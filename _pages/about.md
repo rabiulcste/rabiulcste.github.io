@@ -7,10 +7,9 @@ description: Software Engineer, Goava Sales Intelligence AB
 profile:
   align: right
   image: profile_pic.jpg
-  # address: >
-    # <p>Department of Sociology</p>
-    # <p>295 Lafayette Street</p>
-    # <p>New York, NY 10012</p>
+  address: >
+     <p>rabiul.awal at goava.com</p>
+     <p>Mirpur DOHS, Dhaka 1216</p>
 
 news: true
 social: true
