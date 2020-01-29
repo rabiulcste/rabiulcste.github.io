@@ -6,7 +6,7 @@ description: Software Engineer, Goava Sales Intelligence AB
 
 profile:
   align: right
-  image: profile_pic.JPG
+  image: profile_pic.jpg
   # address: >
     # <p>Department of Sociology</p>
     # <p>295 Lafayette Street</p>
