@@ -1,8 +1,8 @@
 ---
 layout: About
 permalink: /
-title: <strong>Barum</strong> Park
-description: PhD Candidate, Department of Sociology, New York University
+title: <strong>Rabiul</strong> Awal
+description: Software Engineer, Goava Sales Intelligence AB
 
 profile:
   align: right
@@ -17,8 +17,6 @@ social: true
 recent_posts: false
 ---
 
-Welcome! I am a PhD candidate in the department of sociology at New York University. I work on topics in political sociology, social networks, social mobility, and quantitative and computational methods.
+I am a software engineer (backend) at Sweden based sales intelligence startup, Goava. We work on information retrieval and big data tech; focusing on next-gen AI-driven B2B sales prospects and insight tool development. I have completed my bachelor’s degree in Computer Science at Noakhali Science and Technology University, Bangladesh. I am broadly interested in Philosophy, Patterns and Machine Intelligence.
 
-My dissertation engages in the question of social integration of small and large social collectivities. On the national level, I study political polarization and integration in the contemporary US both in terms of political attitudes and ideology-based network segregation; on the smaller scale, my dissertation analyzes how ambiguity in multiplex role relationships shape the integration of naturally occurring communities.
-
-Besides my dissertation, I am interested in network approaches to studying occupational mobility and in developing new models for the quantitative analysis of social phenomena.
+I love to stare at things with interdisciplinary perspectives that connect AI, language and opinion, socio-politico, and people. I like reading paperbacks, cooking, blogging and walking. You may find my Goodreads useful!
