@@ -3,16 +3,21 @@ layout: page
 ---
 
 {% if page.profile %}
-  <div class="profile col one {{ page.profile.align }}">
+<div class="profile col one {{ page.profile.align }}">
     {% if page.profile.image %}
-      <img class="one" src="{{ page.profile.image | prepend: '/assets/img/' | prepend: site.baseurl | prepend: site.url }}">
+    <img class="one"
+         src="{{ page.profile.image | prepend: '/assets/img/' | prepend: site.baseurl | prepend: site.url }}">
     {% endif %}
     {% if page.profile.address %}
-      <div class="address">
+    <div class="address">
         {{ page.profile.address }}
-      </div>
+    </div>
     {% endif %}
-  </div>
+    <a class="twitter-timeline" data-tweet-limit="1" href="https://twitter.com/RabiulAoal?ref_src=twsrc%5Etfw">Tweets by
+        RabiulAoal</a>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+</div>
 {% endif %}
 
 {{ content }}
