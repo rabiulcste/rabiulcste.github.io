@@ -1,12 +1,12 @@
 .profile {
     img {
-        width: 100%;
+        width: 70%;
     }
 }
 .address {
-    font-family: monospace;
-
+    font-family: Palanquin, sans-serif;
     p { margin: 0; }
+    margin: 0 0 20px;
 }
 
 .news {
@@ -23,8 +23,8 @@
         border-collapse: collapse;
         width: 100%;
 
-        .date { width: 19%; }
-        .announcement { width: 81%; }
+        .date { width: 15%; }
+        .announcement { width: 85%; }
 
         tr { text-align: left; }
         td {
