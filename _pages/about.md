@@ -22,7 +22,7 @@ I am a software engineer (backend) at Sweden based sales intelligence startup, [
 
 I love to stare at things with interdisciplinary perspectives that connect AI, language and opinion, socio-politico, and people. I like reading paperbacks, cooking, blogging and walking. You may find my [Goodreads](https://www.goodreads.com/user/show/41650043-rabiul-awal) useful!
 
-[Google Scholar]() / [Linkedin]() / [GitHub]() / [Twitter]()
+[Google Scholar]() / [Linkedin](https://www.linkedin.com/in/rabiulawal/) / [GitHub](https://github.com/rabiulcste) / [Twitter](https://twitter.com/RabiulAoal)
 
 ### Research
 I am broadly interested in Philosophy, Patterns and Machine Intelligence. My works focuses language modeling, sentence classification and conversational text analysis.
