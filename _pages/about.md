@@ -18,14 +18,14 @@ social: true
 recent_posts: false
 ---
 
-I am a software engineer (backend) at Sweden based sales intelligence startup, [Goava](https://www.goava.com/sv/). We work on information retrieval and big data tech; focusing on next-gen AI-driven B2B sales prospects and insight tool development. I have completed my bachelor’s degree in Computer Science at [Noakhali Science and Technology University](https://nstu.edu.bd/), Bangladesh.
+I am a software engineer (backend) at Sweden based sales intelligence startup, [Goava](https://www.goava.com/sv/). We work on information retrieval and big data tech; focusing on next-gen AI-driven B2B sales prospects and insight tool development. I have completed my bachelor’s degree in Computer Science from [Noakhali Science and Technology University](https://nstu.edu.bd/), Bangladesh.
 
-I love to stare at things with interdisciplinary perspectives that connect AI, language and opinion, socio-politico, and people. I like reading paperbacks, cooking, blogging and walking. You may find my [Goodreads](https://www.goodreads.com/user/show/41650043-rabiul-awal) useful!
+I love to stare at things with bird-eyed perspectives that connect AI, language, socio-politico, and people. I like reading paperbacks, cooking, and blogging sometimes. Books and gossips at [goodreads](https://www.goodreads.com/user/show/41650043-rabiul-awal)!
 
 [Google Scholar]() / [Linkedin](https://www.linkedin.com/in/rabiulawal/) / [GitHub](https://github.com/rabiulcste) / [Twitter](https://twitter.com/RabiulAoal)
 
 ### Research
-I am broadly interested in Philosophy, Patterns and Machine Intelligence. My works focuses language modeling, sentence classification and conversational text analysis.
-- RNN and CNN Networks for Sarcasm Detection via Auxiliary and Emotion Fusion [manuscript in progress]()
-- BengalalekhaCONV: Recognizing handwritten Bangla alphabets and digits with Deep Conv Nets [[code]](https://github.com/rabiulcste/BanglaLekhaCONV)
-- Quora Insincere Question Classification using GRU [[kernel]](https://www.kaggle.com/therabiulawal/insincere-approach-3-1)
+I am broadly interested in philosophy, language, patterns and machine intelligence. My recent work has focused on the intersection of deep learning and nlp, with an application focus on language modeling, text generation and social media analysis.
+
+### Publication
+I heard somewhere a few are coming soon!
