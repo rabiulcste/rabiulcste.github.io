@@ -1,11 +1,11 @@
 ---
 layout: About
 permalink: /
-title:  
+title: Rabiul Awal
 description:
 
 profile:
-  align: right
+  align: left
   image: profile_pic.jpg
   address: >
      <p>Software Engineer</p>
@@ -14,9 +14,10 @@ profile:
      <p>Mirpur DOHS, Dhaka 1216</p>
 
 news: true
-social: true
+social: false
 recent_posts: false
 ---
+
 
 I am a software engineer (backend) at Sweden based sales intelligence startup, [Goava](https://www.goava.com/sv/). We work on information retrieval and big data tech; focusing on next-gen AI-driven B2B sales prospects and insight tool development. I have completed my bachelor’s degree in Computer Science from [Noakhali Science and Technology University](https://nstu.edu.bd/), Bangladesh.
 
