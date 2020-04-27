@@ -15,5 +15,4 @@ Lecture notes introducing LaTeX, R, and Rmarkdown.
     + [Taxidriver on a Grid](https://htmlpreview.github.com/?https://github.com/baruuum/intro_to_stats_2019/blob/master/math_refresher/problems/problems.html)
 - [Introduction to Programming in R](https://htmlpreview.github.com/?https://github.com/baruuum/intro_to_stats_2019/blob/master/math_refresher/day2_R/IntroR.html)
     + [What is a Random Variable?](https://htmlpreview.github.com/?https://github.com/baruuum/intro_to_stats_2019/blob/master/math_refresher/problems/problem2.html)
-    + [Seriously, What is a Random Variable? (For the insanely curious...)]({% post_url 2019-09-07-Seriously-What %}) 
 - [Introduction to Rmarkdown](https://htmlpreview.github.com/?https://github.com/baruuum/intro_to_stats_2019/blob/master/math_refresher/day3_Rmarkdown/IntroRmarkdown.html)
