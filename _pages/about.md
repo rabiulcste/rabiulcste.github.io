@@ -5,7 +5,7 @@ title: Rabiul Awal
 description:
 
 profile:
-  align: left
+  align: right
   image: profile_pic.jpg
   address: >
      <p>Software Engineer</p>
