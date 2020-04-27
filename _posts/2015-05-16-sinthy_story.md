@@ -1,5 +1,5 @@
 ---
-title: 'যাচ্ছেতাই জীবন'
+title: 'অগল্প'
 date: '2015-05-16T00:45:02+06:00'
 status: publish
 permalink: /sinthy_story
