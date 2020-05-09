@@ -23,7 +23,7 @@ I currently work at [Goava](https://www.goava.com/sv/) (Sweden based sales intel
 
 Before joining goava, I was an undergrad at [Noakhali Science and Technology University](https://nstu.edu.bd/). In 2018, I graduated from Computer Science program. As someone concerned about social good with a CS major, I have always a spot for human centred intelligence.
 
-I love to stare at things with bird-eyed perspectives that connect language, socio-politico, and people. This site double as my personal blog. Posts range from computer science to my perspectives on life and absurdity. In my free hours, I like reading paperbacks, cooking, and blogging sometimes. Books and gossips at [goodreads](https://www.goodreads.com/user/show/41650043-rabiul-awal)!
+I love to stare at things that connect language, socio-politico, and people. This site double as my personal blog. Posts range from computer science to my perspectives on life and absurdity. In my free hours, I like reading paperbacks, cooking, and blogging sometimes. Books and gossips at [goodreads](https://www.goodreads.com/user/show/41650043-rabiul-awal)!
 
 [Google Scholar]() / [Linkedin](https://www.linkedin.com/in/rabiulawal/) / [GitHub](https://github.com/rabiulcste) / [Twitter](https://twitter.com/RabiulAoal)
 
