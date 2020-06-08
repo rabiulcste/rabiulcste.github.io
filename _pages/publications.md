@@ -19,9 +19,9 @@ description: Publications and Working Papers. * Indicates equal authorship.
 - "On Analyzing Annotation Consistency in Online Abusive Behavior Datasets", by Md Rabiul AWAL, Rui CAO, Roy Ka-Wei LEE and Sandra MITROVIC, 14th International Conference on Web and Social Media - Data Challenge (ICWSM-DC'20), Atlanta, Georgia, U.S, 06/2020.
 
     [[Abstract]]({% link misc_pages/abstracts/2020_abstract_wtcw.md %})
-    [[Pdf]]({{ '/assets/pdf/CultureWar.pdf' | prepend: site.baseurl | prepend: site.url }})
-    [[Code]](https://github.com/baruuum/Replication_Code/tree/master/2019_WTCW)
-    [[Data]](https://doi.org/10.7910/DVN/UFZTYU)
+    [[Pdf]](https://drive.google.com/file/d/1ZV0bM1YT3uIU10VAtrCcg_YEAD7nHMYE/view?usp=sharing)
+    [[Code]](https://gitlab.com/bottle_shop/abusive/annotation_framework)
+    [[Slide]](https://docs.google.com/presentation/d/1p88DdrEaM23Js3HNeRPi2tp8OI7r9r2RNLXxH8L30_M/edit?usp=sharing)
 
 <!--<h3 class="year">{{2019}}</h3>-->
 <!--- "How Are We Apart? Continuity and Change in the Structure of Ideological Disagreement in the American Public, 1980-2012," <em>Social Forces</em>, Volume 96, Issue 4, pp. 1757-1784.-->
