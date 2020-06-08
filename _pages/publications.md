@@ -21,7 +21,7 @@ description: Publications and Working Papers. * Indicates equal authorship.
     [[Abstract]]({% link misc_pages/abstracts/2020_abstract_wtcw.md %})
     [[Pdf]](https://drive.google.com/file/d/1ZV0bM1YT3uIU10VAtrCcg_YEAD7nHMYE/view?usp=sharing)
     [[Code]](https://gitlab.com/bottle_shop/abusive/annotation_framework)
-    [[Slide]](https://docs.google.com/presentation/d/1p88DdrEaM23Js3HNeRPi2tp8OI7r9r2RNLXxH8L30_M/edit?usp=sharing)
+    [[Slide]](https://docs.google.com/presentation/d/e/2PACX-1vSlNSvEB-7dGkVVDvj85I1CBlHXK042WnOn6Y84kLtMpmT7zTKK1QoQmx_XimVQlerqEZ7NML1mnd4T/pub?start=false&loop=false&delayms=3000)
 
 <!--<h3 class="year">{{2019}}</h3>-->
 <!--- "How Are We Apart? Continuity and Change in the Structure of Ideological Disagreement in the American Public, 1980-2012," <em>Social Forces</em>, Volume 96, Issue 4, pp. 1757-1784.-->
