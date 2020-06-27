@@ -28,7 +28,7 @@ I love to stare at things that connect language, socio-politico, and people. Thi
 [Google Scholar]() / [Linkedin](https://www.linkedin.com/in/rabiulawal/) / [GitHub](https://github.com/rabiulcste) / [Twitter](https://twitter.com/RabiulAoal)
 
 ### Research
-I am broadly interested in philosophy, patterns and machine intelligence. My recent work has focused on the intersection of deep learning and nlp, with an application focus on language modeling, text generation and social media analysis. I like thinking about what’s necessary to make NLP applicable to more real-world problems.
+I am broadly interested in philosophy, patterns and machine intelligence. My recent work has focused on the intersection of social computing and NLP, with an application focus on hate speech detection, social media analysis and language modeling. I like thinking about what’s necessary to make NLP applicable to social goods.
 
 ### Publication
 I heard somewhere a few are coming soon!
