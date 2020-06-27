@@ -10,8 +10,9 @@ description: Publications and Working Papers. * Indicates equal authorship.
 
 <h3 class="year"> &nbsp; </h3>
 - "On Analyzing Antisocial Behaviors Amid COVID-19 Pandemic" [under review]
-
     [[Abstract]]()
+- "Multi-Task Learning for Hate Speech Detection" [work in progress]
+- "I miss you babe: Longing, frustration and joy in pandemic discourse" [proposal in progress]
 
 <h4> <strong>Publications</strong> </h4>
 
