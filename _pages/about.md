@@ -25,7 +25,7 @@ Before joining goava, I was an undergrad at [Noakhali Science and Technology Uni
 
 I love to stare at things that connect language, socio-politico, and people. This site double as my personal blog. Posts range from computer science to my perspectives on life and absurdity. In my free hours, I like reading paperbacks, cooking, and blogging sometimes. Books and gossips at [goodreads](https://www.goodreads.com/user/show/41650043-rabiul-awal)!
 
-[Google Scholar]() / [Linkedin](https://www.linkedin.com/in/rabiulawal/) / [GitHub](https://github.com/rabiulcste) / [Twitter](https://twitter.com/RabiulAoal)
+[Google Scholar](https://scholar.google.com/citations?user=oOcLfUMAAAAJ&hl=en) / [Linkedin](https://www.linkedin.com/in/rabiulawal/) / [GitHub](https://github.com/rabiulcste) / [Twitter](https://twitter.com/RabiulAoal)
 
 ### Research
 I am broadly interested in philosophy, patterns and machine intelligence. My recent work has focused on the intersection of social computing and NLP, with an application focus on hate speech detection, social media analysis and language modeling. I like thinking about what’s necessary to make NLP applicable to social goods.
