@@ -6,7 +6,7 @@ description:
 
 profile:
   align: right
-  image: profile_pic.jpg
+  image: profic_2020.jpg
   address: >
      <p>Software Engineer</p>
      <p>Goava Sales Intelligence AB</p>  
