@@ -1,11 +1,16 @@
 .profile {
     img {
-        width: 80%;
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(100%);
     }
 }
 .address {
-    font-family: Palanquin, sans-serif;
-    p { margin: 0; }
+    font-family: 'Palanquin', sans-serif;
+    p { margin: 0; color: #212529;}
+    h1 { margin: 0; padding:0; color: #212529; font-size:1.8em; font-family: 'Julius Sans One', sans-serif;}
     margin: 0 0 20px;
 }
 
@@ -14,25 +19,24 @@
 }
 
 .news {
-    border-top: 1px solid $grey-color-light;
     margin-top: 30px;
-    padding-top: 20px;
-
-    h2 {
-        font-weight: bold;
+    font-size: small;
+    h4 {
+        font-family: 'Julius Sans One', sans-serif;
         margin-top: 0;
+        font-size: 20px;
         margin-bottom: 10px;
     }
     table {
         border-collapse: collapse;
         width: 100%;
 
-        .date { width: 15%; }
-        .announcement { width: 85%; }
+        .date { width: 13%; }
+        .announcement { width: 87%; }
 
         tr { text-align: left; }
         td {
-            padding: 6px 0;
+            padding: 4px 0;
             vertical-align: top;
             border: none;
         }

@@ -7,7 +7,6 @@
     list-style: none;
 
     > li {
-        border-bottom: 1px solid $light-gray;
         padding-bottom: $space-1;
         padding-top: $space-1;
     }
@@ -69,14 +68,18 @@
     }
     h4 {
         font-size: 20px;
+        font-family: 'Julius Sans One';
+        margin-bottom: .5em;
         // @include media-query($on-laptop) {
         //     font-size: 18px;
         // }
     }
     ul, li {
 
-    color: #333;
-
+    color: #292E1E;
+    font-size: .9rem;
+    list-style-type: none;
+    padding: 0;
     }
 }
 .post-meta {

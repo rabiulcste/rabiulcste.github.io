@@ -7,12 +7,19 @@
 
     {% include header.html %}
 
-
-    <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
-    </div>
+     {% if page.layout == "About"  %}
+        <div class="page-content">
+          <div class="abstract-wrapper">
+            {{ content }}
+          </div>
+        </div>
+    {% else %}
+        <div class="page-content">
+          <div class="wrapper">
+            {{ content }}
+          </div>
+        </div>
+    {% endif %}
 
     {% include footer.html %}
 

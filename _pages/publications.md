@@ -5,27 +5,25 @@ title: Research
 description: Publications and Working Papers. * Indicates equal authorship.
 ---
 
-<h4> <strong>Working Papers</strong> </h4> 
+<h4>Working Papers</h4>
 <!--<h5 class="note">( Full draft available upon request )</h5>-->
 
 <h3 class="year"> &nbsp; </h3>
-- "AngryBERT: Joint Learning Target and Emotion for Hate Speech Detection" [under review]
+- *AngryBERT: Joint Learning Target and Emotion for Hate Speech Detection* [[Under review]]()
 
-<h4> <strong>Publications</strong> </h4>
+<h4>Publications</h4>
 
-<h3 class="year">{{2020}}</h3>
-
-- "On Analyzing Antisocial Behaviors Amid COVID-19 Pandemic", by Md Rabiul AWAL, Rui CAO, Sandra MITROVIC and Roy Ka-Wei LEE, arxiv-2007.10712.
+<h3 class="year" xmlns="http://www.w3.org/1999/html">{{2020}}</h3>
+- <strong>*On Analyzing Antisocial Behaviors Amid COVID-19 Pandemic*</strong>, by Md Rabiul AWAL, Rui CAO, Sandra MITROVIC and Roy Ka-Wei LEE, arxiv-2007.10712.
     [[Abstract]](https://arxiv.org/abs/2007.10712)
     [[Pdf]](https://arxiv.org/pdf/2007.10712.pdf)
     [[Code]](https://gitlab.com/bottle_shop/abusive/covid19)
-
-- "On Analyzing Annotation Consistency in Online Abusive Behavior Datasets", by Md Rabiul AWAL, Rui CAO, Roy Ka-Wei LEE and Sandra MITROVIC, 14th International Conference on Web and Social Media - Data Challenge (ICWSM-DC'20), Atlanta, Georgia, U.S, 06/2020.
+- <strong>*On Analyzing Annotation Consistency in Online Abusive Behavior Datasets*</strong>, by Md Rabiul AWAL, Rui CAO, Roy Ka-Wei LEE and Sandra MITROVIC, 14th International Conference on Web and Social Media - Data Challenge (ICWSM-DC'20), Atlanta, Georgia, U.S, 06/2020.
     [[Abstract]](https://arxiv.org/abs/2006.13507)
     [[Pdf]](https://arxiv.org/pdf/2006.13507.pdf)
     [[Code]](https://gitlab.com/bottle_shop/abusive/annotation_framework)
     [[Slide]](https://docs.google.com/presentation/d/e/2PACX-1vSlNSvEB-7dGkVVDvj85I1CBlHXK042WnOn6Y84kLtMpmT7zTKK1QoQmx_XimVQlerqEZ7NML1mnd4T/pub?start=false&loop=false&delayms=3000)
-- "I miss you babe: Analyzing Emotion Dynamics During COVID-19 Pandemic", by Lynnette Hui Xian NG, Roy Ka-Wei LEE and Md Rabiul AWAL, 4th Workshop on NLP and CSS (NLPCSS'20), Online, 11/2020.
+- <strong>*I miss you babe: Analyzing Emotion Dynamics During COVID-19 Pandemic*</strong>, by Lynnette Hui Xian NG, Roy Ka-Wei LEE and Md Rabiul AWAL, 4th Workshop on NLP and CSS (NLPCSS'20), Online, 11/2020.
     [[Abstract]](https://www.aclweb.org/anthology/2020.nlpcss-1.5/)
     [[Pdf]](hhttps://www.aclweb.org/anthology/2020.nlpcss-1.5.pdf)
     [[Code]](https://gitlab.com/bottle_shop/wellness/ethmm)
