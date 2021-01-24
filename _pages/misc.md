@@ -13,10 +13,19 @@ description: Materials for research guidance and miscellaneous.
   3. Ph.D. Applications: FAQ, Noah Smith [[doc]](https://docs.google.com/document/d/1lT-bsIP0GKfh8l5sQnM2hCzzR9prt-QLx16rimUOdIM/edit)
   4. A Survival Guide to a PhD, Andrej Karpathy [[html]](http://karpathy.github.io/2016/09/07/phd/)
   5. Machine Learning PhD Applications — Everything You Need to Know, Tim Dettmers [[html]](https://timdettmers.com/2018/11/26/phd-applications/)
+  6. A Guide to Cold Emailing, Eugene Vinitsky [[html]](http://eugenevinitsky.github.io/posts/2020-12-25-coldemails.html)
+  7. How I Keep My Projects Organized, Sebastian Raschka [[html]](https://sebastianraschka.com/blog/2021/project-management.html)
+  8. Research Taste Exercises [[html]](http://colah.github.io/notes/taste/)
 
 <h4 class="name-row"> Software Engineering </h4>
   1. ফ্রেশার হিশেবে সফটওয়্যার ইঞ্জিনিয়ারিং চাকরি খোঁজাখুঁজির অভিজ্ঞতা, ক্যাম্পাস জুনিয়রদের জন্য বয়ান [[html]](http://www.iamrabiul.info/software-engineering-job-hacking-as-a-fresh-graduate-nstu/)
+  2. সিনট্যাক্স টু কম্পিটিটিভ প্রোগ্রামিং জার্নি [[html]](http://www.iamrabiul.info/syntax-to-competitive-programming/)
 
 <h4 class="name-row"> Machine Learning + Undergrad Research </h4>
   1. Reproducing SOTA works as a pathway for research and prep for a bachelor thesis [[html]](http://www.iamrabiul.info/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/)
   2. Notes on machine learning, part 1 [[pdf]](https://drive.google.com/file/d/1kBnhA6O5aZl61jfzXrFL3kLwAcURuyc1/view)
+
+<h4 class="name-row"> Blogs to Follow </h4>
+ 1. [Lil'Log](https://lilianweng.github.io/lil-log/)
+ 2. [Sebastian Ruder](https://ruder.io/)
+ 3. [Jay Alammar](http://jalammar.github.io/)
