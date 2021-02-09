@@ -16,6 +16,7 @@ description: Materials for research guidance and miscellaneous.
   6. A Guide to Cold Emailing, Eugene Vinitsky [[html]](http://eugenevinitsky.github.io/posts/2020-12-25-coldemails.html)
   7. How I Keep My Projects Organized, Sebastian Raschka [[html]](https://sebastianraschka.com/blog/2021/project-management.html)
   8. Research Taste Exercises [[html]](http://colah.github.io/notes/taste/)
+  9. Heuristics for Scientific Writing (a Machine Learning Perspective)[[html]](http://approximatelycorrect.com/2018/01/29/heuristics-technical-scientific-writing-machine-learning-perspective/)
 
 <h4 class="name-row"> Software Engineering </h4>
   1. ফ্রেশার হিশেবে সফটওয়্যার ইঞ্জিনিয়ারিং চাকরি খোঁজাখুঁজির অভিজ্ঞতা, ক্যাম্পাস জুনিয়রদের জন্য বয়ান [[html]](http://www.iamrabiul.info/software-engineering-job-hacking-as-a-fresh-graduate-nstu/)

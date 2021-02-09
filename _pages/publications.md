@@ -9,9 +9,14 @@ description: Publications and Working Papers. * Indicates equal authorship.
 <!--<h5 class="note">( Full draft available upon request )</h5>-->
 
 <h3 class="year"> &nbsp; </h3>
-- *AngryBERT: Joint Learning Target and Emotion for Hate Speech Detection* [[Under review]]()
 
 <h4>Publications</h4>
+
+
+<h3 class="year" xmlns="http://www.w3.org/1999/html">{{2021}}</h3>
+
+- <strong>*AngryBERT: Joint Learning Target and Emotion for Hate Speech Detection*</strong>, by Md Rabiul AWAL, Rui CAO, Roy Ka-Wei LEE and Sandra MITROVIC, 25th Pacific-Asia Conference on Knowledge Discovery and Data Mining (PAKDD'21), Delhi, India, 05/2021. 
+    [[pdf]]()
 
 <h3 class="year" xmlns="http://www.w3.org/1999/html">{{2020}}</h3>
 - <strong>*On Analyzing Antisocial Behaviors Amid COVID-19 Pandemic*</strong>, by Md Rabiul AWAL, Rui CAO, Sandra MITROVIC and Roy Ka-Wei LEE, arxiv-2007.10712.
@@ -27,7 +32,7 @@ description: Publications and Working Papers. * Indicates equal authorship.
     [[Abstract]](https://www.aclweb.org/anthology/2020.nlpcss-1.5/)
     [[Pdf]](hhttps://www.aclweb.org/anthology/2020.nlpcss-1.5.pdf)
     [[Code]](https://gitlab.com/bottle_shop/wellness/ethmm)
-
+  
 <!--<h3 class="year">{{2019}}</h3>-->
 <!--- "How Are We Apart? Continuity and Change in the Structure of Ideological Disagreement in the American Public, 1980-2012," <em>Social Forces</em>, Volume 96, Issue 4, pp. 1757-1784.-->
 

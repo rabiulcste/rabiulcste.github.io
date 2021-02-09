@@ -9,10 +9,10 @@ profile:
   image: profic_2020.jpg
   address: >
      <h1>Rabiul Awal</h1>
-     <p>Software Engineer</p>
-     <p>Goava Sales Intelligence AB</p>  
-     <p>rabiul.awal at goava.com</p>
-     <p>Mirpur DOHS, Dhaka 1216</p>
+     <p>MS Student</p>
+     <p>USASK</p>  
+     <p>mda219@usask.ca</p>
+     <p>Saskatchewan, Canada</p>
 
 news: true
 social: false
