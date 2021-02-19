@@ -10,7 +10,7 @@ profile:
   address: >
      <h1>Rabiul Awal</h1>
      <p>MS Student</p>
-     <p>USASK</p>  
+     <p>University of Saskatchewan</p>  
      <p>mda219@usask.ca</p>
      <p>Saskatchewan, Canada</p>
 
@@ -21,7 +21,7 @@ recent_posts: false
 #### BIO
 I am a CS master's student at [University of Saskatchewan](https://www.usask.ca/), supervised by Professor Michael Horsch and Roy Ka-wei Lee.
 My research interests lies in the intersection of NLP and Computational Social Science.
-My recent work has focused on hate speech detection, social media analysis and transfer learning.
+My recent work has focused on hate speech detection, low-resource NLP and transfer learning.
 
 Before moving to Canada, I worked at [Goava](https://www.goava.com/sv/) as a software engineer.
 I completed bachelor in Computer Science at [Noakhali Science and Technology University](https://nstu.edu.bd/).

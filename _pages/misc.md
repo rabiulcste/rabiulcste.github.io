@@ -26,7 +26,14 @@ description: Materials for research guidance and miscellaneous.
   1. Reproducing SOTA works as a pathway for research and prep for a bachelor thesis [[html]](http://www.iamrabiul.info/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/)
   2. Notes on machine learning, part 1 [[pdf]](https://drive.google.com/file/d/1kBnhA6O5aZl61jfzXrFL3kLwAcURuyc1/view)
 
+<h4 class="name-row"> Reading Groups on ML&NLP </h4>
+ 1. [Deep Learning: Classics and Trends](http://mlcollective.org/dlct/)
+ 2. [Stanford NLP Seminar](https://nlp.stanford.edu/seminar/)
+ 3. [Mila Tea Talks](https://sites.google.com/lisa.iro.umontreal.ca/tea-talks/home)
+
 <h4 class="name-row"> Blogs to Follow </h4>
  1. [Lil'Log](https://lilianweng.github.io/lil-log/)
  2. [Sebastian Ruder](https://ruder.io/)
  3. [Jay Alammar](http://jalammar.github.io/)
+
+
