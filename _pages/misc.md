@@ -15,12 +15,18 @@ description: Materials for research guidance and miscellaneous.
   5. Machine Learning PhD Applications — Everything You Need to Know, Tim Dettmers [[html]](https://timdettmers.com/2018/11/26/phd-applications/)
   6. A Guide to Cold Emailing, Eugene Vinitsky [[html]](http://eugenevinitsky.github.io/posts/2020-12-25-coldemails.html)
   7. How I Keep My Projects Organized, Sebastian Raschka [[html]](https://sebastianraschka.com/blog/2021/project-management.html)
-  8. Research Taste Exercises [[html]](http://colah.github.io/notes/taste/)
-  9. Heuristics for Scientific Writing (a Machine Learning Perspective)[[html]](http://approximatelycorrect.com/2018/01/29/heuristics-technical-scientific-writing-machine-learning-perspective/)
+  8. Research Taste Exercises, Colah [[html]](http://colah.github.io/notes/taste/)
+  9. Heuristics for Scientific Writing (a Machine Learning Perspective), Zachary Lipton [[html]](http://approximatelycorrect.com/2018/01/29/heuristics-technical-scientific-writing-machine-learning-perspective/)
+  10. The Definitive ‘what do I ask/look for’ in a PhD Advisor Guide [[pdf]](https://www.cs.columbia.edu/wp-content/uploads/2019/03/Get-Advisor.pdf)
+  11. Questions to Ask a Prospective Ph.D. Advisor on Visit Day, With Thorough and Forthright Explanations, CMU [[html]](https://blog.ml.cmu.edu/2020/03/02/questions-to-ask-a-prospective-ph-d-advisor-on-visit-day-with-thorough-and-forthright-explanations/)
 
-<h4 class="name-row"> Software Engineering </h4>
+
+<h4 class="name-row"> Career </h4>
   1. ফ্রেশার হিশেবে সফটওয়্যার ইঞ্জিনিয়ারিং চাকরি খোঁজাখুঁজির অভিজ্ঞতা, ক্যাম্পাস জুনিয়রদের জন্য বয়ান [[html]](http://www.iamrabiul.info/software-engineering-job-hacking-as-a-fresh-graduate-nstu/)
   2. সিনট্যাক্স টু কম্পিটিটিভ প্রোগ্রামিং জার্নি [[html]](http://www.iamrabiul.info/syntax-to-competitive-programming/)
+  3. Dodging pitfalls when transitioning from academia to industry, Archy [[html]](http://deberker.com/archy/dodging-pitfalls-when-transitioning-from-academia-to-industry/)
+  4. 7 reasons not to join a startup and 1 reason to, Chip Huyen [[html]](https://huyenchip.com/2021/02/27/why-not-join-a-startup.html#why_not_join_a_startup)
+
 
 <h4 class="name-row"> Machine Learning + Undergrad Research </h4>
   1. Reproducing SOTA works as a pathway for research and prep for a bachelor thesis [[html]](http://www.iamrabiul.info/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/)
