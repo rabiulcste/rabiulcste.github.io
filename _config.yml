@@ -42,7 +42,7 @@ text:
     older: 'Older'
 
 # Comments
-disqus_shortname: disqus_dU5IeT6xtA
+disqus_shortname: rabiul-me
 
 # Optional features
 show_social_icons:  false
@@ -58,9 +58,9 @@ collections:
       layout: post
     output: true
     permalink: /news/:path/
-#  teaching:
-#    output: true
-#    permalink: /teaching/:path/
+  teaching:
+    output: true
+    permalink: /teaching/:path/
     
 news_limit: 5
 
