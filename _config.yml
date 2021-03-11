@@ -42,7 +42,8 @@ text:
     older: 'Older'
 
 # Comments
-disqus_shortname: rabiul-me
+disqus:
+  shortname: rabiul-me
 
 # Optional features
 show_social_icons:  false
