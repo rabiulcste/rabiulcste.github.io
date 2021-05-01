@@ -19,7 +19,7 @@ description: Materials for research guidance and miscellaneous.
   9. Heuristics for Scientific Writing (a Machine Learning Perspective), Zachary Lipton [[html]](http://approximatelycorrect.com/2018/01/29/heuristics-technical-scientific-writing-machine-learning-perspective/)
   10. The Definitive ‘what do I ask/look for’ in a PhD Advisor Guide [[pdf]](https://www.cs.columbia.edu/wp-content/uploads/2019/03/Get-Advisor.pdf)
   11. Questions to Ask a Prospective Ph.D. Advisor on Visit Day, With Thorough and Forthright Explanations, CMU [[html]](https://blog.ml.cmu.edu/2020/03/02/questions-to-ask-a-prospective-ph-d-advisor-on-visit-day-with-thorough-and-forthright-explanations/)
-
+  12. PhD Syllabus, Mor Naaman [[html]](https://stechlab.github.io/phd-syllabus/)
 
 <h4 class="name-row"> Career </h4>
   1. ফ্রেশার হিশেবে সফটওয়্যার ইঞ্জিনিয়ারিং চাকরি খোঁজাখুঁজির অভিজ্ঞতা, ক্যাম্পাস জুনিয়রদের জন্য বয়ান [[html]](http://www.iamrabiul.info/software-engineering-job-hacking-as-a-fresh-graduate-nstu/)
