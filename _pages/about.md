@@ -30,6 +30,13 @@ This site double as my personal blog. Posts range from computer science to my pe
 
 #### Pointers
 
-- <span style="color:#800000; font-size:1em; "> [[click here]](/bio_bn.html) To access my dedicated page in Bengali.</span>
+- <span style="color:#800000; font-size:1.25em; "> [[click here]](/bio_bn.html) To access my about-me in Bengali.</span>
 - Applying for MS/Phd? Check **Misc** section for resources.
 - Tired of surfing? Grab some coffee and listen [this](https://soundcloud.com/rabiulawal/megh-thom-thom-kore-kapalika) track or [this](https://soundcloud.com/rabiulawal/q3rur1bvxwnm).
+
+
+#### Books I read in 2021
+
+- **#Novel** _The Unbearable Lightness of Being_ by Milan Kundera
+- **#Tech** _The Laws of Simplicity_ by John Maeda
+- **#Tech** _The Design of Everyday Things_ by Don Norman
