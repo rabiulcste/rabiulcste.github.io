@@ -27,7 +27,7 @@ This site double as my personal blog. Posts range from computer science to my pe
 #### Research
 
 I conduct research in the machine learning and natual language processing.
-- Transfer Learning
+- Transfer Learning, meta-learning
 - Learning from small data and weak supervision
 - Multilinguality and Low-resource NLP
 
