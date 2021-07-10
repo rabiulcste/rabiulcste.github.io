@@ -27,9 +27,9 @@ This site double as my personal blog. Posts range from computer science to my pe
 #### Research
 
 I conduct research in the machine learning and natual language processing.
-- Transfer Learning, meta-learning
-- Learning from small data and weak supervision
-- Multilinguality and Low-resource NLP
+- **Transfer Learning** - Efficient source of transfer, [parameter efficient transfer](https://drive.google.com/file/d/1C8dVzzGkKAJy06dUoESEQIqNJUFvkj5g/view?usp=sharing), preventing negative transfer
+- **Meta-learning**: Learning from small data [[slides]](https://drive.google.com/file/d/1qK06orhJ46KLbVI6KjlzMebwfqXQWL1B/view?usp=sharing) for novel tasks and weak supervision.
+- **Multilingual and Low-resource NLP**: NLP for low-resource languages, cross-lingual transfer for mitigating gaps of linguistic divide.
 
 #### Pointers
 
