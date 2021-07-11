@@ -36,8 +36,8 @@ I conduct research in the machine learning and natual language processing.
 
 #### Pointers
 
-<span style="color:#FF0000; font-size:1em; "> 🇧🇩 To access my about-me in Bengali [[page link]](/bio_bn.html) </span> <br>
-<span style="color:#008000; font-size:1em; "> 🎉👋❤️ Summer NLP Reading Group 2021 @Dhaka [[details here]](https://docs.google.com/document/d/e/2PACX-1vRia76U_JQwpLgGoQRH2mQHJewl1kJcXKiOib81ga3WS6vFkQUucRLwtGI_rUSxQqtett1h2z0cJetl/pub).  </span> <br>
+<span style="color:#FF0000; font-size:1em; "> 🇧🇩❤️ To access my about-me in Bengali [[page link]](/bio_bn.html) </span> <br>
+<span style="color:#008000; font-size:1em; "> 🎉👋Summer NLP Reading Group 2021 @Dhaka [[details here]](https://docs.google.com/document/d/e/2PACX-1vRia76U_JQwpLgGoQRH2mQHJewl1kJcXKiOib81ga3WS6vFkQUucRLwtGI_rUSxQqtett1h2z0cJetl/pub).  </span> <br>
 Applying for MS/Phd? Check **[Misc](\misc)** section for resources. <br>
 Tired of surfing? Grab some coffee and listen [this](https://soundcloud.com/rabiulawal/megh-thom-thom-kore-kapalika) track or [this](https://soundcloud.com/rabiulawal/q3rur1bvxwnm).
 

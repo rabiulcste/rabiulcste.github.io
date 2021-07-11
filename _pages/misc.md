@@ -2,10 +2,16 @@
 layout: page
 permalink: /misc/
 title: Misc
-description: Materials for research guidance and miscellaneous.
+description: Materials for research guidance and miscellaneous. This page includes pointers on areas that help people of under-resourced community. I have created this mostly focusing on spreading resources for CS practices, early career research and getting into research position for AI research.
 ---
+<span style="color:#FF0000; font-size:1em; "> [🍩 Telegram channel for job posts] </span> *I maintain a telegram channel [[link]](https://t.me/s/msphdprof) where I post tweets made by professors on MS+PhD open positions. I usually follow ML & AI people so recruitment ads comes from this two area mostly.*
 
-*I maintain a telegram channel [[link]](https://t.me/s/msphdprof) where I post tweets made by professors on MS+PhD open positions. I usually follow ML & AI people so recruitment ads comes from this two area mostly.*
+<span style="color:#0000FF; font-size:1em; "> [🧰 Tools for CS research] </span> Undergrads who are getting started with research often get stuck because they are unfamiliar with various tools. Here is a pointer to a very useful MIT course: [https://missing.csail.mit.edu](https://missing.csail.mit.edu).
+This [blog post](https://kentonmurray.com/blogs/hackingphd.html) might also be useful.
+
+<span style="color:#0000FF; font-size:1em; "> [📚 Reading groups] </span> I should mention about communities that provides opportunities for ML 
+ML research beyond typical research labs. You can join reading groups to discuss research and get feedback on your own research. MLC, MILA, Stanford NLP seminaer
+are few of the. A complete list can be found [here](#research-reading-groups).
 
 <h4 class="name-row"> Phd & Research Guidance </h4>
   1. Syllabus for Eric's PhD students, Eric Gilbert [[doc]](https://docs.google.com/document/d/11D3kHElzS2HQxTwPqcaTnU5HCJ8WGE5brTXI4KLf4dM/edit)
@@ -27,13 +33,13 @@ description: Materials for research guidance and miscellaneous.
   3. Dodging pitfalls when transitioning from academia to industry, Archy [[html]](http://deberker.com/archy/dodging-pitfalls-when-transitioning-from-academia-to-industry/)
   4. 7 reasons not to join a startup and 1 reason to, Chip Huyen [[html]](https://huyenchip.com/2021/02/27/why-not-join-a-startup.html#why_not_join_a_startup)
 
-
 <h4 class="name-row"> Machine Learning + Undergrad Research </h4>
   1. Reproducing SOTA works as a pathway for research and prep for a bachelor thesis [[html]](http://www.iamrabiul.info/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/)
   2. Notes on machine learning, part 1 [[pdf]](https://drive.google.com/file/d/1kBnhA6O5aZl61jfzXrFL3kLwAcURuyc1/view)
 
-<h4 class="name-row"> Reading Groups on ML&NLP </h4>
- 1. [Deep Learning: Classics and Trends](http://mlcollective.org/dlct/)
+<h4 id="research-reading-groups" class="name-row"> Research Reading Groups</h4>
+ 1. [NLP Reading Fall 21 @Dhaka](https://docs.google.com/document/d/e/2PACX-1vSPhi_N9BqxTrla-4Zpgvtx2pZt-ZH5gAIUi5pBA8gR40oG5Nqc4GExxJvwpp-x7UQoTQy9DlhQLL_P/pub)
+ 2. [Deep Learning: Classics and Trends](http://mlcollective.org/dlct/)
  2. [Stanford NLP Seminar](https://nlp.stanford.edu/seminar/)
  3. [Mila Tea Talks](https://sites.google.com/lisa.iro.umontreal.ca/tea-talks/home)
 
