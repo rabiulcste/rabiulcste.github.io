@@ -6,7 +6,7 @@ description:
 
 profile:
   align: right
-  image: profic_2020.jpg
+  image: profile_pic.jpg
   address: >
      <h1>Rabiul Awal</h1>
      <p>MS Student</p>
@@ -18,8 +18,20 @@ news: true
 social: false
 recent_posts: false
 ---
+
+
+[comment]: <> (<p float="right">)
+
+[comment]: <> (<img src="/assets/img/usask_logo_big_color.png" alt="usask_cs_logo" width="350" style="padding-right:30px" /> )
+
+[comment]: <> (<img src="/assets/img/socialAI.png" alt="socialai_studio_logo" width="200"/>)
+
+[comment]: <> (</p>)
+
+
 #### BIO
 I am a CS master's student at [University of Saskatchewan](https://www.usask.ca/), supervised by Professor Michael Horsch and Roy Ka-wei Lee.
+I am also a member of [SocialAI.Studio](https://www.socialai.studio/home).
 Before moving to Canada, I worked at [Goava](https://www.goava.com/sv/) as a software engineer.
 I completed bachelor in Computer Science at [Noakhali Science and Technology University](https://nstu.edu.bd/).
 
@@ -40,7 +52,6 @@ I conduct research in the machine learning and natual language processing.
 <span style="color:#008000; font-size:1em; "> 🎉👋Summer NLP Reading Group 2021 @Dhaka [[details here]](https://docs.google.com/document/d/e/2PACX-1vRia76U_JQwpLgGoQRH2mQHJewl1kJcXKiOib81ga3WS6vFkQUucRLwtGI_rUSxQqtett1h2z0cJetl/pub).  </span> <br>
 Applying for MS/Phd? Check **[Misc](\misc)** section for resources. <br>
 Tired of surfing? Grab some coffee and listen [this](https://soundcloud.com/rabiulawal/megh-thom-thom-kore-kapalika) track or [this](https://soundcloud.com/rabiulawal/q3rur1bvxwnm).
-
 
 
 #### Books I read in 2021
