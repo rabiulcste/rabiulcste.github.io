@@ -2,16 +2,27 @@
 layout: page
 permalink: /misc/
 title: Misc
-description: Materials for research guidance and miscellaneous. This page includes pointers on areas that help people of under-resourced community. I have created this mostly focusing on spreading resources for CS practices, early career research and getting into research position for AI research.
+description: Materials for research guidance and miscellaneous. This page includes resources on topics that might help people of resource-lean community. I have created this page mostly focusing on spreading resources including best CS research practices, mentorship on early career research and getting into research position for prospective grad students.
 ---
-<span style="color:#FF0000; font-size:1em; "> [🍩 Telegram channel for job posts] </span> *I maintain a telegram channel [[link]](https://t.me/s/msphdprof) where I post tweets made by professors on MS+PhD open positions. I usually follow ML & AI people so recruitment ads comes from this two area mostly.*
+<span style="color:#ff00d5; font-size:1em; "> [🌎 Global Equality for PhDs in NLP / AI] </span> One non-negligible reason for success is access to information, such as (1) knowing what a PhD in NLP is like, 
+(2) knowing what top grad schools look for when reviewing PhD applications, 
+(3) broadening your horizon of what is good work, (4) knowing how careers in NLP in both academia and industry are like, and many others.
+Check this awesome github resource repository ([https://github.com/zhijing-jin/nlp-phd-global-equality](https://github.com/zhijing-jin/nlp-phd-global-equality)) with answers 
+on many such questions. Thanks to **Zhijing Jin** for putting this together.
 
-<span style="color:#0000FF; font-size:1em; "> [🧰 Tools for CS research] </span> Undergrads who are getting started with research often get stuck because they are unfamiliar with various tools. Here is a pointer to a very useful MIT course: [https://missing.csail.mit.edu](https://missing.csail.mit.edu).
-This [blog post](https://kentonmurray.com/blogs/hackingphd.html) might also be useful.
+<span style="color:#FF0000; font-size:1em; "> [🍩 Telegram channel for job posts] </span> *I maintain a telegram channel [[link]](https://t.me/s/msphdprof) where 
+I post tweets made by professors on MS+PhD open positions. I usually follow ML & AI people. 
+Often recruitment ads come from these two areas mostly.
+You may use this job posting with proper care for instance writing a personalized email while contacting profs.*
 
-<span style="color:#0000FF; font-size:1em; "> [📚 Reading groups] </span> I should mention about communities that provides opportunities for ML 
-ML research beyond typical research labs. You can join reading groups to discuss research and get feedback on your own research. MLC, MILA, Stanford NLP seminaer
-are few of the. A complete list can be found [here](#research-reading-groups).
+<span style="color:#0000FF; font-size:1em; "> [🧰 Tools for CS research] </span> Undergrads who are getting started with research often get stuck because they are unfamiliar with various tools. 
+Here is a pointer to a very useful MIT course: [https://missing.csail.mit.edu](https://missing.csail.mit.edu).
+This [blog post](https://kentonmurray.com/blogs/hackingphd.html) might also be relevant.
+
+<span style="color:#6B8E23; font-size:1em; "> [📚 Reading groups] </span> I should mention communities that provide opportunities for ML research beyond university/industry research labs. 
+You can join reading groups to follow discussion on  state-of-the-art AI research and get feedback on your research. 
+Reading groups could possibly be a starting point for your first collaboration.
+MLC, MILA, Stanford NLP Seminar are a few of them. Such a list can be found [here](#research-reading-groups).
 
 <h4 class="name-row"> Phd & Research Guidance </h4>
   1. Syllabus for Eric's PhD students, Eric Gilbert [[doc]](https://docs.google.com/document/d/11D3kHElzS2HQxTwPqcaTnU5HCJ8WGE5brTXI4KLf4dM/edit)
