@@ -1,7 +1,5 @@
 ---
 title: 'pride and prejudice &#8211; public university of Bangladesh'
-date: '2017-11-10T12:12:03+06:00'
-permalink: /pride-and-prejudice-public-university-of-bangladesh
 author: 'Rabiul Awal'
 layout: post
 category:

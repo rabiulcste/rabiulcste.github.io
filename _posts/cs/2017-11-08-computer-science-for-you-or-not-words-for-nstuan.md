@@ -1,7 +1,5 @@
 ---
 title: 'Computer Science For You or Not; Words for Nstuan'
-date: '2017-11-08T19:48:29+06:00'
-permalink: /computer-science-for-you-or-not-words-for-nstuan
 author: 'Rabiul Awal'
 excerpt: ''
 layout: post

@@ -1,7 +1,5 @@
 ---
 title: 'skipping classes, questioning, torture, problematic system and suicide'
-date: '2017-11-17T22:58:11+06:00'
-permalink: /skipping-classes-questioning-torture-problematic-system-and-suicide
 author: 'Rabiul Awal'
 excerpt: ''
 layout: post

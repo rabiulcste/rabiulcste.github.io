@@ -1,7 +1,5 @@
 ---
 title: 'Why not semester break?'
-date: '2017-07-21T11:29:44+06:00'
-permalink: /why-not-semester-break
 author: 'Rabiul Awal'
 layout: post
 category:

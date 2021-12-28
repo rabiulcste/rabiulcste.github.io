@@ -1,7 +1,5 @@
 ---
 title: 'CS study in Bangladesh'
-date: '2017-06-05T11:36:48+06:00'
-permalink: /781-2
 author: 'Rabiul Awal'
 layout: post
 category:

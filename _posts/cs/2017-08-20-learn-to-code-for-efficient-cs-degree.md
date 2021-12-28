@@ -1,7 +1,5 @@
 ---
 title: 'learn to code for efficient CS degree'
-date: '2017-08-20T20:29:16+06:00'
-permalink: /learn-to-code-for-efficient-cs-degree
 author: 'Rabiul Awal'
 excerpt: ''
 layout: post
