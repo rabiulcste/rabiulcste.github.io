@@ -1,10 +1,9 @@
 ---
 title: 'skipping classes, questioning, torture, problematic system and suicide'
 author: 'Rabiul Awal'
-excerpt: ''
 layout: post
 category:
-    - 'arts and life'
+    - 'cs'
 tag: [critic]
 ---
 what are the reasons behind a student skip classes and do not care for study? usually, students skip classes or don’t pay attention in a class for two reason – 1) they lack prerequisites, 2) lectures are not interesting enough or teacher don’t know how to teach well. lacking prerequisites and letting students join to universities that’s another problem to discuss but today we don’t want to focus on that. let’s talk about bad teaching. those lecturers who teach/lecture well, I’ve seen student’s don’t skip those class. fact is if you’re a good teacher you have to have the power of having a strong control on your class, a creation of self-driven spirit in your student’s mind to learn and continuous study on how to teach better. these days huge people are joining at universities who are unqualified and they can’t teach better. so how they survive when they need to take classes? they survive by torturing students and making rules. unqualified people suffer from inferiority complex and they make rules to control people. intolerable pressure and torture turn students to a depressive and suicidal mental state what I want to discuss here.

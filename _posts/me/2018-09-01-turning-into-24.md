@@ -6,8 +6,8 @@ author: 'Rabiul Awal'
 layout: post
 thumbnail: ../../uploads/2018/04/pro-2.jpg
 category:
-    - 'arts and life'
-tag: [me n myself]
+    - 'art_culture'
+tag: [me-n-myself]
 ---
 I had a long thought over the last few days, turning pages backward into my memories, alive and blurred ones. Yoohoo, I’m 23 now! I was thinking about the places I’ve lived, the academic institutions I’ve joined, friends I’ve made, roads I’ve walked on, things I’ve created, the failures I’ve suffered and the people I was surrounded with. Turning into 24 is not bad. I’m prepared for this transitional time, being raised in a typical middle-class family I believe it’s time to be on my own – in fact, my father thinks so.
 

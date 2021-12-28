@@ -3,7 +3,7 @@ title: 'Why not semester break?'
 author: 'Rabiul Awal'
 layout: post
 category:
-    - 'arts and life'
+    - 'cs'
 tag: [computer-science]
 ---
 there should be some free weeks for students in an academic year, maybe two or three months. no class, no lab, no exam. totally free, no academic pressure. do what you love to do, just lots of free days, chilling, hanging out, traveling, reading books, art, culture, gaming, developing etc.

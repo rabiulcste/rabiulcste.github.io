@@ -1,7 +1,5 @@
 ---
 title: 'প্রবলেম সলভিং - এলসিএম (১)'
-date: '2015-05-20T01:20:36+06:00'
-permalink: /%e0%a6%a8%e0%a6%be%e0%a6%ae%e0%a7%8d%e0%a6%ac%e0%a6%be%e0%a6%b0-%e0%a6%a5%e0%a6%bf%e0%a6%93%e0%a6%b0%e0%a7%80-%e0%a6%8f%e0%a6%b2%e0%a6%b8%e0%a6%bf%e0%a6%8f%e0%a6%ae
 author: Rabiul Awal
 layout: post
 category:

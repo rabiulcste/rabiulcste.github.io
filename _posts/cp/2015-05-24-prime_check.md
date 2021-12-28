@@ -1,7 +1,5 @@
 ---
 title: 'প্রাইমারিলিটি টেস্টিং (সিভ অব এরাটস্থেনিজ)'
-date: '2015-05-24T11:02:27+06:00'
-permalink: /prime_check
 author: Rabiul Awal
 layout: post
 category:

@@ -1,15 +1,11 @@
 ---
 title: 'sexual frustration in YOUTH minds'
-date: '2017-08-02T12:43:37+06:00'
-permalink: /sexual-frustration-in-youth-minds
 author: 'Rabiul Awal'
-excerpt: ''
 layout: post
 header-style: text
 category:
-    - 'arts and life'
-tag: []
-post_format: [critic]
+    - 'art_culture'
+tag: [critic]
 ---
 I think sexual frustration is one of the driving reason for rape or sexual assault related issues. that sex taboo which still exists in society, we need to do something about it. these days, I’ve spent some hours studying on sex, sex education, sex diseases, sexual frustration, relationship and sexual desire.
 

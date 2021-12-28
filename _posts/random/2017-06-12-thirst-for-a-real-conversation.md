@@ -1,13 +1,9 @@
 ---
 title: 'Thirst for a real conversation'
-date: '2017-06-12T11:33:26+06:00'
 permalink: /thirst-for-a-real-conversation
 author: 'Rabiul Awal'
-excerpt: ''
 layout: post
-category:
-    - 'arts and life'
-tag: [me n myself]
+tag: [me-n-myself]
 ---
 I hate it when people leave me in the middle of a serious conversation. offensive. when I’m talking with someone I’m thinking on it, my brain is working, right? you just can’t leave a conversation without permission. my brain feels bad when someone does so. this is all about basic norms.
 

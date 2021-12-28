@@ -3,7 +3,7 @@ title: 'CS study in Bangladesh'
 author: 'Rabiul Awal'
 layout: post
 category:
-    - computation
+    - cs
 tag: [computer-science]
 ---
 Computer science is the study of problems, problem-solving and the solutions that come out of the problem-solving process. The whole process follows an algorithm which is a step by solution to the specific problem. Yeah, computer science is a beauty! I love it.

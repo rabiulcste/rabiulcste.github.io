@@ -4,8 +4,6 @@ date: '2017-02-07T02:00:13+06:00'
 permalink: /poranbabu
 author: 'Rabiul Awal'
 layout: post
-category:
-    - 'arts and life'
 tag: [nostalgia, drunk]
 ---
 পরানবাবুর মতন অমন করে কেউ দুলায় নি আগে। দুলছি। দুলছে কবি, বৈকুন্ঠ, বোকচোদ আর মঈন ভাই।

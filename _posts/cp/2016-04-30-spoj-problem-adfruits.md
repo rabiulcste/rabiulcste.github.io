@@ -1,8 +1,5 @@
 ---
 title: 'SPOJ Problem ADFRUITS'
-date: '2016-04-30T02:36:38+06:00'
-status: publish
-permalink: /spoj-problem-adfruits
 author: 'Rabiul Awal'
 subtitle: 'এই প্রবলেমটি একটি স্ট্রেইট ফরোয়ার্ড Shortest Common Subsequence প্রবলেম। ডিরেক্ট Shortest Common Subsequence Algorithm প্রয়োগ করে কিংবা Longest Common Subsequence কে কিছুটা মডিফিকেশন করে এটি সলভ করা সম্ভব।'
 layout: post

@@ -1,7 +1,5 @@
 ---
 title: 'Tricks on array index range query'
-date: '2015-12-09T10:10:12+06:00'
-permalink: /tricks-on-array-index-range-query
 author: Rabiul
 subtitle: 'ধরা যাক, আমাদের কাছে `ara[5]` সাইজের একটা এরে আছে । আগেই বলে রাখছি, এরে ইনডেক্স শুরু হবে 1 থেকে, 0 থেকে না। আমাদের এই এরেতে ৭ বার কুয়েরি করতে হবে \[x, y\] ইন্টার্ভালে । প্রতি কুয়েরিতে ওই ইন্টার্ভালের ইনডেক্সগুলোতে 2 যোগ করতে হবে । কুয়েরি শেষে পরিবর্তিত `array` প্রিন্ট করতে হবে । ara[5] = {2, 3, 7, 4, 10}; // array input // 07 queries 1 5 2 4 5 5 2 5'
 layout: post

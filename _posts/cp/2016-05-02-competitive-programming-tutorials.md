@@ -1,7 +1,5 @@
 ---
 title: 'কম্পিটিটিভ প্রোগ্রামিং টিউটোরিয়াল লিঙ্কবাকসো'
-date: '2016-05-02T13:10:39+06:00'
-permalink: /competitive-programming-tutorials
 author: 'Rabiul Awal'
 subtitle: 'প্রোগ্রামিং সিলেবাস কন্টেস্ট প্রোগ্রামিং সিলেবাস - https://goo.gl/0gRHkZ এলগরিদম লিস্ট - https://goo.gl/qQ7WVG Topic wise Coding Resources - http://goo.gl/jJQXHN'
 layout: post
@@ -9,7 +7,6 @@ category:
     - computation
 tag:
     - 'competitive-programming'
-    - 'ড্যাটা স্ট্রাকচার'
 ---
 ### প্রোগ্রামিং সিলেবাস
 - কন্টেস্ট প্রোগ্রামিং সিলেবাস – [https://goo.gl/0gRHkZ](https://www.facebook.com/l.php?u=https%3A%2F%2Fgoo.gl%2F0gRHkZ&h=aAQFWXnaP&s=1)

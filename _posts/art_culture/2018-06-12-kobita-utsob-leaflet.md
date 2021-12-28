@@ -1,12 +1,9 @@
 ---
 title: 'কবিতা উৎসবের পত্র  &#8216;১৭ / মশাল'
-date: '2018-06-12T00:57:30+06:00'
-permalink: /%e0%a6%95%e0%a6%ac%e0%a6%bf%e0%a6%a4%e0%a6%be-%e0%a6%89%e0%a7%8e%e0%a6%b8%e0%a6%ac%e0%a7%87%e0%a6%b0-%e0%a6%aa%e0%a6%a4%e0%a7%8d%e0%a6%b0-%e0%a7%a7%e0%a7%ad-%e0%a6%ae%e0%a6%b6%e0%a6%be%e0%a6%b2
 author: 'Rabiul Awal'
-excerpt: ''
 layout: post
 category:
-    - 'arts and life'
+    - 'art_culture'
 tag: [literature]
 ---
 প্রিয় সুধী,  

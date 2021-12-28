@@ -1,14 +1,11 @@
 ---
 title: 'অগল্প'
-date: '2015-05-16T00:45:02+06:00'
-permalink: /sinthy_story
 author: Rabiul Awal
 layout: post
 category:
     - 'arts and life'
 tag:
     - গল্প
-post_format: []
 ---
 – স্যার!  
 – হ্যা, বল।  

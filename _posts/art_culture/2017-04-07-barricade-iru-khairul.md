@@ -1,12 +1,9 @@
 ---
 title: BARRICADE a film by IRU KHAIRUL KARIM
-date: 2017-04-07T11:46:45+06:00
-permalink: /barricadea-film-by-iru-khairul-karim
 author: Rabiul Awal
 layout: post
-categories: [Arts and Life]
-tag: []
-comments: true
+categories: [art_culture]
+tag: [art]
 ---
 <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="405" src="https://www.youtube.com/embed/5C5dV8P1DlY?feature=oembed" title="ব্যারিকেড || Barricade ||" width="720"></iframe>
 

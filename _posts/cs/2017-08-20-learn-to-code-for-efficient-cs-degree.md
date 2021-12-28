@@ -1,10 +1,9 @@
 ---
 title: 'learn to code for efficient CS degree'
 author: 'Rabiul Awal'
-excerpt: ''
 layout: post
 category:
-    - computation
+    - cs
 tag: [computer-science]
 ---
 learning how to program is good for CS people. the knowledge/logic what we learn/develop while taking Basic C course, it will extend in several courses. the fundamental logic development of writing program/code is a must but many of us care a little. as huge students join into CS program without any prior plan, many couldn’t keep pace with the whole academic process. if you miss the very basic programming course, you’re going to miss everything. yes, everything.

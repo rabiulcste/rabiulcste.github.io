@@ -1,12 +1,10 @@
 ---
 title: 'Fake news, a threat to minority'
-date: '2017-11-11T15:37:00+06:00'
-permalink: /fake-news-a-threat-to-minority
 author: 'Rabiul Awal'
 excerpt: ''
 layout: post
 category:
-    - 'arts and life'
+    - 'computation'
 tag: [tech]
 ---
 Facebook is facing quite odd situations after the complaint of Russian influence in U.S president election through sponsored fake pages. So far I’m following tech news, this is one of the core problems what Facebook or other tech giants are trying to fix in recent months.

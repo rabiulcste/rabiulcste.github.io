@@ -1,12 +1,9 @@
 ---
 title: 'উঠতি কবিদের বলি'
-date: '2017-10-09T03:21:03+06:00'
-permalink: /%e0%a6%89%e0%a6%a0%e0%a6%a4%e0%a6%bf-%e0%a6%95%e0%a6%ac%e0%a6%bf%e0%a6%a6%e0%a7%87%e0%a6%b0-%e0%a6%ac%e0%a6%b2%e0%a6%bf
 author: 'Rabiul Awal'
-excerpt: ''
 layout: post
 category:
-    - 'arts and life'
+    - 'art_culture'
 tag: [critic]
 ---
 > আমার কোন ধারালো অস্ত্র নেই, বলতে গিয়ে অস্ত্র শব্দের বানানেই বিভ্রান্ত হলাম।  

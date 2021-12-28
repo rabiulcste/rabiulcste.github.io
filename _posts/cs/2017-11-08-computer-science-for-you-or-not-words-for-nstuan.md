@@ -1,11 +1,10 @@
 ---
 title: 'Computer Science For You or Not; Words for Nstuan'
 author: 'Rabiul Awal'
-excerpt: ''
 layout: post
 thumbnail: ../../uploads/2017/11/adolescent-adult-beauty-459971.jpg
 category:
-    - computation
+    - cs
 tag: [computer-science]
 ---
 Those who are planning to get admitted to CSTE, ICE or SE department of Noakhali Science and Technology university you may give a second thought whether you should study computer science or not. This is very important to know in details what you’re going to study in <g class="gr_ gr_105 gr-alert gr_gramm gr_inline_cards gr_run_anim Grammar only-ins replaceWithoutSep" data-gr-id="105" id="105">next</g> four years. Computer science is one of the HOTCAKE in every engineering faculty of Bangladesh, NSTU is not different from that and only toppers with merit position &lt;150 may get a chance to get admission in CSTE. SE is just introduced this year, so I can’t be sure about this new subject but so far ICE follows the trend of CSTE.

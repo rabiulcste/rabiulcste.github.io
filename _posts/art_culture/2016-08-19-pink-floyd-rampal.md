@@ -5,10 +5,9 @@ permalink: /pink-floyd-rampal
 author: 'Rabiul Awal'
 layout: post
 category:
-    - 'arts and life'
+    - 'art_culture'
 tag:
     - সমকালীন
-post_format: []
 
 ---
 (সাম্প্রতিক রামপাল ইস্যুতে বেশ কয়েকজ ফেসবুকার সংবিধানের একটি ধারা দেখিয়ে রাষ্ট্রীয় নাগরিক অধিকার দাবি করছেন। সে প্রেক্ষিতে হ-য-ব-র-ল লেখা।)

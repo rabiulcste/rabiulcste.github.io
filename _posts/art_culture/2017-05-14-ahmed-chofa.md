@@ -1,11 +1,9 @@
 ---
 title: 'আহমেদ ছফা ১'
-date: '2017-05-14T11:40:51+06:00'
-permalink: /%e0%a6%9b%e0%a6%ab%e0%a6%be-%e0%a7%a7
 author: 'Rabiul Awal'
 layout: post
 category:
-    - 'arts and life'
+    - 'art_culture'
 tag: [literature]
 
 ---

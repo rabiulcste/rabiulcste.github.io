@@ -1,12 +1,10 @@
 ---
 title: 'Reproducing SOTA works as a pathway to get into research and preparation for a bachelor thesis'
-date: '2020-07-01T22:40:40+06:00'
-permalink: /reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis
 author: 'Rabiul Awal'
 layout: post
 thumbnail: ../uploads/2020/07/d41586-019-00505-2_16443404.jpg
 category:
-    - computation
+    - cs
 tag: [computer-science, research]
 ---
 

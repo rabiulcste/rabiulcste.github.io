@@ -1,12 +1,7 @@
 ---
 title: 'ড. হুমায়ূন কবির | সহজিয়া'
-date: '2016-08-19T13:37:28+06:00'
-permalink: /humayun-kabir-sohojia
 author: 'Rabiul Awal'
-excerpt: ''
 layout: post
-category:
-    - 'arts and life'
 tag:
     - 'people'
 ---

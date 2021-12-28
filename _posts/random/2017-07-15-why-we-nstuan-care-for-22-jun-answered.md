@@ -1,12 +1,7 @@
 ---
 title: 'Why we nstuan care for 22 Jun answered'
-date: '2017-07-15T11:31:36+06:00'
-permalink: /why-we-nstuan-care-for-22-jun-answered
 author: 'Rabiul Awal'
-excerpt: ''
 layout: post
-category:
-    - 'arts and life'
 tag: [old-days]
 ---
 I don’t have any feelings for 15th July, the official university day of Noakhali Science and Technology University! People of nstu (from 1st to 9th batch maybe, not sure) celebrated university day on 22nd June in every year, me too and we will love this day rest of ours life. We’ve lots of memories, feeling and fantasizing stories to tell about this very specific day. Yes, it’s 22 June of course, not 15th July.

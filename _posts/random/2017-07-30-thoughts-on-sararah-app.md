@@ -1,12 +1,9 @@
 ---
 title: 'Thoughts on Sararah App'
-date: '2017-07-30T11:26:12+06:00'
-permalink: /thoughts-on-sararah-app
 author: 'Rabiul Awal'
-excerpt: ''
 layout: post
 category:
-    - 'arts and life'
+    - 'computation'
 tag: [tech]
 ---
 what people are saying about you, how your surroundings judge you, how you’re being treated by – these things are important. Apps like Sarahah where one can send someone anonymous texts, those texts can be any type. bad, good, loving, annoying, sarcastic, disturbing, flirting, hateful – whatever it is you’re reading those texts, your brain is working with that words.

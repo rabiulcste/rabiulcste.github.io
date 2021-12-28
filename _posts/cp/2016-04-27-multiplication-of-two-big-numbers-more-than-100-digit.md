@@ -1,7 +1,5 @@
 ---
 title: 'Multiplication of Two Big Numbers (more than 100 digit)'
-date: '2016-04-27T01:27:15+06:00'
-permalink: /multiplication-of-two-big-numbers-more-than-100-digit
 author: 'Rabiul Awal'
 excerpt: 'First, you should read the code two times without comment. I think, you will understand the algorithm. if not, then follow comments. ------------------------------------- here, we use primary school math logic. let two numbers 1133 333. 1133 333 ---------- 3399 -&gt;3399 ..... res\[0\] = 9'
 layout: post

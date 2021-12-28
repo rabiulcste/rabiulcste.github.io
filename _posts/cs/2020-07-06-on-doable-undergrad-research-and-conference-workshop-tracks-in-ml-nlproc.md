@@ -1,12 +1,10 @@
 ---
 title: 'On doable undergrad research and conference workshop tracks in ML &#038; #NLProc'
-date: '2020-07-06T21:31:47+06:00'
-permalink: /on-doable-undergrad-research-and-conference-workshop-tracks-in-ml-nlproc
 author: 'Rabiul Awal'
 layout: post
 thumbnail: ../uploads/2020/07/khara-woods-6hUR284gLJY-unsplash.jpg
 category:
-    - computation
+    - cs
 tag: [research, computer-science]
 ---
 Photo by [Khara Woods](https://unsplash.com/@kharaoke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/workshop?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
