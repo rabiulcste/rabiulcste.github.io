@@ -1,0 +1,19 @@
+_site
+.sass-cache
+.jekyll-metadata
+.DS_store
+.ruby-version
+Gemfile.lock
+.Rhistory
+.jekyll-cache
+_doc
+ads.txt
+feed.xml
+Rmarkdown/*
+ads.html
+LICENSE
+
+# exceptions
+!Rmarkdown/.keep
+node_modules
+_posts/ml
