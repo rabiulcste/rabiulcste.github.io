@@ -3,9 +3,7 @@ title: 'অগল্প'
 author: Rabiul Awal
 layout: post
 category:
-    - 'arts and life'
-tag:
-    - গল্প
+    - 'art_culture'
 ---
 – স্যার!  
 – হ্যা, বল।  
