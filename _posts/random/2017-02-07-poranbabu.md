@@ -1,7 +1,5 @@
 ---
 title: পরানবাবু
-date: '2017-02-07T02:00:13+06:00'
-permalink: /poranbabu
 author: 'Rabiul Awal'
 layout: post
 tag: [nostalgia, drunk]

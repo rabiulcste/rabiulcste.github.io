@@ -1,7 +1,5 @@
 ---
 title: 'Turning into 24'
-date: '2018-09-01T00:09:18+06:00'
-permalink: /turning-into-24
 author: 'Rabiul Awal'
 layout: post
 thumbnail: ../../uploads/2018/04/pro-2.jpg

@@ -1,7 +1,5 @@
 ---
 title: 'ছাত্র আন্দোলন থেইকা / ২০১৬'
-date: '2016-10-27T03:28:08+06:00'
-permalink: /%e0%a6%9b%e0%a6%be%e0%a6%a4%e0%a7%8d%e0%a6%b0-%e0%a6%86%e0%a6%a8%e0%a7%8d%e0%a6%a6%e0%a7%8b%e0%a6%b2%e0%a6%a8-%e0%a6%a5%e0%a7%87%e0%a6%87%e0%a6%95%e0%a6%be-%e0%a7%a8%e0%a7%a6%e0%a7%a7%e0%a7%ac
 author: 'Rabiul Awal'
 layout: post
 category:

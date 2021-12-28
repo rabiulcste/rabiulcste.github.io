@@ -1,7 +1,5 @@
 ---
 title: 'শহুরে এলিটিজম বিষয়ক'
-date: '2016-11-11T03:23:50+06:00'
-permalink: /%e0%a6%b6%e0%a6%b9%e0%a7%81%e0%a6%b0%e0%a7%87-%e0%a6%8f%e0%a6%b2%e0%a6%bf%e0%a6%9f%e0%a6%bf%e0%a6%9c%e0%a6%ae-%e0%a6%ac%e0%a6%bf%e0%a6%b7%e0%a7%9f%e0%a6%95
 author: 'Rabiul Awal'
 layout: post
 category:

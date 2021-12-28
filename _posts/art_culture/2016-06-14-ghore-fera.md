@@ -1,9 +1,6 @@
 ---
 title: 'ঘরে ফেরা বিষয়ক / ফেনী'
-date: '2016-06-14T03:41:24+06:00'
-permalink: /%e0%a6%98%e0%a6%b0%e0%a7%87-%e0%a6%ab%e0%a7%87%e0%a6%b0%e0%a6%be-%e0%a6%ac%e0%a6%bf%e0%a6%b7%e0%a7%9f%e0%a6%95-%e0%a6%ab%e0%a7%87%e0%a6%a8%e0%a7%80
 author: 'Rabiul Awal'
-excerpt: ''
 layout: post
 category:
     - 'art_culture'

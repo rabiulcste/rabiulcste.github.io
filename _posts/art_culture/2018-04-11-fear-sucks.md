@@ -1,7 +1,5 @@
 ---
 title: 'ভয় সাকস'
-date: '2018-04-11T20:30:34+06:00'
-permalink: /%e0%a6%ad%e0%a7%9f-%e0%a6%b8%e0%a6%be%e0%a6%95%e0%a6%b8
 author: 'Rabiul Awal'
 layout: post
 category:

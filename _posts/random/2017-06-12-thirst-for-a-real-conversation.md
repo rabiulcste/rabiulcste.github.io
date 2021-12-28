@@ -1,6 +1,5 @@
 ---
 title: 'Thirst for a real conversation'
-permalink: /thirst-for-a-real-conversation
 author: 'Rabiul Awal'
 layout: post
 tag: [me-n-myself]

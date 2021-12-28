@@ -1,7 +1,5 @@
 ---
 title: 'শৃঙ্খল ১'
-date: '2016-08-19T13:42:09+06:00'
-permalink: /pink-floyd-rampal
 author: 'Rabiul Awal'
 layout: post
 category:
