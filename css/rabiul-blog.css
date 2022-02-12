@@ -22,6 +22,7 @@
 @media (min-width: 768px) {
   .post-container {
     padding-right: 2.5%;
+    background-color: #f7fcfd;
   }
 }
 .sidebar-container {
@@ -791,6 +792,7 @@ samp {
 }
 .postlist-container {
   margin-bottom: 15px;
+  background-color: #f7fcfd;
 }
 .post-container a {
   color: #337ab7;
@@ -1119,7 +1121,7 @@ samp {
 }
 .intro-header {
   background: no-repeat center center;
-  background-color: #a3a3a3;
+  background-color: #10627a;
   background-attachment: scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
