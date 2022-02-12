@@ -13,14 +13,6 @@
 ম্যাশিন লার্নিং গবেষণায় এই কাজের ক্ষেত্রকে বলা হয় low resource and multilingual NLP।
 মোটাদাগে ভাষা প্রযুক্তি, ট্রান্সফার লার্নিং এবং রিপ্রেজেন্টেশন লার্নিং গবেষণা আমার নিয়মিত আগ্রহের বিষয়।
 
-##### প্রকাশনা
-<ul>
-    <li><a class="pub-list" href="#">AngryBERT: Joint Learning Target and Emotion for Hate Speech Detection</a></li>
-    <li><a class="pub-list" href="https://www.aclweb.org/anthology/2020.nlpcss-1.5/">I miss you babe: Analyzing Emotion Dynamics During COVID-19 Pandemic </a></li>
-    <li><a class="pub-list" href="https://arxiv.org/abs/2007.10712">On analyzing antisocial behaviors amid covid-19 pandemic</a></li>
-    <li><a class="pub-list" href="https://arxiv.org/abs/2006.13507">On Analyzing Annotation Consistency in Online Abusive Behavior Datasets</a></li>
-</ul>
-
 
 #### বিবিধ + সংযোগ
 স্নাতক পড়াকালীন সময়ে কিভাবে গবেষণা করবেন এ প্রসঙ্গে আমি কিছু আর্টিকেল লিখেছি। ব্লগ সেকশনে সেগুলি পাবেন। [Resource](\resources) সেকশনে
@@ -37,4 +29,4 @@ ms+phd+internships পদে নিয়োগ বিজ্ঞপ্তি প্�
 ইমেইল করুন
 r.awal @ usask dot ca :: awalrabiul6 @ gmail dot com
 
-updated december 2021 
+updated february 2022

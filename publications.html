@@ -2,14 +2,15 @@
 layout: default
 title: publications
 description: "yet another deep learning paper"
+header-img: ""
 ---
 
 {% include intro-header.html type='page' short=true %}
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="pub post-container">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+            <div class="pub">
                 {% capture pub %}{% include pages/publications.md %}{% endcapture %}
                 {{ pub | markdownify }}
             </div>

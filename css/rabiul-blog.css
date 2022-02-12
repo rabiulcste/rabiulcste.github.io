@@ -1732,8 +1732,8 @@ img::-moz-selection {
 
 .button1 {
     /*background-color: #FF6600;*/
-    background-color: #009999;
-    border-color: teal;
+    background-color: #ccf;
+    border-color: #ccf;
     color: white;
     padding: 2px 4px;
     text-align: center;

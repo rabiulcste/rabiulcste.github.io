@@ -74,7 +74,7 @@ ga_domain: rabiul.me
 
 
 scholar:
-    style: _layouts/apa-note-num
+    style: acm-siggraph
     bibliography: references.bib
     bibliography_template: bibtemplate
     replace_strings: true

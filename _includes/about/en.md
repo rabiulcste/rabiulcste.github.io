@@ -38,3 +38,5 @@ I am broadly interested in machine learning models that can learn, multi-task, a
 3. **#Novel** _The Unbearable Lightness of Being_ by Milan Kundera
 4. **#Tech** _The Laws of Simplicity_ by John Maeda
 5. **#Tech** _The Design of Everyday Things_ by Don Norman
+
+updated february 2022
