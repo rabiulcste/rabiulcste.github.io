@@ -32,19 +32,19 @@ MLC, MILA, Stanford NLP Seminar are a few of them. Such a list can be found [her
   11. EVERY PHD IS DIFFERENT, Maxwell Forbes [[html]](https://maxwellforbes.com/posts/every-phd-is-different)
   12. Advice for prospective PhD students on deciding which program to join [[html]](https://angelhof.github.io/2020/07/05/advice_for_prospective_phd_students.html)
 
-#### SOP, Research Writing
+### SOP, Research Writing
   1. How to Write a Bad Statement for a Computer Science Ph.D. Admissions Application, Andy Pavlo [[html]](https://www.cs.cmu.edu/~pavlo/blog/2015/10/how-to-write-a-bad-statement-for-a-computer-science-phd-admissions-application.html)
-  2. How to write “statements of purpose” - Boaz Barak [pdf](https://www.boazbarak.org/Papers/howto_statement_of_purpose.pdf)
+  2. How to write “statements of purpose” - Boaz Barak [[pdf]](https://www.boazbarak.org/Papers/howto_statement_of_purpose.pdf)
   3. Heuristics for Scientific Writing (a Machine Learning Perspective), Zachary Lipton [[html]](http://approximatelycorrect.com/2018/01/29/heuristics-technical-scientific-writing-machine-learning-perspective/)
-  4. Planning paper writing [[html]}(https://deviparikh.medium.com/planning-paper-writing-553f497e8839)
+  4. Planning paper writing, Devi Parikh [[html]](https://deviparikh.medium.com/planning-paper-writing-553f497e8839)
 
-#### Career
+### Career
   1. ফ্রেশার হিশেবে সফটওয়্যার ইঞ্জিনিয়ারিং চাকরি খোঁজাখুঁজির অভিজ্ঞতা, ক্যাম্পাস জুনিয়রদের জন্য বয়ান [[html]](http://www.iamrabiul.info/software-engineering-job-hacking-as-a-fresh-graduate-nstu/)
   2. সিনট্যাক্স টু কম্পিটিটিভ প্রোগ্রামিং জার্নি [[html]](http://www.iamrabiul.info/syntax-to-competitive-programming/)
   3. Dodging pitfalls when transitioning from academia to industry, Archy [[html]](http://deberker.com/archy/dodging-pitfalls-when-transitioning-from-academia-to-industry/)
   4. 7 reasons not to join a startup and 1 reason to, Chip Huyen [[html]](https://huyenchip.com/2021/02/27/why-not-join-a-startup.html#why_not_join_a_startup)
 
-#### Machine Learning, Undergrad Research
+### Machine Learning, Undergrad Research
   1. Reproducing SOTA works as a pathway for research and prep for a bachelor thesis [[html]](http://www.iamrabiul.info/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/)
   2. Notes on machine learning, part 1 [[pdf]](https://drive.google.com/file/d/1kBnhA6O5aZl61jfzXrFL3kLwAcURuyc1/view)
   3. An Opinionated Guide to ML Research, John Schulman [[html]](http://joschu.net/blog/opinionated-guide-ml-research.html)
