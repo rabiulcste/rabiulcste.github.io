@@ -30,13 +30,13 @@ MLC, MILA, Stanford NLP Seminar are a few of them. Such a list can be found [her
   9. Questions to Ask a Prospective Ph.D. Advisor on Visit Day, With Thorough and Forthright Explanations, CMU [[html]](https://blog.ml.cmu.edu/2020/03/02/questions-to-ask-a-prospective-ph-d-advisor-on-visit-day-with-thorough-and-forthright-explanations/)
   10. PhD Syllabus, Mor Naaman [[html]](https://stechlab.github.io/phd-syllabus/)
   11. EVERY PHD IS DIFFERENT, Maxwell Forbes [[html]](https://maxwellforbes.com/posts/every-phd-is-different)
-  12. Advice for prospective PhD students on deciding which program to join [https://angelhof.github.io/2020/07/05/advice_for_prospective_phd_students.html]
+  12. Advice for prospective PhD students on deciding which program to join [[html]](https://angelhof.github.io/2020/07/05/advice_for_prospective_phd_students.html)
 
 #### SOP, Research Writing
   1. How to Write a Bad Statement for a Computer Science Ph.D. Admissions Application, Andy Pavlo [[html]](https://www.cs.cmu.edu/~pavlo/blog/2015/10/how-to-write-a-bad-statement-for-a-computer-science-phd-admissions-application.html)
   2. How to write “statements of purpose” - Boaz Barak [pdf](https://www.boazbarak.org/Papers/howto_statement_of_purpose.pdf)
   3. Heuristics for Scientific Writing (a Machine Learning Perspective), Zachary Lipton [[html]](http://approximatelycorrect.com/2018/01/29/heuristics-technical-scientific-writing-machine-learning-perspective/)
-  4. Planning paper writing [https://deviparikh.medium.com/planning-paper-writing-553f497e8839]
+  4. Planning paper writing [[html]}(https://deviparikh.medium.com/planning-paper-writing-553f497e8839)
 
 #### Career
   1. ফ্রেশার হিশেবে সফটওয়্যার ইঞ্জিনিয়ারিং চাকরি খোঁজাখুঁজির অভিজ্ঞতা, ক্যাম্পাস জুনিয়রদের জন্য বয়ান [[html]](http://www.iamrabiul.info/software-engineering-job-hacking-as-a-fresh-graduate-nstu/)

@@ -11,9 +11,9 @@ I am running a Dhaka-based reading group on NLP research started this summer [[c
 
 My current research focuses on social NLP problems and developing deep learning systems for low-resource languages and few-shot NLP tasks.
 I am broadly interested in machine learning models that can learn, multi-task, and adapt from small data.
-- **NLP for Social Good** - Cross-domain multilingual disinformation detection, cross-lingual meta-training for low-resource hate speech, commonsense reasoning and implicit hate speech detection.
-- **Multilingual NLP**: Cross-lingual transfer. Efficient and flexible multi-task learning with multilingual pre-trained sentence encoders.
-- **Transfer Learning & Meta-learning** - [Efficient transfer learning](https://drive.google.com/file/d/1C8dVzzGkKAJy06dUoESEQIqNJUFvkj5g/view?usp=sharing) and preventing negative transfer. Learning from small data [[slides]](https://drive.google.com/file/d/1qK06orhJ46KLbVI6KjlzMebwfqXQWL1B/view?usp=sharing) and fast adaptation on novel tasks.
+- **NLP for Social Good** -- Cross-domain multilingual disinformation detection *(in progress)*. Cross-lingual meta-training for low-resource hate speech *(submitted at KDD22)*. Commonsense knowledge for implicit hate speech detection *(in progress)*. Joint learning target and emotion for hate speech detection *(PAKDD21)*.
+- **Efficient NLP & ML** -- Cross-lingual meta-training for low-data setup. Efficient and flexible multi-task learning with multilingual pre-trained sentence encoders *(in progress)*. Efficiency in deep learning and ML *(maybe in future)*.
+- **Transfer Learning & Meta-learning** -- [Efficient transfer learning](https://drive.google.com/file/d/1C8dVzzGkKAJy06dUoESEQIqNJUFvkj5g/view?usp=sharing) and preventing negative transfer. Learning from small data [[slides]](https://drive.google.com/file/d/1PoBuimWzSOmUhJA03RiuiYIUWcWKxqjj/view?usp=sharing) and fast adaptation on novel tasks.
 
 ☕🍕I work at **G60 lab** in the basement of [Thorvaldson Building](https://maps.usask.ca/?id=6c4f416580e9d24d564eb456e4599e85). If you are interested in deep learning or nlp, feel free to drop by during office hours. 
 
@@ -38,5 +38,8 @@ I am broadly interested in machine learning models that can learn, multi-task, a
 3. **#Novel** _The Unbearable Lightness of Being_ by Milan Kundera
 4. **#Tech** _The Laws of Simplicity_ by John Maeda
 5. **#Tech** _The Design of Everyday Things_ by Don Norman
+
+
+r.awal @ usask dot ca :: awalrabiul6 @ gmail dot com
 
 updated february 2022
