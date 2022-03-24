@@ -9,11 +9,11 @@ I am running a Dhaka-based reading group on NLP research started this summer [[c
 
 ### <span style="color:#990000">Research </span>
 
-My current research focuses on social NLP problems and developing deep learning systems for low-resource languages and few-shot NLP tasks.
-I am broadly interested in machine learning models that can learn, multi-task, and adapt from small data.
-- **NLP for Social Good** -- Cross-domain multilingual disinformation detection *(in progress)*. Cross-lingual meta-training for low-resource hate speech *(submitted at KDD22)*. Commonsense knowledge for implicit hate speech detection *(in progress)*. Joint learning target and emotion for hate speech detection *(PAKDD21)*.
-- **Efficient NLP & ML** -- Cross-lingual meta-training for low-data setup. Efficient and flexible multi-task learning with multilingual pre-trained sentence encoders *(in progress)*. Efficiency in deep learning and ML *(maybe in future)*.
-- **Transfer Learning & Meta-learning** -- [Efficient transfer learning](https://drive.google.com/file/d/1C8dVzzGkKAJy06dUoESEQIqNJUFvkj5g/view?usp=sharing) and preventing negative transfer. Learning from small data [[slides]](https://drive.google.com/file/d/1PoBuimWzSOmUhJA03RiuiYIUWcWKxqjj/view?usp=sharing) and fast adaptation on novel tasks.
+My current research focuses developing deep learning systems for low-resource languages, efficient transfer learning for few-shot NLP tasks. Specifically, building models and datasets for social value tasks in NLP for diverse languages.
+I am broadly interested in machine learning models that can learn, multi-task, and adapt from small data and remain robust in the wild.
+- **NLP for Social Good** -- Cross-domain multilingual disinformation detection *(in progress)*. Cross-lingual meta-training for low-resource hate speech *(submitted at KDD22)*. Joint learning target and emotion for hate speech detection *(PAKDD21)*. 
+- **Efficient transfer & modular ML** -- Cross-lingual meta-training for low-data setup. Efficient and flexible multi-task learning with multilingual pre-trained sentence encoders *(in progress)*. [Efficient transfer learning](https://drive.google.com/file/d/1C8dVzzGkKAJy06dUoESEQIqNJUFvkj5g/view?usp=sharing) and preventing negative transfer. Learning from small data [[slides]](https://drive.google.com/file/d/1PoBuimWzSOmUhJA03RiuiYIUWcWKxqjj/view?usp=sharing) and modular fast adaptation on novel tasks. Domain Adaptation as a Problem of Inference on Graphical Models *([course project](https://drive.google.com/file/d/177MYwtcqfmvXTID-PMFHsdoN9K6ZJtbu/view?usp=sharing))*
+- **Knowledge and resasoning in NLP** - Commonsense knowledge for implicit hate speech detection *(in progress)*. Retrieval based concept learning for coded language understanding *(in progress)*.
 
 ☕🍕I work at **G60 lab** in the basement of [Thorvaldson Building](https://maps.usask.ca/?id=6c4f416580e9d24d564eb456e4599e85). If you are interested in deep learning or nlp, feel free to drop by during office hours. 
 
