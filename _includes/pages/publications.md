@@ -1,6 +1,5 @@
-## Preprints
+### Preprints + Under Review
 {% bibliography -q @article %}
 
-
-## Conferences and Workshops
+### Conferences
 {% bibliography -q @inproceedings %}

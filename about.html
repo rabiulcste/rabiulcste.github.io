@@ -2,17 +2,9 @@
 layout: page
 title: "About"
 description: ""
-header-img: "img/about-bg.jpg"
-multilingual: true
+header-img: ""
+multilingual: false
 ---
-
-{% include multilingual-sel.html %}
-
-<!-- Bangla Version -->
-<div class="bn post-container">
-    {% capture about_bn %}{% include about/bn.md %}{% endcapture %}
-    {{ about_bn | markdownify }}
-</div>
 
 <!-- English Version -->
 <div class="en post-container">
