@@ -23,7 +23,7 @@
     <a href="https://twitter.com/{{ site.twitter_username }}">
       <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        <i class="fa fa-search fa-stack-1x fa-inverse"></i>
       </span>
     </a>
   </li>
@@ -74,6 +74,15 @@
       <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  {% endif %}
+  {% if site.resume_link %}
+  <li>
+    <a target="_blank" href="{{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}">
+      <span class="fa-solid fa-md" style="color: #0085a1">      
+        <b>CV</b>
       </span>
     </a>
   </li>
