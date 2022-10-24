@@ -25,9 +25,11 @@
                         </li>
                         {% for page in site.pages %}
                         {% if page.title and page.hide-in-nav != true %}
-                        <li>
-                            <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-                        </li>
+                            {% unless page.url contains "/page" %}
+                                <li>
+                                    <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+                                </li>
+                            {% endunless %}
                         {% endif %}
                         {% endfor %}
                         <!-- NLPDhaka link -->
