@@ -91,10 +91,17 @@ ga_domain: rabiul.me
 
 
 scholar:
+    source: /_bibliography/
     style: acm-siggraph
     bibliography: references.bib
     bibliography_template: bibtemplate
+    bibtex_filters: [latex, smallcaps, superscript]
     replace_strings: true
+
+    details_dir: bibliography
+    details_layout: bibtex.html
+    details_link: Details
+
     query: "@*"
 
 # Sidebar settings
