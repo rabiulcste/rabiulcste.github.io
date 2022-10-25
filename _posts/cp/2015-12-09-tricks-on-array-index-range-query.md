@@ -6,8 +6,7 @@ layout: post
 category:
     - computation
 tag:
-    - 'ড্যাটা স্ট্রাকচার'
-    - 'প্রবলেম সলভিং'
+    - 'competitive-programming'
 mathjax: true
 ---
 

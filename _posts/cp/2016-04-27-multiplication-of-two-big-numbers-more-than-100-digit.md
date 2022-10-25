@@ -5,7 +5,7 @@ excerpt: 'First, you should read the code two times without comment. I think, yo
 layout: post
 category:
     - computation
-tag: ['নাম্বার থিওরী']
+tag: ['number-theory']
 mathjax: true
 ---
 ### কনসেপ্ট

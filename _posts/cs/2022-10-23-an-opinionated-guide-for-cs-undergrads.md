@@ -5,7 +5,7 @@ layout: post
 header-img: "img/DALLE2022-10-24.png"
 category:
     - 'cs'
-tag: [critic]
+tag: [computer-science]
 ---
 This is a guide with bits of advice I would give my younger self about CS undergrad programs, assuming that self didn't have access to quality education and little idea about what to expect or how to use the degree to build a future. I will start with fundamental CS knowledge that you must acquire to be successful, followed by some hacks that my younger self should have known. I will discuss tools that come in handy and how to build a resume, and then suggest some approaches to things that help, along with some comments on grades. This article may sound a bit rusty.
 

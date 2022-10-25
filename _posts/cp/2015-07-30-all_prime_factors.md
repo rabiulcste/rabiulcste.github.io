@@ -6,8 +6,8 @@ layout: post
 category:
     - computation
 tag:
-    - 'নাম্বার থিওরী'
-    - 'প্রবলেম সলভিং'
+    - 'number-theory'
+    - 'competitive-programming'
 mathjax: true
 ---
 ### প্রাইম ফ্যাক্টরাইজেশন 

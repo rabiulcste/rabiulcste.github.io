@@ -6,7 +6,7 @@ layout: post
 category:
     - computation
 tag:
-    - 'প্রবলেম সলভিং'
+    - 'competitive-programming'
 ---
 [Advanced Fruits](http://www.spoj.com/problems/ADFRUITS/)
 ----------------------------------------------------------------

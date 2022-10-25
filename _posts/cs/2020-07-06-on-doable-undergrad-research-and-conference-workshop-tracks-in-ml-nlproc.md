@@ -1,13 +1,11 @@
 ---
-title: 'On doable undergrad research and conference workshop tracks in ML &#038; #NLProc'
+title: 'On doable undergrad research and conference workshop tracks in NLP'
 author: 'Rabiul Awal'
 layout: post
-thumbnail: ../uploads/2020/07/khara-woods-6hUR284gLJY-unsplash.jpg
 category:
     - cs
 tag: [research, computer-science]
 ---
-Photo by [Khara Woods](https://unsplash.com/@kharaoke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/workshop?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
 ### Setting the scene  
 I am compiling some articles on undergraduate CS research and there are more to come along this line. Lately, I wrote a [blog on SOTA reproduction](http://www.iamrabiul.info/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/) as a key pathway for starting undergrad research. I guess bringing conference workshops into the scenario fits a timely and valuable example following that discussion. *Today I will be talking on workshop tracks from top-notch machine learning and natural language processing conferences and try to argue why CS undergrad students from Bangladesh should go for them obviously.* I first learned about workshop tasks from SemEval18. Since then always hoped for doing some tasks of my interests but sadly never got the chance. The last December I attended a talk titled “Story of Natural Language Processing” by [Dr. Sudipta Kar](http://sudiptakar.info/), Ph.D., Houston University. He was giving this talk at Dhaka and highly encouraged the participants to join NLP workshop tracks and pushed them to honestly work out a project paper. He also made a reference on a rising CS research culture in India, how grad students are doing workshop projects a lot, resulting in publication to good venues, building a strong communication channel, and eventually availing a position in good schools strategically. He made an apparent point that clearly we have a great potential in ML/NLP conference workshops, considering our merit but low resources and less likely research environments.

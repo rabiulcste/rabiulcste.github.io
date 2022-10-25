@@ -2,7 +2,7 @@
 title: পরানবাবু
 author: 'Rabiul Awal'
 layout: post
-tag: [nostalgia, drunk]
+tag: [nostalgia]
 ---
 পরানবাবুর মতন অমন করে কেউ দুলায় নি আগে। দুলছি। দুলছে কবি, বৈকুন্ঠ, বোকচোদ আর মঈন ভাই।
 

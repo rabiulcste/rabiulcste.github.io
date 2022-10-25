@@ -6,5 +6,5 @@ layout: post
 category:
     - computation
 tag:
-    - 'নাম্বার থিওরী'
+    - 'number-theory'
 ---
