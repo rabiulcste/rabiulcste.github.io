@@ -319,7 +319,7 @@ button.paper-button {
   width: 300px;
   height: 300px;
   position: relative;
-  margin: 16px;
+  margin: 18px;
   border-radius: 2px;
 }
 .highlight,
@@ -622,7 +622,7 @@ pre.highlight {
 .search-page .search-icon-close-container {
   position: absolute;
   z-index: 1;
-  padding: 16px;
+  padding: 18px;
   top: 0;
   right: 2px;
 }
@@ -665,7 +665,7 @@ pre.highlight {
 }
 .search-icon,
 .search-icon-close {
-  font-size: 16px;
+  font-size: 18px;
 }
 body {
   /* Hux learn from
@@ -675,7 +675,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "SolaimanLipi", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
 ;
   line-height: 1.5;
-  font-size: 16px;
+  font-size: 18px;
   color: #232323;
   overflow-x: hidden;
   text-rendering: auto;
@@ -795,7 +795,12 @@ samp {
   /* background-color: #f7fcfd; */
 }
 .post-container a {
-  color: #337ab7;
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: .1em;
+  text-underline-offset: .25em;
+  transition-duration: .1s;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
 }
 .post-container a:hover,
 .post-container a:focus {
@@ -886,9 +891,13 @@ samp {
 .post-container ul ul {
   margin-bottom: 5px;
 }
+.post-container li {
+  margin: 0;
+  margin-bottom: 8px;
+}
 .post-container li p {
   margin: 0;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 .post-container li h1,
 .post-container li h2,
@@ -1240,7 +1249,7 @@ samp {
   font-family: 'Lora', 'Times New Roman', serif;
   font-style: italic;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 18px;
 }
 .intro-header .post-heading .meta a {
   color: white;
@@ -1299,7 +1308,7 @@ samp {
 .post-preview > .post-meta {
   font-family: 'Lora', 'Times New Roman', serif;
   color: #a3a3a3;
-  font-size: 16px;
+  font-size: 18px;
   font-style: italic;
   margin-top: 0;
 }
@@ -1319,10 +1328,10 @@ samp {
     margin-bottom: 10px;
   }
   .post-preview > a > .post-subtitle {
-    font-size: 16px;
+    font-size: 18px;
   }
   .post-preview .post-meta {
-    font-size: 18px;
+    font-size: 20px;
   }
 }
 .post-content-preview {
@@ -1388,7 +1397,7 @@ footer .copyright a:focus {
   padding: 15px 25px;
 }
 .btn-lg {
-  font-size: 16px;
+  font-size: 18px;
   padding: 25px 35px;
 }
 .btn-default:hover,
@@ -1601,7 +1610,7 @@ img::-moz-selection {
   position: relative;
 }
 .mini-post-list .post-preview > a .post-title {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   margin-top: 20px;
 }
