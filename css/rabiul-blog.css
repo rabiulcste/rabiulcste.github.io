@@ -147,6 +147,26 @@
 .side-catalog .catalog-body .active a {
   color: #0085a1 !important;
 }
+
+.bg-light-gray {
+  background-color: #eee;
+}
+.p-24 {
+  padding: 12px 24px 12px 24px  !important;
+}
+
+.popular-posts ul {
+  padding-left: 0;
+  margin-left: 0;
+  list-style-type: none;
+  line-height: 1.5;
+}
+.popular-posts li {
+  margin-bottom: 12px !important;
+}
+.popular-posts li a {
+  font-size: 20px !important;
+}
 @media (max-width: 1200px) {
   .side-catalog {
     display: none;

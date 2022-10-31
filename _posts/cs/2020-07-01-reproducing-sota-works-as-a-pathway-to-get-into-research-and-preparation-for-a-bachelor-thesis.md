@@ -23,28 +23,28 @@ Reproducing does not fall into a strong novelty category. Reproducing is just re
 
 ### How does a research paper look like?
 Let’s see what contains in a typical research paper in the field of machine learning aka natural language processing –  
-1\) you come up with a problem or idea  
-2\) compile a proposal addressing your problem  
-3\) introduce the problem and motivate that idea  
-4\) review existing works done by others on this specific problem, a discussion on what has been done on this problem till date  
-5\) describing your contribution and supporting theoretical or practical hypothesis on your contribution  
-6\) developing methods, designing experiments  
-7\) metric for measuring the stated contribution  
-8\) empirical evaluation and technical analysis  
-9\) conclusion and future works
+1. you come up with a problem or idea  
+2. compile a proposal addressing your problem  
+3. introduce the problem and motivate that idea  
+4. review existing works done by others on this specific problem, a discussion on what has been done on this problem till date  
+5. describing your contribution and supporting theoretical or practical hypothesis on your contribution  
+6. developing methods, designing experiments  
+7. metric for measuring the stated contribution  
+8. empirical evaluation and technical analysis  
+9. conclusion and future works
 
 ### The process of reproducing a piece of research
 Let’s assume you picked one research paper of this kind. What you will learn by reproducing that piece of research?  
-a) You get to read ~30-50 papers  
-b) You will learn how to state a problem. And why solving that problem is important for society and for the very field. How to write a formal introduction and how to motivate that problem.  
-c) For machine learning, there are certain models and algorithms that are commonly used. From the related works section, you will learn about all those tools and methods.  
-d) You should pick a paper for which authors have already published the codes and materials. If the algorithms are very common maybe an LSTM or logistic regression method based works, that should be okay for you! Try to learn from others and learn quality stuff, that’s the key.  
-e) By reading 10+ papers you will see a pattern in how authors explain their work and put a claim that their system/theory is better than others.  
-f) An empirical analysis of the problem  
-g) How to present an experiment and systemically support it. The most important part I think this portion of your work. You will learn to use most of the tools used for this research. That will enhance your capacity on building methods for solving new research problems.  
-h) Detailing on a systematic analysis and claim novelty
+- You get to read ~30-50 papers  
+- You will learn how to state a problem. And why solving that problem is important for society and for the very field. How to write a formal introduction and how to motivate that problem.  
+- For machine learning, there are certain models and algorithms that are commonly used. From the related works section, you will learn about all those tools and methods.  
+- You should pick a paper for which authors have already published the codes and materials. If the algorithms are very common maybe an LSTM or logistic regression method based works, that should be okay for you! Try to learn from others and learn quality stuff, that’s the key.  
+- By reading 10+ papers you will see a pattern in how authors explain their work and put a claim that their system/theory is better than others.  
+- An empirical analysis of the problem  
+- How to present an experiment and systemically support it. The most important part I think this portion of your work. You will learn to use most of the tools used for this research. That will enhance your capacity on building methods for solving new research problems.  
+- Detailing on a systematic analysis and claim novelty
 
-You must write a technical paper on your own.** This should be somewhat similar to the original paper but you can try to rephrase it. This is very very important and a must-do!
+**You must write a technical report on your own.** This should be somewhat similar to the original paper but you can try to rephrase it. This is very very important and a must-do!
 
 By following this whole procedure you will learn the standard and methods for doing quality research. Reproducing research is solely a learning journey. You can definitely mention this as a project in your resume. But if you want to publish something, you need to give something more. That’s your seeking of novelty as we talked earlier.
 
@@ -58,9 +58,10 @@ In my opinion will be wise to start at the end of the third year. It will not ta
 Upon reading lots of papers in certain domains and also recent works you will see that most of the papers end with a note on future works. Authors typically mention what works could be done to advance this task and also talk about the current limitations of their method(s). If you follow them and work hard, you should be able to come up with some ideas to push this work to a further level. That requires some supports from a mentor maybe but you might be able to do it all alone. One way to find mentors from a low resource institution is to collaborate with active researchers from other parts of the world. How about North America?
 
 #### Where to find active researchers?
-1. List the authors from those papers you are reading while reproducing. Go to google scholar and check their works. Try to come up with something so that you can write a mail to that person. One nice fact is ML researchers are very active on Twitter. If you have listed 50 researchers, you may find half of them on twitter. Pick someone who is young and hungry for research. Find someone who talks about diversity and inclusion. You are doing something from Bangladesh so that matters in the sense of diversity and advancing underrepresented groups. Even Google and Facebook like companies have funds for helping underrepresented students!
-
-2. Contact with Bangladeshi Ph.D. students at North American school. Tell them you have an idea, you reproduced something, you wrote a paper and you have an idea. Mostly they will be happy to help you.
+- List the authors from those papers you are reading while reproducing. Go to google scholar and check their works. Try to come up with something so that you can write a mail to that person. 
+- One nice fact is ML researchers are very active on Twitter. If you have listed 50 researchers, you may find half of them on twitter. 
+- Pick someone who is young and hungry for research. Find someone who talks about diversity and inclusion. You are doing something from Bangladesh so that matters in the sense of diversity and advancing underrepresented groups. Even Google and Facebook like companies have funds for helping underrepresented students!
+- Contact with Bangladeshi Ph.D. students at North American school. Tell them you have an idea, you reproduced something, you wrote a paper and you have an idea. Mostly they will be happy to help you.
 
 ### Why active researchers will care to mentor or collaborate with you?
 1. You have already learned the methods of doing research  
@@ -69,5 +70,3 @@ Upon reading lots of papers in certain domains and also recent works you will se
 4. You are trying to get into research and some researcher on earth care for your passion
 
 This may feel like a long way. Truth is the research is a long way. You should pass all this hassle and work hard to contribute something in a field. I find it’s an important cause if you follow this path and do not like it, it should help you decide on your career. Most students are not aware of what academic research looks like and suffer a lot once they go abroad without caring about the underlying concerns. So, undergraduate research could be a strong validity check on your interest!
-
-Featured Image from Nature / Credit: Mikaël Theimer
