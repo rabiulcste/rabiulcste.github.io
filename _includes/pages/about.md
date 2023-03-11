@@ -1,6 +1,6 @@
-I'm a CS masters student & research assistant @ the University of Saskatchewan. I also work with [SocialAI.Studio](https://www.socialai.studio/home) @ SUTD. My research interests are in multilingual NLP, language+vision AI, and transfer learning. I have published 3 papers in conference venues. 
+I am a research intern at [Mila, Quebec AI Institute](https://mila.quebec/en/). I am affiliated with MAIR lab, supervised by professor [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I completed my masters student at University of Saskatchewan. During that period, I also worked at [SocialAI.Studio](https://www.socialai.studio/home) at Singapore University of Technology and Design supervided by professor [Roy Ka-Wei Lee](https://info.roylee.sg/). Prior to moving to Canada,I was a software engineer at a Nordic [startup](https://www.goava.com/sv/) with 2 years of experience in Python, Pytorch, NoSQL, microservices, and AWS. I completed my bachelor in Computer Scienece at Noakhali Science and Technology Universiy. 
 
-Before moving to Canada, I was a software engineer at a Nordic [startup](https://www.goava.com/sv/) with 2 years of experience in Python, Pytorch, NoSQL, microservices, and AWS. I run a reading group on NLP research out of [Dhaka](http://nlpdhaka.com/).
+My research interests are in language+vision AI, compositionality and representation learning, Social NLP. I have published 3 papers in conference venues. I run a reading group on NLP research out of [Dhaka](http://nlpdhaka.com/).
 
 
 ## Research
@@ -11,10 +11,10 @@ My current research goal is studying compositionality and reasoning in deep lang
 > OOD generalization in vision-language tasks [pdf](https://drive.google.com/file/d/1cc4Sp2brnhyzRfiLF-IRRxC8pHOTpx1I/view?usp=sharing)
 
 #### NLP for Social Good
- My early research focuses on deep learning applications for tackling two social value tasks: online misinformation and hate speech in multiple languages. I have also explored efficient transfer learning and OOD generalization in language tasks { [Notes](https://drive.google.com/file/d/1C8dVzzGkKAJy06dUoESEQIqNJUFvkj5g/view?usp=sharing) / [slides](https://drive.google.com/file/d/1PoBuimWzSOmUhJA03RiuiYIUWcWKxqjj/view?usp=sharing) / [project report](https://drive.google.com/file/d/177MYwtcqfmvXTID-PMFHsdoN9K6ZJtbu/view?usp=sharing) }.
+ My early research focuses on deep learning applications for tackling two social value tasks: online misinformation and hate speech in multiple languages.
 
-> Cross-lingual meta-training for low-resource hate speech (submitted to KDD22) <br>
-> MUSCAT: Multilingual Rumor Verification in Social Media Conversations (BIGDATA22) <br>
+> Model-Agnostic Meta-Learning for Multilingual Hate Speech Detection (TCSS22) [pdf](https://arxiv.org/abs/2303.02513) <br>
+> MUSCAT: Multilingual Rumor Verification in Social Media Conversations (BIGDATA22) [pdf](https://ieeexplore.ieee.org/abstract/document/10021113/) <br>
 > Joint learning target and emotion for hate speech detection (PAKDD21) [pdf](https://arxiv.org/pdf/2103.11800.pdf)
 
 ## Blog
@@ -37,7 +37,7 @@ I occasionally write on how-to-cs-grad, coding, ai research, and systematic fail
 ## Contact 
 Please send me an email if you are interested in collaboration or need help with grad apps and how-to-cs-undergrad.
 
-r.awal @ usask dot ca  
+rabiul.awal @ mila dot quebec  
 awalrabiul6 @ gmail dot com
 
 updated october 2022

@@ -92,16 +92,11 @@ ga_domain: rabiul.me
 
 scholar:
     source: /_bibliography/
-    style: acm-siggraph
+    style: chicago-fullnote-bibliography
     bibliography: references.bib
     bibliography_template: bibtemplate
     bibtex_filters: [latex, smallcaps, superscript]
     replace_strings: true
-
-    details_dir: bibliography
-    details_layout: bibtex.html
-    details_link: Details
-
     query: "@*"
 
 # Sidebar settings
@@ -111,7 +106,7 @@ Worked as a software engineer for 2 years at Goava, building data-driven b2b sal
 <br><br> My key skills are Python, Pytorch, NoSQL, AWS and ElasticSearch."
 sidebar-avatar: https://github.com/rabiulcste.png # use absolute URL, seeing it's used in both `/` and `/about/`
 sidebar-name: Rabiul Awal
-sidebar-email: "Email: r.awal @ usask.ca"
+sidebar-email: "Email: rabiul.awal @ mila.quebec"
 
 
 
