@@ -1,12 +1,16 @@
-<span style="color:#ff00d5; font-size:1.25em; "> [🌎 Global Equality for PhDs in NLP / AI] </span>  One reason for success is access to information. For example, knowing what a PhD in NLP is like, what top grad schools look for when reviewing PhD applications, and how careers in NLP in both academia and industry are like. This [github repository](https://github.com/zhijing-jin/nlp-phd-global-equality) has answers on many such questions. Thanks to Zhijing Jin for putting this together.
+### 🌎 Global Equality for PhDs in NLP / AI
+One reason for success is access to information. For example, knowing what a PhD in NLP is like, what top grad schools look for when reviewing PhD applications, and how careers in NLP in both academia and industry are like. This [github repository](https://github.com/zhijing-jin/nlp-phd-global-equality) has answers on many such questions. Thanks to Zhijing Jin for putting this together.
 
-<span style="color:#FF0000; font-size:1.25em; "> [🍩 Telegram channel for job posts] </span> I maintain a [telegram channel](https://t.me/s/msphdprof) for phd+research job postings. The ads come from professors' tweets. To use this job posting service, contact the recruiter with a [personalized email](http://eugenevinitsky.github.io/posts/2020-12-25-coldemails.html). 
+### 🍩 Telegram channel for job posts 
+I maintain a [telegram channel](https://t.me/s/msphdprof) for phd+research job postings. The ads come from professors' tweets. To use this job posting service, contact the recruiter with a [personalized email](http://eugenevinitsky.github.io/posts/2020-12-25-coldemails.html). 
 
 
-<span style="color:#0000FF; font-size:1.25em; "> [🧰 Tools for CS research] </span> If you're an undergrad getting started with CS, you might feel stuck because you're unfamiliar with the tools you need. Luckily, there's an MIT [course](https://missing.csail.mit.edu) that can help. You might also find this [blog post](https://kentonmurray.com/blogs/hackingphd.html) useful.
+### 🧰 Tools for CS research 
+If you're an undergrad getting started with CS, you might feel stuck because you're unfamiliar with the tools you need. Luckily, there's an MIT [course](https://missing.csail.mit.edu) that can help. You might also find this [blog post](https://kentonmurray.com/blogs/hackingphd.html) useful.
  
 
-<span style="color:#6B8E23; font-size:1.25em; "> [📚 Reading groups] </span> There are communities that provide opportunities for ML research beyond university/industry research labs, e.g. [reading groups](#research-reading-groups). These can be helpful for learning about machine learning research and possibly a starting point for your first collaboration.
+### 📚 Reading groups
+There are communities that provide opportunities for ML research beyond university/industry research labs, e.g. [reading groups](#research-reading-groups). These can be helpful for learning about machine learning research and possibly a starting point for your first collaboration.
 
 
 ### PHD ADMISSION

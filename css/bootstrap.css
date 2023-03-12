@@ -276,6 +276,11 @@ th {
                 url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular")
                         format("svg");
 }
+@font-face {
+        font-family: 'SolaimanLipi';
+        src: url('../fonts/SolaimanLipi-Regular.ttf') format('truetype');
+ }
+
 .glyphicon {
         position: relative;
         top: 1px;
@@ -1143,8 +1148,8 @@ img {
         border-radius: 50%;
 }
 hr {
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 2.5px;
+        margin-bottom: 2.5px;
         border: 0;
         border-top: 1px solid #eee;
 }

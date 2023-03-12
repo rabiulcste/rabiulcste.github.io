@@ -1,8 +1,8 @@
 # Site settings
 title: Rabiul Awal
-SEOTitle: Rabiul blog
-header-img: img/home-bg.png
-email: r.awal@usask.ca
+SEOTitle: Rabiul Awal
+header-img: ""
+email: rabiul.awal@mila.quebec
 description: ""
 keyword: "rabiul awal, nlp, deep learning, bangladesh"
 url: "https://rabiul.me"              # your host, for absolute URL
@@ -17,7 +17,6 @@ github_username:    rabiulcste
 twitter_username:   _rabiulawal
 linkedin_username:  rabiulawal
 resume_link: true
-
 
 
 # Pagination
@@ -92,7 +91,8 @@ ga_domain: rabiul.me
 
 scholar:
     source: /_bibliography/
-    style: chicago-fullnote-bibliography
+    style: chicago-author-date
+    ignore: ['url', 'doi']
     bibliography: references.bib
     bibliography_template: bibtemplate
     bibtex_filters: [latex, smallcaps, superscript]
@@ -100,7 +100,7 @@ scholar:
     query: "@*"
 
 # Sidebar settings
-sidebar: true                           # whether or not using Sidebar.
+sidebar: false                           # whether or not using Sidebar.
 sidebar-about-description: "2nd year CS masters student at UofS with research focus on language+vision and deep learning. 
 Worked as a software engineer for 2 years at Goava, building data-driven b2b sales intelligence products. 
 <br><br> My key skills are Python, Pytorch, NoSQL, AWS and ElasticSearch."

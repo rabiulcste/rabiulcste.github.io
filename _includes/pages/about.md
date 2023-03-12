@@ -1,4 +1,4 @@
-I am a research intern at [Mila, Quebec AI Institute](https://mila.quebec/en/). I am affiliated with MAIR lab, supervised by professor [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I completed my masters student at University of Saskatchewan. During that period, I also worked at [SocialAI.Studio](https://www.socialai.studio/home) at Singapore University of Technology and Design supervided by professor [Roy Ka-Wei Lee](https://info.roylee.sg/). Prior to moving to Canada,I was a software engineer at a Nordic [startup](https://www.goava.com/sv/) with 2 years of experience in Python, Pytorch, NoSQL, microservices, and AWS. I completed my bachelor in Computer Scienece at Noakhali Science and Technology Universiy. 
+I am a research intern at [Mila, Quebec AI Institute](https://mila.quebec/en/). I am affiliated with MAIR lab, supervised by professor [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I completed my masters at [University of Saskatchewan](https://www.cs.usask.ca/). During that period, I also worked at [SocialAI.Studio](https://www.socialai.studio/home) at Singapore University of Technology and Design supervided by professor [Roy Ka-Wei Lee](https://info.roylee.sg/). Prior to moving to Canada,I was a software engineer at a Nordic [startup](https://www.goava.com/sv/) with 2 years of experience in Python, Pytorch, NoSQL, microservices, and AWS. I completed my bachelor in Computer Scienece at [Noakhali Science and Technology Universiy](https://nstu.edu.bd/). 
 
 My research interests are in language+vision AI, compositionality and representation learning, Social NLP. I have published 3 papers in conference venues. I run a reading group on NLP research out of [Dhaka](http://nlpdhaka.com/).
 
@@ -6,11 +6,11 @@ My research interests are in language+vision AI, compositionality and representa
 ## Research
 My current research goal is studying compositionality and reasoning in deep language+vision and out-of-distribution generalization in neural networks.
 
-#### Language + Vision
+### Language + Vision
  The goal of this project is to systematically evaluate the generalization of pre-trained vision-language models (VLMs) in out-of-distribution (OOD) settings. I aim to achieve this through (1) investigating the reasoning skills of state-of-the-art (SOTA) pre-trained vision-language Transformers and (2) systematic probing of VLMs for compositionality.
 > OOD generalization in vision-language tasks [pdf](https://drive.google.com/file/d/1cc4Sp2brnhyzRfiLF-IRRxC8pHOTpx1I/view?usp=sharing)
 
-#### NLP for Social Good
+### NLP for Social Good
  My early research focuses on deep learning applications for tackling two social value tasks: online misinformation and hate speech in multiple languages.
 
 > Model-Agnostic Meta-Learning for Multilingual Hate Speech Detection (TCSS22) [pdf](https://arxiv.org/abs/2303.02513) <br>

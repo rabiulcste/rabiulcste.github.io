@@ -155,10 +155,10 @@
   line-height: 1.5;
 }
 .popular-posts li {
-  margin-bottom: 12px !important;
+  margin-bottom: 6px !important;
 }
 .popular-posts li a {
-  font-size: 20px !important;
+  font-size: 17px !important;
 }
 @media (max-width: 1200px) {
   .side-catalog {
@@ -688,12 +688,17 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "SolaimanLipi", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
 ;
   line-height: 1.5;
-  font-size: 18px;
+  font-size: 17px;
   color: #232323;
   overflow-x: hidden;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-smooth: always;
+  
+  /* Enable ligatures and contextual alternates */
+  font-feature-settings: "liga" 1, "calt" 1;
 }
 p {
   margin: 0.6em 0;
@@ -716,7 +721,7 @@ h6 {
   font-family: -apple-system, BlinkMacSystemFont, "SolaimanLipi", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
   line-height: 1.7;
   line-height: 1.1;
-  font-weight: bold;
+  font-weight: normal;
 }
 h4 {
   font-size: 21px;
@@ -743,6 +748,7 @@ blockquote {
 }
 blockquote p {
   margin: 0;
+  font-size: 90%;
 }
 small.img-hint {
   display: block;
@@ -775,7 +781,7 @@ table.table > tbody > tr > th,
 table.table > tbody > tr > td,
 table.table > thead > tr > th,
 table.table > thead > tr > td {
-  font-size: 85%;
+  font-size: 90%;
   border-top: 1px solid #eee !important;
   border-bottom: 1px solid #eee !important;
 }
@@ -824,8 +830,7 @@ samp {
   color: #0085a1;
 }
 .post-container h1,
-.post-container h2,
-.post-container h3 {
+.post-container h2 {
   line-height: 1.4;
   padding: 0;
   text-transform: uppercase !important;
@@ -833,6 +838,17 @@ samp {
   font-weight: bold !important;
   font-size: 17px !important;
 }
+
+.post-container h3 {
+  line-height: 1.4;
+  padding: 0;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  font-weight: bold !important;
+  font-size: 15px !important;
+}
+
+
 
 .post-container h4,
 .post-container h5,
@@ -1075,12 +1091,13 @@ samp {
     color: rgba(255, 255, 255, 0.8);
   }
   .navbar-custom .nav li a {
-    color: white;
+    color: #353535;
     padding: 20px;
   }
   .navbar-custom .nav li a:hover,
   .navbar-custom .nav li a:focus {
-    color: rgba(255, 255, 255, 0.8);
+    /* color: rgba(255, 255, 255, 0.8); */
+    text-decoration: underline;
   }
   .navbar-custom .nav li a:active {
     background: none;
@@ -1155,7 +1172,7 @@ samp {
 }
 .intro-header {
   background: no-repeat center center;
-  background-color: #10627a;
+  /* background-color: #10627a; */
   background-attachment: scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -1189,23 +1206,25 @@ samp {
 .intro-header.style-text .tags .tag:active {
   background-color: rgba(0, 0, 0, 0.05);
 }
-@media only screen and (min-width: 768px) {
+
+/* @media only screen and (min-width: 768px) {
   .intro-header {
-    margin-bottom: 20px;
+    margin-bottom: 20px; */
     /* response on desktop */
-  }
-}
+  /* }
+} */
+
 .intro-header .site-heading,
 .intro-header .post-heading,
 .intro-header .page-heading {
   padding: 85px 0 55px;
-  color: white;
+  color: #353535;
 }
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading,
   .intro-header .post-heading,
   .intro-header .page-heading {
-    padding: 150px 0;
+    padding: 50px 0;
   }
 }
 .intro-header .site-heading {
@@ -1218,11 +1237,11 @@ samp {
 }
 .intro-header .site-heading,
 .intro-header .page-heading {
-  text-align: center;
+  text-align: left;
 }
 .intro-header .site-heading h1,
 .intro-header .page-heading h1 {
-  margin-top: 0;
+  /* margin-top: 0; */
   font-size: 50px;
 }
 .intro-header .site-heading .subheading,
@@ -1242,7 +1261,7 @@ samp {
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading h1,
   .intro-header .page-heading h1 {
-    font-size: 80px;
+    font-size: 50px;
   }
 }
 .intro-header .post-heading h1 {
@@ -1372,7 +1391,7 @@ samp {
 .section-heading {
   font-size: 36px;
   margin-top: 60px;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 .caption {
   text-align: center;
@@ -1477,12 +1496,12 @@ footer .copyright a:focus {
   cursor: not-allowed;
 }
 ::-moz-selection {
-  color: white;
+  color: #353535;
   text-shadow: none;
   background: #0085a1;
 }
 ::selection {
-  color: white;
+  color: #353535;
   text-shadow: none;
   background: #0085a1;
 }
@@ -1511,7 +1530,7 @@ img::-moz-selection {
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 999em;
   padding: 0 10px 0 10px;
-  color: #ffffff;
+  color: white;
   line-height: 24px;
   font-size: 12px;
   text-decoration: none;
@@ -1544,7 +1563,7 @@ img::-moz-selection {
 }
 @media only screen and (min-width: 768px) {
   #tag-heading {
-    padding: 55px 0;
+      padding: 55px 0 calc(55px / 2) 0;
   }
 }
 #tag_cloud {
@@ -1633,8 +1652,8 @@ img::-moz-selection {
 }
 .mini-post-list .post-preview > a .post-title {
   font-size: 18px;
-  font-weight: 500;
-  margin-top: 20px;
+  font-weight: 400;
+  margin-top: 10px;
 }
 .mini-post-list .post-preview > a .post-subtitle {
   font-size: 13px;
@@ -1690,7 +1709,7 @@ img::-moz-selection {
 .navbar-default .navbar-toggle .icon-bar {
   width: 18px;
   border-radius: 0px;
-  background-color: white;
+  background-color: #353535;
 }
 .navbar-default .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 3px;
@@ -1747,4 +1766,14 @@ img::-moz-selection {
   overflow-y: hidden;
 }
 
+.profile img {
+  display: block;
+  float: left; /* align the image to the left */
+  margin-top: 0.6em;
+  margin-right: 20px; /* add some spacing between the image and other content */
+  max-width: 100%; /* make the image width responsive up to its original size */
+  max-height: 200px; /* limit the image height to 200 pixels */
+  border: 2px solid #fff; /* add a white border */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5); /* add a subtle shadow */
+}
 
