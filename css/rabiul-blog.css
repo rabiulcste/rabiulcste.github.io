@@ -685,9 +685,10 @@ body {
      *     TypeIsBeautiful,
      *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
      */
-  font-family: -apple-system, BlinkMacSystemFont, "SolaimanLipi", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;;
+  font-family: "Libre Baskerville", "SolaimanLipi", sans-serif;;
   line-height: 1.5;
   font-size: 17px;
+  letter-spacing: -.005em;
   color: #353535;
   overflow-x: hidden;
   text-rendering: auto;
@@ -704,6 +705,7 @@ p {
 }
 @media screen and (max-width: 768px) {
   p {
+    font-size: 15px;
     margin: 12.5px 0;
   }
 }
@@ -717,12 +719,9 @@ h6 {
      *     TypeIsBeautiful,
      *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
      */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "SolaimanLipi", sans-serif;  line-height: 1.7;
+  font-family: "Poppins", "SolaimanLipi", sans-serif;  line-height: 1.7;
   line-height: 1.1;
   font-weight: normal;
-}
-h4 {
-  font-size: 21px;
 }
 a {
   color: #404040;
@@ -834,7 +833,7 @@ samp {
   text-transform: uppercase !important;
   letter-spacing: 2px !important;
   font-weight: bold !important;
-  font-size: 17px !important;
+  font-size: 19px !important;
 }
 
 .post-container h3 {
@@ -843,7 +842,7 @@ samp {
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
   font-weight: bold !important;
-  font-size: 15px !important;
+  font-size: 17px !important;
 }
 
 
@@ -991,6 +990,7 @@ samp {
 .navbar-custom .nav li a {
   text-transform: uppercase;
   font-size: 12px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins', sans-serif;
   line-height: 20px;
   font-weight: 800;
   letter-spacing: 1px;
@@ -1173,7 +1173,7 @@ samp {
      *     TypeIsBeautiful,
      *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
      */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "SolaimanLipi", sans-serif;  line-height: 1.7;
+  font-family: "Poppins", "SolaimanLipi", sans-serif;
   font-size: 18px;
   line-height: 1.1;
   display: block;
@@ -1200,7 +1200,7 @@ samp {
      *     TypeIsBeautiful,
      *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
      */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "SolaimanLipi", sans-serif;  line-height: 1.7;
+  font-family: "Poppins", "SolaimanLipi", sans-serif;  line-height: 1.7;
   font-size: 17px;
   line-height: 1.4;
   font-weight: normal;
@@ -1384,7 +1384,7 @@ footer .copyright a:focus {
      *     TypeIsBeautiful,
      *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
      */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "SolaimanLipi", sans-serif;  line-height: 1.7;
+  font-family: -apple-system, BlinkMacSystemFont, "Poppins", sans-serif;  line-height: 1.7;
   text-transform: uppercase;
   font-size: 13px;
   font-weight: 800;
@@ -1397,7 +1397,7 @@ footer .copyright a:focus {
   .pager li > a,
   .pager li > span {
     font-size: 14px;
-    padding: 15px 25px;
+    padding: 5px 0px;
   }
 }
 .pager li > a {
@@ -1569,7 +1569,7 @@ img::-moz-selection {
      *     TypeIsBeautiful,
      *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
      */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "SolaimanLipi", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Poppins", "SolaimanLipi", sans-serif;
   line-height: 1.7;
 }
 .mini-post-list .post-preview {
@@ -1693,6 +1693,7 @@ img::-moz-selection {
 @media (max-width: 768px) {
   .navbar-custom .nav li a {
     font-size: 18px;
+    font-family: "Poppins", sans-serif !important;
     font-weight: 600;
     line-height: 1.5;
     letter-spacing: 1px;
@@ -1811,12 +1812,32 @@ ol.bibliography {
 }
 
 ol.bibliography li {
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid black;
   padding: 10px 0;
-
+  letter-spacing: -.01em;
 }
 
 /* set bold font weight to 400 */
 ol.bibliography li b, strong {
-  font-weight: 500;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  ol.bibliography li {
+    font-size: 15px;
+  }
+}
+
+ .about-me ol, .about-me ul {
+  list-style: none;
+  padding: 2px;
+}
+
+.about-me ol li, .about-me ul li{
+  font-size: 90%;
+}
+
+.about-me ul li::before {
+  content: "> ";
+  font-weight: bold;
 }

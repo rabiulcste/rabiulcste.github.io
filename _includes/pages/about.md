@@ -8,14 +8,14 @@ My current research goal is studying compositionality and reasoning in deep lang
 
 ### Language + Vision
  The goal of this project is to systematically evaluate the generalization of pre-trained vision-language models (VLMs) in out-of-distribution (OOD) settings. I aim to achieve this through (1) investigating the reasoning skills of state-of-the-art (SOTA) pre-trained vision-language Transformers and (2) systematic probing of VLMs for compositionality.
-> [OOD generalization in vision-language tasks](https://drive.google.com/file/d/1cc4Sp2brnhyzRfiLF-IRRxC8pHOTpx1I/view?usp=sharing)
+- [OOD generalization in vision-language tasks](https://drive.google.com/file/d/1cc4Sp2brnhyzRfiLF-IRRxC8pHOTpx1I/view?usp=sharing)
 
 ### NLP for Social Good
  My early research focuses on deep learning applications for tackling two social value tasks: online misinformation and hate speech in multiple languages.
 
-> [Model-Agnostic Meta-Learning for Multilingual Hate Speech Detection (TCSS22)](https://arxiv.org/abs/2303.02513) <br>
-> [MUSCAT: Multilingual Rumor Verification in Social Media Conversations (BIGDATA22)](https://ieeexplore.ieee.org/abstract/document/10021113/) <br>
-> [Joint learning target and emotion for hate speech detection (PAKDD21)](https://arxiv.org/pdf/2103.11800.pdf)
+- [Model-Agnostic Meta-Learning for Multilingual Hate Speech Detection (TCSS22)](https://arxiv.org/abs/2303.02513) <br>
+- [MUSCAT: Multilingual Rumor Verification in Social Media Conversations (BIGDATA22)](https://ieeexplore.ieee.org/abstract/document/10021113/) <br>
+- [Joint learning target and emotion for hate speech detection (PAKDD21)](https://arxiv.org/pdf/2103.11800.pdf)
 
 ## Blog
 I occasionally write on how-to-cs-grad, coding, ai research, and systematic failure in Bangladesh.
