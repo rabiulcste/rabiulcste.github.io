@@ -90,14 +90,17 @@ ga_domain: rabiul.me
 
 
 scholar:
+    first_name: Md Rabiul
+    last_name: Awal
     source: /_bibliography/
-    style: chicago-author-date
+    style: _csl/transactions-on-algorithms.csl
     ignore: ['url', 'doi']
     bibliography: references.bib
     bibliography_template: bibtemplate
     bibtex_filters: [latex, smallcaps, superscript]
     replace_strings: true
     query: "@*"
+
 
 # Sidebar settings
 sidebar: false                           # whether or not using Sidebar.

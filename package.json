@@ -26,6 +26,7 @@
         "cssmin": "^0.4.3",
         "grunt-contrib-cssmin": "^4.0.0",
         "grunt-jekyll": "^1.0.1",
+        "jsmin": "^1.0.1",
         "sass": "^1.45.1"
     }
 }
