@@ -47,7 +47,7 @@ There are communities that provide opportunities for ML research beyond universi
 ### INDUSTRY + CAREER
 
 | ফ্রেশার হিশেবে সফটওয়্যার ইঞ্জিনিয়ারিং চাকরি খোঁজাখুঁজির অভিজ্ঞতা, ক্যাম্পাস জুনিয়রদের জন্য বয়ান [html](https://rabiul.me/cs/2019/01/30/software-engineering-job-hacking-as-a-fresh-graduate-nstu/) |
-| সিনট্যাক্স টু কম্পিটিটিভ প্রোগ্রামিং জার্নি [html](https://rabiul.me/cs/2019/01/30/syntax-to-competitive-programming-journey/) |
+| সিনট্যাক্স টু কম্পিটিটিভ প্রোগ্রামিং জার্নি [html](https://rabiul.me/computation/2016/05/01/syntax-to-competitive-programming/) |
 | Dodging pitfalls in a software engineering career [html](https://rabiul.me/cs/2019/01/30/dodging-pitfalls-in-a-software-engineering-career/) |
 | 7 reasons why you should not work in a startup [html](https://rabiul.me/cs/2019/01/30/7-reasons-why-you-should-not-work-in-a-startup/) |
 | Navigate Through the Current AI Job Market: A Retrospect, Billy Ian [html](http://billy-inn.github.io/blog/2022/01/06/navigate-through-the-current-ai-job-market-a-retrospect/)|
