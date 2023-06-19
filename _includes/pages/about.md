@@ -1,21 +1,23 @@
 I am a research intern at [Mila, Quebec AI Institute](https://mila.quebec/en/). I am affiliated with MAIR lab, supervised by professor [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I completed my masters at [University of Saskatchewan](https://www.cs.usask.ca/). During that period, I also worked at [SocialAI.Studio](https://www.socialai.studio/home) at Singapore University of Technology and Design supervised by professor [Roy Ka-Wei Lee](https://info.roylee.sg/). Prior to moving to Canada, I was a software engineer at a Nordic [startup](https://www.goava.com/sv/) with 2 years of experience in Python, Pytorch, NoSQL, microservices, and AWS. I completed my bachelor's in Computer Science at [Noakhali Science and Technology Universiy](https://nstu.edu.bd/). 
 
-My research interests are in language+vision AI, compositionality and representation learning and Social NLP. I've published 3 papers in conference venues and lead an NLP research reading group in [Dhaka](http://nlpdhaka.com/).
+^Check archived talks from NLPDhaka [here](http://nlpdhaka.com/).
 
 
 ## Research
-My current research goal is studying compositionality and reasoning in deep language+vision and out-of-distribution generalization in neural networks.
-
 ### Language + Vision
- The goal of this project is to systematically evaluate the generalization of pre-trained vision-language models (VLMs) in out-of-distribution (OOD) settings. I aim to achieve this through (1) investigating the reasoning skills of state-of-the-art (SOTA) pre-trained vision-language Transformers and (2) systematic probing of VLMs for compositionality.
-- [OOD generalization in vision-language tasks](https://drive.google.com/file/d/1cc4Sp2brnhyzRfiLF-IRRxC8pHOTpx1I/view?usp=sharing)
+
+My meta-goal is to study compositionality for neural network generalization in out-of-distribution settings. I am interested in the fine-grained vision-language understading: entanglement of objects in images (representation) and their comprehension through natural language queries. I also investigate zero- and few-shot prompting techniques in large vision-language models.
+
+- [Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding](https://arxiv.org/abs/2306.08832)
+- [Investigating Prompting Techniques for Zero- and Few-Shot Visual Question Answering](https://arxiv.org/abs/2306.09996)
+<!-- - [OOD generalization in vision-language tasks](https://drive.google.com/file/d/1cc4Sp2brnhyzRfiLF-IRRxC8pHOTpx1I/view?usp=sharing) -->
 
 ### NLP for Social Good
- My early research focuses on deep learning applications for tackling two social value tasks: online misinformation and hate speech in multiple languages.
+My early research focuses on deep learning applications for tackling two social value tasks: online misinformation and hate speech in multiple languages.
 
-- [Evaluating GPT-3 Generated Explanations for Hateful Content Moderation (IJCAI23)]() <br>
-- [Model-Agnostic Meta-Learning for Multilingual Hate Speech Detection (TCSS22)](https://arxiv.org/abs/2303.02513) <br>
-- [MUSCAT: Multilingual Rumor Verification in Social Media Conversations (BIGDATA22)](https://ieeexplore.ieee.org/abstract/document/10021113/) <br>
+- [Evaluating GPT-3 Generated Explanations for Hateful Content Moderation (IJCAI23)](https://arxiv.org/abs/2305.17680)
+- [Model-Agnostic Meta-Learning for Multilingual Hate Speech Detection (TCSS22)](https://arxiv.org/abs/2303.02513)
+- [MUSCAT: Multilingual Rumor Verification in Social Media Conversations (BIGDATA22)](https://ieeexplore.ieee.org/abstract/document/10021113/)
 - [AngryBERT: Joint learning target and emotion for hate speech detection (PAKDD21)](https://arxiv.org/pdf/2103.11800.pdf)
 
 ## Blog
