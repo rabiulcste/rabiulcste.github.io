@@ -1,0 +1,603 @@
+[
+  
+    {
+      "title"    : "An opinionated guide for CS undergrads (local universities)",
+      "subtitle" : "",
+      "tags"     : "computer-science",
+      "url"      : "/cs/2022/10/23/an-opinionated-guide-for-cs-undergrads/",
+      "date"     : "2022-10-23 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "On doable undergrad research and conference workshop tracks in NLP",
+      "subtitle" : "",
+      "tags"     : "research, computer-science",
+      "url"      : "/cs/2020/07/06/on-doable-undergrad-research-and-conference-workshop-tracks-in-ml-nlproc/",
+      "date"     : "2020-07-06 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "Reproducing SOTA works as a pathway to get into research and preparation for a bachelor thesis",
+      "subtitle" : "",
+      "tags"     : "computer-science, research",
+      "url"      : "/cs/2020/07/01/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/",
+      "date"     : "2020-07-01 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "মরুর ভেতর সবুজ একটা বন",
+      "subtitle" : "",
+      "tags"     : "art",
+      "url"      : "/art_culture/2019/09/10/moru-sobuj-bon/",
+      "date"     : "2019-09-10 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "ফ্রেশার হিশেবে সফটওয়্যার ইঞ্জিনিয়ারিং চাকরি খোঁজাখুঁজির অভিজ্ঞতা, ক্যাম্পাস জুনিয়রদের জন্য বয়ান",
+      "subtitle" : "",
+      "tags"     : "computer-science",
+      "url"      : "/cs/2019/01/30/software-engineering-job-hacking-as-a-fresh-graduate-nstu/",
+      "date"     : "2019-01-30 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "লিটফেস্ট অবয়ব",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2018/11/14/litfest/",
+      "date"     : "2018-11-14 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "শোকরানা মাহফিল ও কওমি বিদ্যালয় প্রসঙ্গে",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2018/11/04/shokrana-mahfil/",
+      "date"     : "2018-11-04 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "পাবলিক বিশ্ববিদ্যালয়ে গবেষণা সংকট প্রসঙ্গে",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/cs/2018/10/29/public-university-research/",
+      "date"     : "2018-10-29 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "জাতিসংঘের পেটে ঢুইকা বইসা থাকা শিক্ষার্থী বিষয়ক",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2018/10/09/model-united-nations/",
+      "date"     : "2018-10-09 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "বিশ নয় দুহ হাজার আঠারো",
+      "subtitle" : "",
+      "tags"     : "art",
+      "url"      : "/art_culture/2018/09/26/200918/",
+      "date"     : "2018-09-26 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "Turning into 24",
+      "subtitle" : "",
+      "tags"     : "me-n-myself",
+      "url"      : "/art_culture/2018/09/01/turning-into-24/",
+      "date"     : "2018-09-01 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "কপালিকা দর্শন বিষয়ক",
+      "subtitle" : "",
+      "tags"     : "people, nostalgia",
+      "url"      : "/art_culture/2018/08/26/kapalika/",
+      "date"     : "2018-08-26 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "নদী মাঠ মরু প্রান্তর পাহাড় ও জংলা বিষয়ক",
+      "subtitle" : "",
+      "tags"     : "art",
+      "url"      : "/art_culture/2018/06/25/nodi-moru-prantor-pahar-jongla/",
+      "date"     : "2018-06-25 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "খালেদ হোসাইনির নোভেল বিষয়ক",
+      "subtitle" : "",
+      "tags"     : "literature",
+      "url"      : "/art_culture/2018/06/16/khaled-hossaini-novel/",
+      "date"     : "2018-06-16 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "কবিতা উৎসবের পত্র  &amp;#8216;১৭ / মশাল",
+      "subtitle" : "",
+      "tags"     : "literature",
+      "url"      : "/art_culture/2018/06/12/kobita-utsob-leaflet/",
+      "date"     : "2018-06-12 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "বুকের ভেতর সবুজ মনোটোনাস দুঃখ",
+      "subtitle" : "",
+      "tags"     : "nostalgia",
+      "url"      : "/2018/06/10/sadness-in-our-heart/",
+      "date"     : "2018-06-10 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "গ্রামে হার্ডওয়ার দোকান বাইড়া গেছে, বেচাকেনা কম",
+      "subtitle" : "",
+      "tags"     : "me-n-myself",
+      "url"      : "/2018/04/20/grame-hardwire-dokan-baira-geche/",
+      "date"     : "2018-04-20 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "ভয় সাকস",
+      "subtitle" : "",
+      "tags"     : "old-days",
+      "url"      : "/art_culture/2018/04/11/fear-sucks/",
+      "date"     : "2018-04-11 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "শিশুদের বইপত্রে সেক্স এডুকেশন এবং অন্যান্য",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2018/03/26/sexual_abuse_and_sex_education/",
+      "date"     : "2018-03-26 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "শহিদুল জহির",
+      "subtitle" : "",
+      "tags"     : "literature",
+      "url"      : "/art_culture/2018/03/15/shahidul-jahir/",
+      "date"     : "2018-03-15 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "তেরোর পরে",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2018/03/05/teror-pore/",
+      "date"     : "2018-03-05 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "কিচ্ছু হইতেছে না",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2018/02/16/kicchu-hoiteche-na/",
+      "date"     : "2018-02-16 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "১৪ ডিসেম্বর ২০১৭",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2017/12/14/14-december/",
+      "date"     : "2017-12-14 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "skipping classes, questioning, torture, problematic system and suicide",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/cs/2017/11/17/skipping-classes-questioning-torture-problematic-system-and-suicide/",
+      "date"     : "2017-11-17 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "Fake news, a threat to minority",
+      "subtitle" : "",
+      "tags"     : "tech",
+      "url"      : "/computation/2017/11/11/fake-news-a-threat-to-minority/",
+      "date"     : "2017-11-11 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "pride and prejudice &amp;#8211; public university of Bangladesh",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/cs/2017/11/10/pride-and-prejudice-public-university-of-bangladesh/",
+      "date"     : "2017-11-10 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "Computer science for you or not? Notes for Nstuan.",
+      "subtitle" : "",
+      "tags"     : "computer-science",
+      "url"      : "/cs/2017/11/08/computer-science-for-you-or-not-words-for-nstuan/",
+      "date"     : "2017-11-08 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "সেলফ পোট্রেট ৩",
+      "subtitle" : "",
+      "tags"     : "me-n-myself",
+      "url"      : "/2017/10/15/self-portrait3/",
+      "date"     : "2017-10-15 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "উঠতি কবিদের বলি",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2017/10/09/uththi-kobider/",
+      "date"     : "2017-10-09 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "learn to code for efficient CS degree",
+      "subtitle" : "",
+      "tags"     : "computer-science",
+      "url"      : "/cs/2017/08/20/learn-to-code-for-efficient-cs-degree/",
+      "date"     : "2017-08-20 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "c h a r i t y",
+      "subtitle" : "",
+      "tags"     : "society, critic",
+      "url"      : "/art_culture/2017/08/19/c-h-a-r-i-t-y/",
+      "date"     : "2017-08-19 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "h o l d  m e  t i g h t",
+      "subtitle" : "",
+      "tags"     : "art",
+      "url"      : "/art_culture/2017/08/18/h-o-l-d-m-e-t-i-g-h-t/",
+      "date"     : "2017-08-18 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "১০১ একরের দিকে দেখি",
+      "subtitle" : "",
+      "tags"     : "old-days",
+      "url"      : "/art_culture/2017/08/07/scattered-thoughts-on-2nd-aug/",
+      "date"     : "2017-08-07 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "sexual frustration in YOUTH minds",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2017/08/02/sexual-frustration-in-youth-minds/",
+      "date"     : "2017-08-02 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "Thoughts on Sararah App",
+      "subtitle" : "",
+      "tags"     : "tech",
+      "url"      : "/computation/2017/07/30/thoughts-on-sararah-app/",
+      "date"     : "2017-07-30 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "Why not semester break?",
+      "subtitle" : "",
+      "tags"     : "computer-science",
+      "url"      : "/cs/2017/07/21/why-not-semester-break/",
+      "date"     : "2017-07-21 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "Why we nstuan care for 22 Jun answered",
+      "subtitle" : "",
+      "tags"     : "old-days",
+      "url"      : "/2017/07/15/why-we-nstuan-care-for-22-jun-answered/",
+      "date"     : "2017-07-15 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "Thirst for a real conversation",
+      "subtitle" : "",
+      "tags"     : "me-n-myself",
+      "url"      : "/2017/06/12/thirst-for-a-real-conversation/",
+      "date"     : "2017-06-12 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "CS study in Bangladesh",
+      "subtitle" : "",
+      "tags"     : "computer-science",
+      "url"      : "/cs/2017/06/05/cs-study-in-bangladesh/",
+      "date"     : "2017-06-05 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "শৃঙ্খল ২",
+      "subtitle" : "",
+      "tags"     : "me-n-myself",
+      "url"      : "/2017/05/27/chained2/",
+      "date"     : "2017-05-27 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "অল মাদার আউট দেয়ার আ&#39;ম হার চাইল্ড",
+      "subtitle" : "",
+      "tags"     : "global-warming",
+      "url"      : "/2017/05/15/all-mother-child/",
+      "date"     : "2017-05-15 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "আহমেদ ছফা ১",
+      "subtitle" : "",
+      "tags"     : "literature",
+      "url"      : "/art_culture/2017/05/14/ahmed-chofa/",
+      "date"     : "2017-05-14 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "বুকের ভিত্রে ভাল্লুক",
+      "subtitle" : "",
+      "tags"     : "global-warming",
+      "url"      : "/2017/04/27/buker-vitre-valluk/",
+      "date"     : "2017-04-27 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "সেলফ পোট্রেট ২",
+      "subtitle" : "",
+      "tags"     : "me-n-myself",
+      "url"      : "/2017/04/15/self-portrait-2/",
+      "date"     : "2017-04-15 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "BARRICADE a film by IRU KHAIRUL KARIM",
+      "subtitle" : "",
+      "tags"     : "art",
+      "url"      : "/art_culture/2017/04/07/barricade-iru-khairul/",
+      "date"     : "2017-04-07 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "শিউলি ফুল এবং দূর্বা বিষয়ক",
+      "subtitle" : "",
+      "tags"     : "people",
+      "url"      : "/2017/02/20/shiuli-ful-durba/",
+      "date"     : "2017-02-20 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "পরানবাবু",
+      "subtitle" : "",
+      "tags"     : "nostalgia",
+      "url"      : "/2017/02/07/poranbabu/",
+      "date"     : "2017-02-07 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "বইয়ের লিস্টি বইমেলা ২০১৭",
+      "subtitle" : "",
+      "tags"     : "literature",
+      "url"      : "/art_culture/2017/02/07/booklist17/",
+      "date"     : "2017-02-07 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "হাঁসের মাংস এবং অনিক দাস বিষয়ক",
+      "subtitle" : "",
+      "tags"     : "old-days, people",
+      "url"      : "/2016/12/29/haser-mangso-anik-das/",
+      "date"     : "2016-12-29 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "শহুরে এলিটিজম বিষয়ক",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2016/11/11/shohure-elitism/",
+      "date"     : "2016-11-11 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "ছাত্র আন্দোলন থেইকা / ২০১৬",
+      "subtitle" : "",
+      "tags"     : "old-days",
+      "url"      : "/art_culture/2016/10/27/chatro-andolon-theika/",
+      "date"     : "2016-10-27 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "আমার কাছেও ছবি বিক্রি করুক",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2016/10/12/2016-10-12-shilpo-shahbag/",
+      "date"     : "2016-10-12 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "শহর নোয়াখালী",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2016/10/03/noakhali/",
+      "date"     : "2016-10-03 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "হাবিব ভাই আর শাহলাম ভাই বিষয়ক / জাহাঙ্গীরনগর",
+      "subtitle" : "",
+      "tags"     : "people, nostalgia",
+      "url"      : "/2016/09/30/habib-shahalm-jahangirnagar/",
+      "date"     : "2016-09-30 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "ড. হুমায়ূন কবির | সহজিয়া",
+      "subtitle" : "",
+      "tags"     : "people",
+      "url"      : "/2016/08/19/humayun-kabir-sohojia/",
+      "date"     : "2016-08-19 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "স্ট্যান্ডার্ড টেমপ্লেট লাইব্রেরী &amp;#8211; ম্যাপ",
+      "subtitle" : "",
+      "tags"     : "competitive-programming",
+      "url"      : "/computation/2016/08/19/stl-map/",
+      "date"     : "2016-08-19 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "শৃঙ্খল ১",
+      "subtitle" : "",
+      "tags"     : "society",
+      "url"      : "/art_culture/2016/08/19/pink-floyd-rampal/",
+      "date"     : "2016-08-19 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "ঘরে ফেরা বিষয়ক / ফেনী",
+      "subtitle" : "",
+      "tags"     : "nostalgia",
+      "url"      : "/art_culture/2016/06/14/ghore-fera/",
+      "date"     : "2016-06-14 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "রাস্তার আন্দোলন বিষয়ক / ক্যাম্পাস",
+      "subtitle" : "",
+      "tags"     : "old-days",
+      "url"      : "/art_culture/2016/06/08/road-movement-campus/",
+      "date"     : "2016-06-08 14:43:51 -0700"
+    } ,
+  
+    {
+      "title"    : "Quora: বর্তমান সময়ের সেরা প্রশ্ন-উত্তর সাইট",
+      "subtitle" : "আমি যখন কম্পিউটার প্রোগ্রামিং নিয়ে পড়াশুনা শুরু করি বিশেষ করে কম্পিটিটিভ প্রোগ্রামিং নিয়ে কাজ করার সময় নানা প্রশ্নের উত্তর গুগলে সার্চ করতে হত।",
+      "tags"     : "tech",
+      "url"      : "/computation/2016/05/21/quora-a-popular-question-answer-site/",
+      "date"     : "2016-05-21 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "এসিএম আইসিপিসি ২০১৬",
+      "subtitle" : "বিশ্বের সবচেয়ে মর্যাদাপূর্ণ প্রোগ্রামিং প্রতিযোগিতা এসিএম আইসিপিসির চূড়ান্ত পর্বের মূল প্রতিযোগিতা আজ অনুষ্ঠিত হলো। এবারের আয়োজন হয়েছে থাইল্যান্ডের পুকেট শহরে। এটি ছিলো এসিএম আইসিপির ৪০ তম আসর।",
+      "tags"     : "competitive-programming",
+      "url"      : "/computation/2016/05/20/acmicpc2016/",
+      "date"     : "2016-05-20 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "কম্পিটিটিভ প্রোগ্রামিং টিউটোরিয়াল লিঙ্কবাকসো",
+      "subtitle" : "প্রোগ্রামিং সিলেবাস কন্টেস্ট প্রোগ্রামিং সিলেবাস - https://goo.gl/0gRHkZ এলগরিদম লিস্ট - https://goo.gl/qQ7WVG Topic wise Coding Resources - http://goo.gl/jJQXHN",
+      "tags"     : "competitive-programming",
+      "url"      : "/computation/2016/05/02/competitive-programming-tutorials/",
+      "date"     : "2016-05-02 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "সিনট্যাক্স টু কম্পিটিটিভ প্রোগ্রামিং জার্নি",
+      "subtitle" : "কম্পিউটার সায়েন্সের শিক্ষার্থীদের এক দুটো সেমিস্টার যাওয়ার পর খুবই কমন একটি প্রশ্ন হলো, আমি সি ল্যাঙ্গুয়েজ পারি অথবা আমি পাইথন পারি - এখন কি করবো, ভাইয়া?",
+      "tags"     : "competitive-programming",
+      "url"      : "/computation/2016/05/01/syntax-to-competitive-programming/",
+      "date"     : "2016-05-01 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "SPOJ Problem ADFRUITS",
+      "subtitle" : "এই প্রবলেমটি একটি স্ট্রেইট ফরোয়ার্ড Shortest Common Subsequence প্রবলেম। ডিরেক্ট Shortest Common Subsequence Algorithm প্রয়োগ করে কিংবা Longest Common Subsequence কে কিছুটা মডিফিকেশন করে এটি সলভ করা সম্ভব।",
+      "tags"     : "competitive-programming",
+      "url"      : "/computation/2016/04/30/spoj-problem-adfruits/",
+      "date"     : "2016-04-30 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "পুর্ণ সংখ্যার সেট বিট নির্ণয়",
+      "subtitle" : "কোন একটি সংখ্যাকে বাইনারিতে প্রকাশ করলে সেখানে শুধুমাত্র ০ অথবা ১ থাকে । একটি বাইনারি সংখ্যায় কতগুলো ১ আছে, তার মানই সংখ্যাটির সেট বিট। সেট বিট কাউন্ট করার বেশ কিছু উপায় আছে। এর মধ্যে দুটো উপায় নিয়ে আমি আলোচনা করবো।",
+      "tags"     : "number-theory",
+      "url"      : "/computation/2016/04/27/set-bit-counting-of-an-integer/",
+      "date"     : "2016-04-27 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "Multiplication of Two Big Numbers (more than 100 digit)",
+      "subtitle" : "",
+      "tags"     : "number-theory",
+      "url"      : "/computation/2016/04/27/multiplication-of-two-big-numbers-more-than-100-digit/",
+      "date"     : "2016-04-27 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "শৃঙ্খল ০",
+      "subtitle" : "",
+      "tags"     : "critic",
+      "url"      : "/art_culture/2016/04/26/govt-and-intelectual-crisis/",
+      "date"     : "2016-04-26 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "Tricks on array index range query",
+      "subtitle" : "ধরা যাক, আমাদের কাছে `ara[5]` সাইজের একটা এরে আছে । আগেই বলে রাখছি, এরে ইনডেক্স শুরু হবে 1 থেকে, 0 থেকে না। আমাদের এই এরেতে ৭ বার কুয়েরি করতে হবে \[x, y\] ইন্টার্ভালে । প্রতি কুয়েরিতে ওই ইন্টার্ভালের ইনডেক্সগুলোতে 2 যোগ করতে হবে । কুয়েরি শেষে পরিবর্তিত `array` প্রিন্ট করতে হবে । ara[5] = {2, 3, 7, 4, 10}; // array input // 07 queries 1 5 2 4 5 5 2 5",
+      "tags"     : "competitive-programming",
+      "url"      : "/computation/2015/12/09/tricks-on-array-index-range-query/",
+      "date"     : "2015-12-09 00:00:00 -0800"
+    } ,
+  
+    {
+      "title"    : "পূর্ণ সংখ্যার প্রাইম ফ্যাক্টরাইজেশন",
+      "subtitle" : "নাম্বার থিওরীতে কোন একটি ধনাত্মক সংখ্যার মৌলিক গুণনীয়ক বা প্রাইম ফ্যাক্টর হলো এমন কতগুলো মৌলিক সংখ্যা যা ঐ সংখ্যাটিকে সঠিকভাবে ভাগ করে । মানে, যে সকল প্রাইম নাম্বার দিয়ে ঐ সংখ্যাটিকে ভাগ দিলে ভাগশেষ শূন্য হয়, তারাই সংখ্যাটির মৌলিক গুণনীয়ক।",
+      "tags"     : "number-theory, competitive-programming",
+      "url"      : "/computation/2015/07/30/all_prime_factors/",
+      "date"     : "2015-07-30 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "ব্যাসিক জিওমেট্রি প্রব্লেম সলভিং",
+      "subtitle" : "প্রোগ্রামিং ল্যাঙ্গুয়েজের সিনট্যাক্স শেখার পর একজন প্রোগ্রামারের প্রধান দায়িত্ব সেই সিনট্যাক্স দিয়ে নানা সমস্যার সমাধার করা । মূলত প্রোগ্রামিং বা কম্পিউটার সায়েন্সের ফিলোসপি হলো – প্রব্লেম সলভিং।",
+      "tags"     : "competitive-programming",
+      "url"      : "/computation/2015/05/31/geometry_programs/",
+      "date"     : "2015-05-31 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "প্রাইমারিলিটি টেস্টিং (সিভ অব এরাটস্থেনিজ)",
+      "subtitle" : "",
+      "tags"     : "number-theory",
+      "url"      : "/computation/2015/05/24/prime_check/",
+      "date"     : "2015-05-24 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "ইউলার ফাই ফাংশন",
+      "subtitle" : "নাম্বার থিওরীর বেশ মজার একটি টপিকস হলো ইউলার ফাই ফাংশন। নাম্বার থিওরী রিলেটেড প্রবলেম সলভ করতে গেলে দেখবে প্রায়ই এটি খুব কাজে লাগছে। ইউলার ফাই ফাংশন খুবই সহজ একটি কনসেপ্ট।",
+      "tags"     : "number-theory",
+      "url"      : "/computation/2015/05/24/euler_pi_func/",
+      "date"     : "2015-05-24 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "প্রবলেম সলভিং - এলসিএম (১)",
+      "subtitle" : "",
+      "tags"     : "number-theory, competitive-programming",
+      "url"      : "/computation/2015/05/20/problem-solving-lcm/",
+      "date"     : "2015-05-20 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "অগল্প",
+      "subtitle" : "",
+      "tags"     : "",
+      "url"      : "/art_culture/2015/05/16/sinthy_story/",
+      "date"     : "2015-05-16 00:00:00 -0700"
+    } ,
+  
+    {
+      "title"    : "মজার সংখ্যা পাই",
+      "subtitle" : "",
+      "tags"     : "number-theory",
+      "url"      : "/computation/2015/05/15/pi_on_culture_pipihilogy/",
+      "date"     : "2015-05-15 00:00:00 -0700"
+    } 
+  
+]

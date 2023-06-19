@@ -1,0 +1,5 @@
+Rabiul Awal is a CS M.Sc student at UofS. He works with Professor Michael Horsch and Roy Lee.
+He is also a member of SocialAI.studio at SUTD. His current research focuses on social NLP problems (e.g. fairness) and
+developing deep learning systems for low-resource languages and few-shot NLP tasks. He has explored multi-task learning,
+meta-learning, and transfer learning approaches to improve knowledge transfer across domains and languages. He is broadly
+interested in machine learning models that can learn, multi-task and adapt from small data.

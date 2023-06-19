@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords" content="rabiul awal, nlp, deep learning, bangladesh">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title"
+        content="মজার সংখ্যা পাই - Rabiul Awal">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="">
+    
+    <meta property="article:published_time" content=" 2015-05-15T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Rabiul Awal">
+    
+    
+    <meta property="article:tag" content="number-theory">
+    
+    
+    <meta property="og:image" content="https://github.com/rabiulcste.png">
+    <meta property="og:url" content="https://rabiul.me/computation/2015/05/15/pi_on_culture_pipihilogy/">
+    <meta property="og:site_name" content="Rabiul Awal">
+
+    <title>মজার সংখ্যা পাই - Rabiul Awal</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://rabiul.me/computation/2015/05/15/pi_on_culture_pipihilogy/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href=" /css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href=" /css/rabiul-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+        type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- Google AdSense -->
+    <script data-ad-client="ca-pub-6487568398225121" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-light navbar-expand-md navbar-custom fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button id="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+
+                <!-- <button type="button" class="navbar-toggler">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> -->
+                <!-- <a class="navbar-brand" href="/">Rabiul Awal</a> -->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- <div id="huxblog_navbar"> -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                            
+                                <li>
+                                    <a href="/publications/">Publications</a>
+                                </li>
+                            
+                        
+                        
+                        
+                            
+                                <li>
+                                    <a href="/resources/">Resources</a>
+                                </li>
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                            
+                                <li>
+                                    <a href="/archive/index.html">Archive</a>
+                                </li>
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- NLPDhaka link -->
+                        <li>
+                            <a href="http://nlpdhaka.com/" target="_blank" rel="noopener noreferrer">NLPDhaka</a>
+                        </li>
+                        <!-- CV link -->
+                        <li>
+                            <a href="/pdf/rabiul_awal_resume.pdf">Resume</a>
+                        </li>
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            <!-- </div> -->
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+</nav>
+
+<script>
+$(document).ready(function() {
+  $("#navbar-toggler").click(function() {
+    $("#navbarNav").toggleClass("show hide");
+  });
+
+  // Add "hide" class to navbar-collapse element when the page loads
+  $("#navbarNav").addClass("hide");
+});
+</script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=number-theory" title="number-theory">number-theory</a>
+                        
+                    </div>
+                    <h1>মজার সংখ্যা পাই</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">by Rabiul Awal on May 15, 2015</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h3 id="পাই-দিবস">পাই দিবস</h3>
+<p>১৪ই মার্চ। পৃথিবীর সুন্দরতম এবং ধ্রুবমুগ্ধ সংখ্যা পাইয়ের জন্মদিন। <strong>পাই ডে!</strong> প্রাচীন গ্রিক ভাষায় পাইকে বলা হয় <strong>পি</strong>। ধ্রুবক পাই(<strong>π)</strong> একটি অমূলদ সংখ্যা। পাই যে কেবল অমূলদ তা নয়, এটি একই সঙ্গে একটি তুরীয় সংখ্যা। পাই নামটি (গ্রিক <em>পি</em>) গ্রিক পরিধি (περίμετρος <em>পেরিমেত্রোস্‌</em>) থেকে এসেছে। পাইকে বৃত্তীয় ধ্রুবক, আর্কিমিডিসের ধ্রুবক কিংবা রুডলফের সংখাও বলা হয়ে থাকে।</p>
+
+<p>পাইয়ের মান ৩.১৪ হওয়ায় প্রতি বছর মার্চের ১৪ তারিখ(৩/১৪) পালিত হয় গণিত অঙ্গনের বিশাল উৎসব <strong>পাই দিবস</strong>। কাকতালীয়ভাবে এইদিন বিজ্ঞানী আইনস্টাইনেরও জন্মদিন। স্যান ফ্রানসিস্কোর এক্সপ্লোরেটোরিয়াম বিজ্ঞান জাদুকরে প্রথমবারের মত <strong>ল্যারি শ</strong> এই দিবস উদযাপন করেন।</p>
+
+<p>সেই থেকে ল্যারি শ’কে <strong>পাইয়ের জনক</strong> বলা হয়। পাই দিবস পালনে বিশেষত্ব আছে। আমাদের মত সাধারণ আম জনতার জন্মদিনের কেক কাটা হয় রাত ১২.০০ টায়। কিন্তু পাই আমার আপনার মত সাধারণ না। চমকপ্রদ এই সংখ্যার জন্মদিন পালন আরও বেশী চমকপ্রদ। রাত ১টা ৫৯মিনিট ২৬ সেকেন্ডে পাইয়ের জন্মদিন পালন করা হয়। <strong>৩.১৪ ১ ৫৯ ২৬…</strong> এর মান বিবেচনায় রেখে এই কাজটি করা হয়ে থাকে। বাংলাদেশে সর্বপ্রথম ২০০৬ সালে <strong>বাংলাদেশ বিজ্ঞান জনপ্রিয়করণ</strong> সমিতি এই দিবসটি পালনের উদ্যোগ গ্রহণ করেন।</p>
+
+<p>প্রায় ৪০০০ বছর আগ থেকে শুরু হওয়া পাইয়ের বিস্ময় আজও কাটে নি। বরং প্রতিনিয়ত পাই নতুন বিস্ময়ের জন্ম দিচ্ছে। দশমিকের পর প্রায় ট্রিলিয়ন ঘর পর্যন্ত আবিস্কৃত হয়েছে পাইয়ের সীমারেখা। পাইয়ের এই অসীম পথ আবিষ্কারে জ্যামিতিক, সনাতনী এবং আধুনিক যুগের বিজ্ঞানী এবং গনিতবিগণ বিস্ময়কর প্রচেষ্টার প্রমাণ রেখে গেছেন। আজ থেকে ৪,০০০ বছর পূর্বে পাই বিষয়ে সচেতন হয় মানুষ। ব্যবিলনীয় ও মিশরীয়রা পাইয়ের ব্যাপারটা জানতো। গ্রিকরা পাই নামকরণটি করেছিল। সেই থেকেই পাইয়ের মান বের করার চেষ্টা চালিয়ে আসছে মানুষ। ১৬১০ সালে এক জার্মান গণিতজ্ঞ দশমিকের পর ৩৫ ঘর পর্যন্ত নির্ণয় করেন। ১৭৮৯ সালে স্লোভেনিয়ার একজন ১৪০ ঘর পর্যন্ত, আর ১৮৭৩ সালে এক ইংরেজ শৌখিন গণিতজ্ঞ ২০ বছর সাধনা করে ৭০৭ ঘর পর্যন্ত নির্ণয় করে। পরে দেখা যায়, তার নির্ণয়কৃত সংখ্যা ৫২৮তম ঘর পর্যন্ত সঠিক, এর পরের সবই ভুল। ২০০২ সালে এক জাপানী গণিতজ্ঞ পাইয়ের বিশাল একটা মান বের করেছে। তার সংখ্যায় মোট ডিজিট ছিল ১,২৪১,১০০,০০০,০০০টি। অর্থাৎ ট্রিলিয়ন ঘর পর্যন্ত পাইয়ের আসন্ন মান নির্ণয় এখন কোন বিষয়ই না।</p>
+
+<p>পাই নিয়ে মানুষের মাতামাতির কোন শেষ নেই। পাইয়ের মান মুখস্ত করা কিছু কিছু মানুষের কাছে নেশার মত। এই নেশায় ভর করে তৈরি হয়েছে বিস্ময়কর কিছু রেকর্ড। এক লাখ ঘর পর্যন্ত পাইয়ের মান মুখস্ত বলতে পারেন বলে এক জাপানি প্রকৌশলী দাবি করেছিলেন। কিন্তু এই বিষয়ে সুস্পষ্ট প্রমাণ পাওয়া যায় নি। গিনেসের স্বীকৃত পাইয়ের মান বলার রেকর্ড হল ৬৭,৮৯০ ঘর, যার অধিকারী চীনের ২৪ বছর বয়স্ক স্নাতক ছাত্র <strong>লু চাও</strong>। পাইয়ের এই সুবিশাল মান মুখস্ত বলতে লু চাওয়ের সময় লেগেছিল ২৪ ঘন্টা ৪ মিনিট।</p>
+
+<h3 id="পাইয়ের-মান-মনে-রাখার-কৌশল">পাইয়ের মান মনে রাখার কৌশল</h3>
+<p>পাইয়ের মান মনে রাখার বেশ কিছু কৌশল আছে। যাকে ইংরেজিতে বলা হয় পিফিলিওজি(<strong><em>piphiliogy</em></strong>)। পাইয়ের মান মুখস্ত রাখার কৌশল হিসেবে লেখা হয়েছে পাই কবিতা, ইংরেজিতে প্রাইম। এই কবিতাগুলি এমন যে, এর প্রত্যেকটি শব্দের দৈর্ঘ্য (বর্ণে) পাইয়ের একেকটি অঙ্ক প্রকাশ করে। এই থিওরিতে লেখা একটি কবিতা নিচে উল্লেখ করছি,</p>
+
+<blockquote>
+  <p><strong><em>How I need a drink, alcoholic in nature, after the tough chapters involving quantum mechanics!</em></strong></p>
+</blockquote>
+
+<p><strong>জিল ব্রিটলন</strong> পাই নিয়ে খুব সুন্দর একটি কবিতা লিখেছিলেন। এই কবিতার মাধ্যমে পাইয়ের মান ৩১ ঘর পর্যন্ত মুখস্ত করা সম্ভব। পাই নিয়ে এরচে চমৎকার কবিতা দ্বিতীয়টি নেই।</p>
+
+<blockquote>
+  <p><strong><em>Sir, I bear a rhyme excelling</em></strong><br>
+<strong><em>In mystic force and magic spelling</em></strong><br>
+<strong><em>Celestial sprites elucidate</em></strong><br>
+<strong><em>All my own striving can’t relate</em></strong><br>
+<strong><em>Or locate they who can cogitate</em></strong><br>
+<strong><em>And so finally terminate. Finis.</em></strong></p>
+</blockquote>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="mf">3.14159</span>
+<span class="mi">265358</span>
+<span class="mi">979</span>
+<span class="mi">323846</span>
+<span class="mi">264338</span>
+<span class="mi">32795</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>পাইকে ঘিরে চমৎকার কিছু সনেট কবিতাও আছে। <strong>নিওন শেক্সপিয়ার প্রজেক্ট</strong> করতেগিয়ে <strong><em>Joel Doerfel</em></strong> একটি সনেট লেখেন। এটি পাইয়ের মান মুখস্ত করার জন্য একটি চতুর পদ্ধতি,লেখক এর নাম দিয়েছেন <strong><em>synathesia</em></strong>. ১৪ লাইনের সনেটের প্রতি লাইনে ১০ ঘর পর্যন্ত মান পাওয়া যায় সর্বমোট ১৪০ ঘর। সনেটটি পাঠকের মুগ্ধতার সীমা অতিক্রম করবে বলে আশা করছি।</p>
+
+<blockquote>
+  <p><strong><em>dreams number us like pi. runes shift. nights rewind</em></strong><br>
+<strong><em>daytime pleasure-piles. dream-looms create our id.</em></strong><br>
+<strong><em>moods shift. words deviate. needs brew. pleasures rise.</em></strong><br>
+<strong><em>time slows. too late? wait! foreign minds live in</em></strong><br>
+<strong><em>us! quick-minds, free-minds, minds-we-never-mind,</em></strong><br>
+<strong><em>unknown, gyrate! neuro-rhymes measure our</em></strong><br>
+<strong><em>minds, for our minds rhyme. crude ego-emanations</em></strong><br>
+<strong><em>distort nodes. id, (whose basic neuro-spacetime rhymes),</em></strong><br>
+<strong><em>plays its tune. space drones before fate unites</em></strong><br>
+<strong><em>dreams’ lore to unsung measures. whole dimensions</em></strong><br>
+<strong><em>gyrate. new number-games donate quick minds and</em></strong><br>
+<strong><em>weave through fate’s loom. fears, hopes, digits, or devils</em></strong><br>
+<strong><em>collide here—labor stored in gold-mines, lives, lightcone-</em></strong><br>
+<strong><em>piles. fate loops through dreams and pleasure-looms…</em></strong></p>
+</blockquote>
+
+<h4 id="কবিতাটির-বিশ্লেষনঃ">কবিতাটির বিশ্লেষনঃ</h4>
+
+<blockquote>
+  <p><strong><em>dreams number us like pi. runesshift. nights rewind</em></strong></p>
+
+  <p><strong><em>3. 1 4 1 5 9 2 6 5 3 5</em></strong></p>
+
+  <p><strong><em>daytime pleasure-piles. dream-loomscreate our id.</em></strong></p>
+
+  <p><strong><em>8 9 7 9 3 2 3 8 4 6</em></strong></p>
+
+  <p><strong><em>moods shift. words deviate. needsbrew. pleasures rise.</em></strong></p>
+
+  <p><strong><em>2 6 4 3 3 8 3 2 7 9</em></strong></p>
+
+  <p><strong><em>time slows. too late? wait! foreignminds live in</em></strong></p>
+
+  <p><strong><em>5 0 2 8 8 4 1 9 7</em></strong></p>
+
+  <p><strong><em>us! quick-minds, free-minds,minds-we-never-mind,</em></strong></p>
+
+  <p><strong><em>1 6 9 3 9 9 3 7 5</em></strong></p>
+
+  <p><strong><em>unknown, gyrate! neuro-rhymesmeasure our</em></strong></p>
+
+  <p><strong><em>1 0 5 8 2 0 9 7 4</em></strong></p>
+
+  <p><strong><em>minds, for our minds rhyme. crudeego-emanations</em></strong></p>
+
+  <p><strong><em>9 4 4 5 9 2 3 0 7 8 1</em></strong></p>
+
+  <p><strong><em>distort nodes. id, (whose basicneuro-spacetime rhymes),</em></strong></p>
+
+  <p><strong><em>6 4 0 6 2 8 6 2 0 8 9 9</em></strong></p>
+
+  <p><strong><em>plays its tune. space drones beforefate unites</em></strong></p>
+
+  <p><strong><em>8 6 2 8 0 3 4 8 2 5</em></strong></p>
+
+  <p><strong><em>dreams’ lore to unsung measures.whole dimensions</em></strong></p>
+
+  <p><strong><em>3 4 2 1 1 7 0 6 7</em></strong></p>
+
+  <p><strong><em>gyrate. new number-games donatequick minds and</em></strong></p>
+
+  <p><strong><em>9 8 2 1 4 8 0 8 6 5 1</em></strong></p>
+
+  <p><strong><em>weave through fate’s loom. fears,hopes, digits, or devils</em></strong></p>
+
+  <p><strong><em>3 2 8 2 3 0 6 6 4 7</em></strong></p>
+
+  <p><strong><em>collide here—labor stored ingold-mines, lives, lightcone-</em></strong></p>
+
+  <p><strong><em>0 9 3 8 4 4 6 0 9 5 5 0</em></strong></p>
+
+  <p><strong><em>piles. fate loops through dreams andpleasure-looms….</em></strong></p>
+
+  <p><strong><em>5 8 2 2 3 1 7 2</em></strong></p>
+</blockquote>
+
+<p>পাই নিয়ে লেখা গানগুলোর মাঝে ২০০৪ সালে এন্ড্রিউ হুয়াং এর <strong><em>I AM THE FIRST FIFTY DIGITS OF PI</em></strong> গানটি বেশ বিখ্যাত। গানটির লিরিক্স,</p>
+
+<blockquote>
+  <p><strong><em>“Man, I can’t – Ishan’t! – formulate an anthem where the words comprise mnemonics. Dreadedmnemonics for pi…The numerals just bother me, always – even the dry anterior.Try to request something lower (zero) in numerary aptitud”.</em></strong></p>
+</blockquote>
+
+<p>ইংরেজি, জার্মান, ইতালি,স্প্যানিশ, গ্রিক, চাইনিজ, তুর্কি, জাপানিজ,পর্তুগিজ, রাশিয়ান, ফ্রেঞ্চ, এরাবিয়ানসহ বেশ কিছু ভাষায় গান,কবিতা, ছড়া রচনা করা হয়েছে। এই চর্চায় গাণিতিক পাই আজ সংস্কৃতিরও এক বিশাল অংশ। পাই নিজের চারদিকে অসীম কৌতূহল আর জানার আগ্রহের এক চমৎকার উৎস ঘিরে রেখেছে। যুগে যুগে পাইয়ের রহস্য উন্মোচনে বহু মানুষের সুবিশাল এবং কঠোর পরিশ্রম ছিল এবং আজও আছে। পাইকে জানার রহস্য উন্মোচনের পথের পথিকদের প্রতি শ্রদ্ধা রইল। সীমা ছাড়িয়ে যে অসীমে পাইয়ের বাস মানুষের জ্ঞান তারচে অসীমে পৌঁছে যাক।</p>
+
+<p>সকলকে পাই দিবসের শুভেচ্ছা। আমাদের জীবন পাইয়ের মত রহস্যমাখা ধ্রুবমুগ্ধ সুন্দরহোক।</p>
+
+<p>শেষবেলায় পর্তুগিজভাষায় লেখা প্রাইম <strong><em>আই এম দ্যা লাভ</em></strong> এর প্রার্থনা প্রতিটি মানবের তরে,</p>
+
+<blockquote>
+  <p><strong><em>I am the love,</em></strong><strong><em>The impetuous man from the libido</em></strong></p>
+
+  <p><strong><em>Man who attacks attractive women,</em></strong></p>
+
+  <p><strong><em>sinfull maidens who on heaven intrude love, passion, faith,desire, everything!</em></strong></p>
+
+  <p><strong><em>I even idolize with the mermaids so much faith!</em></strong></p>
+
+  <p><strong><em>Luscious women for the brawny,</em></strong></p>
+
+  <p><strong><em>sinfull mermaids and females</em></strong></p>
+
+  <p><strong><em>They even idolize serpents with the burning buck.</em></strong></p>
+
+  <p><strong><em>The virile man will wish the sinfull and the iniquitoushenceforth to love.</em></strong></p>
+</blockquote>
+
+<p><strong>এই দিনে বিজ্ঞানী আইনস্টাইনও জন্মগ্রহণ করেন!</strong></p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/art_culture/2015/05/16/sinthy_story/" data-toggle="tooltip" data-placement="top" title="অগল্প">
+                        Next<br>
+                        <span>অগল্প</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0068" href="/archive/?tag=number-theory" title="number-theory" rel="7">number-theory</a>
+        
+                <a data-sort="0058" href="/archive/?tag=critic" title="critic" rel="17">critic</a>
+        
+                <a data-sort="0066" href="/archive/?tag=competitive-programming" title="competitive-programming" rel="9">competitive-programming</a>
+        
+                <a data-sort="0067" href="/archive/?tag=computer-science" title="computer-science" rel="8">computer-science</a>
+        
+                <a data-sort="0069" href="/archive/?tag=me-n-myself" title="me-n-myself" rel="6">me-n-myself</a>
+        
+                <a data-sort="0069" href="/archive/?tag=old-days" title="old-days" rel="6">old-days</a>
+        
+                <a data-sort="0070" href="/archive/?tag=art" title="art" rel="5">art</a>
+        
+                <a data-sort="0070" href="/archive/?tag=literature" title="literature" rel="5">literature</a>
+        
+                <a data-sort="0070" href="/archive/?tag=nostalgia" title="nostalgia" rel="5">nostalgia</a>
+        
+                <a data-sort="0070" href="/archive/?tag=people" title="people" rel="5">people</a>
+    </div>
+</section>
+
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "rabiul-me";
+    var disqus_identifier = "/computation/2015/05/15/pi_on_culture_pipihilogy";
+    var disqus_url = "https://rabiul.me/computation/2015/05/15/pi_on_culture_pipihilogy/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                <!-- 
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  <li>
+    <a href="https://twitter.com/_rabiulawal">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/rabiulcste">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://www.linkedin.com/in/rabiulawal">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+</ul> -->
+
+                <p class="copyright text-muted">
+                    Copyright © Rabiul Awal 2023
+                    <br>
+                    Powered by <a href="http://rabiul.me">Rabiul Blog </a> with ❤️ <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer"> Jekyll </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/rabiul-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'rabiul.me';
+
+    // Originial
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0" /> -->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

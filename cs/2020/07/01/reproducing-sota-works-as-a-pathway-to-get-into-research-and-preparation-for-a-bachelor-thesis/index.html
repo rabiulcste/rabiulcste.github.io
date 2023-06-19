@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords" content="rabiul awal, nlp, deep learning, bangladesh">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title"
+        content="Reproducing SOTA works as a pathway to get into research and preparation for a bachelor thesis - Rabiul Awal">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Introduction
+It is quite common for undergrad students to face indecisiveness on problems they should choose for a bachelor thesis. Also, students from low resourced institutions find it’s very har...">
+    
+    <meta property="article:published_time" content=" 2020-07-01T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Rabiul Awal">
+    
+    
+    <meta property="article:tag" content="computer-science">
+    
+    <meta property="article:tag" content="research">
+    
+    
+    <meta property="og:image" content="https://github.com/rabiulcste.png">
+    <meta property="og:url" content="https://rabiul.me/cs/2020/07/01/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/">
+    <meta property="og:site_name" content="Rabiul Awal">
+
+    <title>Reproducing SOTA works as a pathway to get into research and preparation for a bachelor thesis - Rabiul Awal</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://rabiul.me/cs/2020/07/01/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href=" /css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href=" /css/rabiul-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+        type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- Google AdSense -->
+    <script data-ad-client="ca-pub-6487568398225121" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-light navbar-expand-md navbar-custom fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button id="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+
+                <!-- <button type="button" class="navbar-toggler">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> -->
+                <!-- <a class="navbar-brand" href="/">Rabiul Awal</a> -->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- <div id="huxblog_navbar"> -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                            
+                                <li>
+                                    <a href="/publications/">Publications</a>
+                                </li>
+                            
+                        
+                        
+                        
+                            
+                                <li>
+                                    <a href="/resources/">Resources</a>
+                                </li>
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                            
+                                <li>
+                                    <a href="/archive/index.html">Archive</a>
+                                </li>
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- NLPDhaka link -->
+                        <li>
+                            <a href="http://nlpdhaka.com/" target="_blank" rel="noopener noreferrer">NLPDhaka</a>
+                        </li>
+                        <!-- CV link -->
+                        <li>
+                            <a href="/pdf/rabiul_awal_resume.pdf">Resume</a>
+                        </li>
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            <!-- </div> -->
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+</nav>
+
+<script>
+$(document).ready(function() {
+  $("#navbar-toggler").click(function() {
+    $("#navbarNav").toggleClass("show hide");
+  });
+
+  // Add "hide" class to navbar-collapse element when the page loads
+  $("#navbarNav").addClass("hide");
+});
+</script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=computer-science" title="computer-science">computer-science</a>
+                        
+                        <a class="tag" href="/archive/?tag=research" title="research">research</a>
+                        
+                    </div>
+                    <h1>Reproducing SOTA works as a pathway to get into research and preparation for a bachelor thesis</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">by Rabiul Awal on July 1, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h3 id="introduction">Introduction</h3>
+<p>It is quite common for undergrad students to face indecisiveness on problems they should choose for a bachelor thesis. Also, students from low resourced institutions find it’s very hard to think about undergrad research. It’s very unlikely for them to get into research due to a lack of proper guidance and motivation. Today I will be talking about how motivated ones can develop a pathway to academic research in an independent manner. Research in Computer Science is very hard and one needs to excel enough to do research and publish them in a world-class venue. Truth is doing scientific research is not all, one supposed to publish it through a standard peer-review. Ending up with a publishable piece of research is important for two reasons. First, your works are being reviewed by others and eventually that ensure the quality of your work. Second, it is important for your career. You can use a bachelor thesis for higher study and maybe you can manage a job in research-based institutions, industry, etc. You can also use your training for further research works and academic collaborations.</p>
+
+<h3 id="motivation">Motivation</h3>
+<p>Institutions like NSTU whom I prefer to consider as low resourced places is not quite supportive of scientific research either undergraduate or graduate level. It’s very rare that grad students produce quality research and prepare themselves for future careers along with this line. But it is possible to do research during undergrad and build a career using that training, experiences, and certifications.</p>
+
+<p>Typically, research is not something that comes from nowhere. Most of the academic institutions which are producing tons of work every year have already developed an environment for this. Those institutions are filled with faculties and research scientists who train undergrad and graduate students for academic research. Sadly we don’t get that training.</p>
+
+<p>So, to come up with a piece of good research work one must follow systematic research methodologies. That brings the question of what those methodologies are and what training one should have for that. Every year thousands of papers get published in academic conferences in many fields of computer science. I myself follow machine learning, AI, and NLP tracks, so I shall talk about them. But this case should be applicable to other fields too. There are specific research methodologies one needs to follow to end up with successful work. Reproducing <strong>State of The Art</strong> research works could be one of the possible pathways for interested minds to train them mostly on their own. One major concern of research is addressing a novelty. By novelty, we mean that you have worked on a problem that pushed existing work in that field, developing new observations, introducing new problems to solve, developing a new metric for qualifying a solution of a specific task, theoretical contribution advancing that field, devising a new algorithm or tools to solve a specific task, etc etc.</p>
+
+<h3 id="why-reproducing-is-good-for-early-researchers">Why reproducing is good for early researchers?</h3>
+<p>Reproducing does not fall into a strong novelty category. Reproducing is just re-doing some research done by some others and training oneself through working on that already solved problem. So, why reproducing matters? It matters cause you are teaching yourself and learning using a standard piece of work! As I said earlier, research requires some standards to be met, demands certain procedures, and a systematic approach. If you want to work on a completely new problem you may miss some important parts as no one is teaching/mentoring you! But if you just redo something done by an expert, you are required to follow the quality. This could be compared with using other codes at the early age of learning computer programming.</p>
+
+<h3 id="how-does-a-research-paper-look-like">How does a research paper look like?</h3>
+<p>Let’s see what contains in a typical research paper in the field of machine learning aka natural language processing –</p>
+<ol>
+  <li>you come up with a problem or idea</li>
+  <li>compile a proposal addressing your problem</li>
+  <li>introduce the problem and motivate that idea</li>
+  <li>review existing works done by others on this specific problem, a discussion on what has been done on this problem till date</li>
+  <li>describing your contribution and supporting theoretical or practical hypothesis on your contribution</li>
+  <li>developing methods, designing experiments</li>
+  <li>metric for measuring the stated contribution</li>
+  <li>empirical evaluation and technical analysis</li>
+  <li>conclusion and future works</li>
+</ol>
+
+<h3 id="the-process-of-reproducing-a-piece-of-research">The process of reproducing a piece of research</h3>
+<p>Let’s assume you picked one research paper of this kind. What you will learn by reproducing that piece of research?</p>
+<ul>
+  <li>You get to read ~30-50 papers</li>
+  <li>You will learn how to state a problem. And why solving that problem is important for society and for the very field. How to write a formal introduction and how to motivate that problem.</li>
+  <li>For machine learning, there are certain models and algorithms that are commonly used. From the related works section, you will learn about all those tools and methods.</li>
+  <li>You should pick a paper for which authors have already published the codes and materials. If the algorithms are very common maybe an LSTM or logistic regression method based works, that should be okay for you! Try to learn from others and learn quality stuff, that’s the key.</li>
+  <li>By reading 10+ papers you will see a pattern in how authors explain their work and put a claim that their system/theory is better than others.</li>
+  <li>An empirical analysis of the problem</li>
+  <li>How to present an experiment and systemically support it. The most important part I think this portion of your work. You will learn to use most of the tools used for this research. That will enhance your capacity on building methods for solving new research problems.</li>
+  <li>Detailing on a systematic analysis and claim novelty</li>
+</ul>
+
+<p><strong>You must write a technical report on your own.</strong> This should be somewhat similar to the original paper but you can try to rephrase it. This is very very important and a must-do!</p>
+
+<p>By following this whole procedure you will learn the standard and methods for doing quality research. Reproducing research is solely a learning journey. You can definitely mention this as a project in your resume. But if you want to publish something, you need to give something more. That’s your seeking of novelty as we talked earlier.</p>
+
+<h4 id="where-to-get-a-task-to-reproduce">Where to get a task to reproduce?</h4>
+<p>I will talk in light of machine learning research. Finding a good problem is pretty simple in machine learning. Go to <a href="https://l.facebook.com/l.php?u=http%3A%2F%2Fpaperwithcode.com%2F%3Ffbclid%3DIwAR0zGX0FuhcDtbYou1pNWw_ATIxspH3orq2wELpse26Ux0cgee1gG5OoarI&amp;h=AT1OnrFDRsJpMgWjVyCPYpCVKmgFfZjwzy3HFG6Ts_rnQD4CccrdyCttKy38ZwEm-RIhIhCKQ1WrdqeFly5tf1FcCSU78TMwPfuDTHBeQRgSKx9hTQNC9BadufGWdhfbr7AGcDdk67r4SA4rY16ylHnoiXjW" target="_blank" rel="noopener noreferrer">paperswithcode.com</a> and you will see some categories of tasks there. Look at the subsection. Anything seems interesting? Pick some papers on that task and read them. Pick the most recent work and start working on that! Remember some big names at this stage. I must mention a few Google, Facebook, Deepmind, OpenAI, Salesforce, CMU, Stanford, and all the big names out there. Don’t be fooled by their work. Those are impossibly hard to reproduce due to a lack of huge computation and fancy methods. You should pick something which may sound easy. You will find codes and resources for most of the papers from paperswithcode.com. Don’t forget to check those codes while deciding on a task. Remember ending up is the ultimate goal here. You must care to finish your work. If you can finish something, that will motivate you to go for something big. Don’t fail yourself, please. It’s possible for you if you have a passion. Just be strategic enough.</p>
+
+<h4 id="when-to-start-reproducing-sota">When to start reproducing SOTA?</h4>
+<p>In my opinion will be wise to start at the end of the third year. It will not take more than six months to end up with a SOTA reproduced version of a work. So, you can use last six months for adding some novelty to your project.</p>
+
+<h4 id="how-to-introduce-novelty-in-your-work">How to introduce novelty in your work?</h4>
+<p>Upon reading lots of papers in certain domains and also recent works you will see that most of the papers end with a note on future works. Authors typically mention what works could be done to advance this task and also talk about the current limitations of their method(s). If you follow them and work hard, you should be able to come up with some ideas to push this work to a further level. That requires some supports from a mentor maybe but you might be able to do it all alone. One way to find mentors from a low resource institution is to collaborate with active researchers from other parts of the world. How about North America?</p>
+
+<h4 id="where-to-find-active-researchers">Where to find active researchers?</h4>
+<ul>
+  <li>List the authors from those papers you are reading while reproducing. Go to google scholar and check their works. Try to come up with something so that you can write a mail to that person.</li>
+  <li>One nice fact is ML researchers are very active on Twitter. If you have listed 50 researchers, you may find half of them on twitter.</li>
+  <li>Pick someone who is young and hungry for research. Find someone who talks about diversity and inclusion. You are doing something from Bangladesh so that matters in the sense of diversity and advancing underrepresented groups. Even Google and Facebook like companies have funds for helping underrepresented students!</li>
+  <li>Contact with Bangladeshi Ph.D. students at North American school. Tell them you have an idea, you reproduced something, you wrote a paper and you have an idea. Mostly they will be happy to help you.</li>
+</ul>
+
+<h3 id="why-active-researchers-will-care-to-mentor-or-collaborate-with-you">Why active researchers will care to mentor or collaborate with you?</h3>
+<ol>
+  <li>You have already learned the methods of doing research</li>
+  <li>You know the tools for solving a problem</li>
+  <li>You have reproduced and you can tell a story based on your proposal</li>
+  <li>You are trying to get into research and some researcher on earth care for your passion</li>
+</ol>
+
+<p>This may feel like a long way. Truth is the research is a long way. You should pass all this hassle and work hard to contribute something in a field. I find it’s an important cause if you follow this path and do not like it, it should help you decide on your career. Most students are not aware of what academic research looks like and suffer a lot once they go abroad without caring about the underlying concerns. So, undergraduate research could be a strong validity check on your interest!</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/art_culture/2019/09/10/moru-sobuj-bon/" data-toggle="tooltip" data-placement="top" title="মরুর ভেতর সবুজ একটা বন">
+                        Previous<br>
+                        <span>মরুর ভেতর সবুজ একটা বন</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/cs/2020/07/06/on-doable-undergrad-research-and-conference-workshop-tracks-in-ml-nlproc/" data-toggle="tooltip" data-placement="top" title="On doable undergrad research and conference workshop tracks in NLP">
+                        Next<br>
+                        <span>On doable undergrad research and conference workshop tracks in NLP</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0068" href="/archive/?tag=number-theory" title="number-theory" rel="7">number-theory</a>
+        
+                <a data-sort="0058" href="/archive/?tag=critic" title="critic" rel="17">critic</a>
+        
+                <a data-sort="0066" href="/archive/?tag=competitive-programming" title="competitive-programming" rel="9">competitive-programming</a>
+        
+                <a data-sort="0067" href="/archive/?tag=computer-science" title="computer-science" rel="8">computer-science</a>
+        
+                <a data-sort="0069" href="/archive/?tag=me-n-myself" title="me-n-myself" rel="6">me-n-myself</a>
+        
+                <a data-sort="0069" href="/archive/?tag=old-days" title="old-days" rel="6">old-days</a>
+        
+                <a data-sort="0070" href="/archive/?tag=art" title="art" rel="5">art</a>
+        
+                <a data-sort="0070" href="/archive/?tag=literature" title="literature" rel="5">literature</a>
+        
+                <a data-sort="0070" href="/archive/?tag=nostalgia" title="nostalgia" rel="5">nostalgia</a>
+        
+                <a data-sort="0070" href="/archive/?tag=people" title="people" rel="5">people</a>
+    </div>
+</section>
+
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "rabiul-me";
+    var disqus_identifier = "/cs/2020/07/01/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis";
+    var disqus_url = "https://rabiul.me/cs/2020/07/01/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                <!-- 
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  <li>
+    <a href="https://twitter.com/_rabiulawal">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/rabiulcste">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://www.linkedin.com/in/rabiulawal">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+</ul> -->
+
+                <p class="copyright text-muted">
+                    Copyright © Rabiul Awal 2023
+                    <br>
+                    Powered by <a href="http://rabiul.me">Rabiul Blog </a> with ❤️ <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer"> Jekyll </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/rabiul-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'rabiul.me';
+
+    // Originial
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0" /> -->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
