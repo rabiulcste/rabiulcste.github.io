@@ -9,9 +9,9 @@ I am a research intern at MAIR lab, [Mila, Quebec AI Institute](https://mila.que
 My meta-goal is to study compositionality for neural network generalization in out-of-distribution settings. I am interested in the fine-grained visio-linguistic understading: entanglement of objects in images (representation) and their comprehension through natural language queries. 
 
 - [VisMin: Visual Minimal-Change Understanding](https://rabiul.me/vismin/)
-- [Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding](https://arxiv.org/abs/2306.08832)
-- [Investigating Prompting Techniques for Zero- and Few-Shot Visual Question Answering](https://arxiv.org/abs/2306.09996)
-
+- [Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding (CVPR'24)](https://arxiv.org/abs/2306.08832) 
+- [Investigating Prompting Techniques for Zero- and Few-Shot Visual Question Answering (CVPR'24 Workshop)](https://arxiv.org/abs/2306.09996)
+- [CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge (CVPR'24 Workshop)]()
 
 ### NLP for Social Good
 My early research focuses on deep learning applications for tackling two social value tasks: online misinformation and hate speech in multiple languages.
