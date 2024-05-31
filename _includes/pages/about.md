@@ -1,4 +1,6 @@
-I am a research intern at MAIR lab, [Mila, Quebec AI Institute](https://mila.quebec/en/) supervised by [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). Before that, I did my masters in CS at [University of Saskatchewan](https://www.cs.usask.ca/) while being part of  [SocialAI.Studio](https://www.socialai.studio/home) at Singapore University of Technology and Design with [Roy Ka-Wei Lee](https://info.roylee.sg/). Prior to moving to Canada, I was a software engineer at a Nordic [startup](https://www.goava.com/sv/) for 2 years and my undergrad in CS at [Noakhali Science and Technology University](https://nstu.edu.bd/). 
+I am an incoming PhD student at Mila/University of Montreal. Currently, I am a research intern at the MAIR lab, [Mila, Quebec AI Institute](https://mila.quebec/en/), under the supervision of [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). 
+
+Before this, I completed my masters in Computer Science at the [University of Saskatchewan](https://www.cs.usask.ca/). During my masters, I was also part of the [SocialAI.Studio](https://www.socialai.studio/home) at the Singapore University of Technology and Design, working with [Roy Ka-Wei Lee](https://info.roylee.sg/).  Prior to moving to Canada, I spent two years as a software engineer at a Nordic [startup](https://www.goava.com/sv/). I completed my undergraduate studies in Computer Science at [Noakhali Science and Technology University](https://nstu.edu.bd/).
 
 ^Check archived talks from NLPDhaka [here](http://nlpdhaka.com/).
 
@@ -6,9 +8,9 @@ I am a research intern at MAIR lab, [Mila, Quebec AI Institute](https://mila.que
 ## Research
 ### Language + Vision
 
-My meta-goal is to study compositionality for neural network generalization in out-of-distribution settings. I am interested in the fine-grained visio-linguistic understading: entanglement of objects in images (representation) and their comprehension through natural language queries. 
+My meta-goal is to study compositionality for neural network generalization in out-of-distribution settings. I am interested in the fine-grained visio-linguistic understanding: the entanglement of objects in images (representation) and their comprehension through natural language queries. Additionally, I am also interested in representation learning and generative models.
 
-- [VisMin: Visual Minimal-Change Understanding](https://rabiul.me/vismin/)
+- [VisMin: Visual Minimal-Change Understanding (Preprint'24)](https://rabiul.me/vismin/)
 - [Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding (CVPR'24)](https://arxiv.org/abs/2306.08832) 
 - [Investigating Prompting Techniques for Zero- and Few-Shot Visual Question Answering (CVPR'24 Workshop)](https://arxiv.org/abs/2306.09996)
 - [CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge (CVPR'24 Workshop)]()
