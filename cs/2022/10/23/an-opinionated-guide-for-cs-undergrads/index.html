@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="qiO-albGeaEMzb5dO0oW2UVGCW5dv8vnQStZ92kXooM" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords" content="rabiul awal, nlp, deep learning, bangladesh">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title"
+        content="An opinionated guide for CS undergrads (local universities) - Rabiul Awal">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="This is a guide with bits of advice I would give my younger self about CS undergrad programs, assuming that self didn’t have access to quality education and little idea about what to expect or how ...">
+    
+    <meta property="article:published_time" content=" 2022-10-23T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Rabiul Awal">
+    
+    
+    <meta property="article:tag" content="computer-science">
+    
+    
+    <meta property="og:image" content="https://github.com/rabiulcste.png">
+    <meta property="og:url" content="https://rabiul.me/cs/2022/10/23/an-opinionated-guide-for-cs-undergrads/">
+    <meta property="og:site_name" content="Rabiul Awal">
+
+    <title>An opinionated guide for CS undergrads (local universities) - Rabiul Awal</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://rabiul.me/cs/2022/10/23/an-opinionated-guide-for-cs-undergrads/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href=" /css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href=" /css/rabiul-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+        type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9E060CCKKW"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9E060CCKKW');
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5CQ59VMT');</script>
+    <!-- End Google Tag Manager -->
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-light navbar-expand-md navbar-custom fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button id="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+
+                <!-- <button type="button" class="navbar-toggler">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> -->
+                <!-- <a class="navbar-brand" href="/">Rabiul Awal</a> -->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- <div id="huxblog_navbar"> -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                            
+                                <li>
+                                    <a href="/publications/">Publications</a>
+                                </li>
+                            
+                        
+                        
+                        
+                            
+                                <li>
+                                    <a href="/resources/">Resources</a>
+                                </li>
+                            
+                        
+                        
+                        
+                        
+                        
+                            
+                                <li>
+                                    <a href="/archive/index.html">Archive</a>
+                                </li>
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- NLPDhaka link -->
+                        <li>
+                            <a href="http://nlpdhaka.com/" target="_blank" rel="noopener noreferrer">NLPDhaka</a>
+                        </li>
+                        <!-- CV link -->
+                        <li>
+                            <a href="/pdf/rabiul_awal_resume.pdf">Resume</a>
+                        </li>
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            <!-- </div> -->
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+</nav>
+
+<script>
+$(document).ready(function() {
+  $("#navbar-toggler").click(function() {
+    $("#navbarNav").toggleClass("show hide");
+  });
+
+  // Add "hide" class to navbar-collapse element when the page loads
+  $("#navbarNav").addClass("hide");
+});
+</script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/DALLE2022-10-24.png" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/DALLE2022-10-24.png');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header">
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=computer-science" title="computer-science">computer-science</a>
+                        
+                    </div>
+                    <h1>An opinionated guide for CS undergrads (local universities)</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">by Rabiul Awal on October 23, 2022</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>This is a guide with bits of advice I would give my younger self about CS undergrad programs, assuming that self didn’t have access to quality education and little idea about what to expect or how to use the degree to build a future. I will start with fundamental CS knowledge that you must acquire to be successful, followed by some hacks that my younger self should have known. I will discuss tools that come in handy and how to build a resume, and then suggest some approaches to things that help, along with some comments on grades. This article may sound a bit rusty.</p>
+
+<h3 id="cs-fundamental-knowledge-you-must-have">CS fundamental knowledge you must have</h3>
+<ul>
+  <li>
+<strong><a href="https://csapp.cs.cmu.edu/" target="_blank" rel="noopener noreferrer">Csapp</a></strong> - This CMU course/book will give you a profound idea of computer science. It should be easy to follow and good for the basics. Make sure to use it as much as possible. </li>
+  <li>
+<strong>Pick one language and go deep</strong> - Every CS program offers an introductory programming language course. Both C and Python work fine as an introductory languages (python is easy to learn). You have two options: you may choose to learn one programming language well or die (dropout). Any compromise in between is a sin. </li>
+  <li>
+<strong>Keep DSA under your pillow</strong> - There should be a course for data structure and algorithms (DSA). Practice algorithm analysis before going to bed. There is another way to be very good at DSA. Just be part of the competitive programming community, they will teach you in the best way.</li>
+  <li>
+<strong>OOP makes you smart</strong> - Object Oriented Programming (OPP) is essential for software craftsmanship. Learn OOP practices with care. Try to do a small unique project for your OOP course. </li>
+  <li>
+<strong>Database + Software</strong> - There should be a course for software dev. You get to use a database, SQL, and a tiny framework for app development. It’s hands-on practice, so build something for this course. Do not copy-paste some php projects from seniors :( </li>
+  <li>
+<strong><a href="http://numerical.recipes/" target="_blank" rel="noopener noreferrer">Numerical recipes</a></strong> - CS is all about numerical computation. You better learn how to do them efficiently. This will make you smarter than most peers in your class.</li>
+</ul>
+
+<p>If you’re an undergrad, these are a few courses you should take to acquire fundamental knowledge. They are essential for your success. Compromising on any of them is a sin that will haunt you forever. It’s not difficult to get this knowledge tbh, but most undergrads fail to do this in time. You’ll notice a pattern where one course is a prerequisite for the next. If you lose your grip in the introductory courses, everything else will fall apart, even if you think you tried.</p>
+
+<h3 id="hacks-you-should-know">Hacks you should know</h3>
+<ul>
+  <li>For every single topic/lesson you will encounter in your four years CS journey, there is a guy on the internet who can spoon-feed that lesson to you. I can guarantee that a random YouTuber will be 5X better than your faculty. I used to follow CMU/Stanford/MIT courses and some Indian YouTubers :)</li>
+  <li>Ask people to teach you and vice versa. If you know something teach it to someone. If they know something, ask them to teach you.</li>
+  <li>Have a study group. If you want to maintain good grades, you should have a study group. You should always pair with people who are better than you. If no one is supposedly better than you, then it is a unique opportunity for you — which comes with appreciation from your opposite gender, some leadership practice, etc, etc.</li>
+  <li>Submit your assignment on time. It’s hard to do it I know. You are a cool programmer and you don’t care about grades. Okay! But timely work on those suggested readings for an assignment and submit it on time. This helps you practice punctuality and consistency, in addition, forces you to pay attention to lectures. Eventually, you will have good grades and final exams will never feel like a nightmare.</li>
+  <li>Google + Reddit. I suppose StackOverflow is commonly used by students these days. Another powerful tool is Reddit. For most things that you are googling… search for that with the “reddit” keyword. It will make your life 10X easier.</li>
+  <li>Maintain a notebook. You should try to maintain a simple computerized one like a folder of “.txt” files or a notebook that someone gifted you on your 18th birthday. Keep track of to-do lists; weekly, monthly and semester-wise. Finish 50% of those, maybe fail in the other 50%. It’s okay! None of your peers will do this and no one gets it right at a young age. If you do this, you will be in the top 5% of your class. Iterate your todos to get better with time estimates.</li>
+  <li>Use consistent storage e.g. google drive to store your data for the long term. You should always organize class notes, data, tutorials, etc tagging with a subject, or semester and get rid of unwanted stuff. </li>
+  <li>Consume resources as you go. Never buy books that you don’t need i.e. don’t collect those five free python books that have no use to you. Use one book only, a maximum of two. Specifically, never ever download tutorials from torrent sites and fill your disk storage with them. You will never watch them, no one does. A simple hack is to download them when you need only. I used to pay for my Udemy courses. Since I have paid for it, now I have to watch those tutorials to justify my 10$ registration fee.</li>
+</ul>
+
+<h3 id="tools-makes-you-cool">Tools makes you cool</h3>
+<ol>
+  <li>Version control (Git) is a must. Learn it. This tool will make you look cool and act smart.</li>
+  <li>You need an editor for coding. You should have a favorite editor and you must have an opinion about it. Like vim vs emacs. This clearly shows you have a sense of taste.</li>
+  <li>Learn some UNIX commands. It is a bit difficult to learn them at first. Girls/boys should date you just for using UNIX commands. Unfortunately, that’s not the case at your university yet. Another sign of taste and coolness.</li>
+  <li>Shell and scripting. For anything that seems repetitive, try to automate it with python scripting.</li>
+  <li>Things like debugging and profiling are good to know. You will debug every single program you write, it’s just a matter of how smartly you do that. And profiling is again coolness. You want your code to run faster.</li>
+  <li>There is a thing called tmux. Have you heard of it?</li>
+</ol>
+
+<p>I am recommending a <a href="https://missing.csail.mit.edu/" target="_blank" rel="noopener noreferrer">course</a> from MIT that pretty much teaches you all of the things I have mentioned above.</p>
+
+<h3 id="an-extreme-approach-for-building-a-resume-that-counts">An extreme approach for building a resume that counts</h3>
+<p>Most people prepare a resume in their final year while they are looking for a job or internship. I suggest the opposite. You should maintain a resume since your first semester. You should practice version controlling on your resume or maybe save them with term tags. The first version will not have much, list your education, awards, and some co-curricular stuff. As you go forward, you will join a programming contest or solve 20 online judge problems or build a tic-tac-toe game using C. You must update your resume with that information, and also drop outdated stuff. At the end of each semester, you should have something to update, which means you are making progress. The plan is to take your efforts from each term and translate them into some presentable outcomes for your resume.</p>
+
+<p>An important question is how do you know you are getting it right? Here is my second piece of advice for you. Download an ideal resume online (how abt a Stanford CS student?) and collect another resume from any recent graduates from your department. Put three resumes side-by-side and compare them. You should take notice of what your resume is missing and how bad that bhai/apu’s resume is (typical case). You don’t want to make the same mistakes for sure. Your goal would be to match that Stanford resume. In practice, you cannot even approximately be the same as a Stanford CS student. It makes sense — you don’t have opportunities similar to Stanford.</p>
+
+<p>However, this practice will deliver your a good resume, with proper outlines, style, and uniqueness. This also forces you not to compete with your peers but compete with a global pull of talents. Now that you have a bar to match, you should find proxies to approximately match that Stanford resume. If that fancy resume guy interned at Meta, you could do GSOC. Every single thing can be replaced by some proxy if you are willing to do it. There are other things like you should use <a href="https://www.overleaf.com/latex/templates" target="_blank" rel="noopener noreferrer">latex</a> for writing a resume — again, it just proves you have good taste!</p>
+
+<h3 id="other-things-to-keep-in-mind">Other things to keep in mind</h3>
+<ul>
+  <li>Don’t listen to random people including your classmates, seniors, or faculties. This is a bit tricky. You need to define your community. And you should listen to people who are experts in that community. For instance, if you are a competitive programmer you should listen to a world finalist but not that faculty who hates contest programmers. You may try to avoid listening to your classmates or seniors who have tons of opinions on everything but knows nothing.</li>
+  <li>Learn to communicate well. This is an important skill that almost 90% of undergrads will lack I may presume. Mention the context clearly to the person you are communicating with and identify what you need from them i.e. I am X, I did Y and I need your help on Z. Learn those email etiquette that varies across cultures. For instance, calling Sir/Madam to US professors or sending an email without a subject or bad grammar in the email body are some bad indications of an email sender. Use AI tools like GPT3, and Grammarly to improve your English. </li>
+  <li>Maintain a personal website. People should be able to find your name on the internet with a simple google search. A portfolio website can be helpful to showcase your projects. GitHub page is pretty easy to use for this. </li>
+  <li>Understand the meaning of help. Some people get it wrong and it’s annoying. When you ask someone for help, you shouldn’t expect them to do your work and you sit there idle doing nothing. It’s just wrong! I can give you a scale for quantifying help. Your request for help from someone is valid if you did 80-90% work or are willing to do it and you need help with the other 10-20% that you can’t figure out yet. Also, please don’t take someone for granted even if they are your close acquaintance. Appreciate people for their support and let them know it. In addition, try to carry it forward.</li>
+  <li>You should ask yourself which community you belong to. Are you a competitive programmer? Python geek? AI enthusiast? Open source dev? None of your peers may think about it. You should spend some time thinking about it. A community is very critical for making an informed decision and generating success. Your undergrad program will fail you in thousands of ways and you will fail it the same. It’s just how things work in reality. My understanding is most undergrads don’t have a proper idea why they need that degree. So, you should try to belong to a broader community that can mitigate some of those issues and help you with resources so that you become a skilled person. There are tons of communities such as the python community, developer community, Linux community, open source community, and so on. Just find your own.</li>
+  <li>Join competitive programming. Try to be part of this and nourish problem-solving attitude. You will face failure cuz it’s difficult. It’s hard to achieve satisfactory growth. To make it worse your seniors will get the 50th position in a national contest. But it’s okay, don’t stress. As long as you keep trying and failing, you will learn something new. I say it’s better to fail for something worthy. Note it is now established that competitive programmers always get jobs soon after their graduation. So, keep trying and secure that job.</li>
+  <li>Participate in Google Summer of Code. I have little idea about them but this is for sure an awesome exposure to global projects and mentorship.</li>
+  <li>Apply for international internships, mentorship, collaboration, etc. Often if you are making good progress, you will outrun your peers. The only way to scale it is by accessing resources beyond your known community. Try to be in touch with FAANG engineers or phd students in US/Canada. Ask them if they need some help with their projects and work with them if you can.</li>
+  <li>Have a plan ready for the future. Want to apply for phd? Crack that 60K salary job? You must have a plan ready at least one year ahead. You must learn to simulate your future and run that simulation three times (i.e. safe, medium, and ambitious self). Our cultural phenomenon is to think in the “short term” — we just live in the present. It’s not good for you. Practice thinking about what you want to do after six months, one year, five years, and ten years. Mastering simulation will give you control for engineering your future self — making informed decisions and generating success.</li>
+  <li>Work on yourself. Run experiments on your work habits, and identify your weakness and strength. Iterate over them to have more control in day-to-day life. Do you prefer small sprints to get work done? Are you distracted by social media? Are you eating healthy? Is it wise to waste time on three private tuitions, maybe one is enough? Should you date that guy? What is the meaning of life?</li>
+  <li>Aim big and play it hard but cool. CS is difficult. Agreed. But it also offers incredible opportunities, right? In the last few years, a huge pool of phd students and FAANG engineers from Bangladesh moved to foreign countries. You could be one of them if you work hard. It might be difficult given your local atmosphere, but it is not impossible.</li>
+</ul>
+
+<h3 id="comments-on-grades-and-gaming-the-system">Comments on grades and gaming the system</h3>
+<ol>
+  <li>
+<em>Grades fail to indicate your CS skills.</em> Grades don’t indicate someone’s CS skills in most local universities I can think of. Many toppers you will encounter don’t know how to code. My sample size is small but I would be surprised to learn otherwise. This means that skills need to be attained with your efforts. Most CS skills can be self-taught. If you are not too much into gaming the system, you can develop your skills in parallel to your efforts to score top grades. But skills and grades are typically mutually exclusive I would say.</li>
+  <li>
+<em>Good grades might kill you.</em> Some students get too occupied with gaming the system, they don’t learn any practical CS skills. They end up in top positions by memorizing (or learning things that only count in exams). Unfortunately, that 160k$ FAANG job is not going to happen to them. They just lose themselves in the process.</li>
+  <li>
+<em>Things where grade matters.</em> Good grades don’t hurt tbh. It is most useful for grad school admission and scholarships. Typically, a person with good grades is deemed to be punctual, attentive, and consistent. These are useful habits to have for doing good work. It is rarely a case that a person with bad grades is a very skilled person (counterintuitive, right?). A balance is always nice to have :)</li>
+  <li>
+<em>How to maintain good (or okayish) grades?</em> For maintaining okayish grades you may game the system lightly. Participating in classes and submitting assignments regularly is a huge plus. The rest is just to follow some old notes, previous year’s questions and not being bugged by a friend the night before your final exam. </li>
+</ol>
+
+<p>You may ask what is gaming the system? Try to collect previous year’s questions before an exam and you will know it :)</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/cs/2020/07/06/on-doable-undergrad-research-and-conference-workshop-tracks-in-ml-nlproc/" data-toggle="tooltip" data-placement="top" title="On doable undergrad research and conference workshop tracks in NLP">
+                        Previous<br>
+                        <span>On doable undergrad research and conference workshop tracks in NLP</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0068" href="/archive/?tag=number-theory" title="number-theory" rel="7">number-theory</a>
+        
+                <a data-sort="0058" href="/archive/?tag=critic" title="critic" rel="17">critic</a>
+        
+                <a data-sort="0066" href="/archive/?tag=competitive-programming" title="competitive-programming" rel="9">competitive-programming</a>
+        
+                <a data-sort="0067" href="/archive/?tag=computer-science" title="computer-science" rel="8">computer-science</a>
+        
+                <a data-sort="0069" href="/archive/?tag=me-n-myself" title="me-n-myself" rel="6">me-n-myself</a>
+        
+                <a data-sort="0069" href="/archive/?tag=old-days" title="old-days" rel="6">old-days</a>
+        
+                <a data-sort="0070" href="/archive/?tag=art" title="art" rel="5">art</a>
+        
+                <a data-sort="0070" href="/archive/?tag=literature" title="literature" rel="5">literature</a>
+        
+                <a data-sort="0070" href="/archive/?tag=nostalgia" title="nostalgia" rel="5">nostalgia</a>
+        
+                <a data-sort="0070" href="/archive/?tag=people" title="people" rel="5">people</a>
+    </div>
+</section>
+
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "rabiul-me";
+    var disqus_identifier = "/cs/2022/10/23/an-opinionated-guide-for-cs-undergrads";
+    var disqus_url = "https://rabiul.me/cs/2022/10/23/an-opinionated-guide-for-cs-undergrads/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                <!-- 
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  <li>
+    <a href="https://twitter.com/_rabiulawal">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/rabiulcste">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+  <li>
+    <a target="_blank" href="https://www.linkedin.com/in/rabiulawal">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+</ul> -->
+
+                <p class="copyright text-muted">
+                    Feel free to use this website's <a href="https://github.com/rabiulcste/rabiulcste.github.io" target="_blank" rel="noopener noreferrer">source code</a>. This website is a fork of <a href="https://github.com/Huxpro/huxpro.github.io" target="_blank" rel="noopener noreferrer">Huxpro </a> with ❤️ <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer"> Jekyll </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/rabiul-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js"></script>
+<script src="/js/sw-registration.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5CQ59VMT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0" /> -->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
