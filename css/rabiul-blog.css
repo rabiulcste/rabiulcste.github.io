@@ -1089,7 +1089,7 @@ samp {
 .post-container h3 {
   line-height: 1.4;
   padding: 20px 0 0;
-  text-transform: uppercase !important;
+  /* text-transform: uppercase !important; */
   letter-spacing: 1px !important;
   font-weight: bold !important;
   font-size: 17px !important;
@@ -1273,16 +1273,16 @@ samp {
 .intro-header .site-heading,
 .intro-header .post-heading,
 .intro-header .page-heading {
-  padding: 85px 0 55px;
+  padding: 85px 0 10px;
   color: #353535;
 }
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
   .intro-header .site-heading,
   .intro-header .post-heading,
   .intro-header .page-heading {
     padding: 50px 0;
   }
-}
+} */
 .intro-header .site-heading {
   padding: 95px 0 70px;
 }
@@ -1575,8 +1575,15 @@ img::-moz-selection {
   display: none !important;
 }
 .tags {
-  margin-bottom: -5px;
+    margin-bottom: -20px;
+    padding-top: 35px;
 }
+@media only screen and (max-width: 768px) {
+  .tags {
+      padding-top: 0px;
+  }
+}
+
 .tags.tags-sup a,
 .tags.tags-sup .tag {
   padding: 0 10px 0 12px;
@@ -1584,16 +1591,18 @@ img::-moz-selection {
 .tags a,
 .tags .tag {
   display: inline-block;
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 999em;
   padding: 0 10px 0 10px;
-  color: white;
+  color: #333;
+  background-color: #f0f0f0;
   line-height: 24px;
   font-size: 12px;
   text-decoration: none;
   margin: 0 1px;
   margin-bottom: 6px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 .tags a > sup,
 .tags .tag > sup {
@@ -1616,11 +1625,11 @@ img::-moz-selection {
   }
 }
 #tag-heading {
-  padding: 70px 0 60px;
+  padding: 70px 0 0px;
 }
 @media only screen and (min-width: 768px) {
   #tag-heading {
-      padding: 55px 0 calc(55px / 2) 0;
+      padding: 55px 0 0 0;
   }
 }
 #tag_cloud {
@@ -1810,33 +1819,118 @@ img::-moz-selection {
   overflow-y: hidden;
 }
 
-.profile img {
-  display: block;
-  float: left; /* align the image to the left */
-  margin-top: 0.6em;
-  margin-right: 20px; /* add some spacing between the image and other content */
-  max-width: 100%; /* make the image width responsive up to its original size */
-  max-height: 200px; /* limit the image height to 200 pixels */
-  border: 2px solid #fff; /* add a white border */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5); /* add a subtle shadow */
+.profile {
+  margin-bottom: 20px; /* Add some space below the profile section */
 }
 
-@media screen and (max-width: 768px) {
-  ol.bibliography li {
-    font-size: 15px;
+.profile img {
+  float: left; /* Align the image to the left */
+  margin-right: 20px; /* Add spacing between the image and text */
+  margin-bottom: 10px; /* Add some space below the image for small screens */
+  max-width: 40%; /* Limit image width to 40% of its container */
+  max-height: 400px; /* Limit the image height */
+  width: 300px; /* Set a fixed width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 5%; /* Rounded corners */
+  object-fit: cover; /* Ensure the image covers the area without stretching */
+}
+
+@media (max-width: 768px) {
+  .profile img {
+    float: none;
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 100%;
+    width: auto;
+    max-height: 300px;
   }
 }
 
- .about-me ol, .about-me ul {
-  list-style: none;
-  padding: 2px;
+/* Publication List */
+.publication-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.about-me ol li, .about-me ul li{
-  font-size: 90%;
+.publication-item {
+  display: flex;
+  gap: 15px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.about-me ul li::before {
-  content: "> ";
-  font-weight: bold;
+.publication-item h3, 
+.publication-item img {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* .publication-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+} */
+
+.publication-image {
+  width: 25%;  /* Takes up 25% of the container width */
+  max-width: 100px;  /* But no larger than 100px */
+  height: auto;  /* Maintain aspect ratio */
+  min-height: 100px;  /* Ensure a minimum height */
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.publication-details {
+  flex: 1;
+}
+
+.publication-title {
+  font-size: 18px;
+}
+
+.publication-authors, .publication-venue {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.publication-links {
+  margin-top: 10px;
+}
+
+.publication-links a {
+  margin-right: 10px;
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.publication-links a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .publication-item {
+    flex-direction: column;
+  }
+
+  .publication-image {
+    width: 100%;  /* Full width on smaller screens */
+    max-width: none;
+    height: 200px;  /* Fixed height on smaller screens */
+  }
+}
+
+/* Social Badges */
+
+.social-badge {
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+.social-badge img {
+  display: inline-block;
 }
