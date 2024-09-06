@@ -1,1 +1,0 @@
-{% bibliography -q @article @inproceedings %}

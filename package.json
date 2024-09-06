@@ -6,9 +6,11 @@
     "homepage": "http://rabiulcste.github.io",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Huxpro/huxpro.github.io"
+        "url": "git+https://github.com/Huxpro/huxpro.github.io.git"
     },
-    "bugs": "https://github.com/Huxpro/huxpro.github.io/issues",
+    "bugs": {
+        "url": "https://github.com/Huxpro/huxpro.github.io/issues"
+    },
     "devDependencies": {
         "grunt": "^1.6.1",
         "grunt-banner": "~0.2.3",
@@ -28,5 +30,9 @@
         "grunt-jekyll": "^1.0.1",
         "jsmin": "^1.0.1",
         "sass": "^1.45.1"
-    }
+    },
+    "description": "[Rabiul Blog](https://rabiul.me) ================================",
+    "main": "Gruntfile.js",
+    "keywords": [],
+    "license": "ISC"
 }

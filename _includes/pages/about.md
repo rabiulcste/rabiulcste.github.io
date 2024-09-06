@@ -1,23 +1,24 @@
-I am an incoming PhD student at Mila/University of Montreal. Currently, I am a research intern at the MAIR lab, [Mila, Quebec AI Institute](https://mila.quebec/en/), under the supervision of [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). 
+I am a PhD student at Mila/University of Montreal. Currently, I am a research intern at the MAIR lab, [Mila, Quebec AI Institute](https://mila.quebec/en/), under the supervision of [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I am also a visiting researcher at [ServiceNow Research](https://www.servicenow.com/research/people.html) Multimodal Team.
 
-Before this, I completed my masters in Computer Science at the [University of Saskatchewan](https://www.cs.usask.ca/). During my masters, I was also part of the [SocialAI.Studio](https://www.socialai.studio/home) at the Singapore University of Technology and Design, working with [Roy Ka-Wei Lee](https://info.roylee.sg/).  Prior to moving to Canada, I spent two years as a software engineer at a Nordic [startup](https://www.goava.com/sv/). I completed my undergraduate studies in Computer Science at [Noakhali Science and Technology University](https://nstu.edu.bd/).
+Previously, I completed my Master's in Computer Science at the [University of Saskatchewan](https://www.cs.usask.ca/) and collaborated with [SocialAI.Studio](https://www.socialai.studio/home) at the Singapore University of Technology and Design. I have industry experience as a software engineer at a Nordic [startup](https://www.goava.com/sv/). My undergraduate degree in Computer Science is from [Noakhali Science and Technology University](https://nstu.edu.bd/).
 
-^Check archived talks from NLPDhaka [here](http://nlpdhaka.com/).
+[[Google Scholar]](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en)  [[Resume]]({{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}) [[NLPDhaka Reading Group]](http://nlpdhaka.com/)
 
+[![Twitter](https://img.shields.io/twitter/follow/rabiuawal?style=social)](https://twitter.com/rabiuawal)
 
 ## Research
-### Language + Vision
+### Language and Vision
 
-My meta-goal is to study compositionality for neural network generalization in out-of-distribution settings. I am interested in the fine-grained visio-linguistic understanding: the entanglement of objects in images (representation) and their comprehension through natural language queries. Additionally, I am also interested in representation learning and generative models.
+My research focuses on representation learning and generative models, particularly their applications in language and vision tasks. I'm especially interested in abstract representation learning for world models.
 
 - [VisMin: Visual Minimal-Change Understanding (Preprint'24)](https://rabiul.me/vismin/)
 - [Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding (CVPR'24)](https://arxiv.org/abs/2306.08832) 
 - [Investigating Prompting Techniques for Zero- and Few-Shot Visual Question Answering (CVPR'24 Workshop)](https://arxiv.org/abs/2306.09996)
-- [CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge (CVPR'24 Workshop)]()
 
-### NLP for Social Good
-My early research focuses on deep learning applications for tackling two social value tasks: online misinformation and hate speech in multiple languages.
+### AI for Social Good
+I am also interested in developing AI systems that promote pluralistic alignment and cultural diversity. My early research focuses on addressing societal challenges such as online misinformation and hate speech across multiple languages.
 
+- [CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge (CVPR'24 Workshop)](https://culturalvqa.org)
 - [Evaluating GPT-3 Generated Explanations for Hateful Content Moderation (IJCAI23)](https://arxiv.org/abs/2305.17680)
 - [Model-Agnostic Meta-Learning for Multilingual Hate Speech Detection (TCSS22)](https://arxiv.org/abs/2303.02513)
 - [MUSCAT: Multilingual Rumor Verification in Social Media Conversations (BIGDATA22)](https://ieeexplore.ieee.org/abstract/document/10021113/)
@@ -46,4 +47,4 @@ Please send me an email if you are interested in collaboration or need help with
 rabiul.awal @ mila dot quebec  
 awalrabiul6 @ gmail dot com
 
-updated october 2022
+updated september 2024

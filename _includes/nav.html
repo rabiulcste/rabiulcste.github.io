@@ -1,69 +1,30 @@
 <!-- Navigation -->
-{% if page.nav-style == "invert" or page.header-style == "text" %}
-<nav class="navbar navbar-light navbar-expand-md navbar-custom fixed-top invert">
-    {% else %}
-    <nav class="navbar navbar-light navbar-expand-md navbar-custom fixed-top">
-        {% endif %}
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button  id="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-
-                <!-- <button type="button" class="navbar-toggler">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button> -->
-                <!-- <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a> -->
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <!-- <div id="huxblog_navbar"> -->
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="{{ site.baseurl }}/">Home <span class="sr-only">(current)</span></a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ site.baseurl }}/">Home</a>
+                </li>
+                {% for page in site.pages %}
+                {% if page.title and page.hide-in-nav != true %}
+                    {% unless page.url contains "/page" %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
                         </li>
-                        {% for page in site.pages %}
-                        {% if page.title and page.hide-in-nav != true %}
-                            {% unless page.url contains "/page" %}
-                                <li>
-                                    <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-                                </li>
-                            {% endunless %}
-                        {% endif %}
-                        {% endfor %}
-                        <!-- NLPDhaka link -->
-                        <li>
-                            <a href="http://nlpdhaka.com/">NLPDhaka</a>
-                        </li>
-                        <!-- CV link -->
-                        <li>
-                            <a href="{{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}">Resume</a>
-                        </li>
-                        <li class="search-icon">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-search"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            <!-- </div> -->
-            <!-- /.navbar-collapse -->
+                    {% endunless %}
+                {% endif %}
+                {% endfor %}
+                <li class="nav-item search-icon">
+                    <a class="nav-link" href="javascript:void(0)">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <!-- /.container -->
+    </div>
 </nav>
-
-<script>
-$(document).ready(function() {
-  $("#navbar-toggler").click(function() {
-    $("#navbarNav").toggleClass("show hide");
-  });
-
-  // Add "hide" class to navbar-collapse element when the page loads
-  $("#navbarNav").addClass("hide");
-});
-</script>
