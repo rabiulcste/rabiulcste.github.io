@@ -3,15 +3,15 @@
 </div>
 
 <div class="social-badge">
-  <a href="https://twitter.com/rabiuawal">
-    <img src="https://img.shields.io/twitter/follow/rabiuawal?style=social" alt="Twitter Follow">
+  <a href="https://twitter.com/_rabiulawal">
+    <img src="https://img.shields.io/twitter/follow/_rabiulawal?style=social" alt="Twitter Follow">
   </a>
 </div>
 
 
 I am a PhD student at [Mila - Quebec AI Institute](https://mila.quebec/en/) and [University of Montreal](https://www.umontreal.ca/en/), under the supervision of [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I am also a visiting researcher at [ServiceNow Research](https://www.servicenow.com/research/people.html) Multimodal Team.
 
-Previously, I completed my Master's in Computer Science at the [University of Saskatchewan](https://www.cs.usask.ca/) and collaborated with [SocialAI.Studio](https://www.socialai.studio/home) at the Singapore University of Technology and Design. I have industry experience as a software engineer at a Nordic [startup](https://www.goava.com/sv/). My undergraduate degree in Computer Science is from [Noakhali Science and Technology University](https://nstu.edu.bd/).
+Previously, I completed my Master's in Computer Science at the [University of Saskatchewan](https://www.cs.usask.ca/) and closely collaborated with [SocialAI.Studio](https://www.socialai.studio/home) at the Singapore University of Technology and Design. I have industry experience as a software engineer at a Nordic [startup](https://www.goava.com/sv/). My undergraduate degree in Computer Science is from [Noakhali Science and Technology University](https://nstu.edu.bd/).
 
 [[Google Scholar]](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en)   [[Resume]]({{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}) [[NLPDhaka RG]](http://nlpdhaka.com/)
 
