@@ -46,8 +46,8 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
       <p class="publication-venue">CVPR'24</p>
       <div class="publication-links">
         <a href="https://arxiv.org/abs/2306.08832">Paper</a>
-        <a href="#">Website</a>
-        <a href="#">Twitter</a>
+        <a href="https://github.com/lezhang7/Enhance-FineGrained">Code</a>
+        <a href="https://x.com/Le_Zhang7/status/1670813884368973826">Twitter</a>
       </div>
     </div>
   </div>
@@ -60,8 +60,8 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
       <p class="publication-venue">CVPR'24 Workshop</p>
       <div class="publication-links">
         <a href="https://arxiv.org/abs/2306.09996">Paper</a>
-        <a href="#">Website</a>
-        <a href="#">Twitter</a>
+        <a href="https://rabiul.me/vqazero/">Website</a>
+        <a href="https://github.com/rabiulcste/vqazero">Code</a>
       </div>
     </div>
   </div>
@@ -77,8 +77,8 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
       <p class="publication-venue">CVPR'24 Workshop</p>
       <div class="publication-links">
         <a href="https://culturalvqa.org">Website</a>
-        <a href="#">Paper</a>
-        <a href="#">Twitter</a>
+        <a href="https://arxiv.org/pdf/2306.09996">Paper</a>
+        <a href="https://x.com/PShravannayak/status/1814327038972440657">Twitter</a>
       </div>
     </div>
   </div>
@@ -91,8 +91,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
       <p class="publication-venue">IJCAI'23</p>
       <div class="publication-links">
         <a href="https://arxiv.org/abs/2305.17680">Paper</a>
-        <a href="#">Website</a>
-        <a href="#">Twitter</a>
+        <a href="https://github.com/Social-AI-Studio/GPT3-HateEval">Code</a>
       </div>
     </div>
   </div>
@@ -105,8 +104,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
       <p class="publication-venue">TCSS'22</p>
       <div class="publication-links">
         <a href="https://arxiv.org/abs/2303.02513">Paper</a>
-        <a href="#">Website</a>
-        <a href="#">Twitter</a>
+        <a href="https://github.com/Social-AI-Studio/HateMAML">Code</a>
       </div>
     </div>
   </div>
@@ -119,8 +117,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
       <p class="publication-venue">BIGDATA'22</p>
       <div class="publication-links">
         <a href="https://ieeexplore.ieee.org/abstract/document/10021113/">Paper</a>
-        <a href="#">Website</a>
-        <a href="#">Twitter</a>
+        <a href="https://github.com/Social-AI-Studio/MUSCAT">Code</a>
       </div>
     </div>
   </div>
@@ -133,8 +130,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
       <p class="publication-venue">PAKDD'21</p>
       <div class="publication-links">
         <a href="https://arxiv.org/pdf/2103.11800.pdf">Paper</a>
-        <a href="#">Website</a>
-        <a href="#">Twitter</a>
+        <a href="https://gitlab.com/bottle_shop/safe/angrybert">Code</a>
       </div>
     </div>
   </div>
