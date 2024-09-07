@@ -1574,9 +1574,7 @@ img::-moz-selection {
 .d-none {
   display: none !important;
 }
-.tags {
-    padding-top: 35px;
-}
+
 @media only screen and (max-width: 768px) {
   .tags {
       padding-top: 0px;
