@@ -1824,8 +1824,8 @@ img::-moz-selection {
   float: left; /* Align the image to the left */
   margin-right: 20px; /* Add spacing between the image and text */
   margin-bottom: 10px; /* Add some space below the image for small screens */
-  max-width: 40%; /* Limit image width to 40% of its container */
-  max-height: 400px; /* Limit the image height */
+  max-width: 30%; /* Limit image width to 40% of its container */
+  max-height: 300px; /* Limit the image height */
   width: 300px; /* Set a fixed width */
   height: auto; /* Maintain aspect ratio */
   border-radius: 5%; /* Rounded corners */

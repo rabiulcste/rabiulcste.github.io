@@ -9,17 +9,15 @@
 </div>
 
 
-I am a PhD student at [Mila - Quebec AI Institute](https://mila.quebec/en/) and [University of Montreal](https://www.umontreal.ca/en/), under the supervision of [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I am also a visiting researcher at [ServiceNow Research](https://www.servicenow.com/research/people.html) Multimodal Team.
+I am a PhD student at [Mila - Quebec AI Institute](https://mila.quebec/en/) and [University of Montreal](https://www.umontreal.ca/en/), under the supervision of [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I am also a visiting researcher at Multimodal Foundation Models Team, [ServiceNow Research](https://www.servicenow.com/research/people.html).
 
-Previously, I completed my Master's in Computer Science at the [University of Saskatchewan](https://www.cs.usask.ca/) and closely collaborated with [SocialAI.Studio](https://www.socialai.studio/home) at the Singapore University of Technology and Design. I have industry experience as a software engineer at a Nordic [startup](https://www.goava.com/sv/). My undergraduate degree in Computer Science is from [Noakhali Science and Technology University](https://nstu.edu.bd/).
+Prio to Mila, I received an MSc in CS from [University of Saskatchewan](https://www.cs.usask.ca/) and BSc in CS from [Noakhali Science and Technology University](https://nstu.edu.bd/).
 
 [[Google Scholar]](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en)   [[Resume]]({{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}) [[NLPDhaka RG]](http://nlpdhaka.com/)
 
 
 ## Research
-My research focuses on representation learning and generative models, particularly their applications in language and vision tasks. I'm especially interested in abstract representation learning for world models.
-
-I am also interested in developing AI systems that promote pluralistic alignment and cultural diversity. My early research focuses on addressing societal challenges such as online misinformation and hate speech across multiple languages.
+My research focuses on visual representation learning and generative models, particularly their applications in language and vision tasks. I'm especially interested in controllable representation learning for world models. I am also interested in developing AI systems that promote pluralistic alignment, safety, and cultural diversity.
 
 ## Highlighted Work
 See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en) for a full list of publications.
@@ -39,7 +37,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   </div>
 
   <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/ceclip_thumb_23.png" alt="CVPR'24 Paper" class="publication-image">
+    <img src="{{ site.baseurl }}/img/papers/ceclip_thumb_23.png" alt="Compositional CLIP" class="publication-image">
     <div class="publication-details">
       <h3 class="publication-title">Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding</h3>
       <p class="publication-authors">Le Zhang, Rabiul Awal, Aishwarya Agrawal</p>
@@ -53,7 +51,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   </div>
 
   <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/cvpr24_workshop.png" alt="CVPR'24 Workshop" class="publication-image">
+    <img src="{{ site.baseurl }}/img/papers/cvpr24_workshop.png" alt="VQA Prompting" class="publication-image">
     <div class="publication-details">
       <h3 class="publication-title">Investigating Prompting Techniques for Zero- and Few-Shot Visual Question Answering</h3>
       <p class="publication-authors">Rabiul Awal, Le Zhang, Aishwarya Agrawal</p>
@@ -110,7 +108,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   </div>
 
   <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/muscat_thumb_23.png" alt="MUSCAT" class="publication-image">
+    <img src="{{ site.baseurl }}/img/papers/muscat_thumb_23.png" alt="MUSCAT Rumor Verification" class="publication-image">
     <div class="publication-details">
       <h3 class="publication-title">MUSCAT: Multilingual Rumor Verification in Social Media Conversations</h3>
       <p class="publication-authors">Rabiul Awal, Minh Dang Nguyen, Roy Ka-Wei Lee, Kenny Tsu Wei Choo</p>
