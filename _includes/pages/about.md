@@ -72,9 +72,10 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <h3 class="publication-title">CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge</h3>
       <p class="publication-authors">Shravan Nayak, Kanishk Jain, Rabiul Awal, et al.</p>
-      <p class="publication-venue">CVPR'24 Workshop</p>
+      <p class="publication-venue">EMNLP'24 (main track)</p>
       <div class="publication-links">
         <a href="https://culturalvqa.org">Website</a>
+        <a href="https://openreview.net/forum?id=Qw5KhoZOtA#discussion">OpenReview</a>
         <a href="https://arxiv.org/pdf/2306.09996">Paper</a>
         <a href="https://x.com/PShravannayak/status/1814327038972440657">Twitter</a>
       </div>
