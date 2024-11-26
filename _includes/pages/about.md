@@ -22,11 +22,24 @@ My research focuses on visual representation learning and generative models, par
 ## Highlighted Work
 See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en) for a full list of publications.
 <div class="publication-list">
+
+  <div class="publication-item">
+    <img src="{{ site.baseurl }}/img/papers/ctrlo_thumb_24.png" alt="CTRL-O" class="publication-image">
+    <div class="publication-details">
+      <h3 class="publication-title">CTRL-O: Language-Controllable Object-Centric Visual Representation Learning</h3>
+      <p class="publication-authors">Aniket Rajiv Didolkar∗, Andrii Zadaianchuk∗, <strong>Rabiul Awal</strong>∗, Maximilian Seitzer, Efstratios Gavves, Aishwarya Agrawal</p>
+      <p class="publication-venue">NeurIPS'24 AFM Workshop</p>
+      <div class="publication-links">
+        <a href="https://openreview.net/pdf?id=BE2u2KF4Tb">Paper</a>
+      </div>
+    </div>
+  </div>
+
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/vismin_thumb_24.png" alt="VisMin" class="publication-image">
     <div class="publication-details">
       <h3 class="publication-title">VisMin: Visual Minimal-Change Understanding</h3>
-      <p class="publication-authors">Rabiul Awal*,  Saba Ahmadi*, Le Zhang*, Aishwarya Agrawal</p>
+      <p class="publication-authors"><strong>Rabiul Awal</strong>*,  Saba Ahmadi*, Le Zhang*, Aishwarya Agrawal</p>
       <p class="publication-venue">NeurIPS'24</p>
       <div class="publication-links">
         <a href="https://arxiv.org/pdf/2407.16772">Paper</a>
@@ -40,7 +53,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <img src="{{ site.baseurl }}/img/papers/ceclip_thumb_23.png" alt="Compositional CLIP" class="publication-image">
     <div class="publication-details">
       <h3 class="publication-title">Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding</h3>
-      <p class="publication-authors">Le Zhang, Rabiul Awal, Aishwarya Agrawal</p>
+      <p class="publication-authors">Le Zhang, <strong>Rabiul Awal</strong>, Aishwarya Agrawal</p>
       <p class="publication-venue">CVPR'24</p>
       <div class="publication-links">
         <a href="https://arxiv.org/abs/2306.08832">Paper</a>
@@ -54,7 +67,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <img src="{{ site.baseurl }}/img/papers/cvpr24_workshop.png" alt="VQA Prompting" class="publication-image">
     <div class="publication-details">
       <h3 class="publication-title">Investigating Prompting Techniques for Zero- and Few-Shot Visual Question Answering</h3>
-      <p class="publication-authors">Rabiul Awal, Le Zhang, Aishwarya Agrawal</p>
+      <p class="publication-authors"><strong>Rabiul Awal</strong>, Le Zhang, Aishwarya Agrawal</p>
       <p class="publication-venue">CVPR'24 Workshop</p>
       <div class="publication-links">
         <a href="https://arxiv.org/abs/2306.09996">Paper</a>
@@ -71,7 +84,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <img src="{{ site.baseurl }}/img/papers/culturalvqa_thumb_24.png" alt="CulturalVQA" class="publication-image">
     <div class="publication-details">
       <h3 class="publication-title">CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge</h3>
-      <p class="publication-authors">Shravan Nayak, Kanishk Jain, Rabiul Awal, et al.</p>
+      <p class="publication-authors">Shravan Nayak, Kanishk Jain, <strong>Rabiul Awal</strong>, et al.</p>
       <p class="publication-venue">EMNLP'24 (main track)</p>
       <div class="publication-links">
         <a href="https://culturalvqa.org">Website</a>
@@ -86,7 +99,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <img src="{{ site.baseurl }}/img/papers/gpt3hatemoderate_thumb_23.png" alt="GPT-3 Hate Speech" class="publication-image">
     <div class="publication-details">
       <h3 class="publication-title">Evaluating GPT-3 Generated Explanations for Hateful Content Moderation</h3>
-      <p class="publication-authors">Han Wang, Ming Shan Hee, Md Rabiul Awal, Kenny Tsu Wei Choo, Roy Ka-Wei Lee</p>
+      <p class="publication-authors">Han Wang, Ming Shan Hee, <strong>Rabiul Awal</strong>, Kenny Tsu Wei Choo, Roy Ka-Wei Lee</p>
       <p class="publication-venue">IJCAI'23</p>
       <div class="publication-links">
         <a href="https://arxiv.org/abs/2305.17680">Paper</a>
@@ -95,44 +108,6 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     </div>
   </div>
 
-  <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/hatemaml_thumb_23.png" alt="MAML Hate Speech" class="publication-image">
-    <div class="publication-details">
-      <h3 class="publication-title">Model-Agnostic Meta-Learning for Multilingual Hate Speech Detection</h3>
-      <p class="publication-authors">Rabiul Awal, Roy Ka-Wei Lee, Eshaan Tanwar, Tanmay Garg, Tanmoy Chakraborty</p>
-      <p class="publication-venue">TCSS'22</p>
-      <div class="publication-links">
-        <a href="https://arxiv.org/abs/2303.02513">Paper</a>
-        <a href="https://github.com/Social-AI-Studio/HateMAML">Code</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/muscat_thumb_23.png" alt="MUSCAT Rumor Verification" class="publication-image">
-    <div class="publication-details">
-      <h3 class="publication-title">MUSCAT: Multilingual Rumor Verification in Social Media Conversations</h3>
-      <p class="publication-authors">Rabiul Awal, Minh Dang Nguyen, Roy Ka-Wei Lee, Kenny Tsu Wei Choo</p>
-      <p class="publication-venue">BIGDATA'22</p>
-      <div class="publication-links">
-        <a href="https://ieeexplore.ieee.org/abstract/document/10021113/">Paper</a>
-        <a href="https://github.com/Social-AI-Studio/MUSCAT">Code</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/angrybert_thumb_22.png" alt="AngryBERT" class="publication-image">
-    <div class="publication-details">
-      <h3 class="publication-title">AngryBERT: Joint learning target and emotion for hate speech detection</h3>
-      <p class="publication-authors">Rabiul Awal, Rui Cao, Roy Ka-Wei Lee, and Sandra Mitrovi ́c</p>
-      <p class="publication-venue">PAKDD'21</p>
-      <div class="publication-links">
-        <a href="https://arxiv.org/pdf/2103.11800.pdf">Paper</a>
-        <a href="https://gitlab.com/bottle_shop/safe/angrybert">Code</a>
-      </div>
-    </div>
-  </div>
 </div>
 
 ## Blog
