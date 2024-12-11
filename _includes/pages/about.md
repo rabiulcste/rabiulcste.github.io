@@ -9,11 +9,15 @@
 </div>
 
 
-I am a PhD student at [Mila - Quebec AI Institute](https://mila.quebec/en/) and [University of Montreal](https://www.umontreal.ca/en/), under the supervision of [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I am also a visiting researcher at Multimodal Foundation Models Team, [ServiceNow Research](https://www.servicenow.com/research/people.html).
+I am a PhD student at [Mila - Quebec AI Institute](https://mila.quebec/en/) and [University of Montreal](https://www.umontreal.ca/en/) with [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I am also a visiting researcher at Multimodal Foundation Models Team, [ServiceNow Research](https://www.servicenow.com/research/people.html) with [Sai Rajeswar](https://sairajeswar.com/).
 
 Prio to Mila, I received an MSc in CS from [University of Saskatchewan](https://www.cs.usask.ca/) and BSc in CS from [Noakhali Science and Technology University](https://nstu.edu.bd/).
 
-[[Google Scholar]](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en)   [[Resume]]({{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}) [[NLPDhaka RG]](http://nlpdhaka.com/)
+
+[[<i class="fas fa-graduation-cap"></i> Google Scholar]](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en)   
+[[<i class="fas fa-file-alt"></i> Resume]]({{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}) 
+[[<i class="fas fa-users"></i> NLPDhaka RG]](http://nlpdhaka.com/)
+
 
 
 ## Research
@@ -63,23 +67,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     </div>
   </div>
 
-  <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/cvpr24_workshop.png" alt="VQA Prompting" class="publication-image">
-    <div class="publication-details">
-      <h3 class="publication-title">Investigating Prompting Techniques for Zero- and Few-Shot Visual Question Answering</h3>
-      <p class="publication-authors"><strong>Rabiul Awal</strong>, Le Zhang, Aishwarya Agrawal</p>
-      <p class="publication-venue">CVPR'24 Workshop</p>
-      <div class="publication-links">
-        <a href="https://arxiv.org/abs/2306.09996">Paper</a>
-        <a href="https://rabiul.me/vqazero/">Website</a>
-        <a href="https://github.com/rabiulcste/vqazero">Code</a>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-<div class="publication-list">
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/culturalvqa_thumb_24.png" alt="CulturalVQA" class="publication-image">
     <div class="publication-details">
@@ -91,19 +79,6 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
         <a href="https://openreview.net/forum?id=Qw5KhoZOtA#discussion">OpenReview</a>
         <a href="https://arxiv.org/pdf/2306.09996">Paper</a>
         <a href="https://x.com/PShravannayak/status/1814327038972440657">Twitter</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/gpt3hatemoderate_thumb_23.png" alt="GPT-3 Hate Speech" class="publication-image">
-    <div class="publication-details">
-      <h3 class="publication-title">Evaluating GPT-3 Generated Explanations for Hateful Content Moderation</h3>
-      <p class="publication-authors">Han Wang, Ming Shan Hee, <strong>Rabiul Awal</strong>, Kenny Tsu Wei Choo, Roy Ka-Wei Lee</p>
-      <p class="publication-venue">IJCAI'23</p>
-      <div class="publication-links">
-        <a href="https://arxiv.org/abs/2305.17680">Paper</a>
-        <a href="https://github.com/Social-AI-Studio/GPT3-HateEval">Code</a>
       </div>
     </div>
   </div>
