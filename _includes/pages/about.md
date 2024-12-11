@@ -2,34 +2,67 @@
   <img src="{{ '/img/rabiul+profic.jpg' | prepend: site.baseurl }}" alt="Rabiul Awal Photo">
 </div>
 
-<div class="social-badge">
-  <a href="https://twitter.com/rabiuawal">
-    <img src="https://img.shields.io/twitter/follow/rabiuawal?style=social" alt="Twitter Follow">
-  </a>
-</div>
+I'm a PhD student at [Mila - Quebec AI Institute](https://mila.quebec/en/) and [University of Montreal](https://www.umontreal.ca/en/) with [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I'm also a visiting researcher at Multimodal Foundation Models Team, [ServiceNow Research](https://www.servicenow.com/research/people.html) with [Sai Rajeswar](https://sairajeswar.com/).
 
+Prio to Mila, I received an MSc in CS from [University of Saskatchewan](https://www.cs.usask.ca/) and BSc in CS from [Noakhali Science and Technology University](https://nstu.edu.bd/).
 
-I am a PhD student at Mila/University of Montreal. Currently, I am a research intern at the MAIR lab, [Mila, Quebec AI Institute](https://mila.quebec/en/), under the supervision of [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I am also a visiting researcher at [ServiceNow Research](https://www.servicenow.com/research/people.html) Multimodal Team.
-
-Previously, I completed my Master's in Computer Science at the [University of Saskatchewan](https://www.cs.usask.ca/) and collaborated with [SocialAI.Studio](https://www.socialai.studio/home) at the Singapore University of Technology and Design. I have industry experience as a software engineer at a Nordic [startup](https://www.goava.com/sv/). My undergraduate degree in Computer Science is from [Noakhali Science and Technology University](https://nstu.edu.bd/).
-
-[[Google Scholar]](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en)   [[Resume]]({{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}) [[NLPDhaka RG]](http://nlpdhaka.com/)
+<span style="display: inline-flex; align-items: center; gap: 10px;">
+    <a href="https://twitter.com/_rabiulawal" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; text-decoration: none;">
+      <i class="fab fa-twitter" style="font-size: 24px; color: #1DA1F2;"></i>
+    </a>
+    <a href="https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en" style="display: inline-flex; align-items: center; text-decoration: none;">
+        <img src="{{ '/img/google-scholar-icon.svg' | prepend: site.baseurl }}" alt="Google Scholar Icon" style="width:24px; height:24px;"> <!-- Increased size -->
+    </a>
+    <a href="{{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}" style="display: inline-flex; align-items: center; text-decoration: none;">
+        <i class="fas fa-file-alt" style="font-size: 24px;"></i> <!-- Increased size -->
+    </a>
+    <a href="http://nlpdhaka.com/" style="display: inline-flex; align-items: center; text-decoration: none;">
+        <i class="fas fa-users" style="font-size: 24px;"></i> <!-- Increased size -->
+    </a>
+</span>
 
 
 ## Research
-My research focuses on representation learning and generative models, particularly their applications in language and vision tasks. I'm especially interested in abstract representation learning for world models.
-
-I am also interested in developing AI systems that promote pluralistic alignment and cultural diversity. My early research focuses on addressing societal challenges such as online misinformation and hate speech across multiple languages.
+My research focuses on visual representation learning and generative models, particularly their applications in language and vision tasks. I'm especially interested in controllable representation learning for world models. I am also interested in developing AI systems that promote pluralistic alignment, safety, and cultural diversity.
 
 ## Highlighted Work
 See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en) for a full list of publications.
 <div class="publication-list">
+
+  <div class="publication-item">
+    <img src="{{ site.baseurl }}/img/papers/bigdocs_thumb_24.png" alt="BigDocs" class="publication-image">
+    <div class="publication-details">
+      <h3 class="publication-title">BigDocs LogoBigDocs: An Open and Permissively-Licensed Dataset for Training Multimodal Models on Document and Code Tasks</h3>
+      <p class="publication-authors">Juan Rodriguez, Xiangru Jian, Siba Smarak Panigrahi, Tianyu Zhang, Aarash Feizi, Abhay Puri, Akshay Kalkunte, François Savard, Ahmed Masry, Shravan Nayak1, <strong>Rabiul Awal</strong> et al.</p>
+      <p class="publication-venue">NeurIPS'24 RBFM Workshop</p>
+      <div class="publication-links">
+        <a href="https://bigdocs.github.io/">Website</a>
+        <a href="https://arxiv.org/abs/2412.04626">Paper</a>
+        <a href="https://huggingface.co/datasets/ServiceNow/BigDocs-Bench">Dataset</a>
+        <a href="https://x.com/joanrod_ai/status/1866549342431219853">Twitter</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="publication-item">
+    <img src="{{ site.baseurl }}/img/papers/ctrlo_thumb_24.png" alt="CTRL-O" class="publication-image">
+    <div class="publication-details">
+      <h3 class="publication-title">CTRL-O: Language-Controllable Object-Centric Visual Representation Learning</h3>
+      <p class="publication-authors">Aniket Rajiv Didolkar∗, Andrii Zadaianchuk∗, <strong>Rabiul Awal</strong>∗, Maximilian Seitzer, Efstratios Gavves, Aishwarya Agrawal</p>
+      <p class="publication-venue">NeurIPS'24 AFM Workshop</p>
+      <div class="publication-links">
+        <a href="https://openreview.net/pdf?id=BE2u2KF4Tb">Paper</a>
+      </div>
+    </div>
+  </div>
+
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/vismin_thumb_24.png" alt="VisMin" class="publication-image">
     <div class="publication-details">
       <h3 class="publication-title">VisMin: Visual Minimal-Change Understanding</h3>
-      <p class="publication-authors">Rabiul Awal*,  Saba Ahmadi*, Le Zhang*, Aishwarya Agrawal</p>
-      <p class="publication-venue">Preprint'24</p>
+      <p class="publication-authors"><strong>Rabiul Awal</strong>*,  Saba Ahmadi*, Le Zhang*, Aishwarya Agrawal</p>
+      <p class="publication-venue">NeurIPS'24</p>
       <div class="publication-links">
         <a href="https://arxiv.org/pdf/2407.16772">Paper</a>
         <a href="https://vismin.net/">Website</a>
@@ -39,105 +72,35 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   </div>
 
   <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/ceclip_thumb_23.png" alt="CVPR'24 Paper" class="publication-image">
+    <img src="{{ site.baseurl }}/img/papers/ceclip_thumb_23.png" alt="Compositional CLIP" class="publication-image">
     <div class="publication-details">
       <h3 class="publication-title">Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding</h3>
-      <p class="publication-authors">Le Zhang, Rabiul Awal, Aishwarya Agrawal</p>
+      <p class="publication-authors">Le Zhang, <strong>Rabiul Awal</strong>, Aishwarya Agrawal</p>
       <p class="publication-venue">CVPR'24</p>
       <div class="publication-links">
         <a href="https://arxiv.org/abs/2306.08832">Paper</a>
-        <a href="#">Website</a>
-        <a href="#">Twitter</a>
+        <a href="https://github.com/lezhang7/Enhance-FineGrained">Code</a>
+        <a href="https://x.com/Le_Zhang7/status/1670813884368973826">Twitter</a>
       </div>
     </div>
   </div>
 
-  <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/cvpr24_workshop.png" alt="CVPR'24 Workshop" class="publication-image">
-    <div class="publication-details">
-      <h3 class="publication-title">Investigating Prompting Techniques for Zero- and Few-Shot Visual Question Answering</h3>
-      <p class="publication-authors">Rabiul Awal, Le Zhang, Aishwarya Agrawal</p>
-      <p class="publication-venue">CVPR'24 Workshop</p>
-      <div class="publication-links">
-        <a href="https://arxiv.org/abs/2306.09996">Paper</a>
-        <a href="#">Website</a>
-        <a href="#">Twitter</a>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-<div class="publication-list">
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/culturalvqa_thumb_24.png" alt="CulturalVQA" class="publication-image">
     <div class="publication-details">
       <h3 class="publication-title">CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge</h3>
-      <p class="publication-authors">Shravan Nayak, Kanishk Jain, Rabiul Awal, et al.</p>
-      <p class="publication-venue">CVPR'24 Workshop</p>
+      <p class="publication-authors">Shravan Nayak, Kanishk Jain, <strong>Rabiul Awal</strong>, et al.</p>
+      <p class="publication-venue">EMNLP'24 <span style="color: red; font-weight: bold;">(Oral)</span></p>
       <div class="publication-links">
         <a href="https://culturalvqa.org">Website</a>
-        <a href="#">Paper</a>
-        <a href="#">Twitter</a>
+        <a href="https://openreview.net/forum?id=Qw5KhoZOtA#discussion">OpenReview</a>
+        <a href="https://arxiv.org/pdf/2306.09996">Paper</a>
+        <a href="https://x.com/PShravannayak/status/1814327038972440657">Twitter</a>
       </div>
     </div>
   </div>
 
-  <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/gpt3hatemoderate_thumb_23.png" alt="GPT-3 Hate Speech" class="publication-image">
-    <div class="publication-details">
-      <h3 class="publication-title">Evaluating GPT-3 Generated Explanations for Hateful Content Moderation</h3>
-      <p class="publication-authors">Han Wang, Ming Shan Hee, Md Rabiul Awal, Kenny Tsu Wei Choo, Roy Ka-Wei Lee</p>
-      <p class="publication-venue">IJCAI'23</p>
-      <div class="publication-links">
-        <a href="https://arxiv.org/abs/2305.17680">Paper</a>
-        <a href="#">Website</a>
-        <a href="#">Twitter</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/hatemaml_thumb_23.png" alt="MAML Hate Speech" class="publication-image">
-    <div class="publication-details">
-      <h3 class="publication-title">Model-Agnostic Meta-Learning for Multilingual Hate Speech Detection</h3>
-      <p class="publication-authors">Rabiul Awal, Roy Ka-Wei Lee, Eshaan Tanwar, Tanmay Garg, Tanmoy Chakraborty</p>
-      <p class="publication-venue">TCSS'22</p>
-      <div class="publication-links">
-        <a href="https://arxiv.org/abs/2303.02513">Paper</a>
-        <a href="#">Website</a>
-        <a href="#">Twitter</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/muscat_thumb_23.png" alt="MUSCAT" class="publication-image">
-    <div class="publication-details">
-      <h3 class="publication-title">MUSCAT: Multilingual Rumor Verification in Social Media Conversations</h3>
-      <p class="publication-authors">Rabiul Awal, Minh Dang Nguyen, Roy Ka-Wei Lee, Kenny Tsu Wei Choo</p>
-      <p class="publication-venue">BIGDATA'22</p>
-      <div class="publication-links">
-        <a href="https://ieeexplore.ieee.org/abstract/document/10021113/">Paper</a>
-        <a href="#">Website</a>
-        <a href="#">Twitter</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/angrybert_thumb_22.png" alt="AngryBERT" class="publication-image">
-    <div class="publication-details">
-      <h3 class="publication-title">AngryBERT: Joint learning target and emotion for hate speech detection</h3>
-      <p class="publication-authors">Rabiul Awal, Rui Cao, Roy Ka-Wei Lee, and Sandra Mitrovi ́c</p>
-      <p class="publication-venue">PAKDD'21</p>
-      <div class="publication-links">
-        <a href="https://arxiv.org/pdf/2103.11800.pdf">Paper</a>
-        <a href="#">Website</a>
-        <a href="#">Twitter</a>
-      </div>
-    </div>
-  </div>
 </div>
 
 ## Blog
