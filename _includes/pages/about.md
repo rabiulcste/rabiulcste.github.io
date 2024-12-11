@@ -2,22 +2,24 @@
   <img src="{{ '/img/rabiul+profic.jpg' | prepend: site.baseurl }}" alt="Rabiul Awal Photo">
 </div>
 
-<div class="social-badge">
-  <a href="https://twitter.com/_rabiulawal">
-    <img src="https://img.shields.io/twitter/follow/_rabiulawal?style=social" alt="Twitter Follow">
-  </a>
-</div>
-
-
-I am a PhD student at [Mila - Quebec AI Institute](https://mila.quebec/en/) and [University of Montreal](https://www.umontreal.ca/en/) with [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I am also a visiting researcher at Multimodal Foundation Models Team, [ServiceNow Research](https://www.servicenow.com/research/people.html) with [Sai Rajeswar](https://sairajeswar.com/).
+I'm a PhD student at [Mila - Quebec AI Institute](https://mila.quebec/en/) and [University of Montreal](https://www.umontreal.ca/en/) with [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I'm also a visiting researcher at Multimodal Foundation Models Team, [ServiceNow Research](https://www.servicenow.com/research/people.html) with [Sai Rajeswar](https://sairajeswar.com/).
 
 Prio to Mila, I received an MSc in CS from [University of Saskatchewan](https://www.cs.usask.ca/) and BSc in CS from [Noakhali Science and Technology University](https://nstu.edu.bd/).
 
-
-[[<i class="fas fa-graduation-cap"></i> Google Scholar]](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en)   
-[[<i class="fas fa-file-alt"></i> Resume]]({{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}) 
-[[<i class="fas fa-users"></i> NLPDhaka RG]](http://nlpdhaka.com/)
-
+<span style="display: inline-flex; align-items: center; gap: 10px;">
+    <a href="https://twitter.com/_rabiulawal" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; text-decoration: none;">
+      <i class="fab fa-twitter" style="font-size: 24px; color: #1DA1F2;"></i>
+    </a>
+    <a href="https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en" style="display: inline-flex; align-items: center; text-decoration: none;">
+        <img src="{{ '/img/google-scholar-icon.svg' | prepend: site.baseurl }}" alt="Google Scholar Icon" style="width:24px; height:24px;"> <!-- Increased size -->
+    </a>
+    <a href="{{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}" style="display: inline-flex; align-items: center; text-decoration: none;">
+        <i class="fas fa-file-alt" style="font-size: 24px;"></i> <!-- Increased size -->
+    </a>
+    <a href="http://nlpdhaka.com/" style="display: inline-flex; align-items: center; text-decoration: none;">
+        <i class="fas fa-users" style="font-size: 24px;"></i> <!-- Increased size -->
+    </a>
+</span>
 
 
 ## Research
@@ -26,6 +28,22 @@ My research focuses on visual representation learning and generative models, par
 ## Highlighted Work
 See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en) for a full list of publications.
 <div class="publication-list">
+
+  <div class="publication-item">
+    <img src="{{ site.baseurl }}/img/papers/bigdocs_thumb_24.png" alt="BigDocs" class="publication-image">
+    <div class="publication-details">
+      <h3 class="publication-title">BigDocs LogoBigDocs: An Open and Permissively-Licensed Dataset for Training Multimodal Models on Document and Code Tasks</h3>
+      <p class="publication-authors">Juan Rodriguez, Xiangru Jian, Siba Smarak Panigrahi, Tianyu Zhang, Aarash Feizi, Abhay Puri, Akshay Kalkunte, François Savard, Ahmed Masry, Shravan Nayak1, <strong>Rabiul Awal</strong> et al.</p>
+      <p class="publication-venue">NeurIPS'24 RBFM Workshop</p>
+      <div class="publication-links">
+        <a href="https://bigdocs.github.io/">Website</a>
+        <a href="https://arxiv.org/abs/2412.04626">Paper</a>
+        <a href="https://huggingface.co/datasets/ServiceNow/BigDocs-Bench">Dataset</a>
+        <a href="https://x.com/joanrod_ai/status/1866549342431219853">Twitter</a>
+      </div>
+    </div>
+  </div>
+
 
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/ctrlo_thumb_24.png" alt="CTRL-O" class="publication-image">
@@ -73,7 +91,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <h3 class="publication-title">CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge</h3>
       <p class="publication-authors">Shravan Nayak, Kanishk Jain, <strong>Rabiul Awal</strong>, et al.</p>
-      <p class="publication-venue">EMNLP'24 (main track)</p>
+      <p class="publication-venue">EMNLP'24 <span style="color: red; font-weight: bold;">(Oral)</span></p>
       <div class="publication-links">
         <a href="https://culturalvqa.org">Website</a>
         <a href="https://openreview.net/forum?id=Qw5KhoZOtA#discussion">OpenReview</a>
