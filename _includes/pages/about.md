@@ -32,9 +32,9 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/bigdocs_thumb_24.png" alt="BigDocs" class="publication-image">
     <div class="publication-details">
-      <h3 class="publication-title">BigDocs LogoBigDocs: An Open and Permissively-Licensed Dataset for Training Multimodal Models on Document and Code Tasks</h3>
+      <h3 class="publication-title">BigDocs: An Open and Permissively-Licensed Dataset for Training Multimodal Models on Document and Code Tasks</h3>
       <p class="publication-authors">Juan Rodriguez, Xiangru Jian, Siba Smarak Panigrahi, Tianyu Zhang, Aarash Feizi, Abhay Puri, Akshay Kalkunte, François Savard, Ahmed Masry, Shravan Nayak1, <strong>Rabiul Awal</strong> et al.</p>
-      <p class="publication-venue">NeurIPS'24 RBFM Workshop</p>
+      <p class="publication-venue">ICLR'25</p>
       <div class="publication-links">
         <a href="https://bigdocs.github.io/">Website</a>
         <a href="https://arxiv.org/abs/2412.04626">Paper</a>
