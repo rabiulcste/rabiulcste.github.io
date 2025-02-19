@@ -32,7 +32,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/bigdocs_thumb_24.png" alt="BigDocs" class="publication-image">
     <div class="publication-details">
-      <h3 class="publication-title">BigDocs: An Open and Permissively-Licensed Dataset for Training Multimodal Models on Document and Code Tasks</h3>
+      <h3>BigDocs: An Open and Permissively-Licensed Dataset for Training Multimodal Models on Document and Code Tasks</h3>
       <p class="publication-authors">Juan Rodriguez, Xiangru Jian, Siba Smarak Panigrahi, Tianyu Zhang, Aarash Feizi, Abhay Puri, Akshay Kalkunte, François Savard, Ahmed Masry, Shravan Nayak1, <strong>Rabiul Awal</strong> et al.</p>
       <p class="publication-venue">ICLR'25</p>
       <div class="publication-links">
@@ -48,7 +48,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/ctrlo_thumb_24.png" alt="CTRL-O" class="publication-image">
     <div class="publication-details">
-      <h3 class="publication-title">CTRL-O: Language-Controllable Object-Centric Visual Representation Learning</h3>
+      <h3>CTRL-O: Language-Controllable Object-Centric Visual Representation Learning</h3>
       <p class="publication-authors">Aniket Rajiv Didolkar∗, Andrii Zadaianchuk∗, <strong>Rabiul Awal</strong>∗, Maximilian Seitzer, Efstratios Gavves, Aishwarya Agrawal</p>
       <p class="publication-venue">NeurIPS'24 AFM Workshop</p>
       <div class="publication-links">
@@ -60,7 +60,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/vismin_thumb_24.png" alt="VisMin" class="publication-image">
     <div class="publication-details">
-      <h3 class="publication-title">VisMin: Visual Minimal-Change Understanding</h3>
+      <h3>VisMin: Visual Minimal-Change Understanding</h3>
       <p class="publication-authors"><strong>Rabiul Awal</strong>*,  Saba Ahmadi*, Le Zhang*, Aishwarya Agrawal</p>
       <p class="publication-venue">NeurIPS'24</p>
       <div class="publication-links">
@@ -74,7 +74,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/ceclip_thumb_23.png" alt="Compositional CLIP" class="publication-image">
     <div class="publication-details">
-      <h3 class="publication-title">Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding</h3>
+      <h3>Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding</h3>
       <p class="publication-authors">Le Zhang, <strong>Rabiul Awal</strong>, Aishwarya Agrawal</p>
       <p class="publication-venue">CVPR'24</p>
       <div class="publication-links">
@@ -89,8 +89,8 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/culturalvqa_thumb_24.png" alt="CulturalVQA" class="publication-image">
     <div class="publication-details">
-      <h3 class="publication-title">CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge</h3>
-      <p class="publication-authors">Shravan Nayak, Kanishk Jain, <strong>Rabiul Awal</strong>, et al.</p>
+      <h3>CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge</h3>
+      <p class="publication-authors">S. Nayak, K. Jain, <strong>R. Awal</strong>, et al.</p>
       <p class="publication-venue">EMNLP'24 <span style="color: red; font-weight: bold;">(Oral)</span></p>
       <div class="publication-links">
         <a href="https://culturalvqa.org">Website</a>

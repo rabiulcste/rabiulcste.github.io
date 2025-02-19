@@ -885,20 +885,20 @@ samp {
 }
 @media screen and (max-width: 768px) {
   .post-container h1 {
-    font-size: 30px;
+    font-size: 24px;
   }
   .post-container h2 {
-    font-size: 22px;
-  }
-  .post-container h3 {
     font-size: 20px;
   }
+  .post-container h3 {
+    font-size: 15px !important;
+  }
   .post-container h4 {
-    font-size: 19px;
+    font-size: 14px !important;
   }
   .post-container h5,
   .post-container h6 {
-    font-size: 18px;
+    font-size: 13px !important;
   }
 }
 .post-container ul,
@@ -1625,14 +1625,11 @@ img::-moz-selection {
   flex: 1;
 }
 
-.publication-title {
-  font-size: 18px;
-}
 
 .publication-authors, .publication-venue {
   margin: 0 0 5px 0;
-  font-size: 14px;
-  color: #666;
+  font-size: 15px;
+  color: #2e2c2c;
 }
 
 .publication-links {
@@ -1664,10 +1661,6 @@ img::-moz-selection {
 
   .publication-details {
     flex: 1;
-  }
-
-  .publication-title {
-    font-size: 16px; /* Slightly smaller font size for mobile */
   }
 
   .publication-authors, .publication-venue {
