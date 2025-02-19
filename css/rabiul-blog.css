@@ -1499,15 +1499,15 @@ img::-moz-selection {
 .publication-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
 
 .publication-item {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   background-color: #f8f8f8;
   border-radius: 8px;
-  padding: 15px;
+  padding: 10px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -1518,12 +1518,11 @@ img::-moz-selection {
 }
 
 .publication-image {
-  width: 25%;  /* Takes up 25% of the container width */
-  max-width: 100px;  /* But no larger than 100px */
-  height: auto;  /* Maintain aspect ratio */
-  min-height: 100px;  /* Ensure a minimum height */
-  object-fit: cover;
+  width: 15%;  /* Takes up 25% of the container width */
+  aspect-ratio: 1; /* Forces a square aspect ratio */
+  object-fit: contain; /* Changed from 'cover' to 'contain' to show full logo */
   border-radius: 5px;
+  height: auto !important; /* Remove fixed height and let it scale naturally */
 }
 
 .publication-details {
@@ -1532,19 +1531,20 @@ img::-moz-selection {
 
 
 .publication-authors, .publication-venue {
-  margin: 0 0 5px 0;
-  font-size: 15px;
+  margin: 0 0 2px 0;
   color: #2e2c2c;
 }
 
-.publication-links {
-  margin-top: 10px;
+.publication-item p, .publication-item a {
+  margin-top: 2px !important; 
+  font-size: 15px;
 }
 
 .publication-links a {
   margin-right: 10px;
   color: #0066cc;
   text-decoration: none;
+  font-weight: 600;
 }
 
 .publication-links a:hover {
@@ -1568,8 +1568,8 @@ img::-moz-selection {
     flex: 1;
   }
 
-  .publication-authors, .publication-venue {
-    font-size: 12px; /* Smaller font size for mobile */
+  .publication-item p, .publication-item a {
+    font-size: 13px; /* Smaller font size for mobile */
   }
 }
 

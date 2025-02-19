@@ -32,8 +32,8 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/bigdocs_thumb_24.png" alt="BigDocs" class="publication-image">
     <div class="publication-details">
-      <h3>BigDocs: An Open and Permissively-Licensed Dataset for Training Multimodal Models on Document and Code Tasks</h3>
-      <p class="publication-authors">Juan Rodriguez, Xiangru Jian, Siba Smarak Panigrahi, Tianyu Zhang, Aarash Feizi, Abhay Puri, Akshay Kalkunte, François Savard, Ahmed Masry, Shravan Nayak1, <strong>Rabiul Awal</strong> et al.</p>
+      <h3>BigDocs: An Open Dataset for Training Multimodal Models on Document and Code Tasks</h3>
+      <p class="publication-authors">Juan Rodriguez, Xiangru Jian, Siba Panigrahi, Tianyu Zhang, Aarash Feizi, Abhay Puri, Akshay Kalkunte, François Savard, Ahmed Masry, Shravan Nayak, <strong>Rabiul Awal</strong> et al.</p>
       <p class="publication-venue">ICLR'25</p>
       <div class="publication-links">
         <a href="https://bigdocs.github.io/">Website</a>
