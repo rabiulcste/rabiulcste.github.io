@@ -4,8 +4,6 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <!-- SNS Link -->
-                <!-- {% include sns-links.html center=true %} -->
-
                 <p class="copyright text-muted">
                     Feel free to use this website's <a href="https://github.com/rabiulcste/rabiulcste.github.io">source code</a>. This website is a fork of <a href="https://github.com/Huxpro/huxpro.github.io">Huxpro </a> with ❤️ <a href="https://jekyllrb.com/"> Jekyll </a>
                 </p>
@@ -24,8 +22,6 @@
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/rabiul-blog.min.js" | prepend: site.baseurl }}"></script>
 
-<!-- Simple Jekyll Search -->
-<script src="{{ "/js/simple-jekyll-search.min.js" | prepend: site.baseurl }}"></script>
 
 <!-- Service Worker -->
 {% if site.service-worker %}
@@ -170,116 +166,4 @@
 </script>
 {% endunless %}
 
-
-<!-- Multi-Lingual -->
-{% if page.multilingual %}
-<!-- Handle Language Change -->
-<script type="text/javascript">
-    // get nodes
-    var $bn = document.querySelector(".bn");
-    var $en = document.querySelector(".en");
-    var $select = document.querySelector("select");
-
-    // Changes at v1.8.1: include lang flag as a url query. This interop well with catalog hash anchors.
-    function getLang() { return new URLSearchParams(document.location.search).get("lang") }
-
-    function setLang(newLang) {
-        var params = new URLSearchParams(document.location.search)
-        params.set("lang", newLang)
-        document.location.search = params.toString()  // refresh.
-    }
-
-    // handle render
-    function _render() {
-        var lang = getLang()
-        // en
-        if (lang == "en") {
-            $select.selectedIndex = 1;
-            $en.style.display = "block";
-            $en.classList.add("active");
-            $bn.style.display = "none";
-            $bn.classList.remove("active");
-            // default to bn-cn
-        } else {
-            $select.selectedIndex = 0;
-            $bn.style.display = "block";
-            $bn.classList.add("active");
-            $en.style.display = "none";
-            $en.classList.remove("active");
-        }
-        // interop with catalog 
-        generateCatalog(".catalog-body");
-    }
-
-    // handle select change
-    function onLanChange(index) {
-        if (index == 0) {
-            lang = "bn"
-        } else {
-            lang = "en"
-        }
-        setLang(lang)
-    }
-
-    // init
-    _render();
-</script>
-{% endif %}
-
-<!-- Simple Jekyll Search -->
-<script>
-    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
-    function htmlDecode(input) {
-        var e = document.createElement('textarea');
-        e.innerHTML = input;
-        // handle case of empty input
-        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
-    }
-
-    SimpleJekyllSearch({
-        searchInput: document.getElementById('search-input'),
-        resultsContainer: document.getElementById('search-results'),
-        json: '/search.json',
-        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
-        noResultsText: 'No results',
-        limit: 50,
-        fuzzy: false,
-        // a hack to get escaped subtitle unescaped. for some reason, 
-        // post.subtitle w/o escape filter nuke entire search.
-        templateMiddleware: function (prop, value, template) {
-            if (prop === 'subtitle' || prop === 'title') {
-                if (value.indexOf("code")) {
-                    return htmlDecode(value);
-                } else {
-                    return value;
-                }
-            }
-        }
-    });
-
-    $(document).ready(function () {
-        var $searchPage = $('.search-page');
-        var $searchOpen = $('.search-icon');
-        var $searchClose = $('.search-icon-close');
-        var $searchInput = $('#search-input');
-        var $body = $('body');
-
-        $searchOpen.on('click', function (e) {
-            e.preventDefault();
-            $searchPage.toggleClass('search-active');
-            var prevClasses = $body.attr('class') || '';
-            setTimeout(function () {
-                $body.addClass('no-scroll');
-            }, 400)
-
-            if ($searchPage.hasClass('search-active')) {
-                $searchClose.on('click', function (e) {
-                    e.preventDefault();
-                    $searchPage.removeClass('search-active');
-                    $body.attr('class', prevClasses);  // from closure 
-                });
-                $searchInput.focus();
-            }
-        });
-    });
 </script>

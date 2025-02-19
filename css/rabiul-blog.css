@@ -142,21 +142,11 @@
   color: #0085a1 !important;
 }
 
-.bg-light-gray {
-  background-color: #eee;
-}
-.p-24 {
-  padding: 12px 24px 12px 24px  !important;
-}
-
 .popular-posts ul {
   padding-left: 0;
   margin-left: 0;
   list-style-type: none;
-  line-height: 1.5;
-}
-.popular-posts li {
-  margin-bottom: 6px !important;
+  line-height: 1.4;
 }
 .popular-posts li a {
   font-size: 17px !important;
@@ -597,89 +587,6 @@ pre.highlight {
     padding: 14px 10px;
   }
 }
-.search-page {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  background: #fff;
-  -webkit-transition: all 400ms cubic-bezier(0.32, 1, 0.23, 1);
-  transition: all 400ms cubic-bezier(0.32, 1, 0.23, 1);
-  -webkit-transform: translate(0, 100%);
-  -ms-transform: translate(0, 100%);
-  transform: translate(0, 100%);
-  opacity: 0;
-}
-.search-page.search-active {
-  opacity: 1;
-  -webkit-transform: translate(0, 0) scale(1, 1);
-  -ms-transform: translate(0, 0) scale(1, 1);
-  transform: translate(0, 0) scale(1, 1);
-}
-.search-page.search-active .search-main {
-  opacity: 1;
-}
-.search-page .search-main {
-  padding-top: 80px;
-  height: 100%;
-  opacity: 0;
-  -webkit-transition: all 400ms cubic-bezier(0.32, 1, 0.23, 1) 250ms;
-  transition: all 400ms cubic-bezier(0.32, 1, 0.23, 1) 250ms;
-}
-.search-page .search-main .row,
-.search-page .search-main .row > div {
-  height: 100%;
-}
-.search-page .search-icon-close-container {
-  position: absolute;
-  z-index: 1;
-  padding: 18px;
-  top: 0;
-  right: 2px;
-}
-.search-page .search-icon-close-container i {
-  font-size: 20px;
-}
-.search-page #search-input {
-  font-family: "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
-  border: none;
-  outline: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  font-size: 30px;
-  font-weight: bold;
-  color: #404040;
-}
-@media only screen and (min-width: 768px) {
-  .search-page #search-input {
-    margin-left: 20px;
-  }
-}
-.search-page #search-results {
-  overflow: auto;
-  height: 100%;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 80px;
-}
-.search-icon a,
-.search-icon-close {
-  cursor: pointer;
-  font-size: 30px;
-  color: #311e3e;
-  -webkit-transition: all 0.25s;
-  transition: all 0.25s;
-}
-.search-icon a:hover,
-.search-icon-close:hover {
-  opacity: 0.8;
-}
-.search-icon,
-.search-icon-close {
-  font-size: 18px;
-}
 body {
   font-family: Palatino, "SolaimanLipi", sans-serif;;
   line-height: 1.25;
@@ -861,8 +768,8 @@ samp {
 .post-container h2::before {
   content: " ";
   display: block;
-  border-bottom: 1px solid #ececec;
-  margin-top: 44px;
+  /* border-bottom: 1px solid #ececec; */
+  margin-top: 30px;
   margin-bottom: 30px;
 }
 .post-container h4 {
@@ -1563,15 +1470,13 @@ img::-moz-selection {
   overflow-y: hidden;
 }
 
-.profile {
-  margin-bottom: 20px; /* Add some space below the profile section */
-}
+
 
 .profile img {
   float: left; /* Align the image to the left */
+  margin-top: 0; /* Explicitly set top margin to 0 */
   margin-right: 20px; /* Add spacing between the image and text */
-  margin-bottom: 10px; /* Add some space below the image for small screens */
-  max-width: 40%; /* Limit image width to 40% of its container */
+  max-width: 20%; /* Limit image width to 40% of its container */
   max-height: 250px; /* Limit the image height */
   width: 200px; /* Set a fixed width */
   height: auto; /* Maintain aspect ratio */
@@ -1668,13 +1573,28 @@ img::-moz-selection {
   }
 }
 
-/* Social Badges */
-
-.social-badge {
-  text-align: left;
+/* Social Links */
+.social-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   margin: 0;
   padding: 0;
+  height: 24px; /* Add fixed height to prevent extra space */
 }
-.social-badge img {
-  display: inline-block;
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  height: 24px; /* Match parent height */
+  text-decoration: none; /* Remove underlines */
+}
+
+.social-links i, .social-links img {
+  width: 18.5px;
+  height: 18.5px;
+}
+
+.fa-twitter {
+  color: #1DA1F2;
 }

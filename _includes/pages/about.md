@@ -1,25 +1,25 @@
 <div class="profile">
-  <img src="{{ '/img/rabiul+profic.jpg' | prepend: site.baseurl }}" alt="Rabiul Awal Photo">
+<img src="{{ '/img/rabiul+profic.jpg' | prepend: site.baseurl }}" alt="Rabiul Awal Photo">
 </div>
 
 I'm a PhD student at [Mila - Quebec AI Institute](https://mila.quebec/en/) and [University of Montreal](https://www.umontreal.ca/en/) with [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I'm also a visiting researcher at Multimodal Foundation Models Team, [ServiceNow Research](https://www.servicenow.com/research/people.html) with [Sai Rajeswar](https://sairajeswar.com/).
 
-Prio to Mila, I received an MSc in CS from [University of Saskatchewan](https://www.cs.usask.ca/) and BSc in CS from [Noakhali Science and Technology University](https://nstu.edu.bd/).
+Prior to Mila, I received an MSc in CS from [University of Saskatchewan](https://www.cs.usask.ca/) and BSc in CS from [Noakhali Science and Technology University](https://nstu.edu.bd/).
 
-<span style="display: inline-flex; align-items: center; gap: 10px;">
-    <a href="https://twitter.com/_rabiulawal" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; text-decoration: none;">
-      <i class="fab fa-twitter" style="font-size: 24px; color: #1DA1F2;"></i>
+<div class="social-links">
+    <a href="https://twitter.com/_rabiulawal" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-twitter"></i>
     </a>
-    <a href="https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en" style="display: inline-flex; align-items: center; text-decoration: none;">
-        <img src="{{ '/img/google-scholar-icon.svg' | prepend: site.baseurl }}" alt="Google Scholar Icon" style="width:24px; height:24px;"> <!-- Increased size -->
+    <a href="https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en">
+        <img src="{{ '/img/google-scholar-icon.svg' | prepend: site.baseurl }}" alt="Google Scholar Icon">
     </a>
-    <a href="{{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}" style="display: inline-flex; align-items: center; text-decoration: none;">
-        <i class="fas fa-file-alt" style="font-size: 24px;"></i> <!-- Increased size -->
+    <a href="{{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}">
+        <i class="fas fa-file-alt"></i>
     </a>
-    <a href="http://nlpdhaka.com/" style="display: inline-flex; align-items: center; text-decoration: none;">
-        <i class="fas fa-users" style="font-size: 24px;"></i> <!-- Increased size -->
+    <a href="http://nlpdhaka.com/">
+        <i class="fas fa-users"></i>
     </a>
-</span>
+</div>
 
 
 ## Research
@@ -106,18 +106,16 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
 ## Blog
 I occasionally write on how-to-cs-grad, coding, ai research, and systematic failure in Bangladesh.
 
-<div class="popular-posts bg-light-gray p-24">
-<h4> Top Posts </h4>
-    <ul>
-        <li> <a href="https://rabiul.me/cs/2022/10/23/an-opinionated-guide-for-cs-undergrads/">An opinionated guide for CS undergrads</a> </li>
-        <li> <a href="https://rabiul.me/cs/2020/07/01/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/">Reproducing prev research for bachelor thesis</a> </li>
-        <li> <a href="https://rabiul.me/cs/2017/11/08/computer-science-for-you-or-not-words-for-nstuan/">Computer science for you or not?</a> </li>
-        <li> <a href="https://rabiul.me/cs/2017/11/10/pride-and-prejudice-public-university-of-bangladesh/">Incorrect approach to public university education, bad pride</a> </li>
-        <li> <a href="https://rabiul.me/cs/2019/01/30/software-engineering-job-hacking-as-a-fresh-graduate-nstu/">ফ্রেশার হিশেবে সফটওয়্যার ইঞ্জিনিয়ারিং চাকরি খোঁজাখুঁজির অভিজ্ঞতা</a> </li>
-        <li> <a href="https://rabiul.me/computation/2016/05/01/syntax-to-competitive-programming">সিনট্যাক্স টু কম্পিটিটিভ প্রোগ্রামিং জার্নি</a> </li>
-        <li> <a href="https://rabiul.me/cs/2018/10/29/public-university-research/">পাবলিক বিশ্ববিদ্যালয়ে গবেষণা সংকট প্রসঙ্গে
-</a> </li>
-    </ul>
+<div class="popular-posts">
+  <ul>
+      <li> <a href="https://rabiul.me/cs/2022/10/23/an-opinionated-guide-for-cs-undergrads/">An opinionated guide for CS undergrads</a> </li>
+      <li> <a href="https://rabiul.me/cs/2020/07/01/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/">Reproducing prev research for bachelor thesis</a> </li>
+      <li> <a href="https://rabiul.me/cs/2017/11/08/computer-science-for-you-or-not-words-for-nstuan/">Computer science for you or not?</a> </li>
+      <li> <a href="https://rabiul.me/cs/2017/11/10/pride-and-prejudice-public-university-of-bangladesh/">Incorrect approach to public university education, bad pride</a> </li>
+      <li> <a href="https://rabiul.me/cs/2019/01/30/software-engineering-job-hacking-as-a-fresh-graduate-nstu/">ফ্রেশার হিশেবে সফটওয়্যার ইঞ্জিনিয়ারিং চাকরি খোঁজাখুঁজির অভিজ্ঞতা</a> </li>
+      <li> <a href="https://rabiul.me/computation/2016/05/01/syntax-to-competitive-programming">সিনট্যাক্স টু কম্পিটিটিভ প্রোগ্রামিং জার্নি</a> </li>
+      <li> <a href="https://rabiul.me/cs/2018/10/29/public-university-research/">পাবলিক বিশ্ববিদ্যালয়ে গবেষণা সংকট প্রসঙ্গে</a> </li>
+  </ul>
 </div>
 
 ## Contact 
