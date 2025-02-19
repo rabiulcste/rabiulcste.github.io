@@ -721,7 +721,7 @@ samp {
 .post-container a {
   color: inherit;
   text-decoration-line: underline;
-  text-decoration-thickness: .1em;
+  text-decoration-thickness: .075em;
   text-underline-offset: .25em;
   transition-duration: .1s;
   transition-timing-function: cubic-bezier(.4,0,.2,1);
