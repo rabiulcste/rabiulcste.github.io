@@ -30,20 +30,13 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
 <div class="publication-list">
 
   <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/bigdocs_thumb_24.png" alt="BigDocs" class="publication-image">
+    <div class="publication-image gradient-box"></div>
     <div class="publication-details">
-      <h3>BigDocs: An Open Dataset for Training Multimodal Models on Document and Code Tasks</h3>
-      <p class="publication-authors">Juan Rodriguez, Xiangru Jian, Siba Panigrahi, Tianyu Zhang, Aarash Feizi, Abhay Puri, Akshay Kalkunte, François Savard, Ahmed Masry, Shravan Nayak, <strong>Rabiul Awal</strong> et al.</p>
-      <p class="publication-venue">ICLR'25</p>
-      <div class="publication-links">
-        <a href="https://bigdocs.github.io/">Website</a>
-        <a href="https://arxiv.org/abs/2412.04626">Paper</a>
-        <a href="https://huggingface.co/datasets/ServiceNow/BigDocs-Bench">Dataset</a>
-        <a href="https://x.com/joanrod_ai/status/1866549342431219853">Twitter</a>
-      </div>
+      <h3>WebMMU: A Benchmark for Multimodal Multilingual Website Understanding and Code Generation</h3>
+      <p class="publication-authors">Rabiul Awal et al.</p>
+      <p class="publication-venue">ICLR Workshop (submitted)</p>
     </div>
   </div>
-
 
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/ctrlo_thumb_24.png" alt="CTRL-O" class="publication-image">
@@ -53,6 +46,8 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
       <p class="publication-venue">NeurIPS'24 AFM Workshop</p>
       <div class="publication-links">
         <a href="https://openreview.net/pdf?id=BE2u2KF4Tb">Paper</a>
+        <a href="https://ctrl-o-paper.github.io/">Website</a>
+        <a href="https://x.com/Aniket_d98/status/1894931395018928262">Twitter</a>
       </div>
     </div>
   </div>
