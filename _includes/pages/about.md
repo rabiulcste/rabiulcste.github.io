@@ -29,6 +29,7 @@ My research focuses on visual representation learning and generative models, par
 See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en) for a full list of publications.
 <div class="publication-list">
 
+
   <div class="publication-item">
     <div class="publication-image gradient-box"></div>
     <div class="publication-details">
@@ -51,6 +52,21 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
       </div>
     </div>
   </div>
+
+  <div class="publication-item">
+    <img src="{{ site.baseurl }}/img/papers/bigdocs_thumb_24.png" alt="BigDocs" class="publication-image">
+    <div class="publication-details">
+      <h3>BigDocs: An Open Dataset for Training Multimodal Models on Document and Code Tasks</h3>
+      <p class="publication-authors">Juan Rodriguez, Xiangru Jian, Siba Panigrahi, Tianyu Zhang, Aarash Feizi, Abhay Puri, Akshay Kalkunte, François Savard, Ahmed Masry, Shravan Nayak, <strong>Rabiul Awal</strong> et al.</p>
+      <div class="publication-links">
+        <a href="https://bigdocs.github.io/">Website</a>
+        <a href="https://arxiv.org/abs/2412.04626">Paper</a>
+        <a href="https://huggingface.co/datasets/ServiceNow/BigDocs-Bench">Dataset</a>
+        <a href="https://x.com/joanrod_ai/status/1866549342431219853">Twitter</a>
+      </div>
+    </div>
+  </div>
+
 
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/vismin_thumb_24.png" alt="VisMin" class="publication-image">
