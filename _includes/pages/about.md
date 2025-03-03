@@ -44,7 +44,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <h3>CTRL-O: Language-Controllable Object-Centric Visual Representation Learning</h3>
       <p class="publication-authors">Aniket Rajiv Didolkar∗, Andrii Zadaianchuk∗, <strong>Rabiul Awal</strong>∗, Maximilian Seitzer, Efstratios Gavves, Aishwarya Agrawal</p>
-      <p class="publication-venue">NeurIPS'24 AFM Workshop</p>
+      <p class="publication-venue">CVPR'25</p>
       <div class="publication-links">
         <a href="https://openreview.net/pdf?id=BE2u2KF4Tb">Paper</a>
         <a href="https://ctrl-o-paper.github.io/">Website</a>
@@ -58,6 +58,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <h3>BigDocs: An Open Dataset for Training Multimodal Models on Document and Code Tasks</h3>
       <p class="publication-authors">Juan Rodriguez, Xiangru Jian, Siba Panigrahi, Tianyu Zhang, Aarash Feizi, Abhay Puri, Akshay Kalkunte, François Savard, Ahmed Masry, Shravan Nayak, <strong>Rabiul Awal</strong> et al.</p>
+      <p class="publication-venue">ICLR'25</p>
       <div class="publication-links">
         <a href="https://bigdocs.github.io/">Website</a>
         <a href="https://arxiv.org/abs/2412.04626">Paper</a>
