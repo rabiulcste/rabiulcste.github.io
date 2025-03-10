@@ -35,7 +35,10 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <h3>WebMMU: A Benchmark for Multimodal Multilingual Website Understanding and Code Generation</h3>
       <p class="publication-authors">Rabiul Awal et al.</p>
-      <p class="publication-venue">ICLR Workshop (submitted)</p>
+      <p class="publication-venue">DL4C Workshop @ ICLR'25 </p>
+      <div class="publication-links">
+        <a href="https://openreview.net/pdf?id=3AWEfUFSPe">Paper</a>
+      </div>
     </div>
   </div>
 
