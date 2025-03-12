@@ -1,5 +1,3 @@
-Rabiul Awal is a CS M.Sc student at UofS. He works with Professor Michael Horsch and Roy Lee.
-He is also a member of SocialAI.studio at SUTD. His current research focuses on social NLP problems (e.g. fairness) and
-developing deep learning systems for low-resource languages and few-shot NLP tasks. He has explored multi-task learning,
-meta-learning, and transfer learning approaches to improve knowledge transfer across domains and languages. He is broadly
-interested in machine learning models that can learn, multi-task and adapt from small data.
+Rabiul Awal is a PhD student at Mila - Quebec AI Institute and University of Montreal, working with Professor Aishwarya Agrawal. He is also a visiting researcher at ServiceNow Research's Multimodal Foundation Models Team.
+His research focus on visual representation learning and generative models. He is particularly interested in developing controllable world models that can understand and simulate physical reality. His work has been published at top-tier venues including CVPR, ICLR, NeurIPS, and EMNLP.
+He received his MSc in Computer Science from University of Saskatchewan and BSc from Noakhali Science and Technology University. Previously, he has contributed to various open-source projects in natural language processing and computer vision.

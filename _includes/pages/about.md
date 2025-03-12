@@ -23,7 +23,9 @@ Prior to Mila, I received an MSc in CS from [University of Saskatchewan](https:/
 
 
 ## Research
-My research focuses on visual representation learning and generative models, particularly their applications in language and vision tasks. I'm especially interested in controllable representation learning for world models. I am also interested in developing AI systems that promote pluralistic alignment, safety, and cultural diversity.
+Building AI systems that truly understand the physical world is an exciting frontier. My ~~future~~ research focuses on two core problems: (1) learning rich visual representations that capture the true structure of the world, and (2) developing controllable generative models that can create (or simulate) with intention. This naturally connects to alignment, as systems that understand the world must ~~develop theory of mind to~~ grasp human values.
+
+
 
 ## Highlighted Work
 See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en) for a full list of publications.
