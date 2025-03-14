@@ -1145,12 +1145,19 @@ article {
     }
     
     .profile img {
-        float: none;
-        display: block;
-        margin: 0 auto 10px;
-        max-width: 100%;
+        float: left;
+        margin: 0 15px 10px 0;
+        max-width: 40%;
         width: auto;
-        max-height: 300px;
+        max-height: 200px;
+        border-radius: 5%;
+    }
+}
+
+@media (max-width: 576px) {
+    .profile img {
+        max-width: 35%;
+        max-height: 150px;
     }
 }
 
