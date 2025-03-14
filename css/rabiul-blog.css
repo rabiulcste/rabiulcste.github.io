@@ -551,7 +551,7 @@ a img:focus {
 
 .publication-item {
     display: flex;
-    gap: 5px;
+    gap: 10px;
     background-color: #f8f8f8;
     border-radius: 8px;
     padding: 5px;
