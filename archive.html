@@ -4,6 +4,7 @@ layout: default
 header-img: ""
 pagination:
   enabled: true
+hide-title: true
 ---
 
 <!-- 
@@ -29,17 +30,18 @@ https://github.com/kitian616/jekyll-TeXt-theme
 				<a data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}"
 					data-encode="{{ tag[0] | strip | url_encode }}"
 					class="tag-button"
-					title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+					title="{{ tag[0] }}" 
+					rel="{{ tag[1].size }}">
 					{{ tag[0] }}
 					<sup>{{tag[1].size}}</sup>
-				</a>__SEPERATOR__
+				</a>__SEPARATOR__
 				{% endfor %}
 				{% endcapture %}
-        {{ tags | split:'__SEPERATOR__' | sort }}
+        {{ tags | split:'__SEPARATOR__' | sort }}
 			</div>
 
             <!-- Article List -->
-			<div class="mini-post-list js-result d-none">
+			<div class="mini-post-list js-result d-none archive-list">
 			{%- assign _sorted_list = site.posts -%}
 			{%- assign _sorted_list = _sorted_list | sort: 'date' -%}
 			{%- assign _sorted_list = _sorted_list | reverse -%}
@@ -61,24 +63,17 @@ https://github.com/kitian616/jekyll-TeXt-theme
 			{%- if _currentdate != _date -%}
 				{%- unless forloop.first -%}</section>{%- endunless -%}
 				<section>
-				<span class="fa listing-seperator">
-					<span class="tag-text">{{ _currentdate }}</span>
-				</span>
+				<div>
+					<span class="archive-year">{{ _currentdate }}</span>
+				</div>
 				{%- assign _date = _currentdate -%}
 			{%- endif -%}
 
-				<div class="post-preview item" data-tags="{{ _tags }}">
+				<div class="post-preview item archive-item" data-tags="{{ _tags }}">
 				    <a href="{{ _article.url | prepend: site.baseurl }}">
-				        <h2 class="post-title">
-                            {{ _article.title }}
-				        </h2>
-				        {% if _article.subtitle %}
-				        <h3 class="post-subtitle">
-				            {{ _article.subtitle }}
-				        </h3>
-				        {% endif %}
+				        <span>{{ _article.title }}</span>
 				    </a>
-					<hr>
+                    <small>{{ _article.date | date: "%b %-d" }}</small>
 				</div>
 			{%- if forloop.last -%}</section>{%- endif -%}
 			{% endfor %}

@@ -5,6 +5,7 @@
   background-size: 300% 300%;
   animation: gradientFlow 8s ease infinite;
   border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .gradient-box::before {
@@ -33,6 +34,7 @@
   position: absolute;
   width: 200%;
   height: 200%;
+  transition: animation-duration 0.3s ease;
 }
 
 .wave1 {
@@ -93,7 +95,6 @@
 .gradient-box:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 28px -4px rgba(79, 70, 229, 0.25);
-  transition: all 0.3s ease;
 }
 
 .gradient-box:hover .wave {
