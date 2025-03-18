@@ -33,7 +33,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
 
 
   <div class="publication-item">
-    <div class="publication-image gradient-box"></div>
+    <img src="{{ site.baseurl }}/img/papers/webmmu_thumb_25.png" alt="WebMMU" class="publication-image">
     <div class="publication-details">
       <h3>WebMMU: A Benchmark for Multimodal Multilingual Website Understanding and Code Generation</h3>
       <p class="publication-authors">Rabiul Awal et al.</p>
