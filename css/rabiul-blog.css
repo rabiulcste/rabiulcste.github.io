@@ -565,7 +565,7 @@ a img:focus {
 }
 
 .publication-image {
-    width: 15%;
+    width: 20%;
     aspect-ratio: 1;
     object-fit: contain;
     border-radius: 5px;
