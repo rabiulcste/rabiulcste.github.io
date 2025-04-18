@@ -14,7 +14,6 @@ const CACHE_NAMESPACE = 'main-'
 const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';
 const PRECACHE_LIST = [
   "./",
-  "./offline.html",
   "./js/jquery.min.js",
   "./js/bootstrap.min.js",
   "./js/rabiul-blog.min.js",
@@ -186,11 +185,6 @@ self.addEventListener('fetch', event => {
     // If the fetch fails (e.g disconnected), wait for the cache.
     // If there’s nothing in cache, wait for the fetch.
     // If neither yields a response, return offline pages.
-    event.respondWith(
-      Promise.race([fetched.catch(_ => cached), cached])
-        .then(resp => resp || fetched)
-        .catch(_ => caches.match('offline.html'))
-    );
 
     // Update the cache with the version we fetched (only for ok status)
     event.waitUntil(

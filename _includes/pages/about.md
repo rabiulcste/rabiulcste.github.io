@@ -10,9 +10,7 @@ Prior to Mila, I received an MSc in CS from [University of Saskatchewan](https:/
     <a href="https://twitter.com/_rabiulawal" target="_blank" rel="noopener noreferrer">
       <i class="fab fa-twitter"></i>
     </a>
-    <a href="https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en">
-        <img src="{{ '/img/google-scholar-icon.svg' | prepend: site.baseurl }}" alt="Google Scholar Icon">
-    </a>
+    <span class="email">awalrabiul6 [at] gmail [dot] com</span>
 </div>
 
 
@@ -29,7 +27,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/webmmu_thumb_25.png" alt="WebMMU" class="publication-image">
     <div class="publication-details">
-      <h3>WebMMU: A Benchmark for Multimodal Multilingual Website Understanding and Code Generation</h3>
+      <p class="publication-title">WebMMU: A Benchmark for Multimodal Multilingual Website Understanding and Code Generation</p>
       <p class="publication-authors">Rabiul Awal et al.</p>
       <p class="publication-venue">DL4C Workshop @ ICLR'25 </p>
       <div class="publication-links">
@@ -41,7 +39,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/ctrlo_thumb_24.png" alt="CTRL-O" class="publication-image">
     <div class="publication-details">
-      <h3>CTRL-O: Language-Controllable Object-Centric Visual Representation Learning</h3>
+      <p class="publication-title">CTRL-O: Language-Controllable Object-Centric Visual Representation Learning</p>
       <p class="publication-authors">Aniket Rajiv Didolkar∗, Andrii Zadaianchuk∗, <strong>Rabiul Awal</strong>∗, Maximilian Seitzer, Efstratios Gavves, Aishwarya Agrawal</p>
       <p class="publication-venue">CVPR'25</p>
       <div class="publication-links">
@@ -56,7 +54,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/vismin_thumb_24.png" alt="VisMin" class="publication-image">
     <div class="publication-details">
-      <h3>VisMin: Visual Minimal-Change Understanding</h3>
+      <p class="publication-title">VisMin: Visual Minimal-Change Understanding</p>
       <p class="publication-authors"><strong>Rabiul Awal</strong>*,  Saba Ahmadi*, Le Zhang*, Aishwarya Agrawal</p>
       <p class="publication-venue">NeurIPS'24</p>
       <div class="publication-links">
@@ -70,7 +68,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/ceclip_thumb_23.png" alt="Compositional CLIP" class="publication-image">
     <div class="publication-details">
-      <h3>Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding</h3>
+      <p class="publication-title">Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding</p>
       <p class="publication-authors">Le Zhang, <strong>Rabiul Awal</strong>, Aishwarya Agrawal</p>
       <p class="publication-venue">CVPR'24</p>
       <div class="publication-links">
@@ -85,7 +83,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/culturalvqa_thumb_24.png" alt="CulturalVQA" class="publication-image">
     <div class="publication-details">
-      <h3>CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge</h3>
+      <p class="publication-title">CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge</p>
       <p class="publication-authors">S. Nayak, K. Jain, <strong>R. Awal</strong>, et al.</p>
       <p class="publication-venue">EMNLP'24 <span style="color: red; font-weight: bold;">(Oral)</span></p>
       <div class="publication-links">
@@ -100,24 +98,14 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
 </div>
 
 ## Blog
-I occasionally write on how-to-cs-grad, coding, ai research, and systematic failure in Bangladesh.
+My writings on how-to-cs-grad, ai research, and systematic issues in Bangladesh.
 
 <div class="popular-posts">
   <ul>
       <li> <a href="https://rabiul.me/cs/2022/10/23/an-opinionated-guide-for-cs-undergrads/">An opinionated guide for CS undergrads</a> </li>
-      <li> <a href="https://rabiul.me/cs/2020/07/01/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/">Reproducing prev research for bachelor thesis</a> </li>
       <li> <a href="https://rabiul.me/cs/2017/11/08/computer-science-for-you-or-not-words-for-nstuan/">Computer science for you or not?</a> </li>
-      <li> <a href="https://rabiul.me/cs/2017/11/10/pride-and-prejudice-public-university-of-bangladesh/">Incorrect approach to public university education, bad pride</a> </li>
       <li> <a href="https://rabiul.me/cs/2019/01/30/software-engineering-job-hacking-as-a-fresh-graduate-nstu/">ফ্রেশার হিশেবে সফটওয়্যার ইঞ্জিনিয়ারিং চাকরি খোঁজাখুঁজির অভিজ্ঞতা</a> </li>
       <li> <a href="https://rabiul.me/computation/2016/05/01/syntax-to-competitive-programming">সিনট্যাক্স টু কম্পিটিটিভ প্রোগ্রামিং জার্নি</a> </li>
       <li> <a href="https://rabiul.me/cs/2018/10/29/public-university-research/">পাবলিক বিশ্ববিদ্যালয়ে গবেষণা সংকট প্রসঙ্গে</a> </li>
   </ul>
 </div>
-
-## Contact 
-Please send me an email if you are interested in collaboration or need help with grad apps and how-to-cs-undergrad.
-
-rabiul.awal @ mila dot quebec  
-awalrabiul6 @ gmail dot com
-
-updated september 2024
