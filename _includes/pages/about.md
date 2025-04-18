@@ -17,7 +17,7 @@ Prior to Mila, I received an MSc in CS from [University of Saskatchewan](https:/
 
 
 ## Research
-Building AI systems that truly understand the physical world is an exciting frontier. My research focuses on two core problems: (1) learning rich visual representations that capture the true structure of the world, and (2) developing controllable generative **world** models. This naturally connects to my interest in alignment and economic utility.
+Building AI systems that truly understand the physical world is an exciting frontier. My research focuses: (1) learning rich **visual representations** that capture the true structure of the world, and (2) developing controllable generative **(diffusion) world** models. This naturally connects to my interest in alignment and economic utility.
 
 
 
