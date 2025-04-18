@@ -13,17 +13,11 @@ Prior to Mila, I received an MSc in CS from [University of Saskatchewan](https:/
     <a href="https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en">
         <img src="{{ '/img/google-scholar-icon.svg' | prepend: site.baseurl }}" alt="Google Scholar Icon">
     </a>
-    <a href="{{ '/pdf/rabiul_awal_resume.pdf' | prepend: site.baseurl }}">
-        <i class="fas fa-file-alt"></i>
-    </a>
-    <a href="http://nlpdhaka.com/">
-        <i class="fas fa-users"></i>
-    </a>
 </div>
 
 
 ## Research
-Building AI systems that truly understand the physical world is an exciting frontier. My research focuses on two core problems: (1) learning rich visual representations that capture the true structure of the world, and (2) developing controllable generative **(diffusion)** models that can create (or simulate) with intention. This naturally connects to alignment, as systems that understand the world must ~~develop theory of mind to~~ grasp human values.
+Building AI systems that truly understand the physical world is an exciting frontier. My research focuses on two core problems: (1) learning rich visual representations that capture the true structure of the world, and (2) developing controllable generative **world** models. This naturally connects to my interest in alignment and economic utility.
 
 
 
@@ -51,24 +45,9 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
       <p class="publication-authors">Aniket Rajiv Didolkar∗, Andrii Zadaianchuk∗, <strong>Rabiul Awal</strong>∗, Maximilian Seitzer, Efstratios Gavves, Aishwarya Agrawal</p>
       <p class="publication-venue">CVPR'25</p>
       <div class="publication-links">
-        <a href="https://openreview.net/pdf?id=BE2u2KF4Tb">Paper</a>
+        <a href="https://arxiv.org/abs/2503.21747">Paper</a>
         <a href="https://ctrl-o-paper.github.io/">Website</a>
         <a href="https://x.com/Aniket_d98/status/1894931395018928262">Twitter</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="publication-item">
-    <img src="{{ site.baseurl }}/img/papers/bigdocs_thumb_24.png" alt="BigDocs" class="publication-image">
-    <div class="publication-details">
-      <h3>BigDocs: An Open Dataset for Training Multimodal Models on Document and Code Tasks</h3>
-      <p class="publication-authors">Juan Rodriguez, Xiangru Jian, Siba Panigrahi, Tianyu Zhang, Aarash Feizi, Abhay Puri, Akshay Kalkunte, François Savard, Ahmed Masry, Shravan Nayak, <strong>Rabiul Awal</strong> et al.</p>
-      <p class="publication-venue">ICLR'25</p>
-      <div class="publication-links">
-        <a href="https://bigdocs.github.io/">Website</a>
-        <a href="https://arxiv.org/abs/2412.04626">Paper</a>
-        <a href="https://huggingface.co/datasets/ServiceNow/BigDocs-Bench">Dataset</a>
-        <a href="https://x.com/joanrod_ai/status/1866549342431219853">Twitter</a>
       </div>
     </div>
   </div>
