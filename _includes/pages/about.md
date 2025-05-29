@@ -7,10 +7,31 @@ I'm a PhD student at [Mila - Quebec AI Institute](https://mila.quebec/en/) and [
 Prior to Mila, I received an MSc in CS from [University of Saskatchewan](https://www.cs.usask.ca/) and BSc in CS from [Noakhali Science and Technology University](https://nstu.edu.bd/).
 
 <div class="social-links">
-    <a href="https://twitter.com/_rabiulawal" target="_blank" rel="noopener noreferrer">
-      <i class="fab fa-twitter"></i>
-    </a>
-    <span class="email">awalrabiul6 [at] gmail [dot] com</span>
+    <div class="column column-22">
+        <a class="icons-sm git-ic" href="https://github.com/rabiulcste" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i> github
+        </a>
+    </div>
+    <div class="column column-22">
+        <a class="icons-sm twitter-ic" href="https://twitter.com/_rabiulawal" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-twitter"></i> twitter
+        </a>
+    </div>
+    <div class="column column-22">
+        <a class="icons-sm email-ic" href="mailto:awalrabiul6@gmail.com" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-envelope"></i> email
+        </a>
+    </div>
+    <div class="column column-22">
+        <a href="{{ site.baseurl }}/assets/rabiul_awal_resume.pdf" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-download"></i> cv
+        </a>
+    </div>
+    <div class="column column-12">
+        <a href="{{ site.baseurl }}/assets/bio.txt" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-file-alt"></i> bio
+        </a>
+    </div>
 </div>
 
 
@@ -23,6 +44,24 @@ Building AI systems that truly understand the physical world is an exciting fron
 See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en) for a full list of publications.
 <div class="publication-list">
 
+  <div class="publication-item">
+    <img src="{{ site.baseurl }}/img/papers/earl_thumb_25.png" alt="RL for Image Editing" class="publication-image">
+    <div class="publication-details">
+      <p class="publication-title">The Promise of RL for Autoregressive Image Editing</p>
+      <p class="publication-authors">Saba Ahmadi*, <strong>Rabiul Awal*</strong>, Ankur Sikarwar*, Amirhossein Kazemnejad*, Ge Ya Luo, Juan Rodriguez, Sai Rajeswar, Siva Reddy, Chrisc x Pal, Benno Krojer, Aishwarya Agrawal</p>
+      <p class="publication-venue">Preprint </p>
+    </div>
+  </div>
+
+
+  <div class="publication-item">
+    <img src="{{ site.baseurl }}/img/papers/vgrl_thumb_25.jpg" alt="Rendering-Aware RL" class="publication-image">
+    <div class="publication-details">
+      <p class="publication-title">Rendering-Aware Reinforcement Learning for Vector Graphics Generation</p>
+      <p class="publication-authors">Juan A. Rodriguez<sup>∗</sup>, Haotian Zhang<sup>∗</sup>, Abhay Puri, Aarash Feizi, Rishav Pramanik, Pascal Wichmann, Arnab Mondal, Mohammad Reza, <strong>Rabiul Awal</strong> + 6 others</p>
+      <p class="publication-venue">Preprint </p>
+    </div>
+  </div>
 
   <div class="publication-item">
     <img src="{{ site.baseurl }}/img/papers/webmmu_thumb_25.png" alt="WebMMU" class="publication-image">
