@@ -1,5 +1,5 @@
 <div class="profile">
-<img src="{{ '/img/rabiul+profic.jpg' | prepend: site.baseurl }}" alt="Rabiul Awal Photo">
+<img src="{{ '/img/rabiul+profic.png' | prepend: site.baseurl }}" alt="Rabiul Awal Photo">
 </div>
 
 I'm a PhD student at [Mila - Quebec AI Institute](https://mila.quebec/en/) and [University of Montreal](https://www.umontreal.ca/en/) with [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I'm also a visiting researcher at Multimodal Foundation Models Team, [ServiceNow Research](https://www.servicenow.com/research/people.html) with [Sai Rajeswar](https://sairajeswar.com/).
