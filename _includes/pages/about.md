@@ -73,7 +73,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <p class="publication-title">WebMMU: A Benchmark for Multimodal Multilingual Website Understanding and Code Generation</p>
       <p class="publication-authors">Rabiul Awal, Mahsa Massoud, Aarash Feizi, Zichao Li + 9 others</p>
-      <p class="publication-venue">DL4C Workshop @ ICLR'25 </p>
+      <p class="publication-venue">DL4C Workshop @ ICLR'25 <span class="presentation-badge spotlight">Spotlight at MAR Workshop @ CVPR'25</span></p>
       <div class="publication-links">
         <a href="https://openreview.net/pdf?id=3AWEfUFSPe">Paper</a>
         <a href="https://webmmu-paper.github.io/">Website</a>
@@ -86,7 +86,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <p class="publication-title">CTRL-O: Language-Controllable Object-Centric Visual Representation Learning</p>
       <p class="publication-authors">Aniket Rajiv Didolkar∗, Andrii Zadaianchuk∗, <strong>Rabiul Awal</strong>∗, Maximilian Seitzer, Efstratios Gavves, Aishwarya Agrawal</p>
-      <p class="publication-venue">CVPR'25  <span class="presentation-badge spotlight">Spotlight Presentation at MAR Workshop @ CVPR'25</span></p>
+      <p class="publication-venue">CVPR'25  <span class="presentation-badge spotlight">Spotlight at MAR Workshop @ CVPR'25</span></p>
       <div class="publication-links">
         <a href="https://arxiv.org/abs/2503.21747">Paper</a>
         <a href="https://ctrl-o-paper.github.io/">Website</a>
@@ -115,7 +115,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <p class="publication-title">Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding</p>
       <p class="publication-authors">Le Zhang, <strong>Rabiul Awal</strong>, Aishwarya Agrawal</p>
-      <p class="publication-venue">CVPR'24 <span class="presentation-badge spotlight">Spotlight Presentation at O-DRUM Workshop @ CVPR'23</span></p>
+      <p class="publication-venue">CVPR'24 <span class="presentation-badge spotlight">Spotlight at O-DRUM Workshop @ CVPR'23</span></p>
       <div class="publication-links">
         <a href="https://arxiv.org/abs/2306.08832">Paper</a>
         <a href="https://github.com/lezhang7/Enhance-FineGrained">Code</a>
@@ -130,7 +130,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <p class="publication-title">CulturalVQA: Benchmarking Vision Language Models for Cultural Knowledge</p>
       <p class="publication-authors">S. Nayak, K. Jain, <strong>R. Awal</strong>, et al.</p>
-      <p class="publication-venue">EMNLP'24 <span class="presentation-badge oral">Oral Presentation</span></p>
+      <p class="publication-venue">EMNLP'24 <span class="presentation-badge oral">Oral</span></p>
       <div class="publication-links">
         <a href="https://culturalvqa.org">Website</a>
         <a href="https://openreview.net/forum?id=Qw5KhoZOtA#discussion">OpenReview</a>
