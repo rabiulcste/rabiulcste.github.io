@@ -1145,3 +1145,45 @@ article {
 .not-found a {
     /* Base link styles will apply */
 }
+
+.publication-venue {
+    margin: 0.3em 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.presentation-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    margin-left: 8px;
+    font-size: 0.85em;
+    font-weight: 500;
+    border-radius: 4px;
+    background-color: #2c3e50;
+    color: white;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.presentation-badge:hover {
+    background-color: #1a252f;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.presentation-badge.spotlight {
+    background-color: #3498db;
+}
+
+.presentation-badge.spotlight:hover {
+    background-color: #2980b9;
+}
+
+.presentation-badge.oral {
+    background-color: #2c3e50;
+}
+
+.presentation-badge.oral:hover {
+    background-color: #1a252f;
+}
