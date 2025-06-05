@@ -115,7 +115,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <p class="publication-title">Contrasting intra-modal and ranking cross-modal hard negatives to enhance visio-linguistic fine-grained understanding</p>
       <p class="publication-authors">Le Zhang, <strong>Rabiul Awal</strong>, Aishwarya Agrawal</p>
-      <p class="publication-venue">CVPR'24</p>
+      <p class="publication-venue">CVPR'24 <span class="presentation-badge spotlight">Spotlight Presentation at O-DRUM Workshop @ CVPR'23</span></p>
       <div class="publication-links">
         <a href="https://arxiv.org/abs/2306.08832">Paper</a>
         <a href="https://github.com/lezhang7/Enhance-FineGrained">Code</a>
