@@ -9,7 +9,7 @@ tag: [computer-science]
 ---
 This is a guide with bits of advice I would give my younger self about CS undergrad programs, assuming that self didn't have access to quality education and little idea about what to expect or how to use the degree to build a future. I will start with fundamental CS knowledge that you must acquire to be successful, followed by some hacks that my younger self should have known. I will discuss tools that come in handy and how to build a resume, and then suggest some approaches to things that help, along with some comments on grades. This article may sound a bit rusty.
 
-### CS fundamental knowledge you must have
+## CS fundamental knowledge you must have
 - **[Csapp](https://csapp.cs.cmu.edu/)** - This CMU course/book will give you a profound idea of computer science. It should be easy to follow and good for the basics. Make sure to use it as much as possible. 
 - **Pick one language and go deep** - Every CS program offers an introductory programming language course. Both C and Python work fine as an introductory languages (python is easy to learn). You have two options: you may choose to learn one programming language well or die (dropout). Any compromise in between is a sin. 
 - **Keep DSA under your pillow** - There should be a course for data structure and algorithms (DSA). Practice algorithm analysis before going to bed. There is another way to be very good at DSA. Just be part of the competitive programming community, they will teach you in the best way.
@@ -20,7 +20,7 @@ This is a guide with bits of advice I would give my younger self about CS underg
 If you're an undergrad, these are a few courses you should take to acquire fundamental knowledge. They are essential for your success. Compromising on any of them is a sin that will haunt you forever. It's not difficult to get this knowledge tbh, but most undergrads fail to do this in time. You'll notice a pattern where one course is a prerequisite for the next. If you lose your grip in the introductory courses, everything else will fall apart, even if you think you tried.
 
 
-### Hacks you should know
+## Hacks you should know
 - For every single topic/lesson you will encounter in your four years CS journey, there is a guy on the internet who can spoon-feed that lesson to you. I can guarantee that a random YouTuber will be 5X better than your faculty. I used to follow CMU/Stanford/MIT courses and some Indian YouTubers :)
 - Ask people to teach you and vice versa. If you know something teach it to someone. If they know something, ask them to teach you.
 - Have a study group. If you want to maintain good grades, you should have a study group. You should always pair with people who are better than you. If no one is supposedly better than you, then it is a unique opportunity for you — which comes with appreciation from your opposite gender, some leadership practice, etc, etc.
@@ -31,7 +31,7 @@ If you're an undergrad, these are a few courses you should take to acquire funda
 - Consume resources as you go. Never buy books that you don’t need i.e. don’t collect those five free python books that have no use to you. Use one book only, a maximum of two. Specifically, never ever download tutorials from torrent sites and fill your disk storage with them. You will never watch them, no one does. A simple hack is to download them when you need only. I used to pay for my Udemy courses. Since I have paid for it, now I have to watch those tutorials to justify my 10$ registration fee.
 
 
-### Tools makes you cool
+## Tools makes you cool
 1. Version control (Git) is a must. Learn it. This tool will make you look cool and act smart.
 2. You need an editor for coding. You should have a favorite editor and you must have an opinion about it. Like vim vs emacs. This clearly shows you have a sense of taste.
 3. Learn some UNIX commands. It is a bit difficult to learn them at first. Girls/boys should date you just for using UNIX commands. Unfortunately, that’s not the case at your university yet. Another sign of taste and coolness.
@@ -42,14 +42,14 @@ If you're an undergrad, these are a few courses you should take to acquire funda
 I am recommending a [course](https://missing.csail.mit.edu/) from MIT that pretty much teaches you all of the things I have mentioned above.
 
 
-### An extreme approach for building a resume that counts
+## An extreme approach for building a resume that counts
 Most people prepare a resume in their final year while they are looking for a job or internship. I suggest the opposite. You should maintain a resume since your first semester. You should practice version controlling on your resume or maybe save them with term tags. The first version will not have much, list your education, awards, and some co-curricular stuff. As you go forward, you will join a programming contest or solve 20 online judge problems or build a tic-tac-toe game using C. You must update your resume with that information, and also drop outdated stuff. At the end of each semester, you should have something to update, which means you are making progress. The plan is to take your efforts from each term and translate them into some presentable outcomes for your resume. 
 
 An important question is how do you know you are getting it right? Here is my second piece of advice for you. Download an ideal resume online (how abt a Stanford CS student?) and collect another resume from any recent graduates from your department. Put three resumes side-by-side and compare them. You should take notice of what your resume is missing and how bad that bhai/apu’s resume is (typical case). You don’t want to make the same mistakes for sure. Your goal would be to match that Stanford resume. In practice, you cannot even approximately be the same as a Stanford CS student. It makes sense — you don’t have opportunities similar to Stanford. 
 
 However, this practice will deliver your a good resume, with proper outlines, style, and uniqueness. This also forces you not to compete with your peers but compete with a global pull of talents. Now that you have a bar to match, you should find proxies to approximately match that Stanford resume. If that fancy resume guy interned at Meta, you could do GSOC. Every single thing can be replaced by some proxy if you are willing to do it. There are other things like you should use [latex](https://www.overleaf.com/latex/templates) for writing a resume — again, it just proves you have good taste!
 
-### Other things to keep in mind
+## Other things to keep in mind
 - Don’t listen to random people including your classmates, seniors, or faculties. This is a bit tricky. You need to define your community. And you should listen to people who are experts in that community. For instance, if you are a competitive programmer you should listen to a world finalist but not that faculty who hates contest programmers. You may try to avoid listening to your classmates or seniors who have tons of opinions on everything but knows nothing.
 - Learn to communicate well. This is an important skill that almost 90% of undergrads will lack I may presume. Mention the context clearly to the person you are communicating with and identify what you need from them i.e. I am X, I did Y and I need your help on Z. Learn those email etiquette that varies across cultures. For instance, calling Sir/Madam to US professors or sending an email without a subject or bad grammar in the email body are some bad indications of an email sender. Use AI tools like GPT3, and Grammarly to improve your English. 
 - Maintain a personal website. People should be able to find your name on the internet with a simple google search. A portfolio website can be helpful to showcase your projects. GitHub page is pretty easy to use for this. 
@@ -63,7 +63,7 @@ However, this practice will deliver your a good resume, with proper outlines, st
 - Aim big and play it hard but cool. CS is difficult. Agreed. But it also offers incredible opportunities, right? In the last few years, a huge pool of phd students and FAANG engineers from Bangladesh moved to foreign countries. You could be one of them if you work hard. It might be difficult given your local atmosphere, but it is not impossible.
 
 
-### Comments on grades and gaming the system
+## Comments on grades and gaming the system
 1. *Grades fail to indicate your CS skills.* Grades don’t indicate someone’s CS skills in most local universities I can think of. Many toppers you will encounter don’t know how to code. My sample size is small but I would be surprised to learn otherwise. This means that skills need to be attained with your efforts. Most CS skills can be self-taught. If you are not too much into gaming the system, you can develop your skills in parallel to your efforts to score top grades. But skills and grades are typically mutually exclusive I would say.
 2. *Good grades might kill you.* Some students get too occupied with gaming the system, they don’t learn any practical CS skills. They end up in top positions by memorizing (or learning things that only count in exams). Unfortunately, that 160k$ FAANG job is not going to happen to them. They just lose themselves in the process.
 3. *Things where grade matters.* Good grades don’t hurt tbh. It is most useful for grad school admission and scholarships. Typically, a person with good grades is deemed to be punctual, attentive, and consistent. These are useful habits to have for doing good work. It is rarely a case that a person with bad grades is a very skilled person (counterintuitive, right?). A balance is always nice to have :)

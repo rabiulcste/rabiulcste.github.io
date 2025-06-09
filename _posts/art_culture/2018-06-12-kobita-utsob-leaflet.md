@@ -1,5 +1,5 @@
 ---
-title: 'কবিতা উৎসবের পত্র  &#8216;১৭ / মশাল'
+title: 'কবিতা উৎসবের পত্র ২০১৭, মশাল'
 author: 'Rabiul Awal'
 layout: post
 category:

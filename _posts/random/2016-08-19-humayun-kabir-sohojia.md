@@ -1,5 +1,5 @@
 ---
-title: 'ড. হুমায়ূন কবির | সহজিয়া'
+title: 'ড. হুমায়ূন কবির সহজিয়া'
 author: 'Rabiul Awal'
 layout: post
 tag:

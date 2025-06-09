@@ -7,10 +7,10 @@ category:
 tag: [research, computer-science]
 ---
 
-### Setting the scene  
+## Setting the scene  
 I am compiling some articles on undergraduate CS research and there are more to come along this line. Lately, I wrote a [blog on SOTA reproduction](http://www.iamrabiul.info/reproducing-sota-works-as-a-pathway-to-get-into-research-and-preparation-for-a-bachelor-thesis/) as a key pathway for starting undergrad research. I guess bringing conference workshops into the scenario fits a timely and valuable example following that discussion. *Today I will be talking on workshop tracks from top-notch machine learning and natural language processing conferences and try to argue why CS undergrad students from Bangladesh should go for them obviously.* I first learned about workshop tasks from SemEval18. Since then always hoped for doing some tasks of my interests but sadly never got the chance. The last December I attended a talk titled “Story of Natural Language Processing” by [Dr. Sudipta Kar](http://sudiptakar.info/), Ph.D., Houston University. He was giving this talk at Dhaka and highly encouraged the participants to join NLP workshop tracks and pushed them to honestly work out a project paper. He also made a reference on a rising CS research culture in India, how grad students are doing workshop projects a lot, resulting in publication to good venues, building a strong communication channel, and eventually availing a position in good schools strategically. He made an apparent point that clearly we have a great potential in ML/NLP conference workshops, considering our merit but low resources and less likely research environments.
 
-### Conferences and workshops, an introduction   
+## Conferences and workshops, an introduction   
 I agree with Sudipta da that workshops are kinda *cool research hack* for undergrad students and early researchers. There are many exciting and fun workshops now happening independently and jointly under several ML/NLP/Vision conferences. ML workshops are typically one or two days long and dedicated to discussing a specific topic ranging from computer science to cross-disciplinary fields. Workshops tend to have deadlines ranging year-long periods. Practically workshops are not exactly the same as conferences but a smaller version of a conference, you can think of minimalism in research conferences. Usually, workshop registration fees are small compared to a wholesome conference, and sometimes it is free to all, so students can usually join paying less. These events are also very diverse and inclusive in terms of attendees and hosts. Workshops tracks are much more action-driven, motivated by certain immediate problems, and call for concrete solutions. Most of them address underrepresented, lately promising, and somewhat new but easy problems to draw attention from the broader research community. You may find some tracks which are literally unheard! These tracks are mostly organized by groups around the world specializing in certain areas. It is mostly doable for undergrad students as you can submit a short paper (4 pages long), maybe some small work of four to five months is pretty much enough for that! Some workshops also call for 8-page papers but they are less likely. That said, workshops are definitely fun places where you can learn research stuff of interesting and amazing concerns.
 
 **A few exemplary workshops to follow and doable tracks** 
@@ -21,15 +21,15 @@ In many cases, the workshop hosts will provide some data and formulate a problem
 
 My [first paper](https://arxiv.org/abs/2006.13507) was a workshop paper at ICWSM20 on hate speech detection datasets which I happen to formulate from a very silly idea. It took us around one and a half months to finish the projects. So to be honest, if you work hard and form a strong team, it is always possible to solve one or two problems from workshop tracks.
 
-### Workshops as a potential venue for being noticed 
+## Workshops as a potential venue for being noticed 
 Aha! One matter which I forgot to mention earlier is using workshop participation as a key for building a good relationship with the community. A few people join in a workshop, typically a closed event of special interest group researchers, so it is very like that you may get noticed by others, maybe you can find someone there who fits your area of research interests. Why not make some friends, right? These are extremely useful if you looking for a Ph.D. position or internship opportunity in a professor lab. It could bring you some collaborations, and maybe open a door to the outer world if you are okay with some wise chit-chat. Actually my supervisor made two friends in the last workshop I joined with him, and recently, we started a project with a CMU Ph.D. student linked from that workshop. Sadly our students spend a whole lot of time hunting for GRE/TOEFL and writing emails to professors. I believe getting involved in workshop tasks seriously could be a smart hack along this line. Even you can plan your bachelor thesis aligning with workshop tasks. I mean we can’t lose anything, right?
 
-### A twitter thread for starting right away! 
+## A twitter thread for starting right away! 
 At this point, I have to direct you to some popular and interesting workshops that will be happening rest of the 2020 in the fields of machine learning and NLP. This twitter thread from UCPH Professor Anna Rogers is extremely useful if you are thinking about doing a workshop paper right away!
 
 <iframe allowfullscreen="allowfullscreen" frameborder="0" height="500" loading="lazy" src="https://threadreaderapp.com/embed/1279092449902841857.html" style="max-width: 100%;" width="100%"></iframe>
 
-### How to build something nice
+## How to build something nice
 Okayyy! We are pretty much done for today! Stopping right away with a few practical notes. A typical setup for starting your project for a workshop could be somewhat like this below. 
 
 **Step by step how to start working for a workshop paper –**

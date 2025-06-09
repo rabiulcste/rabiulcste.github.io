@@ -8,7 +8,7 @@ category:
 tag: ['number-theory']
 mathjax: true
 ---
-### কনসেপ্ট
+## কনসেপ্ট
 First, you should read the code two times without comment.  
 I think, you will understand the algorithm. if not, then follow comments.  
 ————————————-  
@@ -30,6 +30,5 @@ you should read code first to know `res[0], res[1], res[2]`...
 
 —————————————
 
-
-### কোড 
+## কোড 
 <script src="https://gist.github.com/rabiulcste/c42304946954c9b224d3a3414741d479.js"></script>

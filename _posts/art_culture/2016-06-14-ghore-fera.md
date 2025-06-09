@@ -1,5 +1,5 @@
 ---
-title: 'ঘরে ফেরা বিষয়ক / ফেনী'
+title: 'ঘরে ফেরা বিষয়ক'
 author: 'Rabiul Awal'
 layout: post
 category:

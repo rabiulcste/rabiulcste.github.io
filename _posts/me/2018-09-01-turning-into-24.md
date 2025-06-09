@@ -2,7 +2,6 @@
 title: 'Turning into 24'
 author: 'Rabiul Awal'
 layout: post
-thumbnail: ../../uploads/2018/04/pro-2.jpg
 category:
     - 'art_culture'
 tag: [me-n-myself]

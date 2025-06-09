@@ -1,5 +1,5 @@
 ---
-title: 'হাবিব ভাই আর শাহলাম ভাই বিষয়ক / জাহাঙ্গীরনগর'
+title: 'হাবিব ভাই আর শাহলাম ভাই বিষয়ক, জাহাঙ্গীরনগর'
 author: 'Rabiul Awal'
 layout: post
 tag: [people, nostalgia]

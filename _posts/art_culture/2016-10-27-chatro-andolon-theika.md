@@ -1,5 +1,5 @@
 ---
-title: 'ছাত্র আন্দোলন থেইকা / ২০১৬'
+title: 'ছাত্র আন্দোলন থেইকা ২০১৬'
 author: 'Rabiul Awal'
 layout: post
 category:

@@ -1,5 +1,5 @@
 ---
-title: 'Computer science for you or not? Notes for Nstuan.'
+title: 'Computer science for you or not? Notes for Nstuan'
 author: 'Rabiul Awal'
 layout: post
 category:
