@@ -50,6 +50,10 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
       <p class="publication-title">The Promise of RL for Autoregressive Image Editing</p>
       <p class="publication-authors">Saba Ahmadi*, <strong>Rabiul Awal*</strong>, Ankur Sikarwar*, Amirhossein Kazemnejad*, Ge Ya Luo, Juan Rodriguez, Sai Rajeswar, Siva Reddy, Chris Pal, Benno Krojer, Aishwarya Agrawal</p>
       <p class="publication-venue">Preprint </p>
+      <div class="publication-links">
+        <a href="https://www.arxiv.org/abs/2508.01119">Paper</a>
+        <a href="https://x.com/_rabiulawal/status/1952769807767503181">Twitter</a>
+      </div>
 
     </div>
   </div>
