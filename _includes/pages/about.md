@@ -36,7 +36,7 @@ Prior to Mila, I received an MSc in CS from [University of Saskatchewan](https:/
 
 
 ## Research
-I’m driven to build AI systems that truly understand the physical world. My work centers on two fronts: learning deep visual representations, and developing generative world models, with a particular focus on Diffusion and Flow Matching. I’m fascinated by scaling foundation models and reinforcement learning to superhuman capabilities, and how these advances connect to the broader challenges of alignment and the profound economic shifts AI will bring.
+I’m driven to build AI systems that truly understand the physical world. My work centers on two fronts: learning deep visual representations, and developing generative world models, with a particular focus on Diffusion/Flow family of models. I’m fascinated by scaling foundation models and reinforcement learning to superhuman capabilities, and how these advances connect to the broader challenges of alignment and the profound economic shifts AI will bring.
 
 ## Highlighted Work
 See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en) for a full list of publications.
