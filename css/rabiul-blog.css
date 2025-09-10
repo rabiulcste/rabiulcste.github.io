@@ -506,24 +506,24 @@ a:hover, a:focus {
 }
 
 .publication-title {
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: 1.4rem;
+    font-weight: 600;
     margin-bottom: 0.5rem;
-    color: #333;
-    line-height: 1.4;
+    color: #1a1a1a;
+    line-height: 1.3;
 }
 
 .publication-links {
     margin-top: 0.5rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
 }
 
 .publication-links a {
     font-weight: 400;
-    font-size: 13px;
-    color: #666;
+    font-size: 14px;
+    color: #1a1a1a;
     text-decoration: none;
     border-bottom: 1px solid #ddd;
     transition: border-color 0.2s;
@@ -542,13 +542,12 @@ a:hover, a:focus {
 .publication-item {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 1.5rem;
-    padding: 0;
-    background: transparent;
-    border-radius: 0;
-    box-shadow: none;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    background: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f0f0f0;
 }
 
 .publication-item h3, 
@@ -558,11 +557,12 @@ a:hover, a:focus {
 }
 
 .publication-image {
-    width: 17.5%;
+    width: 20%;
     aspect-ratio: 1;
     object-fit: contain;
-    border-radius: 5px;
+    border-radius: 8px;
     height: auto !important;
+    background: #f8f9fa;
 }
 
 .publication-details {
@@ -570,11 +570,19 @@ a:hover, a:focus {
     padding-left: 0.75rem;
 }
 
-.publication-authors, .publication-venue {
+.publication-authors {
     font-size: 0.9rem;
-    color: #777;
+    color: #666666;
     margin-bottom: 0.4rem;
     line-height: 1.4;
+}
+
+.publication-venue {
+    font-size: 0.85rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.3;
 }
 
 .publication-item p {
@@ -1060,16 +1068,29 @@ article {
     }
     
     /* Publications */
-    .publication-title {
-        font-size: 1.1rem;
+    .publication-item {
+        padding: 0.8rem;
+        margin-bottom: 1rem;
     }
     
-    .publication-authors, .publication-venue {
+    .publication-title {
+        font-size: 1.3rem;
+    }
+    
+    .publication-authors {
         font-size: 0.9rem;
+    }
+    
+    .publication-venue {
+        font-size: 0.85rem;
     }
     
     .publication-links a {
         font-size: 13px;
+    }
+    
+    .publication-image {
+        width: 25%;
     }
     
     /* Profile */
@@ -1209,41 +1230,41 @@ article {
 
 .presentation-badge {
     display: inline-block;
-    padding: 2px 8px;
-    margin-left: 8px;
-    font-size: 0.85em;
-    font-weight: 500;
-    border-radius: 4px;
+    padding: 4px 10px;
+    margin-left: 10px;
+    font-size: 0.8em;
+    font-weight: 600;
+    border-radius: 6px;
     background-color: #666666;
     color: white;
     text-decoration: none;
     transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .presentation-badge:hover {
     background-color: #1a252f;
     color: white;
     text-decoration: none;
-    transform: translateY(-1px);
 }
 
 .presentation-badge.spotlight {
-    background-color: #666666;
+    background-color: #8B5CF6;
     color: white;
     border: none;
-    font-weight: 500;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
 }
 
 .presentation-badge.spotlight:hover {
     background-color: #1a252f;
     color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 }
 
 .presentation-badge.oral {
-    background-color: #666666;
+    background-color: #059669;
+    box-shadow: 0 2px 4px rgba(5, 150, 105, 0.3);
 }
 
 .presentation-badge.oral:hover {

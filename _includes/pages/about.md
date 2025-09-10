@@ -73,7 +73,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <p class="publication-title">WebMMU: A Benchmark for Multimodal Multilingual Website Understanding and Code Generation</p>
       <p class="publication-authors"><strong>Rabiul Awal</strong>, Mahsa Massoud, Aarash Feizi, Zichao Li + 9 others</p>
-      <p class="publication-venue">EMNLP'25 (Main Conference)<span class="presentation-badge spotlight">Spotlight at MAR Workshop @ CVPR'25</span></p>
+      <p class="publication-venue">EMNLP'25 (Main)<span class="presentation-badge spotlight">Spotlight at MAR Workshop @ CVPR'25</span></p>
       <div class="publication-links">
         <a href="https://openreview.net/pdf?id=3AWEfUFSPe">Paper</a>
         <a href="https://webmmu-paper.github.io/">Website</a>
