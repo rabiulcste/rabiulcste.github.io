@@ -597,16 +597,102 @@ a:hover, a:focus {
     border-radius: 5px;
 }
 
-/* Popular posts */
-.popular-posts ul {
-    padding-left: 0;
-    margin-left: 0;
-    list-style-type: none;
-    line-height: 1.4;
+/* Workshop announcement */
+.workshop-announcement {
+    margin: 2rem 0;
 }
 
-.popular-posts li a {
-    font-size: 17px !important;
+.workshop-announcement * {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.workshop-content {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.workshop-logo {
+    flex: 0 0 200px;
+}
+
+.workshop-logo img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+    max-height: 200px;
+}
+
+.workshop-text {
+    flex: 1;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.workshop-text h3 {
+    margin: 0 0 0.3rem 0 !important;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.workshop-details {
+    margin: 0 0 0.8rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666666;
+}
+
+.workshop-description {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #1a1a1a;
+}
+
+.workshop-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 0.8rem;
+}
+
+.workshop-links a {
+    font-weight: 500;
+    font-size: 14px;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+    transition: border-color 0.2s;
+}
+
+.workshop-links a:hover {
+    border-bottom-color: #333;
+}
+
+/* Mobile responsive for workshop banner */
+@media (max-width: 768px) {
+    .workshop-content {
+        gap: 1.5rem;
+    }
+    
+    .workshop-logo {
+        flex: 0 0 180px;
+    }
+    
+    .workshop-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .workshop-details {
+        font-size: 0.9rem;
+    }
+    
+    .workshop-description {
+        font-size: 0.9rem;
+    }
 }
 
 /* Archive styles */

@@ -34,7 +34,7 @@
 </div>
 
 ## Research
-I’m driven to build AI systems that truly understand the physical world. My work centers on two fronts: learning deep visual representations, and developing generative world models, with a particular focus on diffusion and flow matching models. I’m fascinated by scaling foundation models and reinforcement learning to superhuman capabilities, and how these advances connect to the broader challenges of alignment and the profound economic shifts AI will bring.
+I'm driven to build AI systems that truly understand the physical world. My work centers on two fronts: learning deep visual representations, and developing generative world models, with a particular focus on diffusion and flow matching models. I'm fascinated by scaling foundation models and reinforcement learning to superhuman capabilities, and how these advances connect to the broader challenges of alignment and the profound economic shifts AI will bring.
 
 ## Highlighted Work
 See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en) for a full list of publications.
@@ -143,15 +143,21 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
 
 </div>
 
-## Blog
-My writings on how-to-cs-grad, ai research, and systematic issues in Bangladesh.
+## Announcement
 
-<div class="popular-posts">
-  <ul>
-      <li> <a href="https://rabiul.me/cs/2022/10/23/an-opinionated-guide-for-cs-undergrads/">An opinionated guide for CS undergrads</a> </li>
-      <li> <a href="https://rabiul.me/cs/2017/11/08/computer-science-for-you-or-not-words-for-nstuan/">Computer science for you or not?</a> </li>
-      <li> <a href="https://rabiul.me/cs/2019/01/30/software-engineering-job-hacking-as-a-fresh-graduate-nstu/">ফ্রেশার হিশেবে সফটওয়্যার ইঞ্জিনিয়ারিং চাকরি খোঁজাখুঁজির অভিজ্ঞতা</a> </li>
-      <li> <a href="https://rabiul.me/computation/2016/05/01/syntax-to-competitive-programming">সিনট্যাক্স টু কম্পিটিটিভ প্রোগ্রামিং জার্নি</a> </li>
-      <li> <a href="https://rabiul.me/cs/2018/10/29/public-university-research/">পাবলিক বিশ্ববিদ্যালয়ে গবেষণা সংকট প্রসঙ্গে</a> </li>
-  </ul>
+<div class="workshop-announcement">
+  <div class="workshop-content">
+    <div class="workshop-logo">
+      <img src="/img/world-model-workshop-mila-2026.jpeg" alt="World Modeling Workshop Logo" />
+    </div>
+    <div class="workshop-text">
+      <h3>World Modeling Workshop</h3>
+      <p class="workshop-details">February 4-6, 2026 • Mila, Montreal</p>
+      <p class="workshop-description">I'm co-organizing this workshop that brings together researchers working on world models, generative models, and their applications in AI systems.</p>
+      <div class="workshop-links">
+        <a href="https://x.com/worldmodel_26/status/1965431030799892634" target="_blank" rel="noopener noreferrer">Follow on X/Twitter</a>
+        <a href="https://world-model-mila.github.io/" target="_blank" rel="noopener noreferrer">Workshop Website</a>
+      </div>
+    </div>
+  </div>
 </div>
