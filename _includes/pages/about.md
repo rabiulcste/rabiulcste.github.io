@@ -1,42 +1,40 @@
 <div class="profile">
-<img src="{{ '/img/rabiul+profic.png' | prepend: site.baseurl }}" alt="Rabiul Awal Photo">
+    <img src="{{ '/img/rabiul+profic.png' | prepend: site.baseurl }}" alt="Rabiul Awal Photo">
+    <div class="profile-content">
+        <p>I'm a PhD student at <a href="https://mila.quebec/en/">Mila - Quebec AI Institute</a> and <a href="https://www.umontreal.ca/en/">University of Montreal</a> with <a href="https://www.iro.umontreal.ca/~agrawal/">Aishwarya Agrawal</a>. I was previously a visiting researcher at <a href="https://www.servicenow.com/research/people.html">ServiceNow Research</a>. I received an MSc in CS from <a href="https://www.cs.usask.ca/">University of Saskatchewan</a> and BSc in CS from <a href="https://nstu.edu.bd/">Noakhali Science and Technology University</a>.</p>
+        
+        <div class="social-links">
+            <div class="column column-22">
+                <a class="icons-sm git-ic" href="https://github.com/rabiulcste" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i> github
+                </a>
+            </div>
+            <div class="column column-22">
+                <a class="icons-sm twitter-ic" href="https://twitter.com/_rabiulawal" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-twitter"></i> twitter
+                </a>
+            </div>
+            <div class="column column-22">
+                <a class="icons-sm email-ic" href="mailto:awalrabiul6@gmail.com" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-envelope"></i> email
+                </a>
+            </div>
+            <div class="column column-22">
+                <a href="{{ site.baseurl }}/assets/rabiul_awal_resume.pdf" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-download"></i> cv
+                </a>
+            </div>
+            <div class="column column-12">
+                <a href="{{ site.baseurl }}/assets/bio.txt" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-file-alt"></i> bio
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
-
-I'm a PhD student at [Mila - Quebec AI Institute](https://mila.quebec/en/) and [University of Montreal](https://www.umontreal.ca/en/) with [Aishwarya Agrawal](https://www.iro.umontreal.ca/~agrawal/). I'm also a visiting researcher at Multimodal Foundation Models Team, [ServiceNow Research](https://www.servicenow.com/research/people.html) with [Sai Rajeswar](https://sairajeswar.com/).
-
-Prior to Mila, I received an MSc in CS from [University of Saskatchewan](https://www.cs.usask.ca/) and BSc in CS from [Noakhali Science and Technology University](https://nstu.edu.bd/).
-
-<div class="social-links">
-    <div class="column column-22">
-        <a class="icons-sm git-ic" href="https://github.com/rabiulcste" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github"></i> github
-        </a>
-    </div>
-    <div class="column column-22">
-        <a class="icons-sm twitter-ic" href="https://twitter.com/_rabiulawal" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-twitter"></i> twitter
-        </a>
-    </div>
-    <div class="column column-22">
-        <a class="icons-sm email-ic" href="mailto:awalrabiul6@gmail.com" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-envelope"></i> email
-        </a>
-    </div>
-    <div class="column column-22">
-        <a href="{{ site.baseurl }}/assets/rabiul_awal_resume.pdf" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-download"></i> cv
-        </a>
-    </div>
-    <div class="column column-12">
-        <a href="{{ site.baseurl }}/assets/bio.txt" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-alt"></i> bio
-        </a>
-    </div>
-</div>
-
 
 ## Research
-I’m driven to build AI systems that truly understand the physical world. My work centers on two fronts: learning deep visual representations, and developing generative world models, with a particular focus on Diffusion/Flow family of models. I’m fascinated by scaling foundation models and reinforcement learning to superhuman capabilities, and how these advances connect to the broader challenges of alignment and the profound economic shifts AI will bring.
+I’m driven to build AI systems that truly understand the physical world. My work centers on two fronts: learning deep visual representations, and developing generative world models, with a particular focus on diffusion and flow matching models. I’m fascinated by scaling foundation models and reinforcement learning to superhuman capabilities, and how these advances connect to the broader challenges of alignment and the profound economic shifts AI will bring.
 
 ## Highlighted Work
 See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en) for a full list of publications.
