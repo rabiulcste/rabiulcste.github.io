@@ -45,7 +45,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <p class="publication-title">The Promise of RL for Autoregressive Image Editing</p>
       <p class="publication-authors">Saba Ahmadi*, <strong>Rabiul Awal*</strong>, Ankur Sikarwar*, Amirhossein Kazemnejad*, Ge Ya Luo, Juan Rodriguez, Sai Rajeswar, Siva Reddy, Chris Pal, Benno Krojer, Aishwarya Agrawal</p>
-      <p class="publication-venue">Preprint </p>
+      <p class="publication-venue">NeurIPS'25</p>
       <div class="publication-links">
         <a href="https://www.arxiv.org/abs/2508.01119">Paper</a>
         <a href="https://x.com/_rabiulawal/status/1952769807767503181">Twitter</a>
@@ -60,7 +60,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <p class="publication-title">Rendering-Aware Reinforcement Learning for Vector Graphics Generation</p>
       <p class="publication-authors">Juan A. Rodriguez<sup>∗</sup>, Haotian Zhang<sup>∗</sup>, Abhay Puri, Aarash Feizi, Rishav Pramanik, Pascal Wichmann, Arnab Mondal, Mohammad Reza, <strong>Rabiul Awal</strong> + 6 others</p>
-      <p class="publication-venue">Preprint </p>
+      <p class="publication-venue">NeurIPS'25</p>
       <div class="publication-links">
         <a href="https://arxiv.org/abs/2505.20793">Paper</a>
         <a href="https://x.com/_akhaliq/status/1927787506424041780">Twitter</a>
@@ -73,7 +73,7 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
     <div class="publication-details">
       <p class="publication-title">WebMMU: A Benchmark for Multimodal Multilingual Website Understanding and Code Generation</p>
       <p class="publication-authors"><strong>Rabiul Awal</strong>, Mahsa Massoud, Aarash Feizi, Zichao Li + 9 others</p>
-      <p class="publication-venue">EMNLP'25 (Main)<span class="presentation-badge spotlight">Spotlight at MAR Workshop @ CVPR'25</span></p>
+      <p class="publication-venue">EMNLP'25 (Main)<span class="presentation-badge oral">Oral</span></p>
       <div class="publication-links">
         <a href="https://openreview.net/pdf?id=3AWEfUFSPe">Paper</a>
         <a href="https://webmmu-paper.github.io/">Website</a>
