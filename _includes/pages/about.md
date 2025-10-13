@@ -145,19 +145,15 @@ See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl
 
 ## Announcement
 
-<div class="workshop-announcement">
-  <div class="workshop-content">
-    <div class="workshop-logo">
-      <img src="/img/world-model-workshop-mila-2026.jpeg" alt="World Modeling Workshop Logo" />
-    </div>
-    <div class="workshop-text">
-      <h3>World Modeling Workshop</h3>
-      <p class="workshop-details">February 4-6, 2026 • Mila, Montreal</p>
-      <p class="workshop-description">I'm co-organizing this workshop that brings together researchers working on world models, generative models, and their applications in AI systems.</p>
-      <div class="workshop-links">
-        <a href="https://x.com/worldmodel_26/status/1965431030799892634" target="_blank" rel="noopener noreferrer">Follow on X/Twitter</a>
-        <a href="https://world-model-mila.github.io/" target="_blank" rel="noopener noreferrer">Workshop Website</a>
-      </div>
+<div class="announcement-banner">
+  <div class="announcement-badge">NEW</div>
+  <div class="announcement-content">
+    <h3>World Modeling Workshop</h3>
+    <p class="announcement-subtitle">February 4-6, 2026 • Mila, Montreal</p>
+    <p class="announcement-text">I'm co-organizing this workshop that brings together researchers working on world models, generative models, and their applications in AI systems.</p>
+    <div class="announcement-actions">
+      <a href="https://world-model-mila.github.io/" target="_blank" rel="noopener noreferrer" class="btn-primary">Workshop Website</a>
+      <a href="https://x.com/worldmodel_26/status/1965431030799892634" target="_blank" rel="noopener noreferrer" class="btn-secondary">Follow Updates</a>
     </div>
   </div>
 </div>
