@@ -34,7 +34,8 @@
 </div>
 
 ## Research
-I'm driven to build AI systems that truly understand the physical world. My work centers on two fronts: learning deep visual representations, and developing generative world models, with a particular focus on diffusion and flow matching models. I'm fascinated by scaling foundation models and reinforcement learning to superhuman capabilities, and how these advances connect to the broader challenges of alignment and the profound economic shifts AI will bring.
+
+I'm excited about physical AI. I work on diffusion and flow models for generation, representation learning, and control. Generative world models serve as a natural testbed for these ideas: they learn to capture the structure of physical reality through deep visual representations, and we can train policies directly in this imagined space. I'm also fascinated by scaling foundation models and reinforcement learning toward superhuman capabilities, and how these advances connect to alignment and the profound economic transformation that AI will bring.
 
 ## Highlighted Work
 See my [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en) for a full list of publications.
