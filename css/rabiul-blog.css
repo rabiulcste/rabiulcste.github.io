@@ -595,11 +595,11 @@ a:focus-visible {
 }
 
 .publication-image {
-    width: 20%;
-    aspect-ratio: 1;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
     object-fit: contain;
     border-radius: 6px;
-    height: auto !important;
     background: #fff;
 }
 
@@ -1157,7 +1157,9 @@ article {
     }
     
     .publication-image {
-        width: 25%;
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
     }
     
     /* Profile – stacked on small screens, keep left-aligned */
