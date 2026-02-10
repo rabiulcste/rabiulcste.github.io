@@ -1,9 +1,5 @@
 /* ===========================================================
- * sw.js
- * ===========================================================
- * Copyright 2016 @huxpro
- * Licensed under Apache 2.0
- * service worker scripting
+ * sw.js – service worker (precache, runtime cache, redirects)
  * ========================================================== */
 
 // CACHE_NAMESPACE
@@ -15,11 +11,10 @@ const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';
 const PRECACHE_LIST = [
   "./",
   "./js/jquery.min.js",
-  "./js/bootstrap.min.js",
   "./js/rabiul-blog.min.js",
   "./js/snackbar.js",
   "./css/rabiul-blog.min.css",
-  "./css/bootstrap.min.css"
+  "./css/bootstrap-grid.min.css"
 ]
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
@@ -63,13 +58,7 @@ const isNavigationReq = (req) => (req.mode === 'navigate' || (req.method === 'GE
 // P.S. An url.pathname has no '.' can not indicate it ends with extension (e.g. /api/version/1.2/)
 const endWithExtension = (req) => Boolean(new URL(req.url).pathname.match(/\.\w+$/))
 
-// Redirect in SW manually fixed github pages arbitray 404s on things?blah
-// what we want:
-//    repo?blah -> !(gh 404) -> sw 302 -> repo/?blah
-//    .ext?blah -> !(sw 302 -> .ext/?blah -> gh 404) -> .ext?blah
-// If It's a navigation req and it's url.pathname isn't end with '/' or '.ext'
-// it should be a dir/repo request and need to be fixed (a.k.a be redirected)
-// Tracking https://twitter.com/Huxpro/status/798816417097224193
+// Fix GitHub Pages 404s: nav requests to repo path without trailing slash get redirected.
 const shouldRedirect = (req) => (isNavigationReq(req) && new URL(req.url).pathname.substr(-1) !== "/" && !endWithExtension(req))
 
 // The Util Function to get redirect URL
@@ -108,7 +97,7 @@ self.addEventListener('install', e => {
  *  waitUntil(): activating ====> activated
  */
 self.addEventListener('activate', event => {
-  // delete old deprecated caches.
+  // Delete old cache names from previous versions.
   caches.keys().then(cacheNames => Promise.all(
     cacheNames
       .filter(cacheName => DEPRECATED_CACHES.includes(cacheName))
@@ -217,12 +206,9 @@ function sendMessageToAllClients(msg) {
 }
 
 /**
- * Broadcasting all clients async
+ * Broadcast message to all clients after a short delay (allow new client to attach).
  */
 function sendMessageToClientsAsync(msg) {
-  // waiting for new client alive with "async" setTimeout hacking
-  // https://twitter.com/Huxpro/status/799265578443751424
-  // https://jakearchibald.com/2016/service-worker-meeting-notes/#fetch-event-clients
   setTimeout(() => {
     sendMessageToAllClients(msg)
   }, 1000)

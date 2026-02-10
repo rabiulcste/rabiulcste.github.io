@@ -2,68 +2,54 @@
 layout: default
 ---
 
-<!-- Post Header -->
 {% include intro-header.html type='post' %}
 
-<!-- Post Content -->
 <article>
     <div class="container">
         <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-				{{ content }}
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 post-container">
+                {{ content }}
 
-                <hr style="visibility: hidden;">
-                <div class="pager">
+                <div class="post-end-spacer"></div>
+                <nav class="pager" aria-label="Post navigation">
                     {% if page.previous.url %}
-                    <div class="previous">
+                    <div class="pager-prev">
                         <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}">
-                        previous
-                        <span>{{ page.previous.title }}</span>
+                            <span class="pager-label">previous</span>
+                            <span class="pager-title">{{ page.previous.title }}</span>
                         </a>
                     </div>
                     {% else %}
-                    <div class="previous" style="visibility: hidden;"></div>
+                    <div class="pager-prev pager-placeholder" aria-hidden="true"></div>
                     {% endif %}
-                    
                     {% if page.next.url %}
-                    <div class="next">
+                    <div class="pager-next">
                         <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}">
-                        next
-                        <span>{{ page.next.title }}</span>
+                            <span class="pager-label">next</span>
+                            <span class="pager-title">{{ page.next.title }}</span>
                         </a>
                     </div>
                     {% else %}
-                    <div class="next" style="visibility: hidden;"></div>
+                    <div class="pager-next pager-placeholder" aria-hidden="true"></div>
                     {% endif %}
-                </div>
-                <hr style="visibility: hidden;">
+                </nav>
 
                 {% if site.disqus_username %}
                 <div class="comment">
                     <div id="disqus_thread" class="disqus-thread"></div>
                 </div>
                 {% endif %}
-            </div>  
+            </div>
 
-            <!-- Side Catalog Container -->
             {% unless page.no-catalog %}
-            <div class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container catalog-container">
-                <div class="side-catalog">
+            <div class="col-lg-2 offset-lg-0 visible-lg-block sidebar-container catalog-container">
+                <nav class="side-catalog" aria-label="On this page">
                     <hr class="hidden-sm hidden-xs">
-                    <h5>
-                        <a class="catalog-toggle" href="#">CATALOG</a>
-                    </h5>
-                    <ul class="catalog-body"></ul>
-                </div>
+                    <h5><a class="catalog-toggle" href="#catalog-body">Catalog</a></h5>
+                    <ul class="catalog-body" id="catalog-body" role="list"></ul>
+                </nav>
             </div>
             {% endunless %}
-
-            <!-- Sidebar Container -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container">
-                <!-- Featured Tags -->
-                {% include featured-tags.html bottom=true %}
-            </div>
         </div>
     </div>
 </article>
@@ -100,21 +86,8 @@ layout: default
 </script>
 <script>
     async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'right',
-        };
+        anchors.options = { visible: 'hover', placement: 'right' };
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
 </script>
-<style>
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
 {% endif %}

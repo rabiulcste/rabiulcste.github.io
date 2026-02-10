@@ -2,20 +2,16 @@
 <footer>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <!-- Copyright -->
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <p class="copyright text-muted">
-                    Feel free to use this website's <a href="https://github.com/rabiulcste/rabiulcste.github.io">source code</a>. 
-                    Made with ❤️ using <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://cursor.sh/">Cursor</a>
+                    © Rabiul Awal 2026. All rights reserved.
                 </p>
             </div>
         </div>
     </div>
 </footer>
 
-<!-- Core JavaScript -->
 <script src="{{ "/js/jquery.min.js" | prepend: site.baseurl }}"></script>
-<script src="{{ "/js/bootstrap.min.js" | prepend: site.baseurl }}"></script>
 <script src="{{ "/js/rabiul-blog.min.js" | prepend: site.baseurl }}"></script>
 
 <!-- Service Worker -->
@@ -37,54 +33,47 @@
 <script src='{{ "/js/archive.js" | prepend: site.baseurl }}'></script>
 {% endif %}
 
-<!-- FastClick -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
-        var $nav = document.querySelector("nav");
-        if ($nav) FastClick.attach($nav);
-    })
-</script>
-
-<!-- Side Catalog -->
-{% unless page.no-catalog %}
+<!-- Side Catalog (posts only) -->
+{% if page.layout == 'post' and page.no-catalog != true %}
 <script type="text/javascript">
-    function generateCatalog(selector) {
-        var P = $('div.post-container'), a, n, t, l, i, c;
-        a = P.find('h1,h2,h3,h4,h5,h6');
-        $(selector).html('');
-        
-        a.each(function () {
-            n = $(this).prop('tagName').toLowerCase();
-            i = "#" + $(this).prop('id');
-            t = $(this).text();
-            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
-            l = $('<li class="' + n + '_nav"></li>').append(c);
-            $(selector).append(l);
+    (function () {
+        var $container = $('div.post-container');
+        var $headings = $container.find('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
+        var $body = $('.catalog-body');
+        if ($headings.length === 0) {
+            $body.closest('.side-catalog').addClass('fold');
+            return;
+        }
+        $body.empty();
+        $headings.each(function () {
+            var tag = $(this).prop('tagName').toLowerCase();
+            var id = $(this).prop('id');
+            var text = $(this).text();
+            if (!id || !text) return;
+            var $a = $('<a href="#' + id + '" rel="nofollow" title="' + text.replace(/"/g, '&quot;') + '">' + text + '</a>');
+            var $li = $('<li class="' + tag + '_nav"></li>').append($a);
+            $body.append($li);
         });
-        return true;
-    }
-
-    generateCatalog(".catalog-body");
-
-    $(".catalog-toggle").click((function (e) {
-        e.preventDefault();
-        $('.side-catalog').toggleClass("fold")
-    }))
-
-    async("{{ '/js/jquery.nav.js' | prepend: site.baseurl }}", function () {
-        $('.catalog-body').onePageNav({
-            currentClass: "active",
-            changeHash: !1,
-            easing: "swing",
-            filter: "",
-            scrollSpeed: 700,
-            scrollOffset: 0,
-            scrollThreshold: .2,
-            begin: null,
-            end: null,
-            scrollChange: null,
-            padding: 80
+        $('.catalog-toggle').on('click', function (e) {
+            e.preventDefault();
+            $('.side-catalog').toggleClass('fold');
         });
-    });
+        var loadNav = function (url, fn) {
+            var $script = $('<script src="' + url + '"><\/script>');
+            $script.on('load', fn);
+            $('script').last().after($script);
+        };
+        loadNav("{{ '/js/jquery.nav.js' | prepend: site.baseurl }}", function () {
+            $('.catalog-body').onePageNav({
+                currentClass: 'active',
+                changeHash: false,
+                easing: 'swing',
+                scrollSpeed: 400,
+                scrollOffset: 0,
+                scrollThreshold: 0.2,
+                padding: 80
+            });
+        });
+    })();
 </script>
-{% endunless %}
+{% endif %}

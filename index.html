@@ -1,11 +1,38 @@
 ---
-layout: page
+layout: default
+title: About
 description: ""
 header-img: ""
+hide-title: true
 ---
 
-<div class="en post-container about-me">
-    {% capture about_en %}{% include pages/about.md %}{% endcapture %}
-    {{ about_en | markdownify }}
+{% include intro-header.html type='page' short=true %}
+
+<!-- About: profile + research (same column as below) -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 post-container about-content">
+            {% include pages/about-intro.html %}
+        </div>
+    </div>
 </div>
 
+<!-- Publications: edge-to-edge background, content in same grid -->
+<div class="publication-band">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                {% include pages/about-publications.html %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Academic service (same column) -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 post-container about-content">
+            {% include pages/about-service.html %}
+        </div>
+    </div>
+</div>
