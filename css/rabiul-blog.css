@@ -14,10 +14,10 @@
     --border-muted: #e9ecef;
     --content-link: #5b7c9a;
     --content-link-hover: #4a6b85;
-    /* Typography */
-    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-serif: Georgia, "Times New Roman", serif;
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    /* Typography (Inter primary; Georgia for meta; system mono for code) */
+    --font-sans: "Inter", system-ui, sans-serif;
+    --font-serif: Georgia, serif;
+    --font-mono: ui-monospace, monospace;
     /* Spacing scale (8px base: 4, 8, 12, 16, 24, 32, 48px) */
     --space-1: 0.25rem;
     --space-2: 0.5rem;
@@ -34,7 +34,7 @@
 body {
     font-family: var(--font-sans);
     line-height: 1.5;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
     letter-spacing: 0;
     color: var(--text);
@@ -64,6 +64,27 @@ h1, h2, h3, h4, h5, h6 {
 
 img::selection, img::-moz-selection {
     background: transparent;
+}
+
+/* Skip link (a11y: visible on focus) */
+.skip-link {
+    position: absolute;
+    top: var(--space-2);
+    left: var(--space-2);
+    z-index: 9999;
+    padding: var(--space-2) var(--space-3);
+    background: var(--text);
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--space-1);
+    transform: translateY(-120%);
+    transition: transform 0.2s;
+}
+.skip-link:focus {
+    transform: translateY(0);
+    outline: 2px solid var(--content-link);
+    outline-offset: 2px;
 }
 
 /* Utility classes */
@@ -135,18 +156,23 @@ a:focus {
     color: var(--content-link-hover);
 }
 
+a:focus-visible {
+    outline: 2px solid var(--content-link);
+    outline-offset: 2px;
+}
+
 /* ======================================
    NAVIGATION & HEADER
    ====================================== */
 
-/* Navbar */
+/* Navbar – scrolls with page, subtle separation */
 .navbar {
     position: relative;
     z-index: 1030;
     min-height: 56px;
     padding: var(--space-4) 0;
-    background-color: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .navbar .container {
@@ -160,13 +186,15 @@ a:focus {
     justify-content: space-between;
     width: 100%;
     padding: 0;
+    min-height: 1.5rem;
 }
 
 .navbar-brand,
 .nav-link {
     font-family: inherit;
-    font-size: 22px !important;
-    font-weight: 600 !important;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.2;
     color: var(--text) !important;
     padding: 0 !important;
     margin: 0;
@@ -184,18 +212,21 @@ a:focus {
     margin: 0;
     padding: 0;
     list-style: none;
+    line-height: 1.2;
 }
 
 .nav-item {
     margin: 0 0 0 1.5rem;
 }
 
-/* Intro header styles */
+/* Intro header styles – same top spacing on every page */
 .intro-header {
     background: no-repeat center center;
     background-attachment: scroll;
     background-size: cover;
+    margin-top: 0;
     margin-bottom: 0;
+    padding-top: var(--space-4);
     color: var(--text);
 }
 
@@ -203,14 +234,20 @@ a:focus {
     background: none;
 }
 
+/* When title is hidden (About, Archive), no extra gap – first content aligns with post’s first content */
 .intro-header.title-hidden {
     margin-bottom: var(--space-section);
+}
+
+/* Same gap from navbar to first content on every page (About/Archive use title-hidden + margin; post uses margin-top here) */
+.intro-header .post-heading {
+    margin-top: calc(var(--space-section) + var(--space-block));
 }
 
 .intro-header .site-heading,
 .intro-header .post-heading,
 .intro-header .page-heading {
-    padding: var(--space-4) 0 var(--space-block);
+    padding: 0 0 var(--space-block);
 }
 
 .intro-header .site-heading {
@@ -224,7 +261,7 @@ a:focus {
     margin: 0 0 0.75rem;
     color: var(--text);
     display: block;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.02em;
 }
 
 .intro-header .site-heading h1,
@@ -232,6 +269,7 @@ a:focus {
     font-size: 2rem;
     margin: 0;
     line-height: 1.2;
+    letter-spacing: -0.02em;
 }
 
 .intro-header .subheading {
@@ -255,6 +293,7 @@ a:focus {
     font-size: 1.75rem;
     margin: 0 0 var(--space-2);
     line-height: 1.25;
+    letter-spacing: -0.02em;
 }
 
 .intro-header .post-heading .subheading {
@@ -287,7 +326,7 @@ a:focus {
     padding: 0;
     font-weight: 600;
     font-size: 1.25rem;
-    letter-spacing: 0.02em;
+    letter-spacing: 0;
 }
 
 .post-container h3 {
@@ -1081,7 +1120,7 @@ article {
         padding: 0;
     }
     .navbar-brand {
-        font-size: 20px !important;
+        font-size: 1.125rem;
     }
     .navbar-nav {
         padding: 10px 0;
