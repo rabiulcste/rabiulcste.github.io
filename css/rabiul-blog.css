@@ -29,6 +29,9 @@
     /* Semantic spacing */
     --space-section: var(--space-6);  /* between major sections (e.g. after header) */
     --space-block: var(--space-4);   /* between related blocks (title, meta, first p) */
+    /* Publication list thumbnail – single place to tweak size */
+    --pub-thumb-size: 128px;
+    --pub-thumb-size-sm: 116px;
 }
 
 body {
@@ -594,13 +597,30 @@ a:focus-visible {
     margin: 0 !important;
 }
 
+/* Publication thumb: gradient + icon when no image, white when image exists */
 .publication-image {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
+    width: var(--pub-thumb-size);
+    height: var(--pub-thumb-size);
+    min-width: var(--pub-thumb-size);
+    flex-shrink: 0;
     object-fit: contain;
     border-radius: 6px;
+    background: linear-gradient(145deg, #f4f0fc 0%, #fcf0f6 45%, #fcf8f4 100%);
+}
+
+img.publication-image {
     background: #fff;
+}
+
+.publication-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.publication-image-placeholder i {
+    font-size: 2.1rem;
+    color: rgba(0, 0, 0, 0.12);
 }
 
 .publication-details {
@@ -628,12 +648,6 @@ a:focus-visible {
     margin-top: 1px !important; 
     font-size: 15px;
     line-height: 1.3;
-}
-
-/* Publication image placeholder when no thumbnail */
-.gradient-box {
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
-    border-radius: 5px;
 }
 
 /* Gradient text (e.g. “the era of experience”) */
@@ -1157,9 +1171,9 @@ article {
     }
     
     .publication-image {
-        width: 36px;
-        height: 36px;
-        min-width: 36px;
+        width: var(--pub-thumb-size-sm);
+        height: var(--pub-thumb-size-sm);
+        min-width: var(--pub-thumb-size-sm);
     }
     
     /* Profile – stacked on small screens, keep left-aligned */
