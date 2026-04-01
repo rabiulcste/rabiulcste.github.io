@@ -1,23 +1,18 @@
-<!-- Navigation – same centered column as main content -->
 <nav class="navbar">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <div class="navbar-wrapper">
-                    <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
-                    <ul class="navbar-nav">
-                        {% for page in site.pages %}
-                        {% if page.title and page.hide-in-nav != true %}
-                            {% unless page.url contains "/page" or page.url == "/" or page.url == "/index.html" %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-                                </li>
-                            {% endunless %}
-                        {% endif %}
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+    <div class="wrap">
+        <div class="navbar-wrapper">
+            <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
+            <ul class="navbar-nav">
+                {% for page in site.pages %}
+                {% if page.title and page.hide-in-nav != true %}
+                    {% unless page.url contains "/page" or page.url == "/" or page.url == "/index.html" %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+                        </li>
+                    {% endunless %}
+                {% endif %}
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </nav>

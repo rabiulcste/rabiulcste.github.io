@@ -3,35 +3,33 @@
     "title": "Rabiul Blog",
     "author": "Rabiul <rabiulawal6@gmail.com>",
     "version": "1.8.2",
-    "homepage": "http://rabiulcste.github.io",
+    "homepage": "https://rabiul.me",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Huxpro/huxpro.github.io.git"
+        "url": "git+https://github.com/rabiulcste/rabiulcste.github.io.git"
     },
     "bugs": {
-        "url": "https://github.com/Huxpro/huxpro.github.io/issues"
+        "url": "https://github.com/rabiulcste/rabiulcste.github.io/issues"
     },
     "devDependencies": {
         "grunt": "^1.6.1",
-        "grunt-banner": "~0.2.3",
-        "grunt-contrib-less": "^2.0.0",
-        "grunt-contrib-uglify": "^4.0.1",
-        "grunt-contrib-watch": "^1.1.0"
+        "grunt-contrib-cssmin": "^4.0.0",
+        "grunt-contrib-uglify": "^5.2.2",
+        "grunt-contrib-watch": "^1.1.0",
+        "sharp": "^0.34.1",
+        "svgo": "^4.0.0"
     },
     "scripts": {
         "start": "bundle exec jekyll serve -w -l --host 0.0.0.0",
+        "build:css": "grunt cssmin",
+        "build:js": "grunt uglify",
+        "build:images": "node scripts/optimize-images.mjs",
+        "build:assets": "grunt && npm run build:images",
         "dev": "grunt watch & npm run start",
         "boil": "git push boilerplate boilerplate:master",
         "push": "git push origin master --tag"
     },
-    "dependencies": {
-        "cssmin": "^0.4.3",
-        "grunt-contrib-cssmin": "^4.0.0",
-        "grunt-jekyll": "^1.0.1",
-        "jsmin": "^1.0.1",
-        "sass": "^1.45.1"
-    },
-    "description": "[Rabiul Blog](https://rabiul.me) ================================",
+    "description": "Personal site and blog at https://rabiul.me",
     "main": "Gruntfile.js",
     "keywords": [],
     "license": "ISC"

@@ -1,0 +1,6 @@
+{% comment %}stem: path under img/ without ext, e.g. papers/foo. ext: jpg|png{% endcomment %}
+{% assign _base = site.baseurl | append: '/img/' | append: include.stem %}
+<picture>
+    <source type="image/webp" srcset="{{ _base }}.webp">
+    <img src="{{ _base }}.{{ include.ext }}" alt="{{ include.alt }}" class="publication-image" width="128" height="128" loading="lazy" decoding="async">
+</picture>

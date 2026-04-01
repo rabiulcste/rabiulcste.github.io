@@ -14,8 +14,8 @@
     --border-muted: #e9ecef;
     --content-link: #5b7c9a;
     --content-link-hover: #4a6b85;
-    /* Typography (Inter primary; Georgia for meta; system mono for code) */
-    --font-sans: "Inter", system-ui, sans-serif;
+    /* System UI stack — no webfont request */
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-serif: Georgia, serif;
     --font-mono: ui-monospace, monospace;
     /* Spacing scale (8px base: 4, 8, 12, 16, 24, 32, 48px) */
@@ -90,6 +90,78 @@ img::selection, img::-moz-selection {
     outline-offset: 2px;
 }
 
+/* Centered content column (replaces Bootstrap ~8/12 + offset) */
+.wrap {
+    width: 100%;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+
+/* Post + sidebar TOC: wider shell, same article measure */
+.wrap.post-layout {
+    max-width: 1140px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0 1rem;
+}
+
+.post-layout .post-main {
+    flex: 0 1 760px;
+    max-width: 760px;
+    min-width: 0;
+}
+
+.post-layout .post-side {
+    flex: 0 0 12rem;
+}
+
+@media (max-width: 1200px) {
+    .wrap.post-layout {
+        display: block;
+        max-width: 760px;
+    }
+    .post-layout .post-main {
+        max-width: none;
+    }
+    .post-layout .post-side {
+        display: none;
+    }
+}
+
+/* Responsive 16:9 embed (replaces Bootstrap embed utilities) */
+.embed-responsive {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+.embed-responsive::before {
+    content: "";
+    display: block;
+    padding-top: 56.25%;
+}
+.embed-responsive-item,
+.embed-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.post-container :is(h1, h2, h3, h4, h5, h6) {
+    scroll-margin-top: 5rem;
+}
+
 /* Utility classes */
 .d-none {
     display: none !important;
@@ -97,11 +169,6 @@ img::selection, img::-moz-selection {
 
 .no-scroll {
     overflow-y: hidden;
-}
-
-.visible-lg-block { display: none; }
-@media (min-width: 992px) {
-    .visible-lg-block { display: block; }
 }
 
 /* Hide on small/medium (show from lg up). Used for catalog/tag section dividers. */
@@ -178,7 +245,7 @@ a:focus-visible {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.navbar .container {
+.navbar .wrap {
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -516,8 +583,8 @@ a:focus-visible {
     letter-spacing: normal;
 }
 
-.fa-twitter {
-    color: #1DA1F2;
+.social-links .twitter-ic .icon {
+    color: #1d9bf0;
 }
 
 .publication-title {
@@ -618,8 +685,9 @@ img.publication-image {
     justify-content: center;
 }
 
-.publication-image-placeholder i {
-    font-size: 2.1rem;
+.publication-image-placeholder .icon {
+    width: 2.1rem;
+    height: 2.1rem;
     color: rgba(0, 0, 0, 0.12);
 }
 
@@ -1021,6 +1089,11 @@ table {
     margin-top: 10px;
 }
 
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
 table.table > tbody > tr > th,
 table.table > tbody > tr > td,
 table.table > thead > tr > th,
@@ -1094,12 +1167,6 @@ article {
     }
     .post-preview .post-meta {
         font-size: 20px;
-    }
-}
-
-@media (max-width: 1200px) {
-    .side-catalog {
-        display: none;
     }
 }
 

@@ -10,11 +10,8 @@ const CACHE_NAMESPACE = 'main-'
 const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';
 const PRECACHE_LIST = [
   "./",
-  "./js/jquery.min.js",
-  "./js/rabiul-blog.min.js",
-  "./js/snackbar.js",
-  "./css/rabiul-blog.min.css",
-  "./css/bootstrap-grid.min.css"
+  "./js/site.min.js",
+  "./css/rabiul-blog.min.css"
 ]
 const HOSTNAME_WHITELIST = [
   self.location.hostname,

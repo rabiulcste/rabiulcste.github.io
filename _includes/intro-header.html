@@ -5,22 +5,17 @@
 
 {% if include.type == 'post' %}
 <header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        {% for tag in page.tags %}
-                        <a class="tag" href="{{ site.baseurl }}/archive/?tag={{ tag | url_encode }}" title="{{ tag }}">{{ tag }}</a>
-                        {% endfor %}
-                    </div>
-                    <h1>{{ page.title }}</h1>
-                    {% comment %} always create a h2 for keeping the margin {% endcomment %}
-                    <h2 class="subheading">{{ page.subtitle }}</h2>
-                    <span class="meta">by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %}
-                        on {{ page.date | date: "%B %-d, %Y" }}</span>
-                </div>
+    <div class="wrap">
+        <div class="post-heading">
+            <div class="tags">
+                {% for tag in page.tags %}
+                <a class="tag" href="{{ site.baseurl }}/archive/?tag={{ tag | url_encode }}" title="{{ tag }}">{{ tag }}</a>
+                {% endfor %}
             </div>
+            <h1>{{ page.title }}</h1>
+            <h2 class="subheading">{{ page.subtitle }}</h2>
+            <span class="meta">by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %}
+                on {{ page.date | date: "%B %-d, %Y" }}</span>
         </div>
     </div>
 </header>
@@ -28,30 +23,26 @@
 
 {% if include.type == 'page' %}
 <header class="intro-header {% if page.hide-title %}title-hidden{% endif %}">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                {% if include.short %}
-                <div class="site-heading" id="tag-heading">
-                    {% unless page.hide-title %}
-                    <h1 class="page-title">{% if page.title %}{{ page.title }}{% endif %}</h1>
-                    {% endunless %}
-                    {% if page.description %}
-                    <span class="subheading">{{ page.description }}</span>
-                    {% endif %}
-                </div>
-                {% else %}
-                <div class="site-heading">
-                    {% unless page.hide-title %}
-                    <h1 class="page-title">{% if page.title %}{{ page.title }}{% endif %}</h1>
-                    {% endunless %}
-                    {% if page.description %}
-                    <span class="subheading">{{ page.description }}</span>
-                    {% endif %}
-                </div>
-                {% endif %}
-            </div>
+    <div class="wrap">
+        {% if include.short %}
+        <div class="site-heading" id="tag-heading">
+            {% unless page.hide-title %}
+            <h1 class="page-title">{% if page.title %}{{ page.title }}{% endif %}</h1>
+            {% endunless %}
+            {% if page.description %}
+            <span class="subheading">{{ page.description }}</span>
+            {% endif %}
         </div>
+        {% else %}
+        <div class="site-heading">
+            {% unless page.hide-title %}
+            <h1 class="page-title">{% if page.title %}{{ page.title }}{% endif %}</h1>
+            {% endunless %}
+            {% if page.description %}
+            <span class="subheading">{{ page.description }}</span>
+            {% endif %}
+        </div>
+        {% endif %}
     </div>
 </header>
 {% endif %}

@@ -1,79 +1,10 @@
 <!-- Footer -->
 <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <p class="copyright text-muted">
-                    © Rabiul Awal 2026. All rights reserved.
-                </p>
-            </div>
-        </div>
+    <div class="wrap">
+        <p class="copyright text-muted">
+            © Rabiul Awal 2026. All rights reserved.
+        </p>
     </div>
 </footer>
 
-<script src="{{ "/js/jquery.min.js" | prepend: site.baseurl }}"></script>
-<script src="{{ "/js/rabiul-blog.min.js" | prepend: site.baseurl }}"></script>
-
-<!-- Service Worker -->
-{% if site.service-worker %}
-<script src="{{ "/js/snackbar.js" | prepend: site.baseurl }}"></script>
-{% endif %}
-
-<!-- Archive Page Scripts -->
-{% if page.title == 'Archive' %}
-<script src='{{ "/js/jquery.tagcloud.js" | prepend: site.baseurl }}'></script>
-<script>
-    async('{{ "/js/jquery.tagcloud.js" | prepend: site.baseurl }}', function () {
-        $.fn.tagcloud.defaults = {
-            color: { start: '#bbbbee', end: '#2f93b4' },
-        };
-        $('#tag_cloud a').tagcloud();
-    })
-</script>
-<script src='{{ "/js/archive.js" | prepend: site.baseurl }}'></script>
-{% endif %}
-
-<!-- Side Catalog (posts only) -->
-{% if page.layout == 'post' and page.no-catalog != true %}
-<script type="text/javascript">
-    (function () {
-        var $container = $('div.post-container');
-        var $headings = $container.find('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
-        var $body = $('.catalog-body');
-        if ($headings.length === 0) {
-            $body.closest('.side-catalog').addClass('fold');
-            return;
-        }
-        $body.empty();
-        $headings.each(function () {
-            var tag = $(this).prop('tagName').toLowerCase();
-            var id = $(this).prop('id');
-            var text = $(this).text();
-            if (!id || !text) return;
-            var $a = $('<a href="#' + id + '" rel="nofollow" title="' + text.replace(/"/g, '&quot;') + '">' + text + '</a>');
-            var $li = $('<li class="' + tag + '_nav"></li>').append($a);
-            $body.append($li);
-        });
-        $('.catalog-toggle').on('click', function (e) {
-            e.preventDefault();
-            $('.side-catalog').toggleClass('fold');
-        });
-        var loadNav = function (url, fn) {
-            var $script = $('<script src="' + url + '"><\/script>');
-            $script.on('load', fn);
-            $('script').last().after($script);
-        };
-        loadNav("{{ '/js/jquery.nav.js' | prepend: site.baseurl }}", function () {
-            $('.catalog-body').onePageNav({
-                currentClass: 'active',
-                changeHash: false,
-                easing: 'swing',
-                scrollSpeed: 400,
-                scrollOffset: 0,
-                scrollThreshold: 0.2,
-                padding: 80
-            });
-        });
-    })();
-</script>
-{% endif %}
+<script src="{{ "/js/site.min.js" | prepend: site.baseurl }}" defer></script>

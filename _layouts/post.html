@@ -5,71 +5,90 @@ layout: default
 {% include intro-header.html type='post' %}
 
 <article>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 post-container">
-                {{ content }}
+    <div class="wrap post-layout">
+        <div class="post-main post-container">
+            {{ content }}
 
-                <div class="post-end-spacer"></div>
-                <nav class="pager" aria-label="Post navigation">
-                    {% if page.previous.url %}
-                    <div class="pager-prev">
-                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}">
-                            <span class="pager-label">previous</span>
-                            <span class="pager-title">{{ page.previous.title }}</span>
-                        </a>
-                    </div>
-                    {% else %}
-                    <div class="pager-prev pager-placeholder" aria-hidden="true"></div>
-                    {% endif %}
-                    {% if page.next.url %}
-                    <div class="pager-next">
-                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}">
-                            <span class="pager-label">next</span>
-                            <span class="pager-title">{{ page.next.title }}</span>
-                        </a>
-                    </div>
-                    {% else %}
-                    <div class="pager-next pager-placeholder" aria-hidden="true"></div>
-                    {% endif %}
-                </nav>
-
-                {% if site.disqus_username %}
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
+            <div class="post-end-spacer"></div>
+            <nav class="pager" aria-label="Post navigation">
+                {% if page.previous.url %}
+                <div class="pager-prev">
+                    <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}">
+                        <span class="pager-label">previous</span>
+                        <span class="pager-title">{{ page.previous.title }}</span>
+                    </a>
                 </div>
+                {% else %}
+                <div class="pager-prev pager-placeholder" aria-hidden="true"></div>
                 {% endif %}
-            </div>
+                {% if page.next.url %}
+                <div class="pager-next">
+                    <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}">
+                        <span class="pager-label">next</span>
+                        <span class="pager-title">{{ page.next.title }}</span>
+                    </a>
+                </div>
+                {% else %}
+                <div class="pager-next pager-placeholder" aria-hidden="true"></div>
+                {% endif %}
+            </nav>
 
-            {% unless page.no-catalog %}
-            <div class="col-lg-2 offset-lg-0 visible-lg-block sidebar-container catalog-container">
-                <nav class="side-catalog" aria-label="On this page">
-                    <hr class="hidden-sm hidden-xs">
-                    <h5><a class="catalog-toggle" href="#catalog-body">Catalog</a></h5>
-                    <ul class="catalog-body" id="catalog-body" role="list"></ul>
-                </nav>
+            {% if site.disqus_username %}
+            <div class="comment">
+                <div id="disqus_thread" class="disqus-thread"></div>
             </div>
-            {% endunless %}
+            {% endif %}
         </div>
+
+        {% unless page.no-catalog %}
+        <aside class="post-side sidebar-container catalog-container">
+            <nav class="side-catalog" aria-label="On this page">
+                <hr class="hidden-sm hidden-xs">
+                <h5><a class="catalog-toggle" href="#catalog-body">Catalog</a></h5>
+                <ul class="catalog-body" id="catalog-body" role="list"></ul>
+            </nav>
+        </aside>
+        {% endunless %}
     </div>
 </article>
 
-<!-- Add support for mathjax -->
 {% if page.mathjax %}
   {% include mathjax_support.html %}
 {% endif %}
 
 {% if site.disqus_username %}
-<script type="text/javascript">
-    var disqus_shortname = "{{site.disqus_username}}";
-    var disqus_identifier = "{{page.id}}";
-    var disqus_url = "{{site.url}}{{page.url}}";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+<script>
+(function () {
+    var shortname = "{{ site.disqus_username }}";
+    var id = "{{ page.id }}";
+    var pageUrl = "{{ site.url }}{{ page.url }}";
+    var loaded = false;
+    function loadDisqus() {
+        if (loaded) return;
+        loaded = true;
+        window.disqus_shortname = shortname;
+        window.disqus_identifier = id;
+        window.disqus_url = pageUrl;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://' + shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', String(+new Date()));
+        (document.head || document.body).appendChild(s);
+    }
+    var el = document.getElementById('disqus_thread');
+    if (!el) return;
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            if (entries[0].isIntersecting) {
+                loadDisqus();
+                io.disconnect();
+            }
+        }, { rootMargin: '320px', threshold: 0.01 });
+        io.observe(el);
+    } else {
+        loadDisqus();
+    }
+})();
 </script>
 {% endif %}
 
