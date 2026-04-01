@@ -9,11 +9,12 @@
 :root {
     /* Colors */
     --text: #1a1a1a;
-    --text-muted: #666;
+    --text-muted: #595959;
     --bg-muted: #f8f9fa;
     --border-muted: #e9ecef;
-    --content-link: #5b7c9a;
-    --content-link-hover: #4a6b85;
+    /* WCAG AA: ≥4.5:1 on #fff and on --bg-muted for normal text */
+    --content-link: #1a4d6d;
+    --content-link-hover: #133a54;
     /* System UI stack — no webfont request */
     --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-serif: Georgia, serif;
@@ -579,19 +580,19 @@ a:focus-visible {
     flex-wrap: wrap;
 }
 
-.social-links > div > a {
-    color: var(--text-muted);
+.social-links a {
+    color: var(--content-link);
     font-size: 1rem;
     text-decoration: none;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     font-weight: 400;
     transition: color 0.2s, text-decoration 0.2s;
 }
 
-.social-links > div > a:hover {
-    color: #333;
-    border-bottom-color: #333;
+.social-links a:hover,
+.social-links a:focus {
+    color: var(--content-link-hover);
 }
 
 .social-links i {
@@ -612,7 +613,7 @@ a:focus-visible {
 }
 
 .social-links .twitter-ic .icon {
-    color: #1d9bf0;
+    color: currentColor;
 }
 
 .publication-title {
@@ -1306,12 +1307,12 @@ article {
 @media (max-width: 576px) {
     .profile { gap: 1rem; }
     .social-links { flex-wrap: wrap; gap: 0.8rem; }
-    .social-links > div > a { font-size: 0.95rem; }
+    .social-links a { font-size: 0.95rem; }
 }
 
 @media (max-width: 480px) {
     .social-links { gap: 0.6rem; }
-    .social-links > div > a { font-size: 0.9rem; }
+    .social-links a { font-size: 0.9rem; }
 }
 
 /* 404 Page */
