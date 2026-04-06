@@ -2,6 +2,7 @@
 layout: default
 title: About
 description: ""
+hide-in-nav: true
 header-img: ""
 hide-title: true
 ---
@@ -10,14 +11,6 @@ hide-title: true
 
 <div class="wrap post-container about-content">
     {% include pages/about-intro.html %}
-</div>
-
-<div class="publication-band">
-    <div class="wrap">
-        {% include pages/about-publications.html %}
-    </div>
-</div>
-
-<div class="wrap post-container about-content">
+    {% include pages/about-publications.html %}
     {% include pages/about-service.html %}
 </div>

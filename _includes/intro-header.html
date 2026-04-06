@@ -7,15 +7,9 @@
 <header class="intro-header">
     <div class="wrap">
         <div class="post-heading">
-            <div class="tags">
-                {% for tag in page.tags %}
-                <a class="tag" href="{{ site.baseurl }}/archive/?tag={{ tag | url_encode }}" title="{{ tag }}">{{ tag }}</a>
-                {% endfor %}
-            </div>
             <h1>{{ page.title }}</h1>
-            <h2 class="subheading">{{ page.subtitle }}</h2>
-            <span class="meta">by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %}
-                on {{ page.date | date: "%B %-d, %Y" }}</span>
+            {% if page.subtitle %}<h2 class="subheading">{{ page.subtitle }}</h2>{% endif %}
+            <span class="meta">{{ page.date | date: "%B %-d, %Y" }}{% if page.tags.size > 0 %} &middot; {% for tag in page.tags %}<a href="{{ site.baseurl }}/archive/?tag={{ tag | url_encode }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}</span>
         </div>
     </div>
 </header>
@@ -24,25 +18,14 @@
 {% if include.type == 'page' %}
 <header class="intro-header {% if page.hide-title %}title-hidden{% endif %}">
     <div class="wrap">
-        {% if include.short %}
-        <div class="site-heading" id="tag-heading">
+        <div class="site-heading"{% if include.short %} id="tag-heading"{% endif %}>
             {% unless page.hide-title %}
             <h1 class="page-title">{% if page.title %}{{ page.title }}{% endif %}</h1>
             {% endunless %}
-            {% if page.description %}
+            {% if page.description and page.description != "" %}
             <span class="subheading">{{ page.description }}</span>
             {% endif %}
         </div>
-        {% else %}
-        <div class="site-heading">
-            {% unless page.hide-title %}
-            <h1 class="page-title">{% if page.title %}{{ page.title }}{% endif %}</h1>
-            {% endunless %}
-            {% if page.description %}
-            <span class="subheading">{{ page.description }}</span>
-            {% endif %}
-        </div>
-        {% endif %}
     </div>
 </header>
 {% endif %}

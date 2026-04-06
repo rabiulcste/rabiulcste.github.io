@@ -29,34 +29,6 @@
     });
   }
 
-  function initTagCloud() {
-    var root = document.getElementById('tag_cloud');
-    if (!root) return;
-    var links = root.querySelectorAll('a.tag-button[rel]');
-    if (!links.length) return;
-    var weights = Array.prototype.map.call(links, function (a) {
-      return parseInt(a.getAttribute('rel'), 10) || 0;
-    }).sort(function (a, b) { return a - b; });
-    var low = weights[0];
-    var high = weights[weights.length - 1];
-    var range = high - low || 1;
-    var sizeStart = 14;
-    var sizeEnd = 18;
-    var fontIncr = (sizeEnd - sizeStart) / range;
-    var c0 = [0xbb, 0xbb, 0xee];
-    var c1 = [0x2f, 0x93, 0xb4];
-    var cIncr = c1.map(function (c, i) { return (c - c0[i]) / range; });
-    Array.prototype.forEach.call(links, function (a) {
-      var w = parseInt(a.getAttribute('rel'), 10) || low;
-      var t = w - low;
-      a.style.fontSize = (sizeStart + t * fontIncr) + 'pt';
-      var rgb = c0.map(function (c, i) {
-        return Math.max(0, Math.min(255, Math.round(c + cIncr[i] * t)));
-      });
-      a.style.backgroundColor = 'rgb(' + rgb.join(',') + ')';
-    });
-  }
-
   function tagFromQueryString() {
     var q = window.location.search.slice(1);
     var parts = q.split('&');
@@ -162,7 +134,6 @@
     });
 
     tagSelect(tagFromQueryString());
-    initTagCloud();
   }
 
   function initPostCatalog() {
@@ -237,9 +208,50 @@
     syncActive();
   }
 
+  function initDisqus() {
+    var cfg = window.__disqus;
+    if (!cfg) return;
+    var el = document.getElementById('disqus_thread');
+    if (!el) return;
+    var loaded = false;
+    function load() {
+      if (loaded) return;
+      loaded = true;
+      window.disqus_shortname = cfg.shortname;
+      window.disqus_identifier = cfg.id;
+      window.disqus_url = cfg.url;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://' + cfg.shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', String(+new Date()));
+      (document.head || document.body).appendChild(s);
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { load(); io.disconnect(); }
+      }, { rootMargin: '320px', threshold: 0.01 });
+      io.observe(el);
+    } else {
+      load();
+    }
+  }
+
+  function initAnchorJS() {
+    if (!window.__anchorjs) return;
+    var s = document.createElement('script');
+    s.src = '//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js';
+    s.addEventListener('load', function () {
+      anchors.options = { visible: 'hover', placement: 'right' };
+      anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    });
+    document.head.appendChild(s);
+  }
+
   onReady(function () {
     enhanceTablesAndEmbeds();
     initArchiveFilter();
     initPostCatalog();
+    initDisqus();
+    initAnchorJS();
   });
 })();
