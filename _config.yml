@@ -24,7 +24,7 @@ pagination:
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
 permalink: pretty
-exclude: ["less","node_modules","Gruntfile.js","package.json","package-lock.json","scripts","README.md","README.zh.md"]
+exclude: ["less","node_modules","Gruntfile.js","package.json","package-lock.json","scripts","README.md","README.zh.md","screenshots"]
 anchorjs: true
 
 # Gems
@@ -61,4 +61,4 @@ disqus_username: rabiul-me
 sidebar-avatar: https://github.com/rabiulcste.png
 
 # Progressive Web Apps
-chrome-tab-theme-color: "#000000"
+chrome-tab-theme-color: "#fbfbfd"

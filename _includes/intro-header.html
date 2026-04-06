@@ -18,7 +18,7 @@
 {% if include.type == 'page' %}
 <header class="intro-header {% if page.hide-title %}title-hidden{% endif %}">
     <div class="wrap">
-        <div class="site-heading"{% if include.short %} id="tag-heading"{% endif %}>
+        <div class="site-heading{% if page.hide-title %}{% unless page.description and page.description != "" %} site-heading--minimal{% endunless %}{% endif %}"{% if include.short %} id="tag-heading"{% endif %}>
             {% unless page.hide-title %}
             <h1 class="page-title">{% if page.title %}{{ page.title }}{% endif %}</h1>
             {% endunless %}

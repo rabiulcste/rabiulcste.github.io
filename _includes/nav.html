@@ -1,10 +1,23 @@
-<nav class="navbar">
-    <div class="wrap">
-        <div class="navbar-wrapper">
-            <div class="navbar-nav">
+{% assign nav_home = false %}
+{% if page.url == '/' or page.url == '/index.html' %}
+    {% assign nav_home = true %}
+{% endif %}
+<nav class="navbar {% if nav_home %}navbar--home{% else %}navbar--compact{% endif %}" aria-label="Site">
+    <div class="wrap navbar-inner">
+        {% if nav_home %}
+        <h1 class="navbar-brand navbar-brand--home">
+            <a href="{{ site.baseurl }}/">{{ site.title }}</a>
+        </h1>
+        {% else %}
+        <a class="navbar-brand navbar-brand--compact" href="{{ site.baseurl }}/">{{ site.title }}</a>
+        {% endif %}
+        <ul class="navbar-nav" role="list">
+            <li class="nav-item" role="listitem">
                 <a class="nav-link{% if page.url == '/' or page.url == '/index.html' %} active{% endif %}" href="{{ site.baseurl }}/">Home</a>
+            </li>
+            <li class="nav-item" role="listitem">
                 <a class="nav-link{% if page.url contains '/archive' %} active{% endif %}" href="{{ site.baseurl }}/archive/">Blog</a>
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
 </nav>

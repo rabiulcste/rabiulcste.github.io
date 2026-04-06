@@ -21,6 +21,7 @@
     },
     "scripts": {
         "start": "bundle exec jekyll serve -w -l --host 0.0.0.0",
+        "start:built": "npm run build:css && npm run build:js && bundle exec jekyll serve -w -l --host 0.0.0.0",
         "build:css": "grunt cssmin",
         "build:js": "grunt uglify",
         "build:images": "node scripts/optimize-images.mjs",

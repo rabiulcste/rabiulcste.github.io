@@ -7,4 +7,8 @@
     </div>
 </footer>
 
+{% if jekyll.environment == "development" %}
+<script src="{{ "/js/site.js" | prepend: site.baseurl }}" defer></script>
+{% else %}
 <script src="{{ "/js/site.min.js" | prepend: site.baseurl }}" defer></script>
+{% endif %}
