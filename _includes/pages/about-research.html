@@ -1,93 +1,92 @@
-<h2>Research</h2>
+<h2 id="research-heading">Research</h2>
 <p>The central question I work on: can a model learn to simulate the world well enough to act in it? We are entering <a href="https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf" class="gradient-text" target="_blank">the era of experience</a>, where the data that matters most is not human-labeled but agent-generated.</p>
 
 <p>My current research focuses on diffusion and flow models as world models. These models are expressive, but sampling from them is slow, which makes them nearly unusable for planning. I work on making them fast, temporally consistent, and structured enough to support a control loop. The adjacent question is representation: what does a model need to internalize about the world for its latent space to be useful for downstream decision-making?</p>
 
+<p class="research-note">A few deep-learning "recipes" I keep coming back to: the <a href="https://arxiv.org/abs/1312.5602" target="_blank" rel="noopener noreferrer"><em>target network</em></a> trick from RL, which later echoed through <a href="https://arxiv.org/abs/2006.07733" target="_blank" rel="noopener noreferrer">SSL</a> and <a href="https://arxiv.org/abs/2505.18825" target="_blank" rel="noopener noreferrer">flow-based models</a>; and <a href="https://arxiv.org/abs/2011.10566" target="_blank" rel="noopener noreferrer">asymmetric views</a> in self-supervised learning.</p>
+
 <p>See <a href="https://scholar.google.ca/citations?user=oOcLfUMAAAAJ&hl=en" target="_blank">Google Scholar</a> for a full list. <sup>*</sup>denotes equal contribution.</p>
 
-<div class="publication-list">
-  <div class="publication-item">
-    <div class="publication-image publication-image-placeholder" aria-hidden="true">{% include svg-icon.html name='robot' %}</div>
+<ul class="publication-list" aria-label="Selected publications">
+  <li class="publication-item">
     <div class="publication-details">
-      <p class="publication-title">Grounding Computer Use Agents on Human Demonstrations</p>
+      <p class="publication-title">Grounding Computer-Use Agents from Demonstrations</p>
       <p class="publication-authors">Aarash Feizi, Shravan Nayak, Xiangru Jian, Kevin Qinghong Lin, Kaixin Li, <strong>Rabiul Awal</strong> + 11 others</p>
       <p class="publication-venue">ICLR'26</p>
       <div class="publication-links">
-        <a href="https://arxiv.org/abs/2511.07332" target="_blank">Paper</a>
+        <a href="https://arxiv.org/abs/2511.07332" target="_blank" rel="noopener noreferrer">Paper</a>
       </div>
     </div>
-  </div>
-  <div class="publication-item">
-    <div class="publication-image publication-image-placeholder" aria-hidden="true">{% include svg-icon.html name='robot' %}</div>
+  </li>
+  <li class="publication-item">
     <div class="publication-details">
       <p class="publication-title">The Promise of RL for Autoregressive Image Editing</p>
       <p class="publication-authors">Saba Ahmadi*, <strong>Rabiul Awal*</strong>, Ankur Sikarwar*, Amirhossein Kazemnejad*, Ge Ya Luo, Juan Rodriguez, Sai Rajeswar, Siva Reddy, Chris Pal, Benno Krojer, Aishwarya Agrawal</p>
       <p class="publication-venue">NeurIPS'25</p>
       <div class="publication-links">
-        <a href="https://www.arxiv.org/abs/2508.01119" target="_blank">Paper</a>
-        <a href="https://x.com/_rabiulawal/status/1952769807767503181" target="_blank">Twitter</a>
+        <a href="https://www.arxiv.org/abs/2508.01119" target="_blank" rel="noopener noreferrer">Paper</a>
+        <a href="https://x.com/_rabiulawal/status/1952769807767503181" target="_blank" rel="noopener noreferrer">Twitter</a>
       </div>
     </div>
-  </div>
-  <div class="publication-item">
+  </li>
+  <li class="publication-item">
     {% include pub-thumb.html stem="papers/vgrl_thumb_25" ext="jpg" alt="Rendering-Aware RL" %}
     <div class="publication-details">
-      <p class="publication-title">Rendering-Aware Reinforcement Learning for Vector Graphics Generation</p>
+      <p class="publication-title">Rendering-Aware RL for Vector Graphics</p>
       <p class="publication-authors">Juan A. Rodriguez<sup>∗</sup>, Haotian Zhang<sup>∗</sup>, Abhay Puri, Aarash Feizi, Rishav Pramanik, Pascal Wichmann, Arnab Mondal, Mohammad Reza, <strong>Rabiul Awal</strong> + 6 others</p>
       <p class="publication-venue">NeurIPS'25</p>
       <div class="publication-links">
-        <a href="https://arxiv.org/abs/2505.20793" target="_blank">Paper</a>
-        <a href="https://x.com/_akhaliq/status/1927787506424041780" target="_blank">Twitter</a>
+        <a href="https://arxiv.org/abs/2505.20793" target="_blank" rel="noopener noreferrer">Paper</a>
+        <a href="https://x.com/_akhaliq/status/1927787506424041780" target="_blank" rel="noopener noreferrer">Twitter</a>
       </div>
     </div>
-  </div>
-  <div class="publication-item">
+  </li>
+  <li class="publication-item">
     {% include pub-thumb.html stem="papers/webmmu_thumb_25" ext="png" alt="WebMMU" %}
     <div class="publication-details">
-      <p class="publication-title">WebMMU: A Benchmark for Multimodal Multilingual Website Understanding and Code Generation</p>
+      <p class="publication-title">WebMMU: Multimodal Website Understanding &amp; Code</p>
       <p class="publication-authors"><strong>Rabiul Awal</strong>, Mahsa Massoud, Aarash Feizi, Zichao Li + 9 others</p>
       <p class="publication-venue">EMNLP'25 (Main)<span class="presentation-badge oral">Oral</span></p>
       <div class="publication-links">
-        <a href="https://arxiv.org/abs/2508.16763" target="_blank">Paper</a>
-        <a href="https://webmmu-paper.github.io/" target="_blank">Website</a>
+        <a href="https://arxiv.org/abs/2508.16763" target="_blank" rel="noopener noreferrer">Paper</a>
+        <a href="https://webmmu-paper.github.io/" target="_blank" rel="noopener noreferrer">Website</a>
       </div>
     </div>
-  </div>
-  <div class="publication-item">
+  </li>
+  <li class="publication-item">
     {% include pub-thumb.html stem="papers/ctrlo_thumb_24" ext="png" alt="CTRL-O" %}
     <div class="publication-details">
-      <p class="publication-title">CTRL-O: Language-Controllable Object-Centric Visual Representation Learning</p>
+      <p class="publication-title">CTRL-O: Language-Controllable Object-Centric Representations</p>
       <p class="publication-authors">Aniket Rajiv Didolkar*, Andrii Zadaianchuk*, <strong>Rabiul Awal</strong>*, Maximilian Seitzer, Efstratios Gavves, Aishwarya Agrawal</p>
       <p class="publication-venue">CVPR'25 <span class="presentation-badge spotlight">Spotlight at MAR Workshop @ CVPR'25</span></p>
       <div class="publication-links">
-        <a href="https://arxiv.org/abs/2503.21747" target="_blank">Paper</a>
-        <a href="https://ctrl-o-paper.github.io/" target="_blank">Website</a>
-        <a href="https://x.com/Aniket_d98/status/1894931395018928262" target="_blank">Twitter</a>
+        <a href="https://arxiv.org/abs/2503.21747" target="_blank" rel="noopener noreferrer">Paper</a>
+        <a href="https://ctrl-o-paper.github.io/" target="_blank" rel="noopener noreferrer">Website</a>
+        <a href="https://x.com/Aniket_d98/status/1894931395018928262" target="_blank" rel="noopener noreferrer">Twitter</a>
       </div>
     </div>
-  </div>
-  <div class="publication-item">
+  </li>
+  <li class="publication-item">
     {% include pub-thumb.html stem="papers/vismin_thumb_24" ext="png" alt="VisMin" %}
     <div class="publication-details">
       <p class="publication-title">VisMin: Visual Minimal-Change Understanding</p>
       <p class="publication-authors"><strong>Rabiul Awal</strong>*, Saba Ahmadi*, Le Zhang*, Aishwarya Agrawal</p>
       <p class="publication-venue">NeurIPS'24</p>
       <div class="publication-links">
-        <a href="https://arxiv.org/pdf/2407.16772" target="_blank">Paper</a>
-        <a href="https://vismin.net/" target="_blank">Website</a>
-        <a href="https://github.com/rabiulcste/vismin" target="_blank">Code</a>
+        <a href="https://arxiv.org/pdf/2407.16772" target="_blank" rel="noopener noreferrer">Paper</a>
+        <a href="https://vismin.net/" target="_blank" rel="noopener noreferrer">Website</a>
+        <a href="https://github.com/rabiulcste/vismin" target="_blank" rel="noopener noreferrer">Code</a>
       </div>
     </div>
-  </div>
-  <div class="publication-item">
-    <div class="publication-image publication-image-placeholder" aria-hidden="true">{% include svg-icon.html name='robot' %}</div>
+  </li>
+  <li class="publication-item">
     <div class="publication-details">
-      <p class="publication-title">Contrasting Intra-Modal and Ranking Cross-Modal Hard Negatives to Enhance Visio-Linguistic Compositional Understanding</p>
+      <p class="publication-title">Hard Negatives for Visio-Linguistic Compositionality</p>
       <p class="publication-authors">Le Zhang, <strong>Rabiul Awal</strong>, Aishwarya Agrawal</p>
       <p class="publication-venue">CVPR'24</p>
       <div class="publication-links">
-        <a href="https://openaccess.thecvf.com/content/CVPR2024/html/Zhang_Contrasting_Intra-Modal_and_Ranking_Cross-Modal_Hard_Negatives_to_Enhance_Visio-Linguistic_CVPR_2024_paper.html" target="_blank">Paper</a>
+        <a href="https://openaccess.thecvf.com/content/CVPR2024/html/Zhang_Contrasting_Intra-Modal_and_Ranking_Cross-Modal_Hard_Negatives_to_Enhance_Visio-Linguistic_CVPR_2024_paper.html" target="_blank" rel="noopener noreferrer">Paper</a>
       </div>
     </div>
-  </div>
-</div>
+  </li>
+</ul>
