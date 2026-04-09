@@ -27,6 +27,8 @@
     --navbar-bg: rgba(251, 251, 253, 0.72);
     --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
     --duration: 0.2s;
+    --accent: #2563eb;
+    --accent-muted: rgba(37, 99, 235, 0.08);
     --content-link: #1d1d1f;
     --content-link-hover: #0a0a0a;
     --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -142,7 +144,7 @@ h4, h5, h6 {
     letter-spacing: var(--track-normal);
 }
 
-::selection, ::-moz-selection { color: #fff; background: rgba(29, 29, 31, 0.82); }
+::selection, ::-moz-selection { color: #fff; background: rgba(29, 29, 31, 0.75); }
 img::selection, img::-moz-selection { background: transparent; }
 
 code, kbd, pre, samp {
@@ -379,9 +381,23 @@ main {
     letter-spacing: var(--track-normal);
     color: var(--text-muted);
     transition: color var(--duration) var(--ease-standard);
+    position: relative;
 }
 .nav-link:hover { color: var(--text); }
-.nav-link.active { color: var(--text); font-weight: 500; }
+.nav-link.active {
+    color: var(--text);
+    font-weight: 500;
+}
+.nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 1.5px;
+    background: var(--text);
+    border-radius: 1px;
+}
 
 .navbar-nav {
     display: flex;
@@ -715,7 +731,8 @@ main {
     text-decoration: none;
     cursor: pointer;
     transition: background var(--duration) var(--ease-standard),
-        color var(--duration) var(--ease-standard);
+        color var(--duration) var(--ease-standard),
+        transform var(--duration) var(--ease-standard);
 }
 #tag_cloud a:hover,
 .tag-button:hover,
@@ -723,9 +740,10 @@ main {
 .tags a:hover,
 .tags .tag:hover,
 .archive-tags a:hover {
-    background: rgba(29, 29, 31, 0.09);
+    background: rgba(29, 29, 31, 0.11);
     color: var(--text);
     text-decoration: none;
+    transform: translateY(-1px);
 }
 
 .tag-button--all,
@@ -758,10 +776,14 @@ main {
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    transition: color var(--duration) var(--ease-standard);
+    transition: color var(--duration) var(--ease-standard),
+        transform var(--duration) var(--ease-standard);
 }
 .social-links a:hover,
-.social-links a:focus { color: var(--text); }
+.social-links a:focus {
+    color: var(--text);
+    transform: translateY(-1px);
+}
 .social-links i {
     margin-right: 0.08em;
     font-size: 1.1em;
@@ -827,8 +849,9 @@ main {
     margin-top: 0;
 }
 
-/* About: publication + service lists share rail + stack */
+/* About: publication, talks, service lists share rail + stack */
 .about-content .publication-list,
+.about-content .talk-list,
 .about-content .service-list {
     margin-top: var(--space-5);
     padding: 0 0 0 var(--space-4);
@@ -841,19 +864,42 @@ main {
 }
 
 .publication-list,
+.talk-list,
 .service-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-3);
 }
 
+/* Publications: flex so an optional leading thumb can sit beside .publication-details */
 .publication-item {
     display: flex;
+    flex-wrap: nowrap;
     align-items: flex-start;
     gap: 0.65rem;
     margin: 0;
     padding: 0;
     list-style: none;
+}
+
+/* Talks & service: inline flow — meta follows title continuously. */
+.talk-item,
+.service-item {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.talk-item .about-list-body,
+.service-item .about-list-body {
+    display: inline;
+    min-width: 0;
+}
+
+.talk-item .about-list-aside,
+.service-item .about-list-aside {
+    display: inline;
 }
 
 .publication-item h3,
@@ -880,10 +926,30 @@ main {
 }
 
 .publication-details {
-    flex: 1;
+    flex: 1 1 0;
     min-width: 0;
     padding: 0;
     padding-top: 0.05rem;
+}
+
+.about-list-body {
+    padding: 0;
+    padding-top: 0.05rem;
+}
+
+.about-list-aside {
+    padding: 0;
+    padding-top: 0.05rem;
+    box-sizing: border-box;
+}
+
+/* One atomic unit in the grid’s second column — avoids role/year splitting across title wrap lines */
+.aside-cluster {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    gap: 0.65rem;
+    white-space: nowrap;
 }
 
 .publication-details > :first-child {
@@ -894,22 +960,16 @@ main {
     margin: 0;
 }
 
-.publication-title,
-.service-title-line .service-title {
+.publication-title {
     font-size: var(--text-subtitle);
     font-weight: 500;
     line-height: 1.38;
     letter-spacing: var(--track-normal);
     color: var(--text);
-}
-
-.publication-title,
-.service-title-line {
     margin: 0 0 0.2rem;
 }
 
-.publication-authors,
-.service-meta {
+.publication-authors {
     font-size: var(--text-caption);
     line-height: 1.5;
     letter-spacing: var(--track-normal);
@@ -918,11 +978,6 @@ main {
 .publication-authors {
     color: var(--text-muted);
     margin: 0 0 0.12rem;
-}
-
-.service-meta {
-    margin: 0;
-    color: var(--text-muted);
 }
 
 .publication-venue {
@@ -958,11 +1013,16 @@ main {
     color: var(--text-muted);
     text-decoration: none;
     letter-spacing: var(--track-normal);
-    transition: color var(--duration) var(--ease-standard);
+    transition: color var(--duration) var(--ease-standard),
+        text-decoration-color var(--duration) var(--ease-standard);
 }
 
 .publication-links a:hover {
     color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 0.14em;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--border-muted);
 }
 
 .publication-list .presentation-badge {
@@ -998,12 +1058,41 @@ main {
     filter: brightness(1.07) saturate(1.1);
 }
 
-/* Academic service — link + role accent only */
-.service-item {
-    margin: 0;
-    max-width: var(--prose-measure);
+.talk-item .talk-title,
+.service-item .service-title {
+    font-size: var(--text-subtitle);
+    font-weight: 500;
+    line-height: 1.38;
+    letter-spacing: var(--track-normal);
+    color: var(--text);
 }
 
+.talk-item .talk-meta {
+    font-size: var(--text-caption);
+    line-height: 1.45;
+    letter-spacing: var(--track-normal);
+    color: var(--text-muted);
+}
+
+.talk-item .aside-cluster a {
+    font-size: var(--text-caption);
+    font-weight: 400;
+    color: var(--content-link);
+    text-decoration: underline;
+    text-decoration-color: var(--border-muted);
+    text-underline-offset: 0.14em;
+    text-decoration-thickness: 1px;
+    letter-spacing: var(--track-normal);
+    transition: color var(--duration) var(--ease-standard),
+        text-decoration-color var(--duration) var(--ease-standard);
+}
+
+.talk-item .aside-cluster a:hover {
+    color: var(--content-link-hover);
+    text-decoration-color: var(--text);
+}
+
+/* Academic service — linked title uses content link color */
 .service-item a.service-title {
     color: var(--content-link);
     text-decoration: none;
@@ -1014,8 +1103,19 @@ main {
     color: var(--content-link-hover);
 }
 
-.service-role {
+.service-item .service-role,
+.service-item .service-detail {
+    font-size: var(--text-caption);
+    line-height: 1.45;
+    letter-spacing: var(--track-normal);
+}
+
+.service-item .service-role {
     color: var(--text);
+}
+
+.service-item .service-detail {
+    color: var(--text-muted);
 }
 
 /* Profile — name lives in navbar on home; photo + bio only */
@@ -1041,8 +1141,9 @@ main {
     height: 112px;
     object-fit: cover;
     object-position: center 18%;
-    border-radius: 6px;
+    border-radius: var(--radius-soft);
     border: 1px solid var(--border-hairline);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
     box-sizing: border-box;
 }
 .profile-bio {
@@ -1196,7 +1297,7 @@ table.table > thead > tr > td {
 footer {
     font-size: var(--text-body);
     line-height: var(--leading-body);
-    padding: var(--space-8) 0;
+    padding: var(--space-6) 0;
     margin-top: var(--space-6);
     border-top: 1px solid var(--border-hairline);
     background-color: var(--bg-page);
@@ -1206,8 +1307,7 @@ footer .copyright {
     font-size: var(--text-caption);
     letter-spacing: var(--track-ui);
     color: var(--text-muted);
-    text-align: left;
-    margin-bottom: 0;
+    margin: 0;
 }
 
 /* ======================================
@@ -1290,7 +1390,7 @@ footer .copyright {
     .post-container h5 { font-size: var(--text-small); }
     .post-container h6 { font-size: var(--text-caption); }
 
-    .post-container ul:not(.service-list):not(.publication-list),
+    .post-container ul:not(.service-list):not(.publication-list):not(.talk-list),
     .post-container ol { padding-left: 1.25rem; }
     .table-responsive { border: 0; }
 
@@ -1370,10 +1470,21 @@ footer .copyright {
     .tags a,
     .archive-tags a,
     .publication-links a,
+    .talk-item .aside-cluster a,
     .service-item a.service-title,
     .archive-item a,
     .pager a,
     .gradient-text {
         transition-duration: 0.01ms;
+    }
+    #tag_cloud a,
+    .tag-button,
+    .tag-button--all,
+    .tags a,
+    .tags .tag,
+    .archive-tags a,
+    .social-links a {
+        transition-duration: 0.01ms;
+        transform: none !important;
     }
 }
