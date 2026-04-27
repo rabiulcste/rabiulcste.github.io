@@ -76,17 +76,17 @@
     --space-publication-band-top: 1.5rem;
     --pub-thumb-size: 88px;
     --pub-thumb-size-sm: 80px;
-    --wrap-max: 720px;
+    --wrap-max: 680px;
     /* ~62–70 characters per line for body copy */
     --prose-measure: 40rem;
     --post-toc-width: 12rem;
     --post-layout-gap: 1rem;
 }
 
-@media (min-width: 640px)  { :root { --wrap-max: 760px; } }
-@media (min-width: 1024px) { :root { --wrap-max: 840px; } }
-@media (min-width: 1280px) { :root { --wrap-max: 920px; } }
-@media (min-width: 1536px) { :root { --wrap-max: 960px; } }
+@media (min-width: 640px)  { :root { --wrap-max: 720px; } }
+@media (min-width: 1024px) { :root { --wrap-max: 760px; } }
+@media (min-width: 1280px) { :root { --wrap-max: 800px; } }
+@media (min-width: 1536px) { :root { --wrap-max: 800px; } }
 
 /* ======================================
    BASE

@@ -11,12 +11,95 @@ tag: [machine-learning, generative-models, diffusion]
 ---
 
 <style>
-.eq {
-  background: #f5f5f5;
-  padding: 14px 20px;
-  border-radius: 8px;
+:root {
+  --fig-paper:    #faf6ec;
+  --fig-panel:    #f3ede0;
+  --fig-frame:    #d8d0bd;
+  --fig-ink:      #3a3833;
+  --fig-ink-soft: #6a6660;
+  --fig-ink-mute: #a8a298;
+  --fig-blue:     #6b8caf;
+  --fig-sage:     #8fa68a;
+  --fig-amber:    #c89060;
+  --fig-rose:     #c66c5e;
+  --fig-plum:     #997aa8;
+  --fig-ochre:    #c9a35c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fig-paper:    #1c1c20;
+    --fig-panel:    #25252b;
+    --fig-frame:    #3a3a40;
+    --fig-ink:      #d8d4cc;
+    --fig-ink-soft: #989288;
+    --fig-ink-mute: #6a6660;
+    --fig-blue:     #87a4c2;
+    --fig-sage:     #a6bba0;
+    --fig-amber:    #d8a578;
+    --fig-rose:     #d68478;
+    --fig-plum:     #ad95bb;
+    --fig-ochre:    #d4b574;
+  }
+}
+.fig-card {
+  background: var(--fig-paper);
+  border: 1px solid var(--fig-frame);
+  border-radius: 10px;
+  padding: 18px 18px 14px;
   margin: 1.4rem 0 0.4rem;
-  border: 0.5px solid #e0e0e0;
+  position: relative;
+}
+.fig-card-title {
+  font-family: "Iowan Old Style", "Charter", Georgia, serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fig-ink-soft);
+  text-align: center;
+  letter-spacing: 0.01em;
+  margin: 0 0 10px;
+}
+.fig-card-inner {
+  background: var(--fig-panel);
+  border-radius: 6px;
+  padding: 14px;
+}
+.fig-card svg, .fig-card canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.fig-card figcaption,
+figure.fig-card > figcaption {
+  font-size: 13px;
+  color: var(--fig-ink-soft);
+  line-height: 1.6;
+  margin: 10px 4px 0;
+  font-style: italic;
+}
+.fig-paper {
+  margin: 1.4rem 0 0.4rem;
+}
+.fig-paper-title {
+  font-family: "Iowan Old Style", "Charter", Georgia, serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fig-ink-mute);
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.fig-paper img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.fig-paper > figcaption,
+figure.fig-paper > figcaption {
+  font-size: 13px;
+  color: var(--fig-ink-soft);
+  line-height: 1.6;
+  margin: 10px 4px 0;
+  font-style: italic;
+}
+.eq {
+  margin: 1.2rem 0 0.3rem;
   overflow-x: auto;
   text-align: center;
 }
@@ -48,18 +131,88 @@ tag: [machine-learning, generative-models, diffusion]
 @media (max-width: 540px) {
   #unifiedGrid { grid-template-columns: repeat(2, 1fr) !important; }
 }
+.trajectory-sketch {
+  background: #f5f5f5;
+  padding: 14px 20px;
+  border-radius: 8px;
+  margin: 1rem 0 0.4rem;
+  border: 0.5px solid #e0e0e0;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #333;
+}
+.trajectory-sketch pre {
+  margin: 0;
+  white-space: pre;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
 @media (prefers-color-scheme: dark) {
-  .eq { background: #252525; border-color: #333; color: #e0e0e0; }
   .eq .MathJax, .eq .MathJax_Display, .eq .MathJax svg { color: #e0e0e0 !important; fill: #e0e0e0 !important; }
   .eq-label { color: #666; }
   .callout { background: #222; border-color: #444; color: #aaa; }
   .interactive-box { border-color: #333; }
   #unifiedDetail { background: #252525 !important; color: #b0b0b0 !important; }
+  .trajectory-sketch { background: #252525; border-color: #333; color: #c8c8c8; }
 }
 .ref-list { font-size: 13px; color: #888; padding-left: 1.4rem; }
 .ref-list li { margin-bottom: 0.35rem; line-height: 1.5; }
-sup.cite a { color: #5599cc; text-decoration: none; font-size: 11px; vertical-align: super; }
+sup.cite a { color: var(--fig-blue); text-decoration: none; font-size: 11px; vertical-align: super; }
 sup.cite a:hover { text-decoration: underline; }
+.post-table-wrap { overflow-x: auto; margin: 1.4rem 0 1.6rem; }
+.post-table {
+  border-collapse: collapse;
+  font-size: 14px;
+  width: 100%;
+  min-width: 480px;
+  line-height: 1.55;
+  border-top: 1.5px solid #1d1d1f;
+  border-bottom: 1.5px solid #1d1d1f;
+}
+.post-table th {
+  text-align: left;
+  padding: 10px 14px 8px;
+  font-weight: 600;
+  color: #1d1d1f !important;
+  border-bottom: 1px solid #1d1d1f;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.post-table th.center, .post-table td.center { text-align: center; }
+.post-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #d8d4cc;
+  color: #1d1d1f !important;
+  vertical-align: top;
+}
+.post-table td.muted, .post-table .muted { color: #6a6660; }
+.post-table td.good { color: #1d1d1f; font-weight: 500; }
+.post-table td.label { color: #1d1d1f; font-weight: 600; }
+.post-table tr:last-child td { border-bottom: none; }
+.post-table-note { font-size: 12px; color: #6a6660; margin: 8px 2px 0; font-style: italic; }
+.post-table code {
+  background: transparent;
+  padding: 0;
+  border: 0;
+  font-size: 13px;
+  color: #1d1d1f;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  white-space: nowrap;
+}
+@media (prefers-color-scheme: dark) {
+  .post-table { border-top-color: #f0ece4; border-bottom-color: #f0ece4; }
+  .post-table th { color: #f0ece4; border-bottom-color: #f0ece4; }
+  .post-table td { color: #f0ece4; border-bottom-color: #4a4a50; }
+  .post-table td.muted, .post-table .muted { color: #989288; }
+  .post-table td.good, .post-table td.label { color: #f0ece4; }
+  .post-table-note { color: #989288; }
+  .post-table code { color: #f0ece4; }
+}
 </style>
 
 I have been spending a lot of time on one-step generative models, specifically MeanFlow and the broader family it belongs to. This is my attempt to build an honest mental model of how these methods work, where the math comes from, and how each one is a response to the limitations of the one before it.
@@ -70,40 +223,61 @@ Starting from the goal and working backwards: what does a network need to learn 
 
 ---
 
-## The trajectory picture
+## Generation as transport
 
-Every method in this family starts from the same setup. You define a *trajectory* through image space: a path from pure noise at time $t=1$ to clean data at time $t=0$. This is the probability flow ODE (PF-ODE), a deterministic path with the same marginal distributions at each time $t$ as the stochastic diffusion process but without the randomness. You can run it forwards or backwards exactly. Think of probability mass as a fluid, like shampoo bubbles slowly changing shape. The PF-ODE is the velocity field that moves each bubble without tearing it apart or compressing it; the density is preserved, just the shape changes. A point $z_t$ on a trajectory is one particle of that fluid at time $t$.
+Generating a sample is moving probability mass from a noise distribution to the data distribution, and every method in this family is a different way to learn that movement. They all share the same setup: a *trajectory* through image space, a path from pure noise at time $t=1$ to clean data at time $t=0$. This is the probability flow ODE (PF-ODE), a deterministic path that shares the same marginal distributions at each time $t$ as the stochastic diffusion process but without the randomness. You can run it forwards or backwards exactly.
 
-The closer $t$ is to 1, the noisier the particle. The bubble is still spread out, not yet shaped like a real image. The PF-ODE tells you how fast and in which direction to move to stay on the trajectory. Standard diffusion and flow models learn to estimate this velocity locally and integrate it step by step from noise to data.
+Think of a soap bubble. Press it slowly and the surface deforms; every point on the film follows a smooth, deterministic path. Release the pressure and it snaps back along the exact same path, not an approximation. The PF-ODE is that elastic surface in probability space: a deterministic velocity field that moves every point from noise to data (or back) along a reversible path, with no randomness. A point $z_t$ on a trajectory is one spot on that surface at time $t$.
 
-<figure>
-<svg width="100%" viewBox="0 0 680 210" role="img">
+The closer $t$ is to 1, the more spread out and featureless the point. The PF-ODE tells you how fast and in which direction to move to stay on the trajectory, and standard diffusion and flow models learn to estimate this velocity locally and integrate it step by step from noise to data.
+
+<figure class="fig-card">
+<div class="fig-card-title">PF-ODE trajectory</div>
+<div class="fig-card-inner">
+<svg viewBox="0 0 680 210" role="img" style="font-family:'Iowan Old Style',Charter,Georgia,serif;">
 <title>A PF-ODE trajectory from noise to data</title>
-<desc>A curved path from a diffuse noise cloud on the left to a structured data cluster on the right, with three intermediate points. The path is labeled as the PF-ODE trajectory.</desc>
-<defs><marker id="ar1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-<ellipse cx="100" cy="105" rx="64" ry="64" fill="none" stroke="#ddd" stroke-width="0.5" stroke-dasharray="3 4"/>
-<ellipse cx="100" cy="105" rx="40" ry="40" fill="none" stroke="#ddd" stroke-width="0.5" stroke-dasharray="2 4"/>
-<circle cx="82" cy="90" r="3" fill="#ddd"/>
-<circle cx="114" cy="100" r="3" fill="#ddd"/>
-<circle cx="92" cy="122" r="3" fill="#ddd"/>
-<circle cx="120" cy="84" r="3" fill="#ddd"/>
-<circle cx="76" cy="116" r="3" fill="#ddd"/>
-<text style="font-size:12px;fill:#aaa" x="100" y="190" text-anchor="middle">noise  t=1</text>
-<ellipse cx="570" cy="105" rx="46" ry="46" fill="none" stroke="#5599cc" stroke-width="0.5" stroke-dasharray="3 4"/>
-<ellipse cx="570" cy="105" rx="26" ry="26" fill="none" stroke="#5599cc" stroke-width="0.5"/>
-<circle cx="560" cy="98" r="4" fill="#d6e8f7" stroke="#5599cc" stroke-width="1"/>
-<circle cx="580" cy="110" r="4" fill="#d6e8f7" stroke="#5599cc" stroke-width="1"/>
-<circle cx="558" cy="118" r="4" fill="#d6e8f7" stroke="#5599cc" stroke-width="1"/>
-<text style="font-size:12px;fill:#5599cc" x="570" y="190" text-anchor="middle">data  t=0</text>
-<path d="M 158 105 C 210 80, 290 128, 348 102 C 405 76, 462 120, 522 105" fill="none" stroke="#bbb" stroke-width="1.5" marker-end="url(#ar1)"/>
-<circle cx="210" cy="91" r="5" fill="#f8f8f8" stroke="#bbb" stroke-width="1.5"/>
-<circle cx="344" cy="107" r="5" fill="#f8f8f8" stroke="#bbb" stroke-width="1.5"/>
-<circle cx="462" cy="114" r="5" fill="#f8f8f8" stroke="#bbb" stroke-width="1.5"/>
-<text style="font-size:11px;fill:#ccc" x="210" y="79" text-anchor="middle">t=0.8</text>
-<text style="font-size:11px;fill:#ccc" x="344" y="125" text-anchor="middle">t=0.5</text>
-<text style="font-size:11px;fill:#ccc" x="462" y="132" text-anchor="middle">t=0.2</text>
-<text style="font-size:11px;fill:#ccc" x="340" y="22" text-anchor="middle">PF-ODE trajectory</text>
+<desc>A curved path from a diffuse noise cloud on the left to a structured data cluster on the right, with three intermediate points along the trajectory.</desc>
+<defs>
+  <marker id="ar1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M1 1L9 5L1 9" fill="none" stroke="context-stroke" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <radialGradient id="noiseBlob" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="var(--fig-ink-mute)" stop-opacity="0.25"/>
+    <stop offset="70%" stop-color="var(--fig-ink-mute)" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="var(--fig-ink-mute)" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="dataBlob" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="var(--fig-sage)" stop-opacity="0.32"/>
+    <stop offset="70%" stop-color="var(--fig-sage)" stop-opacity="0.14"/>
+    <stop offset="100%" stop-color="var(--fig-sage)" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<!-- noise blob -->
+<circle cx="100" cy="105" r="68" fill="url(#noiseBlob)"/>
+<circle cx="100" cy="105" r="48" fill="none" stroke="var(--fig-ink-mute)" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.5"/>
+<circle cx="82"  cy="90"  r="2.5" fill="var(--fig-ink-soft)" opacity="0.55"/>
+<circle cx="114" cy="100" r="2.5" fill="var(--fig-ink-soft)" opacity="0.55"/>
+<circle cx="92"  cy="122" r="2.5" fill="var(--fig-ink-soft)" opacity="0.55"/>
+<circle cx="120" cy="84"  r="2.5" fill="var(--fig-ink-soft)" opacity="0.55"/>
+<circle cx="76"  cy="116" r="2.5" fill="var(--fig-ink-soft)" opacity="0.55"/>
+<text font-size="12" fill="var(--fig-ink-soft)" x="100" y="195" text-anchor="middle">noise  t=1</text>
+<!-- data blob -->
+<circle cx="570" cy="105" r="50" fill="url(#dataBlob)"/>
+<circle cx="570" cy="105" r="32" fill="none" stroke="var(--fig-sage)" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.6"/>
+<circle cx="560" cy="98"  r="3.5" fill="var(--fig-sage)" opacity="0.85"/>
+<circle cx="580" cy="110" r="3.5" fill="var(--fig-sage)" opacity="0.85"/>
+<circle cx="558" cy="118" r="3.5" fill="var(--fig-sage)" opacity="0.85"/>
+<text font-size="12" fill="var(--fig-sage)" x="570" y="195" text-anchor="middle">data  t=0</text>
+<!-- trajectory -->
+<path d="M 158 105 C 210 80, 290 128, 348 102 C 405 76, 462 120, 522 105" fill="none" stroke="var(--fig-ink-soft)" stroke-width="1.4" stroke-linecap="round" marker-end="url(#ar1)" opacity="0.7"/>
+<circle cx="210" cy="91"  r="4.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
+<circle cx="344" cy="107" r="4.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
+<circle cx="462" cy="114" r="4.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
+<text font-size="10.5" fill="var(--fig-ink-mute)" x="210" y="79"  text-anchor="middle">t=0.8</text>
+<text font-size="10.5" fill="var(--fig-ink-mute)" x="344" y="125" text-anchor="middle">t=0.5</text>
+<text font-size="10.5" fill="var(--fig-ink-mute)" x="462" y="132" text-anchor="middle">t=0.2</text>
 </svg>
+</div>
 <figcaption>Every method in this family lives on a trajectory like this. The question is not how the trajectory is defined; it is how much of it you have to traverse at inference time.</figcaption>
 </figure>
 
@@ -112,37 +286,40 @@ The core problem with step-by-step integration: the local velocity at $z_t$ tell
 Two strategies for escaping this:
 
 1. **Jump to the endpoint directly.** Learn a function that maps any trajectory point to $x_0$ in one shot. This is the consistency model idea.
-2. **Jump to any point, not just the endpoint.** Learn a two-time function that can jump from any $t$ to any $s < t$ in one step. This is the flow map idea, and it is what CTM, shortcut models, and MeanFlow all do.
+2. **Jump to any point, not just the endpoint.** Learn a two-time function that can jump from any $t$ to any $s < t$ in one step. This is the flow map idea, and it is what CTM, shortcut models, and MeanFlow (all coming up) build on.
 
 ---
 
-## Flow matching: the foundation
+## Flow matching
 
-Before getting to one-step methods, it helps to understand flow matching, because all the one-step methods either build on it or borrow its training structure. Flow matching <sup class="cite"><a href="#ref-lipman2022">[1]</a></sup> defines simple straight-line paths between noise and data:
+Before getting to one-step methods, it helps to understand flow matching, because all the one-step methods either build on it or borrow its training structure. Flow matching <sup class="cite"><a href="#ref-lipman2022">[1]</a></sup> frames generation as *transport*: learn a continuous-time flow that moves probability mass from one distribution to another. The source and destination can be any two distributions; unlike diffusion models, you are not committed to Gaussian noise on one end. In practice, the simplest useful case uses Gaussian noise as the source, giving straight-line paths between noise and data:
 
 <div class="eq">$$z_t \;=\; (1 - t)\, x_0 \;+\; t\, x_1$$</div>
-<div class="eq-label">$x_0$ is clean data, $x_1$ is Gaussian noise, $t \in [0,1]$. At $t=0$ you have data; at $t=1$ you have noise.</div>
+<div class="eq-label">$x_0$ is clean data, $x_1 \sim \mathcal{N}(0,I)$, $t \in [0,1]$. At $t=0$ you have data; at $t=1$ you have noise. Any source distribution works; Gaussian is convenient, not required.</div>
 
 The velocity at any point on this path is constant: $v = x_0 - x_1$. This is directly computable from training pairs, no score estimation, no self-referential structure. You train a network to predict this velocity at every $(z_t, t)$, which is just supervised regression on a clean ground-truth target.
 
-Why is inference still slow? Even though each individual path $x_0 \leftrightarrow x_1$ is a straight line, the *marginal* velocity field is not. At any given noisy image $z_t$, many different clean images $x_0$ are plausible, not just one. Each candidate $x_0$ has its own straight-line velocity pointing in a slightly different direction. The network has to output the probability-weighted average of all those directions, which traces a curved path through image space. Following a curved path with only local velocity information requires many small steps.
+Why is inference still slow? Even though each individual path $x_0 \leftrightarrow x_1$ is a straight line, the *marginal* velocity field is not. At any given noisy image $z_t$, many different clean images $x_0$ are plausible, not just one. Each candidate has its own straight-line velocity pointing in a slightly different direction. The network has to output the probability-weighted average of all those directions, which traces a curved path through image space. Following a curved path with only local velocity information requires many small steps.
+
+Scrub the demo below to watch this happen: at $t=1$ the field points toward the centroid (no cluster has been chosen), and as $t$ decreases the weights concentrate and particles fan out toward different clusters. Try the *candidates* buttons (1, 3, 5) to see how a single cluster gives a uniform field while multiple clusters force curvature.
 
 <style>
-.mv-label { font-size: 11px; color: #aaa; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+.mv-label { font-size: 11px; color: var(--fig-ink-mute); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
 .mv-nbtn { transition: background 0.15s, color 0.15s; }
-.mv-nbtn.mv-active { background: #5599cc; color: #fff; border-color: #5599cc; }
+.mv-nbtn.mv-active { background: var(--fig-blue); color: var(--fig-paper); border-color: var(--fig-blue); }
 </style>
-<figure>
-<div class="interactive-box" style="padding-bottom:14px;">
+<figure class="fig-card">
+<div class="fig-card-title">Marginal velocity field with k clusters</div>
+<div class="fig-card-inner">
   <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;">
     <button id="mvPlay" class="play-btn">&#9654; play</button>
     <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:160px;">
-      <span style="font-size:12px;color:#aaa;white-space:nowrap;">t =</span>
+      <span style="font-size:12px;color:var(--fig-ink-mute);white-space:nowrap;">t =</span>
       <input type="range" min="0" max="100" value="100" step="1" id="mvScrub" style="flex:1;">
-      <span id="mvTout" style="font-size:12px;font-weight:500;color:#888;min-width:28px;">1.00</span>
+      <span id="mvTout" style="font-size:12px;font-weight:500;color:var(--fig-ink-soft);min-width:28px;">1.00</span>
     </div>
     <div style="display:flex;align-items:center;gap:6px;">
-      <span style="font-size:12px;color:#aaa;">candidates</span>
+      <span style="font-size:12px;color:var(--fig-ink-mute);">candidates</span>
       <button id="mvN1" class="play-btn mv-nbtn" style="min-width:28px;padding:3px 8px;">1</button>
       <button id="mvN3" class="play-btn mv-nbtn" style="min-width:28px;padding:3px 8px;">3</button>
       <button id="mvN5" class="play-btn mv-nbtn" style="min-width:28px;padding:3px 8px;">5</button>
@@ -150,11 +327,11 @@ Why is inference still slow? Even though each individual path $x_0 \leftrightarr
   </div>
   <canvas id="cvMarginal" style="width:100%;display:block;border-radius:4px;"></canvas>
   <div style="display:flex;justify-content:space-between;margin-top:8px;gap:8px;">
-    <p id="mvCapL" style="font-size:12px;color:#aaa;margin:0;flex:1;">1 destination: field is uniform everywhere. A single step from any noise point lands exactly at x₀.</p>
-    <p id="mvCapR" style="font-size:12px;color:#888;margin:0;flex:1;text-align:right;"></p>
+    <p id="mvCapL" style="font-size:12px;color:var(--fig-ink-soft);margin:0;flex:1;">1 destination: field is uniform everywhere. A single step from any noise point lands exactly at x₀.</p>
+    <p id="mvCapR" style="font-size:12px;color:var(--fig-ink-soft);margin:0;flex:1;text-align:right;"></p>
   </div>
 </div>
-<figcaption>The marginal velocity field $\bar{v}(z,t)$ (amber arrows) and its live weight decomposition (bottom panel). Each cluster on the right represents a region of data space — cats, dogs, cars. At $t=1$ (pure noise) the Gaussian weights $w_i \propto \exp(-\|z - z_t^{(i)}\|^2 / 2\sigma^2)$ over all clusters are nearly equal: the particle has no information about which cluster it will become, so the field averages all their directions and points toward the centroid. As $t$ decreases the weights concentrate: the particle's position becomes informative about which cluster it is heading to, and the field progressively commits. With one cluster the field is uniform and one step is exact. With multiple clusters, a single large step follows the initial average direction and lands between all clusters — the red ghost shows exactly where.</figcaption>
+<figcaption>The marginal velocity field $\bar{v}(z,t)$ (amber arrows) and its live weight decomposition (bottom panel). Each cluster on the right represents a region of data space: cats, dogs, cars. At $t=1$ (pure noise) the Gaussian weights $w_i \propto \exp(-\|z - z_t^{(i)}\|^2 / 2\sigma^2)$ over all clusters are nearly equal: the particle has no information about which cluster it will become, so the field averages all their directions and points toward the centroid. As $t$ decreases the weights concentrate: the particle's position becomes informative about which cluster it is heading to, and the field progressively commits. With one cluster the field is uniform and one step is exact. With multiple clusters, a single large step follows the initial average direction and lands between all clusters. The red ghost shows exactly where.</figcaption>
 </figure>
 
 <script>
@@ -163,8 +340,10 @@ Why is inference still slow? Even though each individual path $x_0 \leftrightarr
   var ctx = cv.getContext('2d');
   var LW = 640, LH = 400, MAIN_H = LH - 110;
   var TRAJ_STEPS = 400, N_CLOUD = 26, ANIM_DUR = 4200;
-  var PALETTE = ['#5599cc','#1D9E75','#D85A30','#9B59B6','#E67E22'];
-  var AMBER = '#BA7517';
+  function cssVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function palette(){
+    return [cssVar('--fig-blue'), cssVar('--fig-sage'), cssVar('--fig-amber'), cssVar('--fig-plum'), cssVar('--fig-ochre')];
+  }
   var scenarios, nActive = 1, tVal = 1.0;
   var animating = false, rafId = null, animStart = null;
 
@@ -179,7 +358,7 @@ Why is inference still slow? Even though each individual path $x_0 \leftrightarr
   }
 
   function margV(px, py, t, noisePts, modes){
-    var sigma = 55, wx = 0, wy = 0, ws = 0, i, cpx, cpy, d2, w;
+    var sigma = 38, wx = 0, wy = 0, ws = 0, i, cpx, cpy, d2, w;
     for(i = 0; i < modes.length; i++){
       cpx = (1-t)*modes[i].x + t*noisePts[i].x;
       cpy = (1-t)*modes[i].y + t*noisePts[i].y;
@@ -204,7 +383,7 @@ Why is inference still slow? Even though each individual path $x_0 \leftrightarr
   }
 
   function rawWeights(px, py, t, noisePts, modes){
-    var sigma = 55, i, cpx, cpy, d2, out = [];
+    var sigma = 38, i, cpx, cpy, d2, out = [];
     for(i = 0; i < modes.length; i++){
       cpx = (1-t)*modes[i].x + t*noisePts[i].x;
       cpy = (1-t)*modes[i].y + t*noisePts[i].y;
@@ -221,65 +400,106 @@ Why is inference still slow? Even though each individual path $x_0 \leftrightarr
     ctx.closePath(); ctx.fillStyle = col; ctx.fill(); ctx.restore();
   }
 
-  // Seeded LCG so scenarios are deterministic across redraws
+  // Seeded LCG for deterministic randomness
   function seededRand(seed){
-    var s = seed;
-    return function(){ s = (s * 1664525 + 1013904223) & 0xffffffff; return (s >>> 0) / 0xffffffff; };
+    var s = seed >>> 0;
+    return function(){ s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 0x100000000; };
   }
 
   function makeScenario(n){
-    var noiseX = 80, dataX = 540, cy = MAIN_H / 2;
-    // Clusters are evenly spaced vertically across most of the canvas.
-    // Noise samples are randomly scattered across the full y range —
-    // each one will sort to whichever cluster's conditional path it ends up
-    // closest to, tracing a genuinely curved trajectory as it commits.
-    var dataSpread = n === 1 ? 0 : Math.min(n * 44, MAIN_H - 60);
-    var rand = seededRand(n * 7919);
-    var modes = [], noisePts = [], i, frac, exactPaths, cloudStarts, cloudPaths;
-    var v0, ghost;
+    var noiseX = 82, dataX = 530, cy = MAIN_H / 2;
+    var dataSpread = n === 1 ? 0 : Math.min(n * 46, MAIN_H - 56);
+
+    // --- cluster centres (modes) evenly spaced vertically ---
+    var modes = [], i, frac;
     for(i = 0; i < n; i++){
       frac = n === 1 ? 0.5 : i / (n - 1);
       modes.push({x: dataX, y: cy + (frac - 0.5) * dataSpread});
-      // Each noise point placed randomly across the full canvas height
-      noisePts.push({x: noiseX, y: 20 + rand() * (MAIN_H - 40)});
     }
-    exactPaths = noisePts.map(function(np){ return tracePath(np, noisePts, modes); });
-    // Cloud: uniform grid of starts — shows the full field structure
-    cloudStarts = [];
+
+    // Noise samples scatter inside the noise blob (roughly ±14px around noiseX),
+    // not stacked on a single vertical line. Mirrors what samples from a 2D
+    // Gaussian actually look like.
+    var NOISE_JITTER = 14;
+    function noiseJX(r){ return noiseX + (r - 0.5) * 2 * NOISE_JITTER; }
+
+    // --- MANY random (noise, mode) pairs that define the marginal field ---
+    // Each pair assigns a random noise point to a random cluster.
+    // This creates the genuine mixture: the field at any point averages over
+    // all nearby conditional paths, producing a curved marginal field.
+    var N_PAIRS = 40;
+    var rand = seededRand(n * 7919 + 1);
+    var noisePts = [], pairModes = [];
+    for(i = 0; i < N_PAIRS; i++){
+      var clusterIdx = Math.floor(rand() * n);
+      noisePts.push({x: noiseJX(rand()), y: 18 + rand() * (MAIN_H - 36)});
+      pairModes.push(modes[clusterIdx]);
+    }
+
+    // --- highlighted particles: fixed starting positions, NOT matching any pair ---
+    // These experience the ambiguous marginal field and must curve to sort.
+    // Use a separate seeded jitter so positions are deterministic per n but
+    // visually scattered like real noise samples.
+    var pRand = seededRand(n * 104729 + 13);
+    var particleStarts = [];
+    if(n === 1){
+      particleStarts = [{x: noiseX, y: cy}];
+    } else {
+      for(i = 0; i < n; i++){
+        frac = i / (n - 1);
+        particleStarts.push({x: noiseJX(pRand()), y: 22 + frac * (MAIN_H - 44)});
+      }
+    }
+    var exactPaths = particleStarts.map(function(s){ return tracePath(s, noisePts, pairModes); });
+
+    // --- cloud: scattered starts show full field structure ---
+    var cRand = seededRand(n * 31 + 7);
+    var cloudStarts = [], cloudPaths;
     for(i = 0; i < N_CLOUD; i++){
-      cloudStarts.push({x: noiseX, y: 14 + i * (MAIN_H - 28) / (N_CLOUD - 1)});
+      cloudStarts.push({x: noiseJX(cRand()), y: 14 + i * (MAIN_H - 28) / (N_CLOUD - 1)});
     }
-    cloudPaths = cloudStarts.map(function(s){ return tracePath(s, noisePts, modes); });
-    // Ghost: one-step landing from the centroid of all noise pts
-    var cnx = 0, cny = 0;
-    for(i = 0; i < n; i++){ cnx += noisePts[i].x; cny += noisePts[i].y; }
-    cnx /= n; cny /= n;
-    v0 = margV(cnx, cny, 1.0, noisePts, modes);
-    ghost = {x: cnx + v0.x, y: cny + v0.y};
-    return {n: n, modes: modes, noisePts: noisePts, dataSpread: dataSpread,
-            exactPaths: exactPaths, cloudPaths: cloudPaths, ghost: ghost};
+    cloudPaths = cloudStarts.map(function(s){ return tracePath(s, noisePts, pairModes); });
+
+    // --- ghost: one large step from the middle highlighted particle ---
+    // Stretch along the velocity until x reaches dataX; this is what a 1-step
+    // Euler integrator from t=1 to t=0 would do.
+    var midIdx = Math.floor(particleStarts.length / 2);
+    var ghostStart = particleStarts[midIdx];
+    var v0 = margV(ghostStart.x, ghostStart.y, 1.0, noisePts, pairModes);
+    var ghost = {x: dataX, y: ghostStart.y + v0.y * (dataX - ghostStart.x) / Math.max(1e-6, v0.x)};
+
+    return {n: n, modes: modes, noisePts: noisePts, pairModes: pairModes,
+            dataSpread: dataSpread, exactPaths: exactPaths,
+            cloudPaths: cloudPaths, ghost: ghost};
   }
 
   function drawScene(sc, t){
-    var dark = window.matchMedia('(prefers-color-scheme:dark)').matches;
-    var bg   = dark ? '#1a1a1a' : '#fafafa';
+    var dark   = window.matchMedia('(prefers-color-scheme:dark)').matches;
+    var PAL    = palette();
+    var AMBER  = cssVar('--fig-amber');
+    var ROSE   = cssVar('--fig-rose');
+    var BG     = cssVar('--fig-panel');
+    var INK    = cssVar('--fig-ink');
+    var INK_S  = cssVar('--fig-ink-soft');
+    var INK_M  = cssVar('--fig-ink-mute');
+    var FRAME  = cssVar('--fig-frame');
     var n    = sc.n;
     var stepIdx = Math.min(Math.round((1-t) * TRAJ_STEPS), TRAJ_STEPS - 1);
     var gi, gj, px, py, v, vl, ex, ey, alpha, i, j, path, cp, col, prev, by, ws, wsSum, wNorm, maxW, note, bx, blw, bw, bh, w;
 
     ctx.clearRect(0, 0, LW, LH);
-    ctx.fillStyle = bg; ctx.fillRect(0, 0, LW, LH);
+    ctx.fillStyle = BG; ctx.fillRect(0, 0, LW, LH);
 
     // divider
     ctx.beginPath(); ctx.moveTo(0, MAIN_H); ctx.lineTo(LW, MAIN_H);
-    ctx.strokeStyle = dark ? '#2a2a2a' : '#e8e8e8'; ctx.lineWidth = 0.5; ctx.stroke();
+    ctx.strokeStyle = FRAME; ctx.lineWidth = 0.5; ctx.stroke();
 
     // velocity field
     for(gi = 0; gi < 11; gi++){
       for(gj = 0; gj < 8; gj++){
         px = 50 + gi * (LW - 100) / 10;
         py = 14 + gj * (MAIN_H - 28) / 7;
-        v  = margV(px, py, t, sc.noisePts, sc.modes);
+        v  = margV(px, py, t, sc.noisePts, sc.pairModes);
         vl = Math.sqrt(v.x*v.x + v.y*v.y);
         if(vl < 0.5) continue;
         ex = px + v.x / vl * 20; ey = py + v.y / vl * 20;
@@ -301,17 +521,17 @@ Why is inference still slow? Even though each individual path $x_0 \leftrightarr
         if(j === 0) ctx.moveTo(path[j].x, path[j].y);
         else        ctx.lineTo(path[j].x, path[j].y);
       }
-      ctx.strokeStyle = dark ? 'rgba(160,160,160,0.055)' : 'rgba(0,0,0,0.045)';
+      ctx.strokeStyle = dark ? 'rgba(216,212,204,0.06)' : 'rgba(58,56,51,0.07)';
       ctx.lineWidth = 1; ctx.stroke();
       cp = path[Math.min(stepIdx, path.length - 1)];
       ctx.beginPath(); ctx.arc(cp.x, cp.y, 2, 0, Math.PI*2);
-      ctx.fillStyle = dark ? 'rgba(185,185,185,0.22)' : 'rgba(60,60,60,0.15)'; ctx.fill();
+      ctx.fillStyle = dark ? 'rgba(216,212,204,0.20)' : 'rgba(58,56,51,0.18)'; ctx.fill();
     }
 
     // exact marginal paths
     for(i = 0; i < sc.exactPaths.length; i++){
       path = sc.exactPaths[i];
-      col  = n === 1 ? PALETTE[0] : PALETTE[i % PALETTE.length];
+      col  = n === 1 ? PAL[0] : PAL[i % PAL.length];
       if(stepIdx >= 2){
         ctx.beginPath();
         for(j = 0; j <= stepIdx && j < path.length; j++){
@@ -333,24 +553,24 @@ Why is inference still slow? Even though each individual path $x_0 \leftrightarr
     // 1-step ghost
     if(n > 1){
       ctx.beginPath(); ctx.arc(sc.ghost.x, sc.ghost.y, 6, 0, Math.PI*2);
-      ctx.strokeStyle = '#c0392b'; ctx.lineWidth = 1.5;
+      ctx.strokeStyle = ROSE; ctx.lineWidth = 1.5;
       ctx.setLineDash([3, 3]); ctx.stroke(); ctx.setLineDash([]);
-      ctx.globalAlpha = 0.4; ctx.fillStyle = '#c0392b'; ctx.fill(); ctx.globalAlpha = 1;
+      ctx.globalAlpha = 0.4; ctx.fillStyle = ROSE; ctx.fill(); ctx.globalAlpha = 1;
       ctx.font = '9px system-ui,sans-serif'; ctx.textAlign = 'center';
-      ctx.fillStyle = '#c0392b'; ctx.globalAlpha = 0.65;
+      ctx.fillStyle = ROSE; ctx.globalAlpha = 0.75;
       ctx.fillText('1-step lands here', sc.ghost.x, sc.ghost.y - 11);
       ctx.globalAlpha = 1;
     }
 
-    // data clusters — drawn as sideways Gaussian density bumps
+    // data clusters, drawn as sideways Gaussian density bumps
     // Each cluster cy±spread shows a filled bell curve extending leftward from dataX,
     // communicating "this is a region of probability mass, not just a point"
     var CLUSTER_NAMES = ['cats','dogs','cars','birds','boats'];
     var clusterSigma = n === 1 ? 30 : Math.max(8, Math.min(24, sc.dataSpread / (n * 1.8)));
     for(i = 0; i < sc.modes.length; i++){
-      col = n === 1 ? PALETTE[0] : PALETTE[i % PALETTE.length];
+      col = n === 1 ? PAL[0] : PAL[i % PAL.length];
       var mx = sc.modes[i].x, my = sc.modes[i].y;
-      // sideways bell extending LEFT from the data wall — fills space toward trajectory
+      // sideways bell extending LEFT from the data wall; fills space toward trajectory
       var bSteps = 32, bMaxW = 28, bSig = clusterSigma, k;
       ctx.beginPath();
       ctx.moveTo(mx, my - bSig * 2.2);
@@ -367,11 +587,11 @@ Why is inference still slow? Even though each individual path $x_0 \leftrightarr
       ctx.beginPath(); ctx.arc(mx, my, 3.5, 0, Math.PI*2);
       ctx.fillStyle = col; ctx.fill();
       // label to the right of the wall
-      ctx.font = '10px system-ui,sans-serif'; ctx.textAlign = 'left'; ctx.fillStyle = col;
+      ctx.font = '11px "Iowan Old Style",Charter,Georgia,serif'; ctx.textAlign = 'left'; ctx.fillStyle = col;
       var clabel = n === 1 ? 'data' : CLUSTER_NAMES[i] || ('cluster ' + (i+1));
       ctx.fillText(clabel, mx + 7, my + 4);
     }
-    // noise side: single wide Gaussian bell extending rightward — unstructured, no clusters
+    // noise side: single wide Gaussian bell extending rightward; unstructured, no clusters
     var noiseSig = MAIN_H * 0.22, noiseBMaxW = 22, noiseX2 = 80, noiseCY = MAIN_H / 2;
     ctx.beginPath();
     ctx.moveTo(noiseX2, noiseCY - noiseSig * 2.2);
@@ -381,70 +601,85 @@ Why is inference still slow? Even though each individual path $x_0 \leftrightarr
     }
     ctx.lineTo(noiseX2, noiseCY + noiseSig * 2.2);
     ctx.closePath();
-    ctx.fillStyle = dark ? 'rgba(180,180,180,0.07)' : 'rgba(0,0,0,0.05)'; ctx.fill();
-    ctx.strokeStyle = dark ? '#3a3a3a' : '#d8d8d8'; ctx.lineWidth = 1; ctx.stroke();
-    ctx.font = '10px system-ui,sans-serif'; ctx.textAlign = 'right';
-    ctx.fillStyle = dark ? '#444' : '#bbb';
+    ctx.fillStyle = dark ? 'rgba(216,212,204,0.07)' : 'rgba(58,56,51,0.06)'; ctx.fill();
+    ctx.strokeStyle = FRAME; ctx.lineWidth = 1; ctx.stroke();
+    ctx.font = '10px "Iowan Old Style",Charter,Georgia,serif'; ctx.textAlign = 'right';
+    ctx.fillStyle = INK_M;
     ctx.fillText('noise', noiseX2 - 3, noiseCY - 4);
     ctx.fillText('(x₁)', noiseX2 - 3, noiseCY + 8);
 
     // corner labels
-    ctx.font = '10px system-ui,sans-serif';
-    ctx.fillStyle = dark ? '#555' : '#bbb'; ctx.textAlign = 'left';
+    ctx.font = '10px "Iowan Old Style",Charter,Georgia,serif';
+    ctx.fillStyle = INK_M; ctx.textAlign = 'left';
     ctx.fillText('t = ' + t.toFixed(2), 8, 13);
-    ctx.fillStyle = AMBER; ctx.globalAlpha = 0.5; ctx.textAlign = 'right';
-    ctx.fillText('velocity field (amber)', LW - 8, 13);
+    ctx.fillStyle = AMBER; ctx.globalAlpha = 0.7; ctx.textAlign = 'right';
+    ctx.fillText('velocity field', LW - 8, 13);
     ctx.globalAlpha = 1;
 
-    // weight bars (n>1 only)
+    // weight bars (n>1 only): aggregate the 40 pair weights into n cluster buckets
     var PY = MAIN_H + 7;
     if(n > 1){
-      cp  = sc.exactPaths[0][Math.min(stepIdx, sc.exactPaths[0].length - 1)];
-      ws  = rawWeights(cp.x, cp.y, t, sc.noisePts, sc.modes);
+      // Track the middle particle, the same one the ghost is computed from.
+      var midI = Math.floor(sc.exactPaths.length / 2);
+      cp = sc.exactPaths[midI][Math.min(stepIdx, sc.exactPaths[midI].length - 1)];
+      // raw per-pair weights
+      ws = rawWeights(cp.x, cp.y, t, sc.noisePts, sc.pairModes);
+      // sum into cluster buckets by matching pairMode y to nearest mode y
+      var clusterW = [], ci;
+      for(ci = 0; ci < n; ci++) clusterW.push(0);
+      for(i = 0; i < ws.length; i++){
+        // find which cluster this pair belongs to
+        var bestC = 0, bestD = Infinity;
+        for(ci = 0; ci < n; ci++){
+          var dd = Math.abs(sc.pairModes[i].y - sc.modes[ci].y);
+          if(dd < bestD){ bestD = dd; bestC = ci; }
+        }
+        clusterW[bestC] += ws[i];
+      }
       wsSum = 0;
-      for(i = 0; i < ws.length; i++) wsSum += ws[i];
+      for(ci = 0; ci < n; ci++) wsSum += clusterW[ci];
       if(wsSum < 1e-9) wsSum = 1;
-      wNorm = ws.map(function(x){ return x / wsSum; });
+      wNorm = clusterW.map(function(x){ return x / wsSum; });
 
-      ctx.font = '9px system-ui,sans-serif'; ctx.textAlign = 'left';
-      ctx.fillStyle = dark ? '#555' : '#bbb';
-      ctx.fillText('w(z,t) at particle 1 — how much does each data cluster pull?', 8, PY + 10);
+      ctx.font = '10px "Iowan Old Style",Charter,Georgia,serif'; ctx.textAlign = 'left';
+      ctx.fillStyle = INK_S;
+      ctx.fillText('w(z,t) at the middle particle: how much does each cluster pull?', 8, PY + 10);
 
       bx = 8; blw = 78; bw = 190; bh = 10;
       maxW = 0;
-      for(i = 0; i < wNorm.length; i++){
-        w   = wNorm[i];
+      for(i = 0; i < n; i++){
+        w = wNorm[i];
         if(w > maxW) maxW = w;
-        col = PALETTE[i % PALETTE.length];
-        by  = PY + 18 + i * 14;
-        ctx.fillStyle = dark ? '#242424' : '#ebebeb';
+        col = PAL[i % PAL.length];
+        by = PY + 18 + i * 14;
+        ctx.fillStyle = FRAME;
         ctx.fillRect(bx + blw, by, bw, bh);
         ctx.fillStyle = col; ctx.globalAlpha = 0.75;
         ctx.fillRect(bx + blw, by, Math.max(0, bw * w), bh);
         ctx.globalAlpha = 1;
-        ctx.font = '9px system-ui,sans-serif'; ctx.textAlign = 'left'; ctx.fillStyle = col;
-        var cname = n === 1 ? 'data' : (CLUSTER_NAMES[i] || 'cluster ' + (i+1));
-        ctx.fillText('w' + (i + 1) + ' (' + cname + ')', bx, by + bh - 1);
-        ctx.textAlign = 'right'; ctx.fillStyle = dark ? '#666' : '#999';
+        ctx.font = '10px "Iowan Old Style",Charter,Georgia,serif'; ctx.textAlign = 'left'; ctx.fillStyle = col;
+        var cname = CLUSTER_NAMES[i] || ('cluster ' + (i+1));
+        ctx.fillText('w' + (i+1) + ' (' + cname + ')', bx, by + bh - 1);
+        ctx.textAlign = 'right'; ctx.fillStyle = INK_M;
         ctx.fillText((w * 100).toFixed(0) + '%', bx + blw - 3, by + bh - 1);
       }
 
-      note = maxW > 0.82 ? 'committed — particle knows its mode'
-           : maxW > 0.48 ? 'concentrating — ambiguity resolving'
-           :               'near-equal — destination unknown';
-      ctx.font = '9px system-ui,sans-serif'; ctx.textAlign = 'left';
-      ctx.fillStyle = dark ? '#555' : '#aaa';
+      note = maxW > 0.75 ? 'committed: particle knows its cluster'
+           : maxW > 0.45 ? 'concentrating: ambiguity resolving'
+           :               'near-equal: destination unknown';
+      ctx.font = '10px "Iowan Old Style",Charter,Georgia,serif'; ctx.fontStyle = 'italic'; ctx.textAlign = 'left';
+      ctx.fillStyle = INK_M;
       ctx.fillText(note, bx + blw + bw + 10, PY + 22);
     }
 
     // progress bar
     var pbarX = 8, pbarW = LW - 16, pbarY = LH - 13;
-    ctx.fillStyle = dark ? '#242424' : '#e6e6e6';
+    ctx.fillStyle = FRAME;
     ctx.fillRect(pbarX, pbarY, pbarW, 2);
-    ctx.fillStyle = '#5599cc'; ctx.globalAlpha = 0.65;
+    ctx.fillStyle = PAL[0]; ctx.globalAlpha = 0.7;
     ctx.fillRect(pbarX, pbarY, (1 - t) * pbarW, 2);
     ctx.globalAlpha = 1;
-    ctx.font = '9px system-ui,sans-serif'; ctx.fillStyle = dark ? '#444' : '#ccc';
+    ctx.font = '10px "Iowan Old Style",Charter,Georgia,serif'; ctx.fillStyle = INK_M;
     ctx.textAlign = 'left';  ctx.fillText('noise t=1', pbarX, pbarY + 11);
     ctx.textAlign = 'right'; ctx.fillText('data t=0',  pbarX + pbarW, pbarY + 11);
   }
@@ -458,9 +693,9 @@ Why is inference still slow? Even though each individual path $x_0 \leftrightarr
       [0.1,  0.0, 'One data cluster: arrived. Single-step generation is perfect here.']
     ];
     var capsM = [
-      [1.0, 0.60, 'Near t=1 (noise): the particle could become any cluster — cats, dogs, cars… The field averages all their directions equally, pointing toward the centroid. No cluster has been chosen yet. Watch the weight bars.'],
+      [1.0, 0.60, 'Near t=1 (noise): the particle could become any cluster (cats, dogs, cars). The field averages all their directions equally, pointing toward the centroid. No cluster has been chosen yet. Watch the weight bars.'],
       [0.60, 0.15, 'Mid-journey: one cluster pulling ahead in the weights. Paths fan apart. A naive single large step from t=1 follows that initial average direction and lands between all clusters, reaching none of them.'],
-      [0.15, 0.0, 'Near t=0 (data): weights fully concentrated on one cluster. Particles have sorted. The red ghost shows where the single-step shortcut would have landed — between clusters, nowhere.']
+      [0.15, 0.0, 'Near t=0 (data): weights fully concentrated on one cluster. Particles have sorted. The red ghost shows where the single-step shortcut would have landed: between clusters, reaching none of them.']
     ];
     var caps = nActive === 1 ? caps1 : capsM;
     var text = caps[caps.length - 1][2], k;
@@ -535,39 +770,109 @@ Flow matching gives you clean, stable training but slow inference. Every method 
 
 ## Consistency models
 
-Consistency models <sup class="cite"><a href="#ref-song2023">[2]</a></sup> are the first serious attack on the inference problem. Rather than learn the velocity and integrate it, learn a function that maps any point on the trajectory directly to the clean endpoint $x_0$:
+Consistency models <sup class="cite"><a href="#ref-song2023">[2]</a></sup> were the first serious attempt at fixing the inference problem. Rather than learn the velocity and integrate it, learn a function that maps any point on the trajectory directly to the clean endpoint $x_0$:
 
 <div class="eq">$$f_\theta(z_t,\, t) \;=\; x_0 \qquad \text{for all } t \text{ on the same trajectory}$$</div>
 
-Apply this once from pure noise, and you get a clean image. One network call, done.
+Apply this once from pure noise, and you get a clean image. The model should give the same clean answer from any point on the same trajectory. Same idea as the equation above, drawn along one trajectory:
 
-For this to actually work, the function needs two properties. First, the **boundary condition**: at $t = 0$ (or more precisely, a small cutoff $\varepsilon$ near zero), the function must be the identity, $f(x_0, \varepsilon) = x_0$. A completely clean image maps to itself. This is enforced architecturally, typically by a skip connection that activates near zero. Without it, the network could satisfy the rest of the loss by outputting a constant; the boundary condition pins one end of the function to something meaningful.
+<div class="trajectory-sketch" role="img" aria-label="One PF-ODE trajectory from noise z_T to data x_0; f theta maps each noisy point to the same x_0, and is the identity at x_0."><pre>same trajectory:
 
-Second, the **consistency condition**: any two points on the *same* PF-ODE trajectory must map to the same $x_0$. If two different noisy versions of the same clean image both pass through the network, they should produce identical outputs. This is the key constraint that makes the function globally coherent rather than just locally trained.
+noise side                         clean side
+z_T  ─────── z_t ─────── z_s ─────── x_0
 
-<figure>
-<svg width="100%" viewBox="0 0 680 200" role="img">
+f_θ(z_T, T) → x_0
+f_θ(z_t, t) → x_0
+f_θ(z_s, s) → x_0
+f_θ(x_0, 0) → x_0</pre></div>
+
+For this to actually work, the function needs two properties. First, the **boundary condition**: at $t = 0$ (or more precisely, a small cutoff $\varepsilon$ near zero), the function must be the identity, $f_\theta(x_0, \varepsilon) = x_0$. A completely clean image maps to itself. Without it, the network could satisfy the rest of the loss by outputting a constant; the boundary condition pins one end of the function to something meaningful.
+
+Second, the **consistency condition**: any two points on the *same* PF-ODE trajectory must map to the same $x_0$. If two different noisy versions of the same clean image both pass through the network, they should produce identical outputs. This is the key constraint that makes the function globally coherent rather than just locally trained. The figure below shows what this looks like: every point along one trajectory is required to map to the same destination.
+
+<figure class="fig-card">
+<div class="fig-card-title">Consistency condition: every point on the trajectory maps to the same x₀</div>
+<div class="fig-card-inner">
+<svg viewBox="0 0 680 200" role="img" style="font-family:'Iowan Old Style',Charter,Georgia,serif;">
 <title>Consistency condition: all trajectory points map to the same x0</title>
-<desc>A curved PF-ODE trajectory with four points. Dashed blue arrows from each point all converge on the same x0 endpoint at the right.</desc>
-<defs><marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-<path d="M 58 162 C 140 132, 220 154, 302 126 C 362 108, 412 98, 470 88" fill="none" stroke="#ccc" stroke-width="1.5"/>
-<circle cx="58"  cy="162" r="6" fill="#f8f8f8" stroke="#ccc" stroke-width="1.5"/>
-<circle cx="190" cy="145" r="6" fill="#f8f8f8" stroke="#ccc" stroke-width="1.5"/>
-<circle cx="308" cy="123" r="6" fill="#f8f8f8" stroke="#ccc" stroke-width="1.5"/>
-<circle cx="410" cy="101" r="6" fill="#f8f8f8" stroke="#ccc" stroke-width="1.5"/>
-<text style="font-size:11px;fill:#aaa" x="58"  y="180" text-anchor="middle">t=1</text>
-<text style="font-size:11px;fill:#aaa" x="190" y="163" text-anchor="middle">t=0.7</text>
-<text style="font-size:11px;fill:#aaa" x="308" y="141" text-anchor="middle">t=0.4</text>
-<text style="font-size:11px;fill:#aaa" x="410" y="119" text-anchor="middle">t=0.1</text>
-<circle cx="596" cy="64" r="10" fill="#d6e8f7" stroke="#5599cc" stroke-width="1.5"/>
-<text style="font-size:13px;font-weight:500;fill:#5599cc" x="596" y="68" text-anchor="middle">x₀</text>
-<line x1="64"  y1="157" x2="584" y2="68" stroke="#5599cc" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar3)"/>
-<line x1="196" y1="141" x2="584" y2="66" stroke="#5599cc" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar3)"/>
-<line x1="314" y1="119" x2="584" y2="65" stroke="#5599cc" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar3)"/>
-<line x1="415" y1="97"  x2="584" y2="65" stroke="#5599cc" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar3)"/>
-<text style="font-size:12px;fill:#aaa" x="340" y="24" text-anchor="middle">f(z_t, t) = x₀   for every t on the same trajectory</text>
+<desc>A curved PF-ODE trajectory with four points. Dashed arrows from each point converge on the same x0 endpoint.</desc>
+<defs>
+  <marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M1 1L9 5L1 9" fill="none" stroke="context-stroke" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <radialGradient id="x0Blob" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="var(--fig-sage)" stop-opacity="0.30"/>
+    <stop offset="100%" stop-color="var(--fig-sage)" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<!-- trajectory -->
+<path d="M 58 162 C 140 132, 220 154, 302 126 C 362 108, 412 98, 470 88" fill="none" stroke="var(--fig-ink-soft)" stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>
+<circle cx="58"  cy="162" r="5.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
+<circle cx="190" cy="145" r="5.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
+<circle cx="308" cy="123" r="5.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
+<circle cx="410" cy="101" r="5.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
+<text font-size="11" fill="var(--fig-ink-mute)" x="58"  y="182" text-anchor="middle">t=1</text>
+<text font-size="11" fill="var(--fig-ink-mute)" x="190" y="165" text-anchor="middle">t=0.7</text>
+<text font-size="11" fill="var(--fig-ink-mute)" x="308" y="143" text-anchor="middle">t=0.4</text>
+<text font-size="11" fill="var(--fig-ink-mute)" x="410" y="121" text-anchor="middle">t=0.1</text>
+<!-- x0 destination -->
+<circle cx="596" cy="64" r="22" fill="url(#x0Blob)"/>
+<circle cx="596" cy="64" r="9" fill="var(--fig-sage)" opacity="0.85"/>
+<text font-size="13" font-weight="600" fill="var(--fig-paper)" x="596" y="68" text-anchor="middle">x₀</text>
+<!-- arrows -->
+<line x1="64"  y1="157" x2="584" y2="68" stroke="var(--fig-blue)" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#ar3)" opacity="0.75"/>
+<line x1="196" y1="141" x2="584" y2="66" stroke="var(--fig-blue)" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#ar3)" opacity="0.75"/>
+<line x1="314" y1="119" x2="584" y2="65" stroke="var(--fig-blue)" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#ar3)" opacity="0.75"/>
+<line x1="415" y1="97"  x2="584" y2="65" stroke="var(--fig-blue)" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#ar3)" opacity="0.75"/>
+<text font-size="11.5" font-style="italic" fill="var(--fig-ink-mute)" x="340" y="24" text-anchor="middle">f(zₜ, t) = x₀   for every t on the same trajectory</text>
 </svg>
+</div>
 <figcaption>The consistency condition says all these dashed arrows must land at exactly the same $x_0$. The function is consistent across the whole trajectory, not just at individual points.</figcaption>
+</figure>
+
+How do you actually build $f_\theta$ so the boundary identity $f_\theta(x_0, \varepsilon) = x_0$ holds? The naive way is piecewise: define $f_\theta(x, t) = x$ when $t = \varepsilon$ and $f_\theta(x, t) = F_\theta(x, t)$ otherwise, where $F_\theta$ is a free neural network. This works for the discrete-time loss but breaks the moment you want continuous-time training, because the function is not differentiable at $\varepsilon$ and the continuous-time loss requires a clean derivative through $f_\theta$.
+
+The fix the paper actually uses, and the one that has stuck, is to **wire the boundary identity into the architecture algebraically** with a skip / output split:
+
+<div class="eq">$$f_\theta(x, t) \;=\; c_\text{skip}(t)\, x \;+\; c_\text{out}(t)\, F_\theta(x, t)$$</div>
+<div class="eq-label">Two scalar schedules $c_\text{skip}(t)$ and $c_\text{out}(t)$ are differentiable functions of $t$ designed so that $c_\text{skip}(\varepsilon) = 1$ and $c_\text{out}(\varepsilon) = 0$.</div>
+
+At $t = \varepsilon$ the formula collapses to $f_\theta(x, \varepsilon) = 1 \cdot x + 0 \cdot F_\theta = x$. The boundary condition is true by construction; the loss never has to enforce it. Crucially, because $c_\text{skip}$, $c_\text{out}$, and $F_\theta$ are all differentiable in $t$, so is $f_\theta$. That smoothness is what unlocks continuous-time consistency training, where the loss involves a derivative of $f_\theta$ with respect to $t$.
+
+The specific functional forms for $c_\text{skip}$ and $c_\text{out}$ are inherited directly from the EDM diffusion preconditioning <sup class="cite"><a href="#ref-karras2022">[10]</a></sup>, which is a deliberate choice: it lets consistency models drop into existing diffusion architectures with no structural changes, just a different head and loss.
+
+<figure class="fig-card">
+<div class="fig-card-title">Schedule weights along the PF-ODE</div>
+<div class="fig-card-inner">
+<svg viewBox="0 0 760 240" role="img" style="font-family:'Iowan Old Style',Charter,Georgia,serif;">
+<title>Schedule weights c_skip and c_out along the PF-ODE</title>
+<desc>Two curves on a coefficient axis. The skip weight rises toward 1 near the clean end; the trunk weight falls toward 0.</desc>
+<!-- axes -->
+<line x1="92" y1="186" x2="708" y2="186" stroke="var(--fig-ink-mute)" stroke-width="1"/>
+<line x1="92" y1="186" x2="92"  y2="50"  stroke="var(--fig-ink-mute)" stroke-width="1"/>
+<text font-size="11" fill="var(--fig-ink-mute)" x="84" y="56"  text-anchor="end">1</text>
+<text font-size="11" fill="var(--fig-ink-mute)" x="84" y="121" text-anchor="end">½</text>
+<text font-size="11" fill="var(--fig-ink-mute)" x="84" y="190" text-anchor="end">0</text>
+<line x1="92" y1="118" x2="708" y2="118" stroke="var(--fig-frame)" stroke-width="0.5" stroke-dasharray="2 4"/>
+<!-- curves -->
+<path d="M 92 158 C 230 146 380 96 708 60"  fill="none" stroke="var(--fig-blue)"  stroke-width="2.2" stroke-linecap="round"/>
+<path d="M 92 72  C 230 88  380 130 708 178" fill="none" stroke="var(--fig-amber)" stroke-width="2.2" stroke-linecap="round"/>
+<!-- clean-end guide -->
+<line x1="668" y1="50" x2="668" y2="186" stroke="var(--fig-ink-mute)" stroke-width="0.8" stroke-dasharray="3 4" opacity="0.7"/>
+<!-- x-axis labels -->
+<text font-size="11.5" fill="var(--fig-ink-soft)" x="92"  y="208" text-anchor="start">noisy (t→1)</text>
+<text font-size="11.5" font-style="italic" fill="var(--fig-ink-mute)" x="400" y="208" text-anchor="middle">PF-ODE toward data →</text>
+<text font-size="11.5" fill="var(--fig-ink-soft)" x="708" y="208" text-anchor="end">clean (t→0)</text>
+<!-- legend (inline labels on curves) -->
+<text font-size="12" fill="var(--fig-blue)"  x="708" y="48"  text-anchor="end">c_skip(t)</text>
+<text font-size="12" fill="var(--fig-amber)" x="708" y="195" text-anchor="end">c_out(t)</text>
+<!-- annotation at clean end -->
+<text font-size="10.5" font-style="italic" fill="var(--fig-ink-mute)" x="660" y="232" text-anchor="end">at t→ε:  c_skip→1, c_out→0,  output ≈ z_t ≈ x₀</text>
+</svg>
+</div>
+<figcaption markdown="1">
+The skip weight $c_{\mathrm{skip}}(t)$ rises toward one as $t \to \varepsilon$ while the trunk weight $c_{\mathrm{out}}(t)$ falls to zero, so the wired output $f_\theta(z_t, t) = c_{\mathrm{skip}}(t)\, z_t + c_{\mathrm{out}}(t)\, F_\theta(z_t, t)$ becomes nearly the identity on $z_t$ near the clean end. The boundary condition falls out of the wiring; the loss does not have to learn it.
+</figcaption>
 </figure>
 
 ### Enforcing consistency via self-distillation
@@ -581,30 +886,33 @@ The EMA copy $\theta^-$ is updated slowly after each training step, typically $m
 
 The stop-gradient on the target side breaks this symmetry. Gradients only flow through the left side of the loss, so only $\theta$ is updated to chase the target. The target then drifts slowly via the EMA rule. This is the same *target network* trick from deep RL; it is what makes self-distillation stable.
 
-To get the adjacent point $z_{t-\Delta}$ on the same trajectory as $z_t$, you need to take one step of the PF-ODE. In consistency *distillation* (CD), you use a pretrained diffusion model to do this and the teacher provides reliable ODE steps. In consistency *training* (CT), you estimate the score from scratch, which introduces additional noise and is harder to stabilise.
+To get the adjacent point $z_{t-\Delta}$ on the same trajectory as $z_t$, you need to take one step of the PF-ODE. This is where the teacher and student framing becomes explicit. In consistency *distillation* (CD), a pretrained diffusion model acts as the teacher: it provides reliable one-step ODE moves that land on the true trajectory, and the student learns to jump directly to $x_0$ from any point on those teacher-generated trajectories. In consistency *training* (CT), there is no external teacher; the network estimates the score from scratch and generates its own training pairs, which introduces additional noise and makes training harder to stabilise. CD is faster to converge and produces better results; CT avoids the dependency on a pretrained teacher at the cost of more careful engineering.
 
-### The discretisation curriculum and why it is not optional
+Worth pinning down the language here, because three different things in this post all get called "teacher" at various points and they are not the same. **Data supervision** means clean targets read directly from training pairs, like flow matching's $v = x_0 - x_1$. A **pretrained teacher** is an external network trained separately, used in CD and later in AYF; quality is capped at whatever the teacher can do. The **EMA copy** $\theta^-$ is the network's own slowly-moving lag of itself, used in CT, CTM, Shortcut, and the consistency half of MeanFlow. CT and CD differ exactly in this: CT has only the EMA copy, CD has both. From here on I will say "EMA copy" when I mean the internal lag and "pretrained teacher" when I mean a separately trained network.
 
-One subtlety about consistency model training that matters. You divide the time axis into $N$ discrete steps. Adjacent training pairs are always one step apart, so the gap $\Delta = T/N$.
+### The discretisation curriculum
+
+There is one subtlety about consistency model training that matters. You divide the time axis into $N$ discrete steps. Adjacent training pairs are always one step apart, so the gap $\Delta = T/N$.
 
 If $N$ is small, the gap is large. The two adjacent points are far apart on the PF-ODE trajectory. The training signal is strong (there is a lot of distance between the two predictions to align) but the targets are noisy. Taking a large step along the PF-ODE introduces large discretisation error, so $z_{t-\Delta}$ is only approximately on the right trajectory. You are training the network to agree with a somewhat wrong target.
 
 If $N$ is large, the gap is small. The targets are very accurate (a tiny ODE step is nearly exact) but the training signal is weak. The two adjacent points are so close that their predictions are already similar. The loss gradient is tiny and training makes almost no progress.
 
-Neither extreme works. The fix is a curriculum: start with small $N$ (coarse, strong signal, rough targets), then progressively increase $N$ (fine, weak signal, accurate targets). The network first learns a rough consistency function, then refines it.
+Neither extreme works. The fix is a curriculum: start with small $N$ (coarse, strong signal, rough targets), then progressively increase $N$ (fine, weak signal, accurate targets). The network first learns a rough consistency function, then refines it. Slide $N$ in the demo below to see the tradeoff: at $N=1$ the Euler step from $z_t$ falls far off the true curve (large red gap, strong gradient); at $N=8$ it tracks the curve closely but the gradient barely moves the network.
 
-<figure>
-<div class="interactive-box">
+<figure class="fig-card">
+<div class="fig-card-title">Discretisation tradeoff: signal vs target accuracy</div>
+<div class="fig-card-inner">
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
   <button id="playDisc" class="play-btn">&#9654; play</button>
-  <label style="font-size:13px;color:#888;min-width:80px;">steps N</label>
+  <label style="font-size:13px;color:var(--fig-ink-soft);min-width:80px;">steps N</label>
   <input type="range" min="1" max="8" value="1" step="1" id="nSteps" oninput="drawDisc()" style="flex:1;">
-  <span id="nStepsOut" style="font-size:13px;font-weight:500;min-width:46px;text-align:right;">N = 1</span>
+  <span id="nStepsOut" style="font-size:13px;font-weight:500;color:var(--fig-ink-soft);min-width:46px;text-align:right;">N = 1</span>
 </div>
 <canvas id="cvDisc" style="width:100%;display:block;border-radius:4px;"></canvas>
-<p id="discCap" style="font-size:12px;color:#aaa;margin:6px 0 0;text-align:center;">N=1: one step covers the whole trajectory. The tangent step at z_t lands far from the true curve. Large training signal, noisy target.</p>
+<p id="discCap" style="font-size:12px;color:var(--fig-ink-soft);margin:6px 0 0;text-align:center;">N=1: one step covers the whole trajectory. The tangent step at z_t lands far from the true curve. Large training signal, noisy target.</p>
 </div>
-<figcaption>The PF-ODE trajectory (grey) curves because the marginal velocity field curves. At each marked time step, the tangent arrow shows the local velocity. A single Euler step along that tangent departs from the true curve; the error is the red gap. More steps reduces the gap but shrinks the per-step gradient.</figcaption>
+<figcaption>The PF-ODE trajectory (grey) curves because the marginal velocity field curves. At each marked time step, the tangent arrow shows the local velocity. A single Euler step along that tangent departs from the true curve; the error is the red gap. More steps reduce the gap but shrink the per-step gradient.</figcaption>
 </figure>
 
 <script>
@@ -653,13 +961,15 @@ Neither extreme works. The fix is a curriculum: start with small $N$ (coarse, st
   function draw(){
     const N=parseInt(document.getElementById('nSteps').value);
     document.getElementById('nStepsOut').textContent='N = '+N;
-    const dark=window.matchMedia('(prefers-color-scheme:dark)').matches;
-    const fg=dark?'#d0d0d0':'#1a1a1a';
-    const trueCurveColor=dark?'#444':'#ddd';
-    const muted=dark?'#555':'#bbb';
-    const blue='#5599cc', red='#D85A30', teal='#1D9E75', amber='#BA7517';
+    const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const bg=css('--fig-panel');
+    const fg=css('--fig-ink');
+    const trueCurveColor=css('--fig-frame');
+    const muted=css('--fig-ink-mute');
+    const blue=css('--fig-blue'), red=css('--fig-rose'), teal=css('--fig-sage'), amber=css('--fig-amber');
 
     ctx.clearRect(0,0,LW,LH);
+    ctx.fillStyle=bg; ctx.fillRect(0,0,LW,LH);
 
     // True trajectory
     const trueRes=120;
@@ -725,12 +1035,12 @@ Neither extreme works. The fix is a curriculum: start with small $N$ (coarse, st
     ctx.fillStyle=teal; ctx.fill();
 
     // Labels
-    ctx.font='11px system-ui,sans-serif'; ctx.setLineDash([]);
+    ctx.font='11px "Iowan Old Style",Charter,Georgia,serif'; ctx.setLineDash([]);
     ctx.fillStyle=muted; ctx.textAlign='left';
     ctx.fillText('x₁  noise  t=1',noiseEnd.x+10,noiseEnd.y+4);
     ctx.fillStyle=teal;
     ctx.fillText('x₀  data  t=0',dataEnd.x-80,dataEnd.y-10);
-    ctx.fillStyle=trueCurveColor.replace('#ddd','#aaa').replace('#444','#666');
+    ctx.fillStyle=muted;
     ctx.fillText('true PF-ODE trajectory',truePt(0.38).x+8,truePt(0.38).y-8);
     ctx.fillStyle=amber;
     ctx.fillText('local velocity',truePt(0.15).x+8,truePt(0.15).y+14);
@@ -775,13 +1085,17 @@ Neither extreme works. The fix is a curriculum: start with small $N$ (coarse, st
 })();
 </script>
 
-### Limitations
+### Discrete-time vs continuous-time
 
-Consistency models prove the point: you can generate decent images in one step. That was not obvious before 2023. The original paper achieved FID 3.55 on CIFAR-10 and 6.20 on ImageNet 64×64 in a single step. iCT <sup class="cite"><a href="#ref-ict2023">[3]</a></sup> improved this substantially with pseudo-Huber losses, a lognormal noise schedule, and progressive discretisation step doubling, reaching FID 2.51 (CIFAR-10) and 3.25 (ImageNet 64×64) in a single step, a 3-4× improvement over the original. But even these required considerable engineering effort just to be reliable.
+What I described above is the *discrete-time* formulation: pick a grid of $N$ noise levels, define adjacent pairs on that grid, and run the curriculum on $N$. The grid is a crutch. It exists because we cannot directly enforce the consistency condition over a continuum, only at sampled pairs of points. The whole curriculum on $N$ is just managing the bias-variance tradeoff that the grid introduces.
+
+The *continuous-time* formulation removes the grid entirely. Differentiating the consistency condition $f(z_t, t) = f(z_{t-\Delta}, t-\Delta)$ as $\Delta \to 0$ gives a PDE-style identity: $\partial_t f + v(z_t, t) \cdot \partial_z f = 0$ along the PF-ODE. The training loss enforces this identity at sampled $(z_t, t)$ pairs, no adjacent point needed, no grid to schedule. sCT and sCD <sup class="cite"><a href="#ref-sct2024">[9]</a></sup> use this formulation and produce sharper results than the discrete-time version, because the bias from finite $\Delta$ is gone. The cost is a Jacobian-vector product (JVP) through the network to compute $\partial_z f \cdot v$, a single forward pass with forward-mode autodiff. Keep this trick in mind: MeanFlow, which we will get to later, uses essentially the same machinery for a different purpose.
+
+Consistency models prove the point: you can generate decent images in one step. That was not obvious before 2023. iCT <sup class="cite"><a href="#ref-ict2023">[3]</a></sup> improved substantially over the original with pseudo-Huber losses, a lognormal noise schedule, and progressive discretisation step doubling, but even these required considerable engineering effort just to be reliable.
 
 The training target is always *behavioural*: it constrains what the network outputs at adjacent pairs of points, not what the underlying field should be. There is no ground truth for $f(z_t, t)$ that exists independently of the network. The optimal function is defined only implicitly, via the consistency condition and boundary condition, and can only be learned by having the network agree with itself across adjacent pairs. This is inherently noisy and sensitive to hyperparameters.
 
-The deeper limitation: consistency models are stuck. They can only jump to one destination, the endpoint $x_0$. The function signature is $f(z_t, t) = x_0$; you tell it where you are and what time it is, and it predicts the endpoint. You cannot ask it to jump to an intermediate point. Multi-step generation therefore requires running the network multiple times and renoising between each evaluation, a clunky workaround that does not actually use the trajectory structure.
+The deeper limitation: consistency models are stuck. They can only jump to one destination, the endpoint $x_0$. The function signature is $f(z_t, t) = x_0$; you tell it where you are and what time it is, and it predicts the endpoint. You cannot ask it to jump to an intermediate point. Multi-step generation therefore requires running the network multiple times and renoising between each evaluation, a clunky workaround that does not actually use the trajectory structure. The natural next question: what if the jump function could land anywhere, not just $x_0$?
 
 ---
 
@@ -792,23 +1106,26 @@ CTM <sup class="cite"><a href="#ref-ctm2024">[4]</a></sup> generalises consisten
 <div class="eq">$$G_\theta(x_t,\, t,\, s) \;=\; x_s$$</div>
 <div class="eq-label">From any point $x_t$ at time $t$, jump to the state $x_s$ at time $s$. Consistency models are the special case $s=0$.</div>
 
-This is the **two-time function**: a completely flexible jump operator. You can take large steps or small steps, jump to any intermediate point on the trajectory, and compose multiple jumps to refine a generation. Consistency models are just the special case where you always set $s = 0$.
+This is the **two-time function**: a completely flexible jump operator. You can take large or small steps, jump to any intermediate point on the trajectory, and compose multiple jumps to refine a generation.
 
 The key constraint that makes this well-posed is the **semigroup property**. If you jump from $t$ to some intermediate $u$, and then jump from $u$ to $s$, you should get the same result as jumping directly from $t$ to $s$:
 
 <div class="eq">$$G_\theta(x_t,\, t,\, s) \;=\; G_\theta\!\bigl(G_\theta(x_t,\, t,\, u),\; u,\; s\bigr) \qquad \text{for any } u \in (s,t)$$</div>
 <div class="eq-label">One large jump = two composed smaller jumps. This is the composition rule at the heart of every flow-map method.</div>
 
-<figure>
-<div class="interactive-box">
+Drag the split point $u$ in the figure below to see this in action: the direct jump (top arc) and the two-leg composition (bottom arcs) always end at the same destination, no matter where you split.
+
+<figure class="fig-card">
+<div class="fig-card-title">Semigroup property: one jump = two composed jumps</div>
+<div class="fig-card-inner">
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
   <button id="playSemi" class="play-btn">&#9654; play</button>
-  <label style="font-size:13px;color:#888;min-width:80px;">split point</label>
+  <label style="font-size:13px;color:var(--fig-ink-soft);min-width:80px;">split point</label>
   <input type="range" min="15" max="85" value="40" step="1" id="splitPct" oninput="drawSemi()" style="flex:1;">
-  <span id="splitOut" style="font-size:13px;font-weight:500;min-width:46px;text-align:right;">u = 0.40</span>
+  <span id="splitOut" style="font-size:13px;font-weight:500;color:var(--fig-ink-soft);min-width:46px;text-align:right;">u = 0.40</span>
 </div>
 <canvas id="cvSemi" style="width:100%;display:block;border-radius:4px;"></canvas>
-<p style="font-size:12px;color:#aaa;margin:6px 0 0;text-align:center;">Drag the split point. Both routes (direct and two-step) always land at the same destination.</p>
+<p style="font-size:12px;color:var(--fig-ink-soft);margin:6px 0 0;text-align:center;">Drag the split point. Both routes (direct and two-step) always land at the same destination.</p>
 </div>
 <figcaption>The semigroup property: one jump from $t$ to $r$ equals two composed jumps through any intermediate $u$. Every flow-map method enforces exactly this constraint.</figcaption>
 </figure>
@@ -848,21 +1165,24 @@ The key constraint that makes this well-posed is the **semigroup property**. If 
   function draw(){
     const pct = parseInt(document.getElementById('splitPct').value)/100;
     document.getElementById('splitOut').textContent = 'u = '+pct.toFixed(2);
-    const dark = window.matchMedia('(prefers-color-scheme:dark)').matches;
-    const fg=dark?'#d0d0d0':'#1a1a1a';
-    const faint=dark?'#2a2a2a':'#f0f0f0';
-    const muted=dark?'#555':'#bbb';
-    const nodeFill=dark?'#1e1e1e':'#f8f8f8';
-    const blue='#5599cc', teal='#1D9E75', amber='#BA7517';
+    const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const bg=css('--fig-panel');
+    const fg=css('--fig-ink');
+    const faint=css('--fig-frame');
+    const muted=css('--fig-ink-mute');
+    const inkSoft=css('--fig-ink-soft');
+    const nodeFill=css('--fig-paper');
+    const blue=css('--fig-blue'), teal=css('--fig-sage'), amber=css('--fig-amber');
     ctx.clearRect(0,0,LW,LH);
+    ctx.fillStyle=bg; ctx.fillRect(0,0,LW,LH);
 
     // axis line
-    ctx.strokeStyle=faint; ctx.lineWidth=0.5; ctx.setLineDash([]);
+    ctx.strokeStyle=faint; ctx.lineWidth=1; ctx.setLineDash([]);
     ctx.beginPath(); ctx.moveTo(rX-18,baseY); ctx.lineTo(tX+18,baseY); ctx.stroke();
 
     // time axis label
-    ctx.font='11px system-ui,sans-serif'; ctx.textAlign='center';
-    ctx.fillStyle=muted;
+    ctx.font='11px "Iowan Old Style",Charter,Georgia,serif'; ctx.textAlign='center';
+    ctx.fillStyle=muted; ctx.fontStyle='italic';
     ctx.fillText('← time flows this way (t=1 is noise, t=0 is data)',LW/2,baseY+44);
 
     const sX = rX + pct*(tX-rX);
@@ -881,7 +1201,7 @@ The key constraint that makes this well-posed is the **semigroup property**. If 
       ctx.strokeStyle=n.primary?blue:muted; ctx.lineWidth=1.5; ctx.fill(); ctx.stroke();
     });
 
-    ctx.font='12px system-ui,sans-serif'; ctx.textAlign='center';
+    ctx.font='12px "Iowan Old Style",Charter,Georgia,serif'; ctx.textAlign='center';
     ctx.fillStyle=blue;
     ctx.fillText('r = 0',rX,baseY+24);
     ctx.fillText('t = 1',tX,baseY+24);
@@ -895,7 +1215,7 @@ The key constraint that makes this well-posed is the **semigroup property**. If 
     ctx.fillStyle=teal;
     ctx.fillText('2nd leg: u→r',(rX+sX)/2,baseY+76);
 
-    ctx.fillStyle=fg; ctx.font='11px system-ui,sans-serif';
+    ctx.fillStyle=inkSoft; ctx.font='11px "Iowan Old Style",Charter,Georgia,serif';
     ctx.fillText('semigroup: G(z_t, t, r) = G( G(z_t, t, u), u, r )  for any u',LW/2,LH-8);
   }
 
@@ -931,34 +1251,15 @@ Training enforces this by sampling triples $(r, s, t)$ with $r < s < t$ and comp
 <div class="eq">$$\mathcal{L}_\text{CTM} \;=\; \mathbb{E}\,\bigl\lVert G_\theta(x_t,\,t,\,r) \;-\; \operatorname{sg}\!\bigl(G_{\theta^-}\!\bigl(G_{\theta^-}(x_t,\,t,\,s),\;s,\;r\bigr)\bigr) \bigr\rVert^2$$</div>
 <div class="eq-label">Same stop-gradient and EMA trick as consistency models. $\theta^-$ is used for both the inner and outer jump on the target side.</div>
 
-CTM achieves FID 1.73 on CIFAR-10 and 1.92 on ImageNet 64×64 in a single step, the best single-step results at the time by a significant margin. The flexible jump function also makes multi-step generation more natural: you just chain calls with progressively smaller target times, no renoising needed.
+The flexible jump function makes multi-step generation more natural than consistency models: you chain calls with progressively smaller target times, no renoising needed. At the time of publication, CTM held the best single-step FID numbers (see the results table below).
 
-The limitation it inherits from consistency models: the training target is still self-referential. $G_{\theta^-}$ is the network evaluated at a slightly lagged version of itself. There is no ground-truth two-time map that exists independently of the network; the only supervision comes from the model agreeing with itself across different decompositions. This makes training more stable than consistency models (because the semigroup structure is richer), but the fundamental self-referential nature remains. CTM also required adversarial training as a core component to reach its best numbers, which limits how cleanly it scales.
-
----
-
-## Align Your Flow: distilling the jump function
-
-Align Your Flow <sup class="cite"><a href="#ref-ayf2025">[8]</a></sup> works with exactly the same object as CTM: a two-time network $f_\theta(x_t, t, s) = x_s$ that jumps from any noise level $t$ to any cleaner level $s$ in one forward pass. The difference is not the architecture or the mathematical object being learned; it is the training regime. Instead of training from scratch with self-referential targets, AYF distills from a pretrained teacher: the consistency loss is replaced by an objective that asks the student's jump function to agree with one-step moves of the teacher's probability-flow ODE.
-
-<figure>
-<img src="https://arxiv.org/html/2506.14603/extracted/6549324/figures/overview_fig_4.jpg"
-     alt="Overview of Flow Maps from Align Your Flow (Sabour et al., 2025). Three panels show Consistency Model (s=0), Flow Map (any s,t), and Flow Matching (s→t), with their respective training objectives below."
-     style="width:100%;border-radius:4px;display:block;">
-<figcaption>Figure 2 from Sabour et al. (2025). Flow maps generalise both consistency models and flow matching by connecting any two noise levels $(s, t)$ in a single step. Setting $s=0$ recovers a consistency model; letting $s \to t$ recovers standard flow matching. (Image: arXiv 2506.14603, reproduced for educational commentary.)</figcaption>
-</figure>
-
-This framing resolves something that was implicit in CTM but never fully confronted. CTM trains the jump function so that composed shorter jumps reproduce longer ones, but it never asks whether the jump function is actually correct, only whether it is internally consistent. A pretrained teacher changes that: the teacher's ODE trajectories are ground truth, and the student's jumps are trained to trace them. Internal consistency is still enforced, but now there is an external anchor.
-
-The paper also proves something sharp about consistency models: for any non-optimal consistency model, there exists a step count beyond which adding more steps monotonically worsens FID. This is not a failure of implementation; it is a structural consequence of the self-referential training target accumulating errors under composition. Flow maps trained against a teacher do not have this property. Adding steps always helps or is neutral, because each additional step is a further correction toward the teacher's trajectory rather than a compounding of self-generated error.
-
-In practice this matters a lot. AYF-S, a 280M-parameter model, reaches FID 1.25 at 2 NFE on ImageNet 64×64, and FID 1.70 at 4 NFE on ImageNet 512×512 in 0.24 seconds. The comparable distillation baseline (sCD-XXL, 1.5B parameters, 2 NFE) achieves FID 1.88 in 0.50 seconds: larger model, more compute, worse result. The efficiency gain comes directly from the teacher anchor: the student does not have to waste capacity on self-consistency at high noise levels where the self-referential signal is noisy and unreliable.
+The limitation it inherits from consistency models: the training target is still self-referential. $G_{\theta^-}$ is the network evaluated at a slightly lagged version of itself. There is no ground-truth two-time map that exists independently of the network; the only supervision comes from the model agreeing with itself across different decompositions. This makes training more stable than consistency models (because the semigroup structure is richer), but the fundamental self-referential nature remains. CTM is also fiddly in practice: random triples $(r, s, t)$, two separate network evaluations on the target side, careful coordination of all the moving parts. The methods that come next chip away at this complexity from different angles.
 
 ---
 
 ## Shortcut models
 
-CTM's training samples random triples $(r, s, t)$, which requires managing a flexible two-time input and coordinating two separate network evaluations for the composed target. Shortcut models <sup class="cite"><a href="#ref-shortcut2024">[5]</a></sup> ask: what is the simplest possible way to enforce the semigroup property?
+Shortcut models <sup class="cite"><a href="#ref-shortcut2024">[5]</a></sup> ask: what is the simplest possible way to enforce the semigroup property?
 
 The answer: condition the network on both the current noise level $t$ and the *desired step size* $d$. The network learns to predict where you will end up after a jump of size $d$ from $z_t$. The step size is an input, not a fixed constant.
 
@@ -969,71 +1270,143 @@ Think of it like this. A regular flow matching network only knows "I am at noise
 
 ### The bootstrapping training procedure
 
-How do you train this? You cannot compute the ground-truth $z_{t-d}$ directly, because it would require running the full ODE. But you can enforce the semigroup property discretely:
+How do you train this? You cannot compute the ground-truth $z_{t-d}$ directly, because it would require running the full ODE. The trick is to build the target out of *smaller* steps the network can already make. Two half-steps from the (stop-gradient) EMA copy of the network are composed into a single full-step target the student is trained to match. The picture first, equations after.
 
-<div class="eq">$$v_\theta(z_t,\,t,\,d) \;=\; \operatorname{compose}\!\bigl(v_{\theta^-}(z_t,\,t,\,d/2),\;\; v_{\theta^-}(z_{t-d/2},\,t-d/2,\,d/2)\bigr)$$</div>
-<div class="eq-label">One large step of size $d$ = two composed half-steps of size $d/2$.</div>
-
-The right side is computable: take a half-step along the PF-ODE using the EMA network to reach $z_{t-d/2}$, then take another half-step from there. Compose the two predictions into a target for the full step. The EMA network on the right side plays the same stabilising role as in consistency models; it moves slowly so the target does not chase itself.
-
-In practice, training proceeds by starting with small steps (where the half-step approximation is accurate) and progressively training larger steps using the smaller steps as building blocks. The network learns to predict one-step jumps first, then two-step, then four-step, and so on, bootstrapping upward. At inference, you can choose any step count: one step for speed, many steps for quality.
-
-<figure>
-<svg width="100%" viewBox="0 0 680 230" role="img">
+<figure class="fig-card">
+<div class="fig-card-title">Shortcut bootstrapping: half-steps teach full steps</div>
+<div class="fig-card-inner">
+<svg viewBox="0 0 680 230" role="img" style="font-family:'Iowan Old Style',Charter,Georgia,serif;">
 <title>Shortcut model bootstrapping: one large step = two composed half-steps</title>
-<desc>Three points on a noise timeline. The EMA network takes two half-steps to produce a composed target. The student network takes the full step in one shot.</desc>
-<defs><marker id="ar4b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-<line x1="60" y1="110" x2="630" y2="110" stroke="#eee" stroke-width="0.5"/>
-<circle cx="100" cy="110" r="8" fill="#d6e8f7" stroke="#5599cc" stroke-width="1.5"/>
-<circle cx="356" cy="110" r="8" fill="#f8f8f8" stroke="#bbb" stroke-width="1.5"/>
-<circle cx="600" cy="110" r="8" fill="#f8f8f8" stroke="#bbb" stroke-width="1.5"/>
-<text style="font-size:12px;fill:#5599cc" x="100" y="132" text-anchor="middle">z_{t−d}</text>
-<text style="font-size:11px;fill:#aaa" x="100" y="148" text-anchor="middle">landing point</text>
-<text style="font-size:12px;fill:#888" x="356" y="132" text-anchor="middle">z_{t−d/2}</text>
-<text style="font-size:11px;fill:#aaa" x="356" y="148" text-anchor="middle">halfway</text>
-<text style="font-size:12px;fill:#888" x="600" y="132" text-anchor="middle">z_t</text>
-<text style="font-size:11px;fill:#aaa" x="600" y="148" text-anchor="middle">start</text>
-<path d="M 108 110 Q 228 58 348 110" fill="none" stroke="#1D9E75" stroke-width="1.6" marker-end="url(#ar4b)"/>
-<path d="M 364 110 Q 480 58 592 110" fill="none" stroke="#BA7517" stroke-width="1.6" marker-end="url(#ar4b)"/>
-<text style="font-size:11px;fill:#1D9E75" x="228" y="56" text-anchor="middle">EMA: 2nd half-step</text>
-<text style="font-size:11px;fill:#BA7517" x="480" y="56" text-anchor="middle">EMA: 1st half-step</text>
-<path d="M 108 110 Q 354 180 592 110" fill="none" stroke="#5599cc" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#ar4b)"/>
-<text style="font-size:12px;fill:#5599cc" x="352" y="194" text-anchor="middle">student: one full step (what we are training)</text>
-<text style="font-size:11px;fill:#888" x="350" y="24" text-anchor="middle">bootstrapping: half-steps teach full steps</text>
+<desc>Three points on a noise timeline. The EMA network takes two half-steps to produce a composed target. The student takes the full step in one shot.</desc>
+<defs>
+  <marker id="ar4b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M1 1L9 5L1 9" fill="none" stroke="context-stroke" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+<!-- baseline -->
+<line x1="60" y1="110" x2="630" y2="110" stroke="var(--fig-frame)" stroke-width="0.5"/>
+<!-- nodes -->
+<circle cx="100" cy="110" r="7.5" fill="var(--fig-sage)" opacity="0.9"/>
+<circle cx="356" cy="110" r="6"   fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
+<circle cx="600" cy="110" r="7.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.5"/>
+<!-- labels under nodes -->
+<text font-size="12" fill="var(--fig-sage)"     x="100" y="134" text-anchor="middle">z_(t−d)</text>
+<text font-size="10.5" font-style="italic" fill="var(--fig-ink-mute)" x="100" y="150" text-anchor="middle">landing point</text>
+<text font-size="12" fill="var(--fig-ink-soft)" x="356" y="134" text-anchor="middle">z_(t−d/2)</text>
+<text font-size="10.5" font-style="italic" fill="var(--fig-ink-mute)" x="356" y="150" text-anchor="middle">halfway</text>
+<text font-size="12" fill="var(--fig-ink-soft)" x="600" y="134" text-anchor="middle">z_t</text>
+<text font-size="10.5" font-style="italic" fill="var(--fig-ink-mute)" x="600" y="150" text-anchor="middle">start</text>
+<!-- EMA half-step arcs (drawn left-to-right but read right-to-left in time) -->
+<path d="M 108 110 Q 228 58 348 110" fill="none" stroke="var(--fig-sage)"  stroke-width="1.6" stroke-linecap="round" marker-end="url(#ar4b)"/>
+<path d="M 364 110 Q 480 58 592 110" fill="none" stroke="var(--fig-amber)" stroke-width="1.6" stroke-linecap="round" marker-end="url(#ar4b)"/>
+<text font-size="11" fill="var(--fig-sage)"  x="228" y="54" text-anchor="middle">EMA: 2nd half-step</text>
+<text font-size="11" fill="var(--fig-amber)" x="480" y="54" text-anchor="middle">EMA: 1st half-step</text>
+<!-- student full step (dashed) -->
+<path d="M 108 110 Q 354 180 592 110" fill="none" stroke="var(--fig-blue)" stroke-width="1.8" stroke-dasharray="6 3" stroke-linecap="round" marker-end="url(#ar4b)"/>
+<text font-size="12" font-style="italic" fill="var(--fig-blue)" x="352" y="196" text-anchor="middle">student: one full step (what we are training)</text>
 </svg>
-<figcaption>The EMA network (solid arcs) takes two half-steps to produce a composed target. The student network (dashed arc) is trained to match this in a single step. Same stop-gradient / EMA pattern as consistency models, applied to the composition property.</figcaption>
+</div>
+<figcaption>Read right-to-left in time. Starting from $z_t$, the EMA network takes one half-step (amber) to reach $z_{t-d/2}$, then another half-step (sage) to land at $z_{t-d}$. The composition of those two half-steps becomes the target. The student (dashed blue) is trained to match it in a single jump of size $d$.</figcaption>
 </figure>
 
-Shortcut models avoid the JVP computation that MeanFlow requires. The composition is enforced by direct comparison of network outputs, not by differentiating through the network. This is simpler and faster per training step. The tradeoff: the discrete half-step approximation introduces small errors that compound when you compose many steps. The continuous formulation of MeanFlow avoids this, but pays the JVP cost to do so.
+In equations, this is the semigroup property enforced discretely:
+
+<div class="eq">$$v_\theta(z_t,\,t,\,d) \;=\; \operatorname{compose}\!\bigl(v_{\theta^-}(z_t,\,t,\,d/2),\;\; v_{\theta^-}(z_{t-d/2},\,t-d/2,\,d/2)\bigr)$$</div>
+<div class="eq-label">One large step of size $d$ = two composed half-steps of size $d/2$. $\theta^-$ is the EMA copy, the same stop-gradient stabiliser that appears in consistency models.</div>
+
+In practice, training starts with the smallest steps (where the half-step approximation is most accurate) and progressively learns larger steps using the smaller ones as building blocks. The network learns one-step jumps first, then two-step, then four-step, bootstrapping upward. At inference, you choose any step count: one for speed, many for quality.
+
+Frans et al. draw the same construction with the actual loss notation overlaid; reproduced for cross-reference.
+
+<figure class="fig-paper">
+<div class="fig-paper-title">From the paper · Frans et al. 2024, Fig. 3</div>
+<img src="https://arxiv.org/html/2410.12557/x3.png"
+     alt="Figure 3 from Frans et al. (2024). Overview of shortcut model training: at d≈0 the objective reduces to flow matching against the empirical velocity x1−x0; targets for larger d are constructed by concatenating two d/2 shortcuts, with the network conditioning on the step size d.">
+<figcaption>Same idea as the schematic above, drawn the way the paper presents it: at $d \to 0$ the loss matches the empirical flow-matching velocity $x_1 - x_0$; for larger $d$, the target is built by composing two half-step predictions from the EMA model.</figcaption>
+</figure>
+
+Shortcut models keep things simple by enforcing composition through direct comparison of network outputs: no differentiation through the network, no JVP, just a fast per-step training update. The tradeoff is that the discrete half-step approximation introduces small errors that compound when you compose many steps; and like CTM and consistency models before it, the training target is still self-referential. The next two methods both push against that self-reference. Align Your Flow does it by importing ground truth from outside (a pretrained teacher); MeanFlow does it from the inside (an exact identity that lets the network supervise itself against quantities readable directly from data).
+
+---
+
+## Align Your Flow: distilling the jump function
+
+Both CTM and Shortcut models work with the same flow-map object: a two-time network $f_\theta(x_t, t, s) = x_s$ that jumps from any noise level to any cleaner level in one forward pass. They train it from scratch with self-referential targets and pay for that with curriculum schedules and EMA copies of themselves on the target side. Align Your Flow <sup class="cite"><a href="#ref-ayf2025">[8]</a></sup> takes a different bet: instead of training the flow map from scratch, distill it from a pretrained diffusion teacher whose ODE trajectories *are* the ground truth.
+
+<figure class="fig-paper">
+<div class="fig-paper-title">From the paper · Sabour et al. 2025, Fig. 2</div>
+<img src="https://arxiv.org/html/2506.14603/extracted/6549324/figures/overview_fig_4.jpg"
+     alt="Overview of Flow Maps from Align Your Flow (Sabour et al., 2025). Three panels show Consistency Model (s=0), Flow Map (any s,t), and Flow Matching (s→t), with their respective training objectives below.">
+<figcaption>Flow maps generalise both consistency models and flow matching by connecting any two noise levels $(s, t)$ in a single step. Setting $s=0$ recovers a consistency model; letting $s \to t$ recovers standard flow matching.</figcaption>
+</figure>
+
+This framing resolves something that was implicit in CTM but never fully confronted. CTM trains the jump function so that composed shorter jumps reproduce longer ones, but it never asks whether the jump function is actually correct, only whether it is internally consistent. A pretrained teacher changes that: the teacher's ODE trajectories are ground truth, and the student's jumps are trained to trace them. Internal consistency is still enforced, but now there is an external anchor.
+
+The paper also proves something sharp about consistency models. **Theorem 3.1**: for a Gaussian data source, even a *suboptimal* consistency model (and crucially, this holds for models arbitrarily close to optimal in $L_2$) admits some step count $N$ beyond which the Wasserstein-2 distance to the true distribution **increases** as you add more sampling steps. The empirical version is just as stark: with the standard EDM noise scale, CMs typically peak at around 2 steps and then degrade. The mechanism is specific. CMs jump to clean and *renoise* between steps; over many steps the reinjected noise does not align with the teacher's PF-ODE trajectory and errors compound.
+
+Flow maps avoid this by construction: they map directly between any two noise levels in one step, never leaving the trajectory. The paper does not formally prove they monotonically improve, but empirically they keep getting better with more steps, exactly where CMs fall apart.
+
+Distilling the jump function from a teacher raises a practical question: how do you actually enforce the consistency constraint? AYF gives two answers, borrowing the fluid-dynamics distinction between Eulerian (fixed observer, watch the field) and Lagrangian (move with the particle) frames. The two losses differ in *which time variable they perturb*.
+
+<div class="post-table-wrap">
+<table class="post-table">
+<thead>
+<tr>
+  <th>Objective</th>
+  <th>What's varied</th>
+  <th>Why it works</th>
+  <th>Empirical role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class="label">EMD <span class="muted" style="font-weight:400;">(Eulerian)</span></td>
+  <td>Endpoint $s$ fixed, perturb starting time $t$; check that $f_\theta(x_t, t, s)$ is invariant as $t$ moves along the teacher trajectory.</td>
+  <td>This loss generalises both the continuous-time consistency loss (when $s = 0$) and the flow matching loss (as $s \to t$); structurally the right object to optimise.</td>
+  <td class="label">Primary loss in all main results.</td>
+</tr>
+<tr>
+  <td class="label">LMD <span class="muted" style="font-weight:400;">(Lagrangian)</span></td>
+  <td>Starting point $t$ fixed, perturb endpoint $s$; check that $f_\theta(x_t, t, s)$ moves correctly as $s$ slides along the trajectory it predicts.</td>
+  <td>Uses the teacher's instantaneous velocity at the predicted point, so it stays faithful to the flow geometry the teacher defines.</td>
+  <td class="label">Used as a stabiliser; on its own produces over-smoothed samples on real images, per the paper's ablations.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+To replace classifier-free guidance during distillation, AYF uses **autoguidance**: the teacher is mixed with a weaker checkpoint of itself, $v_\phi^{\text{guided}} = \lambda v_\phi + (1 - \lambda) v_\phi^{\text{weak}}$ with $\lambda$ sampled uniformly from $[1, 3]$. This steers samples away from low-quality regions without the overshooting failure mode CFG can have.
+
+The empirical headline (numbers are in the results table at the end): a small AYF student beats much larger distillation baselines at fewer NFEs. The efficiency gain comes from the teacher anchor: unlike CTM, the student does not waste capacity reconciling self-generated targets at high noise levels where those targets are most unreliable.
+
+AYF resolves the self-referential issue by importing ground truth from outside (a teacher). The next method, MeanFlow, resolves it from the inside.
 
 ---
 
 ## MeanFlow: ground truth for the jump function
 
-Now we have the setup to understand what makes MeanFlow <sup class="cite"><a href="#ref-meanflow2025">[6]</a></sup> special. Every method so far has the same fundamental limitation: the training target is self-referential. You are always asking the network to agree with itself, at adjacent points, or at composed decompositions. There is no independent ground truth for what the jump function should output.
-
-MeanFlow's answer is the **average velocity**, a quantity that has a ground-truth value computable directly from data, with no self-reference required.
+MeanFlow <sup class="cite"><a href="#ref-meanflow2025">[6]</a></sup> finds a quantity the network can predict whose true value is computable directly from data, no teacher required. That quantity is the **average velocity**.
 
 ### Average velocity: a ground-truth two-time quantity
 
-Define the average velocity over an interval $[r, t]$ starting from state $z_t$ as simply displacement divided by time:
+So what does "average velocity" actually mean here? It is the same thing it meant in physics class: total displacement divided by elapsed time. If you go from $z_t$ to $z_r$ over an interval of length $t - r$, the average velocity is just one divided by the other:
 
 <div class="eq">$$\bar{u}(z_t,\, r,\, t) \;=\; \frac{z_t - z_r}{t - r}$$</div>
-<div class="eq-label">$z_r$ is where you would land if you followed the PF-ODE from $z_t$ back to time $r$. Average velocity = distance ÷ time, the same definition as in physics.</div>
+<div class="eq-label">$z_r$ is where you would land if you followed the PF-ODE from $z_t$ back to time $r$.</div>
 
-For the linear interpolation paths of flow matching, this simplifies completely. Since $z_t = (1-t)x_0 + tx_1$ and $z_r = (1-r)x_0 + rx_1$:
+This looks unhelpful at first because $z_r$ is exactly the thing we cannot compute without integrating the ODE. But here is where flow matching does us a favor. Because the conditional paths are linear interpolations $z_t = (1-t)x_0 + tx_1$, the difference $z_t - z_r$ collapses algebraically:
 
 <div class="eq">$$\bar{u}(z_t,\, r,\, t) \;=\; \frac{z_t - z_r}{t - r} \;=\; x_1 - x_0$$</div>
-<div class="eq-label">Independent of $r$ and $t$: the average velocity over any interval is just $x_1 - x_0$, computable directly from training data.</div>
+<div class="eq-label">The average velocity over any interval is just $x_1 - x_0$. No $r$, no $t$, no integration.</div>
 
-The average velocity does not depend on which interval you are looking at. It is a fixed quantity for each training pair $(x_0, x_1)$, readable directly from data. No network evaluation, no self-reference, no approximation. One-step generation falls out immediately:
+That is the punchline. The average velocity is a fixed quantity for each training pair $(x_0, x_1)$, readable directly from data; no network evaluation, no self-reference, no approximation. And one-step generation falls out for free: start at pure noise, subtract the average velocity over the full interval, you have $x_0$.
 
 <div class="eq">$$x_0 \;=\; z_1 \;-\; \bar{u}_\theta(z_1,\, 0,\, 1)$$</div>
-<div class="eq-label">Start from pure noise $z_1$ at $t=1$, subtract the average velocity, arrive at $x_0$. One network call.</div>
+<div class="eq-label">One network call. The whole reason MeanFlow exists.</div>
 
-The challenge is training a network to predict $\bar{u}$ correctly for all $(z_t, r, t)$ triples, not just the full-interval case. The definition gives a ground-truth target, but computing it directly during training is intractable.
+The catch: this beautiful identity is only directly usable for the full interval $[0, 1]$ where you actually have ground-truth $(x_0, x_1)$ pairs. For arbitrary intermediate triples $(z_t, r, t)$ during training, computing $\bar{u}$ directly would require running the ODE, which is exactly what we are trying to avoid. The next subsection is how MeanFlow gets around that.
 
-### The MeanFlow identity: turning the definition into a training signal
+### The MeanFlow identity
 
 Computing $z_r$ requires running the PF-ODE from $z_t$ to time $r$, exactly the slow integration we are trying to avoid. MeanFlow gets around this by deriving an equivalent form that does not require $z_r$ at all. Start from the definition rewritten as an integral:
 
@@ -1045,7 +1418,7 @@ Now differentiate both sides with respect to $t$. The right side uses the fundam
 <div class="eq">$$\bar{u}(z_t,\, r,\, t) \;=\; v(z_t,\, t) \;-\; (t - r)\cdot \frac{d\bar{u}}{dt}$$</div>
 <div class="eq-label">The MeanFlow identity. $v(z_t, t)$ is the instantaneous flow matching velocity (ground truth from data). $d\bar{u}/dt$ is the total time derivative of the network output.</div>
 
-This identity gives a target for $\bar{u}$ that involves no integrals and no ODE simulation. The right side has two pieces: $v(z_t, t)$ is the standard flow matching velocity (the same clean ground-truth target that flow matching uses), and $d\bar{u}/dt$ is the derivative of the network's own output with respect to the time conditioning. The identity is exact, not an approximation.
+This identity gives a target for $\bar{u}$ with no integrals and no ODE simulation. Notice the two pieces on the right side play very different roles. The first, $v(z_t, t)$, is data-supervised, the same clean target flow matching uses. The second, $d\bar{u}/dt$, is the network differentiating its own output. So the MeanFlow target is a *mix* of data supervision and self-reference; the identity is exact, but the self-referential half still has to be stabilised. That tension is exactly what the TFM/TC conflict (next section) is about.
 
 ### Computing $d\bar{u}/dt$: the Jacobian-vector product
 
@@ -1063,7 +1436,7 @@ The full training loss applies stop-gradient to the entire target to avoid secon
 
 ---
 
-## The TFM/TC conflict in MeanFlow training
+## The TFM/TC conflict
 
 MeanFlow looks clean on paper: ground-truth target, exact identity, minimal overhead. In practice, the training has an interesting internal structure that causes problems.
 
@@ -1094,18 +1467,19 @@ Same coarse-to-fine principle as the discretisation curriculum in consistency mo
 
 ## A unified view
 
-Every method we have discussed enforces the same composition rule (that a long jump should equal composed shorter jumps) at different levels of precision and with different tradeoffs.
+Stepping back across all these methods, the same structure keeps reappearing: a composition rule, a curriculum, an EMA copy on the target side, a growing step size. They look like different tricks in different papers. They are the same principle at different levels of precision.
 
-<figure>
-<div class="interactive-box">
-<p style="font-size:12px;color:#aaa;margin:0 0 10px;text-align:center;">Click any method to see details</p>
+<figure class="fig-card">
+<div class="fig-card-title">A unified view of the family</div>
+<div class="fig-card-inner">
+<p style="font-size:12px;color:var(--fig-ink-soft);margin:0 0 10px;text-align:center;">Click any method to see details</p>
 <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;" id="unifiedGrid"></div>
-<div id="unifiedDetail" style="background:#f8f8f8;border-radius:6px;padding:12px 16px;font-size:13px;color:#555;line-height:1.6;min-height:60px;"></div>
+<div id="unifiedDetail" style="background:var(--fig-paper);border-radius:6px;padding:12px 16px;font-size:13px;color:var(--fig-ink-soft);line-height:1.6;min-height:60px;"></div>
 <div style="margin-top:12px;position:relative;height:28px;">
-  <div style="position:absolute;left:0;right:0;top:14px;height:0.5px;background:#ccc;"></div>
-  <div id="alphaThumb" style="position:absolute;top:6px;width:14px;height:14px;border-radius:50%;background:#5599cc;border:2px solid #fff;box-shadow:0 0 0 1px #5599cc;transition:left 0.4s;pointer-events:none;"></div>
-  <div style="position:absolute;left:0;top:24px;font-size:11px;color:#bbb;">α=0  stable</div>
-  <div style="position:absolute;right:0;top:24px;font-size:11px;color:#bbb;text-align:right;">α=1  expressive</div>
+  <div style="position:absolute;left:0;right:0;top:14px;height:1px;background:var(--fig-frame);"></div>
+  <div id="alphaThumb" style="position:absolute;top:6px;width:14px;height:14px;border-radius:50%;background:var(--fig-blue);border:2px solid var(--fig-paper);box-shadow:0 0 0 1px var(--fig-blue);transition:left 0.4s;pointer-events:none;"></div>
+  <div style="position:absolute;left:0;top:24px;font-size:11px;color:var(--fig-ink-mute);">α=0  stable</div>
+  <div style="position:absolute;right:0;top:24px;font-size:11px;color:var(--fig-ink-mute);text-align:right;">α=1  expressive</div>
 </div>
 </div>
 <figcaption>The full family, unified. Each method enforces the composition rule more strictly than the one to its left, at increasing cost. MeanFlow is the only one with both a ground-truth target and one-step inference, but pays with the JVP and the TFM/TC conflict.</figcaption>
@@ -1113,142 +1487,162 @@ Every method we have discussed enforces the same composition rule (that a long j
 
 <script>
 (function(){
+const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+// semantic key: '+' = good (sage), '-' = cost (rose), '.' = neutral (mute)
+const C = { '+': '--fig-sage', '-': '--fig-rose', '.': '--fig-ink-mute' };
 const methods=[
   {name:'Flow matching',alpha:0,
    props:['no composition enforced','ground-truth target ✓','multi-step inference','no JVP needed'],
-   propColors:['#888','#1D9E75','#D85A30','#1D9E75'],
+   propKey:['.','+','-','+'],
    detail:'The foundation. Defines straight-line paths between noise and data, trains on instantaneous velocity v = x₀ − x₁. Clean supervised learning with a fixed ground-truth target. Slow at inference because integration is required to follow the curved marginal path.',
    accent:false},
   {name:'Consistency models',alpha:0.25,
    props:['any point → same x₀','behavioural target ✗','one-step inference ✓','no JVP needed'],
-   propColors:['#888','#D85A30','#1D9E75','#1D9E75'],
+   propKey:['.','-','+','+'],
    detail:'The jump-to-endpoint idea. Learns f(z_t, t) = x₀ using self-distillation: the network trains to agree with its own EMA copy at adjacent trajectory points. One-step generation, but no ground truth exists for the consistency function; training is chasing a moving target.',
    accent:false},
   {name:'CTM / Shortcut',alpha:0.6,
    props:['discrete composition','behavioural target ✗','one-step inference ✓','no JVP needed'],
-   propColors:['#888','#D85A30','#1D9E75','#1D9E75'],
+   propKey:['.','-','+','+'],
    detail:'The any-to-any generalisation. CTM learns G(x_t, t, s) for any pair of times. Shortcut models add step-size conditioning d and bootstrap: two half-steps teach one full step. More flexible than consistency models, same self-referential training structure; no JVP needed.',
+   accent:false},
+  {name:'Align Your Flow',alpha:0.8,
+   props:['flow maps: any (s,t)','teacher-anchored ✓','FID 1.25 @ 2-NFE IN-64','autoguidance + EMD'],
+   propKey:['.','+','+','+'],
+   detail:'AYF scales the flow-map idea (f_θ(x_t,t,s)=x_s) to large pretrained models via distillation. Proves consistency models degrade with more steps; flow maps do not. Two objectives: EMD (Eulerian, sharp images) and LMD (Lagrangian, stable but blurry). Replaces CFG with autoguidance from a weaker checkpoint. AYF-S (280M params) reaches FID 1.70 on IN-512 at 4 NFE in 0.24s, beating sCD-XXL (1.5B params, 2 NFE, FID 1.88, 0.50s) at 5x fewer parameters and 2x faster.',
    accent:false},
   {name:'MeanFlow',alpha:1,
    props:['continuous composition','ground-truth target ✓','one-step inference ✓','JVP ~20% overhead'],
-   propColors:['#888','#1D9E75','#1D9E75','#D85A30'],
+   propKey:['.','+','+','-'],
    detail:'MeanFlow learns average velocity ū(z_t, r, t), a ground-truth quantity computable directly from (x₀, x₁) pairs. The MeanFlow identity gives a training signal without integrals or ODE simulation. One-step generation. Pays with JVP computation and the TFM/TC training conflict. FID 3.43 on ImageNet 256×256 (1-NFE, trained from scratch).',
-   accent:false},
-  {name:'Align Your Flow',alpha:1,
-   props:['flow maps: any (s,t)','distillation from teacher','FID 1.25 @ 2-NFE IN-64','autoguidance + EMD'],
-   propColors:['#888','#888','#1D9E75','#1D9E75'],
-   detail:'AYF scales the flow-map idea (f_θ(x_t,t,s)=x_s) to large pretrained models via distillation. Proves consistency models degrade with more steps; flow maps do not. Two objectives: EMD (Eulerian, sharp images) and LMD (Lagrangian, stable but blurry). Replaces CFG with autoguidance from a weaker checkpoint. AYF-S (280M params) reaches FID 1.70 on IN-512 at 4 NFE in 0.24s, beating sCD-XXL (1.5B params, 2 NFE, FID 1.88, 0.50s) at 5x fewer parameters and 2x faster.',
    accent:true},
 ];
-let active=3;
+let active=4;
 const grid=document.getElementById('unifiedGrid');
 const detail=document.getElementById('unifiedDetail');
 const thumb=document.getElementById('alphaThumb');
 
 function render(){
+  const blue = css('--fig-blue');
+  const ink  = css('--fig-ink');
+  const inkS = css('--fig-ink-soft');
+  const inkM = css('--fig-ink-mute');
+  const frame= css('--fig-frame');
+  const paper= css('--fig-paper');
+  const panel= css('--fig-panel');
   grid.innerHTML='';
   methods.forEach((m,i)=>{
     const card=document.createElement('div');
     const isSel=i===active;
-    card.style.cssText='border-radius:6px;padding:10px 8px;cursor:pointer;transition:all .15s;border:'+
-      (isSel?(m.accent?'1.5px solid #5599cc':'1.5px solid #888'):'0.5px solid #ddd')+';'+
-      'background:'+(isSel?(m.accent?'#eef4fb':'#f0f0f0'):'#f9f9f9')+';';
-    card.innerHTML='<div style="font-size:12px;font-weight:500;color:'+(isSel?(m.accent?'#2266aa':'#333'):'#555')+';margin-bottom:6px;line-height:1.3;">'+m.name+'</div>'+
-      m.props.map((p,j)=>'<div style="font-size:11px;color:'+m.propColors[j]+';margin-bottom:2px;">'+p+'</div>').join('');
+    const borderCol = isSel ? (m.accent ? blue : inkS) : frame;
+    const borderW   = isSel ? '1.5px' : '1px';
+    const bgCol     = isSel ? paper : panel;
+    const titleCol  = isSel ? (m.accent ? blue : ink) : inkS;
+    card.style.cssText='border-radius:6px;padding:10px 8px;cursor:pointer;transition:all .15s;'+
+      'border:'+borderW+' solid '+borderCol+';background:'+bgCol+';';
+    card.innerHTML='<div style="font-size:12px;font-weight:600;color:'+titleCol+';margin-bottom:6px;line-height:1.3;font-family:\'Iowan Old Style\',Charter,Georgia,serif;">'+m.name+'</div>'+
+      m.props.map((p,j)=>'<div style="font-size:11px;color:'+css(C[m.propKey[j]])+';margin-bottom:2px;">'+p+'</div>').join('');
     card.onclick=()=>{active=i;render();};
     grid.appendChild(card);
   });
   const m=methods[active];
   detail.textContent=m.detail;
-  detail.style.background=m.accent?'#eef4fb':'#f8f8f8';
-  detail.style.color=m.accent?'#2266aa':'#555';
+  detail.style.background=paper;
+  detail.style.color=inkS;
   const pct=(m.alpha/1)*100;
   thumb.style.left='calc('+pct+'% - 7px)';
-  thumb.style.background=m.accent?'#5599cc':'#888';
-  thumb.style.boxShadow='0 0 0 1px '+(m.accent?'#5599cc':'#888');
+  thumb.style.background=m.accent?blue:inkS;
+  thumb.style.boxShadow='0 0 0 1px '+(m.accent?blue:inkS);
 }
 render();
+window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',render);
 })();
 </script>
 
 α-Flow <sup class="cite"><a href="#ref-alphaflow2025">[7]</a></sup> formalises this: all four methods are special cases of one parameterised objective. The parameter $\alpha$ interpolates between pure flow matching ($\alpha=0$, no composition) and full MeanFlow ($\alpha=1$, continuous composition). The general principle behind every scheduling trick we have seen is to start at $\alpha=0$ and anneal toward 1: the discretisation curriculum in consistency models, the 75% border-case sampling in MeanFlow, the $\lambda$ ramp-up. All of these are different parameterisations of the same idea: learn the stable data-supervised component first, then progressively enforce the self-referential consistency component.
 
+There is a reason this curriculum is unavoidable. The signal you can compute cheaply is local: instantaneous velocity from data, or a short ODE step from a teacher. The thing you want is global: a one-step jump that has to be correct over a long interval. Self-reference is the only way to bridge the two, and self-reference is unstable until the data-supervised part is solid. Turn it on too early, the gradients are noise. Too late, you have just flow matching. The same logic is why the teacher-distillation line (AYF) and the self-distillation line (everything else) end up at comparable quality. A pretrained teacher is an external oracle for the long-jump answer; an EMA copy is an internal one. Both stabilise the self-referential target. Which you pick mostly depends on whether you have a good teacher to distill from.
+
+A few things still feel unresolved to me. Guidance is the obvious one. CFG is what makes large-scale conditional diffusion deployable, and none of the one-step methods have a clean equivalent. AYF's autoguidance is the best answer so far, but it needs a second trained model and only really works in the distillation setting. The architectures are also borrowed: every model here is a diffusion U-Net or DiT being repurposed, with the skip/output split from EDM and the two-time conditioning bolted on as an extra input embedding. I have not seen anyone ask what a network designed for the one-step objective from scratch would look like. MeanFlow's $\bar u = x_1 - x_0$ identity is more fragile than it looks too; it relies on linear interpolation paths, and the moment you want curved schedules (which matter for sample quality at scale) the algebra stops and you are back to the integral form. And the benchmarks here are all ImageNet at 64, 256, and 512. A real one-step video model does not exist yet.
+
+My guess is the next jump is either an architecture redesign that bakes in the boundary and composition constraints, or a clean way to do guidance at one step. The compositional principle feels right. What is missing is the engineering around it.
+
 ---
 
 ## Results and current state
 
-The one-step generation problem is solved in the sense that it works. These numbers did not exist two years ago, and the gap with multi-step diffusion continues to close.
+Two years ago none of these numbers existed. The gap with multi-step diffusion is closing faster than most expected.
 
-<div style="overflow-x:auto;margin:1.2rem 0 1.6rem;">
-<table style="border-collapse:collapse;font-size:13px;width:100%;min-width:480px;">
+<div class="post-table-wrap">
+<table class="post-table">
 <thead>
-<tr style="border-bottom:1px solid #ddd;">
-  <th style="text-align:left;padding:7px 12px;font-weight:600;color:#555;">Method</th>
-  <th style="text-align:center;padding:7px 12px;font-weight:600;color:#555;">NFE</th>
-  <th style="text-align:center;padding:7px 12px;font-weight:600;color:#555;">Benchmark</th>
-  <th style="text-align:center;padding:7px 12px;font-weight:600;color:#555;">FID ↓</th>
-  <th style="text-align:left;padding:7px 12px;font-weight:600;color:#555;">Training</th>
+<tr>
+  <th>Method</th>
+  <th class="center">NFE</th>
+  <th class="center">Benchmark</th>
+  <th class="center">FID ↓</th>
+  <th>Training</th>
 </tr>
 </thead>
 <tbody>
-<tr style="border-bottom:1px solid #f0f0f0;">
-  <td style="padding:7px 12px;">Consistency Models <sup class="cite"><a href="#ref-song2023">[2]</a></sup></td>
-  <td style="text-align:center;padding:7px 12px;">1</td>
-  <td style="text-align:center;padding:7px 12px;">CIFAR-10</td>
-  <td style="text-align:center;padding:7px 12px;">3.55</td>
-  <td style="padding:7px 12px;color:#888;">distillation / from scratch</td>
-</tr>
-<tr style="border-bottom:1px solid #f0f0f0;">
-  <td style="padding:7px 12px;">iCT <sup class="cite"><a href="#ref-ict2023">[3]</a></sup></td>
-  <td style="text-align:center;padding:7px 12px;">1</td>
-  <td style="text-align:center;padding:7px 12px;">CIFAR-10 / IN-64</td>
-  <td style="text-align:center;padding:7px 12px;">2.51 / 3.25</td>
-  <td style="padding:7px 12px;color:#888;">from scratch</td>
-</tr>
-<tr style="border-bottom:1px solid #f0f0f0;">
-  <td style="padding:7px 12px;">CTM <sup class="cite"><a href="#ref-ctm2024">[4]</a></sup></td>
-  <td style="text-align:center;padding:7px 12px;">1</td>
-  <td style="text-align:center;padding:7px 12px;">CIFAR-10 / IN-64</td>
-  <td style="text-align:center;padding:7px 12px;">1.73 / 1.92</td>
-  <td style="padding:7px 12px;color:#888;">distillation + adversarial</td>
-</tr>
-<tr style="border-bottom:1px solid #f0f0f0;">
-  <td style="padding:7px 12px;">MeanFlow <sup class="cite"><a href="#ref-meanflow2025">[6]</a></sup></td>
-  <td style="text-align:center;padding:7px 12px;">1</td>
-  <td style="text-align:center;padding:7px 12px;">IN-256</td>
-  <td style="text-align:center;padding:7px 12px;">3.43</td>
-  <td style="padding:7px 12px;color:#888;">from scratch</td>
-</tr>
-<tr style="border-bottom:1px solid #f0f0f0;">
-  <td style="padding:7px 12px;">α-Flow <sup class="cite"><a href="#ref-alphaflow2025">[7]</a></sup></td>
-  <td style="text-align:center;padding:7px 12px;">1 / 2</td>
-  <td style="text-align:center;padding:7px 12px;">IN-256</td>
-  <td style="text-align:center;padding:7px 12px;">2.58 / 2.15</td>
-  <td style="padding:7px 12px;color:#888;">from scratch (DiT)</td>
-</tr>
-<tr style="border-bottom:1px solid #f0f0f0;">
-  <td style="padding:7px 12px;" rowspan="3">Align Your Flow <sup class="cite"><a href="#ref-ayf2025">[8]</a></sup></td>
-  <td style="text-align:center;padding:7px 12px;">1</td>
-  <td style="text-align:center;padding:7px 12px;">IN-64</td>
-  <td style="text-align:center;padding:7px 12px;">2.98</td>
-  <td style="padding:7px 12px;color:#888;" rowspan="3">distillation (EMD) + optional adversarial</td>
-</tr>
-<tr style="border-bottom:1px solid #f0f0f0;">
-  <td style="text-align:center;padding:7px 12px;">2</td>
-  <td style="text-align:center;padding:7px 12px;">IN-64</td>
-  <td style="text-align:center;padding:7px 12px;font-weight:500;color:#1D9E75;">1.25</td>
+<tr>
+  <td>Consistency Models <sup class="cite"><a href="#ref-song2023">[2]</a></sup></td>
+  <td class="center">1</td>
+  <td class="center">CIFAR-10</td>
+  <td class="center">3.55</td>
+  <td class="muted">distillation / from scratch</td>
 </tr>
 <tr>
-  <td style="text-align:center;padding:7px 12px;">4</td>
-  <td style="text-align:center;padding:7px 12px;">IN-512 (280M)</td>
-  <td style="text-align:center;padding:7px 12px;font-weight:500;color:#1D9E75;">1.70 <span style="font-weight:400;color:#aaa;font-size:11px;">0.24s</span></td>
+  <td>iCT <sup class="cite"><a href="#ref-ict2023">[3]</a></sup></td>
+  <td class="center">1</td>
+  <td class="center">CIFAR-10 / IN-64</td>
+  <td class="center">2.51 / 3.25</td>
+  <td class="muted">from scratch</td>
+</tr>
+<tr>
+  <td>CTM <sup class="cite"><a href="#ref-ctm2024">[4]</a></sup></td>
+  <td class="center">1</td>
+  <td class="center">CIFAR-10 / IN-64</td>
+  <td class="center">1.73 / 1.92</td>
+  <td class="muted">distillation + adversarial</td>
+</tr>
+<tr>
+  <td>MeanFlow <sup class="cite"><a href="#ref-meanflow2025">[6]</a></sup></td>
+  <td class="center">1</td>
+  <td class="center">IN-256</td>
+  <td class="center">3.43</td>
+  <td class="muted">from scratch</td>
+</tr>
+<tr>
+  <td>α-Flow <sup class="cite"><a href="#ref-alphaflow2025">[7]</a></sup></td>
+  <td class="center">1 / 2</td>
+  <td class="center">IN-256</td>
+  <td class="center">2.58 / 2.15</td>
+  <td class="muted">from scratch (DiT)</td>
+</tr>
+<tr>
+  <td rowspan="3">Align Your Flow <sup class="cite"><a href="#ref-ayf2025">[8]</a></sup></td>
+  <td class="center">1</td>
+  <td class="center">IN-64</td>
+  <td class="center">2.98</td>
+  <td class="muted" rowspan="3">distillation (EMD) + optional adversarial</td>
+</tr>
+<tr>
+  <td class="center">2</td>
+  <td class="center">IN-64</td>
+  <td class="center good">1.25</td>
+</tr>
+<tr>
+  <td class="center">4</td>
+  <td class="center">IN-512 (280M)</td>
+  <td class="center good">1.70 <span style="font-weight:400;color:#aaa;font-size:11px;">0.24s</span></td>
 </tr>
 </tbody>
 </table>
-<p style="font-size:11px;color:#aaa;margin:4px 0 0;">IN = ImageNet. NFE = network function evaluations. AYF-S at 4 NFE (FID 1.70, 0.24s) outperforms sCD-XXL at 2 NFE (FID 1.88, 0.50s) using 5× fewer parameters.</p>
+<p class="post-table-note">IN = ImageNet. NFE = network function evaluations. AYF-S at 4 NFE (FID 1.70, 0.24s) outperforms sCD-XXL at 2 NFE (FID 1.88, 0.50s) using 5× fewer parameters.</p>
 </div>
 
-What I find most satisfying about this whole family is that the composition rule is the single unifying principle, even though it can look like a different trick in each paper. Every method is a different answer to the same question: how do you enforce that a long jump equals composed shorter jumps, while keeping training tractable? Consistency models do it globally via self-distillation. CTM does it for any pair of times. Shortcut models do it discretely with step-size conditioning. MeanFlow does it continuously via calculus. Align Your Flow shows the same ideas transfer cleanly to distillation from pretrained teachers at scale. Once you see this, the curricula, the EMA teachers, the JVP, the 75% border-case sampling, the tangent warmup: all of it falls into place.
+What I find most satisfying about this whole family is that the composition rule is the single unifying principle, even though it can look like a different trick in each paper. Every method is a different answer to the same question: how do you enforce that a long jump equals composed shorter jumps, while keeping training tractable? Consistency models do it globally via self-distillation. CTM does it for any pair of times. Shortcut models do it discretely with step-size conditioning. Align Your Flow does it by anchoring to a pretrained teacher and showing the same ideas transfer cleanly to distillation at scale. MeanFlow does it continuously via calculus, with an exact identity that needs no teacher at all. Once you see this, the curricula, the EMA copies, the JVP, the 75% border-case sampling, the tangent warmup: all of it falls into place.
 
 ---
 
@@ -1263,4 +1657,6 @@ What I find most satisfying about this whole family is that the composition rule
 <li id="ref-meanflow2025">Geng et al., <a href="https://arxiv.org/abs/2505.13447">MeanFlow: Unified Average-Velocity Learning for Flow-Based Generative Models</a>, 2025.</li>
 <li id="ref-alphaflow2025">Zhang et al., <a href="https://arxiv.org/abs/2510.20771">α-Flow: Unifying Flow Matching and Consistency Models</a>, 2025.</li>
 <li id="ref-ayf2025">Sabour et al., <a href="https://arxiv.org/abs/2506.14603">Align Your Flow: Scaling Continuous-Time Flow Map Distillation</a>, 2025.</li>
+<li id="ref-sct2024">Lu &amp; Song, <a href="https://arxiv.org/abs/2410.11081">Simplifying, Stabilizing &amp; Scaling Continuous-Time Consistency Models</a>, 2024.</li>
+<li id="ref-karras2022">Karras et al., <a href="https://arxiv.org/abs/2206.00364">Elucidating the Design Space of Diffusion-Based Generative Models</a>, NeurIPS 2022.</li>
 </ol>
