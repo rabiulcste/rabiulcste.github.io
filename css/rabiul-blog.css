@@ -1434,7 +1434,7 @@ footer .copyright {
 
     .profile {
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
+        grid-template-rows: auto auto auto;
         row-gap: var(--space-3);
         column-gap: 0;
     }
@@ -1450,6 +1450,10 @@ footer .copyright {
     .profile-bio {
         grid-column: 1;
         grid-row: 2;
+    }
+    .profile .social-links {
+        grid-column: 1;
+        grid-row: 3;
     }
     .profile-bio > p:first-child { margin-top: 0; }
 
