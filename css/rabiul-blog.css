@@ -465,7 +465,7 @@ main {
 .intro-header .site-heading .subheading,
 .intro-header .page-heading .subheading {
     font-size: var(--text-subtitle);
-    font-weight: 300;
+    font-weight: 400;
     line-height: var(--leading-snug);
     letter-spacing: var(--track-normal);
     margin: var(--space-1) 0 0;
@@ -786,14 +786,12 @@ main {
     color: var(--text);
     transform: translateY(-1px);
 }
-.social-links i {
-    margin-right: 0.08em;
-    font-size: 1.1em;
-    width: 1.1em;
-    height: 1.1em;
-    display: inline-block;
-    position: relative;
-    top: 1px;
+.social-links a svg.icon {
+    width: 1em;
+    height: 1em;
+    margin-right: 0.4em;
+    flex-shrink: 0;
+    color: currentColor;
 }
 
 /* Home / about page prose */
@@ -808,8 +806,8 @@ main {
 /* Section headings on home (about) page — stronger than body + paper titles (subtitle 1rem) */
 .about-content > h2 {
     font-family: var(--font-display);
-    font-size: var(--text-title-lg);
-    font-weight: 700;
+    font-size: var(--text-title-md);
+    font-weight: 600;
     line-height: var(--leading-tight);
     letter-spacing: var(--track-title);
     color: var(--text);
@@ -820,7 +818,7 @@ main {
 
 @media (min-width: 768px) {
     .about-content > h2 {
-        font-size: var(--text-headline);
+        font-size: var(--text-title-lg);
     }
 }
 
@@ -877,7 +875,7 @@ main {
 .about-content .about-subheading {
     font-family: var(--font-display);
     font-size: var(--text-title-sm);
-    font-weight: 600;
+    font-weight: 500;
     line-height: var(--leading-tight);
     letter-spacing: var(--track-title);
     color: var(--text);
@@ -1142,9 +1140,9 @@ main {
 .profile {
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: auto auto;
     column-gap: 1.5rem;
-    row-gap: 0;
+    row-gap: var(--space-3);
     margin-bottom: var(--space-5);
     align-items: start;
 }
@@ -1155,13 +1153,18 @@ main {
     margin: 0;
     line-height: 0;
 }
+.profile .social-links {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 0;
+}
 .profile img {
     display: block;
-    width: 112px;
-    height: 112px;
+    width: 100px;
+    height: 133px;
     object-fit: cover;
     object-position: center 18%;
-    border-radius: var(--radius-soft);
+    border-radius: 0;
     border: 1px solid var(--border-hairline);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
     box-sizing: border-box;
@@ -1441,8 +1444,8 @@ footer .copyright {
         justify-self: start;
     }
     .profile img {
-        width: 80px;
-        height: 80px;
+        width: 84px;
+        height: 112px;
     }
     .profile-bio {
         grid-column: 1;

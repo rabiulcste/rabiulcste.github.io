@@ -1,7 +1,7 @@
 <h2 id="research-heading">Research</h2>
-<p>The central question I work on: can a model learn to simulate the world well enough to act in it? We are entering <a href="https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf" class="gradient-text" target="_blank">the era of experience</a>, where the data that matters most is not human-labeled but agent-generated.</p>
+<p>Scaling on internet text has taken us remarkably far &mdash; further than most of us expected. But the next leap, the one that gets us to general and physical intelligence, will come from agents that learn by acting in the world. This is what the wisest minds in the field are starting to call <a href="https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf" class="gradient-text" target="_blank">the era of experience</a>: the data that matters is no longer what humans wrote down, it is what an agent generates for itself by trying things. To get there, we need models that can simulate the world well enough to plan, fail, and try again inside it.</p>
 
-<p>My current research focuses on diffusion and flow models as world models. These models are expressive, but sampling from them is slow, which makes them nearly unusable for planning. I work on making them fast, temporally consistent, and structured enough to support a control loop. The adjacent question is representation: what does a model need to internalize about the world for its latent space to be useful for downstream decision-making?</p>
+<p>I think the path runs through the generative paradigm. The models we already use to generate images and video are, with the right training signal, world models. To get them to work for an agent in a big world, we need <a href="https://drive.google.com/file/d/10zf-t6m6gAShmdtMlVFFv2yhjZFyQJ5y/view?usp=drive_link" target="_blank" rel="noopener noreferrer">better representations</a> and better policy gradient algorithms for scaling experience. That is what I work on.</p>
 
 <p class="research-note">A few deep-learning "recipes" I keep coming back to: the <a href="https://arxiv.org/abs/1312.5602" target="_blank" rel="noopener noreferrer"><em>target network</em></a> trick from RL, which later echoed through <a href="https://arxiv.org/abs/2006.07733" target="_blank" rel="noopener noreferrer">SSL</a> and <a href="https://arxiv.org/abs/2505.18825" target="_blank" rel="noopener noreferrer">flow-based models</a>; and <a href="https://arxiv.org/abs/2011.10566" target="_blank" rel="noopener noreferrer">asymmetric views</a> in self-supervised learning.</p>
 
@@ -16,7 +16,7 @@
       <div class="publication-meta">
         <span class="publication-venue"><em>Under review, 2026</em></span>
         <span class="publication-links">
-          <a href="#" target="_blank" rel="noopener noreferrer">Paper</a>
+          <a href="https://drive.google.com/file/d/10zf-t6m6gAShmdtMlVFFv2yhjZFyQJ5y/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Paper</a>
         </span>
       </div>
     </div>
