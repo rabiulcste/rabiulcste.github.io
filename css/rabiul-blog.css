@@ -1454,7 +1454,9 @@ footer .copyright {
     .profile .social-links {
         grid-column: 1;
         grid-row: 3;
+        flex-wrap: nowrap;
     }
+    .profile .social-links .git-ic { display: none; }
     .profile-bio > p:first-child { margin-top: 0; }
 
     .not-found .ascii-art { font-size: 0.5rem; }
