@@ -225,60 +225,143 @@ Starting from the goal and working backwards: what does a network need to learn 
 
 ## Generation as transport
 
-Generating a sample (say, an image of a dog) is moving probability mass from a noise distribution to the data distribution along a deterministic path. That path is the probability flow ODE (PF-ODE) <sup class="cite"><a href="#ref-songsde2021">[11]</a></sup>, parameterised by time $t$: at $t=1$ the point is pure Gaussian noise; at $t=0$ it is clean data. The PF-ODE shares the same marginal distributions at each $t$ as the stochastic diffusion process, but without the randomness, so you can run it forwards or backwards exactly.
+Generating a sample (say, an image of a dog) is moving probability mass from a noise distribution to the data distribution. In general this transport can be either stochastic (a forward and reverse diffusion SDE) or deterministic (an ODE); every method in this post lives in the deterministic regime, on a path called the probability flow ODE (PF-ODE) <sup class="cite"><a href="#ref-songsde2021">[11]</a></sup>. Parameterise it by time $t$ running from $t=1$ (pure Gaussian noise) to $t=0$ (a clean data sample, like our dog). Write $z_t$ for the point on the trajectory at time $t$, and $x_0$ for the clean data sample at $t=0$. The PF-ODE shares the same marginal distributions at each $t$ as the stochastic diffusion process, but without the randomness, so you can run it forwards or backwards exactly.
 
-Think of a soap bubble. Press it slowly and the surface deforms; every point on the film follows a smooth path. Release the pressure and it snaps back along the exact same path, not an approximation. The PF-ODE is that elastic surface in probability space. A point $z_t$ on a trajectory is one spot on the surface at time $t$.
+Think of a soap bubble. Press it slowly and the surface deforms; every point on the film follows a smooth path. Release the pressure and it snaps back along the exact same path, not an approximation. The PF-ODE is that elastic surface in probability space, and $z_t$ is one spot on the surface at time $t$.
 
-Standard diffusion and flow models learn to estimate the PF-ODE velocity locally and integrate it step by step from noise to data. At each $z_t$ the network tells you how fast and in which direction to move to keep heading toward the dog (or whatever target the trajectory points to). Apply that, take a step, repeat.
+Standard diffusion and flow models learn to estimate the PF-ODE velocity locally, then numerically solve the learned ODE step by step from noise to data. At each $z_t$ the network tells you how fast and in which direction to move to keep heading toward the dog (or whatever target the trajectory points to). Apply that, take a step, repeat.
 
 <figure class="fig-card">
-<div class="fig-card-title">PF-ODE trajectory</div>
+<div class="fig-card-title">A noise distribution flowing into a data distribution</div>
 <div class="fig-card-inner">
-<svg viewBox="0 0 680 210" role="img" style="font-family:'Iowan Old Style',Charter,Georgia,serif;">
-<title>A PF-ODE trajectory from noise to data</title>
-<desc>A curved path from a diffuse noise cloud on the left to a structured data cluster on the right, with three intermediate points along the trajectory.</desc>
+<svg viewBox="0 0 680 260" role="img" style="font-family:'Iowan Old Style',Charter,Georgia,serif;">
+<title>Distribution snapshots along the PF-ODE from noise to data</title>
+<desc>Five snapshots of a probability distribution along the trajectory from t=1 to t=0. At t=1 the points form a wide diffuse Gaussian cloud (noise). At each subsequent snapshot the cloud progressively contracts and structures itself, until at t=0 the points form a tight cluster on the data manifold.</desc>
 <defs>
-  <marker id="ar1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <marker id="flowArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
     <path d="M1 1L9 5L1 9" fill="none" stroke="context-stroke" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
   </marker>
-  <radialGradient id="noiseBlob" cx="50%" cy="50%" r="50%">
-    <stop offset="0%" stop-color="var(--fig-ink-mute)" stop-opacity="0.25"/>
-    <stop offset="70%" stop-color="var(--fig-ink-mute)" stop-opacity="0.10"/>
-    <stop offset="100%" stop-color="var(--fig-ink-mute)" stop-opacity="0"/>
-  </radialGradient>
-  <radialGradient id="dataBlob" cx="50%" cy="50%" r="50%">
-    <stop offset="0%" stop-color="var(--fig-sage)" stop-opacity="0.32"/>
-    <stop offset="70%" stop-color="var(--fig-sage)" stop-opacity="0.14"/>
-    <stop offset="100%" stop-color="var(--fig-sage)" stop-opacity="0"/>
+  <radialGradient id="cloudFade" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="var(--fig-ink-soft)" stop-opacity="0.18"/>
+    <stop offset="100%" stop-color="var(--fig-ink-soft)" stop-opacity="0"/>
   </radialGradient>
 </defs>
-<!-- noise blob -->
-<circle cx="100" cy="105" r="68" fill="url(#noiseBlob)"/>
-<circle cx="100" cy="105" r="48" fill="none" stroke="var(--fig-ink-mute)" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.5"/>
-<circle cx="82"  cy="90"  r="2.5" fill="var(--fig-ink-soft)" opacity="0.55"/>
-<circle cx="114" cy="100" r="2.5" fill="var(--fig-ink-soft)" opacity="0.55"/>
-<circle cx="92"  cy="122" r="2.5" fill="var(--fig-ink-soft)" opacity="0.55"/>
-<circle cx="120" cy="84"  r="2.5" fill="var(--fig-ink-soft)" opacity="0.55"/>
-<circle cx="76"  cy="116" r="2.5" fill="var(--fig-ink-soft)" opacity="0.55"/>
-<text font-size="12" fill="var(--fig-ink-soft)" x="100" y="195" text-anchor="middle">noise  t=1</text>
-<!-- data blob -->
-<circle cx="570" cy="105" r="50" fill="url(#dataBlob)"/>
-<circle cx="570" cy="105" r="32" fill="none" stroke="var(--fig-sage)" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.6"/>
-<circle cx="560" cy="98"  r="3.5" fill="var(--fig-sage)" opacity="0.85"/>
-<circle cx="580" cy="110" r="3.5" fill="var(--fig-sage)" opacity="0.85"/>
-<circle cx="558" cy="118" r="3.5" fill="var(--fig-sage)" opacity="0.85"/>
-<text font-size="12" fill="var(--fig-sage)" x="570" y="195" text-anchor="middle">data  t=0</text>
-<!-- trajectory -->
-<path d="M 158 105 C 210 80, 290 128, 348 102 C 405 76, 462 120, 522 105" fill="none" stroke="var(--fig-ink-soft)" stroke-width="1.4" stroke-linecap="round" marker-end="url(#ar1)" opacity="0.7"/>
-<circle cx="210" cy="91"  r="4.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
-<circle cx="344" cy="107" r="4.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
-<circle cx="462" cy="114" r="4.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
-<text font-size="10.5" fill="var(--fig-ink-mute)" x="210" y="79"  text-anchor="middle">t=0.8</text>
-<text font-size="10.5" fill="var(--fig-ink-mute)" x="344" y="125" text-anchor="middle">t=0.5</text>
-<text font-size="10.5" fill="var(--fig-ink-mute)" x="462" y="132" text-anchor="middle">t=0.2</text>
+
+<!-- Snapshot 1: t=1, pure noise, wide diffuse cloud -->
+<g transform="translate(70,110)">
+  <circle r="58" fill="url(#cloudFade)"/>
+  <circle cx="-22" cy="-32" r="2.2" fill="var(--fig-ink-soft)" opacity="0.55"/>
+  <circle cx="18" cy="-26" r="2.2" fill="var(--fig-ink-soft)" opacity="0.55"/>
+  <circle cx="-34" cy="-6" r="2.2" fill="var(--fig-ink-soft)" opacity="0.55"/>
+  <circle cx="28" cy="4" r="2.2" fill="var(--fig-ink-soft)" opacity="0.55"/>
+  <circle cx="-10" cy="18" r="2.2" fill="var(--fig-ink-soft)" opacity="0.55"/>
+  <circle cx="14" cy="30" r="2.2" fill="var(--fig-ink-soft)" opacity="0.55"/>
+  <circle cx="-28" cy="32" r="2.2" fill="var(--fig-ink-soft)" opacity="0.55"/>
+  <circle cx="34" cy="-12" r="2.2" fill="var(--fig-ink-soft)" opacity="0.55"/>
+  <circle cx="2" cy="-12" r="2.2" fill="var(--fig-ink-soft)" opacity="0.55"/>
+  <circle cx="-6" cy="42" r="2.2" fill="var(--fig-ink-soft)" opacity="0.55"/>
+  <circle cx="22" cy="40" r="2.2" fill="var(--fig-ink-soft)" opacity="0.55"/>
+  <circle cx="-40" cy="14" r="2.2" fill="var(--fig-ink-soft)" opacity="0.55"/>
+  <text font-size="11" fill="var(--fig-ink-mute)" y="84" text-anchor="middle">t = 1.0</text>
+  <text font-size="10" fill="var(--fig-ink-mute)" y="98" text-anchor="middle" font-style="italic">noise</text>
+</g>
+
+<!-- Snapshot 2: t=0.75, slightly concentrated -->
+<g transform="translate(210,110)">
+  <circle r="44" fill="url(#cloudFade)"/>
+  <circle cx="-14" cy="-22" r="2.2" fill="var(--fig-ink-soft)" opacity="0.7"/>
+  <circle cx="14" cy="-18" r="2.2" fill="var(--fig-ink-soft)" opacity="0.7"/>
+  <circle cx="-24" cy="0" r="2.2" fill="var(--fig-ink-soft)" opacity="0.7"/>
+  <circle cx="20" cy="2" r="2.2" fill="var(--fig-ink-soft)" opacity="0.7"/>
+  <circle cx="-6" cy="14" r="2.2" fill="var(--fig-ink-soft)" opacity="0.7"/>
+  <circle cx="10" cy="22" r="2.2" fill="var(--fig-ink-soft)" opacity="0.7"/>
+  <circle cx="-18" cy="24" r="2.2" fill="var(--fig-ink-soft)" opacity="0.7"/>
+  <circle cx="24" cy="-8" r="2.2" fill="var(--fig-ink-soft)" opacity="0.7"/>
+  <circle cx="0" cy="-8" r="2.2" fill="var(--fig-ink-soft)" opacity="0.7"/>
+  <circle cx="-2" cy="32" r="2.2" fill="var(--fig-ink-soft)" opacity="0.7"/>
+  <circle cx="16" cy="28" r="2.2" fill="var(--fig-ink-soft)" opacity="0.7"/>
+  <circle cx="-28" cy="10" r="2.2" fill="var(--fig-ink-soft)" opacity="0.7"/>
+  <text font-size="11" fill="var(--fig-ink-mute)" y="84" text-anchor="middle">t = 0.75</text>
+</g>
+
+<!-- Snapshot 3: t=0.5, modes starting to separate -->
+<g transform="translate(340,110)">
+  <ellipse rx="34" ry="24" fill="url(#cloudFade)"/>
+  <!-- early hints of three modes: top-left, top-right, bottom -->
+  <circle cx="-22" cy="-12" r="2.2" fill="var(--fig-blue)" opacity="0.7"/>
+  <circle cx="-16" cy="-6" r="2.2" fill="var(--fig-blue)" opacity="0.7"/>
+  <circle cx="-26" cy="-4" r="2.2" fill="var(--fig-blue)" opacity="0.7"/>
+  <circle cx="-12" cy="-14" r="2.2" fill="var(--fig-blue)" opacity="0.7"/>
+  <circle cx="22" cy="-12" r="2.2" fill="var(--fig-blue)" opacity="0.7"/>
+  <circle cx="18" cy="-4" r="2.2" fill="var(--fig-blue)" opacity="0.7"/>
+  <circle cx="26" cy="-6" r="2.2" fill="var(--fig-blue)" opacity="0.7"/>
+  <circle cx="12" cy="-10" r="2.2" fill="var(--fig-blue)" opacity="0.7"/>
+  <circle cx="-4" cy="14" r="2.2" fill="var(--fig-blue)" opacity="0.7"/>
+  <circle cx="4" cy="16" r="2.2" fill="var(--fig-blue)" opacity="0.7"/>
+  <circle cx="0" cy="20" r="2.2" fill="var(--fig-blue)" opacity="0.7"/>
+  <circle cx="-8" cy="18" r="2.2" fill="var(--fig-blue)" opacity="0.7"/>
+  <text font-size="11" fill="var(--fig-ink-mute)" y="84" text-anchor="middle">t = 0.5</text>
+</g>
+
+<!-- Snapshot 4: t=0.25, three modes clearly separating -->
+<g transform="translate(470,110)">
+  <!-- top-left blob -->
+  <ellipse cx="-18" cy="-10" rx="10" ry="7" fill="var(--fig-sage)" opacity="0.10"/>
+  <circle cx="-20" cy="-12" r="2.3" fill="var(--fig-sage)" opacity="0.85"/>
+  <circle cx="-14" cy="-10" r="2.3" fill="var(--fig-sage)" opacity="0.85"/>
+  <circle cx="-22" cy="-8" r="2.3" fill="var(--fig-sage)" opacity="0.85"/>
+  <circle cx="-16" cy="-14" r="2.3" fill="var(--fig-sage)" opacity="0.85"/>
+  <!-- top-right blob -->
+  <ellipse cx="18" cy="-10" rx="10" ry="7" fill="var(--fig-sage)" opacity="0.10"/>
+  <circle cx="20" cy="-12" r="2.3" fill="var(--fig-sage)" opacity="0.85"/>
+  <circle cx="14" cy="-10" r="2.3" fill="var(--fig-sage)" opacity="0.85"/>
+  <circle cx="22" cy="-8" r="2.3" fill="var(--fig-sage)" opacity="0.85"/>
+  <circle cx="16" cy="-14" r="2.3" fill="var(--fig-sage)" opacity="0.85"/>
+  <!-- bottom blob -->
+  <ellipse cx="0" cy="14" rx="10" ry="7" fill="var(--fig-sage)" opacity="0.10"/>
+  <circle cx="-2" cy="12" r="2.3" fill="var(--fig-sage)" opacity="0.85"/>
+  <circle cx="4" cy="14" r="2.3" fill="var(--fig-sage)" opacity="0.85"/>
+  <circle cx="-4" cy="16" r="2.3" fill="var(--fig-sage)" opacity="0.85"/>
+  <circle cx="2" cy="18" r="2.3" fill="var(--fig-sage)" opacity="0.85"/>
+  <text font-size="11" fill="var(--fig-ink-mute)" y="84" text-anchor="middle">t = 0.25</text>
+</g>
+
+<!-- Snapshot 5: t=0, three tight data modes ("cats / dogs / cars") -->
+<g transform="translate(600,110)">
+  <!-- top-left: dogs -->
+  <ellipse cx="-15" cy="-12" rx="6" ry="4" fill="var(--fig-sage)" opacity="0.20"/>
+  <circle cx="-17" cy="-13" r="2.5" fill="var(--fig-sage)" opacity="0.95"/>
+  <circle cx="-13" cy="-12" r="2.5" fill="var(--fig-sage)" opacity="0.95"/>
+  <circle cx="-15" cy="-10" r="2.5" fill="var(--fig-sage)" opacity="0.95"/>
+  <text font-size="8.5" fill="var(--fig-sage)" x="-15" y="-22" text-anchor="middle" font-style="italic">dogs</text>
+  <!-- top-right: cats -->
+  <ellipse cx="15" cy="-12" rx="6" ry="4" fill="var(--fig-sage)" opacity="0.20"/>
+  <circle cx="13" cy="-13" r="2.5" fill="var(--fig-sage)" opacity="0.95"/>
+  <circle cx="17" cy="-12" r="2.5" fill="var(--fig-sage)" opacity="0.95"/>
+  <circle cx="15" cy="-10" r="2.5" fill="var(--fig-sage)" opacity="0.95"/>
+  <text font-size="8.5" fill="var(--fig-sage)" x="15" y="-22" text-anchor="middle" font-style="italic">cats</text>
+  <!-- bottom: cars -->
+  <ellipse cx="0" cy="14" rx="6" ry="4" fill="var(--fig-sage)" opacity="0.20"/>
+  <circle cx="-2" cy="13" r="2.5" fill="var(--fig-sage)" opacity="0.95"/>
+  <circle cx="2" cy="14" r="2.5" fill="var(--fig-sage)" opacity="0.95"/>
+  <circle cx="0" cy="16" r="2.5" fill="var(--fig-sage)" opacity="0.95"/>
+  <text font-size="8.5" fill="var(--fig-sage)" x="0" y="30" text-anchor="middle" font-style="italic">cars</text>
+  <text font-size="11" fill="var(--fig-sage)" y="84" text-anchor="middle">t = 0.0</text>
+  <text font-size="10" fill="var(--fig-sage)" y="98" text-anchor="middle" font-style="italic">data manifold</text>
+</g>
+
+<!-- Flow arrows between snapshots, drawn faintly -->
+<path d="M 138 110 L 162 110" stroke="var(--fig-ink-mute)" stroke-width="1" opacity="0.5" marker-end="url(#flowArrow)"/>
+<path d="M 262 110 L 288 110" stroke="var(--fig-ink-mute)" stroke-width="1" opacity="0.5" marker-end="url(#flowArrow)"/>
+<path d="M 384 110 L 420 110" stroke="var(--fig-ink-mute)" stroke-width="1" opacity="0.5" marker-end="url(#flowArrow)"/>
+<path d="M 500 110 L 574 110" stroke="var(--fig-ink-mute)" stroke-width="1" opacity="0.5" marker-end="url(#flowArrow)"/>
+
+<!-- Time axis at bottom -->
+<line x1="60" y1="232" x2="620" y2="232" stroke="var(--fig-frame)" stroke-width="0.8"/>
+<text font-size="10.5" fill="var(--fig-ink-mute)" x="60" y="248">time runs this way →</text>
 </svg>
 </div>
-<figcaption>Every method in this family lives on a trajectory like this. The question is not how the trajectory is defined; it is how much of it you have to traverse at inference time.</figcaption>
+<figcaption>The PF-ODE moves a probability distribution from pure noise at $t=1$ into the data distribution at $t=0$. The five snapshots show the cloud progressively contracting and structuring itself as time decreases. A single sample $z_t$ rides along this flow; every one-step method in the post is trying to skip directly from one snapshot to another.</figcaption>
 </figure>
 
 The core problem with step-by-step integration: the local velocity at $z_t$ tells you nothing about where the trajectory ends up globally. You have to follow it closely, one small step at a time, or you drift off course and end up somewhere wrong. This is expensive.
@@ -297,7 +380,7 @@ Flow matching is the foundation every one-step method either builds on or borrow
 <div class="eq">$$z_t \;=\; (1 - t)\, x_0 \;+\; t\, x_1$$</div>
 <div class="eq-label">$x_0$ is clean data, $x_1 \sim \mathcal{N}(0,I)$, $t \in [0,1]$. At $t=0$ you have data; at $t=1$ you have noise. Any source distribution works; Gaussian is convenient, not required.</div>
 
-The velocity at any point on this path is constant: $v = x_0 - x_1$. It is directly computable from a training pair $(x_0, x_1)$, no integration or simulation needed. You train a network to predict this velocity at every $(z_t, t)$, which is supervised regression on a ground-truth target.
+The velocity at any point on this path is constant: $v = x_0 - x_1$. It is directly computable from a training pair $(x_0, x_1)$, no integration or simulation needed. A neural network $v_\theta(z_t, t)$ is then trained to predict this velocity at every $(z_t, t)$, by minimising the regression loss $\lVert v_\theta(z_t, t) - (x_0 - x_1) \rVert^2$. Clean supervised learning against a ground-truth target.
 
 Inference is still slow, though. Even though each individual path $x_0 \leftrightarrow x_1$ is a straight line, the *marginal* velocity field is not. At any given noisy image $z_t$, many different clean images $x_0$ are plausible, not just one. Each candidate has its own straight-line velocity pointing in a slightly different direction. The network has to output the probability-weighted average of all those directions, which traces a curved path through image space. Following a curved path with only local velocity information requires many small steps.
 
@@ -790,44 +873,11 @@ For this to work, the function needs two properties. First, the **boundary condi
 
 Second, the **consistency condition**: any two points on the *same* PF-ODE trajectory must map to the same $x_0$. If two different noisy versions of the same clean image both pass through the network, they should produce identical outputs. Without this, the network is only locally trained at individual points and the function never becomes globally coherent. The figure below shows what this looks like: every point along one trajectory is required to map to the same destination.
 
-<figure class="fig-card">
-<div class="fig-card-title">Consistency condition: every point on the trajectory maps to the same x₀</div>
-<div class="fig-card-inner">
-<svg viewBox="0 0 680 200" role="img" style="font-family:'Iowan Old Style',Charter,Georgia,serif;">
-<title>Consistency condition: all trajectory points map to the same x0</title>
-<desc>A curved PF-ODE trajectory with four points. Dashed arrows from each point converge on the same x0 endpoint.</desc>
-<defs>
-  <marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-    <path d="M1 1L9 5L1 9" fill="none" stroke="context-stroke" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-  </marker>
-  <radialGradient id="x0Blob" cx="50%" cy="50%" r="50%">
-    <stop offset="0%" stop-color="var(--fig-sage)" stop-opacity="0.30"/>
-    <stop offset="100%" stop-color="var(--fig-sage)" stop-opacity="0"/>
-  </radialGradient>
-</defs>
-<!-- trajectory -->
-<path d="M 58 162 C 140 132, 220 154, 302 126 C 362 108, 412 98, 470 88" fill="none" stroke="var(--fig-ink-soft)" stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>
-<circle cx="58"  cy="162" r="5.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
-<circle cx="190" cy="145" r="5.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
-<circle cx="308" cy="123" r="5.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
-<circle cx="410" cy="101" r="5.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
-<text font-size="11" fill="var(--fig-ink-mute)" x="58"  y="182" text-anchor="middle">t=1</text>
-<text font-size="11" fill="var(--fig-ink-mute)" x="190" y="165" text-anchor="middle">t=0.7</text>
-<text font-size="11" fill="var(--fig-ink-mute)" x="308" y="143" text-anchor="middle">t=0.4</text>
-<text font-size="11" fill="var(--fig-ink-mute)" x="410" y="121" text-anchor="middle">t=0.1</text>
-<!-- x0 destination -->
-<circle cx="596" cy="64" r="22" fill="url(#x0Blob)"/>
-<circle cx="596" cy="64" r="9" fill="var(--fig-sage)" opacity="0.85"/>
-<text font-size="13" font-weight="600" fill="var(--fig-paper)" x="596" y="68" text-anchor="middle">x₀</text>
-<!-- arrows -->
-<line x1="64"  y1="157" x2="584" y2="68" stroke="var(--fig-blue)" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#ar3)" opacity="0.75"/>
-<line x1="196" y1="141" x2="584" y2="66" stroke="var(--fig-blue)" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#ar3)" opacity="0.75"/>
-<line x1="314" y1="119" x2="584" y2="65" stroke="var(--fig-blue)" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#ar3)" opacity="0.75"/>
-<line x1="415" y1="97"  x2="584" y2="65" stroke="var(--fig-blue)" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#ar3)" opacity="0.75"/>
-<text font-size="11.5" font-style="italic" fill="var(--fig-ink-mute)" x="340" y="24" text-anchor="middle">f(zₜ, t) = x₀   for every t on the same trajectory</text>
-</svg>
-</div>
-<figcaption>The consistency condition says all these dashed arrows must land at exactly the same $x_0$. The function is consistent across the whole trajectory, not just at individual points.</figcaption>
+<figure class="fig-paper">
+<div class="fig-paper-title">From the paper · Song et al. 2023, Fig. 1</div>
+<img src="https://ar5iv.labs.arxiv.org/html/2303.01469/assets/figures/scheme.jpg"
+     alt="Figure 1 from Song et al. (2023). A row of images along the probability flow ODE from clean data (a dog) at t=0 progressively to pure noise at t=T. Red arrows below show the consistency function f_theta mapping multiple noisy intermediate points (x_t, x_t', x_T) all back to the same clean endpoint x_0.">
+<figcaption>The consistency function $f_\theta$ takes any point on the PF-ODE trajectory and maps it back to the same clean endpoint $x_0$. The condition is consistency across the whole trajectory, not just at individual points.</figcaption>
 </figure>
 
 How do you actually build $f_\theta$ so the boundary identity $f_\theta(x_0, \varepsilon) = x_0$ holds? The naive way is piecewise: define $f_\theta(x, t) = x$ when $t = \varepsilon$ and $f_\theta(x, t) = F_\theta(x, t)$ otherwise, where $F_\theta$ is a free neural network. This works for the discrete-time loss but breaks the moment you want continuous-time training, because the function is not differentiable at $\varepsilon$ and the continuous-time loss requires a clean derivative through $f_\theta$.
@@ -1207,14 +1257,14 @@ Drag the split point $u$ in the figure below to see this in action: the direct j
     ctx.fillText('u = '+pct.toFixed(2),sX,baseY+24);
 
     ctx.fillStyle=muted;
-    ctx.fillText('direct: G(z_t, t→r)',(rX+tX)/2,baseY-63);
+    ctx.fillText('direct: G(zₜ, t→r)',(rX+tX)/2,baseY-63);
     ctx.fillStyle=amber;
     ctx.fillText('1st leg: t→u',(sX+tX)/2,baseY+76);
     ctx.fillStyle=teal;
     ctx.fillText('2nd leg: u→r',(rX+sX)/2,baseY+76);
 
     ctx.fillStyle=inkSoft; ctx.font='11px "Iowan Old Style",Charter,Georgia,serif';
-    ctx.fillText('semigroup: G(z_t, t, r) = G( G(z_t, t, u), u, r )  for any u',LW/2,LH-8);
+    ctx.fillText('semigroup:  G(zₜ, t, r) = G( G(zₜ, t, u), u, r )  for any u',LW/2,LH-8);
   }
 
   window.drawSemi = draw;
@@ -1286,11 +1336,11 @@ How do you train this? You cannot compute the ground-truth $z_{t-d}$ directly, b
 <circle cx="356" cy="110" r="6"   fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.3"/>
 <circle cx="600" cy="110" r="7.5" fill="var(--fig-paper)" stroke="var(--fig-ink-soft)" stroke-width="1.5"/>
 <!-- labels under nodes -->
-<text font-size="12" fill="var(--fig-sage)"     x="100" y="134" text-anchor="middle">z_(t−d)</text>
+<text font-size="12" fill="var(--fig-sage)"     x="100" y="134" text-anchor="middle">z<tspan font-size="9" baseline-shift="sub">t−d</tspan></text>
 <text font-size="10.5" font-style="italic" fill="var(--fig-ink-mute)" x="100" y="150" text-anchor="middle">landing point</text>
-<text font-size="12" fill="var(--fig-ink-soft)" x="356" y="134" text-anchor="middle">z_(t−d/2)</text>
+<text font-size="12" fill="var(--fig-ink-soft)" x="356" y="134" text-anchor="middle">z<tspan font-size="9" baseline-shift="sub">t−d/2</tspan></text>
 <text font-size="10.5" font-style="italic" fill="var(--fig-ink-mute)" x="356" y="150" text-anchor="middle">halfway</text>
-<text font-size="12" fill="var(--fig-ink-soft)" x="600" y="134" text-anchor="middle">z_t</text>
+<text font-size="12" fill="var(--fig-ink-soft)" x="600" y="134" text-anchor="middle">z<tspan font-size="9" baseline-shift="sub">t</tspan></text>
 <text font-size="10.5" font-style="italic" fill="var(--fig-ink-mute)" x="600" y="150" text-anchor="middle">start</text>
 <!-- EMA half-step arcs (drawn left-to-right but read right-to-left in time) -->
 <path d="M 108 110 Q 228 58 348 110" fill="none" stroke="var(--fig-sage)"  stroke-width="1.6" stroke-linecap="round" marker-end="url(#ar4b)"/>
@@ -1356,13 +1406,13 @@ Distilling the jump function from a teacher raises a practical question: how do 
 </thead>
 <tbody>
 <tr>
-  <td class="label">EMD <span class="muted" style="font-weight:400;">(Eulerian)</span></td>
+  <td class="label">EMD <span class="muted" style="font-weight:400;">(Eulerian Map Distillation)</span></td>
   <td>Endpoint $s$ fixed, perturb starting time $t$; check that $f_\theta(x_t, t, s)$ is invariant as $t$ moves along the teacher trajectory.</td>
   <td>This loss generalises both the continuous-time consistency loss (when $s = 0$) and the flow matching loss (as $s \to t$); structurally the right object to optimise.</td>
   <td class="label">Primary loss in all main results.</td>
 </tr>
 <tr>
-  <td class="label">LMD <span class="muted" style="font-weight:400;">(Lagrangian)</span></td>
+  <td class="label">LMD <span class="muted" style="font-weight:400;">(Lagrangian Map Distillation)</span></td>
   <td>Starting point $t$ fixed, perturb endpoint $s$; check that $f_\theta(x_t, t, s)$ moves correctly as $s$ slides along the trajectory it predicts.</td>
   <td>Uses the teacher's instantaneous velocity at the predicted point, so it stays faithful to the flow geometry the teacher defines.</td>
   <td class="label">Used as a stabiliser; on its own produces over-smoothed samples on real images, per the paper's ablations.</td>
