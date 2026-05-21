@@ -163,6 +163,22 @@ figure.fig-paper > figcaption {
 .ref-list li { margin-bottom: 0.35rem; line-height: 1.5; }
 sup.cite a { color: var(--fig-blue); text-decoration: none; font-size: 11px; vertical-align: super; }
 sup.cite a:hover { text-decoration: underline; }
+/* Footnotes: visually distinct from citations — smaller, muted, italic numeral */
+sup[role="doc-noteref"] a.footnote {
+  color: var(--fig-ink-mute);
+  text-decoration: none;
+  font-size: 10px;
+  font-style: italic;
+  vertical-align: super;
+  padding: 0 0.05em;
+}
+sup[role="doc-noteref"] a.footnote::before { content: "†"; margin-right: 0.1em; }
+sup[role="doc-noteref"] a.footnote:hover { color: var(--fig-ink); text-decoration: underline; }
+.footnotes { font-size: 13px; color: var(--fig-ink-soft); border-top: 1px solid var(--fig-frame); margin-top: 2.4rem; padding-top: 0.8rem; }
+.footnotes ol { padding-left: 1.2rem; }
+.footnotes li { margin-bottom: 0.4rem; line-height: 1.55; }
+.footnotes a.reversefootnote { color: var(--fig-ink-mute); text-decoration: none; margin-left: 0.3em; }
+.footnotes a.reversefootnote:hover { color: var(--fig-ink); }
 .post-table-wrap { overflow-x: auto; margin: 1.4rem 0 1.6rem; }
 .post-table {
   border-collapse: collapse;
@@ -225,7 +241,9 @@ Starting from the goal and working backwards: what does a network need to learn 
 
 ## Generation as transport
 
-Generating a sample (say, an image of a dog) is moving probability mass from a noise distribution to the data distribution. In general this transport can be either stochastic (a forward and reverse diffusion SDE) or deterministic (an ODE); every method in this post lives in the deterministic regime, on a path called the probability flow ODE (PF-ODE) <sup class="cite"><a href="#ref-songsde2021">[11]</a></sup>. Parameterise it by time $t$ running from $t=1$ (pure Gaussian noise) to $t=0$ (a clean data sample, like our dog). Write $z_t$ for the point on the trajectory at time $t$, and $x_0$ for the clean data sample at $t=0$. The PF-ODE shares the same marginal distributions at each $t$ as the stochastic diffusion process, but without the randomness, so you can run it forwards or backwards exactly.
+Generating a sample (say, an image of a dog) is moving probability mass from a noise distribution to the data distribution. In general this transport can be either stochastic (a forward and reverse diffusion SDE) or deterministic (an ODE); every method in this post lives in the deterministic regime, on a path called the probability flow ODE (PF-ODE) <sup class="cite"><a href="#ref-songsde2021">[11]</a></sup>.[^pfode-marginal] Parameterise it by time $t$ running from $t=1$ (pure Gaussian noise) to $t=0$ (a clean data sample, like our dog). Write $z_t$ for the point on the trajectory at time $t$, and $x_0$ for the clean data sample at $t=0$. Because it is deterministic, you can run it forwards or backwards exactly.
+
+[^pfode-marginal]: A foundational result in the diffusion-models literature, and the entire reason an ODE formulation exists at all: the PF-ODE shares the same time-marginal distributions $p_t(x)$ as the stochastic diffusion process for every $t$, even though one is deterministic and the other is not. The PF-ODE drift is $\frac{dx}{dt} = f(x,t) - \tfrac{1}{2}g(t)^2 \nabla_x \log p_t(x)$, where $f$ and $g$ are the SDE's drift and diffusion coefficients. The proof is direct: both processes induce the same Fokker–Planck equation for $p_t(x)$, so any solution to one is a solution to the other at the marginal level (Song et al. 2021, Appendix D.1). Trajectories differ, marginals do not.
 
 Think of a soap bubble. Press it slowly and the surface deforms; every point on the film follows a smooth path. Release the pressure and it snaps back along the exact same path, not an approximation. The PF-ODE is that elastic surface in probability space, and $z_t$ is one spot on the surface at time $t$.
 
@@ -369,16 +387,18 @@ The core problem with step-by-step integration: the local velocity at $z_t$ tell
 Two strategies:
 
 1. **Jump to the endpoint directly.** Learn a function that maps any trajectory point to $x_0$ in one shot. This is the consistency model <sup class="cite"><a href="#ref-song2023">[2]</a></sup> idea.
-2. **Jump to any point, not just the endpoint.** Learn a two-time function that can jump from any $t$ to any $s < t$ in one step. This is the flow map idea, and it is what consistency trajectory models (CTM), shortcut models, and MeanFlow (all coming up) build on.
+2. **Jump to any point, not just the endpoint.** Learn a two-time function that can jump from any $t$ to any $s < t$ in one step. This is the flow map idea, and it is what consistency trajectory models (CTM), shortcut models, and MeanFlow build on.
 
 ---
 
 ## Flow matching
 
-Flow matching is the foundation every one-step method either builds on or borrows training structure from, so the rest of the post assumes the setup. Flow matching <sup class="cite"><a href="#ref-lipman2022">[1]</a></sup> frames generation as *transport*: learn a continuous-time flow that moves probability mass from one distribution to another. The source and destination can be any two distributions; unlike diffusion, which fixes the noisy end to Gaussian noise by construction, flow matching has no such constraint. In practice, the simplest useful case uses Gaussian noise as the source, giving straight-line paths between noise and data:
+Flow matching is the foundation every one-step method either builds on or borrows training structure from, so the rest of the post assumes the setup. Flow matching <sup class="cite"><a href="#ref-lipman2022">[1]</a></sup> frames generation as *transport*: learn a continuous-time flow that moves probability mass from one distribution to another. The source and destination can be any two distributions; unlike diffusion, which fixes the noisy end to Gaussian noise by construction, flow matching has no such constraint. In practice, the simplest useful case uses Gaussian noise as the source, giving straight-line paths between noise and data:[^fm-source]
+
+[^fm-source]: Any source distribution works in the flow-matching framework; Gaussian is convenient because the velocity calculation collapses cleanly, not because it is required. Recent work on optimal-transport flow matching exploits this freedom directly.
 
 <div class="eq">$$z_t \;=\; (1 - t)\, x_0 \;+\; t\, x_1$$</div>
-<div class="eq-label">$x_0$ is clean data, $x_1 \sim \mathcal{N}(0,I)$, $t \in [0,1]$. At $t=0$ you have data; at $t=1$ you have noise. Any source distribution works; Gaussian is convenient, not required.</div>
+<div class="eq-label">$x_0$ is clean data, $x_1 \sim \mathcal{N}(0,I)$, $t \in [0,1]$. At $t=0$ you have data; at $t=1$ you have noise.</div>
 
 The velocity at any point on this path is constant: $v = x_0 - x_1$. It is directly computable from a training pair $(x_0, x_1)$, no integration or simulation needed. A neural network $v_\theta(z_t, t)$ is then trained to predict this velocity at every $(z_t, t)$, by minimising the regression loss $\lVert v_\theta(z_t, t) - (x_0 - x_1) \rVert^2$. Clean supervised learning against a ground-truth target.
 
@@ -889,7 +909,9 @@ The fix the paper uses, and the one that has stuck since, is to **wire the bound
 
 At $t = \varepsilon$ the formula collapses to $f_\theta(x, \varepsilon) = 1 \cdot x + 0 \cdot F_\theta = x$. The boundary condition is true by construction; the loss never has to enforce it. Because $c_\text{skip}$, $c_\text{out}$, and $F_\theta$ are all differentiable in $t$, so is $f_\theta$. That matters for continuous-time consistency training, which needs a clean derivative of $f_\theta$ with respect to $t$.
 
-The specific functional forms for $c_\text{skip}$ and $c_\text{out}$ are inherited directly from the EDM (elucidating diffusion models) preconditioning <sup class="cite"><a href="#ref-karras2022">[10]</a></sup>, which is a deliberate choice: it lets consistency models drop into existing diffusion architectures with no structural changes, just a different head and loss.
+The specific functional forms for $c_\text{skip}$ and $c_\text{out}$ are inherited directly from the EDM (elucidating diffusion models) preconditioning <sup class="cite"><a href="#ref-karras2022">[10]</a></sup>.[^edm-precond]
+
+[^edm-precond]: This is a deliberate inheritance choice, not a derivation. EDM uses these schedules to keep the network's input and output magnitudes well-conditioned across noise levels (specifically $c_\text{skip}(t) = \sigma_\text{data}^2 / (\sigma_\text{data}^2 + t^2)$ and $c_\text{out}(t) = t \cdot \sigma_\text{data} / \sqrt{\sigma_\text{data}^2 + t^2}$ in the EDM noise parameterisation). Borrowing them lets consistency models drop into existing diffusion architectures with no structural changes, just a different head and loss.
 
 <figure class="fig-card">
 <div class="fig-card-title">Schedule weights along the PF-ODE</div>
@@ -1139,9 +1161,15 @@ Neither extreme works. The fix is a curriculum: start with small $N$ (coarse, st
 
 What I described above is the *discrete-time* formulation: pick a grid of $N$ noise levels, define adjacent pairs on that grid, and run the curriculum on $N$. The grid is a crutch. It exists because we cannot directly enforce the consistency condition over a continuum, only at sampled pairs of points. The whole curriculum on $N$ is just managing the bias-variance tradeoff that the grid introduces.
 
-The *continuous-time* formulation removes the grid entirely. Differentiating the consistency condition $f(z_t, t) = f(z_{t-\Delta}, t-\Delta)$ as $\Delta \to 0$ gives a PDE-style identity: $\partial_t f + v(z_t, t) \cdot \partial_z f = 0$ along the PF-ODE. The training loss enforces this identity at sampled $(z_t, t)$ pairs, no adjacent point needed, no grid to schedule. sCT and sCD (the simplified continuous-time variants of CT and CD) <sup class="cite"><a href="#ref-sct2024">[9]</a></sup> use this formulation and produce sharper results than the discrete-time version, because the bias from finite $\Delta$ is gone. The cost is a Jacobian-vector product (JVP) through the network to compute $\partial_z f \cdot v$. A JVP is the Jacobian times a vector, but you never have to materialise the full Jacobian: forward-mode autodiff computes it in a single modified forward pass at roughly the same cost as a normal one. (The <a href="https://docs.jax.dev/en/latest/notebooks/autodiff_cookbook.html" target="_blank" rel="noopener noreferrer">JAX autodiff cookbook</a> is a good primer on JVPs and forward-mode autodiff if you want a refresher.) MeanFlow uses the same JVP machinery later for a different purpose.
+The *continuous-time* formulation removes the grid entirely. Differentiating the consistency condition $f(z_t, t) = f(z_{t-\Delta}, t-\Delta)$ as $\Delta \to 0$ gives a PDE-style identity: $\partial_t f + v(z_t, t) \cdot \partial_z f = 0$ along the PF-ODE.[^cm-pde] The training loss enforces this identity at sampled $(z_t, t)$ pairs, no adjacent point needed, no grid to schedule. sCT and sCD (the simplified continuous-time variants of CT and CD) <sup class="cite"><a href="#ref-sct2024">[9]</a></sup> use this formulation and produce sharper results than the discrete-time version, because the bias from finite $\Delta$ is gone. The cost is a Jacobian-vector product (JVP) through the network to compute $\partial_z f \cdot v$. A JVP is the Jacobian times a vector, but you never have to materialise the full Jacobian: forward-mode autodiff computes it in a single modified forward pass at roughly the same cost as a normal one.[^jvp-primer] MeanFlow uses the same JVP machinery later for a different purpose.
 
-Consistency models were the first method to show you can generate decent images in one step, which was not obvious before 2023. iCT (improved consistency training) <sup class="cite"><a href="#ref-ict2023">[3]</a></sup> improved substantially over the original with a bundle of training stability tricks: pseudo-Huber losses, a lognormal noise schedule, and progressive discretisation step doubling. Even those required considerable engineering effort just to be reliable.
+[^cm-pde]: Where the PDE comes from: differentiate $f(z_t, t) = f(z_{t-\Delta}, t-\Delta)$ with respect to $\Delta$ at $\Delta = 0$. The right side gives $-\partial_t f - \partial_z f \cdot (dz/dt)$. Along the PF-ODE, $dz/dt$ is the velocity $v(z_t, t)$. Setting the derivative to zero (so consistency holds for *every* small $\Delta$, not just at sampled pairs) gives $\partial_t f + v(z_t, t) \cdot \partial_z f = 0$. This is the transport equation for $f$ along the flow, the method-of-characteristics statement that $f$ is constant along PF-ODE trajectories.
+
+[^jvp-primer]: The <a href="https://docs.jax.dev/en/latest/notebooks/autodiff_cookbook.html" target="_blank" rel="noopener noreferrer">JAX autodiff cookbook</a> is a good primer on JVPs and forward-mode autodiff if you want a refresher.
+
+Consistency models were the first method to show you can generate decent images in one step, which was not obvious before 2023. iCT (improved consistency training) <sup class="cite"><a href="#ref-ict2023">[3]</a></sup> improved substantially over the original with a bundle of training stability tricks: pseudo-Huber losses, a lognormal noise schedule, and progressive discretisation step doubling.[^ict-tricks] Even those required considerable engineering effort just to be reliable.
+
+[^ict-tricks]: Briefly: *pseudo-Huber* is a smooth approximation to the Huber loss, which behaves like $L_2$ near zero and like $L_1$ further out; it cuts the variance contribution from a few large errors that otherwise destabilise consistency training. The *lognormal noise schedule* concentrates training samples around noise levels where the loss is most informative, instead of uniformly over $t$. *Progressive step doubling* runs the discretisation curriculum on a $\log_2 N$ schedule, doubling $N$ at preset training milestones rather than tuning a continuous ramp. iCT also drops the EMA target network used in the original CT, which is a more important change than its placement in the trick list suggests.
 
 The training target is always *behavioural*: it constrains what the network outputs at adjacent pairs of points, not what the underlying field should be. There is no ground truth for $f(z_t, t)$ that exists independently of the network. The optimal function is defined only implicitly, via the consistency condition and boundary condition, and can only be learned by having the network agree with itself across adjacent pairs. This is inherently noisy and sensitive to hyperparameters.
 
@@ -1388,7 +1416,9 @@ Both CTM and Shortcut models work with the same flow-map object: a two-time netw
 
 This framing resolves something that was implicit in CTM but never fully confronted. CTM trains the jump function so that composed shorter jumps reproduce longer ones, but it never asks whether the jump function is actually correct, only whether it is internally consistent. A pretrained teacher changes that: the teacher's ODE trajectories are ground truth, and the student's jumps are trained to trace them. Internal consistency is still enforced, but now there is an external anchor.
 
-The paper also proves that consistency models eventually get worse with more steps. **Theorem 3.1**: for a Gaussian data source, even a *suboptimal* consistency model (the result holds for models arbitrarily close to optimal in $L_2$) admits some step count $N$ beyond which the Wasserstein-2 distance to the true distribution **increases** as you add more sampling steps. The empirical version is just as stark: with the standard EDM noise scale, CMs typically peak at around 2 steps and then degrade. The mechanism is renoising. CMs jump to clean between steps and reinject Gaussian noise to get back onto the trajectory; over many steps that injected noise does not align with the teacher's PF-ODE trajectory and errors compound.
+The paper also proves that consistency models eventually get worse with more steps. **Theorem 3.1**: for an isotropic Gaussian data distribution, there exist consistency models arbitrarily close to optimal in $L_2$ such that increasing the sampling step count beyond some $N$ *increases* the Wasserstein-2 distance to the true distribution.[^ayf-thm] The empirical version (Fig. 5 of the paper, on isotropic Gaussian data with standard deviation $c = 0.5$) is just as stark: multi-step CM sampling peaks around 2 steps and then degrades. The mechanism is renoising. CMs jump to clean between steps and reinject Gaussian noise to get back onto the trajectory; over many steps that injected noise does not align with the teacher's PF-ODE trajectory and errors compound.
+
+[^ayf-thm]: To be precise about the existential form: the theorem says that for any $\delta > 0$, there exists a consistency model $f$ with $\mathbb{E}\lVert f(x_t,t) - f^{\ast}(x_t,t)\rVert_2^2 < \delta$ uniformly in $t$, *and* some $N$ beyond which extra sampling steps make the generated distribution worse in $W_2$. It is therefore not a statement about every imperfect CM, but about the existence of arbitrarily-close-to-optimal ones with this pathology, which is enough to make the theorem load-bearing in the post's argument: the failure mode is not a "you trained badly" artifact. The proof and the Gaussian assumption together yield a closed-form analysis; whether the result extends to non-Gaussian data is not formally settled.
 
 Flow maps avoid this by construction: they map directly between any two noise levels in one step, never leaving the trajectory. The paper does not formally prove they monotonically improve, but empirically they keep getting better with more steps, exactly where CMs fall apart.
 
@@ -1423,7 +1453,7 @@ Distilling the jump function from a teacher raises a practical question: how do 
 
 To replace classifier-free guidance during distillation, AYF uses **autoguidance**: the teacher is mixed with a weaker checkpoint of itself, $v_\phi^{\text{guided}} = \lambda v_\phi + (1 - \lambda) v_\phi^{\text{weak}}$ with $\lambda$ sampled uniformly from $[1, 3]$. This steers samples away from low-quality regions without the overshooting failure mode CFG can have.
 
-The headline result (full numbers in the results table at the end): a small AYF student beats much larger distillation baselines at fewer network function evaluations (NFEs). The efficiency gain comes from the teacher anchor: unlike CTM, the student does not waste capacity reconciling self-generated targets at high noise levels where those targets are most unreliable.
+Empirically, a small AYF student beats much larger distillation baselines at fewer network function evaluations (NFEs). The efficiency comes from the teacher anchor: unlike CTM, the student does not waste capacity reconciling self-generated targets at high noise levels where those targets are most unreliable. Full numbers are in the table at the end of the post.
 
 ---
 
@@ -1467,7 +1497,7 @@ Now differentiate both sides with respect to $t$. The right side uses the fundam
 <div class="eq">$$\bar{u}(z_t,\, r,\, t) \;=\; v(z_t,\, t) \;-\; (t - r)\cdot \frac{d\bar{u}}{dt}$$</div>
 <div class="eq-label">The MeanFlow identity. $v(z_t, t)$ is the instantaneous flow matching velocity (ground truth from data). $d\bar{u}/dt$ is the total time derivative of the network output.</div>
 
-This identity gives a target for $\bar{u}$ with no integrals and no ODE simulation. The two pieces on the right side play very different roles. The first, $v(z_t, t)$, is data-supervised, the same target flow matching uses. The second, $d\bar{u}/dt$, is the network differentiating its own output. So the MeanFlow target is a *mix* of data supervision and self-reference; the identity is exact, but the self-referential half still has to be stabilised. That tension is what the TFM/TC conflict (next section) is about.
+This identity gives a target for $\bar{u}$ with no integrals and no ODE simulation. The two pieces on the right side play very different roles. The first, $v(z_t, t)$, is data-supervised, the same target flow matching uses. The second, $d\bar{u}/dt$, is the network differentiating its own output. So the MeanFlow target is a *mix* of data supervision and self-reference; the identity is exact, but the self-referential half still has to be stabilised. That tension is what the next subsection is about.
 
 ### Computing $d\bar{u}/dt$: the Jacobian-vector product
 
