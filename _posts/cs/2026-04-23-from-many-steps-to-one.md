@@ -1476,151 +1476,95 @@ The term $d\bar{u}/dt$ is a total derivative: it measures how the network output
 <div class="eq">$$\frac{d\bar{u}}{dt} \;=\; \frac{\partial \bar{u}}{\partial z}\cdot v(z_t,\,t) \;+\; \frac{\partial \bar{u}}{\partial t}$$</div>
 <div class="eq-label">First term: Jacobian of $\bar{u}$ w.r.t. its input $z$, multiplied by the velocity vector (a JVP). Second term: explicit partial derivative w.r.t. $t$.</div>
 
-The first term is a Jacobian-vector product (JVP): the Jacobian of the network output with respect to its input $z$, dotted with the velocity vector $v(z_t, t)$. This is computed via forward-mode automatic differentiation, a single modified forward pass through the network. In PyTorch: `torch.func.jvp`. In JAX: `jax.jvp`. The overhead is roughly 20% compared to standard flow matching training, which is modest; far less than running a full second forward pass for a teacher network.
+The first term is a Jacobian-vector product (JVP): the Jacobian of the network output with respect to its input $z$, dotted with the velocity vector $v(z_t, t)$. This is computed via forward-mode automatic differentiation, a single modified forward pass through the network. In PyTorch: `torch.func.jvp`. In JAX: `jax.jvp`. The overhead in practice is a fraction of an extra forward pass, much less than running a full second forward pass for a teacher network.
 
 The full training loss applies stop-gradient to the entire target to avoid second-order gradients:
 
 <div class="eq">$$\mathcal{L}_\text{MF} \;=\; \mathbb{E}\,\bigl\lVert \bar{u}_\theta(z_t,\,r,\,t) \;-\; \operatorname{sg}\!\Bigl[v_\text{FM}(z_t,t) \;-\; (t-r)\cdot\tfrac{d\bar{u}_\theta}{dt}\Bigr] \bigr\rVert^2$$</div>
 <div class="eq-label">Stop-gradient prevents gradients from flowing through the target. $v_\text{FM}$ is the flow matching ground-truth velocity.</div>
 
----
+### Why this loss is hard to train
 
-## The TFM/TC conflict
+α-Flow <sup class="cite"><a href="#ref-alphaflow2025">[7]</a></sup> takes apart the MeanFlow loss and shows that an exact identity does not guarantee a stable optimisation: the loss splits into two components that fight each other in the early stages of training. The decomposition is called TFM/TC.
 
-α-Flow <sup class="cite"><a href="#ref-alphaflow2025">[7]</a></sup> takes apart the MeanFlow loss and shows why it is hard to train. An exact identity does not guarantee a stable optimisation: MeanFlow's loss splits into two components that fight each other in the early stages of training. The decomposition is called TFM/TC.
-
-### The 75% border case
-
-When $r = t$, the interval collapses to a single point, and the average velocity over a zero-length interval equals the instantaneous velocity. The MeanFlow identity reduces to $\bar{u} = v$, and the loss becomes exactly the standard flow matching loss. MeanFlow uses $r = t$ for 75% of training samples. Why spend three-quarters of training on the degenerate case that ignores the average velocity entirely?
+When $r = t$, the interval collapses to a single point and the average velocity over a zero-length interval equals the instantaneous velocity. The MeanFlow identity reduces to $\bar{u} = v$, and the loss becomes exactly the standard flow matching loss. MeanFlow uses $r = t$ for a large fraction of training samples (around three-quarters in the paper's main configuration). Why spend that much of training on the degenerate case that ignores the average velocity entirely?
 
 The decomposition is:
 
 <div class="eq">$$\mathcal{L}_\text{MF} \;=\; \mathcal{L}_\text{TFM} \;+\; \mathcal{L}_\text{TC}$$</div>
 <div class="eq-label">TFM = trajectory flow matching (data-supervised). TC = trajectory consistency (JVP-based).</div>
 
-**TFM** is the flow matching component. It pushes the network to correctly predict the instantaneous velocity field, supervised directly by data and stable to optimise. The 75% sampling ensures TFM dominates early training.
+**TFM** is the flow matching component. It pushes the network to predict the instantaneous velocity field, supervised directly by data and stable to optimise. The large-fraction $r=t$ sampling ensures TFM dominates early training.
 
-**TC** is the consistency enforcement component. It uses the JVP to ensure predictions compose correctly across intervals. This is the part that gives MeanFlow its structure beyond plain flow matching. But TC depends on a JVP computed through the network, which is noisy at high noise levels.
+**TC** is the consistency enforcement component. It uses the JVP to ensure predictions compose correctly across intervals. This is the part that gives MeanFlow its structure beyond plain flow matching, but it depends on a JVP through the network, which is noisy at high noise levels.
 
-### Why TC is noisy at high $t$
+Why? The TC gradient uses the JVP: the Jacobian of the network output with respect to input $z_t$, multiplied by the velocity vector. At high $t$ (near pure noise) the input carries almost no semantic signal. The network's weights at this early stage are unstructured, so the Jacobian of an unstructured network with respect to its input is essentially random: large in magnitude, arbitrary in direction. Multiplying this random matrix by the velocity vector produces a JVP that points nowhere useful.
 
-The TC gradient uses the JVP: the Jacobian of the network output with respect to input $z_t$, multiplied by the velocity vector. At high $t$ (near pure noise) the input carries almost no semantic signal. The network's weights at this early stage are unstructured. The Jacobian of an unstructured network with respect to its input is essentially random: large in magnitude, arbitrary in direction. Multiplying this random matrix by the velocity vector produces a JVP that points nowhere useful.
+The consequence is that TC gradients at high $t$ are large, random vectors that actively conflict with TFM gradients. α-Flow documents this conflict and uses it to motivate a curriculum: a parameter $\lambda \in [0,1]$ interpolates between pure TFM ($\lambda=0$, just flow matching, completely stable) and full MeanFlow ($\lambda=1$). Training starts at $\lambda=0$ and increases as the velocity field converges, by which time the Jacobian at high $t$ begins to encode which direction the trajectory is heading, and the JVP carries real signal.
 
-The consequence: TC gradients at high $t$ early in training are large, random vectors. They actively conflict with TFM gradients. α-Flow <sup class="cite"><a href="#ref-alphaflow2025">[7]</a></sup> measured this directly: the cosine similarity between TFM and TC gradient vectors is strongly negative early in training. They are pulling the network in opposite directions.
-
-The fix is the **$\lambda$ curriculum**. The parameter $\lambda \in [0,1]$ interpolates between pure TFM ($\lambda=0$) and full MeanFlow ($\lambda=1$). Start training with $\lambda=0$, which is just flow matching, completely stable. As training progresses and the velocity field converges, the network starts genuinely learning the PF-ODE structure: the Jacobian at high $t$ begins to encode which direction the trajectory is heading, and the JVP becomes a reliable signal rather than noise. Then increase $\lambda$ to bring TC online. By the time TC is fully active, the network has enough PF-ODE structure that the JVP carries real signal.
-
-Same coarse-to-fine principle as the discretisation curriculum in consistency models, applied to a continuous parameter. Stabilise the data-supervised component first; turn on the self-referential one only after the velocity field has converged enough for the JVP to mean something.
+Same coarse-to-fine principle as the discretisation curriculum in consistency models, applied to a continuous parameter: stabilise the data-supervised component first; turn on the self-referential one only after the velocity field has converged enough for the JVP to mean something.
 
 ---
 
-## A unified view
+## Where this leaves us
 
-Stepping back across all these methods, the same training mechanics keep reappearing: a composition rule, a curriculum, an EMA copy on the target side, a growing step size. Different papers package these differently, but it is one principle being refined.
+Stepping back, the methods sit on a continuum from cheap-and-local training signals to expensive-and-global ones.
 
-<figure class="fig-card">
-<div class="fig-card-title">A unified view of the family</div>
-<div class="fig-card-inner">
-<p style="font-size:12px;color:var(--fig-ink-soft);margin:0 0 10px;text-align:center;">Click any method to see details</p>
-<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;" id="unifiedGrid"></div>
-<div id="unifiedDetail" style="background:var(--fig-paper);border-radius:6px;padding:12px 16px;font-size:13px;color:var(--fig-ink-soft);line-height:1.6;min-height:60px;"></div>
-<div style="margin-top:12px;position:relative;height:28px;">
-  <div style="position:absolute;left:0;right:0;top:14px;height:1px;background:var(--fig-frame);"></div>
-  <div id="alphaThumb" style="position:absolute;top:6px;width:14px;height:14px;border-radius:50%;background:var(--fig-blue);border:2px solid var(--fig-paper);box-shadow:0 0 0 1px var(--fig-blue);transition:left 0.4s;pointer-events:none;"></div>
-  <div style="position:absolute;left:0;top:24px;font-size:11px;color:var(--fig-ink-mute);">α=0  stable</div>
-  <div style="position:absolute;right:0;top:24px;font-size:11px;color:var(--fig-ink-mute);text-align:right;">α=1  expressive</div>
+<div class="post-table-wrap">
+<table class="post-table">
+<thead>
+<tr>
+  <th>Method</th>
+  <th>Composition</th>
+  <th>Training target</th>
+  <th>Inference</th>
+  <th>Per-step cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class="label">Flow matching</td>
+  <td class="muted">none</td>
+  <td>data-supervised</td>
+  <td class="muted">multi-step</td>
+  <td>regression</td>
+</tr>
+<tr>
+  <td class="label">Consistency models</td>
+  <td>jump to $x_0$</td>
+  <td class="muted">self-referential (EMA)</td>
+  <td>one-step</td>
+  <td>regression</td>
+</tr>
+<tr>
+  <td class="label">CTM / Shortcut</td>
+  <td>any-pair / discrete sizes</td>
+  <td class="muted">self-referential (EMA)</td>
+  <td>one- or few-step</td>
+  <td>regression</td>
+</tr>
+<tr>
+  <td class="label">Align Your Flow</td>
+  <td>any-pair via distillation</td>
+  <td>teacher-anchored</td>
+  <td>one- or few-step</td>
+  <td>regression + teacher</td>
+</tr>
+<tr>
+  <td class="label">MeanFlow</td>
+  <td>continuous (semigroup identity)</td>
+  <td>data-supervised + self-referential mix</td>
+  <td>one-step</td>
+  <td>regression + JVP</td>
+</tr>
+</tbody>
+</table>
+<p class="post-table-note">MeanFlow is the only row with a ground-truth target and one-step inference; it pays with the JVP and the training conflict from the previous section.</p>
 </div>
-</div>
-<figcaption>The full family, unified. Each method enforces the composition rule more strictly than the one to its left, at increasing cost. MeanFlow is the only one with both a ground-truth target and one-step inference, but pays with the JVP and the TFM/TC conflict.</figcaption>
-</figure>
 
-<script>
-(function(){
-const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-// semantic key: '+' = good (sage), '-' = cost (rose), '.' = neutral (mute)
-const C = { '+': '--fig-sage', '-': '--fig-rose', '.': '--fig-ink-mute' };
-const methods=[
-  {name:'Flow matching',alpha:0,
-   props:['no composition enforced','ground-truth target ✓','multi-step inference','no JVP needed'],
-   propKey:['.','+','-','+'],
-   detail:'The foundation. Defines straight-line paths between noise and data, trains on instantaneous velocity v = x₀ − x₁. Clean supervised learning with a fixed ground-truth target. Slow at inference because integration is required to follow the curved marginal path.',
-   accent:false},
-  {name:'Consistency models',alpha:0.25,
-   props:['any point → same x₀','behavioural target ✗','one-step inference ✓','no JVP needed'],
-   propKey:['.','-','+','+'],
-   detail:'The jump-to-endpoint idea. Learns f(z_t, t) = x₀ using self-distillation: the network trains to agree with its own EMA copy at adjacent trajectory points. One-step generation, but no ground truth exists for the consistency function; training is chasing a moving target.',
-   accent:false},
-  {name:'CTM / Shortcut',alpha:0.6,
-   props:['discrete composition','behavioural target ✗','one-step inference ✓','no JVP needed'],
-   propKey:['.','-','+','+'],
-   detail:'The any-to-any generalisation. CTM learns G(x_t, t, s) for any pair of times. Shortcut models add step-size conditioning d and bootstrap: two half-steps teach one full step. More flexible than consistency models, same self-referential training structure; no JVP needed.',
-   accent:false},
-  {name:'Align Your Flow',alpha:0.8,
-   props:['flow maps: any (s,t)','teacher-anchored ✓','FID 1.25 @ 2-NFE IN-64','autoguidance + EMD'],
-   propKey:['.','+','+','+'],
-   detail:'AYF scales the flow-map idea (f_θ(x_t,t,s)=x_s) to large pretrained models via distillation. Proves consistency models degrade with more steps; flow maps do not. Two objectives: EMD (Eulerian, sharp images) and LMD (Lagrangian, stable but blurry). Replaces CFG with autoguidance from a weaker checkpoint. AYF-S (280M params) reaches FID 1.70 on IN-512 at 4 NFE in 0.24s, beating sCD-XXL (1.5B params, 2 NFE, FID 1.88, 0.50s) at 5x fewer parameters and 2x faster.',
-   accent:false},
-  {name:'MeanFlow',alpha:1,
-   props:['continuous composition','ground-truth target ✓','one-step inference ✓','JVP ~20% overhead'],
-   propKey:['.','+','+','-'],
-   detail:'MeanFlow learns average velocity ū(z_t, r, t), a ground-truth quantity computable directly from (x₀, x₁) pairs. The MeanFlow identity gives a training signal without integrals or ODE simulation. One-step generation. Pays with JVP computation and the TFM/TC training conflict. FID 3.43 on ImageNet 256×256 (1-NFE, trained from scratch).',
-   accent:true},
-];
-let active=4;
-const grid=document.getElementById('unifiedGrid');
-const detail=document.getElementById('unifiedDetail');
-const thumb=document.getElementById('alphaThumb');
+There is a structural reason this looks like a continuum and not a set of unrelated tricks. The signal you can compute cheaply is local: an instantaneous velocity from data, or a short ODE step from a teacher. The thing you want is global: a one-step jump that has to be correct over a long interval. Self-reference, the network agreeing with a lagged copy of itself, is the only way to bridge the two. It is also unstable until the data-supervised part is solid, which is why every method here needs a curriculum that turns the self-referential part on gradually. A pretrained teacher is an external oracle for the long-jump answer; an EMA copy is an internal one. Which you pick mostly depends on whether you have a good teacher available.
 
-function render(){
-  const blue = css('--fig-blue');
-  const ink  = css('--fig-ink');
-  const inkS = css('--fig-ink-soft');
-  const inkM = css('--fig-ink-mute');
-  const frame= css('--fig-frame');
-  const paper= css('--fig-paper');
-  const panel= css('--fig-panel');
-  grid.innerHTML='';
-  methods.forEach((m,i)=>{
-    const card=document.createElement('div');
-    const isSel=i===active;
-    const borderCol = isSel ? (m.accent ? blue : inkS) : frame;
-    const borderW   = isSel ? '1.5px' : '1px';
-    const bgCol     = isSel ? paper : panel;
-    const titleCol  = isSel ? (m.accent ? blue : ink) : inkS;
-    card.style.cssText='border-radius:6px;padding:10px 8px;cursor:pointer;transition:all .15s;'+
-      'border:'+borderW+' solid '+borderCol+';background:'+bgCol+';';
-    card.innerHTML='<div style="font-size:12px;font-weight:600;color:'+titleCol+';margin-bottom:6px;line-height:1.3;font-family:\'Iowan Old Style\',Charter,Georgia,serif;">'+m.name+'</div>'+
-      m.props.map((p,j)=>'<div style="font-size:11px;color:'+css(C[m.propKey[j]])+';margin-bottom:2px;">'+p+'</div>').join('');
-    card.onclick=()=>{active=i;render();};
-    grid.appendChild(card);
-  });
-  const m=methods[active];
-  detail.textContent=m.detail;
-  detail.style.background=paper;
-  detail.style.color=inkS;
-  const pct=(m.alpha/1)*100;
-  thumb.style.left='calc('+pct+'% - 7px)';
-  thumb.style.background=m.accent?blue:inkS;
-  thumb.style.boxShadow='0 0 0 1px '+(m.accent?blue:inkS);
-}
-render();
-window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',render);
-})();
-</script>
-
-α-Flow <sup class="cite"><a href="#ref-alphaflow2025">[7]</a></sup> formalises this: all four methods are special cases of one parameterised objective. The parameter $\alpha$ interpolates between pure flow matching ($\alpha=0$, no composition) and full MeanFlow ($\alpha=1$, continuous composition). Every scheduling trick we have seen (the discretisation curriculum in consistency models, the 75% border-case sampling in MeanFlow, the $\lambda$ ramp-up) is a way to start at $\alpha=0$ and anneal toward 1, learning the stable data-supervised component first before progressively enforcing the self-referential one.
-
-This curriculum is unavoidable for a structural reason. The signal you can compute cheaply is local: instantaneous velocity from data, or a short ODE step from a teacher. The thing you want is global: a one-step jump that has to be correct over a long interval. Self-reference is the only way to bridge the two, and self-reference is unstable until the data-supervised part is solid. Turning it on too early makes the gradients noise; too late and you have just flow matching. The same logic is why the teacher-distillation line (AYF) and the self-distillation line (everything else) end up at comparable quality. A pretrained teacher is an external oracle for the long-jump answer; an EMA copy is an internal one. Both stabilise the self-referential target. Which you pick mostly depends on whether you have a good teacher to distill from.
-
-A few things still feel unresolved to me. Guidance is the obvious one. CFG is what makes large-scale conditional diffusion deployable, and none of the one-step methods have a clean equivalent. AYF's autoguidance is the best answer so far, but it needs a second trained model and only really works in the distillation setting. The architectures are also borrowed: every model here is a diffusion U-Net or DiT being repurposed, with the skip/output split from EDM and the two-time conditioning bolted on as an extra input embedding. I have not seen anyone ask what a network designed for the one-step objective from scratch would look like. MeanFlow's $\bar u = x_1 - x_0$ identity is more fragile than it looks too; it relies on linear interpolation paths, and the moment you want curved schedules (which matter for sample quality at scale) the algebra stops and you are back to the integral form. And the benchmarks here are all ImageNet at 64, 256, and 512. A real one-step video model does not exist yet.
-
-My guess is the next jump is either an architecture redesign that bakes in the boundary and composition constraints, or a clean way to do guidance at one step. The compositional principle feels right. What is missing is the engineering around it.
-
----
-
-## Results and current state
-
-Two years ago none of these numbers existed. The gap with multi-step diffusion is closing faster than most expected.
+Two years ago none of these numbers existed. The gap with multi-step diffusion is closing faster than most expected. CIFAR-10 at 1 NFE looks effectively saturated in this family; the ImageNet rows show what teacher anchoring buys you, with AYF at 2 NFE reaching the best FID in the table and a 280M-parameter AYF-S beating the 1.5B-parameter sCD-XXL on IN-512.
 
 <div class="post-table-wrap">
 <table class="post-table">
@@ -1690,6 +1634,12 @@ Two years ago none of these numbers existed. The gap with multi-step diffusion i
 </table>
 <p class="post-table-note">IN = ImageNet. NFE = network function evaluations. AYF-S at 4 NFE (FID 1.70, 0.24s) outperforms sCD-XXL at 2 NFE (FID 1.88, 0.50s) using 5× fewer parameters.</p>
 </div>
+
+This is one branch of the one-step literature. Parallel lines, flow rectification, distribution matching distillation, and adversarial distillation, currently dominate at SDXL-scale text-to-image and are not covered here.
+
+A few things still feel unresolved to me. Guidance is the obvious one. CFG is what makes large-scale conditional diffusion deployable, and none of the one-step methods have a clean equivalent. AYF's autoguidance is the best answer so far, but it needs a second trained model and only really works in the distillation setting. The architectures are also borrowed: every model here is a diffusion U-Net or DiT being repurposed, with the skip/output split from EDM and the two-time conditioning bolted on as an extra input embedding. I have not seen anyone ask what a network designed for the one-step objective from scratch would look like. MeanFlow's $\bar u = x_1 - x_0$ identity is more fragile than it looks too; it relies on linear interpolation paths, and the moment you want curved schedules (which matter for sample quality at scale) the algebra stops and you are back to the integral form. And the benchmarks here are all ImageNet at 64, 256, and 512. A real one-step video model does not exist yet.
+
+My guess is the next jump is either an architecture redesign that bakes in the boundary and composition constraints, or a clean way to do guidance at one step. The compositional principle feels right. What is missing is the engineering around it.
 
 What I find most satisfying about this whole family is that the composition rule is the single unifying principle, even though it can look like a different trick in each paper. Every method is a different answer to the same question: how do you enforce that a long jump equals composed shorter jumps, while keeping training tractable? Consistency models do it globally via self-distillation. CTM generalises to any pair of times. Shortcut models go discrete and condition on step size. Align Your Flow imports an external teacher and shows the ideas transfer cleanly to distillation at scale. MeanFlow goes continuous via an exact calculus identity, with no teacher at all. Once you see that, the curricula, the EMA copies, the JVP, and the 75% border-case sampling stop looking like separate tricks.
 
