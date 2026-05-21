@@ -217,7 +217,7 @@ sup.cite a:hover { text-decoration: underline; }
 
 I have been spending a lot of time on one-step generative models, specifically MeanFlow and the broader family it belongs to. This is my attempt to build an honest mental model of how these methods work, where the math comes from, and how each one is a response to the limitations of the one before it.
 
-The context: diffusion and flow models can now produce images, audio, and video that are nearly indistinguishable from real data, but generating a single sample requires hundreds of sequential network evaluations. That is fine for offline synthesis. It is nearly unusable for anything interactive or real-time. The last two years have seen a serious push to fix this, and the results are surprisingly good.
+The context: diffusion and flow models can now produce images, audio, and video that are nearly indistinguishable from real data, but generating a single sample requires hundreds of sequential network evaluations. A 1024×1024 image from a model like <a href="https://arxiv.org/abs/2307.01952" target="_blank" rel="noopener noreferrer">SDXL</a> at 50 steps takes several seconds on an A100; a one-step distilled model produces the same resolution in tens of milliseconds. That is fine for offline synthesis. It is nearly unusable for anything interactive or real-time. The last two years, people have been trying hard to fix this, and the results are surprisingly good.
 
 Starting from the goal and working backwards: what does a network need to learn to generate in one step?
 
@@ -225,11 +225,11 @@ Starting from the goal and working backwards: what does a network need to learn 
 
 ## Generation as transport
 
-Generating a sample is moving probability mass from a noise distribution to the data distribution, and every method in this family is a different way to learn that movement. They all share the same setup: a *trajectory* through image space, a path from pure noise at time $t=1$ to clean data at time $t=0$. This is the probability flow ODE (PF-ODE), a deterministic path that shares the same marginal distributions at each time $t$ as the stochastic diffusion process but without the randomness. You can run it forwards or backwards exactly.
+Generating a sample (say, an image of a dog) is moving probability mass from a noise distribution to the data distribution along a deterministic path. That path is the probability flow ODE (PF-ODE) <sup class="cite"><a href="#ref-songsde2021">[11]</a></sup>, parameterised by time $t$: at $t=1$ the point is pure Gaussian noise; at $t=0$ it is clean data. The PF-ODE shares the same marginal distributions at each $t$ as the stochastic diffusion process, but without the randomness, so you can run it forwards or backwards exactly.
 
-Think of a soap bubble. Press it slowly and the surface deforms; every point on the film follows a smooth, deterministic path. Release the pressure and it snaps back along the exact same path, not an approximation. The PF-ODE is that elastic surface in probability space: a deterministic velocity field that moves every point from noise to data (or back) along a reversible path, with no randomness. A point $z_t$ on a trajectory is one spot on that surface at time $t$.
+Think of a soap bubble. Press it slowly and the surface deforms; every point on the film follows a smooth path. Release the pressure and it snaps back along the exact same path, not an approximation. The PF-ODE is that elastic surface in probability space. A point $z_t$ on a trajectory is one spot on the surface at time $t$.
 
-The closer $t$ is to 1, the more spread out and featureless the point. The PF-ODE tells you how fast and in which direction to move to stay on the trajectory, and standard diffusion and flow models learn to estimate this velocity locally and integrate it step by step from noise to data.
+Standard diffusion and flow models learn to estimate the PF-ODE velocity locally and integrate it step by step from noise to data. At each $z_t$ the network tells you how fast and in which direction to move to keep heading toward the dog (or whatever target the trajectory points to). Apply that, take a step, repeat.
 
 <figure class="fig-card">
 <div class="fig-card-title">PF-ODE trajectory</div>
@@ -283,23 +283,23 @@ The closer $t$ is to 1, the more spread out and featureless the point. The PF-OD
 
 The core problem with step-by-step integration: the local velocity at $z_t$ tells you nothing about where the trajectory ends up globally. You have to follow it closely, one small step at a time, or you drift off course and end up somewhere wrong. This is expensive.
 
-Two strategies for escaping this:
+Two strategies:
 
-1. **Jump to the endpoint directly.** Learn a function that maps any trajectory point to $x_0$ in one shot. This is the consistency model idea.
-2. **Jump to any point, not just the endpoint.** Learn a two-time function that can jump from any $t$ to any $s < t$ in one step. This is the flow map idea, and it is what CTM, shortcut models, and MeanFlow (all coming up) build on.
+1. **Jump to the endpoint directly.** Learn a function that maps any trajectory point to $x_0$ in one shot. This is the consistency model <sup class="cite"><a href="#ref-song2023">[2]</a></sup> idea.
+2. **Jump to any point, not just the endpoint.** Learn a two-time function that can jump from any $t$ to any $s < t$ in one step. This is the flow map idea, and it is what consistency trajectory models (CTM), shortcut models, and MeanFlow (all coming up) build on.
 
 ---
 
 ## Flow matching
 
-Before getting to one-step methods, it helps to understand flow matching, because all the one-step methods either build on it or borrow its training structure. Flow matching <sup class="cite"><a href="#ref-lipman2022">[1]</a></sup> frames generation as *transport*: learn a continuous-time flow that moves probability mass from one distribution to another. The source and destination can be any two distributions; unlike diffusion models, you are not committed to Gaussian noise on one end. In practice, the simplest useful case uses Gaussian noise as the source, giving straight-line paths between noise and data:
+Flow matching is the foundation every one-step method either builds on or borrows training structure from, so the rest of the post assumes the setup. Flow matching <sup class="cite"><a href="#ref-lipman2022">[1]</a></sup> frames generation as *transport*: learn a continuous-time flow that moves probability mass from one distribution to another. The source and destination can be any two distributions; unlike diffusion models, you are not committed to Gaussian noise on one end. In practice, the simplest useful case uses Gaussian noise as the source, giving straight-line paths between noise and data:
 
 <div class="eq">$$z_t \;=\; (1 - t)\, x_0 \;+\; t\, x_1$$</div>
 <div class="eq-label">$x_0$ is clean data, $x_1 \sim \mathcal{N}(0,I)$, $t \in [0,1]$. At $t=0$ you have data; at $t=1$ you have noise. Any source distribution works; Gaussian is convenient, not required.</div>
 
-The velocity at any point on this path is constant: $v = x_0 - x_1$. This is directly computable from training pairs, no score estimation, no self-referential structure. You train a network to predict this velocity at every $(z_t, t)$, which is just supervised regression on a clean ground-truth target.
+The velocity at any point on this path is constant: $v = x_0 - x_1$. This is directly computable from training pairs, no score estimation, no self-referential structure. You train a network to predict this velocity at every $(z_t, t)$, which is just supervised regression on a ground-truth target.
 
-Why is inference still slow? Even though each individual path $x_0 \leftrightarrow x_1$ is a straight line, the *marginal* velocity field is not. At any given noisy image $z_t$, many different clean images $x_0$ are plausible, not just one. Each candidate has its own straight-line velocity pointing in a slightly different direction. The network has to output the probability-weighted average of all those directions, which traces a curved path through image space. Following a curved path with only local velocity information requires many small steps.
+Inference is still slow, though. Even though each individual path $x_0 \leftrightarrow x_1$ is a straight line, the *marginal* velocity field is not. At any given noisy image $z_t$, many different clean images $x_0$ are plausible, not just one. Each candidate has its own straight-line velocity pointing in a slightly different direction. The network has to output the probability-weighted average of all those directions, which traces a curved path through image space. Following a curved path with only local velocity information requires many small steps.
 
 Scrub the demo below to watch this happen: at $t=1$ the field points toward the centroid (no cluster has been chosen), and as $t$ decreases the weights concentrate and particles fan out toward different clusters. Try the *candidates* buttons (1, 3, 5) to see how a single cluster gives a uniform field while multiple clusters force curvature.
 
@@ -764,7 +764,7 @@ Scrub the demo below to watch this happen: at $t=1$ the field points toward the 
 })();
 </script>
 
-Flow matching gives you clean, stable training but slow inference. Every method we discuss next is trying to fix the inference speed without giving up that training clarity.
+Flow matching gives you a simple regression objective at training time but slow inference. The rest of this post is about how recent research has explored fixing the inference side without giving up that simplicity.
 
 ---
 
@@ -786,9 +786,9 @@ f_θ(z_t, t) → x_0
 f_θ(z_s, s) → x_0
 f_θ(x_0, 0) → x_0</pre></div>
 
-For this to actually work, the function needs two properties. First, the **boundary condition**: at $t = 0$ (or more precisely, a small cutoff $\varepsilon$ near zero), the function must be the identity, $f_\theta(x_0, \varepsilon) = x_0$. A completely clean image maps to itself. Without it, the network could satisfy the rest of the loss by outputting a constant; the boundary condition pins one end of the function to something meaningful.
+For this to work, the function needs two properties. First, the **boundary condition**: at $t = 0$ (or more precisely, a small cutoff $\varepsilon$ near zero), the function must be the identity, $f_\theta(x_0, \varepsilon) = x_0$. A completely clean image maps to itself. Without it, the network could satisfy the rest of the loss by outputting a constant; the boundary condition pins one end of the function to something meaningful.
 
-Second, the **consistency condition**: any two points on the *same* PF-ODE trajectory must map to the same $x_0$. If two different noisy versions of the same clean image both pass through the network, they should produce identical outputs. This is the key constraint that makes the function globally coherent rather than just locally trained. The figure below shows what this looks like: every point along one trajectory is required to map to the same destination.
+Second, the **consistency condition**: any two points on the *same* PF-ODE trajectory must map to the same $x_0$. If two different noisy versions of the same clean image both pass through the network, they should produce identical outputs. Without this, the network is only locally trained at individual points and the function never becomes globally coherent. The figure below shows what this looks like: every point along one trajectory is required to map to the same destination.
 
 <figure class="fig-card">
 <div class="fig-card-title">Consistency condition: every point on the trajectory maps to the same x₀</div>
@@ -832,14 +832,14 @@ Second, the **consistency condition**: any two points on the *same* PF-ODE traje
 
 How do you actually build $f_\theta$ so the boundary identity $f_\theta(x_0, \varepsilon) = x_0$ holds? The naive way is piecewise: define $f_\theta(x, t) = x$ when $t = \varepsilon$ and $f_\theta(x, t) = F_\theta(x, t)$ otherwise, where $F_\theta$ is a free neural network. This works for the discrete-time loss but breaks the moment you want continuous-time training, because the function is not differentiable at $\varepsilon$ and the continuous-time loss requires a clean derivative through $f_\theta$.
 
-The fix the paper actually uses, and the one that has stuck, is to **wire the boundary identity into the architecture algebraically** with a skip / output split:
+The fix the paper uses, and the one that has stuck since, is to **wire the boundary identity into the architecture algebraically** with a skip / output split:
 
 <div class="eq">$$f_\theta(x, t) \;=\; c_\text{skip}(t)\, x \;+\; c_\text{out}(t)\, F_\theta(x, t)$$</div>
 <div class="eq-label">Two scalar schedules $c_\text{skip}(t)$ and $c_\text{out}(t)$ are differentiable functions of $t$ designed so that $c_\text{skip}(\varepsilon) = 1$ and $c_\text{out}(\varepsilon) = 0$.</div>
 
-At $t = \varepsilon$ the formula collapses to $f_\theta(x, \varepsilon) = 1 \cdot x + 0 \cdot F_\theta = x$. The boundary condition is true by construction; the loss never has to enforce it. Crucially, because $c_\text{skip}$, $c_\text{out}$, and $F_\theta$ are all differentiable in $t$, so is $f_\theta$. That smoothness is what unlocks continuous-time consistency training, where the loss involves a derivative of $f_\theta$ with respect to $t$.
+At $t = \varepsilon$ the formula collapses to $f_\theta(x, \varepsilon) = 1 \cdot x + 0 \cdot F_\theta = x$. The boundary condition is true by construction; the loss never has to enforce it. Because $c_\text{skip}$, $c_\text{out}$, and $F_\theta$ are all differentiable in $t$, so is $f_\theta$. That matters for continuous-time consistency training, which needs a clean derivative of $f_\theta$ with respect to $t$.
 
-The specific functional forms for $c_\text{skip}$ and $c_\text{out}$ are inherited directly from the EDM diffusion preconditioning <sup class="cite"><a href="#ref-karras2022">[10]</a></sup>, which is a deliberate choice: it lets consistency models drop into existing diffusion architectures with no structural changes, just a different head and loss.
+The specific functional forms for $c_\text{skip}$ and $c_\text{out}$ are inherited directly from the EDM (elucidating diffusion models) preconditioning <sup class="cite"><a href="#ref-karras2022">[10]</a></sup>, which is a deliberate choice: it lets consistency models drop into existing diffusion architectures with no structural changes, just a different head and loss.
 
 <figure class="fig-card">
 <div class="fig-card-title">Schedule weights along the PF-ODE</div>
@@ -884,15 +884,15 @@ Here is the problem: you never directly observe which trajectory any $z_t$ belon
 
 The EMA copy $\theta^-$ is updated slowly after each training step, typically $m \approx 0.99$, so the target moves at roughly 1% of the speed of the main network. This keeps the target stable enough to learn against. Without it, both sides of the loss update simultaneously and they can easily converge to the same wrong answer: outputting a constant everywhere, which technically satisfies the loss but is completely useless for generation.
 
-The stop-gradient on the target side breaks this symmetry. Gradients only flow through the left side of the loss, so only $\theta$ is updated to chase the target. The target then drifts slowly via the EMA rule. This is the same *target network* trick from deep RL; it is what makes self-distillation stable.
+The stop-gradient on the target side breaks this symmetry. Gradients only flow through the left side of the loss, so only $\theta$ is updated to chase the target. The target then drifts slowly via the EMA rule. This is the same *target network* trick that stabilised DQN in deep RL: when the network is regressing toward a target derived from itself, you keep the target frozen (or slowly-moving) so the optimisation has something fixed enough to converge to.
 
 To get the adjacent point $z_{t-\Delta}$ on the same trajectory as $z_t$, you need to take one step of the PF-ODE. This is where the teacher and student framing becomes explicit. In consistency *distillation* (CD), a pretrained diffusion model acts as the teacher: it provides reliable one-step ODE moves that land on the true trajectory, and the student learns to jump directly to $x_0$ from any point on those teacher-generated trajectories. In consistency *training* (CT), there is no external teacher; the network estimates the score from scratch and generates its own training pairs, which introduces additional noise and makes training harder to stabilise. CD is faster to converge and produces better results; CT avoids the dependency on a pretrained teacher at the cost of more careful engineering.
 
-Worth pinning down the language here, because three different things in this post all get called "teacher" at various points and they are not the same. **Data supervision** means clean targets read directly from training pairs, like flow matching's $v = x_0 - x_1$. A **pretrained teacher** is an external network trained separately, used in CD and later in AYF; quality is capped at whatever the teacher can do. The **EMA copy** $\theta^-$ is the network's own slowly-moving lag of itself, used in CT, CTM, Shortcut, and the consistency half of MeanFlow. CT and CD differ exactly in this: CT has only the EMA copy, CD has both. From here on I will say "EMA copy" when I mean the internal lag and "pretrained teacher" when I mean a separately trained network.
+Worth pinning down the language here, because three different things in this post all get called "teacher" at various points and they are not the same. **Data supervision** means clean targets read directly from training pairs, like flow matching's $v = x_0 - x_1$. A **pretrained teacher** is an external network trained separately, used in CD and later in Align Your Flow (AYF); quality is capped at whatever the teacher can do. The **EMA copy** $\theta^-$ is the network's own slowly-moving lag of itself, used in CT, CTM, Shortcut, and the consistency half of MeanFlow. CT and CD differ exactly in this: CT has only the EMA copy, CD has both. From here on I will say "EMA copy" when I mean the internal lag and "pretrained teacher" when I mean a separately trained network.
 
 ### The discretisation curriculum
 
-There is one subtlety about consistency model training that matters. You divide the time axis into $N$ discrete steps. Adjacent training pairs are always one step apart, so the gap $\Delta = T/N$.
+There is a subtlety in how consistency models are trained. You divide the time axis into $N$ discrete steps. Adjacent training pairs are always one step apart, so the gap $\Delta = T/N$.
 
 If $N$ is small, the gap is large. The two adjacent points are far apart on the PF-ODE trajectory. The training signal is strong (there is a lot of distance between the two predictions to align) but the targets are noisy. Taking a large step along the PF-ODE introduces large discretisation error, so $z_{t-\Delta}$ is only approximately on the right trajectory. You are training the network to agree with a somewhat wrong target.
 
@@ -1089,26 +1089,24 @@ Neither extreme works. The fix is a curriculum: start with small $N$ (coarse, st
 
 What I described above is the *discrete-time* formulation: pick a grid of $N$ noise levels, define adjacent pairs on that grid, and run the curriculum on $N$. The grid is a crutch. It exists because we cannot directly enforce the consistency condition over a continuum, only at sampled pairs of points. The whole curriculum on $N$ is just managing the bias-variance tradeoff that the grid introduces.
 
-The *continuous-time* formulation removes the grid entirely. Differentiating the consistency condition $f(z_t, t) = f(z_{t-\Delta}, t-\Delta)$ as $\Delta \to 0$ gives a PDE-style identity: $\partial_t f + v(z_t, t) \cdot \partial_z f = 0$ along the PF-ODE. The training loss enforces this identity at sampled $(z_t, t)$ pairs, no adjacent point needed, no grid to schedule. sCT and sCD <sup class="cite"><a href="#ref-sct2024">[9]</a></sup> use this formulation and produce sharper results than the discrete-time version, because the bias from finite $\Delta$ is gone. The cost is a Jacobian-vector product (JVP) through the network to compute $\partial_z f \cdot v$, a single forward pass with forward-mode autodiff. Keep this trick in mind: MeanFlow, which we will get to later, uses essentially the same machinery for a different purpose.
+The *continuous-time* formulation removes the grid entirely. Differentiating the consistency condition $f(z_t, t) = f(z_{t-\Delta}, t-\Delta)$ as $\Delta \to 0$ gives a PDE-style identity: $\partial_t f + v(z_t, t) \cdot \partial_z f = 0$ along the PF-ODE. The training loss enforces this identity at sampled $(z_t, t)$ pairs, no adjacent point needed, no grid to schedule. sCT and sCD (the simplified continuous-time variants of CT and CD) <sup class="cite"><a href="#ref-sct2024">[9]</a></sup> use this formulation and produce sharper results than the discrete-time version, because the bias from finite $\Delta$ is gone. The cost is a Jacobian-vector product (JVP) through the network to compute $\partial_z f \cdot v$. A JVP is the Jacobian times a vector, but you never have to materialise the full Jacobian: forward-mode autodiff computes it in a single modified forward pass at roughly the same cost as a normal one. (The <a href="https://docs.jax.dev/en/latest/notebooks/autodiff_cookbook.html" target="_blank" rel="noopener noreferrer">JAX autodiff cookbook</a> is a good primer on JVPs and forward-mode autodiff if you want a refresher.) MeanFlow uses the same JVP machinery later for a different purpose.
 
-Consistency models prove the point: you can generate decent images in one step. That was not obvious before 2023. iCT <sup class="cite"><a href="#ref-ict2023">[3]</a></sup> improved substantially over the original with pseudo-Huber losses, a lognormal noise schedule, and progressive discretisation step doubling, but even these required considerable engineering effort just to be reliable.
+Consistency models were the first method to show you can generate decent images in one step, which was not obvious before 2023. iCT (improved consistency training) <sup class="cite"><a href="#ref-ict2023">[3]</a></sup> improved substantially over the original with a bundle of training stability tricks: pseudo-Huber losses, a lognormal noise schedule, and progressive discretisation step doubling. Even those required considerable engineering effort just to be reliable.
 
 The training target is always *behavioural*: it constrains what the network outputs at adjacent pairs of points, not what the underlying field should be. There is no ground truth for $f(z_t, t)$ that exists independently of the network. The optimal function is defined only implicitly, via the consistency condition and boundary condition, and can only be learned by having the network agree with itself across adjacent pairs. This is inherently noisy and sensitive to hyperparameters.
 
-The deeper limitation: consistency models are stuck. They can only jump to one destination, the endpoint $x_0$. The function signature is $f(z_t, t) = x_0$; you tell it where you are and what time it is, and it predicts the endpoint. You cannot ask it to jump to an intermediate point. Multi-step generation therefore requires running the network multiple times and renoising between each evaluation, a clunky workaround that does not actually use the trajectory structure. The natural next question: what if the jump function could land anywhere, not just $x_0$?
+The deeper limitation: consistency models are stuck. They can only jump to one destination, the endpoint $x_0$. The function signature is $f(z_t, t) = x_0$; you tell it where you are and what time it is, and it predicts the endpoint. You cannot ask it to jump to an intermediate point. Multi-step generation therefore requires running the network multiple times and renoising between each evaluation, a clunky workaround that does not actually use the trajectory structure. But what if the jump function could land anywhere, not just $x_0$?
 
 ---
 
 ## Consistency trajectory models: any-to-any jumps
 
-CTM <sup class="cite"><a href="#ref-ctm2024">[4]</a></sup> generalises consistency models in one clean move. Recall the PF-ODE trajectory we defined: a path parameterised by time, running from noise at $t=1$ to data at $t=0$. Consistency models always jump to the end of that path. CTM removes that restriction and learns a function that can jump to *any* point along the PF-ODE, not just the endpoint:
+CTM <sup class="cite"><a href="#ref-ctm2024">[4]</a></sup> generalises consistency models. Where consistency models always jump to the end of the PF-ODE trajectory, CTM lets the function jump to *any* point along it. This is the **two-time function**:
 
 <div class="eq">$$G_\theta(x_t,\, t,\, s) \;=\; x_s$$</div>
 <div class="eq-label">From any point $x_t$ at time $t$, jump to the state $x_s$ at time $s$. Consistency models are the special case $s=0$.</div>
 
-This is the **two-time function**: a completely flexible jump operator. You can take large or small steps, jump to any intermediate point on the trajectory, and compose multiple jumps to refine a generation.
-
-The key constraint that makes this well-posed is the **semigroup property**. If you jump from $t$ to some intermediate $u$, and then jump from $u$ to $s$, you should get the same result as jumping directly from $t$ to $s$:
+With this object you can take large or small steps, land at any intermediate point on the trajectory, and compose multiple jumps to refine a generation. For this to be well-posed, the function has to satisfy the **semigroup property**. If you jump from $t$ to some intermediate $u$, and then jump from $u$ to $s$, you should get the same result as jumping directly from $t$ to $s$:
 
 <div class="eq">$$G_\theta(x_t,\, t,\, s) \;=\; G_\theta\!\bigl(G_\theta(x_t,\, t,\, u),\; u,\; s\bigr) \qquad \text{for any } u \in (s,t)$$</div>
 <div class="eq-label">One large jump = two composed smaller jumps. This is the composition rule at the heart of every flow-map method.</div>
@@ -1253,20 +1251,18 @@ Training enforces this by sampling triples $(r, s, t)$ with $r < s < t$ and comp
 
 The flexible jump function makes multi-step generation more natural than consistency models: you chain calls with progressively smaller target times, no renoising needed. At the time of publication, CTM held the best single-step FID numbers (see the results table below).
 
-The limitation it inherits from consistency models: the training target is still self-referential. $G_{\theta^-}$ is the network evaluated at a slightly lagged version of itself. There is no ground-truth two-time map that exists independently of the network; the only supervision comes from the model agreeing with itself across different decompositions. This makes training more stable than consistency models (because the semigroup structure is richer), but the fundamental self-referential nature remains. CTM is also fiddly in practice: random triples $(r, s, t)$, two separate network evaluations on the target side, careful coordination of all the moving parts. The methods that come next chip away at this complexity from different angles.
+The limitation it inherits from consistency models: the training target is still self-referential. $G_{\theta^-}$ is the network evaluated at a slightly lagged version of itself. There is no ground-truth two-time map that exists independently of the network; the only supervision comes from the model agreeing with itself across different decompositions. This makes training more stable than consistency models (because the semigroup structure is richer), but the fundamental self-referential nature remains. CTM is also fiddly in practice: random triples $(r, s, t)$, two separate network evaluations on the target side, careful coordination of all the moving parts.
 
 ---
 
 ## Shortcut models
 
-Shortcut models <sup class="cite"><a href="#ref-shortcut2024">[5]</a></sup> ask: what is the simplest possible way to enforce the semigroup property?
-
-The answer: condition the network on both the current noise level $t$ and the *desired step size* $d$. The network learns to predict where you will end up after a jump of size $d$ from $z_t$. The step size is an input, not a fixed constant.
+Where CTM works with continuous-time triples $(r, s, t)$ and pays for that flexibility with fiddly training, shortcut models <sup class="cite"><a href="#ref-shortcut2024">[5]</a></sup> commit to a discrete set of jump sizes and make the training procedure radically simpler. The idea: condition the network on both the current noise level $t$ and the *desired step size* $d$. The network learns to predict where you will end up after a jump of size $d$ from $z_t$. The step size is an input, not a fixed constant.
 
 <div class="eq">$$v_\theta(z_t,\, t,\, d) \;\approx\; \frac{z_t - z_{t-d}}{d}$$</div>
 <div class="eq-label">Predict the average displacement per unit time over a step of size $d$. At $d \to 0$ this recovers instantaneous velocity.</div>
 
-Think of it like this. A regular flow matching network only knows "I am at noise level $t$." A shortcut model knows "I am at noise level $t$, and I want to travel a distance of $d$ in one step." With that extra information, it can calibrate its prediction to the correct jump size and can be asked to take different step sizes at different points during generation.
+A regular flow matching network only knows "I am at noise level $t$." A shortcut model knows "I am at noise level $t$, and I want to travel a distance of $d$ in one step." With that extra information, it can calibrate its prediction to the correct jump size, and you can ask it to take different step sizes at different points during generation.
 
 ### The bootstrapping training procedure
 
@@ -1325,7 +1321,7 @@ Frans et al. draw the same construction with the actual loss notation overlaid; 
 <figcaption>Same idea as the schematic above, drawn the way the paper presents it: at $d \to 0$ the loss matches the empirical flow-matching velocity $x_1 - x_0$; for larger $d$, the target is built by composing two half-step predictions from the EMA model.</figcaption>
 </figure>
 
-Shortcut models keep things simple by enforcing composition through direct comparison of network outputs: no differentiation through the network, no JVP, just a fast per-step training update. The tradeoff is that the discrete half-step approximation introduces small errors that compound when you compose many steps; and like CTM and consistency models before it, the training target is still self-referential. The next two methods both push against that self-reference. Align Your Flow does it by importing ground truth from outside (a pretrained teacher); MeanFlow does it from the inside (an exact identity that lets the network supervise itself against quantities readable directly from data).
+Shortcut models enforce composition by directly comparing network outputs: no differentiation through the network, no JVP, just a fast per-step training update. The tradeoff is that the discrete half-step approximation introduces small errors that compound when you compose many steps; and like CTM and consistency models before it, the training target is still self-referential. The next two methods both push against that self-reference. Align Your Flow does it by importing ground truth from outside (a pretrained teacher); MeanFlow does it from the inside (an exact identity that lets the network supervise itself against quantities readable directly from data).
 
 ---
 
@@ -1342,11 +1338,11 @@ Both CTM and Shortcut models work with the same flow-map object: a two-time netw
 
 This framing resolves something that was implicit in CTM but never fully confronted. CTM trains the jump function so that composed shorter jumps reproduce longer ones, but it never asks whether the jump function is actually correct, only whether it is internally consistent. A pretrained teacher changes that: the teacher's ODE trajectories are ground truth, and the student's jumps are trained to trace them. Internal consistency is still enforced, but now there is an external anchor.
 
-The paper also proves something sharp about consistency models. **Theorem 3.1**: for a Gaussian data source, even a *suboptimal* consistency model (and crucially, this holds for models arbitrarily close to optimal in $L_2$) admits some step count $N$ beyond which the Wasserstein-2 distance to the true distribution **increases** as you add more sampling steps. The empirical version is just as stark: with the standard EDM noise scale, CMs typically peak at around 2 steps and then degrade. The mechanism is specific. CMs jump to clean and *renoise* between steps; over many steps the reinjected noise does not align with the teacher's PF-ODE trajectory and errors compound.
+The paper also proves that consistency models eventually get worse with more steps. **Theorem 3.1**: for a Gaussian data source, even a *suboptimal* consistency model (the result holds for models arbitrarily close to optimal in $L_2$) admits some step count $N$ beyond which the Wasserstein-2 distance to the true distribution **increases** as you add more sampling steps. The empirical version is just as stark: with the standard EDM noise scale, CMs typically peak at around 2 steps and then degrade. The mechanism is renoising. CMs jump to clean between steps and reinject Gaussian noise to get back onto the trajectory; over many steps that injected noise does not align with the teacher's PF-ODE trajectory and errors compound.
 
 Flow maps avoid this by construction: they map directly between any two noise levels in one step, never leaving the trajectory. The paper does not formally prove they monotonically improve, but empirically they keep getting better with more steps, exactly where CMs fall apart.
 
-Distilling the jump function from a teacher raises a practical question: how do you actually enforce the consistency constraint? AYF gives two answers, borrowing the fluid-dynamics distinction between Eulerian (fixed observer, watch the field) and Lagrangian (move with the particle) frames. The two losses differ in *which time variable they perturb*.
+Distilling the jump function from a teacher raises a practical question: how do you enforce the consistency constraint? AYF gives two answers, borrowing the fluid-dynamics distinction between Eulerian (fixed observer, watch the field) and Lagrangian (move with the particle) frames. The two losses differ in *which time variable they perturb*.
 
 <div class="post-table-wrap">
 <table class="post-table">
@@ -1377,9 +1373,7 @@ Distilling the jump function from a teacher raises a practical question: how do 
 
 To replace classifier-free guidance during distillation, AYF uses **autoguidance**: the teacher is mixed with a weaker checkpoint of itself, $v_\phi^{\text{guided}} = \lambda v_\phi + (1 - \lambda) v_\phi^{\text{weak}}$ with $\lambda$ sampled uniformly from $[1, 3]$. This steers samples away from low-quality regions without the overshooting failure mode CFG can have.
 
-The empirical headline (numbers are in the results table at the end): a small AYF student beats much larger distillation baselines at fewer NFEs. The efficiency gain comes from the teacher anchor: unlike CTM, the student does not waste capacity reconciling self-generated targets at high noise levels where those targets are most unreliable.
-
-AYF resolves the self-referential issue by importing ground truth from outside (a teacher). The next method, MeanFlow, resolves it from the inside.
+The headline result (full numbers in the results table at the end): a small AYF student beats much larger distillation baselines at fewer network function evaluations (NFEs). The efficiency gain comes from the teacher anchor: unlike CTM, the student does not waste capacity reconciling self-generated targets at high noise levels where those targets are most unreliable.
 
 ---
 
@@ -1394,7 +1388,12 @@ So what does "average velocity" actually mean here? It is the same thing it mean
 <div class="eq">$$\bar{u}(z_t,\, r,\, t) \;=\; \frac{z_t - z_r}{t - r}$$</div>
 <div class="eq-label">$z_r$ is where you would land if you followed the PF-ODE from $z_t$ back to time $r$.</div>
 
-This looks unhelpful at first because $z_r$ is exactly the thing we cannot compute without integrating the ODE. But here is where flow matching does us a favor. Because the conditional paths are linear interpolations $z_t = (1-t)x_0 + tx_1$, the difference $z_t - z_r$ collapses algebraically:
+This looks unhelpful at first because $z_r$ is exactly the thing we cannot compute without integrating the ODE. But here is where flow matching does us a favor. Because the conditional paths are linear interpolations $z_t = (1-t)x_0 + tx_1$, the numerator $z_t - z_r$ collapses cleanly. Subtract the two interpolations:
+
+<div class="eq">$$z_t - z_r \;=\; \bigl[(1-t)x_0 + t\,x_1\bigr] - \bigl[(1-r)x_0 + r\,x_1\bigr] \;=\; (t - r)(x_1 - x_0)$$</div>
+<div class="eq-label">The $x_0$ and $x_1$ coefficients combine into a single $(t-r)$ factor.</div>
+
+Divide by $(t-r)$ and the time variables cancel completely:
 
 <div class="eq">$$\bar{u}(z_t,\, r,\, t) \;=\; \frac{z_t - z_r}{t - r} \;=\; x_1 - x_0$$</div>
 <div class="eq-label">The average velocity over any interval is just $x_1 - x_0$. No $r$, no $t$, no integration.</div>
@@ -1404,11 +1403,11 @@ That is the punchline. The average velocity is a fixed quantity for each trainin
 <div class="eq">$$x_0 \;=\; z_1 \;-\; \bar{u}_\theta(z_1,\, 0,\, 1)$$</div>
 <div class="eq-label">One network call. The whole reason MeanFlow exists.</div>
 
-The catch: this beautiful identity is only directly usable for the full interval $[0, 1]$ where you actually have ground-truth $(x_0, x_1)$ pairs. For arbitrary intermediate triples $(z_t, r, t)$ during training, computing $\bar{u}$ directly would require running the ODE, which is exactly what we are trying to avoid. The next subsection is how MeanFlow gets around that.
+The catch: this beautiful identity is only directly usable for the full interval $[0, 1]$ where you have ground-truth $(x_0, x_1)$ pairs. For arbitrary intermediate triples $(z_t, r, t)$ during training, computing $\bar{u}$ directly would require running the ODE, which is the slow integration we are trying to avoid. The next subsection is how MeanFlow gets around that.
 
 ### The MeanFlow identity
 
-Computing $z_r$ requires running the PF-ODE from $z_t$ to time $r$, exactly the slow integration we are trying to avoid. MeanFlow gets around this by deriving an equivalent form that does not require $z_r$ at all. Start from the definition rewritten as an integral:
+Computing $z_r$ requires running the PF-ODE from $z_t$ to time $r$, the slow integration we just said we want to avoid. MeanFlow derives an equivalent form that does not require $z_r$ at all. Start from the definition rewritten as an integral:
 
 <div class="eq">$$(t - r)\cdot \bar{u}(z_t,\, r,\, t) \;=\; \int_r^t v(z_\tau,\, \tau)\, d\tau$$</div>
 <div class="eq-label">Average velocity × time = total displacement = integral of instantaneous velocity. Think: distance = speed × time.</div>
@@ -1418,7 +1417,7 @@ Now differentiate both sides with respect to $t$. The right side uses the fundam
 <div class="eq">$$\bar{u}(z_t,\, r,\, t) \;=\; v(z_t,\, t) \;-\; (t - r)\cdot \frac{d\bar{u}}{dt}$$</div>
 <div class="eq-label">The MeanFlow identity. $v(z_t, t)$ is the instantaneous flow matching velocity (ground truth from data). $d\bar{u}/dt$ is the total time derivative of the network output.</div>
 
-This identity gives a target for $\bar{u}$ with no integrals and no ODE simulation. Notice the two pieces on the right side play very different roles. The first, $v(z_t, t)$, is data-supervised, the same clean target flow matching uses. The second, $d\bar{u}/dt$, is the network differentiating its own output. So the MeanFlow target is a *mix* of data supervision and self-reference; the identity is exact, but the self-referential half still has to be stabilised. That tension is exactly what the TFM/TC conflict (next section) is about.
+This identity gives a target for $\bar{u}$ with no integrals and no ODE simulation. The two pieces on the right side play very different roles. The first, $v(z_t, t)$, is data-supervised, the same target flow matching uses. The second, $d\bar{u}/dt$, is the network differentiating its own output. So the MeanFlow target is a *mix* of data supervision and self-reference; the identity is exact, but the self-referential half still has to be stabilised. That tension is what the TFM/TC conflict (next section) is about.
 
 ### Computing $d\bar{u}/dt$: the Jacobian-vector product
 
@@ -1438,18 +1437,18 @@ The full training loss applies stop-gradient to the entire target to avoid secon
 
 ## The TFM/TC conflict
 
-MeanFlow looks clean on paper: ground-truth target, exact identity, minimal overhead. In practice, the training has an interesting internal structure that causes problems.
+α-Flow <sup class="cite"><a href="#ref-alphaflow2025">[7]</a></sup> takes apart the MeanFlow loss and shows why it is hard to train. An exact identity does not guarantee a stable optimisation: MeanFlow's loss splits into two components that fight each other in the early stages of training. The decomposition is called TFM/TC.
 
 ### The 75% border case
 
 When $r = t$, the interval collapses to a single point, and the average velocity over a zero-length interval equals the instantaneous velocity. The MeanFlow identity reduces to $\bar{u} = v$, and the loss becomes exactly the standard flow matching loss. MeanFlow uses $r = t$ for 75% of training samples. Why spend three-quarters of training on the degenerate case that ignores the average velocity entirely?
 
-The α-Flow paper <sup class="cite"><a href="#ref-alphaflow2025">[7]</a></sup> explains this by showing the MeanFlow loss decomposes into two components:
+The decomposition is:
 
 <div class="eq">$$\mathcal{L}_\text{MF} \;=\; \mathcal{L}_\text{TFM} \;+\; \mathcal{L}_\text{TC}$$</div>
-<div class="eq-label">TFM = trajectory flow matching (data-supervised). TC = trajectory consistency (JVP-based). The 75% border case is dominated by TFM.</div>
+<div class="eq-label">TFM = trajectory flow matching (data-supervised). TC = trajectory consistency (JVP-based).</div>
 
-**TFM** is the flow matching component. It pushes the network to correctly predict the instantaneous velocity field: purely data-supervised, stable, converges quickly. The 75% sampling ensures TFM dominates early training.
+**TFM** is the flow matching component. It pushes the network to correctly predict the instantaneous velocity field, supervised directly by data and stable to optimise. The 75% sampling ensures TFM dominates early training.
 
 **TC** is the consistency enforcement component. It uses the JVP to ensure predictions compose correctly across intervals. This is the part that gives MeanFlow its structure beyond plain flow matching. But TC depends on a JVP computed through the network, which is noisy at high noise levels.
 
@@ -1459,15 +1458,15 @@ The TC gradient uses the JVP: the Jacobian of the network output with respect to
 
 The consequence: TC gradients at high $t$ early in training are large, random vectors. They actively conflict with TFM gradients. α-Flow <sup class="cite"><a href="#ref-alphaflow2025">[7]</a></sup> measured this directly: the cosine similarity between TFM and TC gradient vectors is strongly negative early in training. They are pulling the network in opposite directions.
 
-The fix is the **$\lambda$ curriculum**. The parameter $\lambda \in [0,1]$ interpolates between pure TFM ($\lambda=0$) and full MeanFlow ($\lambda=1$). Start training with $\lambda=0$, which is just flow matching, completely stable. As training progresses and the velocity field converges, the network starts genuinely learning the PF-ODE structure: the Jacobian at high $t$ begins to encode which direction the trajectory is heading, and the JVP becomes a reliable signal rather than noise. Then increase $\lambda$ to bring TC online. By the time TC is fully active, the network has enough PF-ODE structure that the JVP actually means something.
+The fix is the **$\lambda$ curriculum**. The parameter $\lambda \in [0,1]$ interpolates between pure TFM ($\lambda=0$) and full MeanFlow ($\lambda=1$). Start training with $\lambda=0$, which is just flow matching, completely stable. As training progresses and the velocity field converges, the network starts genuinely learning the PF-ODE structure: the Jacobian at high $t$ begins to encode which direction the trajectory is heading, and the JVP becomes a reliable signal rather than noise. Then increase $\lambda$ to bring TC online. By the time TC is fully active, the network has enough PF-ODE structure that the JVP carries real signal.
 
-Same coarse-to-fine principle as the discretisation curriculum in consistency models, applied to a continuous parameter. Stabilise the data-supervised component first; introduce the self-referential component after the foundation is solid.
+Same coarse-to-fine principle as the discretisation curriculum in consistency models, applied to a continuous parameter. Stabilise the data-supervised component first; turn on the self-referential one only after the velocity field has converged enough for the JVP to mean something.
 
 ---
 
 ## A unified view
 
-Stepping back across all these methods, the same structure keeps reappearing: a composition rule, a curriculum, an EMA copy on the target side, a growing step size. They look like different tricks in different papers. They are the same principle at different levels of precision.
+Stepping back across all these methods, the same training mechanics keep reappearing: a composition rule, a curriculum, an EMA copy on the target side, a growing step size. Different papers package these differently, but it is one principle being refined.
 
 <figure class="fig-card">
 <div class="fig-card-title">A unified view of the family</div>
@@ -1559,9 +1558,9 @@ window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',rende
 })();
 </script>
 
-α-Flow <sup class="cite"><a href="#ref-alphaflow2025">[7]</a></sup> formalises this: all four methods are special cases of one parameterised objective. The parameter $\alpha$ interpolates between pure flow matching ($\alpha=0$, no composition) and full MeanFlow ($\alpha=1$, continuous composition). The general principle behind every scheduling trick we have seen is to start at $\alpha=0$ and anneal toward 1: the discretisation curriculum in consistency models, the 75% border-case sampling in MeanFlow, the $\lambda$ ramp-up. All of these are different parameterisations of the same idea: learn the stable data-supervised component first, then progressively enforce the self-referential consistency component.
+α-Flow <sup class="cite"><a href="#ref-alphaflow2025">[7]</a></sup> formalises this: all four methods are special cases of one parameterised objective. The parameter $\alpha$ interpolates between pure flow matching ($\alpha=0$, no composition) and full MeanFlow ($\alpha=1$, continuous composition). Every scheduling trick we have seen (the discretisation curriculum in consistency models, the 75% border-case sampling in MeanFlow, the $\lambda$ ramp-up) is a way to start at $\alpha=0$ and anneal toward 1, learning the stable data-supervised component first before progressively enforcing the self-referential one.
 
-There is a reason this curriculum is unavoidable. The signal you can compute cheaply is local: instantaneous velocity from data, or a short ODE step from a teacher. The thing you want is global: a one-step jump that has to be correct over a long interval. Self-reference is the only way to bridge the two, and self-reference is unstable until the data-supervised part is solid. Turn it on too early, the gradients are noise. Too late, you have just flow matching. The same logic is why the teacher-distillation line (AYF) and the self-distillation line (everything else) end up at comparable quality. A pretrained teacher is an external oracle for the long-jump answer; an EMA copy is an internal one. Both stabilise the self-referential target. Which you pick mostly depends on whether you have a good teacher to distill from.
+This curriculum is unavoidable for a structural reason. The signal you can compute cheaply is local: instantaneous velocity from data, or a short ODE step from a teacher. The thing you want is global: a one-step jump that has to be correct over a long interval. Self-reference is the only way to bridge the two, and self-reference is unstable until the data-supervised part is solid. Turning it on too early makes the gradients noise; too late and you have just flow matching. The same logic is why the teacher-distillation line (AYF) and the self-distillation line (everything else) end up at comparable quality. A pretrained teacher is an external oracle for the long-jump answer; an EMA copy is an internal one. Both stabilise the self-referential target. Which you pick mostly depends on whether you have a good teacher to distill from.
 
 A few things still feel unresolved to me. Guidance is the obvious one. CFG is what makes large-scale conditional diffusion deployable, and none of the one-step methods have a clean equivalent. AYF's autoguidance is the best answer so far, but it needs a second trained model and only really works in the distillation setting. The architectures are also borrowed: every model here is a diffusion U-Net or DiT being repurposed, with the skip/output split from EDM and the two-time conditioning bolted on as an extra input embedding. I have not seen anyone ask what a network designed for the one-step objective from scratch would look like. MeanFlow's $\bar u = x_1 - x_0$ identity is more fragile than it looks too; it relies on linear interpolation paths, and the moment you want curved schedules (which matter for sample quality at scale) the algebra stops and you are back to the integral form. And the benchmarks here are all ImageNet at 64, 256, and 512. A real one-step video model does not exist yet.
 
@@ -1642,7 +1641,7 @@ Two years ago none of these numbers existed. The gap with multi-step diffusion i
 <p class="post-table-note">IN = ImageNet. NFE = network function evaluations. AYF-S at 4 NFE (FID 1.70, 0.24s) outperforms sCD-XXL at 2 NFE (FID 1.88, 0.50s) using 5× fewer parameters.</p>
 </div>
 
-What I find most satisfying about this whole family is that the composition rule is the single unifying principle, even though it can look like a different trick in each paper. Every method is a different answer to the same question: how do you enforce that a long jump equals composed shorter jumps, while keeping training tractable? Consistency models do it globally via self-distillation. CTM does it for any pair of times. Shortcut models do it discretely with step-size conditioning. Align Your Flow does it by anchoring to a pretrained teacher and showing the same ideas transfer cleanly to distillation at scale. MeanFlow does it continuously via calculus, with an exact identity that needs no teacher at all. Once you see this, the curricula, the EMA copies, the JVP, the 75% border-case sampling, the tangent warmup: all of it falls into place.
+What I find most satisfying about this whole family is that the composition rule is the single unifying principle, even though it can look like a different trick in each paper. Every method is a different answer to the same question: how do you enforce that a long jump equals composed shorter jumps, while keeping training tractable? Consistency models do it globally via self-distillation. CTM generalises to any pair of times. Shortcut models go discrete and condition on step size. Align Your Flow imports an external teacher and shows the ideas transfer cleanly to distillation at scale. MeanFlow goes continuous via an exact calculus identity, with no teacher at all. Once you see that, the curricula, the EMA copies, the JVP, and the 75% border-case sampling stop looking like separate tricks.
 
 ---
 
@@ -1659,4 +1658,5 @@ What I find most satisfying about this whole family is that the composition rule
 <li id="ref-ayf2025">Sabour et al., <a href="https://arxiv.org/abs/2506.14603">Align Your Flow: Scaling Continuous-Time Flow Map Distillation</a>, 2025.</li>
 <li id="ref-sct2024">Lu &amp; Song, <a href="https://arxiv.org/abs/2410.11081">Simplifying, Stabilizing &amp; Scaling Continuous-Time Consistency Models</a>, 2024.</li>
 <li id="ref-karras2022">Karras et al., <a href="https://arxiv.org/abs/2206.00364">Elucidating the Design Space of Diffusion-Based Generative Models</a>, NeurIPS 2022.</li>
+<li id="ref-songsde2021">Song et al., <a href="https://arxiv.org/abs/2011.13456">Score-Based Generative Modeling through Stochastic Differential Equations</a>, ICLR 2021.</li>
 </ol>
