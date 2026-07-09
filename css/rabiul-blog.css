@@ -27,14 +27,10 @@
     --navbar-bg: rgba(251, 251, 253, 0.72);
     --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
     --duration: 0.2s;
-    --accent: #2563eb;
-    --accent-muted: rgba(37, 99, 235, 0.08);
     --content-link: #1d1d1f;
     --content-link-hover: #0a0a0a;
     --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-serif: "Spectral", "Source Serif Pro", Georgia, "Times New Roman", serif;
-    --font-display: "Spectral", "Source Serif Pro", Georgia, "Times New Roman", serif;
-    --font-prose: "Spectral", "Source Serif Pro", Georgia, "Times New Roman", serif;
     --font-mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
     /* Type scale — single coherent rhythm */
     --text-micro: 0.75rem;
@@ -67,7 +63,6 @@
     --space-4: 1rem;
     --space-5: 1.5rem;
     --space-6: 2rem;
-    --space-8: 3rem;
     --space-section: var(--space-6);
     --space-block: var(--space-4);
     /* Layout — horizontal padding for .wrap / navbar; code blocks bleed full-width on small screens */
@@ -75,8 +70,6 @@
     /* Section rhythm (named so components don’t rely on calc tricks) */
     --space-about-h2-before: 1.75rem;
     --wrap-max: 680px;
-    /* ~62–70 characters per line for body copy */
-    --prose-measure: 40rem;
     --post-toc-width: 12rem;
     --post-layout-gap: 1rem;
 }
@@ -96,7 +89,7 @@ html {
 }
 
 body {
-    font-family: var(--font-prose);
+    font-family: var(--font-serif);
     font-size: var(--text-body);
     font-weight: 400;
     line-height: var(--leading-body);
@@ -324,7 +317,7 @@ main {
 }
 .navbar-brand--home a,
 .navbar-brand--compact {
-    font-family: var(--font-display);
+    font-family: var(--font-serif);
     font-size: var(--text-display);
     font-weight: 600;
     line-height: var(--leading-display);
@@ -425,7 +418,7 @@ main {
 
 .page-title,
 .intro-header .site-heading h1 {
-    font-family: var(--font-display);
+    font-family: var(--font-serif);
     font-size: var(--text-headline);
     font-weight: 600;
     line-height: var(--leading-display);
@@ -450,7 +443,7 @@ main {
 }
 
 .intro-header .post-heading h1 {
-    font-family: var(--font-display);
+    font-family: var(--font-serif);
     font-size: var(--text-title-lg);
     margin: 0 0 var(--space-2);
     line-height: var(--leading-tight);
@@ -487,7 +480,7 @@ main {
    ====================================== */
 .post-container,
 .about-content {
-    font-family: var(--font-prose);
+    font-family: var(--font-serif);
     line-height: var(--leading-prose);
     letter-spacing: var(--track-prose);
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
@@ -780,7 +773,7 @@ main {
 
 /* Section headings on home (about) page — stronger than body + paper titles (subtitle 1rem) */
 .about-content > h2 {
-    font-family: var(--font-display);
+    font-family: var(--font-serif);
     font-size: var(--text-title-md);
     font-weight: 600;
     line-height: var(--leading-tight);
@@ -800,6 +793,7 @@ main {
 /* About: misc list (talks + service) — plain stack, no rail */
 .about-content .misc-list {
     margin-top: var(--space-5);
+    margin-bottom: var(--space-5);
     padding: 0;
     list-style: none;
 }
@@ -827,15 +821,10 @@ main {
     margin: 0 0 var(--space-4);
 }
 
-.about-content .misc-list {
-    margin-bottom: var(--space-5);
-}
-
 .publication-list,
 .misc-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
 }
 
 .misc-list {
@@ -1396,7 +1385,6 @@ footer .copyright {
     .tag-button,
     #tag_cloud a,
     .tags a,
-    .archive-tags a,
     .publication-links a,
     .misc-item .aside-cluster a,
     .misc-item a.misc-title,
@@ -1410,7 +1398,6 @@ footer .copyright {
     .tag-button--all,
     .tags a,
     .tags .tag,
-    .archive-tags a,
     .social-links a {
         transition-duration: 0.01ms;
         transform: none !important;
