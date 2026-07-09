@@ -32,9 +32,9 @@
     --content-link: #1d1d1f;
     --content-link-hover: #0a0a0a;
     --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-serif: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
-    --font-display: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
-    --font-prose: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+    --font-serif: "Spectral", "Source Serif Pro", Georgia, "Times New Roman", serif;
+    --font-display: "Spectral", "Source Serif Pro", Georgia, "Times New Roman", serif;
+    --font-prose: "Spectral", "Source Serif Pro", Georgia, "Times New Roman", serif;
     --font-mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
     /* Type scale — single coherent rhythm */
     --text-micro: 0.75rem;
@@ -74,9 +74,6 @@
     --gutter-x: 15px;
     /* Section rhythm (named so components don’t rely on calc tricks) */
     --space-about-h2-before: 1.75rem;
-    --space-publication-band-top: 1.5rem;
-    --pub-thumb-size: 88px;
-    --pub-thumb-size-sm: 80px;
     --wrap-max: 680px;
     /* ~62–70 characters per line for body copy */
     --prose-measure: 40rem;
@@ -325,23 +322,7 @@ main {
     font-weight: inherit;
     line-height: inherit;
 }
-.navbar-brand--home a {
-    font-family: var(--font-display);
-    font-size: var(--text-display);
-    font-weight: 600;
-    line-height: var(--leading-display);
-    letter-spacing: var(--track-display);
-    color: var(--text);
-    text-decoration: none;
-    transition: color var(--duration) var(--ease-standard), opacity var(--duration) var(--ease-standard);
-}
-.navbar-brand--home a:hover { color: var(--text); opacity: 0.85; }
-
-.navbar--home .nav-link {
-    font-size: var(--text-small);
-    font-weight: 400;
-}
-
+.navbar-brand--home a,
 .navbar-brand--compact {
     font-family: var(--font-display);
     font-size: var(--text-display);
@@ -352,8 +333,10 @@ main {
     text-decoration: none;
     transition: color var(--duration) var(--ease-standard), opacity var(--duration) var(--ease-standard);
 }
+.navbar-brand--home a:hover,
 .navbar-brand--compact:hover { color: var(--text); opacity: 0.85; }
 
+.navbar--home .nav-link,
 .navbar--compact .nav-link {
     font-size: var(--text-small);
     font-weight: 400;
@@ -423,9 +406,7 @@ main {
     padding-top: var(--space-4);
     color: var(--text);
 }
-.intro-header.style-text,
 .intro-header:not(.title-hidden) { padding-top: 0; }
-.intro-header.style-text { background: none; }
 .intro-header.title-hidden {
     padding-top: 0;
     margin-bottom: var(--space-5);
@@ -434,8 +415,7 @@ main {
 .intro-header .post-heading { margin-top: var(--space-section); }
 
 .intro-header .site-heading,
-.intro-header .post-heading,
-.intro-header .page-heading {
+.intro-header .post-heading {
     padding: 0 0 var(--space-block);
     text-align: left;
 }
@@ -444,8 +424,7 @@ main {
 }
 
 .page-title,
-.intro-header .site-heading h1,
-.intro-header .page-heading h1 {
+.intro-header .site-heading h1 {
     font-family: var(--font-display);
     font-size: var(--text-headline);
     font-weight: 600;
@@ -462,15 +441,13 @@ main {
     line-height: 1.1;
     display: block;
 }
-.intro-header .site-heading .subheading,
-.intro-header .page-heading .subheading {
+.intro-header .site-heading .subheading {
     font-size: var(--text-subtitle);
     font-weight: 400;
     line-height: var(--leading-snug);
     letter-spacing: var(--track-normal);
     margin: var(--space-1) 0 0;
 }
-.intro-header.style-text .subheading { margin-bottom: var(--space-2); }
 
 .intro-header .post-heading h1 {
     font-family: var(--font-display);
@@ -718,8 +695,7 @@ main {
 .tag-button,
 .tag-button--all,
 .tags a,
-.tags .tag,
-.archive-tags a {
+.tags .tag {
     display: inline-block;
     padding: 0.3rem 0.75rem;
     margin: 0 0.25rem 0.25rem 0;
@@ -740,8 +716,7 @@ main {
 .tag-button:hover,
 .tag-button--all:hover,
 .tags a:hover,
-.tags .tag:hover,
-.archive-tags a:hover {
+.tags .tag:hover {
     background: rgba(29, 29, 31, 0.11);
     color: var(--text);
     text-decoration: none;
@@ -822,36 +797,8 @@ main {
     }
 }
 
-.publication-band {
-    border-top: 1px solid var(--border-hairline);
-    padding: var(--space-publication-band-top) 0 0;
-    margin-top: var(--space-6);
-    margin-bottom: 0;
-}
-.publication-band h2 {
-    font-family: var(--font-display);
-    font-size: var(--text-title-md);
-    font-weight: 600;
-    line-height: var(--leading-tight);
-    letter-spacing: var(--track-title);
-    color: var(--text);
-    text-transform: none;
-    margin-bottom: var(--space-4);
-    text-wrap: balance;
-}
-.publication-band h2:first-of-type { margin-top: 0; }
-
-.publication-band > .wrap > p {
-    font-size: var(--text-body);
-    line-height: var(--leading-prose);
-    letter-spacing: var(--track-normal);
-    max-width: none;
-    margin-top: 0;
-}
-
-/* About: talks, service lists — plain stack, no rail */
-.about-content .talk-list,
-.about-content .service-list {
+/* About: misc list (talks + service) — plain stack, no rail */
+.about-content .misc-list {
     margin-top: var(--space-5);
     padding: 0;
     list-style: none;
@@ -872,43 +819,27 @@ main {
     line-height: var(--leading-snug);
 }
 
-.about-content .about-subheading {
-    font-family: var(--font-display);
-    font-size: var(--text-title-sm);
-    font-weight: 500;
-    line-height: var(--leading-tight);
-    letter-spacing: var(--track-title);
-    color: var(--text);
-    margin: var(--space-3) 0 var(--space-1);
-}
-
-.about-content .about-subheading:first-of-type {
-    margin-top: 0;
-}
-
 .about-content .about-subheading-note {
     font-family: var(--font-sans);
     font-size: var(--text-caption);
     color: var(--text-muted);
     line-height: var(--leading-snug);
-    margin: 0 0 var(--space-2);
+    margin: 0 0 var(--space-4);
 }
 
-.about-content .service-list {
+.about-content .misc-list {
     margin-bottom: var(--space-5);
 }
 
 .publication-list,
-.talk-list,
-.service-list {
+.misc-list {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
 }
 
-.talk-list,
-.service-list {
-    gap: var(--space-1);
+.misc-list {
+    gap: var(--space-3);
 }
 
 .publication-list {
@@ -925,23 +856,20 @@ main {
 .publication-item:first-child { padding-top: 0; }
 .publication-item:last-child { padding-bottom: 0; }
 
-/* Talks & service: inline flow — meta follows title continuously. */
-.talk-item,
-.service-item {
+/* Misc (talks + service): inline flow — meta follows title continuously. */
+.misc-item {
     display: block;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.talk-item .about-list-body,
-.service-item .about-list-body {
+.misc-item .about-list-body {
     display: inline;
     min-width: 0;
 }
 
-.talk-item .about-list-aside,
-.service-item .about-list-aside {
+.misc-item .about-list-aside {
     display: inline;
 }
 
@@ -952,11 +880,7 @@ main {
     padding: 0;
 }
 
-.about-list-body {
-    padding: 0;
-    padding-top: 0.05rem;
-}
-
+.about-list-body,
 .about-list-aside {
     padding: 0;
     padding-top: 0.05rem;
@@ -982,7 +906,7 @@ main {
 
 .publication-title {
     font-size: var(--text-subtitle);
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.25;
     letter-spacing: var(--track-title);
     color: var(--text);
@@ -996,6 +920,11 @@ main {
     letter-spacing: var(--track-normal);
     color: var(--text-muted);
     margin: 0;
+}
+
+.publication-authors strong {
+    color: var(--text);
+    font-weight: 600;
 }
 
 .publication-venue {
@@ -1080,8 +1009,7 @@ main {
     filter: brightness(1.07) saturate(1.1);
 }
 
-.talk-item .talk-title,
-.service-item .service-title {
+.misc-item .misc-title {
     font-size: var(--text-subtitle);
     font-weight: 600;
     line-height: 1.25;
@@ -1089,7 +1017,7 @@ main {
     color: var(--text);
 }
 
-.talk-item .talk-meta {
+.misc-item .misc-meta {
     font-family: var(--font-sans);
     font-size: var(--text-caption);
     font-style: italic;
@@ -1098,7 +1026,7 @@ main {
     color: var(--text-muted);
 }
 
-.talk-item .aside-cluster a {
+.misc-item .aside-cluster a {
     font-family: var(--font-sans);
     font-size: var(--text-caption);
     font-weight: 600;
@@ -1108,32 +1036,22 @@ main {
     transition: text-decoration-color var(--duration) var(--ease-standard);
 }
 
-.talk-item .aside-cluster a:hover {
+.misc-item .aside-cluster a:hover {
     text-decoration: underline;
     text-underline-offset: 0.18em;
     text-decoration-thickness: 1px;
     text-decoration-color: var(--border-muted);
 }
 
-/* Academic service — linked title uses content link color */
-.service-item a.service-title {
+/* Linked misc title (e.g. workshop) uses content link color */
+.misc-item a.misc-title {
     color: var(--content-link);
     text-decoration: none;
     transition: color var(--duration) var(--ease-standard);
 }
 
-.service-item a.service-title:hover {
+.misc-item a.misc-title:hover {
     color: var(--content-link-hover);
-}
-
-.service-item .service-role,
-.service-item .service-detail {
-    font-family: var(--font-sans);
-    font-size: var(--text-caption);
-    font-style: italic;
-    line-height: 1.3;
-    letter-spacing: var(--track-normal);
-    color: var(--text-muted);
 }
 
 /* Profile — name lives in navbar on home; photo + bio only */
@@ -1142,8 +1060,8 @@ main {
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto;
     column-gap: 1.5rem;
-    row-gap: var(--space-3);
-    margin-bottom: var(--space-5);
+    row-gap: var(--space-4);
+    margin-bottom: var(--space-6);
     align-items: start;
 }
 .profile picture {
@@ -1197,15 +1115,9 @@ main {
     background: var(--bg-muted);
     color: var(--text-muted);
 }
-.presentation-badge.oral {
-    color: var(--text);
-    background: rgba(60, 60, 67, 0.08);
-}
-
 /* ======================================
    ARCHIVE
    ====================================== */
-.archive-container { margin-bottom: 1.25rem; }
 .archive-list { padding-top: 0; }
 .archive-item {
     display: flex;
@@ -1218,7 +1130,7 @@ main {
     font-size: var(--text-caption);
     font-variant-numeric: tabular-nums;
     min-width: 100px;
-    margin-right: 1rem;
+    margin-right: var(--space-4);
     letter-spacing: var(--track-ui);
 }
 .archive-item a {
@@ -1240,7 +1152,7 @@ main {
     padding: 0;
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    gap: var(--space-4);
 }
 .pager-prev, .pager-next { max-width: 45%; }
 .pager-placeholder { visibility: hidden; pointer-events: none; }
@@ -1325,7 +1237,6 @@ footer {
     border-top: 1px solid var(--border-hairline);
     background-color: var(--bg-page);
 }
-footer .list-inline { margin: 0; padding: 0; }
 footer .copyright {
     font-size: var(--text-caption);
     letter-spacing: var(--track-ui);
@@ -1336,15 +1247,6 @@ footer .copyright {
 /* ======================================
    404 PAGE
    ====================================== */
-.error-container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.25rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
 .not-found {
     padding: 6.25rem 0;
     text-align: center;
@@ -1413,7 +1315,7 @@ footer .copyright {
     .post-container h5 { font-size: var(--text-small); }
     .post-container h6 { font-size: var(--text-caption); }
 
-    .post-container ul:not(.service-list):not(.publication-list):not(.talk-list),
+    .post-container ul:not(.misc-list):not(.publication-list),
     .post-container ol { padding-left: 1.25rem; }
     .table-responsive { border: 0; }
 
@@ -1471,7 +1373,7 @@ footer .copyright {
 }
 
 @media (max-width: 576px) {
-    .profile { gap: 1rem; }
+    .profile { gap: var(--space-4); }
     .social-links { gap: 0.8rem; }
     .social-links a { font-size: var(--text-body-lg); }
 }
@@ -1497,8 +1399,8 @@ footer .copyright {
     .tags a,
     .archive-tags a,
     .publication-links a,
-    .talk-item .aside-cluster a,
-    .service-item a.service-title,
+    .misc-item .aside-cluster a,
+    .misc-item a.misc-title,
     .archive-item a,
     .pager a,
     .gradient-text {
