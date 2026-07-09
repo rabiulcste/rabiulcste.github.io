@@ -921,7 +921,7 @@ The **consistency condition**: any two points on the *same* PF-ODE trajectory mu
 <figcaption>The consistency function $f_\theta$ takes any point on the PF-ODE trajectory and maps it back to the same clean endpoint $x_0$. The condition is consistency across the whole trajectory, not just at individual points.</figcaption>
 </figure>
 
-How is $f_\theta$ built so the boundary identity holds? The naive way is piecewise: set $f_\theta(x, t) = x$ at $t = \varepsilon$ and $f_\theta(x, t) = F_\theta(x, t)$ otherwise, with $F_\theta$ a free neural network. That works for the discrete-time loss but breaks under continuous-time training, since the function is no longer differentiable at $\varepsilon$.
+Building $f_\theta$ so the boundary identity actually holds takes some care. The naive way is piecewise: set $f_\theta(x, t) = x$ at $t = \varepsilon$ and $f_\theta(x, t) = F_\theta(x, t)$ otherwise, with $F_\theta$ a free neural network. That works for the discrete-time loss but breaks under continuous-time training, since the function is no longer differentiable at $\varepsilon$.
 
 The solution, which has stuck since, is to **wire the boundary identity into the architecture** with a skip / output split:
 
@@ -970,12 +970,14 @@ The two schedules cross as $t \to \varepsilon$: the skip weight $c_{\mathrm{skip
 
 ### Enforcing consistency via self-distillation
 
-Which trajectory a given $z_t$ belongs to is never directly observed, so the $(z_t, z_s)$ pairs that should agree cannot be enumerated. The workaround is to take two *adjacent* points on the same trajectory, $z_t$ and $z_{t-\Delta}$ a small step apart, and require their predictions to match:
+Which trajectory a given $z_t$ belongs to is never directly observed, so the pairs of points that should agree cannot be enumerated directly. The workaround is to take two *adjacent* points on the same trajectory, $z_t$ and $z_{t-\Delta}$ a small step apart, and require their predictions to match:
 
 <div class="eq">$$\mathcal{L}_\text{CD} \;=\; \mathbb{E}\,\bigl\lVert f_\theta(z_t,\,t) \;-\; \operatorname{sg}\!\bigl(f_{\theta^-}(z_{t-\Delta},\,t-\Delta)\bigr) \bigr\rVert^2$$</div>
 <div class="eq-label">sg = stop-gradient. $\theta^-$ = EMA copy of $\theta$, updated slowly as $\theta^- \leftarrow m\,\theta^- + (1-m)\,\theta$.</div>
 
-The EMA copy $\theta^-$ updates slowly, typically $m \approx 0.99$, so the target moves at about 1% of the main network's speed. If both sides of the loss moved together, they could chase each other into the constant solution from before; the stop-gradient breaks that symmetry, so gradients flow only through the left side and $\theta$ chases a target that drifts slowly underneath it. Same *target network* trick that stabilised DQN: when a network regresses toward a target derived from itself, the target has to stay still enough to aim at.
+The EMA copy $\theta^-$ updates slowly, typically $m \approx 0.99$, so the target moves at about 1% of the main network's speed. If both sides of the loss moved together, they could chase each other into the constant solution from before; the stop-gradient breaks that symmetry, so gradients flow only through the left side and $\theta$ chases a target that drifts slowly underneath it. Same *target network* trick that stabilised DQN.[^dqn-target]
+
+[^dqn-target]: In DQN, a Q-network regressing toward a target computed by itself chases a moving goalpost and can diverge; freezing a lagged copy as the target long enough to aim at fixed the same failure mode there.
 
 Getting the adjacent point $z_{t-\Delta}$ requires one step of the PF-ODE, and this is where the teacher/student framing becomes explicit. In consistency *distillation* (CD), a pretrained diffusion model is the teacher: it provides reliable one-step ODE moves onto the true trajectory, and the student learns to jump straight to $x_0$ from any point on them. In consistency *training* (CT) there is no teacher; the network produces its own one-step moves, which adds noise and makes training harder to stabilise. CD converges faster and produces better results; CT drops the teacher dependency but needs more careful engineering.
 
@@ -1192,7 +1194,7 @@ Both formulations are hard to train in their basic form. iCT (improved consisten
 
 The training target here is always *behavioural*: it constrains what the network outputs at adjacent pairs of points, not what the underlying field should be. There is no ground truth for $f(z_t, t)$ independent of the network. The optimal function is defined only implicitly, through the consistency and boundary conditions, and the only way to learn it is to have the network agree with itself across adjacent pairs. That is inherently noisy and sensitive to hyperparameters.
 
-A deeper limitation: consistency models are stuck on a single destination, the endpoint $x_0$. The signature is $f(z_t, t) = x_0$: given a point and its time, the network predicts the endpoint and nothing else. There is no way to ask it to jump to an intermediate point, so multi-step generation means running the network repeatedly and renoising between evaluations, a workaround that does not actually use the trajectory structure. But what if the jump function could land anywhere, not just $x_0$?
+A deeper limitation: consistency models are stuck on a single destination, the endpoint $x_0$. The signature is $f(z_t, t) = x_0$: given a point and its time, the network predicts the endpoint and nothing else. There is no way to ask it to jump to an intermediate point, so multi-step generation means running the network repeatedly and renoising between evaluations, a workaround that does not actually use the trajectory structure. The natural fix is to let the jump function land anywhere, not just $x_0$.
 
 ---
 
@@ -1354,7 +1356,7 @@ Like consistency models, CTM still trains against a self-referential target. $G_
 
 ## Shortcut models
 
-Shortcut models <sup class="cite"><a href="#ref-shortcut2024">[5]</a></sup> trade CTM's continuous triples for a discrete set of jump sizes and get a much simpler procedure in exchange. They condition the network on both the current noise level $t$ and the *desired step size* $d$, so it predicts where a jump of size $d$ from $z_t$ lands.
+Shortcut models <sup class="cite"><a href="#ref-shortcut2024">[5]</a></sup> trade CTM's continuous triples for a discrete set of jump sizes and get a much simpler procedure in exchange. Where CTM conditions on the two absolute times $(t, s)$, a shortcut model conditions on the current noise level $t$ and a *step size* $d = t - s$, so it predicts where a jump of size $d$ from $z_t$ lands.
 
 <div class="eq">$$v_\theta(z_t,\, t,\, d) \;\approx\; \frac{z_t - z_{t-d}}{d}$$</div>
 <div class="eq-label">Predict the average displacement per unit time over a step of size $d$. At $d \to 0$ this recovers instantaneous velocity.</div>
@@ -1363,7 +1365,7 @@ A plain flow matching network only knows "I am at noise level $t$." A shortcut m
 
 ### The bootstrapping training procedure
 
-How is this trained? The ground-truth $z_{t-d}$ cannot be computed directly without running the full ODE, so the target is built from *smaller* steps the network can already make: two half-steps from the (stop-gradient) EMA copy are composed into a single full-step target the student matches. The picture first, then the equations.
+The training procedure has to work around one problem: the ground-truth $z_{t-d}$ cannot be computed directly without running the full ODE. So the target is built from *smaller* steps the network can already make: two half-steps from the (stop-gradient) EMA copy are composed into a single full-step target the student matches. The picture first, then the equations.
 
 <figure class="fig-card">
 <div class="fig-card-title">Shortcut bootstrapping: half-steps teach full steps</div>
@@ -1441,7 +1443,7 @@ The paper also proves consistency models eventually get *worse* with more steps.
 
 Flow maps avoid this failure by construction, because they step directly between noise levels and never renoise. The paper does not prove they improve monotonically, but empirically they keep getting better with more steps, exactly where CMs fall apart.
 
-How does the student actually enforce consistency against the teacher? AYF gives two losses, borrowing the fluid-dynamics distinction between Eulerian (fixed observer, watch the field go by) and Lagrangian (move along with the particle) frames. They differ in *which time variable they perturb*.
+The student enforces consistency against the teacher with two losses, borrowing the fluid-dynamics distinction between Eulerian (fixed observer, watch the field go by) and Lagrangian (move along with the particle) frames. They differ in *which time variable they perturb*.
 
 <div class="post-table-wrap">
 <table class="post-table">
@@ -1470,7 +1472,7 @@ How does the student actually enforce consistency against the teacher? AYF gives
 </table>
 </div>
 
-To replace classifier-free guidance during distillation, AYF uses **autoguidance**: the teacher is mixed with a weaker checkpoint of itself, $v_\phi^{\text{guided}} = \lambda v_\phi + (1 - \lambda) v_\phi^{\text{weak}}$ with $\lambda$ sampled uniformly from $[1, 3]$. This steers samples away from low-quality regions without the overshooting failure mode CFG can have.
+To replace classifier-free guidance during distillation, AYF uses **autoguidance**: the teacher is mixed with a weaker checkpoint of itself, $v_\phi^{\text{guided}} = \lambda v_\phi + (1 - \lambda) v_\phi^{\text{weak}}$ with $\lambda$ sampled uniformly from $[1, 3]$. Since $\lambda > 1$, this extrapolates past the teacher, away from what the weaker checkpoint would have predicted, without CFG's overshooting failure mode.
 
 Empirically, a small AYF student beats much larger distillation baselines at fewer network function evaluations (NFEs). The efficiency comes from the teacher anchor: unlike CTM, the student does not spend capacity reconciling self-generated targets at high noise levels, where those targets are least reliable. Full numbers are in the table at the end.
 
@@ -1546,7 +1548,7 @@ The TC gradient runs the Jacobian of the network output with respect to $z_t$ ag
 
 So at high $t$ the TC gradients are large, random vectors that actively conflict with the TFM gradients. α-Flow documents this conflict and uses it to motivate a curriculum: a parameter $\lambda \in [0,1]$ interpolates between pure TFM ($\lambda=0$, just flow matching, completely stable) and full MeanFlow ($\lambda=1$). Training starts at $\lambda=0$ and increases as the velocity field converges, by which time the Jacobian at high $t$ begins to encode which direction the trajectory is heading, and the JVP carries real signal.
 
-Same coarse-to-fine principle as the discretisation curriculum in consistency models, applied to a continuous parameter: stabilise the data-supervised component first; turn on the self-referential one only after the velocity field has converged enough for the JVP to mean something.
+It's the same coarse-to-fine principle as the discretisation curriculum in consistency models, applied to a continuous parameter instead of a step count: stabilise the data-supervised component first, then turn on the self-referential one only after the velocity field has converged enough for the JVP to mean something.
 
 ---
 
