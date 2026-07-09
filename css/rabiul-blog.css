@@ -914,7 +914,6 @@ main {
 }
 
 .publication-authors {
-    font-family: var(--font-sans);
     font-size: var(--text-caption);
     line-height: 1.35;
     letter-spacing: var(--track-normal);

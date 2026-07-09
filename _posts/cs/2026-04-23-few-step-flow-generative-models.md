@@ -235,11 +235,7 @@ sup[role="doc-noteref"] a.footnote:hover { color: var(--fig-ink); text-decoratio
 }
 </style>
 
-I have been spending a lot of time on one-step generative models lately, MeanFlow in particular and the family it belongs to. This post is how I now think about them: how they work, where the math comes from, and how each one answers a limitation of the one before it.
-
-Diffusion and flow models produce images, audio, and video that are nearly indistinguishable from real data, but a single sample takes hundreds of sequential network evaluations. A 1024×1024 image from <a href="https://arxiv.org/abs/2307.01952" target="_blank" rel="noopener noreferrer">SDXL</a> at 50 steps takes several seconds on an A100, while a one-step model produces the same image in tens of milliseconds. That is fine for offline synthesis but unusable for anything interactive, and most of that gap has closed in the last two years.
-
-Working backwards from the goal: what does a network need to learn to generate in one step?
+Diffusion and flow models denoise step by step, usually 50 or more steps. Each step is a full forward pass through a billion-parameter network. A single SDXL image takes several seconds on an A100 this way, even though the network itself runs in tens of milliseconds. Getting to few-step generation means cutting down the number of denoising steps. The most promising way to do that right now is to learn the jump between noise levels directly, a flow map, instead of learning the local velocity and integrating it. MeanFlow is the cleanest version of this idea I've seen. I wanted to write down how it works, where the math comes from, and why it's so hard to train.
 
 The post leans on a small set of symbols, collected here for reference. Each is also defined where it first appears, so you can skip this and refer back.
 
