@@ -5,8 +5,15 @@ layout: default
 {% include intro-header.html type='post' %}
 
 <article>
-    <div class="wrap post-layout">
+    <div class="wrap">
         <div class="post-main post-container">
+            {% unless page.no-catalog %}
+            <nav class="top-catalog" aria-label="On this page">
+                <h5>On this page</h5>
+                <ul class="catalog-body" id="catalog-body" role="list"></ul>
+            </nav>
+            {% endunless %}
+
             {{ content }}
 
             <div class="post-end-spacer"></div>
@@ -39,16 +46,6 @@ layout: default
             </div>
             {% endif %}
         </div>
-
-        {% unless page.no-catalog %}
-        <aside class="post-side sidebar-container catalog-container">
-            <nav class="side-catalog" aria-label="On this page">
-                <hr class="hidden-sm hidden-xs">
-                <h5><a class="catalog-toggle" href="#catalog-body">Catalog</a></h5>
-                <ul class="catalog-body" id="catalog-body" role="list"></ul>
-            </nav>
-        </aside>
-        {% endunless %}
     </div>
 </article>
 

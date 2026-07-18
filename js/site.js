@@ -139,8 +139,7 @@
   function initPostCatalog() {
     var container = document.querySelector('article .post-container');
     var body = document.getElementById('catalog-body');
-    var side = document.querySelector('.side-catalog');
-    var toggle = document.querySelector('.catalog-toggle');
+    var side = document.querySelector('.top-catalog');
     if (!container || !body || !side) return;
 
     var headings = container.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
@@ -164,13 +163,6 @@
       li.appendChild(a);
       body.appendChild(li);
     });
-
-    if (toggle) {
-      toggle.addEventListener('click', function (e) {
-        e.preventDefault();
-        side.classList.toggle('fold');
-      });
-    }
 
     var links = body.querySelectorAll('a');
     var headingList = Array.prototype.slice.call(headings);
