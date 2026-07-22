@@ -811,6 +811,28 @@ main {
 }
 .list-entry em { font-style: italic; color: var(--text-muted); }
 
+/* Publications with a small ASCII glyph to the left */
+.publication-list .list-entry {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+.entry-art {
+    flex-shrink: 0;
+    width: 4.5em;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.3;
+    color: var(--border-muted);
+    white-space: pre;
+    margin: 0.2em 0 0;
+    padding-bottom: 0.3em;
+    overflow: visible;
+    user-select: none;
+}
+.entry-text { margin: 0; }
+
 /* Gradient text — “era of experience” & similar emphasis links */
 .about-content > p a.gradient-text,
 .post-container a.gradient-text,
