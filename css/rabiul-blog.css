@@ -820,16 +820,19 @@ main {
 }
 .entry-art {
     flex-shrink: 0;
-    width: 4.5em;
+    width: 5em;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     line-height: 1.3;
     color: var(--border-muted);
     white-space: pre;
     margin: 0.2em 0 0;
-    padding-bottom: 0.3em;
+    padding-bottom: 0.2em;
     overflow: visible;
     user-select: none;
+}
+.entry-art--filled {
+    color: var(--text-muted);
 }
 .entry-text { margin: 0; }
 
