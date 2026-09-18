@@ -12,26 +12,14 @@
         "url": "https://github.com/rabiulcste/rabiulcste.github.io/issues"
     },
     "devDependencies": {
-        "grunt": "^1.6.1",
-        "grunt-contrib-cssmin": "^4.0.0",
-        "grunt-contrib-uglify": "^5.2.2",
-        "grunt-contrib-watch": "^1.1.0",
         "sharp": "^0.34.1",
         "svgo": "^4.0.0"
     },
     "scripts": {
         "start": "bundle exec jekyll serve -w -l --host 0.0.0.0",
-        "start:built": "npm run build:css && npm run build:js && bundle exec jekyll serve -w -l --host 0.0.0.0",
-        "build:css": "grunt cssmin",
-        "build:js": "grunt uglify",
-        "build:images": "node scripts/optimize-images.mjs",
-        "build:assets": "grunt && npm run build:images",
-        "dev": "grunt watch & npm run start",
-        "boil": "git push boilerplate boilerplate:master",
-        "push": "git push origin master --tag"
+        "build:images": "node scripts/optimize-images.mjs"
     },
     "description": "Personal site and blog at https://rabiul.me",
-    "main": "Gruntfile.js",
     "keywords": [],
     "license": "ISC"
 }

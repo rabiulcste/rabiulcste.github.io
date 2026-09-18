@@ -2,16 +2,11 @@ source 'https://rubygems.org'
 
 group :jekyll_plugins do
     gem 'jekyll'
-    gem 'jekyll-archives'
     gem 'jekyll-feed'
-    gem 'jekyll-minifier'
-    gem 'jekyll-paginate-v2'
     gem 'jekyll-sitemap'
-    gem 'jekyll-target-blank'
-    gem 'jemoji'
-    # gem 'mini_racer'
-    gem 'unicode_utils'
     gem 'webrick'
+    # Ruby 3.4 stdlib extractions still required by Jekyll's dependencies
+    gem 'base64'
     gem 'csv'
     gem 'observer'
 end

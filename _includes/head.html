@@ -35,11 +35,7 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
-    {% if jekyll.environment == "development" %}
     <link rel="stylesheet" href="{{ "/css/rabiul-blog.css" | prepend: site.baseurl }}">
-    {% else %}
-    <link rel="stylesheet" href="{{ "/css/rabiul-blog.min.css" | prepend: site.baseurl }}">
-    {% endif %}
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9E060CCKKW"></script>

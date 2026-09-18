@@ -5,7 +5,7 @@ Personal site and blog, built with **[Jekyll](https://jekyllrb.com/)** and hoste
 ## Requirements
 
 - **Ruby** and **[Bundler](https://bundler.io/)** (see [Using Jekyll with Bundler](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/))
-- **Node.js** and npm (for CSS/JS minify and image tooling)
+- **Node.js** and npm (only for the image tooling)
 
 ## Setup
 
@@ -23,25 +23,15 @@ npm start
 This runs `bundle exec jekyll serve -w -l --host 0.0.0.0` (default port **4000**).  
 Alternatively: `bundle exec jekyll serve`
 
-## Build assets before deploy
-
-Edits to **`css/rabiul-blog.css`** and **`js/site.js`** are not served until minified:
+## Images
 
 ```sh
-npx grunt
+npm run build:images
 ```
 
-Or CSS + JS + image pass:
+Optimizes raster/SVG sources and refreshes the **`img/**/*.webp`** siblings.
 
-```sh
-npm run build:assets
-```
-
-- **`npm run build:css`** — minify CSS only  
-- **`npm run build:js`** — minify `site.js` → `site.min.js`  
-- **`npm run build:images`** — optimize raster/SVG and refresh **`img/**/*.webp`** next to JPG/PNG sources
-
-The live site loads **`css/rabiul-blog.min.css`** and **`js/site.min.js`** (see `_includes/head.html` and `_includes/footer.html`).
+CSS and JS are served as-is — there is no build step. GitHub Pages gzips them.
 
 ## Repository layout (high level)
 
@@ -50,9 +40,8 @@ The live site loads **`css/rabiul-blog.min.css`** and **`js/site.min.js`** (see 
 | `_config.yml` | Jekyll config |
 | `_layouts/`, `_includes/` | Templates and partials |
 | `_posts/` | Blog posts |
-| `css/rabiul-blog.css` | Source stylesheet (**edit this**; minify for production) |
-| `js/site.js` | Site behaviour bundle (**edit this**; uglify for production) |
-| `sw.js` | Service worker (precache list should match shipped assets) |
+| `css/rabiul-blog.css` | Stylesheet |
+| `js/site.js` | Site behaviour bundle |
 | `scripts/optimize-images.mjs` | Image + WebP sibling generation |
 
 ## License

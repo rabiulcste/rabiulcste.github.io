@@ -16,25 +16,17 @@ twitter_username:   _rabiulawal
 linkedin_username:  rabiulawal
 
 
-# Pagination
-pagination:
-  enabled: true
-
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
 permalink: pretty
-exclude: ["less","node_modules","Gruntfile.js","package.json","package-lock.json","scripts","README.md","README.zh.md","screenshots"]
+exclude: ["node_modules","package.json","package-lock.json","scripts","README.md","screenshots"]
 anchorjs: true
 
 # Gems
 plugins:
-  - jekyll-archives
   - jekyll-feed
-  - jekyll-minifier
-  - jekyll-paginate-v2
   - jekyll-sitemap
-  - jekyll-target-blank
 
 
 
