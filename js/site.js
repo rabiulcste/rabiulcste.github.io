@@ -5,38 +5,39 @@
 (function () {
   'use strict';
 
-  function onReady(fn) {
-    if (document.readyState !== 'loading') fn();
-    else document.addEventListener('DOMContentLoaded', fn);
+  var $$ = function (sel, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+  };
+
+  function wrap(el, className) {
+    if (el.closest('.' + className)) return;
+    var box = document.createElement('div');
+    box.className = className;
+    el.parentNode.insertBefore(box, el);
+    box.appendChild(el);
   }
 
   function enhanceTablesAndEmbeds() {
-    document.querySelectorAll('table').forEach(function (table) {
-      if (table.closest('.table-responsive')) return;
-      var wrap = document.createElement('div');
-      wrap.className = 'table-responsive';
-      table.parentNode.insertBefore(wrap, table);
-      wrap.appendChild(table);
-      if (!table.classList.contains('table')) table.classList.add('table');
+    $$('table').forEach(function (table) {
+      wrap(table, 'table-responsive');
+      table.classList.add('table');
     });
-    document.querySelectorAll('iframe[src*="youtube.com"], iframe[src*="vimeo.com"]').forEach(function (iframe) {
-      if (iframe.closest('.embed-responsive')) return;
-      var wrap = document.createElement('div');
-      wrap.className = 'embed-responsive embed-responsive-16by9';
-      iframe.parentNode.insertBefore(wrap, iframe);
-      wrap.appendChild(iframe);
-      iframe.classList.add('embed-responsive-item');
+    $$('iframe[src*="youtube.com"], iframe[src*="vimeo.com"]').forEach(function (iframe) {
+      wrap(iframe, 'embed-responsive');
     });
   }
 
-  function tagFromQueryString() {
-    var q = window.location.search.slice(1);
-    var parts = q.split('&');
-    for (var i = 0; i < parts.length; i++) {
-      var pair = parts[i].split('=');
-      if (pair[0] === 'tag') return pair.length > 1 ? pair.slice(1).join('=') : '';
-    }
-    return undefined;
+  // Deliberately not URLSearchParams: that decodes, and tags are compared
+  // against Liquid's already-encoded data-encode attribute.
+  function rawQueryParam(name) {
+    var found = '';
+    window.location.search.slice(1).split('&').forEach(function (pair) {
+      var eq = pair.indexOf('=');
+      if (pair.slice(0, eq < 0 ? pair.length : eq) === name) {
+        found = eq < 0 ? '' : pair.slice(eq + 1);
+      }
+    });
+    return found;
   }
 
   function initArchiveFilter() {
@@ -44,155 +45,81 @@
     var resultRoot = document.querySelector('.js-result');
     if (!tagsRoot || !resultRoot) return;
 
+    var buttons = $$('a[data-encode]', tagsRoot);
+    var showAll = tagsRoot.querySelector('.tag-button--all');
+    var items = $$('.item', resultRoot);
     var baseUrl = window.location.href.split('?')[0];
-    function setUrlQuery(query) {
-      window.history.replaceState(null, '', query ? baseUrl + query : baseUrl);
-    }
 
-    var articleTags = tagsRoot.querySelectorAll('.tag-button');
-    var tagShowAll = tagsRoot.querySelector('.tag-button--all');
-    var sections = resultRoot.querySelectorAll('section');
-    var sectionArticles = [];
-    sections.forEach(function (sec) {
-      sectionArticles.push(sec.querySelectorAll('.item'));
-    });
-    var lastFocus = null;
-    var hasInit = false;
-
-    function buttonFocus(el) {
-      if (!el) return;
-      el.classList.add('focus');
-      if (lastFocus && lastFocus !== el) lastFocus.classList.remove('focus');
-      lastFocus = el;
-    }
-
-    function searchButtonsByTag(tag) {
-      if (tag == null || tag === '') return tagShowAll;
-      var found = null;
-      articleTags.forEach(function (btn) {
-        if (btn.classList.contains('tag-button--all')) return;
-        if (btn.getAttribute('data-encode') === tag) found = btn;
+    function select(tag, pushUrl) {
+      tag = tag || '';
+      // data-encode holds Liquid's url_encode output, so tags stay percent-encoded
+      // on both sides of this comparison and in the ?tag= query.
+      var active = buttons.filter(function (btn) {
+        return btn.getAttribute('data-encode') === tag;
+      })[0] || showAll;
+      buttons.forEach(function (btn) {
+        btn.classList.toggle('focus', btn === active);
       });
-      return found || tagShowAll;
-    }
-
-    function tagSelect(tag, targetEl) {
-      var result = {};
-      var i, j, k;
-      for (i = 0; i < sectionArticles.length; i++) {
-        var articles = sectionArticles[i];
-        for (j = 0; j < articles.length; j++) {
-          if (tag === '' || tag === undefined) {
-            result[i] = result[i] || {};
-            result[i][j] = true;
-          } else {
-            var dt = articles[j].getAttribute('data-tags') || '';
-            var parts = dt.split(',');
-            for (k = 0; k < parts.length; k++) {
-              if (parts[k] === tag) {
-                result[i] = result[i] || {};
-                result[i][j] = true;
-                break;
-              }
-            }
-          }
-        }
-      }
-      for (i = 0; i < sectionArticles.length; i++) {
-        if (result[i]) sections[i].classList.remove('d-none');
-        else sections[i].classList.add('d-none');
-        for (j = 0; j < sectionArticles[i].length; j++) {
-          if (result[i] && result[i][j]) sectionArticles[i][j].classList.remove('d-none');
-          else sectionArticles[i][j].classList.add('d-none');
-        }
-      }
-      if (!hasInit) {
-        resultRoot.classList.remove('d-none');
-        hasInit = true;
-      }
-      if (targetEl) {
-        buttonFocus(targetEl);
-        var enc = targetEl.getAttribute('data-encode');
-        if (enc === '' || enc == null) setUrlQuery();
-        else setUrlQuery('?tag=' + enc);
-      } else {
-        buttonFocus(searchButtonsByTag(tag));
+      items.forEach(function (item) {
+        var tags = (item.getAttribute('data-tags') || '').split(',');
+        item.classList.toggle('d-none', tag !== '' && tags.indexOf(tag) === -1);
+      });
+      if (pushUrl) {
+        window.history.replaceState(null, '', tag ? baseUrl + '?tag=' + tag : baseUrl);
       }
     }
 
     tagsRoot.addEventListener('click', function (e) {
-      var a = e.target.closest('a');
+      var a = e.target.closest('a[data-encode]');
       if (!a || !tagsRoot.contains(a)) return;
       e.preventDefault();
-      if (a.classList.contains('tag-button--all')) {
-        tagSelect('', a);
-        return;
-      }
-      var enc = a.getAttribute('data-encode');
-      if (enc == null) return;
-      tagSelect(enc, a);
+      select(a.getAttribute('data-encode'), true);
     });
 
-    tagSelect(tagFromQueryString());
+    select(rawQueryParam('tag'), false);
   }
 
   function initPostCatalog() {
     var container = document.querySelector('article .post-container');
-    var body = document.getElementById('catalog-body');
-    var side = document.querySelector('.top-catalog');
-    if (!container || !body || !side) return;
+    var list = document.getElementById('catalog-body');
+    var panel = document.querySelector('.top-catalog');
+    if (!container || !list || !panel) return;
 
-    var headings = container.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
-    if (!headings.length) {
-      side.classList.add('fold');
+    var entries = $$('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]', container)
+      .filter(function (h) { return h.textContent.trim(); })
+      .map(function (h) {
+        var li = document.createElement('li');
+        li.className = h.tagName.toLowerCase() + '_nav';
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.rel = 'nofollow';
+        a.title = a.textContent = h.textContent.trim();
+        li.appendChild(a);
+        list.appendChild(li);
+        return { heading: h, li: li };
+      });
+
+    if (!entries.length) {
+      panel.classList.add('fold');
       return;
     }
 
-    body.innerHTML = '';
-    headings.forEach(function (h) {
-      var id = h.id;
-      var text = h.textContent.trim();
-      if (!id || !text) return;
-      var li = document.createElement('li');
-      li.className = (h.tagName.toLowerCase()) + '_nav';
-      var a = document.createElement('a');
-      a.href = '#' + id;
-      a.setAttribute('rel', 'nofollow');
-      a.title = text;
-      a.textContent = text;
-      li.appendChild(a);
-      body.appendChild(li);
-    });
-
-    var links = body.querySelectorAll('a');
-    var headingList = Array.prototype.slice.call(headings);
-    var byHref = {};
-    links.forEach(function (a) {
-      byHref[a.getAttribute('href')] = a;
-    });
-
-    links.forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        var id = a.getAttribute('href').slice(1);
-        var target = document.getElementById(id);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+    list.addEventListener('click', function (e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      e.preventDefault();
+      var target = document.getElementById(a.getAttribute('href').slice(1));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
     function syncActive() {
-      var pad = 96;
-      var y = window.scrollY + pad;
-      var current = headingList[0];
-      for (var i = 0; i < headingList.length; i++) {
-        var top = headingList[i].getBoundingClientRect().top + window.scrollY;
-        if (top <= y) current = headingList[i];
-      }
-      var href = '#' + current.id;
-      var activeA = byHref[href];
-      links.forEach(function (x) {
-        var li = x.closest('li');
-        if (li) li.classList.toggle('active', x === activeA);
+      var y = window.scrollY + 96;
+      var current = entries[0];
+      entries.forEach(function (entry) {
+        if (entry.heading.getBoundingClientRect().top + window.scrollY <= y) current = entry;
+      });
+      entries.forEach(function (entry) {
+        entry.li.classList.toggle('active', entry === current);
       });
     }
 
@@ -202,44 +129,44 @@
 
   function initDisqus() {
     var cfg = window.__disqus;
-    if (!cfg) return;
     var el = document.getElementById('disqus_thread');
-    if (!el) return;
-    var loaded = false;
+    if (!cfg || !el) return;
+
     function load() {
-      if (loaded) return;
-      loaded = true;
       window.disqus_shortname = cfg.shortname;
       window.disqus_identifier = cfg.id;
       window.disqus_url = cfg.url;
       var s = document.createElement('script');
       s.async = true;
       s.src = 'https://' + cfg.shortname + '.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', String(+new Date()));
-      (document.head || document.body).appendChild(s);
+      s.setAttribute('data-timestamp', String(Date.now()));
+      document.head.appendChild(s);
     }
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) { load(); io.disconnect(); }
-      }, { rootMargin: '320px', threshold: 0.01 });
-      io.observe(el);
-    } else {
-      load();
-    }
+
+    if (!('IntersectionObserver' in window)) return load();
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { io.disconnect(); load(); }
+    }, { rootMargin: '320px', threshold: 0.01 });
+    io.observe(el);
   }
 
   function initAnchorJS() {
     if (!window.__anchorjs) return;
     var s = document.createElement('script');
-    s.src = '//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js';
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js';
     s.addEventListener('load', function () {
       anchors.options = { visible: 'hover', placement: 'right' };
-      anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+      anchors.add().remove('.intro-header h1').remove('.subheading');
     });
     document.head.appendChild(s);
   }
 
-  onReady(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+
+  ready(function () {
     enhanceTablesAndEmbeds();
     initArchiveFilter();
     initPostCatalog();

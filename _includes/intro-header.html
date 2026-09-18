@@ -20,7 +20,7 @@
     <div class="wrap">
         <div class="site-heading{% if page.hide-title %}{% unless page.description and page.description != "" %} site-heading--minimal{% endunless %}{% endif %}"{% if include.short %} id="tag-heading"{% endif %}>
             {% unless page.hide-title %}
-            <h1 class="page-title">{% if page.title %}{{ page.title }}{% endif %}</h1>
+            <h1>{% if page.title %}{{ page.title }}{% endif %}</h1>
             {% endunless %}
             {% if page.description and page.description != "" %}
             <span class="subheading">{{ page.description }}</span>

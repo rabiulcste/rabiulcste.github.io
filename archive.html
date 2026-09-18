@@ -2,15 +2,13 @@
 title: Archive
 layout: default
 header-img: ""
-pagination:
-  enabled: true
 hide-title: true
 ---
 
 {% include intro-header.html type='page' short=true %}
 
 <div class="wrap">
-    <div id='tag_cloud' class="tags tags-sup js-tags">
+    <div class="tags js-tags">
         <a class="tag-button--all" data-encode="">
             Show All
             <sup>{{site.posts.size}}</sup>
@@ -31,7 +29,7 @@ hide-title: true
         {{ tags | split:'__SEPARATOR__' | sort }}
     </div>
 
-    <div class="mini-post-list js-result archive-list">
+    <div class="js-result archive-list">
     {%- assign _sorted_list = site.posts | sort: 'date' | reverse -%}
     <section>
     {%- for _article in _sorted_list -%}

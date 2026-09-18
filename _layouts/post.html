@@ -6,7 +6,7 @@ layout: default
 
 <article>
     <div class="wrap">
-        <div class="post-main post-container">
+        <div class="post-container">
             {% unless page.no-catalog %}
             <nav class="top-catalog" aria-label="On this page">
                 <h5>On this page</h5>
@@ -41,9 +41,7 @@ layout: default
             </nav>
 
             {% if site.disqus_username %}
-            <div class="comment">
-                <div id="disqus_thread" class="disqus-thread"></div>
-            </div>
+            <div id="disqus_thread"></div>
             {% endif %}
         </div>
     </div>
