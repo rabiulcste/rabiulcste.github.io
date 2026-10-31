@@ -28,7 +28,7 @@ bibtex: |
 <section id="motivation">
     <h2>Why this project</h2>
     <p>For the past two years, I have worked on generative world models for control. In my <a href="/drift/">DRIFT</a> project, I found that the features of a denoising model are less suited to control. One explanation is that reconstruction does not produce invariant, abstract features. This is also part of why Yann LeCun favors joint-embedding methods such as JEPA over generative models.</p>
-    <p>This raised a question. Can one model predict embeddings, as joint-embedding methods do, and also generate images, as diffusion models do? In this project, a single denoising objective trains one network to do both. The network generates representations and pixels, so representation learning and generation share one model and one objective. In this view, self-supervised learning becomes a form of generative modeling.</p>
+    <p>I was mostly fascinated and consumed by diffusion models, so I went looking for a diffusion-native solution to both representation and generation. In this project, a single denoising objective trains one network to do both. The network generates representations and pixels, so representation learning and generation share one model and one objective. In this view, self-supervised learning becomes a form of generative modeling.</p>
 </section>
 
 <section id="abstract">
