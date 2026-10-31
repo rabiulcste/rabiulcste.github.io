@@ -1,0 +1,43 @@
+---
+layout: project
+title: "One Flow Transformer for Imagination and Control"
+description: "An online agent whose world model and policy share one Flow Transformer backbone, trained from scratch."
+authors:
+  - name: Rabiul Awal
+    url: /
+  - name: Jinseong Jeong
+  - name: Ankur Sikarwar
+  - name: Parisa Kordjamshidi
+  - name: Andrii Zadaianchuk
+  - name: Sai Rajeswar
+  - name: Paul Hongsuck Seo
+  - name: Aishwarya Agrawal
+venue: "Under review, 2026"
+links:
+  - label: Paper
+    url: "https://drive.google.com/file/d/10zf-t6m6gAShmdtMlVFFv2yhjZFyQJ5y/view?usp=drive_link"
+  - label: Code
+    url: ""
+og_image: teaser.png
+bibtex: |
+  @misc{awal2026drift,
+    title  = {One Flow Transformer for Imagination and Control},
+    author = {Awal, Rabiul and Jeong, Jinseong and Sikarwar, Ankur and Kordjamshidi, Parisa and Zadaianchuk, Andrii and Rajeswar, Sai and Seo, Paul Hongsuck and Agrawal, Aishwarya},
+    note   = {Under review},
+    year   = {2026}
+  }
+---
+
+<section>
+    {% include project/figure.html src="teaser.png" wide=true alt="Two panels side by side. Left, prior diffusion agents use a world model to imagine frames and a separate policy to act. Right, DRIFT uses one block, labelled world model plus policy, that both imagines and acts." caption="Left: prior diffusion agents imagine frames with a world model over several denoising steps and train a separate policy on these frames. Right: DRIFT uses one Flow Transformer for both, imagining each frame in one denoising step and acting from the same backbone." %}
+</section>
+
+<section id="abstract">
+    <h2>Abstract</h2>
+    <p>Diffusion and flow models are effective world models for visual reinforcement learning, letting agents learn behaviors in imagination. In current diffusion-based online agents, the world model serves as a black-box simulator. A separate policy network learns from its generated rollouts, so the diffusion model's backbone representations go unused for control. We introduce DRIFT, an agent whose policy learns entirely in imagination on the same Flow Transformer backbone as its world model, trained online from scratch. Three modeling choices make this work. First, denoising alone yields a less effective control state for the actor&ndash;critic. We therefore train the backbone to predict the next frame's latent from the control state's summary of the history and the current action, a reconstruction-free objective that makes the control state predictive and improves control. Second, the world model's reward predictions are less accurate on the generated latents than on the real ones. A simple and effective mitigation is to also train the world model on its own rollouts, with targets from the real data. Third, shortcut flow matching reduces imagination time to one denoising step per imagined transition while matching multi-step sampling in rollout accuracy. Imagining in a compact continuous latent space, DRIFT uses 33&times; fewer FLOPs per imagined transition than prior diffusion-based agents. It outperforms diffusion and flow baselines on Craftium and on Crafter with full-scale rewards, and is competitive on Atari. These results show that one diffusion generative backbone can both imagine and control in online RL.</p>
+</section>
+
+<section id="method">
+    <h2>Method</h2>
+    {% include project/figure.html src="method.png" wide=true alt="Two regions. Left, world-model training: an observation is encoded, noised, and passed with its tokens through DRIFT, which outputs a control state feeding predictor heads, including a next-latent head aligned with the encoder latent of the next observation. Right, actor-critic learning in imagination: DRIFT generates each next latent in one step, and the actor and critic take the resulting control state." caption="Left: world-model training. DRIFT denoises the latent of each time step and outputs the control state, from which small heads predict the reward (trophy) and the continuation (flag). A next-latent head also uses the control state and the action to predict the encoder's latent of the next observation. Right: actor&ndash;critic learning in imagination. DRIFT generates each next latent in one denoising step, and the actor and critic take the resulting control state as input." %}
+</section>
