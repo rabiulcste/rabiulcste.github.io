@@ -175,6 +175,16 @@ bibtex: |
     <figcaption>Atari 100k, eight games, 32 imagined frames. The blue line tracks the imagined rollout. The imagined side drifts from the real one as small errors add up; a brief punch can be missed in Boxing and the BankHeist maze changes colour early.</figcaption>
     </figure>
     <figure class="fig fig--video fig--bleed">
+    <div class="fig-img"><div class="drift-clip" style="max-width:936px;min-width:640px;aspect-ratio:1634 / 276"><video src="craftium_rollouts.mp4" poster="craftium_rollouts.webp" muted loop playsinline preload="metadata" aria-label="Four Craftium tasks. In each, real frames play on the left and DRIFT's imagined frames on the right under the same actions."></video><span class="clip-lab" style="left:0.00%;top:10.14%">Real</span><span class="clip-lab" style="left:12.00%;top:10.14%">Imagined</span><span class="clip-name" style="left:0.00%;top:23.55%">SmallRoom</span><span class="clip-lab" style="left:25.40%;top:10.14%">Real</span><span class="clip-lab" style="left:37.39%;top:10.14%">Imagined</span><span class="clip-name" style="left:25.40%;top:23.55%">Room</span><span class="clip-lab" style="left:50.80%;top:10.14%">Real</span><span class="clip-lab" style="left:62.79%;top:10.14%">Imagined</span><span class="clip-name" style="left:50.80%;top:23.55%">Speleo</span><span class="clip-lab" style="left:76.19%;top:10.14%">Real</span><span class="clip-lab" style="left:88.19%;top:10.14%">Imagined</span><span class="clip-name" style="left:76.19%;top:23.55%">ChopTree</span></div></div>
+    <script>(function () {
+        var v = document.currentScript.previousElementSibling.querySelector("video");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { v.controls = true; return; }
+        v.autoplay = true;
+        v.play().catch(function () { v.controls = true; });
+    })();</script>
+    <figcaption>Craftium, four 3D tasks, same protocol, except SmallRoom, which shows one rollout because its short episodes end during the warm-up. The imagined SmallRoom view loses the red target block.</figcaption>
+    </figure>
+    <figure class="fig fig--video fig--bleed">
     <div class="fig-img"><div class="drift-clip" style="max-width:518px;min-width:518px;aspect-ratio:518 / 304"><video src="crafter_rollout.mp4" poster="crafter_rollout.webp" muted loop playsinline preload="metadata" aria-label="Crafter. Real frames play on the left and DRIFT's imagined frames on the right under the same actions."></video><span class="clip-lab" style="left:0.00%;top:4.93%">Real</span><span class="clip-lab" style="left:50.39%;top:4.93%">Imagined</span><span class="clip-name" style="left:0.00%;top:11.84%">Crafter</span></div></div>
     <script>(function () {
         var v = document.currentScript.previousElementSibling.querySelector("video");
