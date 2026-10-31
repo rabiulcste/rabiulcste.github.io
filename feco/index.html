@@ -271,24 +271,23 @@ bibtex: |
     <h2>Preliminary results <span class="muted">(ImageNet-100 speedrun)</span></h2>
     <figure class="feco-fig feco-chart">
         <div class="feco-scroll">
-        <svg class="fd" viewBox="0 0 520 256" role="img" aria-labelledby="chart-title">
-            <title id="chart-title">One-step FID for MeanFlow SiT-B/2 on the ImageNet-100 speedrun: baseline 57.3, REPA 51.2, FeCo with an extra EMA forward 54.4, FeCo with the tangent teacher 51.8, FeCo plus SIGReg at the student block 52.4, FeCo plus SIGReg at the teacher block 48.9.</title>
-            <line class="repa-line" x1="304.0" y1="10" x2="304.0" y2="204"/>
+        <svg class="fd" viewBox="0 0 520 228" role="img" aria-labelledby="chart-title">
+            <title id="chart-title">One-step FID for MeanFlow SiT-B/2 on the ImageNet-100 speedrun: baseline 57.3, REPA 51.2, SIGReg alone 56.3, FeCo alone 51.8, FeCo plus SIGReg 48.9.</title>
+            <line class="repa-line" x1="304.0" y1="10" x2="304.0" y2="176"/>
             <g class="row"><title>Baseline: 57.3</title><rect class="hit" x="0" y="10" width="520" height="28"/><text class="lab" x="200" y="29" text-anchor="end">Baseline</text><circle class="dot-n" cx="426.0" cy="24" r="4.5"/><text class="val" x="436.0" y="29">57.3</text></g>
             <g class="row"><title>REPA (DINOv2): 51.2</title><rect class="hit" x="0" y="38" width="520" height="28"/><text class="lab" x="200" y="57" text-anchor="end">REPA (DINOv2)</text><circle class="dot-repa" cx="304.0" cy="52" r="4.5"/><text class="val" x="314.0" y="57">51.2</text></g>
-            <g class="row"><title>FeCo, extra forward: 54.4</title><rect class="hit" x="0" y="82" width="520" height="28"/><text class="lab" x="200" y="101" text-anchor="end">FeCo, extra forward</text><circle class="dot-n" cx="368.0" cy="96" r="4.5"/><text class="val" x="378.0" y="101">54.4</text></g>
-            <g class="row"><title>FeCo, tangent: 51.8</title><rect class="hit" x="0" y="110" width="520" height="28"/><text class="lab" x="200" y="129" text-anchor="end">FeCo, tangent</text><circle class="dot-n" cx="316.0" cy="124" r="4.5"/><text class="val" x="326.0" y="129">51.8</text></g>
-            <g class="row"><title>+ SIGReg, student block: 52.4</title><rect class="hit" x="0" y="138" width="520" height="28"/><text class="lab" x="200" y="157" text-anchor="end">+ SIGReg, student block</text><circle class="dot-n" cx="328.0" cy="152" r="4.5"/><text class="val" x="338.0" y="157">52.4</text></g>
-            <g class="row"><title>+ SIGReg, teacher block: 48.9</title><rect class="hit" x="0" y="166" width="520" height="28"/><text class="lab best" x="200" y="185" text-anchor="end">+ SIGReg, teacher block</text><circle class="dot-best" cx="258.0" cy="180" r="5.5"/><text class="val best" x="268.0" y="185">48.9</text></g>
-            <line class="axis" x1="220" y1="204" x2="480" y2="204"/>
-            <line class="axis" x1="240.0" y1="204" x2="240.0" y2="208"/><text class="tick" x="240.0" y="224" text-anchor="middle">48</text>
-            <line class="axis" x1="320.0" y1="204" x2="320.0" y2="208"/><text class="tick" x="320.0" y="224" text-anchor="middle">52</text>
-            <line class="axis" x1="400.0" y1="204" x2="400.0" y2="208"/><text class="tick" x="400.0" y="224" text-anchor="middle">56</text>
-            <line class="axis" x1="480.0" y1="204" x2="480.0" y2="208"/><text class="tick" x="480.0" y="224" text-anchor="middle">60</text>
-            <text class="tick" x="350" y="246" text-anchor="middle">1-step FID (lower is better)</text>
+            <g class="row"><title>SIGReg alone: 56.3</title><rect class="hit" x="0" y="82" width="520" height="28"/><text class="lab" x="200" y="101" text-anchor="end">SIGReg alone</text><circle class="dot-n" cx="406.0" cy="96" r="4.5"/><text class="val" x="416.0" y="101">56.3</text></g>
+            <g class="row"><title>FeCo alone: 51.8</title><rect class="hit" x="0" y="110" width="520" height="28"/><text class="lab" x="200" y="129" text-anchor="end">FeCo alone</text><circle class="dot-n" cx="316.0" cy="124" r="4.5"/><text class="val" x="326.0" y="129">51.8</text></g>
+            <g class="row"><title>FeCo + SIGReg: 48.9</title><rect class="hit" x="0" y="138" width="520" height="28"/><text class="lab best" x="200" y="157" text-anchor="end">FeCo + SIGReg</text><circle class="dot-best" cx="258.0" cy="152" r="5.5"/><text class="val best" x="268.0" y="157">48.9</text></g>
+            <line class="axis" x1="220" y1="176" x2="480" y2="176"/>
+            <line class="axis" x1="240.0" y1="176" x2="240.0" y2="180"/><text class="tick" x="240.0" y="196" text-anchor="middle">48</text>
+            <line class="axis" x1="320.0" y1="176" x2="320.0" y2="180"/><text class="tick" x="320.0" y="196" text-anchor="middle">52</text>
+            <line class="axis" x1="400.0" y1="176" x2="400.0" y2="180"/><text class="tick" x="400.0" y="196" text-anchor="middle">56</text>
+            <line class="axis" x1="480.0" y1="176" x2="480.0" y2="180"/><text class="tick" x="480.0" y="196" text-anchor="middle">60</text>
+            <text class="tick" x="350" y="218" text-anchor="middle">1-step FID (lower is better)</text>
         </svg>
         </div>
-        <figcaption>MeanFlow SiT-B/2, one-step FID, lower is better. The faint dotted line marks <a href="https://arxiv.org/abs/2410.06940">REPA</a>. Preliminary, ImageNet-100 speedrun.</figcaption>
+        <figcaption>MeanFlow SiT-B/2, one-step FID, lower is better. SIGReg alone barely helps; on top of FeCo it adds 2.9 and passes REPA. The faint dotted line marks <a href="https://arxiv.org/abs/2410.06940">REPA</a>. Preliminary, ImageNet-100 speedrun.</figcaption>
     </figure>
     <div class="table-wrap">
         <table>
