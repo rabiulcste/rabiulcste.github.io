@@ -6,8 +6,9 @@ Figure slot for project pages.
   include.label    text inside the placeholder box
   include.ratio    placeholder aspect ratio, e.g. "16 / 9" (default), "2 / 1"
   include.wide     set to scroll sideways on phones instead of shrinking (for wide diagrams)
+  include.bleed    set to run wider than the text column on large screens (for image grids)
 {%- endcomment -%}
-<figure class="fig{% if include.wide %} fig--wide{% endif %}">
+<figure class="fig{% if include.wide %} fig--wide{% endif %}{% if include.bleed %} fig--bleed{% endif %}">
     {%- if include.src %}
     <div class="fig-img"><img src="{{ include.src }}" alt="{{ include.alt | default: include.caption | strip_html }}" loading="lazy"></div>
     {%- else %}

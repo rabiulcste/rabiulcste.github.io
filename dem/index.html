@@ -22,11 +22,10 @@ bibtex: |
 ---
 
 <section>
-    {% include project/figure.html src="teaser.png" alt="Scatter plot of linear probe accuracy on ImageNet-100 against FID without labels. DEM sits at the top right, ahead of the self-supervised and generative baselines." caption="One generative model learns representations competitive with self-supervised methods and generates images without labels." %}
+    {% include project/figure.html src="samples.webp" bleed=true alt="A grid of 32 small generated images of animals, objects and scenes." caption="Uncurated images generated without labels, by one network trained only by denoising." %}
 </section>
 
-<section id="motivation">
-    <h2>Why this project</h2>
+<section class="intro">
     <p>For the past two years, I have worked on generative world models for control. In my <a href="/drift/">DRIFT</a> project, I found that the features of a denoising model are less suited to control. One explanation is that reconstruction does not produce invariant, abstract features. This is also part of why Yann LeCun favors joint-embedding methods such as JEPA over generative models.</p>
     <p>I was mostly fascinated and consumed by diffusion models, so I went looking for a diffusion-native solution to both representation and generation. In this project, a single denoising objective trains one network to do both. The network generates representations and pixels, so representation learning and generation share one model and one objective. In this view, self-supervised learning becomes a form of generative modeling.</p>
 </section>
@@ -40,4 +39,38 @@ bibtex: |
 <section id="method">
     <h2>Method</h2>
     {% include project/figure.html src="concept.png" wide=true alt="Three diagrams side by side. (a) A joint-embedding model predicts the embedding of view x from view x prime. (b) A diffusion model denoises x_t conditioned on z. (c) A denoising embedding model denoises the embedding z_tau of x, conditioned on x prime." caption="Denoising in embedding space turns joint-embedding prediction into a generative model." %}
+</section>
+
+<section id="results">
+    <h2>Results</h2>
+    {% include project/figure.html src="teaser.png" alt="Scatter plot of linear probe accuracy on ImageNet-100 against FID without labels. DEM sits at the top right, ahead of the self-supervised and generative baselines." caption="One generative model learns representations competitive with self-supervised methods and generates images without labels." %}
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr><th></th><th>DEM</th><th>Baseline</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Linear probe</td><td>76.1%</td><td>72.8% (DINOv2)</td></tr>
+                <tr><td>FID-50k without labels</td><td>26.1</td><td>22.9 (RCG, three models)</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="caption">ImageNet-100, 64x64, current results.</p>
+</section>
+
+<section id="one-embedding">
+    <h2>One embedding, many images</h2>
+    {% include project/figure.html src="same_embedding.webp" bleed=true alt="Four rows of eight generated images. Images in a row share content and differ in detail." caption="Each row decodes one sampled embedding with different pixel noise." %}
+</section>
+
+<section id="completion">
+    <h2>Completing a crop</h2>
+    <p>A small crop fits many images. DEM samples several embeddings given the crop, and each one decodes to a different image.</p>
+    {% include project/figure.html src="completion.webp" alt="Four rows. Each starts with an image where only a small boxed crop is visible, followed by four generated images that contain the crop's content." caption="The first column shows the crop in a blue box, and the others show images decoded from sampled embeddings." %}
+</section>
+
+<section id="inpainting">
+    <h2>In-painting</h2>
+    <p>If we keep the visible pixels while sampling, DEM fills in a hidden region without being trained for this task.</p>
+    {% include project/figure.html src="inpaint.webp" bleed=true alt="Eight examples in two blocks. Each shows an image with its centre hidden, then two filled-in versions." caption="Each triple shows the input with its centre hidden and two samples. The examples are uncurated." %}
 </section>

@@ -98,6 +98,7 @@ p { margin: 0 0 16px; }
 .lede { font-size: 1.0625rem; }
 .muted { color: var(--muted); }
 .note { color: var(--muted); font-size: 0.875rem; }
+.intro { margin-bottom: 48px; }
 
 /* Figures */
 .fig { margin: 0 0 32px; }
@@ -106,6 +107,12 @@ p { margin: 0 0 16px; }
 .fig img { display: block; width: 100%; height: auto; }
 .fig--wide .fig-img { overflow-x: auto; }
 @media (max-width: 600px) { .fig--wide img { width: 600px; max-width: none; } }
+/* Wider than the column on large screens, the column width on phones; the caption stays in the column. */
+.fig--bleed .fig-img {
+    width: min(960px, 100vw - 2 * var(--gutter));
+    margin-left: calc(50% - min(480px, 50vw - var(--gutter)));
+}
+.fig--bleed img { width: auto; max-width: 100%; margin: 0 auto; }
 .placeholder {
     display: flex;
     align-items: center;
