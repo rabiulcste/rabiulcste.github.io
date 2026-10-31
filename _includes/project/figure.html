@@ -1,0 +1,18 @@
+{%- comment -%}
+Figure slot for project pages.
+  include.src      image path relative to the page folder (omit for a placeholder box)
+  include.alt      alt text
+  include.caption  caption text (HTML allowed)
+  include.label    text inside the placeholder box
+  include.ratio    placeholder aspect ratio, e.g. "16 / 9" (default), "2 / 1"
+{%- endcomment -%}
+<figure class="fig">
+    {%- if include.src %}
+    <img src="{{ include.src }}" alt="{{ include.alt | default: include.caption | strip_html }}" loading="lazy">
+    {%- else %}
+    <div class="placeholder" style="aspect-ratio: {{ include.ratio | default: '16 / 9' }}" role="img" aria-label="{{ include.label | default: 'Figure placeholder' }}">{{ include.label | default: 'Figure TBD' }}</div>
+    {%- endif %}
+    {%- if include.caption %}
+    <figcaption>{{ include.caption }}</figcaption>
+    {%- endif %}
+</figure>

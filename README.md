@@ -40,6 +40,7 @@ CSS and JS are served as-is — there is no build step. GitHub Pages gzips them.
 | `_config.yml` | Jekyll config |
 | `_layouts/`, `_includes/` | Templates and partials |
 | `_posts/` | Blog posts |
+| `_layouts/project.html`, `css/project.css` | Paper project pages (e.g. `dem/` at `/dem/`); copy `dem/` to start a new one |
 | `css/rabiul-blog.css` | Stylesheet |
 | `js/site.js` | Site behaviour bundle |
 | `scripts/optimize-images.mjs` | Image + WebP sibling generation |

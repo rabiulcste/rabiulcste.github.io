@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+{%- comment -%}
+Minimal research project page. Standalone on purpose: it does not load the
+blog stylesheet, only css/project.css.
+
+New project: copy dem/ to <name>/, then edit the front matter and the
+figure/table slots in <name>/index.html. Front matter fields:
+  title, description, venue
+  authors: list of {name, url, note}   (note is a marker like "*")
+  affiliations: one line of text
+  links: list of {label, url}           (empty url renders as "coming soon")
+  bibtex: block string
+Figures use {% include project/figure.html %}; with no src it draws a
+placeholder box.
+{%- endcomment -%}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:description" content="{{ page.description | default: site.description }}">
+    <meta property="og:url" content="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
+    {%- if page.og_image %}
+    <meta property="og:image" content="{{ page.og_image | prepend: page.url | prepend: site.baseurl | prepend: site.url }}">
+    {%- endif %}
+    <link rel="canonical" href="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="shortcut icon" href="{{ site.baseurl }}/img/favicon.ico">
+    <link rel="stylesheet" href="{{ '/css/project.css' | prepend: site.baseurl }}">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site">
+        <a href="{{ site.baseurl }}/">{{ site.title }}</a>
+    </header>
+
+    <main id="main">
+        <header class="hero">
+            <h1>{{ page.title }}</h1>
+
+            {%- if page.authors %}
+            <p class="authors">
+                {%- for a in page.authors -%}
+                <span class="author">{% if a.url %}<a href="{{ a.url }}">{{ a.name }}</a>{% else %}{{ a.name }}{% endif %}{% if a.note %}<sup>{{ a.note }}</sup>{% endif %}</span>{% unless forloop.last %}, {% endunless %}
+                {%- endfor -%}
+            </p>
+            {%- endif %}
+            {%- if page.affiliations %}
+            <p class="meta">{{ page.affiliations }}</p>
+            {%- endif %}
+            {%- if page.venue %}
+            <p class="meta">{{ page.venue }}</p>
+            {%- endif %}
+
+            {%- if page.links %}
+            <ul class="links" role="list">
+                {%- for l in page.links %}
+                <li>{% if l.url and l.url != "" %}<a href="{{ l.url }}">{{ l.label }}</a>{% else %}<span class="soon" title="Coming soon">{{ l.label }}</span>{% endif %}</li>
+                {%- endfor %}
+                {%- if page.bibtex %}
+                <li><a href="#bibtex">BibTeX</a></li>
+                {%- endif %}
+            </ul>
+            {%- endif %}
+        </header>
+
+        {{ content }}
+
+        {%- if page.bibtex %}
+        <section id="bibtex">
+            <h2>BibTeX</h2>
+            <pre><code>{{ page.bibtex | strip | xml_escape }}</code></pre>
+        </section>
+        {%- endif %}
+    </main>
+
+    <footer class="site">
+        <a href="{{ site.baseurl }}/">{{ site.url | remove: 'https://' }}</a>
+    </footer>
+</body>
+</html>
