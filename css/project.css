@@ -174,3 +174,37 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-svg .band { stroke: var(--muted); } .drift-svg .band-ours { stroke: var(--drift); } .drift-svg .band-sym { stroke: var(--drift-2); }
 .drift-svg .bar { fill: var(--muted); opacity: 0.45; } .drift-svg .bar-ours { fill: var(--drift); } .drift-svg .bar-sym { fill: var(--drift-2); }
 .drift-svg .pt-g:hover .pt, .drift-svg .pt-g:hover .bar { fill: var(--text); opacity: 1; }
+/* DRIFT diagrams (teaser and overview), same palette as the paper: amber = actions and actor, teal = predictor heads */
+:root { --drift-amb: #E0892A; --drift-amb-t: #8A4B0F; --drift-teal: #1A8C7E; --drift-teal-t: #0F5A51; }
+@media (prefers-color-scheme: dark) { :root { --drift-amb: #F2A65A; --drift-amb-t: #F2B36B; --drift-teal: #3FB3A4; --drift-teal-t: #8FDCD1; } }
+.drift-diagram { min-width: 700px; }
+.drift-diagram .ttl2 { font-size: 17px; font-weight: 600; }
+.drift-diagram .lb { font-size: 14px; fill: var(--text); }
+.drift-diagram .lb-amb, .drift-diagram .lab-amb { font-size: 14px; fill: var(--drift-amb-t); }
+.drift-diagram .lab-amb { font-size: 13px; }
+.drift-diagram .math, .drift-diagram .math-amb { font-size: 15px; font-style: italic; }
+.drift-diagram .math-amb { fill: var(--drift-amb-t); }
+.drift-diagram .sub { font-size: 11px; }
+.drift-diagram .approx { font-size: 16px; }
+.drift-diagram .hero { fill: var(--drift); }
+.drift-diagram .hero-t { fill: #fff; font-size: 20px; font-weight: 600; }
+.drift-diagram .hero-s { fill: #fff; font-size: 16px; font-weight: 600; }
+.drift-diagram .mod { fill: var(--surface); stroke: var(--muted); stroke-width: 1.2; }
+.drift-diagram .mod-stc { fill: var(--bg); stroke: var(--muted); stroke-width: 1.2; }
+.drift-diagram .ema { fill: var(--surface); stroke: var(--border); stroke-width: 1.2; }
+.drift-diagram .mod-amb { fill: var(--drift-amb); fill-opacity: 0.12; stroke: var(--drift-amb); stroke-width: 1.2; }
+.drift-diagram .mod-teal { fill: var(--drift-teal); fill-opacity: 0.12; stroke: var(--drift-teal); stroke-width: 1.2; }
+.drift-diagram .grp { fill: var(--surface); }
+.drift-diagram .bg { fill: var(--bg); }
+.drift-diagram .tok-b { fill: var(--drift); fill-opacity: 0.22; stroke: var(--drift); stroke-width: 0.8; }
+.drift-diagram .tok-a { fill: var(--drift-amb); fill-opacity: 0.45; stroke: var(--drift-amb); stroke-width: 0.8; }
+.drift-diagram .lat { fill: var(--muted); }
+.drift-diagram .lat-f { fill: none; stroke: var(--muted); stroke-width: 0.8; }
+.drift-diagram .tile { clip-path: inset(0 round 4px); }
+.drift-diagram .tile-f { fill: none; stroke: var(--text); stroke-opacity: 0.3; stroke-width: 0.8; }
+.drift-diagram .ln, .drift-diagram .ln-amb, .drift-diagram .ln-teal, .drift-diagram .ln-faint { fill: none; stroke: var(--muted); stroke-width: 1.2; stroke-linejoin: round; }
+.drift-diagram .ln-amb { stroke: var(--drift-amb); } .drift-diagram .ln-teal { stroke: var(--drift-teal); } .drift-diagram .ln-faint { stroke: var(--border); }
+.drift-diagram .ahd { fill: var(--muted); } .drift-diagram .ahd-amb { fill: var(--drift-amb); } .drift-diagram .ahd-teal { fill: var(--drift-teal); }
+.drift-diagram .sg { stroke: var(--muted); stroke-width: 1.2; }
+.drift-diagram .ico { fill: var(--drift-teal); fill-opacity: 0.4; stroke: var(--drift-teal-t); stroke-width: 0.8; stroke-linejoin: round; stroke-linecap: round; }
+.drift-diagram .ico-l { fill: none; }
