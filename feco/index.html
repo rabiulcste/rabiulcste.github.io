@@ -2,7 +2,7 @@
 # Method name is not final: "FeCo" is a placeholder (candidate: IsoFeCo). Replace it in the title, body and bibtex.
 layout: project
 title: "Self-Supervised Free Lunch for Flow Map Training"
-description: "A flow map supplies its own representation target: its composition rule gives two views and a teacher for free, and SIGReg shapes the teacher features. No external encoder."
+description: "A flow map supplies its own representation target: its composition rule gives two views and a teacher for free, and SIGReg shapes the teacher-depth features. No external encoder."
 authors:
   - name: Rabiul Awal
     url: /
@@ -25,30 +25,67 @@ bibtex: |
   }
 ---
 <!-- TODO: co-authors (add them to the authors list and the bibtex) -->
+<style>
+    .hero { padding-bottom: 40px; }
+    @media (min-width: 1100px) {
+        .feco-wide { width: 1040px; margin-left: calc(50% - 520px); }
+    }
+    .feco-tldr { text-align: center; font-size: 1.1875rem; line-height: 1.5; margin: 0 auto; max-width: 620px; }
+    .feco-samples { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0 0 12px; }
+    .feco-samples figure { margin: 0; }
+    .feco-samples img { display: block; width: 100%; height: auto; border-radius: 6px; }
+    .feco-samples figcaption { margin: 0 0 8px; text-align: center; font-size: 0.9375rem; color: var(--text); }
+    .feco-samples figcaption span { color: var(--muted); }
+    .feco-family { margin: 32px 0 8px; text-align: center; font-size: 1rem; font-weight: 600; }
+    .feco-family span { font-weight: 400; color: var(--muted); }
+    .feco-plot .fig-img { max-width: 480px; margin: 0 auto; }
+    .feco-soon { padding: 14px 16px; border: 1px dashed var(--border); border-radius: 8px; background: var(--surface); color: var(--muted); text-align: center; font-size: 0.9375rem; }
+</style>
+
+<section id="teaser" class="feco-wide">
+    {% include project/figure.html src="concept.png" alt="A path from noise to data. Two noisy versions of one image lie on it, a noisier one and a cleaner one. The flow-map loss asks the outputs to agree; FeCo asks an early block on the noisier version to predict a deep block on the cleaner version." caption="The composition rule links two points on one path. The flow-map loss asks the outputs to agree; FeCo asks the features to agree." %}
+</section>
 
 <section id="tldr">
-    <p class="lede"><strong>TL;DR:</strong> A flow map can supervise its own representations: its composition rule supplies two views of an image and a teacher without an extra forward pass, and SIGReg shapes the teacher features. No external encoder is needed.</p>
+    <p class="feco-tldr"><strong>TL;DR:</strong> A flow map can supervise its own features. Its composition rule gives two views of an image and a teacher with no extra forward pass, and no external encoder.</p>
 </section>
 
-<section>
-    {% include project/figure.html src="concept.png" alt="A path from noise to data. Two noisy versions of one image lie on it, a noisier one and a cleaner one. The flow-map loss asks the outputs to agree; FeCo asks an early block on the noisier version to predict a deep block on the cleaner version." caption="The flow-map composition rule links two points on one path. The flow-map loss asks the outputs to agree. FeCo asks the features to agree: an early block on the noisier view predicts a deep block of the EMA model on the cleaner view." %}
-</section>
+<section id="samples" class="feco-wide">
+    <h2>One-step samples, ImageNet 256&times;256</h2>
 
-<section id="abstract">
-    <h2>Abstract</h2>
-    <p>REPA showed that generative models train better when their features are aligned with a pretrained DINOv2 encoder. We show that a flow map can supply this signal itself. The flow-map composition rule gives two views of one image, a noisier one and a cleaner one. An early block on the noisier view predicts the deeper features of the EMA model on the cleaner view. Each flow-map family already computes the cleaner view, so the teacher costs no extra forward pass. We add SIGReg, from LeJEPA, which shapes the predicted teacher-depth features toward an isotropic Gaussian. One setting works across MeanFlow, Shortcut Models and Lagrangian self-distillation, with no external encoder and no extra data. In a preliminary ImageNet-100 study, it lowers one-step FID in all three families.</p>
+    <p class="feco-family">MeanFlow <span>SiT-B/2, 1 step</span></p>
+    <div class="feco-samples">
+        <figure>
+            <figcaption>Baseline</figcaption>
+            <img src="samples_meanflow_baseline.jpg" alt="MeanFlow baseline, one-step samples: four classes, four samples each." loading="lazy">
+        </figure>
+        <figure>
+            <figcaption>FeCo <span>(previous version, without SIGReg)</span></figcaption>
+            <img src="samples_meanflow_feco.jpg" alt="MeanFlow with FeCo (previous version, without SIGReg), one-step samples with the same classes and noise as the baseline." loading="lazy">
+        </figure>
+    </div>
+
+    <p class="feco-family">Shortcut <span>DiT-B/2, 1 step</span></p>
+    <div class="feco-samples">
+        <figure>
+            <figcaption>Baseline</figcaption>
+            <img src="samples_shortcut_baseline.jpg" alt="Shortcut baseline, one-step samples: four classes, four samples each." loading="lazy">
+        </figure>
+        <figure>
+            <figcaption>FeCo <span>(previous version, without SIGReg)</span></figcaption>
+            <img src="samples_shortcut_feco.jpg" alt="Shortcut with FeCo (previous version, without SIGReg), one-step samples with the same classes and noise as the baseline." loading="lazy">
+        </figure>
+    </div>
+    <p class="caption">Uncurated. Each row is one class; both grids in a pair use the same classes and noise. Models trained for 1.2M steps. These samples come from an earlier version of FeCo (feature loss only, without SIGReg), not the final method.</p>
 </section>
 
 <section id="method">
     <h2>Method</h2>
-    <p>A flow map jumps from one point on the noise-to-data path to another. Its composition rule says that one long jump equals two shorter jumps in a row. So the model itself links the same image at two noise levels: a noisier point and a cleaner point. We use these as two views. A small predictor on an early block of the online model, run on the noisier view, predicts the features of a deeper block of the EMA model, run on the cleaner view. The target has a stop-gradient. This predictive loss is added to the usual flow-map loss.</p>
-    <p>The second term is SIGReg, from LeJEPA. It measures how far a batch of features is from an isotropic Gaussian, using random one-dimensional projections. We apply it to the online model's features at the teacher depth, the block whose EMA copy FeCo predicts. Its role is to shape the distribution of these features so they spread evenly across directions. It is one statistic on features the model already computes.</p>
-    {% include project/figure.html src="method.png" wide=true alt="Two stacks of transformer blocks. The online model takes the noisier view; a predictor on its early block feeds the FeCo loss. The EMA model takes the cleaner view; its deep block gives the target, with a stop-gradient." caption="An early block of the online model (noisier view) predicts, through a small predictor <em>h</em>, a deep block of the EMA model (cleaner view, stop-gradient). SIGReg acts on the online model's features at the teacher depth (not drawn)." %}
+    {% include project/figure.html src="method.png" wide=true alt="Two stacks of transformer blocks. The online model takes the noisier view; a predictor on its early block feeds the FeCo loss. The EMA model takes the cleaner view; its deep block gives the target, with a stop-gradient." caption="An early block of the online model, on the noisier view, predicts a deep block of the EMA model on the cleaner view (stop-gradient). SIGReg, from LeJEPA, pushes the online model's features at the teacher-depth block toward an isotropic Gaussian (not drawn). Both terms are added to the usual flow-map loss." %}
 </section>
 
 <section id="free">
     <h2>Why it is free</h2>
-    <p>Each family already computes a point on the path that is cleaner than its input, as part of its own training target. That point is the teacher view.</p>
     <div class="table-wrap">
         <table class="text">
             <thead>
@@ -61,11 +98,15 @@ bibtex: |
             </tbody>
         </table>
     </div>
-    <p class="caption">The remaining cost is the small predictor and the SIGReg statistic. No external encoder and no extra data are used.</p>
+    <p class="caption">Each family already computes the cleaner view for its own target. What remains is a small predictor and the SIGReg statistic.</p>
 </section>
 
 <section id="preliminary">
-    <h2>Preliminary results</h2>
+    <h2>Preliminary results <span class="muted">(ImageNet-100 speedrun)</span></h2>
+    <figure class="fig feco-plot">
+        <div class="fig-img"><img src="speedrun_meanflow.png" alt="One-step FID for MeanFlow SiT-B/2 on the ImageNet-100 speedrun: baseline 57.3, REPA 51.2, FeCo with an extra EMA forward 54.4, FeCo with the tangent teacher 51.8, FeCo plus SIGReg at the student block 52.4, FeCo plus SIGReg at the teacher block 48.9." loading="lazy"></div>
+        <figcaption>MeanFlow SiT-B/2, one-step FID (lower is better). Preliminary, ImageNet-100 speedrun.</figcaption>
+    </figure>
     <div class="table-wrap">
         <table>
             <thead>
@@ -79,13 +120,10 @@ bibtex: |
             </tbody>
         </table>
     </div>
-    <p class="caption">One-step FID (lower is better), mean of 2 seeds. ImageNet-100, 39.5k training steps: a fast testbed, not the paper budget. MeanFlow uses the tangent teacher. REPA aligns with a frozen DINOv2 encoder. The LSD baseline was not part of this study. These numbers are preliminary and may change.</p>
+    <p class="caption">Preliminary, ImageNet-100 speedrun: one-step FID, mean of 2 seeds, 39.5k training steps, not the paper budget. REPA aligns with a frozen DINOv2 encoder. No LSD baseline in this study.</p>
 </section>
 
 <section id="main-results">
-    <h2>Main results (coming soon)</h2>
-    <p>ImageNet-1k 256&times;256 experiments at standard training budgets are in progress.</p>
-    {% include project/figure.html label="Main table: ImageNet-1k 256, FID by family (coming soon)" ratio="2 / 1" %}
-    {% include project/figure.html label="Training curves: FID against training steps (coming soon)" ratio="2 / 1" %}
-    {% include project/figure.html label="Representation probe (coming soon)" ratio="2 / 1" %}
+    <h2>Main results</h2>
+    <div class="feco-soon">ImageNet-1k 256&times;256 at standard training budgets: coming soon.</div>
 </section>
