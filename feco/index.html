@@ -44,8 +44,9 @@ bibtex: |
     .feco-soon { padding: 14px 16px; border: 1px dashed var(--border); border-radius: 8px; background: var(--surface); color: var(--muted); text-align: center; font-size: 0.9375rem; }
     .feco-scroll { overflow-x: auto; }
     .feco-scroll svg { display: block; width: 100%; height: auto; min-width: 600px; }
-    .feco-chart { max-width: 640px; margin: 0 auto; }
-    .feco-chart svg { min-width: 480px; }
+    .feco-chart { max-width: 520px; margin: 0 auto; }
+    .feco-method .feco-scroll { max-width: 860px; margin: 0 auto; }
+    .feco-chart svg { min-width: 440px; }
     .feco-how { margin: 0 0 24px; padding: 0; list-style: none; }
     .feco-how li { margin: 0 0 8px; }
     .fd text { font-family: var(--font); font-size: 15px; fill: var(--text); }
@@ -70,29 +71,23 @@ bibtex: |
     .fd .box-acc { fill: var(--feco-acc-soft); stroke: var(--feco-acc); stroke-width: 1.5; }
     .fd .box-reg { fill: var(--feco-reg-soft); stroke: var(--feco-reg); stroke-width: 1.5; }
     .fd .ring-reg { fill: none; stroke: var(--feco-reg); stroke-width: 2.5; }
-    .fd .grid { stroke: var(--border); stroke-width: 1; }
     .fd .axis { stroke: var(--muted); stroke-width: 1; }
-    .fd .tick { font-size: 13px; fill: var(--muted); }
-    .fd .name { font-size: 15px; font-weight: 600; }
-    .fd .sub { font-size: 13px; fill: var(--muted); }
-    .fd .val { font-size: 15px; }
-    .fd .bold { font-weight: 700; }
-    .fd .track { stroke: var(--border); stroke-width: 2; }
-    .fd .repa-line { stroke: var(--feco-reg); stroke-width: 1.5; stroke-dasharray: 3 4; opacity: 0.5; }
-    .fd .repa-lab { font-size: 12px; fill: var(--feco-reg); }
-    .fd .best-bg { fill: var(--feco-acc-soft); }
+    .fd .tick { font-size: 12px; fill: var(--muted); }
+    .fd .lab { font-size: 14px; }
+    .fd .val { font-size: 13px; fill: var(--muted); }
+    .fd .best { font-weight: 600; fill: var(--text); }
+    .fd .repa-line { stroke: var(--feco-reg); stroke-width: 1; stroke-dasharray: 1 3; opacity: 0.4; }
     .fd .hit { fill: transparent; }
     .fd .row:hover .hit { fill: var(--surface); }
-    .fd .dot-base { fill: var(--muted); }
-    .fd .dot-repa { fill: var(--feco-reg); }
-    .fd .dot-feco { fill: var(--feco-acc); opacity: 0.55; }
+    .fd .dot-n { fill: var(--muted); }
+    .fd .dot-repa { fill: var(--feco-reg); opacity: 0.6; }
     .fd .dot-best { fill: var(--feco-acc); }
 </style>
 
 <section id="teaser" class="feco-wide">
     <figure class="feco-fig">
         <div class="feco-scroll">
-        <svg class="fd" viewBox="0 0 1010 370" role="img" aria-labelledby="concept-title">
+        <svg class="fd" viewBox="15 0 990 370" role="img" aria-labelledby="concept-title">
             <title id="concept-title">A noise-to-data path with four images: noise, a noisier view, a cleaner view and data. One long jump goes from the noisier view to data; two short jumps go through the cleaner view. Below, an early block on the noisier view predicts a deep block on the cleaner view.</title>
             <defs>
                 <marker id="cm-text" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-text" d="M0,0 L10,5 L0,10 z"/></marker>
@@ -177,9 +172,9 @@ bibtex: |
 
 <section id="method">
     <h2>Method</h2>
-    <figure class="feco-fig feco-wide">
+    <figure class="feco-fig feco-wide feco-method">
         <div class="feco-scroll">
-        <svg class="fd" viewBox="0 0 1000 340" role="img" aria-labelledby="method-title">
+        <svg class="fd" viewBox="4 0 834 340" role="img" aria-labelledby="method-title">
             <title id="method-title">The online model takes the noisier view. A predictor h on its early block feeds the FeCo loss. The EMA model takes the cleaner view; its deep block gives the target through a stop-gradient. SIGReg acts on the online model's block at the teacher depth.</title>
             <defs>
                 <marker id="mm-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker>
@@ -205,7 +200,8 @@ bibtex: |
             <rect class="ring-reg" x="477" y="35" width="44" height="74" rx="7"/>
             <rect class="box-reg" x="452" y="4" width="94" height="26" rx="13"/>
             <text class="reg b small" x="499" y="22" text-anchor="middle">SIGReg</text>
-            <text class="mut small" x="556" y="22">features toward an isotropic Gaussian</text>
+            <text class="mut small" x="556" y="14">pushes features toward</text>
+            <text class="mut small" x="556" y="30">an isotropic Gaussian</text>
             <line class="ar" x1="652" y1="72" x2="688" y2="72" marker-end="url(#mm-mut)"/>
             <rect class="box" x="692" y="52" width="130" height="40" rx="8"/>
             <text x="757" y="77" text-anchor="middle">flow-map loss</text>
@@ -275,26 +271,24 @@ bibtex: |
     <h2>Preliminary results <span class="muted">(ImageNet-100 speedrun)</span></h2>
     <figure class="feco-fig feco-chart">
         <div class="feco-scroll">
-        <svg class="fd" viewBox="0 0 640 366" role="img" aria-labelledby="chart-title">
+        <svg class="fd" viewBox="0 0 520 256" role="img" aria-labelledby="chart-title">
             <title id="chart-title">One-step FID for MeanFlow SiT-B/2 on the ImageNet-100 speedrun: baseline 57.3, REPA 51.2, FeCo with an extra EMA forward 54.4, FeCo with the tangent teacher 51.8, FeCo plus SIGReg at the student block 52.4, FeCo plus SIGReg at the teacher block 48.9.</title>
-            <rect class="best-bg" x="0" y="260" width="640" height="46" rx="8"/>
-            <line class="grid" x1="302.9" y1="16" x2="302.9" y2="314"/><text class="tick" x="302.9" y="334" text-anchor="middle">48</text>
-            <line class="grid" x1="408.6" y1="16" x2="408.6" y2="314"/><text class="tick" x="408.6" y="334" text-anchor="middle">52</text>
-            <line class="grid" x1="514.3" y1="16" x2="514.3" y2="314"/><text class="tick" x="514.3" y="334" text-anchor="middle">56</text>
-            <line class="grid" x1="620.0" y1="16" x2="620.0" y2="314"/><text class="tick" x="620.0" y="334" text-anchor="middle">60</text>
-            <line class="axis" x1="250" y1="314" x2="620" y2="314"/>
-            <line class="repa-line" x1="387.4" y1="18" x2="387.4" y2="314"/><text class="repa-lab" x="387.4" y="12" text-anchor="middle">REPA</text>
-            <line class="grid" x1="20" y1="116" x2="620" y2="116"/>
-            <g class="row"><title>Baseline, MeanFlow: 57.3</title><rect class="hit" x="0" y="17" width="640" height="46"/><text class="name" x="230" y="39" text-anchor="end">Baseline</text><text class="sub" x="230" y="56" text-anchor="end">MeanFlow</text><line class="track" x1="250" y1="44" x2="548.6" y2="44"/><circle class="dot-base" cx="548.6" cy="44" r="6"/><text class="val" x="562.6" y="49">57.3</text></g>
-            <g class="row"><title>REPA, frozen DINOv2 encoder: 51.2</title><rect class="hit" x="0" y="63" width="640" height="46"/><text class="name" x="230" y="85" text-anchor="end">REPA</text><text class="sub" x="230" y="102" text-anchor="end">frozen DINOv2 encoder</text><line class="track" x1="250" y1="90" x2="387.4" y2="90"/><circle class="dot-repa" cx="387.4" cy="90" r="6"/><text class="val" x="401.4" y="95">51.2</text></g>
-            <g class="row"><title>FeCo, extra EMA forward: 54.4</title><rect class="hit" x="0" y="123" width="640" height="46"/><text class="name" x="230" y="145" text-anchor="end">FeCo</text><text class="sub" x="230" y="162" text-anchor="end">extra EMA forward</text><line class="track" x1="250" y1="150" x2="472.0" y2="150"/><circle class="dot-feco" cx="472.0" cy="150" r="6"/><text class="val" x="486.0" y="155">54.4</text></g>
-            <g class="row"><title>FeCo, tangent teacher: 51.8</title><rect class="hit" x="0" y="169" width="640" height="46"/><text class="name" x="230" y="191" text-anchor="end">FeCo</text><text class="sub" x="230" y="208" text-anchor="end">tangent teacher</text><line class="track" x1="250" y1="196" x2="403.3" y2="196"/><circle class="dot-feco" cx="403.3" cy="196" r="6"/><text class="val" x="417.3" y="201">51.8</text></g>
-            <g class="row"><title>FeCo + SIGReg, student block: 52.4</title><rect class="hit" x="0" y="215" width="640" height="46"/><text class="name" x="230" y="237" text-anchor="end">FeCo + SIGReg</text><text class="sub" x="230" y="254" text-anchor="end">student block</text><line class="track" x1="250" y1="242" x2="419.1" y2="242"/><circle class="dot-feco" cx="419.1" cy="242" r="6"/><text class="val" x="433.1" y="247">52.4</text></g>
-            <g class="row"><title>FeCo + SIGReg, teacher block: 48.9</title><rect class="hit" x="0" y="261" width="640" height="46"/><text class="name bold" x="230" y="283" text-anchor="end">FeCo + SIGReg</text><text class="sub" x="230" y="300" text-anchor="end">teacher block</text><line class="track" x1="250" y1="288" x2="326.6" y2="288"/><circle class="dot-best" cx="326.6" cy="288" r="8"/><text class="val bold" x="340.6" y="293">48.9</text></g>
-            <text class="tick" x="435" y="356" text-anchor="middle">one-step FID (lower is better)</text>
+            <line class="repa-line" x1="304.0" y1="10" x2="304.0" y2="204"/>
+            <g class="row"><title>Baseline: 57.3</title><rect class="hit" x="0" y="10" width="520" height="28"/><text class="lab" x="200" y="29" text-anchor="end">Baseline</text><circle class="dot-n" cx="426.0" cy="24" r="4.5"/><text class="val" x="436.0" y="29">57.3</text></g>
+            <g class="row"><title>REPA (DINOv2): 51.2</title><rect class="hit" x="0" y="38" width="520" height="28"/><text class="lab" x="200" y="57" text-anchor="end">REPA (DINOv2)</text><circle class="dot-repa" cx="304.0" cy="52" r="4.5"/><text class="val" x="314.0" y="57">51.2</text></g>
+            <g class="row"><title>FeCo, extra forward: 54.4</title><rect class="hit" x="0" y="82" width="520" height="28"/><text class="lab" x="200" y="101" text-anchor="end">FeCo, extra forward</text><circle class="dot-n" cx="368.0" cy="96" r="4.5"/><text class="val" x="378.0" y="101">54.4</text></g>
+            <g class="row"><title>FeCo, tangent: 51.8</title><rect class="hit" x="0" y="110" width="520" height="28"/><text class="lab" x="200" y="129" text-anchor="end">FeCo, tangent</text><circle class="dot-n" cx="316.0" cy="124" r="4.5"/><text class="val" x="326.0" y="129">51.8</text></g>
+            <g class="row"><title>+ SIGReg, student block: 52.4</title><rect class="hit" x="0" y="138" width="520" height="28"/><text class="lab" x="200" y="157" text-anchor="end">+ SIGReg, student block</text><circle class="dot-n" cx="328.0" cy="152" r="4.5"/><text class="val" x="338.0" y="157">52.4</text></g>
+            <g class="row"><title>+ SIGReg, teacher block: 48.9</title><rect class="hit" x="0" y="166" width="520" height="28"/><text class="lab best" x="200" y="185" text-anchor="end">+ SIGReg, teacher block</text><circle class="dot-best" cx="258.0" cy="180" r="5.5"/><text class="val best" x="268.0" y="185">48.9</text></g>
+            <line class="axis" x1="220" y1="204" x2="480" y2="204"/>
+            <line class="axis" x1="240.0" y1="204" x2="240.0" y2="208"/><text class="tick" x="240.0" y="224" text-anchor="middle">48</text>
+            <line class="axis" x1="320.0" y1="204" x2="320.0" y2="208"/><text class="tick" x="320.0" y="224" text-anchor="middle">52</text>
+            <line class="axis" x1="400.0" y1="204" x2="400.0" y2="208"/><text class="tick" x="400.0" y="224" text-anchor="middle">56</text>
+            <line class="axis" x1="480.0" y1="204" x2="480.0" y2="208"/><text class="tick" x="480.0" y="224" text-anchor="middle">60</text>
+            <text class="tick" x="350" y="246" text-anchor="middle">1-step FID (lower is better)</text>
         </svg>
         </div>
-        <figcaption>MeanFlow SiT-B/2, one-step FID, lower is better. The dotted line marks REPA. Preliminary, ImageNet-100 speedrun.</figcaption>
+        <figcaption>MeanFlow SiT-B/2, one-step FID, lower is better. The faint dotted line marks REPA. Preliminary, ImageNet-100 speedrun.</figcaption>
     </figure>
     <div class="table-wrap">
         <table>
