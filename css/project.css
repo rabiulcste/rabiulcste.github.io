@@ -148,3 +148,8 @@ pre {
 
 footer.site { padding-top: 32px; padding-bottom: 48px; border-top: 1px solid var(--border); font-size: 0.875rem; }
 footer.site a { color: var(--muted); text-decoration: none; }
+
+/* Videos (_includes/project/video.html): same white card as figures */
+.fig video { display: block; width: 100%; height: auto; }
+@media (max-width: 600px) { .fig--wide video { width: 600px; max-width: none; } }
+.fig--bleed video { width: auto; max-width: 100%; margin: 0 auto; }
