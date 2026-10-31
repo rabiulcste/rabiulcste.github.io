@@ -1,62 +1,43 @@
 ---
 layout: project
 title: "Denoising Embedding Models Are Self-Supervised Learners"
-description: "Project page for Denoising Embedding Models (DEM)."
+description: "One network trained only by denoising learns visual representations and generates images without labels."
 authors:
   - name: Rabiul Awal
     url: /
-  - name: "Coauthors TBD"
-affiliations: "Mila, Quebec AI Institute"
-venue: "In preparation, 2026"
+affiliations: "Mila, Université de Montréal"
+venue: "Work in progress"
 links:
   - label: Paper
     url: ""
   - label: Code
     url: ""
+og_image: teaser.png
 bibtex: |
-  @article{awal2026dem,
-    title   = {Denoising Embedding Models Are Self-Supervised Learners},
-    author  = {Awal, Rabiul and TBD},
-    journal = {TBD},
-    year    = {2026}
+  @misc{awal2026dem,
+    title  = {Denoising Embedding Models Are Self-Supervised Learners},
+    author = {Awal, Rabiul},
+    year   = {2026}
   }
 ---
-{%- comment -%}
-Images for this page live next to this file (dem/teaser.png, ...).
-To fill a slot, add src: {% include project/figure.html src="teaser.png" caption="..." %}
-{%- endcomment -%}
 
 <section>
-    {% include project/figure.html label="Teaser figure TBD" ratio="2 / 1" caption="Teaser caption TBD." %}
+    {% include project/figure.html src="teaser.png" alt="Scatter plot of linear probe accuracy on ImageNet-100 against FID without labels. DEM sits at the top right, ahead of the self-supervised and generative baselines." caption="One generative model learns representations competitive with self-supervised methods and generates images without labels." %}
+</section>
+
+<section id="motivation">
+    <h2>Why this project</h2>
+    <p>For the past two years, I have worked on generative world models for control. In my <a href="/drift/">DRIFT</a> project, I found that the features of a denoising model are less suited to control. One explanation is that reconstruction does not produce invariant, abstract features. This is also part of why Yann LeCun favors joint-embedding methods such as JEPA over generative models.</p>
+    <p>This raised a question. Can one model predict embeddings, as joint-embedding methods do, and also generate images, as diffusion models do? In this project, a single denoising objective trains one network to do both. The network generates representations and pixels, so representation learning and generation share one model and one objective. In this view, self-supervised learning becomes a form of generative modeling.</p>
 </section>
 
 <section id="abstract">
     <h2>Abstract</h2>
-    <p class="lede muted">Abstract coming soon.</p>
+    <p>This paper shows that a generative model trained only by denoising can learn visual representations competitive with self-supervised learning and generate images without labels. Our approach is simple. In joint-embedding self-supervised learning, a network predicts the embedding of one view of an image from another view. We observe that this prediction is denoising at full noise, where the noisy embedding carries no information. We train the network on this <em>view-conditioned denoising</em> at all noise levels and call the result a <em>denoising embedding model</em> (DEM). A DEM is a diffusion model in representation space, with self-supervised prediction at its full-noise end. Without the view, the same network generates embeddings, and as a pixel denoiser it turns them into images. On ImageNet-100, DEM's linear probe exceeds that of DINOv2 at the same training length (76.1% against 72.8%). With a single network, it generates without labels at FID 26.1, against 22.9 for RCG, which trains three separate models. We hope this simple model will motivate rethinking self-supervised learning as a form of generative modeling.</p>
+    <p class="note">These are current results on ImageNet-100 at 64x64 resolution. They may change as the work progresses.</p>
 </section>
 
 <section id="method">
     <h2>Method</h2>
-    <p class="muted">Short method summary TBD.</p>
-    {% include project/figure.html label="Method figure TBD" caption="Method caption TBD." %}
-</section>
-
-<section id="results">
-    <h2>Results</h2>
-    <p class="muted">Results summary TBD.</p>
-    {% include project/figure.html label="Results figure TBD" ratio="3 / 2" caption="Results caption TBD." %}
-
-    <div class="table-wrap">
-        <table>
-            <thead>
-                <tr><th>Method</th><th>Metric A</th><th>Metric B</th><th>Metric C</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Baseline 1</td><td>TBD</td><td>TBD</td><td>TBD</td></tr>
-                <tr><td>Baseline 2</td><td>TBD</td><td>TBD</td><td>TBD</td></tr>
-                <tr class="ours"><td>DEM (ours)</td><td>TBD</td><td>TBD</td><td>TBD</td></tr>
-            </tbody>
-        </table>
-    </div>
-    <p class="caption">Table caption TBD.</p>
+    {% include project/figure.html src="concept.png" wide=true alt="Three diagrams side by side. (a) A joint-embedding model predicts the embedding of view x from view x prime. (b) A diffusion model denoises x_t conditioned on z. (c) A denoising embedding model denoises the embedding z_tau of x, conditioned on x prime." caption="Denoising in embedding space turns joint-embedding prediction into a generative model." %}
 </section>
