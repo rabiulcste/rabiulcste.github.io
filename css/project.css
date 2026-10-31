@@ -150,7 +150,8 @@ footer.site { padding-top: 32px; padding-bottom: 48px; border-top: 1px solid var
 footer.site a { color: var(--muted); text-decoration: none; }
 
 /* Videos (_includes/project/video.html): same white card as figures */
-.fig video { display: block; width: 100%; height: auto; }
+.fig video { display: block; width: 100%; height: auto; border-radius: 8px; }
+.fig--video .fig-img { background: none; padding: 0; }
 @media (max-width: 600px) { .fig--wide video { width: 600px; max-width: none; } }
 .fig--bleed video { width: auto; max-width: 100%; margin: 0 auto; }
 
