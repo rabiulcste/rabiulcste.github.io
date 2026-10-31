@@ -1,0 +1,91 @@
+---
+# Method name is not final: "FeCo" is a placeholder (candidate: IsoFeCo). Replace it in the title, body and bibtex.
+layout: project
+title: "Self-Supervised Free Lunch for Flow Map Training"
+description: "A flow map supplies its own representation target: its composition rule gives two views and a teacher for free, and SIGReg shapes the teacher features. No external encoder."
+authors:
+  - name: Rabiul Awal
+    url: /
+affiliations: "Mila, Université de Montréal"
+venue: "Work in progress"
+links:
+  - label: Paper
+    url: ""
+  - label: arXiv
+    url: ""
+  - label: Code
+    url: ""
+og_image: concept.png
+bibtex: |
+  @article{awal2026feco,
+    title  = {Self-Supervised Free Lunch for Flow Map Training},
+    author = {Awal, Rabiul and others},
+    year   = {2026},
+    note   = {Preprint coming soon}
+  }
+---
+<!-- TODO: co-authors (add them to the authors list and the bibtex) -->
+
+<section id="tldr">
+    <p class="lede"><strong>TL;DR:</strong> A flow map can supervise its own representations: its composition rule supplies two views of an image and a teacher without an extra forward pass, and SIGReg shapes the teacher features. No external encoder is needed.</p>
+</section>
+
+<section>
+    {% include project/figure.html src="concept.png" alt="A path from noise to data. Two noisy versions of one image lie on it, a noisier one and a cleaner one. The flow-map loss asks the outputs to agree; FeCo asks an early block on the noisier version to predict a deep block on the cleaner version." caption="The flow-map composition rule links two points on one path. The flow-map loss asks the outputs to agree. FeCo asks the features to agree: an early block on the noisier view predicts a deep block of the EMA model on the cleaner view." %}
+</section>
+
+<section id="abstract">
+    <h2>Abstract</h2>
+    <p>REPA showed that generative models train better when their features are aligned with a pretrained DINOv2 encoder. We show that a flow map can supply this signal itself. The flow-map composition rule gives two views of one image, a noisier one and a cleaner one. An early block on the noisier view predicts the deeper features of the EMA model on the cleaner view. Each flow-map family already computes the cleaner view, so the teacher costs no extra forward pass. We add SIGReg, from LeJEPA, which shapes the predicted teacher-depth features toward an isotropic Gaussian. One setting works across MeanFlow, Shortcut Models and Lagrangian self-distillation, with no external encoder and no extra data. In a preliminary ImageNet-100 study, it lowers one-step FID in all three families.</p>
+</section>
+
+<section id="method">
+    <h2>Method</h2>
+    <p>A flow map jumps from one point on the noise-to-data path to another. Its composition rule says that one long jump equals two shorter jumps in a row. So the model itself links the same image at two noise levels: a noisier point and a cleaner point. We use these as two views. A small predictor on an early block of the online model, run on the noisier view, predicts the features of a deeper block of the EMA model, run on the cleaner view. The target has a stop-gradient. This predictive loss is added to the usual flow-map loss.</p>
+    <p>The second term is SIGReg, from LeJEPA. It measures how far a batch of features is from an isotropic Gaussian, using random one-dimensional projections. We apply it to the predicted features at the teacher depth. Its role is to shape the distribution of these target features so they spread evenly across directions. It is one statistic on features the model already computes.</p>
+    {% include project/figure.html src="method.png" wide=true alt="Two stacks of transformer blocks. The online model takes the noisier view; a predictor on its early block feeds the FeCo loss. The EMA model takes the cleaner view; its deep block gives the target, with a stop-gradient." caption="An early block of the online model (noisier view) predicts, through a small predictor <em>h</em>, a deep block of the EMA model (cleaner view, stop-gradient). SIGReg acts on the predictor output (not drawn)." %}
+</section>
+
+<section id="free">
+    <h2>Why it is free</h2>
+    <p>Each family already computes a point on the path that is cleaner than its input, as part of its own training target. That point is the teacher view.</p>
+    <div class="table-wrap">
+        <table class="text">
+            <thead>
+                <tr><th>Family</th><th>Teacher view</th><th>Extra forward pass</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Shortcut Models</td><td>EMA half step</td><td>none</td></tr>
+                <tr><td>MeanFlow</td><td>tangent from its JVP</td><td>none</td></tr>
+                <tr><td>LSD</td><td>landing point of its target forward</td><td>none</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="caption">The remaining cost is the small predictor and the SIGReg statistic. No external encoder and no extra data are used.</p>
+</section>
+
+<section id="preliminary">
+    <h2>Preliminary results</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr><th>Family</th><th>Baseline</th><th>FeCo</th><th>+ SIGReg</th><th>REPA</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>MeanFlow (SiT-B/2)</td><td>57.3</td><td>51.8</td><td>48.9</td><td>51.2</td></tr>
+                <tr><td>Shortcut (DiT-B/2)</td><td>139.9</td><td>135.4</td><td>116.8</td><td>&ndash;</td></tr>
+                <tr><td>LSD (SiT-B/2), landing teacher</td><td>&ndash;</td><td>72.7</td><td>64.6</td><td>&ndash;</td></tr>
+                <tr><td>LSD (SiT-B/2), extra forward</td><td>&ndash;</td><td>73.8</td><td>63.7</td><td>&ndash;</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="caption">One-step FID (lower is better), mean of 2 seeds. ImageNet-100, 39.5k training steps: a fast testbed, not the paper budget. MeanFlow uses the tangent teacher. REPA aligns with a frozen DINOv2 encoder. The LSD baseline was not part of this study. These numbers are preliminary and may change.</p>
+</section>
+
+<section id="main-results">
+    <h2>Main results (coming soon)</h2>
+    <p>ImageNet-1k 256&times;256 experiments at standard training budgets are in progress.</p>
+    {% include project/figure.html label="Main table: ImageNet-1k 256, FID by family (coming soon)" ratio="2 / 1" %}
+    {% include project/figure.html label="Training curves: FID against training steps (coming soon)" ratio="2 / 1" %}
+    {% include project/figure.html label="Representation probe (coming soon)" ratio="2 / 1" %}
+</section>

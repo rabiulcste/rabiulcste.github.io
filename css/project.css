@@ -127,6 +127,7 @@ th, td { padding: 8px 12px; text-align: right; border-bottom: 1px solid var(--bo
 th:first-child, td:first-child { text-align: left; }
 thead th { font-weight: 600; border-bottom-color: var(--text); }
 tr.ours td { font-weight: 600; }
+table.text th, table.text td { text-align: left; }
 
 /* BibTeX */
 pre {
