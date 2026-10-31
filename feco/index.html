@@ -136,15 +136,15 @@ bibtex: |
 
 <section id="context">
     <h2>Why this matters</h2>
-    <p>Diffusion training seems difficult partly because of the semantic structure that has to come out of it. We have seen representation autoencoders, representation generation and representation alignment. Much of this work says the same thing: diffusion training needs some form of self-supervised signal to train faster and generate better.</p>
+    <p>Diffusion training seems difficult partly because of the semantic structure that has to come out of it. We have seen <a href="https://arxiv.org/abs/2510.11690">representation autoencoders</a>, <a href="https://arxiv.org/abs/2312.03701">representation generation</a> and <a href="https://arxiv.org/abs/2410.06940">representation alignment</a>. Much of this work says the same thing: diffusion training needs some form of self-supervised signal to train faster and generate better.</p>
     <p>Since I was mostly working on few-step models, that is, flow maps, I noticed they are in principle a knowledge distillation algorithm: a student tries to distill from a multi-step teacher. Looked at closely, the student and the teacher see two views of the same data. The teacher gets the cleaner one and the student the noisier one. This gives another dimension of consistency, in feature space, without any additional forward pass. That is the first free lunch for flow map training.</p>
-    <p>Then I realized that even when you align features across these free views, their quality is still below what self-supervised learning gives. A distributional regularizer like SIGReg can also be applied to diffusion to shape its representations. That is the second free lunch.</p>
+    <p>Then I realized that even when you align features across these free views, their quality is still below what self-supervised learning gives. A distributional regularizer like <a href="https://arxiv.org/abs/2511.08544">SIGReg</a> can also be applied to diffusion to shape its representations. That is the second free lunch.</p>
 </section>
 
 <section id="samples" class="feco-wide">
     <h2>One-step samples, ImageNet 256&times;256</h2>
 
-    <p class="feco-family">MeanFlow <span>SiT-B/2, 1 step</span></p>
+    <p class="feco-family"><a href="https://arxiv.org/abs/2505.13447">MeanFlow</a> <span>SiT-B/2, 1 step</span></p>
     <div class="feco-samples">
         <figure>
             <figcaption>Baseline</figcaption>
@@ -156,7 +156,7 @@ bibtex: |
         </figure>
     </div>
 
-    <p class="feco-family">Shortcut <span>DiT-B/2, 1 step</span></p>
+    <p class="feco-family"><a href="https://arxiv.org/abs/2410.12557">Shortcut</a> <span>DiT-B/2, 1 step</span></p>
     <div class="feco-samples">
         <figure>
             <figcaption>Baseline</figcaption>
@@ -244,7 +244,7 @@ bibtex: |
         <li><strong>Student.</strong> An early block of the online model reads the noisier view.</li>
         <li><strong>Teacher.</strong> A deep block of the EMA model reads the cleaner view. No gradient flows into it.</li>
         <li><strong>Predictor <em>h</em>.</strong> A small network that maps the student's features to the teacher's. The FeCo loss compares the two.</li>
-        <li><strong>SIGReg</strong> (from LeJEPA). It acts on the online model's features at the teacher's depth and pushes their distribution toward an isotropic Gaussian.</li>
+        <li><strong>SIGReg</strong> (from <a href="https://arxiv.org/abs/2511.08544">LeJEPA</a>). It acts on the online model's features at the teacher's depth and pushes their distribution toward an isotropic Gaussian.</li>
     </ul>
     <p class="caption">Both terms are added to the usual flow-map loss.</p>
 </section>
@@ -258,9 +258,9 @@ bibtex: |
                 <tr><th>Family</th><th>Teacher view</th><th>Already there because</th></tr>
             </thead>
             <tbody>
-                <tr><td>Shortcut Models</td><td>EMA half step</td><td>its target chains two half steps</td></tr>
-                <tr><td>MeanFlow</td><td>tangent from its JVP</td><td>its target runs a JVP</td></tr>
-                <tr><td>LSD</td><td>landing point of its target forward</td><td>its target runs that forward</td></tr>
+                <tr><td><a href="https://arxiv.org/abs/2410.12557">Shortcut Models</a></td><td>EMA half step</td><td>its target chains two half steps</td></tr>
+                <tr><td><a href="https://arxiv.org/abs/2505.13447">MeanFlow</a></td><td>tangent from its JVP</td><td>its target runs a JVP</td></tr>
+                <tr><td><a href="https://arxiv.org/abs/2505.18825">LSD</a></td><td>landing point of its target forward</td><td>its target runs that forward</td></tr>
             </tbody>
         </table>
     </div>
@@ -288,12 +288,12 @@ bibtex: |
             <text class="tick" x="350" y="246" text-anchor="middle">1-step FID (lower is better)</text>
         </svg>
         </div>
-        <figcaption>MeanFlow SiT-B/2, one-step FID, lower is better. The faint dotted line marks REPA. Preliminary, ImageNet-100 speedrun.</figcaption>
+        <figcaption>MeanFlow SiT-B/2, one-step FID, lower is better. The faint dotted line marks <a href="https://arxiv.org/abs/2410.06940">REPA</a>. Preliminary, ImageNet-100 speedrun.</figcaption>
     </figure>
     <div class="table-wrap">
         <table>
             <thead>
-                <tr><th>Family</th><th>Baseline</th><th>FeCo</th><th>+ SIGReg</th><th>REPA</th></tr>
+                <tr><th>Family</th><th>Baseline</th><th>FeCo</th><th>+ <a href="https://arxiv.org/abs/2511.08544">SIGReg</a></th><th><a href="https://arxiv.org/abs/2410.06940">REPA</a></th></tr>
             </thead>
             <tbody>
                 <tr><td>MeanFlow (SiT-B/2)</td><td>57.3</td><td>51.8</td><td>48.9</td><td>51.2</td></tr>
@@ -302,7 +302,7 @@ bibtex: |
             </tbody>
         </table>
     </div>
-    <p class="caption">Preliminary, ImageNet-100 speedrun: one-step FID, mean of 2 seeds, 39.5k training steps, not the paper budget. REPA aligns with a frozen DINOv2 encoder. No LSD baseline in this study.</p>
+    <p class="caption">Preliminary, ImageNet-100 speedrun: one-step FID, mean of 2 seeds, 39.5k training steps, not the paper budget. <a href="https://arxiv.org/abs/2410.06940">REPA</a> aligns with a frozen <a href="https://arxiv.org/abs/2304.07193">DINOv2</a> encoder. No LSD baseline in this study.</p>
 </section>
 
 <section id="main-results">
