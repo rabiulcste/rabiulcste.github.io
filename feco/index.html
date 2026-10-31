@@ -50,6 +50,12 @@ bibtex: |
     <p class="feco-tldr"><strong>TL;DR:</strong> A flow map can supervise its own features. Its composition rule gives two views of an image and a teacher with no extra forward pass, and no external encoder.</p>
 </section>
 
+<section id="context">
+    <h2>Why this matters</h2>
+    <p>Diffusion and flow models are slow to train, in part because good semantic structure has to emerge from the denoising objective alone. Recent work points the same way from several directions: representation autoencoders generate in the feature space of a pretrained encoder, representation-conditioned generation conditions on self-supervised features, and representation alignment (REPA) aligns the generator's features with a frozen encoder. Each adds a self-supervised signal to generative training, and each makes training faster and generation better. All of them borrow that signal from an external encoder.</p>
+    <p>Flow maps do not need to borrow it. Their training already contains an elegant self-supervised signal: the composition rule gives two views of one image, and the teacher view is something the model computes anyway. Adding SIGReg as a distributional regularizer on the features, we get two concrete free lunches for training flow maps faster.</p>
+</section>
+
 <section id="samples" class="feco-wide">
     <h2>One-step samples, ImageNet 256&times;256</h2>
 
