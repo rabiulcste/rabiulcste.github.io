@@ -1,5 +1,4 @@
 ---
-# Method name is not final: "FeCo" is a placeholder (candidate: IsoFeCo). Replace it in the title, body and bibtex.
 layout: project
 title: "Self-Supervised Free Lunch for Flow Map Training"
 description: "A flow map supplies its own representation target: its composition rule gives two views and a teacher for free, and SIGReg shapes the teacher-depth features. No external encoder."
@@ -77,6 +76,12 @@ bibtex: |
     .fd .val { font-size: 13px; fill: var(--muted); }
     .fd .best { font-weight: 600; fill: var(--text); }
     .fd .repa-line { stroke: var(--feco-reg); stroke-width: 1; stroke-dasharray: 1 3; opacity: 0.4; }
+    .fd .traj { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 1.5 4; opacity: 0.8; }
+    .fd .main { fill: none; stroke: var(--muted); stroke-width: 2; }
+    .fd .dens { fill: var(--surface); stroke: var(--muted); stroke-width: 1.5; }
+    .fd .dot { fill: var(--text); }
+    .fd .pt { fill: var(--muted); }
+    .fd .cv { fill: var(--feco-acc-soft); stroke: var(--feco-acc); stroke-width: 2.5; }
     .fd .hit { fill: transparent; }
     .fd .row:hover .hit { fill: var(--surface); }
     .fd .dot-n { fill: var(--muted); }
@@ -120,13 +125,13 @@ bibtex: |
             <text x="570" y="339" text-anchor="middle">deep block</text>
             <line class="ar-acc" x1="397" y1="334" x2="500" y2="334" marker-end="url(#cm-acc)"/>
             <text class="acc small" x="448" y="325" text-anchor="middle">predicts</text>
-            <text class="b" x="885" y="84">Flow-map loss</text>
-            <text class="mut" x="885" y="105">outputs agree</text>
-            <text class="acc b" x="885" y="330">FeCo loss</text>
-            <text class="mut" x="885" y="351">features agree</text>
+            <text class="b" x="866" y="84">Flow-map loss</text>
+            <text class="mut" x="866" y="105">outputs agree</text>
+            <text class="acc b" x="866" y="330">Consistency loss</text>
+            <text class="mut" x="866" y="351">features agree</text>
         </svg>
         </div>
-        <figcaption>The two views are the same image at two points on one noise-to-data path. A flow map should land in the same place with one long jump or with two short jumps through the cleaner view. FeCo also asks an early block on the noisier view to predict a deep block on the cleaner view.</figcaption>
+        <figcaption>The two views are the same image at two points on one noise-to-data path. A flow map should land in the same place with one long jump or with two short jumps through the cleaner view. iFeCo also asks an early block on the noisier view to predict a deep block on the cleaner view.</figcaption>
     </figure>
 </section>
 
@@ -151,8 +156,8 @@ bibtex: |
             <img src="samples_meanflow_baseline.jpg" alt="MeanFlow baseline, one-step samples: four classes, four samples each." loading="lazy">
         </figure>
         <figure>
-            <figcaption>FeCo <span>(previous version, without SIGReg)</span></figcaption>
-            <img src="samples_meanflow_feco.jpg" alt="MeanFlow with FeCo (previous version, without SIGReg), one-step samples with the same classes and noise as the baseline." loading="lazy">
+            <figcaption>Consistency only <span>(without SIGReg)</span></figcaption>
+            <img src="samples_meanflow_feco.jpg" alt="MeanFlow with the consistency loss only (without SIGReg), one-step samples with the same classes and noise as the baseline." loading="lazy">
         </figure>
     </div>
 
@@ -163,11 +168,11 @@ bibtex: |
             <img src="samples_shortcut_baseline.jpg" alt="Shortcut baseline, one-step samples: four classes, four samples each." loading="lazy">
         </figure>
         <figure>
-            <figcaption>FeCo <span>(previous version, without SIGReg)</span></figcaption>
-            <img src="samples_shortcut_feco.jpg" alt="Shortcut with FeCo (previous version, without SIGReg), one-step samples with the same classes and noise as the baseline." loading="lazy">
+            <figcaption>Consistency only <span>(without SIGReg)</span></figcaption>
+            <img src="samples_shortcut_feco.jpg" alt="Shortcut with the consistency loss only (without SIGReg), one-step samples with the same classes and noise as the baseline." loading="lazy">
         </figure>
     </div>
-    <p class="caption">Uncurated. Each row is one class; both grids in a pair use the same classes and noise. Models trained for 1.2M steps. These samples come from an earlier version of FeCo (feature loss only, without SIGReg), not the final method.</p>
+    <p class="caption">Uncurated. Each row is one class; both grids in a pair use the same classes and noise. Models trained for 1.2M steps. These samples use the consistency loss only, without SIGReg; iFeCo samples will follow.</p>
 </section>
 
 <section id="method">
@@ -175,7 +180,7 @@ bibtex: |
     <figure class="feco-fig feco-wide feco-method">
         <div class="feco-scroll">
         <svg class="fd" viewBox="4 0 834 340" role="img" aria-labelledby="method-title">
-            <title id="method-title">The online model takes the noisier view. A predictor h on its early block feeds the FeCo loss. The EMA model takes the cleaner view; its deep block gives the target through a stop-gradient. SIGReg acts on the online model's block at the teacher depth.</title>
+            <title id="method-title">The online model takes the noisier view. A predictor h on its early block feeds the consistency loss. The EMA model takes the cleaner view; its deep block gives the target through a stop-gradient. SIGReg acts on the online model's block at the teacher depth.</title>
             <defs>
                 <marker id="mm-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker>
                 <marker id="mm-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker>
@@ -214,7 +219,7 @@ bibtex: |
             <line class="ar-acc" x1="292" y1="158" x2="429" y2="158" marker-end="url(#mm-acc)"/>
             <text class="acc small" x="360" y="150" text-anchor="middle">predicts</text>
             <rect class="box-acc" x="434" y="140" width="130" height="36" rx="8"/>
-            <text class="acc b" x="499" y="163" text-anchor="middle">FeCo loss</text>
+            <text class="acc b" x="499" y="163" text-anchor="middle">consistency loss</text>
             <line class="ar-acc-d" x1="499" y1="234" x2="499" y2="182" marker-end="url(#mm-acc)"/>
             <text class="mut small" x="508" y="212">stop-gradient</text>
 
@@ -243,27 +248,95 @@ bibtex: |
     <ul class="feco-how">
         <li><strong>Student.</strong> An early block of the online model reads the noisier view.</li>
         <li><strong>Teacher.</strong> A deep block of the EMA model reads the cleaner view. No gradient flows into it.</li>
-        <li><strong>Predictor <em>h</em>.</strong> A small network that maps the student's features to the teacher's. The FeCo loss compares the two.</li>
+        <li><strong>Predictor <em>h</em>.</strong> A small network that maps the student's features to the teacher's. The consistency loss compares the two.</li>
         <li><strong>SIGReg</strong> (from <a href="https://arxiv.org/abs/2511.08544">LeJEPA</a>). It acts on the online model's features at the teacher's depth and pushes their distribution toward an isotropic Gaussian.</li>
     </ul>
     <p class="caption">Both terms are added to the usual flow-map loss.</p>
 </section>
 
-<section id="free">
+<section id="free" class="feco-wide">
     <h2>Why it is free</h2>
-    <p>Every flow-map family builds its training target by moving along the path to a cleaner point. FeCo reads the teacher features at that point, so it needs no extra forward pass.</p>
-    <div class="table-wrap">
-        <table class="text">
-            <thead>
-                <tr><th>Family</th><th>Teacher view</th><th>Already there because</th></tr>
-            </thead>
-            <tbody>
-                <tr><td><a href="https://arxiv.org/abs/2410.12557">Shortcut Models</a></td><td>EMA half step</td><td>its target chains two half steps</td></tr>
-                <tr><td><a href="https://arxiv.org/abs/2505.13447">MeanFlow</a></td><td>tangent from its JVP</td><td>its target runs a JVP</td></tr>
-                <tr><td><a href="https://arxiv.org/abs/2505.18825">LSD</a></td><td>landing point of its target forward</td><td>its target runs that forward</td></tr>
-            </tbody>
-        </table>
-    </div>
+    <p>Every flow-map family already visits the cleaner view while it builds its training target. iFeCo reads the teacher there, so it needs no extra forward pass.</p>
+    <figure class="feco-fig">
+        <div class="feco-scroll">
+        <svg class="fd" viewBox="0 0 1040 330" role="img" aria-labelledby="teachers-title">
+            <title id="teachers-title">Three panels, one per flow-map family, each showing trajectories from a noise distribution to a two-mode data distribution. The student jumps from a noisier point. Shortcut: two EMA half steps, the teacher reads the start of the second. MeanFlow: a first-order step along its JVP moves the features to a cleaner point. LSD: the EMA velocity at the landing point, where the teacher reads its features.</title>
+            <defs>
+                <marker id="tm-txt" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path class="hd-text" d="M0,0 L10,5 L0,10 z"/></marker>
+                <marker id="tm-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker>
+                <marker id="tm-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <text class="b" x="173" y="26" text-anchor="middle">Shortcut</text>
+            <text class="mut small" x="173" y="46" text-anchor="middle">target: two EMA half steps</text>
+            <polyline class="dens" points="47.9,75.0 47.9,76.5 47.9,78.0 47.9,79.5 47.8,81.0 47.8,82.5 47.7,84.0 47.7,85.5 47.6,87.0 47.5,88.5 47.4,90.0 47.2,91.5 47.1,93.0 46.9,94.5 46.7,96.0 46.4,97.5 46.1,99.0 45.8,100.5 45.4,102.0 44.9,103.5 44.4,105.0 43.8,106.5 43.2,108.0 42.5,109.5 41.7,111.0 40.9,112.5 39.9,114.0 38.9,115.5 37.9,117.0 36.7,118.5 35.5,120.0 34.2,121.5 32.9,123.0 31.5,124.5 30.1,126.0 28.6,127.5 27.2,129.0 25.7,130.5 24.3,132.0 22.9,133.5 21.5,135.0 20.2,136.5 19.0,138.0 17.9,139.5 16.9,141.0 16.1,142.5 15.3,144.0 14.8,145.5 14.3,147.0 14.1,148.5 14.0,150.0 14.1,151.5 14.3,153.0 14.8,154.5 15.3,156.0 16.1,157.5 16.9,159.0 17.9,160.5 19.0,162.0 20.2,163.5 21.5,165.0 22.9,166.5 24.3,168.0 25.7,169.5 27.2,171.0 28.6,172.5 30.1,174.0 31.5,175.5 32.9,177.0 34.2,178.5 35.5,180.0 36.7,181.5 37.9,183.0 38.9,184.5 39.9,186.0 40.9,187.5 41.7,189.0 42.5,190.5 43.2,192.0 43.8,193.5 44.4,195.0 44.9,196.5 45.4,198.0 45.8,199.5 46.1,201.0 46.4,202.5 46.7,204.0 46.9,205.5 47.1,207.0 47.2,208.5 47.4,210.0 47.5,211.5 47.6,213.0 47.7,214.5 47.7,216.0 47.8,217.5 47.8,219.0 47.9,220.5 47.9,222.0 47.9,223.5 47.9,225.0"/>
+            <polyline class="dens" points="298.7,75.0 298.7,76.5 298.7,78.0 298.7,79.5 298.8,81.0 298.8,82.5 299.0,84.0 299.2,85.5 299.5,87.0 300.0,88.5 300.8,90.0 301.8,91.5 303.2,93.0 305.1,94.5 307.4,96.0 310.2,97.5 313.3,99.0 316.8,100.5 320.5,102.0 324.0,103.5 327.2,105.0 329.9,106.5 331.7,108.0 332.6,109.5 332.4,111.0 331.2,112.5 329.1,114.0 326.2,115.5 322.9,117.0 319.3,118.5 315.6,120.0 312.2,121.5 309.2,123.0 306.6,124.5 304.4,126.0 302.7,127.5 301.4,129.0 300.5,130.5 299.8,132.0 299.4,133.5 299.1,135.0 298.9,136.5 298.8,138.0 298.7,139.5 298.7,141.0 298.7,142.5 298.7,144.0 298.7,145.5 298.7,147.0 298.7,148.5 298.7,150.0 298.7,151.5 298.7,153.0 298.7,154.5 298.7,156.0 298.7,157.5 298.7,159.0 298.7,160.5 298.8,162.0 298.9,163.5 299.1,165.0 299.4,166.5 299.8,168.0 300.5,169.5 301.4,171.0 302.7,172.5 304.4,174.0 306.6,175.5 309.2,177.0 312.2,178.5 315.6,180.0 319.3,181.5 322.9,183.0 326.2,184.5 329.1,186.0 331.2,187.5 332.4,189.0 332.6,190.5 331.7,192.0 329.9,193.5 327.2,195.0 324.0,196.5 320.5,198.0 316.8,199.5 313.3,201.0 310.2,202.5 307.4,204.0 305.1,205.5 303.2,207.0 301.8,208.5 300.8,210.0 300.0,211.5 299.5,213.0 299.2,214.5 299.0,216.0 298.8,217.5 298.8,219.0 298.7,220.5 298.7,222.0 298.7,223.5 298.7,225.0"/>
+            <path class="traj" d="M52.0,102 C128.0,102 218.7,104 294.7,104"/>
+            <path class="traj" d="M52.0,120 C128.0,120 218.7,108 294.7,108"/>
+            <path class="traj" d="M52.0,136 C128.0,136 218.7,114 294.7,114"/>
+            <path class="traj" d="M52.0,162 C128.0,162 218.7,180 294.7,180"/>
+            <path class="traj" d="M52.0,180 C128.0,180 218.7,186 294.7,186"/>
+            <path class="traj" d="M52.0,198 C128.0,198 218.7,194 294.7,194"/>
+            <path class="main" d="M52.0,212 C128.0,212 218.7,194 294.7,194"/>
+            <path class="arc" d="M93.5,216.8 Q161.2,272.8 227.9,205.0" marker-end="url(#tm-txt)"/>
+            <text class="small" x="161.2" y="266.8" text-anchor="middle">student jump</text>
+            <path class="arc-d" d="M93.5,203.8 Q125.2,170.8 151.8,196.3" marker-end="url(#tm-mut)"/>
+            <path class="arc-d" d="M169.8,196.3 Q196.9,164.3 228.9,190.0" marker-end="url(#tm-mut)"/>
+            <text class="mut small" x="196.9" y="170.3" text-anchor="middle">EMA half steps</text>
+            <circle class="pt" cx="232.9" cy="197.0" r="4"/>
+            <circle class="cv" cx="160.8" cy="204.3" r="8"/>
+            <circle class="dot" cx="89.5" cy="210.8" r="5.5"/>
+            <text class="mut small" x="30.0" y="246" text-anchor="middle">noise</text>
+            <text class="mut small" x="316.7" y="246" text-anchor="middle">data</text>
+            <text class="acc small" x="173" y="300" text-anchor="middle">teacher: EMA at the start</text>
+            <text class="acc small" x="173" y="318" text-anchor="middle">of the second half step</text>
+            <text class="b" x="520" y="26" text-anchor="middle">MeanFlow</text>
+            <text class="mut small" x="520" y="46" text-anchor="middle">target: a JVP along the path</text>
+            <polyline class="dens" points="394.6,75.0 394.6,76.5 394.6,78.0 394.5,79.5 394.5,81.0 394.5,82.5 394.4,84.0 394.3,85.5 394.3,87.0 394.2,88.5 394.0,90.0 393.9,91.5 393.7,93.0 393.6,94.5 393.3,96.0 393.1,97.5 392.8,99.0 392.4,100.5 392.0,102.0 391.6,103.5 391.1,105.0 390.5,106.5 389.9,108.0 389.2,109.5 388.4,111.0 387.5,112.5 386.6,114.0 385.6,115.5 384.5,117.0 383.4,118.5 382.2,120.0 380.9,121.5 379.5,123.0 378.2,124.5 376.7,126.0 375.3,127.5 373.8,129.0 372.4,130.5 370.9,132.0 369.5,133.5 368.2,135.0 366.9,136.5 365.7,138.0 364.6,139.5 363.6,141.0 362.7,142.5 362.0,144.0 361.4,145.5 361.0,147.0 360.8,148.5 360.7,150.0 360.8,151.5 361.0,153.0 361.4,154.5 362.0,156.0 362.7,157.5 363.6,159.0 364.6,160.5 365.7,162.0 366.9,163.5 368.2,165.0 369.5,166.5 370.9,168.0 372.4,169.5 373.8,171.0 375.3,172.5 376.7,174.0 378.2,175.5 379.5,177.0 380.9,178.5 382.2,180.0 383.4,181.5 384.5,183.0 385.6,184.5 386.6,186.0 387.5,187.5 388.4,189.0 389.2,190.5 389.9,192.0 390.5,193.5 391.1,195.0 391.6,196.5 392.0,198.0 392.4,199.5 392.8,201.0 393.1,202.5 393.3,204.0 393.6,205.5 393.7,207.0 393.9,208.5 394.0,210.0 394.2,211.5 394.3,213.0 394.3,214.5 394.4,216.0 394.5,217.5 394.5,219.0 394.5,220.5 394.6,222.0 394.6,223.5 394.6,225.0"/>
+            <polyline class="dens" points="645.3,75.0 645.3,76.5 645.4,78.0 645.4,79.5 645.4,81.0 645.5,82.5 645.6,84.0 645.9,85.5 646.2,87.0 646.7,88.5 647.4,90.0 648.5,91.5 649.9,93.0 651.7,94.5 654.1,96.0 656.8,97.5 660.0,99.0 663.5,100.5 667.1,102.0 670.7,103.5 673.9,105.0 676.6,106.5 678.4,108.0 679.3,109.5 679.1,111.0 677.9,112.5 675.8,114.0 672.9,115.5 669.5,117.0 665.9,118.5 662.3,120.0 658.9,121.5 655.8,123.0 653.2,124.5 651.1,126.0 649.4,127.5 648.1,129.0 647.2,130.5 646.5,132.0 646.1,133.5 645.8,135.0 645.6,136.5 645.5,138.0 645.4,139.5 645.4,141.0 645.4,142.5 645.3,144.0 645.3,145.5 645.3,147.0 645.3,148.5 645.3,150.0 645.3,151.5 645.3,153.0 645.3,154.5 645.3,156.0 645.4,157.5 645.4,159.0 645.4,160.5 645.5,162.0 645.6,163.5 645.8,165.0 646.1,166.5 646.5,168.0 647.2,169.5 648.1,171.0 649.4,172.5 651.1,174.0 653.2,175.5 655.8,177.0 658.9,178.5 662.3,180.0 665.9,181.5 669.5,183.0 672.9,184.5 675.8,186.0 677.9,187.5 679.1,189.0 679.3,190.5 678.4,192.0 676.6,193.5 673.9,195.0 670.7,196.5 667.1,198.0 663.5,199.5 660.0,201.0 656.8,202.5 654.1,204.0 651.7,205.5 649.9,207.0 648.5,208.5 647.4,210.0 646.7,211.5 646.2,213.0 645.9,214.5 645.6,216.0 645.5,217.5 645.4,219.0 645.4,220.5 645.4,222.0 645.3,223.5 645.3,225.0"/>
+            <path class="traj" d="M398.7,102 C474.7,102 565.3,104 641.3,104"/>
+            <path class="traj" d="M398.7,120 C474.7,120 565.3,108 641.3,108"/>
+            <path class="traj" d="M398.7,136 C474.7,136 565.3,114 641.3,114"/>
+            <path class="traj" d="M398.7,162 C474.7,162 565.3,180 641.3,180"/>
+            <path class="traj" d="M398.7,180 C474.7,180 565.3,186 641.3,186"/>
+            <path class="traj" d="M398.7,198 C474.7,198 565.3,194 641.3,194"/>
+            <path class="main" d="M398.7,212 C474.7,212 565.3,194 641.3,194"/>
+            <path class="arc" d="M440.2,216.8 Q507.9,272.8 574.6,205.0" marker-end="url(#tm-txt)"/>
+            <text class="small" x="507.9" y="266.8" text-anchor="middle">student jump</text>
+            <path class="ar-acc-d" d="M442.2,203.8 Q471.8,180.8 497.5,196.3" marker-end="url(#tm-acc)"/>
+            <text class="acc small" x="471.8" y="180.8" text-anchor="middle">first-order step</text>
+            <circle class="pt" cx="579.6" cy="197.0" r="4"/>
+            <circle class="cv" cx="507.5" cy="204.3" r="8"/>
+            <circle class="dot" cx="436.2" cy="210.8" r="5.5"/>
+            <text class="mut small" x="376.7" y="246" text-anchor="middle">noise</text>
+            <text class="mut small" x="663.3" y="246" text-anchor="middle">data</text>
+            <text class="acc small" x="520" y="300" text-anchor="middle">teacher: model features moved</text>
+            <text class="acc small" x="520" y="318" text-anchor="middle">along the path by the JVP</text>
+            <text class="b" x="867" y="26" text-anchor="middle">LSD</text>
+            <text class="mut small" x="867" y="46" text-anchor="middle">target: EMA velocity at landing</text>
+            <polyline class="dens" points="741.3,75.0 741.2,76.5 741.2,78.0 741.2,79.5 741.2,81.0 741.1,82.5 741.1,84.0 741.0,85.5 740.9,87.0 740.8,88.5 740.7,90.0 740.6,91.5 740.4,93.0 740.2,94.5 740.0,96.0 739.7,97.5 739.4,99.0 739.1,100.5 738.7,102.0 738.3,103.5 737.7,105.0 737.2,106.5 736.5,108.0 735.8,109.5 735.1,111.0 734.2,112.5 733.3,114.0 732.3,115.5 731.2,117.0 730.0,118.5 728.8,120.0 727.5,121.5 726.2,123.0 724.8,124.5 723.4,126.0 722.0,127.5 720.5,129.0 719.0,130.5 717.6,132.0 716.2,133.5 714.9,135.0 713.6,136.5 712.4,138.0 711.3,139.5 710.3,141.0 709.4,142.5 708.7,144.0 708.1,145.5 707.7,147.0 707.4,148.5 707.3,150.0 707.4,151.5 707.7,153.0 708.1,154.5 708.7,156.0 709.4,157.5 710.3,159.0 711.3,160.5 712.4,162.0 713.6,163.5 714.9,165.0 716.2,166.5 717.6,168.0 719.0,169.5 720.5,171.0 722.0,172.5 723.4,174.0 724.8,175.5 726.2,177.0 727.5,178.5 728.8,180.0 730.0,181.5 731.2,183.0 732.3,184.5 733.3,186.0 734.2,187.5 735.1,189.0 735.8,190.5 736.5,192.0 737.2,193.5 737.7,195.0 738.3,196.5 738.7,198.0 739.1,199.5 739.4,201.0 739.7,202.5 740.0,204.0 740.2,205.5 740.4,207.0 740.6,208.5 740.7,210.0 740.8,211.5 740.9,213.0 741.0,214.5 741.1,216.0 741.1,217.5 741.2,219.0 741.2,220.5 741.2,222.0 741.2,223.5 741.3,225.0"/>
+            <polyline class="dens" points="992.0,75.0 992.0,76.5 992.0,78.0 992.1,79.5 992.1,81.0 992.2,82.5 992.3,84.0 992.5,85.5 992.9,87.0 993.4,88.5 994.1,90.0 995.2,91.5 996.6,93.0 998.4,94.5 1000.7,96.0 1003.5,97.5 1006.7,99.0 1010.2,100.5 1013.8,102.0 1017.4,103.5 1020.6,105.0 1023.2,106.5 1025.1,108.0 1025.9,109.5 1025.8,111.0 1024.6,112.5 1022.4,114.0 1019.6,115.5 1016.2,117.0 1012.6,118.5 1009.0,120.0 1005.6,121.5 1002.5,123.0 999.9,124.5 997.7,126.0 996.1,127.5 994.8,129.0 993.8,130.5 993.2,132.0 992.7,133.5 992.4,135.0 992.3,136.5 992.1,138.0 992.1,139.5 992.0,141.0 992.0,142.5 992.0,144.0 992.0,145.5 992.0,147.0 992.0,148.5 992.0,150.0 992.0,151.5 992.0,153.0 992.0,154.5 992.0,156.0 992.0,157.5 992.0,159.0 992.1,160.5 992.1,162.0 992.3,163.5 992.4,165.0 992.7,166.5 993.2,168.0 993.8,169.5 994.8,171.0 996.1,172.5 997.7,174.0 999.9,175.5 1002.5,177.0 1005.6,178.5 1009.0,180.0 1012.6,181.5 1016.2,183.0 1019.6,184.5 1022.4,186.0 1024.6,187.5 1025.8,189.0 1025.9,190.5 1025.1,192.0 1023.2,193.5 1020.6,195.0 1017.4,196.5 1013.8,198.0 1010.2,199.5 1006.7,201.0 1003.5,202.5 1000.7,204.0 998.4,205.5 996.6,207.0 995.2,208.5 994.1,210.0 993.4,211.5 992.9,213.0 992.5,214.5 992.3,216.0 992.2,217.5 992.1,219.0 992.1,220.5 992.0,222.0 992.0,223.5 992.0,225.0"/>
+            <path class="traj" d="M745.3,102 C821.3,102 912.0,104 988.0,104"/>
+            <path class="traj" d="M745.3,120 C821.3,120 912.0,108 988.0,108"/>
+            <path class="traj" d="M745.3,136 C821.3,136 912.0,114 988.0,114"/>
+            <path class="traj" d="M745.3,162 C821.3,162 912.0,180 988.0,180"/>
+            <path class="traj" d="M745.3,180 C821.3,180 912.0,186 988.0,186"/>
+            <path class="traj" d="M745.3,198 C821.3,198 912.0,194 988.0,194"/>
+            <path class="main" d="M745.3,212 C821.3,212 912.0,194 988.0,194"/>
+            <path class="arc" d="M786.8,216.8 Q854.5,272.8 921.3,205.0" marker-end="url(#tm-txt)"/>
+            <text class="small" x="854.5" y="266.8" text-anchor="middle">student jump</text>
+            <line class="arc-d" x1="934.3" y1="190.0" x2="948.3" y2="159.0" marker-end="url(#tm-mut)"/>
+            <text class="mut small" x="940.3" y="151.0" text-anchor="middle">EMA velocity</text>
+            <circle class="pt" cx="854.2" cy="204.3" r="4"/>
+            <circle class="cv" cx="926.3" cy="197.0" r="8"/>
+            <circle class="dot" cx="782.8" cy="210.8" r="5.5"/>
+            <text class="mut small" x="723.3" y="246" text-anchor="middle">noise</text>
+            <text class="mut small" x="1010.0" y="246" text-anchor="middle">data</text>
+            <text class="acc small" x="867" y="300" text-anchor="middle">teacher: EMA at the</text>
+            <text class="acc small" x="867" y="318" text-anchor="middle">landing point</text>
+        </svg>
+        </div>
+        <figcaption>Black dot: the noisier view, where the student jumps from. Orange ring: the cleaner view, where the teacher reads its deep features. Dashed: work the target already does. <a href="https://arxiv.org/abs/2410.12557">Shortcut Models</a>, <a href="https://arxiv.org/abs/2505.13447">MeanFlow</a>, <a href="https://arxiv.org/abs/2505.18825">LSD</a>.</figcaption>
+    </figure>
     <p class="caption">What remains is the small predictor and the SIGReg statistic.</p>
 </section>
 
@@ -272,13 +345,13 @@ bibtex: |
     <figure class="feco-fig feco-chart">
         <div class="feco-scroll">
         <svg class="fd" viewBox="0 0 520 228" role="img" aria-labelledby="chart-title">
-            <title id="chart-title">One-step FID for MeanFlow SiT-B/2 on the ImageNet-100 speedrun: baseline 57.3, REPA 51.2, SIGReg alone 56.3, FeCo alone 51.8, FeCo plus SIGReg 48.9.</title>
+            <title id="chart-title">One-step FID for MeanFlow SiT-B/2 on the ImageNet-100 speedrun: baseline 57.3, REPA 51.2, SIGReg alone 56.3, consistency alone 51.8, iFeCo (consistency plus SIGReg) 48.9.</title>
             <line class="repa-line" x1="304.0" y1="10" x2="304.0" y2="176"/>
             <g class="row"><title>Baseline: 57.3</title><rect class="hit" x="0" y="10" width="520" height="28"/><text class="lab" x="200" y="29" text-anchor="end">Baseline</text><circle class="dot-n" cx="426.0" cy="24" r="4.5"/><text class="val" x="436.0" y="29">57.3</text></g>
             <g class="row"><title>REPA (DINOv2): 51.2</title><rect class="hit" x="0" y="38" width="520" height="28"/><text class="lab" x="200" y="57" text-anchor="end">REPA (DINOv2)</text><circle class="dot-repa" cx="304.0" cy="52" r="4.5"/><text class="val" x="314.0" y="57">51.2</text></g>
             <g class="row"><title>SIGReg alone: 56.3</title><rect class="hit" x="0" y="82" width="520" height="28"/><text class="lab" x="200" y="101" text-anchor="end">SIGReg alone</text><circle class="dot-n" cx="406.0" cy="96" r="4.5"/><text class="val" x="416.0" y="101">56.3</text></g>
-            <g class="row"><title>FeCo alone: 51.8</title><rect class="hit" x="0" y="110" width="520" height="28"/><text class="lab" x="200" y="129" text-anchor="end">FeCo alone</text><circle class="dot-n" cx="316.0" cy="124" r="4.5"/><text class="val" x="326.0" y="129">51.8</text></g>
-            <g class="row"><title>FeCo + SIGReg: 48.9</title><rect class="hit" x="0" y="138" width="520" height="28"/><text class="lab best" x="200" y="157" text-anchor="end">FeCo + SIGReg</text><circle class="dot-best" cx="258.0" cy="152" r="5.5"/><text class="val best" x="268.0" y="157">48.9</text></g>
+            <g class="row"><title>Consistency alone: 51.8</title><rect class="hit" x="0" y="110" width="520" height="28"/><text class="lab" x="200" y="129" text-anchor="end">Consistency alone</text><circle class="dot-n" cx="316.0" cy="124" r="4.5"/><text class="val" x="326.0" y="129">51.8</text></g>
+            <g class="row"><title>iFeCo: 48.9</title><rect class="hit" x="0" y="138" width="520" height="28"/><text class="lab best" x="200" y="157" text-anchor="end">iFeCo (both)</text><circle class="dot-best" cx="258.0" cy="152" r="5.5"/><text class="val best" x="268.0" y="157">48.9</text></g>
             <line class="axis" x1="220" y1="176" x2="480" y2="176"/>
             <line class="axis" x1="240.0" y1="176" x2="240.0" y2="180"/><text class="tick" x="240.0" y="196" text-anchor="middle">48</text>
             <line class="axis" x1="320.0" y1="176" x2="320.0" y2="180"/><text class="tick" x="320.0" y="196" text-anchor="middle">52</text>
@@ -287,12 +360,12 @@ bibtex: |
             <text class="tick" x="350" y="218" text-anchor="middle">1-step FID (lower is better)</text>
         </svg>
         </div>
-        <figcaption>MeanFlow SiT-B/2, one-step FID, lower is better. SIGReg alone barely helps; on top of FeCo it adds 2.9 and passes REPA. The faint dotted line marks <a href="https://arxiv.org/abs/2410.06940">REPA</a>. Preliminary, ImageNet-100 speedrun.</figcaption>
+        <figcaption>MeanFlow SiT-B/2, one-step FID, lower is better. SIGReg alone barely helps; on top of the consistency loss it adds 2.9 and passes REPA. The faint dotted line marks <a href="https://arxiv.org/abs/2410.06940">REPA</a>. Preliminary, ImageNet-100 speedrun.</figcaption>
     </figure>
     <div class="table-wrap">
         <table>
             <thead>
-                <tr><th>Family</th><th>Baseline</th><th>FeCo</th><th>+ <a href="https://arxiv.org/abs/2511.08544">SIGReg</a></th><th><a href="https://arxiv.org/abs/2410.06940">REPA</a></th></tr>
+                <tr><th>Family</th><th>Baseline</th><th>Consistency</th><th>iFeCo (+ <a href="https://arxiv.org/abs/2511.08544">SIGReg</a>)</th><th><a href="https://arxiv.org/abs/2410.06940">REPA</a></th></tr>
             </thead>
             <tbody>
                 <tr><td>MeanFlow (SiT-B/2)</td><td>57.3</td><td>51.8</td><td>48.9</td><td>51.2</td></tr>
