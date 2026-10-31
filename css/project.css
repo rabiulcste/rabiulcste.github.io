@@ -149,11 +149,9 @@ pre {
 footer.site { padding-top: 32px; padding-bottom: 48px; border-top: 1px solid var(--border); font-size: 0.875rem; }
 footer.site a { color: var(--muted); text-decoration: none; }
 
-/* Videos (_includes/project/video.html): same white card as figures */
+/* Videos: no card, the clip blends with the page */
 .fig video { display: block; width: 100%; height: auto; border-radius: 8px; }
 .fig--video .fig-img { background: none; padding: 0; }
-@media (max-width: 600px) { .fig--wide video { width: 600px; max-width: none; } }
-.fig--bleed video { width: auto; max-width: 100%; margin: 0 auto; }
 
 /* DRIFT (drift/index.html): inline SVG results charts that follow the theme */
 :root { --drift: #1F4FB0; --drift-2: #79A8F2; --drift-grid: #ececef; }
@@ -209,3 +207,10 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-diagram .sg { stroke: var(--muted); stroke-width: 1.2; }
 .drift-diagram .ico { fill: var(--drift-teal); fill-opacity: 0.4; stroke: var(--drift-teal-t); stroke-width: 0.8; stroke-linejoin: round; stroke-linecap: round; }
 .drift-diagram .ico-l { fill: none; }
+.drift-svg .ghead { font-size: 13px; font-weight: 600; fill: var(--muted); }
+/* DRIFT clips: text-free video on a white canvas, labels drawn by the page in the canvas' blank strips */
+.fig--video .fig-img { overflow-x: auto; }
+.drift-clip { position: relative; margin: 0 auto; container-type: inline-size; }
+.drift-clip video { position: absolute; inset: 0; width: 100%; height: 100%; }
+.drift-clip .clip-lab, .drift-clip .clip-name { position: absolute; transform: translateY(-100%); line-height: 1; white-space: nowrap; font-size: clamp(9px, 1.4cqw, 13px); color: #6e6e73; }
+.drift-clip .clip-name { font-weight: 600; color: #0d0d0d; }

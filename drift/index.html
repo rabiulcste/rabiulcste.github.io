@@ -164,118 +164,143 @@ bibtex: |
 <section id="imagination">
     <h2>Imagination in one step per frame</h2>
     <p class="note">Each clip shows the real game on the left and DRIFT imagining the same actions on the right, one denoising step per frame, from 8 real context frames taken mid-episode. For every environment the clip is the median of 10 rollouts by pixel error, so misses stay in. Frames are decoded for display.</p>
-    {% include project/video.html src="atari_rollouts.mp4" poster="atari_rollouts.webp" bleed=true alt="Eight Atari games. In each, real frames play on the left and DRIFT's imagined frames on the right under the same actions." caption="Atari 100k, eight games, 32 imagined frames. The imagined side drifts from the real one as small errors add up; a brief punch can be missed in Boxing and the BankHeist maze changes colour early." %}
-    {% include project/video.html src="crafter_rollout.mp4" poster="crafter_rollout.webp" bleed=true alt="Crafter. Real frames play on the left and DRIFT's imagined frames on the right under the same actions." caption="Crafter, same protocol." %}
+    <figure class="fig fig--video fig--bleed">
+    <div class="fig-img"><div class="drift-clip" style="max-width:936px;min-width:640px;aspect-ratio:1634 / 544"><video src="atari_rollouts.mp4" poster="atari_rollouts.webp" muted loop playsinline preload="metadata" aria-label="Eight Atari games. In each, real frames play on the left and DRIFT's imagined frames on the right under the same actions."></video><span class="clip-lab" style="left:0.00%;top:5.15%">Real</span><span class="clip-lab" style="left:12.00%;top:5.15%">Imagined</span><span class="clip-name" style="left:0.00%;top:11.95%">Boxing</span><span class="clip-lab" style="left:25.40%;top:5.15%">Real</span><span class="clip-lab" style="left:37.39%;top:5.15%">Imagined</span><span class="clip-name" style="left:25.40%;top:11.95%">Pong</span><span class="clip-lab" style="left:50.80%;top:5.15%">Real</span><span class="clip-lab" style="left:62.79%;top:5.15%">Imagined</span><span class="clip-name" style="left:50.80%;top:11.95%">Breakout</span><span class="clip-lab" style="left:76.19%;top:5.15%">Real</span><span class="clip-lab" style="left:88.19%;top:5.15%">Imagined</span><span class="clip-name" style="left:76.19%;top:11.95%">KungFuMaster</span><span class="clip-name" style="left:0.00%;top:61.21%">Kangaroo</span><span class="clip-name" style="left:25.40%;top:61.21%">Hero</span><span class="clip-name" style="left:50.80%;top:61.21%">BankHeist</span><span class="clip-name" style="left:76.19%;top:61.21%">RoadRunner</span></div></div>
+    <script>(function () {
+        var v = document.currentScript.previousElementSibling.querySelector("video");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { v.controls = true; return; }
+        v.autoplay = true;
+        v.play().catch(function () { v.controls = true; });
+    })();</script>
+    <figcaption>Atari 100k, eight games, 32 imagined frames. The blue line tracks the imagined rollout. The imagined side drifts from the real one as small errors add up; a brief punch can be missed in Boxing and the BankHeist maze changes colour early.</figcaption>
+    </figure>
+    <figure class="fig fig--video fig--bleed">
+    <div class="fig-img"><div class="drift-clip" style="max-width:518px;min-width:518px;aspect-ratio:518 / 304"><video src="crafter_rollout.mp4" poster="crafter_rollout.webp" muted loop playsinline preload="metadata" aria-label="Crafter. Real frames play on the left and DRIFT's imagined frames on the right under the same actions."></video><span class="clip-lab" style="left:0.00%;top:4.93%">Real</span><span class="clip-lab" style="left:50.39%;top:4.93%">Imagined</span><span class="clip-name" style="left:0.00%;top:11.84%">Crafter</span></div></div>
+    <script>(function () {
+        var v = document.currentScript.previousElementSibling.querySelector("video");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { v.controls = true; return; }
+        v.autoplay = true;
+        v.play().catch(function () { v.controls = true; });
+    })();</script>
+    <figcaption>Crafter, same protocol.</figcaption>
+    </figure>
 </section>
 
 <section id="results">
     <h2>Results</h2>
     <figure class="fig">
-        <div class="drift-media"><svg class="drift-svg" viewBox="0 0 760 236" role="img" aria-labelledby="at-t">
+        <div class="drift-media"><svg class="drift-svg" viewBox="0 0 760 252" role="img" aria-labelledby="at-t">
 <title id="at-t">Mean, median and IQM human-normalized score on Atari 100k with 95% intervals for DreamerV3, DIAMOND, DRIFT-symlog and DRIFT. DRIFT has the highest median and IQM, DIAMOND the highest mean, and the intervals overlap.</title>
 <text class="ttl" x="118" y="18">Mean</text>
-<line class="grid" x1="118.0" y1="30" x2="118.0" y2="186"/><text class="tick" x="118.0" y="204" text-anchor="middle">1</text>
-<line class="grid" x1="166.5" y1="30" x2="166.5" y2="186"/><text class="tick" x="166.5" y="204" text-anchor="middle">1.2</text>
-<line class="grid" x1="215.1" y1="30" x2="215.1" y2="186"/><text class="tick" x="215.1" y="204" text-anchor="middle">1.4</text>
-<line class="grid" x1="263.6" y1="30" x2="263.6" y2="186"/><text class="tick" x="263.6" y="204" text-anchor="middle">1.6</text>
-<line class="axis" x1="118" y1="186" x2="300" y2="186"/>
+<line class="grid" x1="118.0" y1="30" x2="118.0" y2="202"/><text class="tick" x="118.0" y="220" text-anchor="middle">1</text>
+<line class="grid" x1="166.5" y1="30" x2="166.5" y2="202"/><text class="tick" x="166.5" y="220" text-anchor="middle">1.2</text>
+<line class="grid" x1="215.1" y1="30" x2="215.1" y2="202"/><text class="tick" x="215.1" y="220" text-anchor="middle">1.4</text>
+<line class="grid" x1="263.6" y1="30" x2="263.6" y2="202"/><text class="tick" x="263.6" y="220" text-anchor="middle">1.6</text>
+<line class="axis" x1="118" y1="202" x2="300" y2="202"/>
 <g class="pt-g"><title>DreamerV3, mean 1.183 [1.079, 1.321]</title>
-<text class="lab" x="108" y="53" text-anchor="end">DreamerV3</text>
-<line class="band" x1="137.2" y1="48" x2="195.9" y2="48"/>
-<circle class="pt" cx="162.4" cy="48" r="5"/>
-<text class="val" x="205.9" y="53">1.18</text>
+<text class="lab" x="108" y="51" text-anchor="end">DreamerV3</text>
+<line class="band" x1="137.2" y1="50" x2="195.9" y2="50"/>
+<circle class="pt" cx="162.4" cy="50" r="5"/>
+<text class="val" x="205.9" y="55">1.18</text>
 </g>
 <g class="pt-g"><title>DIAMOND, mean 1.459 [1.358, 1.566]</title>
-<text class="lab" x="108" y="91" text-anchor="end">DIAMOND</text>
-<line class="band" x1="204.9" y1="86" x2="255.3" y2="86"/>
-<circle class="pt" cx="229.4" cy="86" r="5"/>
-<text class="val" x="265.3" y="91">1.46</text>
+<text class="lab" x="108" y="93" text-anchor="end">DIAMOND</text>
+<line class="band" x1="204.9" y1="92" x2="255.3" y2="92"/>
+<circle class="pt" cx="229.4" cy="92" r="5"/>
+<text class="val" x="265.3" y="97">1.46</text>
 </g>
 <g class="pt-g"><title>DRIFT-symlog, mean 1.328 [1.201, 1.461]</title>
-<text class="lab-sym" x="108" y="129" text-anchor="end">DRIFT-symlog</text>
-<line class="band-sym" x1="166.8" y1="124" x2="229.9" y2="124"/>
-<circle class="pt-sym" cx="197.6" cy="124" r="5"/>
-<text class="val-sym" x="239.9" y="129">1.33</text>
+<text class="lab-sym" x="108" y="135" text-anchor="end">DRIFT-symlog</text>
+<line class="band-sym" x1="166.8" y1="134" x2="229.9" y2="134"/>
+<circle class="pt-sym" cx="197.6" cy="134" r="5"/>
+<text class="val-sym" x="239.9" y="139">1.33</text>
 </g>
 <g class="pt-g"><title>DRIFT, mean 1.348 [1.252, 1.448]</title>
-<text class="lab-ours" x="108" y="167" text-anchor="end">DRIFT</text>
-<line class="band-ours" x1="179.2" y1="162" x2="226.7" y2="162"/>
-<circle class="pt-ours" cx="202.4" cy="162" r="5"/>
-<text class="val-ours" x="236.7" y="167">1.35</text>
+<text class="lab-ours" x="108" y="177" text-anchor="end">DRIFT</text>
+<line class="band-ours" x1="179.2" y1="176" x2="226.7" y2="176"/>
+<circle class="pt-ours" cx="202.4" cy="176" r="5"/>
+<text class="val-ours" x="236.7" y="181">1.35</text>
 </g>
 <text class="ttl" x="338" y="18">Median</text>
-<line class="grid" x1="338.0" y1="30" x2="338.0" y2="186"/><text class="tick" x="338.0" y="204" text-anchor="middle">0.3</text>
-<line class="grid" x1="398.7" y1="30" x2="398.7" y2="186"/><text class="tick" x="398.7" y="204" text-anchor="middle">0.5</text>
-<line class="grid" x1="459.3" y1="30" x2="459.3" y2="186"/><text class="tick" x="459.3" y="204" text-anchor="middle">0.7</text>
-<line class="axis" x1="338" y1="186" x2="520" y2="186"/>
+<line class="grid" x1="338.0" y1="30" x2="338.0" y2="202"/><text class="tick" x="338.0" y="220" text-anchor="middle">0.3</text>
+<line class="grid" x1="398.7" y1="30" x2="398.7" y2="202"/><text class="tick" x="398.7" y="220" text-anchor="middle">0.5</text>
+<line class="grid" x1="459.3" y1="30" x2="459.3" y2="202"/><text class="tick" x="459.3" y="220" text-anchor="middle">0.7</text>
+<line class="axis" x1="338" y1="202" x2="520" y2="202"/>
 <g class="pt-g"><title>DreamerV3, median 0.437 [0.383, 0.503]</title>
-<line class="band" x1="363.2" y1="48" x2="399.6" y2="48"/>
-<circle class="pt" cx="379.6" cy="48" r="5"/>
-<text class="val" x="409.6" y="53">0.44</text>
+<line class="band" x1="363.2" y1="50" x2="399.6" y2="50"/>
+<circle class="pt" cx="379.6" cy="50" r="5"/>
+<text class="val" x="409.6" y="55">0.44</text>
 </g>
 <g class="pt-g"><title>DIAMOND, median 0.373 [0.309, 0.489]</title>
-<line class="band" x1="340.7" y1="86" x2="395.3" y2="86"/>
-<circle class="pt" cx="360.1" cy="86" r="5"/>
-<text class="val" x="405.3" y="91">0.37</text>
+<line class="band" x1="340.7" y1="92" x2="395.3" y2="92"/>
+<circle class="pt" cx="360.1" cy="92" r="5"/>
+<text class="val" x="405.3" y="97">0.37</text>
 </g>
 <g class="pt-g"><title>DRIFT-symlog, median 0.427 [0.379, 0.488]</title>
-<line class="band-sym" x1="362.0" y1="124" x2="395.0" y2="124"/>
-<circle class="pt-sym" cx="376.5" cy="124" r="5"/>
-<text class="val-sym" x="405.0" y="129">0.43</text>
+<line class="band-sym" x1="362.0" y1="134" x2="395.0" y2="134"/>
+<circle class="pt-sym" cx="376.5" cy="134" r="5"/>
+<text class="val-sym" x="405.0" y="139">0.43</text>
 </g>
 <g class="pt-g"><title>DRIFT, median 0.520 [0.395, 0.730]</title>
-<line class="band-ours" x1="366.8" y1="162" x2="468.4" y2="162"/>
-<circle class="pt-ours" cx="404.7" cy="162" r="5"/>
-<text class="val-ours" x="478.4" y="167">0.52</text>
+<line class="band-ours" x1="366.8" y1="176" x2="468.4" y2="176"/>
+<circle class="pt-ours" cx="404.7" cy="176" r="5"/>
+<text class="val-ours" x="478.4" y="181">0.52</text>
 </g>
 <text class="ttl" x="558" y="18">IQM</text>
-<line class="grid" x1="558.0" y1="30" x2="558.0" y2="186"/><text class="tick" x="558.0" y="204" text-anchor="middle">0.4</text>
-<line class="grid" x1="630.8" y1="30" x2="630.8" y2="186"/><text class="tick" x="630.8" y="204" text-anchor="middle">0.6</text>
-<line class="grid" x1="703.6" y1="30" x2="703.6" y2="186"/><text class="tick" x="703.6" y="204" text-anchor="middle">0.8</text>
-<line class="axis" x1="558" y1="186" x2="740" y2="186"/>
+<line class="grid" x1="558.0" y1="30" x2="558.0" y2="202"/><text class="tick" x="558.0" y="220" text-anchor="middle">0.4</text>
+<line class="grid" x1="630.8" y1="30" x2="630.8" y2="202"/><text class="tick" x="630.8" y="220" text-anchor="middle">0.6</text>
+<line class="grid" x1="703.6" y1="30" x2="703.6" y2="202"/><text class="tick" x="703.6" y="220" text-anchor="middle">0.8</text>
+<line class="axis" x1="558" y1="202" x2="740" y2="202"/>
 <g class="pt-g"><title>DreamerV3, iqm 0.471 [0.424, 0.525]</title>
-<line class="band" x1="566.7" y1="48" x2="603.5" y2="48"/>
-<circle class="pt" cx="583.8" cy="48" r="5"/>
-<text class="val" x="613.5" y="53">0.47</text>
+<line class="band" x1="566.7" y1="50" x2="603.5" y2="50"/>
+<circle class="pt" cx="583.8" cy="50" r="5"/>
+<text class="val" x="613.5" y="55">0.47</text>
 </g>
 <g class="pt-g"><title>DIAMOND, iqm 0.641 [0.578, 0.706]</title>
-<line class="band" x1="622.8" y1="86" x2="669.4" y2="86"/>
-<circle class="pt" cx="645.7" cy="86" r="5"/>
-<text class="val" x="679.4" y="91">0.64</text>
+<line class="band" x1="622.8" y1="92" x2="669.4" y2="92"/>
+<circle class="pt" cx="645.7" cy="92" r="5"/>
+<text class="val" x="679.4" y="97">0.64</text>
 </g>
 <g class="pt-g"><title>DRIFT-symlog, iqm 0.620 [0.553, 0.699]</title>
-<line class="band-sym" x1="613.7" y1="124" x2="666.8" y2="124"/>
-<circle class="pt-sym" cx="638.1" cy="124" r="5"/>
-<text class="val-sym" x="676.8" y="129">0.62</text>
+<line class="band-sym" x1="613.7" y1="134" x2="666.8" y2="134"/>
+<circle class="pt-sym" cx="638.1" cy="134" r="5"/>
+<text class="val-sym" x="676.8" y="139">0.62</text>
 </g>
 <g class="pt-g"><title>DRIFT, iqm 0.673 [0.602, 0.757]</title>
-<line class="band-ours" x1="631.5" y1="162" x2="687.9" y2="162"/>
-<circle class="pt-ours" cx="657.4" cy="162" r="5"/>
-<text class="val-ours" x="697.9" y="167">0.67</text>
+<line class="band-ours" x1="631.5" y1="176" x2="687.9" y2="176"/>
+<circle class="pt-ours" cx="657.4" cy="176" r="5"/>
+<text class="val-ours" x="697.9" y="181">0.67</text>
 </g>
-<text class="ax" x="429" y="230" text-anchor="middle">Human-normalized score on Atari 100k, 26 games, 95% intervals</text>
+<text class="grp" x="108" y="68" text-anchor="end">discrete latent, no diffusion</text>
+<text class="grp" x="108" y="110" text-anchor="end">pixels, diffusion</text>
+<text class="grp" x="108" y="152" text-anchor="end">continuous latent, flow</text>
+<text class="grp" x="108" y="194" text-anchor="end">continuous latent, flow</text>
+<text class="ax" x="429" y="246" text-anchor="middle">Human-normalized score on Atari 100k, 26 games, 95% intervals</text>
 </svg></div>
         <figcaption>Atari 100k, 26 games, 95% bootstrap intervals over 5 seeds. DRIFT is competitive with DIAMOND (the intervals overlap and DIAMOND has the higher mean); TWISTER, a latent world model without per-seed scores, reports higher mean and median.</figcaption>
     </figure>
     {% include project/figure.html src="curves_craftium.webp" wide=true alt="Four learning curves on Craftium tasks SmallRoom, Room, Speleo and ChopTree for DRIFT and DRIFT-symlog, with the final returns of DIAMOND and Horizon Imagination as horizontal lines." caption="Craftium, evaluation return over 100k steps, with the baselines' final returns as dashed lines. DRIFT ends above DIAMOND and Horizon Imagination on all four tasks." %}
     <figure class="fig">
-        <div class="drift-media"><svg class="drift-svg" viewBox="0 0 760 336" role="img" aria-labelledby="cr-t">
-<title id="cr-t">Crafter score at 1M steps. DreamerV3 XL 14.5, DRIFT-symlog 10.6, DreamerV2 10.0, Delta-IRIS 9.3, Horizon Imagination 8.1, DRIFT 6.4, PPO 4.6, Rainbow 4.3, DIAMOND 3.8.</title>
-<line class="grid" x1="140.0" y1="10" x2="140.0" y2="290"/><text class="tick" x="140.0" y="308" text-anchor="middle">0</text>
-<line class="grid" x1="299.4" y1="10" x2="299.4" y2="290"/><text class="tick" x="299.4" y="308" text-anchor="middle">5</text>
-<line class="grid" x1="458.8" y1="10" x2="458.8" y2="290"/><text class="tick" x="458.8" y="308" text-anchor="middle">10</text>
-<line class="grid" x1="618.1" y1="10" x2="618.1" y2="290"/><text class="tick" x="618.1" y="308" text-anchor="middle">15</text>
-<line class="axis" x1="140" y1="290" x2="650" y2="290"/>
-<g class="pt-g"><title>DreamerV3 XL, score 14.5%, latent</title><text class="lab" x="130" y="31" text-anchor="end">DreamerV3 XL</text><rect class="bar" x="140" y="17" width="462.2" height="18" rx="2"/><text class="val" x="610.2" y="31">14.5</text><text class="grp" x="664" y="30">latent</text></g>
-<g class="pt-g"><title>DRIFT-symlog, score 10.6%, diffusion or flow</title><text class="lab-sym" x="130" y="61" text-anchor="end">DRIFT-symlog</text><rect class="bar-sym" x="140" y="47" width="337.9" height="18" rx="2"/><text class="val-sym" x="485.9" y="61">10.6</text><text class="grp" x="664" y="60">diffusion or flow</text></g>
-<g class="pt-g"><title>DreamerV2, score 10.0%, latent</title><text class="lab" x="130" y="91" text-anchor="end">DreamerV2</text><rect class="bar" x="140" y="77" width="318.8" height="18" rx="2"/><text class="val" x="466.8" y="91">10.0</text><text class="grp" x="664" y="90">latent</text></g>
-<g class="pt-g"><title>Δ-IRIS, score 9.3%, latent</title><text class="lab" x="130" y="121" text-anchor="end">Δ-IRIS</text><rect class="bar" x="140" y="107" width="296.4" height="18" rx="2"/><text class="val" x="444.4" y="121">9.3</text><text class="grp" x="664" y="120">latent</text></g>
-<g class="pt-g"><title>Horizon Imag., score 8.1%, diffusion or flow</title><text class="lab" x="130" y="151" text-anchor="end">Horizon Imag.</text><rect class="bar" x="140" y="137" width="258.2" height="18" rx="2"/><text class="val" x="406.2" y="151">8.1</text><text class="grp" x="664" y="150">diffusion or flow</text></g>
-<g class="pt-g"><title>DRIFT, score 6.4%, diffusion or flow</title><text class="lab-ours" x="130" y="181" text-anchor="end">DRIFT</text><rect class="bar-ours" x="140" y="167" width="204.0" height="18" rx="2"/><text class="val-ours" x="352.0" y="181">6.4</text><text class="grp" x="664" y="180">diffusion or flow</text></g>
-<g class="pt-g"><title>PPO, score 4.6%, model-free</title><text class="lab" x="130" y="211" text-anchor="end">PPO</text><rect class="bar" x="140" y="197" width="146.6" height="18" rx="2"/><text class="val" x="294.6" y="211">4.6</text><text class="grp" x="664" y="210">model-free</text></g>
-<g class="pt-g"><title>Rainbow, score 4.3%, model-free</title><text class="lab" x="130" y="241" text-anchor="end">Rainbow</text><rect class="bar" x="140" y="227" width="137.1" height="18" rx="2"/><text class="val" x="285.1" y="241">4.3</text><text class="grp" x="664" y="240">model-free</text></g>
-<g class="pt-g"><title>DIAMOND, score 3.8%, diffusion or flow</title><text class="lab" x="130" y="271" text-anchor="end">DIAMOND</text><rect class="bar" x="140" y="257" width="121.1" height="18" rx="2"/><text class="val" x="269.1" y="271">3.8</text><text class="grp" x="664" y="270">diffusion or flow</text></g>
-<text class="ax" x="395.0" y="332" text-anchor="middle">Crafter score (%) at 1M steps</text>
+        <div class="drift-media"><svg class="drift-svg" viewBox="0 0 760 400" role="img" aria-labelledby="cr-t">
+<title id="cr-t">Crafter score at 1M steps. Model-free: PPO 4.6, Rainbow 4.3. World models without diffusion, discrete latent: DreamerV3 XL 14.5, DreamerV2 10.0, Delta-IRIS 9.3. Diffusion and flow world models: DRIFT-symlog 10.6 and Horizon Imagination 8.1 and DRIFT 6.4 in a continuous latent, DIAMOND 3.8 in pixels.</title>
+<line class="grid" x1="140.0" y1="10" x2="140.0" y2="348"/><text class="tick" x="140.0" y="366" text-anchor="middle">0</text>
+<line class="grid" x1="299.4" y1="10" x2="299.4" y2="348"/><text class="tick" x="299.4" y="366" text-anchor="middle">5</text>
+<line class="grid" x1="458.8" y1="10" x2="458.8" y2="348"/><text class="tick" x="458.8" y="366" text-anchor="middle">10</text>
+<line class="grid" x1="618.1" y1="10" x2="618.1" y2="348"/><text class="tick" x="618.1" y="366" text-anchor="middle">15</text>
+<line class="axis" x1="140" y1="348" x2="650" y2="348"/>
+<text class="ghead" x="0" y="24.0">Model-free</text>
+<g class="pt-g"><title>PPO, score 4.6%</title><text class="lab" x="130" y="50.0" text-anchor="end">PPO</text><rect class="bar" x="140" y="36.0" width="146.6" height="18" rx="2"/><text class="val" x="294.6" y="50.0">4.6</text></g>
+<g class="pt-g"><title>Rainbow, score 4.3%</title><text class="lab" x="130" y="76.0" text-anchor="end">Rainbow</text><rect class="bar" x="140" y="62.0" width="137.1" height="18" rx="2"/><text class="val" x="285.1" y="76.0">4.3</text></g>
+<text class="ghead" x="0" y="114.0">World models without diffusion</text>
+<g class="pt-g"><title>DreamerV3 XL, score 14.5%, discrete latent</title><text class="lab" x="130" y="140.0" text-anchor="end">DreamerV3 XL</text><rect class="bar" x="140" y="126.0" width="462.2" height="18" rx="2"/><text class="val" x="610.2" y="140.0">14.5</text><text class="grp" x="664" y="139.0">discrete latent</text></g>
+<g class="pt-g"><title>DreamerV2, score 10.0%, discrete latent</title><text class="lab" x="130" y="166.0" text-anchor="end">DreamerV2</text><rect class="bar" x="140" y="152.0" width="318.8" height="18" rx="2"/><text class="val" x="466.8" y="166.0">10.0</text><text class="grp" x="664" y="165.0">discrete latent</text></g>
+<g class="pt-g"><title>Δ-IRIS, score 9.3%, discrete latent</title><text class="lab" x="130" y="192.0" text-anchor="end">Δ-IRIS</text><rect class="bar" x="140" y="178.0" width="296.4" height="18" rx="2"/><text class="val" x="444.4" y="192.0">9.3</text><text class="grp" x="664" y="191.0">discrete latent</text></g>
+<text class="ghead" x="0" y="230.0">Diffusion and flow world models</text>
+<g class="pt-g"><title>DRIFT-symlog, score 10.6%, continuous latent</title><text class="lab-sym" x="130" y="256.0" text-anchor="end">DRIFT-symlog</text><rect class="bar-sym" x="140" y="242.0" width="337.9" height="18" rx="2"/><text class="val-sym" x="485.9" y="256.0">10.6</text><text class="grp" x="664" y="255.0">continuous latent</text></g>
+<g class="pt-g"><title>Horizon Imag., score 8.1%, continuous latent</title><text class="lab" x="130" y="282.0" text-anchor="end">Horizon Imag.</text><rect class="bar" x="140" y="268.0" width="258.2" height="18" rx="2"/><text class="val" x="406.2" y="282.0">8.1</text><text class="grp" x="664" y="281.0">continuous latent</text></g>
+<g class="pt-g"><title>DRIFT, score 6.4%, continuous latent</title><text class="lab-ours" x="130" y="308.0" text-anchor="end">DRIFT</text><rect class="bar-ours" x="140" y="294.0" width="204.0" height="18" rx="2"/><text class="val-ours" x="352.0" y="308.0">6.4</text><text class="grp" x="664" y="307.0">continuous latent</text></g>
+<g class="pt-g"><title>DIAMOND, score 3.8%, pixels</title><text class="lab" x="130" y="334.0" text-anchor="end">DIAMOND</text><rect class="bar" x="140" y="320.0" width="121.1" height="18" rx="2"/><text class="val" x="269.1" y="334.0">3.8</text><text class="grp" x="664" y="333.0">pixels</text></g>
+<text class="ax" x="395.0" y="390" text-anchor="middle">Crafter score (%) at 1M steps</text>
 </svg></div>
         <figcaption>Crafter score at 1M steps. DRIFT-symlog, trained on full-scale rewards, is the best diffusion or flow world model, while DreamerV3 XL is higher and sign-reward DRIFT falls below Horizon Imagination.</figcaption>
     </figure>
