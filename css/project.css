@@ -99,6 +99,7 @@ p { margin: 0 0 16px; }
 .muted { color: var(--muted); }
 .note { color: var(--muted); font-size: 0.875rem; }
 .intro { margin-bottom: 48px; }
+.tldr { text-align: center; font-size: 1.1875rem; line-height: 1.5; margin: 0 auto 48px; max-width: 620px; }
 
 /* Figures */
 .fig { margin: 0 0 32px; }
