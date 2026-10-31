@@ -18,7 +18,7 @@ links:
     url: "https://drive.google.com/file/d/10zf-t6m6gAShmdtMlVFFv2yhjZFyQJ5y/view?usp=drive_link"
   - label: Code
     url: ""
-og_image: teaser.png
+og_image: teaser.webp
 bibtex: |
   @misc{awal2026drift,
     title  = {One Flow Transformer for Imagination and Control},
@@ -29,22 +29,7 @@ bibtex: |
 ---
 
 <section>
-    {% include project/figure.html src="teaser.png" wide=true alt="Two panels side by side. Left, prior diffusion agents use a world model to imagine frames and a separate policy to act. Right, DRIFT uses one block, labelled world model plus policy, that both imagines and acts." caption="Left: prior diffusion agents imagine frames with a world model over several denoising steps and train a separate policy on these frames. Right: DRIFT uses one Flow Transformer for both, imagining each frame in one denoising step and acting from the same backbone." %}
-</section>
-
-<section id="imagination">
-    <h2>Imagination in one step per frame</h2>
-    <p class="note">Each clip shows the real game on the left and DRIFT imagining the same actions on the right, one denoising step per frame, from 8 real context frames taken mid-episode. For every environment the clip is the median of 10 rollouts by pixel error, so misses stay in. Frames are decoded for display.</p>
-    {% include project/video.html src="atari_rollouts.mp4" poster="atari_rollouts.png" bleed=true alt="Eight Atari games. In each, real frames play on the left and DRIFT's imagined frames on the right under the same actions." caption="Atari 100k, eight games, 32 imagined frames. The imagined side drifts from the real one as small errors add up; a brief punch can be missed in Boxing and the BankHeist maze changes colour early." %}
-    {% include project/video.html src="crafter_rollout.mp4" poster="crafter_rollout.png" alt="Crafter. Real frames play on the left and DRIFT's imagined frames on the right under the same actions." caption="Crafter, same protocol." %}
-</section>
-
-<section id="results">
-    <h2>Results</h2>
-    {% include project/figure.html src="atari_hns.png" alt="Three dot plots of mean, median and IQM human-normalized score on Atari 100k for DreamerV3, DIAMOND, DRIFT-symlog and DRIFT, each with a 95% interval." caption="Atari 100k, 26 games, 95% bootstrap intervals over 5 seeds. DRIFT is competitive with DIAMOND (the intervals overlap and DIAMOND has the higher mean); TWISTER, a latent world model without per-seed scores, reports higher mean and median." %}
-    {% include project/figure.html src="curves_craftium.png" wide=true alt="Four learning curves on Craftium tasks SmallRoom, Room, Speleo and ChopTree for DRIFT and DRIFT-symlog, with the final returns of DIAMOND and Horizon Imagination as horizontal lines." caption="Craftium, evaluation return over 100k steps, with the baselines' final returns as dashed lines. DRIFT ends above DIAMOND and Horizon Imagination on all four tasks." %}
-    {% include project/figure.html src="crafter_score.png" alt="Bar chart of Crafter score at 1M steps for nine agents, from DreamerV3 XL at 14.5 down to DIAMOND at 3.8." caption="Crafter score at 1M steps. DRIFT-symlog, trained on full-scale rewards, is the best diffusion or flow world model, while DreamerV3 XL is higher and sign-reward DRIFT falls below Horizon Imagination." %}
-    {% include project/figure.html src="ablations.png" wide=true alt="Two dot plots of IQM human-normalized score. Left, next-latent prediction variants on 8 games. Right, self-generated rollouts on 26 games." caption="Ablations. Left: next-latent prediction, on a subset of 8 Atari games with an earlier agent setup. Right: training on self-generated rollouts, on all 26 games." %}
+    {% include project/figure.html src="teaser.webp" wide=true alt="Two panels side by side. Left, prior diffusion agents use a world model to imagine frames and a separate policy to act. Right, DRIFT uses one block, labelled world model plus policy, that both imagines and acts." caption="Left: prior diffusion agents imagine frames with a world model over several denoising steps and train a separate policy on these frames. Right: DRIFT uses one Flow Transformer for both, imagining each frame in one denoising step and acting from the same backbone." %}
 </section>
 
 <section id="abstract">
@@ -54,5 +39,188 @@ bibtex: |
 
 <section id="method">
     <h2>Method</h2>
-    {% include project/figure.html src="method.png" wide=true alt="Two regions. Left, world-model training: an observation is encoded, noised, and passed with its tokens through DRIFT, which outputs a control state feeding predictor heads, including a next-latent head aligned with the encoder latent of the next observation. Right, actor-critic learning in imagination: DRIFT generates each next latent in one step, and the actor and critic take the resulting control state." caption="Left: world-model training. DRIFT denoises the latent of each time step and outputs the control state, from which small heads predict the reward (trophy) and the continuation (flag). A next-latent head also uses the control state and the action to predict the encoder's latent of the next observation. Right: actor&ndash;critic learning in imagination. DRIFT generates each next latent in one denoising step, and the actor and critic take the resulting control state as input." %}
+    {% include project/figure.html src="method.webp" wide=true alt="Two regions. Left, world-model training: an observation is encoded, noised, and passed with its tokens through DRIFT, which outputs a control state feeding predictor heads, including a next-latent head aligned with the encoder latent of the next observation. Right, actor-critic learning in imagination: DRIFT generates each next latent in one step, and the actor and critic take the resulting control state." caption="Left: world-model training. DRIFT denoises the latent of each time step and outputs the control state, from which small heads predict the reward (trophy) and the continuation (flag). A next-latent head also uses the control state and the action to predict the encoder's latent of the next observation. Right: actor&ndash;critic learning in imagination. DRIFT generates each next latent in one denoising step, and the actor and critic take the resulting control state as input." %}
+</section>
+
+<section id="imagination">
+    <h2>Imagination in one step per frame</h2>
+    <p class="note">Each clip shows the real game on the left and DRIFT imagining the same actions on the right, one denoising step per frame, from 8 real context frames taken mid-episode. For every environment the clip is the median of 10 rollouts by pixel error, so misses stay in. Frames are decoded for display.</p>
+    {% include project/video.html src="atari_rollouts.mp4" poster="atari_rollouts.webp" bleed=true alt="Eight Atari games. In each, real frames play on the left and DRIFT's imagined frames on the right under the same actions." caption="Atari 100k, eight games, 32 imagined frames. The imagined side drifts from the real one as small errors add up; a brief punch can be missed in Boxing and the BankHeist maze changes colour early." %}
+    {% include project/video.html src="crafter_rollout.mp4" poster="crafter_rollout.webp" alt="Crafter. Real frames play on the left and DRIFT's imagined frames on the right under the same actions." caption="Crafter, same protocol." %}
+</section>
+
+<section id="results">
+    <h2>Results</h2>
+    <figure class="fig">
+        <div class="drift-media"><svg class="drift-svg" viewBox="0 0 760 236" role="img" aria-labelledby="at-t">
+<title id="at-t">Mean, median and IQM human-normalized score on Atari 100k with 95% intervals for DreamerV3, DIAMOND, DRIFT-symlog and DRIFT. DRIFT has the highest median and IQM, DIAMOND the highest mean, and the intervals overlap.</title>
+<text class="ttl" x="118" y="18">Mean</text>
+<line class="grid" x1="118.0" y1="30" x2="118.0" y2="186"/><text class="tick" x="118.0" y="204" text-anchor="middle">1</text>
+<line class="grid" x1="166.5" y1="30" x2="166.5" y2="186"/><text class="tick" x="166.5" y="204" text-anchor="middle">1.2</text>
+<line class="grid" x1="215.1" y1="30" x2="215.1" y2="186"/><text class="tick" x="215.1" y="204" text-anchor="middle">1.4</text>
+<line class="grid" x1="263.6" y1="30" x2="263.6" y2="186"/><text class="tick" x="263.6" y="204" text-anchor="middle">1.6</text>
+<line class="axis" x1="118" y1="186" x2="300" y2="186"/>
+<g class="pt-g"><title>DreamerV3, mean 1.183 [1.079, 1.321]</title>
+<text class="lab" x="108" y="53" text-anchor="end">DreamerV3</text>
+<line class="band" x1="137.2" y1="48" x2="195.9" y2="48"/>
+<circle class="pt" cx="162.4" cy="48" r="5"/>
+<text class="val" x="205.9" y="53">1.18</text>
+</g>
+<g class="pt-g"><title>DIAMOND, mean 1.459 [1.358, 1.566]</title>
+<text class="lab" x="108" y="91" text-anchor="end">DIAMOND</text>
+<line class="band" x1="204.9" y1="86" x2="255.3" y2="86"/>
+<circle class="pt" cx="229.4" cy="86" r="5"/>
+<text class="val" x="265.3" y="91">1.46</text>
+</g>
+<g class="pt-g"><title>DRIFT-symlog, mean 1.328 [1.201, 1.461]</title>
+<text class="lab-sym" x="108" y="129" text-anchor="end">DRIFT-symlog</text>
+<line class="band-sym" x1="166.8" y1="124" x2="229.9" y2="124"/>
+<circle class="pt-sym" cx="197.6" cy="124" r="5"/>
+<text class="val-sym" x="239.9" y="129">1.33</text>
+</g>
+<g class="pt-g"><title>DRIFT, mean 1.348 [1.252, 1.448]</title>
+<text class="lab-ours" x="108" y="167" text-anchor="end">DRIFT</text>
+<line class="band-ours" x1="179.2" y1="162" x2="226.7" y2="162"/>
+<circle class="pt-ours" cx="202.4" cy="162" r="5"/>
+<text class="val-ours" x="236.7" y="167">1.35</text>
+</g>
+<text class="ttl" x="338" y="18">Median</text>
+<line class="grid" x1="338.0" y1="30" x2="338.0" y2="186"/><text class="tick" x="338.0" y="204" text-anchor="middle">0.3</text>
+<line class="grid" x1="398.7" y1="30" x2="398.7" y2="186"/><text class="tick" x="398.7" y="204" text-anchor="middle">0.5</text>
+<line class="grid" x1="459.3" y1="30" x2="459.3" y2="186"/><text class="tick" x="459.3" y="204" text-anchor="middle">0.7</text>
+<line class="axis" x1="338" y1="186" x2="520" y2="186"/>
+<g class="pt-g"><title>DreamerV3, median 0.437 [0.383, 0.503]</title>
+<line class="band" x1="363.2" y1="48" x2="399.6" y2="48"/>
+<circle class="pt" cx="379.6" cy="48" r="5"/>
+<text class="val" x="409.6" y="53">0.44</text>
+</g>
+<g class="pt-g"><title>DIAMOND, median 0.373 [0.309, 0.489]</title>
+<line class="band" x1="340.7" y1="86" x2="395.3" y2="86"/>
+<circle class="pt" cx="360.1" cy="86" r="5"/>
+<text class="val" x="405.3" y="91">0.37</text>
+</g>
+<g class="pt-g"><title>DRIFT-symlog, median 0.427 [0.379, 0.488]</title>
+<line class="band-sym" x1="362.0" y1="124" x2="395.0" y2="124"/>
+<circle class="pt-sym" cx="376.5" cy="124" r="5"/>
+<text class="val-sym" x="405.0" y="129">0.43</text>
+</g>
+<g class="pt-g"><title>DRIFT, median 0.520 [0.395, 0.730]</title>
+<line class="band-ours" x1="366.8" y1="162" x2="468.4" y2="162"/>
+<circle class="pt-ours" cx="404.7" cy="162" r="5"/>
+<text class="val-ours" x="478.4" y="167">0.52</text>
+</g>
+<text class="ttl" x="558" y="18">IQM</text>
+<line class="grid" x1="558.0" y1="30" x2="558.0" y2="186"/><text class="tick" x="558.0" y="204" text-anchor="middle">0.4</text>
+<line class="grid" x1="630.8" y1="30" x2="630.8" y2="186"/><text class="tick" x="630.8" y="204" text-anchor="middle">0.6</text>
+<line class="grid" x1="703.6" y1="30" x2="703.6" y2="186"/><text class="tick" x="703.6" y="204" text-anchor="middle">0.8</text>
+<line class="axis" x1="558" y1="186" x2="740" y2="186"/>
+<g class="pt-g"><title>DreamerV3, iqm 0.471 [0.424, 0.525]</title>
+<line class="band" x1="566.7" y1="48" x2="603.5" y2="48"/>
+<circle class="pt" cx="583.8" cy="48" r="5"/>
+<text class="val" x="613.5" y="53">0.47</text>
+</g>
+<g class="pt-g"><title>DIAMOND, iqm 0.641 [0.578, 0.706]</title>
+<line class="band" x1="622.8" y1="86" x2="669.4" y2="86"/>
+<circle class="pt" cx="645.7" cy="86" r="5"/>
+<text class="val" x="679.4" y="91">0.64</text>
+</g>
+<g class="pt-g"><title>DRIFT-symlog, iqm 0.620 [0.553, 0.699]</title>
+<line class="band-sym" x1="613.7" y1="124" x2="666.8" y2="124"/>
+<circle class="pt-sym" cx="638.1" cy="124" r="5"/>
+<text class="val-sym" x="676.8" y="129">0.62</text>
+</g>
+<g class="pt-g"><title>DRIFT, iqm 0.673 [0.602, 0.757]</title>
+<line class="band-ours" x1="631.5" y1="162" x2="687.9" y2="162"/>
+<circle class="pt-ours" cx="657.4" cy="162" r="5"/>
+<text class="val-ours" x="697.9" y="167">0.67</text>
+</g>
+<text class="ax" x="429" y="230" text-anchor="middle">Human-normalized score on Atari 100k, 26 games, 95% intervals</text>
+</svg></div>
+        <figcaption>Atari 100k, 26 games, 95% bootstrap intervals over 5 seeds. DRIFT is competitive with DIAMOND (the intervals overlap and DIAMOND has the higher mean); TWISTER, a latent world model without per-seed scores, reports higher mean and median.</figcaption>
+    </figure>
+    {% include project/figure.html src="curves_craftium.webp" wide=true alt="Four learning curves on Craftium tasks SmallRoom, Room, Speleo and ChopTree for DRIFT and DRIFT-symlog, with the final returns of DIAMOND and Horizon Imagination as horizontal lines." caption="Craftium, evaluation return over 100k steps, with the baselines' final returns as dashed lines. DRIFT ends above DIAMOND and Horizon Imagination on all four tasks." %}
+    <figure class="fig">
+        <div class="drift-media"><svg class="drift-svg" viewBox="0 0 760 336" role="img" aria-labelledby="cr-t">
+<title id="cr-t">Crafter score at 1M steps. DreamerV3 XL 14.5, DRIFT-symlog 10.6, DreamerV2 10.0, Delta-IRIS 9.3, Horizon Imagination 8.1, DRIFT 6.4, PPO 4.6, Rainbow 4.3, DIAMOND 3.8.</title>
+<line class="grid" x1="140.0" y1="10" x2="140.0" y2="290"/><text class="tick" x="140.0" y="308" text-anchor="middle">0</text>
+<line class="grid" x1="299.4" y1="10" x2="299.4" y2="290"/><text class="tick" x="299.4" y="308" text-anchor="middle">5</text>
+<line class="grid" x1="458.8" y1="10" x2="458.8" y2="290"/><text class="tick" x="458.8" y="308" text-anchor="middle">10</text>
+<line class="grid" x1="618.1" y1="10" x2="618.1" y2="290"/><text class="tick" x="618.1" y="308" text-anchor="middle">15</text>
+<line class="axis" x1="140" y1="290" x2="650" y2="290"/>
+<g class="pt-g"><title>DreamerV3 XL, score 14.5%, latent</title><text class="lab" x="130" y="31" text-anchor="end">DreamerV3 XL</text><rect class="bar" x="140" y="17" width="462.2" height="18" rx="2"/><text class="val" x="610.2" y="31">14.5</text><text class="grp" x="664" y="30">latent</text></g>
+<g class="pt-g"><title>DRIFT-symlog, score 10.6%, diffusion or flow</title><text class="lab-sym" x="130" y="61" text-anchor="end">DRIFT-symlog</text><rect class="bar-sym" x="140" y="47" width="337.9" height="18" rx="2"/><text class="val-sym" x="485.9" y="61">10.6</text><text class="grp" x="664" y="60">diffusion or flow</text></g>
+<g class="pt-g"><title>DreamerV2, score 10.0%, latent</title><text class="lab" x="130" y="91" text-anchor="end">DreamerV2</text><rect class="bar" x="140" y="77" width="318.8" height="18" rx="2"/><text class="val" x="466.8" y="91">10.0</text><text class="grp" x="664" y="90">latent</text></g>
+<g class="pt-g"><title>Δ-IRIS, score 9.3%, latent</title><text class="lab" x="130" y="121" text-anchor="end">Δ-IRIS</text><rect class="bar" x="140" y="107" width="296.4" height="18" rx="2"/><text class="val" x="444.4" y="121">9.3</text><text class="grp" x="664" y="120">latent</text></g>
+<g class="pt-g"><title>Horizon Imag., score 8.1%, diffusion or flow</title><text class="lab" x="130" y="151" text-anchor="end">Horizon Imag.</text><rect class="bar" x="140" y="137" width="258.2" height="18" rx="2"/><text class="val" x="406.2" y="151">8.1</text><text class="grp" x="664" y="150">diffusion or flow</text></g>
+<g class="pt-g"><title>DRIFT, score 6.4%, diffusion or flow</title><text class="lab-ours" x="130" y="181" text-anchor="end">DRIFT</text><rect class="bar-ours" x="140" y="167" width="204.0" height="18" rx="2"/><text class="val-ours" x="352.0" y="181">6.4</text><text class="grp" x="664" y="180">diffusion or flow</text></g>
+<g class="pt-g"><title>PPO, score 4.6%, model-free</title><text class="lab" x="130" y="211" text-anchor="end">PPO</text><rect class="bar" x="140" y="197" width="146.6" height="18" rx="2"/><text class="val" x="294.6" y="211">4.6</text><text class="grp" x="664" y="210">model-free</text></g>
+<g class="pt-g"><title>Rainbow, score 4.3%, model-free</title><text class="lab" x="130" y="241" text-anchor="end">Rainbow</text><rect class="bar" x="140" y="227" width="137.1" height="18" rx="2"/><text class="val" x="285.1" y="241">4.3</text><text class="grp" x="664" y="240">model-free</text></g>
+<g class="pt-g"><title>DIAMOND, score 3.8%, diffusion or flow</title><text class="lab" x="130" y="271" text-anchor="end">DIAMOND</text><rect class="bar" x="140" y="257" width="121.1" height="18" rx="2"/><text class="val" x="269.1" y="271">3.8</text><text class="grp" x="664" y="270">diffusion or flow</text></g>
+<text class="ax" x="395.0" y="332" text-anchor="middle">Crafter score (%) at 1M steps</text>
+</svg></div>
+        <figcaption>Crafter score at 1M steps. DRIFT-symlog, trained on full-scale rewards, is the best diffusion or flow world model, while DreamerV3 XL is higher and sign-reward DRIFT falls below Horizon Imagination.</figcaption>
+    </figure>
+    <figure class="fig">
+        <div class="drift-media"><svg class="drift-svg" viewBox="0 0 760 426" role="img" aria-labelledby="ab-t">
+<title id="ab-t">Ablations in IQM human-normalized score. Left, next-latent prediction on 8 games: frozen tokenizer 0.199, online tokenizer 0.242, frozen tokenizer with next-latent 0.790, online tokenizer with next-latent 0.818, DRIFT 1.243. Right, self-generated rollouts on 26 games: sign rewards 0.447, DRIFT 0.673, DRIFT-symlog 0.620.</title>
+<text class="tick" x="740" y="18" text-anchor="end">8 games</text>
+<line class="grid" x1="252.0" y1="30" x2="252.0" y2="192"/><text class="tick" x="252.0" y="210" text-anchor="middle">0</text>
+<line class="grid" x1="414.7" y1="30" x2="414.7" y2="192"/><text class="tick" x="414.7" y="210" text-anchor="middle">0.5</text>
+<line class="grid" x1="577.3" y1="30" x2="577.3" y2="192"/><text class="tick" x="577.3" y="210" text-anchor="middle">1</text>
+<line class="grid" x1="740.0" y1="30" x2="740.0" y2="192"/><text class="tick" x="740.0" y="210" text-anchor="middle">1.5</text>
+<line class="axis" x1="252" y1="192" x2="740" y2="192"/>
+<text class="ax" x="496.0" y="232" text-anchor="middle">IQM (human-normalized)</text>
+<g class="pt-g"><title>Frozen tokenizer, IQM 0.199</title>
+<text class="lab" x="240" y="55" text-anchor="end">Frozen tokenizer</text>
+<circle class="pt" cx="316.7" cy="50" r="5"/>
+<text class="val" x="326.7" y="55">0.20</text>
+</g>
+<g class="pt-g"><title>Online tokenizer, IQM 0.242</title>
+<text class="lab" x="240" y="85" text-anchor="end">Online tokenizer</text>
+<circle class="pt" cx="330.7" cy="80" r="5"/>
+<text class="val" x="340.7" y="85">0.24</text>
+</g>
+<g class="pt-g"><title>Frozen tokenizer + next-latent, IQM 0.790</title>
+<text class="lab" x="240" y="115" text-anchor="end">Frozen tokenizer + next-latent</text>
+<circle class="pt" cx="509.0" cy="110" r="5"/>
+<text class="val" x="519.0" y="115">0.79</text>
+</g>
+<g class="pt-g"><title>Online tokenizer + next-latent, IQM 0.818</title>
+<text class="lab" x="240" y="145" text-anchor="end">Online tokenizer + next-latent</text>
+<circle class="pt" cx="518.1" cy="140" r="5"/>
+<text class="val" x="528.1" y="145">0.82</text>
+</g>
+<g class="pt-g"><title>+ self-rollouts (DRIFT), IQM 1.243</title>
+<text class="lab-ours" x="240" y="175" text-anchor="end">+ self-rollouts (DRIFT)</text>
+<circle class="pt-ours" cx="656.4" cy="170" r="5"/>
+<text class="val-ours" x="666.4" y="175">1.24</text>
+</g>
+<text class="ttl" x="0" y="18">(a) Next-latent prediction</text>
+<text class="tick" x="740" y="256" text-anchor="end">26 games</text>
+<line class="grid" x1="252.0" y1="268" x2="252.0" y2="370"/><text class="tick" x="252.0" y="388" text-anchor="middle">0.4</text>
+<line class="grid" x1="374.0" y1="268" x2="374.0" y2="370"/><text class="tick" x="374.0" y="388" text-anchor="middle">0.5</text>
+<line class="grid" x1="496.0" y1="268" x2="496.0" y2="370"/><text class="tick" x="496.0" y="388" text-anchor="middle">0.6</text>
+<line class="grid" x1="618.0" y1="268" x2="618.0" y2="370"/><text class="tick" x="618.0" y="388" text-anchor="middle">0.7</text>
+<line class="grid" x1="740.0" y1="268" x2="740.0" y2="370"/><text class="tick" x="740.0" y="388" text-anchor="middle">0.8</text>
+<line class="axis" x1="252" y1="370" x2="740" y2="370"/>
+<text class="ax" x="496.0" y="410" text-anchor="middle">IQM (human-normalized)</text>
+<g class="pt-g"><title>Sign rewards, IQM 0.447</title>
+<text class="lab" x="240" y="293" text-anchor="end">Sign rewards</text>
+<circle class="pt" cx="309.3" cy="288" r="5"/>
+<text class="val" x="319.3" y="293">0.45</text>
+</g>
+<g class="pt-g"><title>+ self-rollouts (DRIFT), IQM 0.673</title>
+<text class="lab-ours" x="240" y="323" text-anchor="end">+ self-rollouts (DRIFT)</text>
+<circle class="pt-ours" cx="585.1" cy="318" r="5"/>
+<text class="val-ours" x="595.1" y="323">0.67</text>
+</g>
+<g class="pt-g"><title>DRIFT-symlog, IQM 0.620</title>
+<text class="lab-sym" x="240" y="353" text-anchor="end">DRIFT-symlog</text>
+<circle class="pt-sym" cx="520.4" cy="348" r="5"/>
+<text class="val-sym" x="530.4" y="353">0.62</text>
+</g>
+<text class="ttl" x="0" y="256">(b) Self-generated rollouts</text>
+</svg></div>
+        <figcaption>Ablations. Left: next-latent prediction, on a subset of 8 Atari games with an earlier agent setup. Right: training on self-generated rollouts, on all 26 games.</figcaption>
+    </figure>
 </section>

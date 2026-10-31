@@ -153,3 +153,24 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .fig video { display: block; width: 100%; height: auto; }
 @media (max-width: 600px) { .fig--wide video { width: 600px; max-width: none; } }
 .fig--bleed video { width: auto; max-width: 100%; margin: 0 auto; }
+
+/* DRIFT (drift/index.html): inline SVG results charts that follow the theme */
+:root { --drift: #1F4FB0; --drift-2: #79A8F2; --drift-grid: #ececef; }
+@media (prefers-color-scheme: dark) { :root { --drift: #79A8F2; --drift-2: #4A78C8; --drift-grid: #222225; } }
+.drift-media { margin: 0 0 12px; overflow-x: auto; }
+.drift-svg { display: block; width: 100%; height: auto; min-width: 560px; }
+.drift-svg text { font-family: var(--font); font-size: 15px; fill: var(--text); }
+.drift-svg .ttl { font-weight: 600; }
+.drift-svg .tick, .drift-svg .lab, .drift-svg .val { font-size: 13px; fill: var(--muted); }
+.drift-svg .val { fill: var(--text); }
+.drift-svg .grp { font-size: 12px; fill: var(--muted); }
+.drift-svg .ax { font-size: 13px; fill: var(--muted); }
+.drift-svg .lab-ours, .drift-svg .val-ours { font-size: 13px; font-weight: 600; fill: var(--drift); }
+.drift-svg .lab-sym, .drift-svg .val-sym { font-size: 13px; fill: var(--text); }
+.drift-svg .grid { stroke: var(--drift-grid); }
+.drift-svg .axis { stroke: var(--muted); }
+.drift-svg .pt { fill: var(--muted); } .drift-svg .pt-ours { fill: var(--drift); } .drift-svg .pt-sym { fill: var(--drift-2); }
+.drift-svg .band, .drift-svg .band-ours, .drift-svg .band-sym { stroke-width: 8; stroke-linecap: round; opacity: 0.3; }
+.drift-svg .band { stroke: var(--muted); } .drift-svg .band-ours { stroke: var(--drift); } .drift-svg .band-sym { stroke: var(--drift-2); }
+.drift-svg .bar { fill: var(--muted); opacity: 0.45; } .drift-svg .bar-ours { fill: var(--drift); } .drift-svg .bar-sym { fill: var(--drift-2); }
+.drift-svg .pt-g:hover .pt, .drift-svg .pt-g:hover .bar { fill: var(--text); opacity: 1; }
