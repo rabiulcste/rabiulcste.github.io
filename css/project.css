@@ -158,6 +158,8 @@ footer.site a { color: var(--muted); text-decoration: none; }
 :root { --drift: #1F4FB0; --drift-2: #79A8F2; --drift-grid: #ececef; }
 @media (prefers-color-scheme: dark) { :root { --drift: #79A8F2; --drift-2: #4A78C8; --drift-grid: #222225; } }
 .drift-media { margin: 0 0 12px; overflow-x: auto; }
+/* Teaser width, as on DEM: wider than the column on large screens, the column on phones. */
+.drift-media--wide { width: min(880px, 100vw - 2 * var(--gutter)); margin-left: calc(50% - min(440px, 50vw - var(--gutter))); }
 .drift-svg { display: block; width: 100%; height: auto; min-width: 560px; }
 .drift-svg text { font-family: var(--font); font-size: 15px; fill: var(--text); }
 .drift-svg .ttl { font-weight: 600; }
