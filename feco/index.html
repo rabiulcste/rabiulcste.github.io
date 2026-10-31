@@ -24,7 +24,12 @@ bibtex: |
 ---
 <!-- TODO: co-authors (add them to the authors list and the bibtex) -->
 <style>
+    :root { --feco-acc: #c2410c; --feco-acc-soft: #fdeadb; --feco-reg: #7c3aed; --feco-reg-soft: #efe7fe; }
+    @media (prefers-color-scheme: dark) {
+        :root { --feco-acc: #fb923c; --feco-acc-soft: #3a2414; --feco-reg: #b49cfc; --feco-reg-soft: #261f3d; }
+    }
     .hero { padding-bottom: 40px; }
+    .feco-fig { margin: 0 0 32px; }
     @media (min-width: 1100px) {
         .feco-wide { width: 1040px; margin-left: calc(50% - 520px); }
     }
@@ -36,12 +41,98 @@ bibtex: |
     .feco-samples figcaption span { color: var(--muted); }
     .feco-family { margin: 32px 0 8px; text-align: center; font-size: 1rem; font-weight: 600; }
     .feco-family span { font-weight: 400; color: var(--muted); }
-    .feco-plot .fig-img { max-width: 480px; margin: 0 auto; }
     .feco-soon { padding: 14px 16px; border: 1px dashed var(--border); border-radius: 8px; background: var(--surface); color: var(--muted); text-align: center; font-size: 0.9375rem; }
+    .feco-scroll { overflow-x: auto; }
+    .feco-scroll svg { display: block; width: 100%; height: auto; min-width: 600px; }
+    .feco-chart { max-width: 640px; margin: 0 auto; }
+    .feco-chart svg { min-width: 480px; }
+    .feco-how { margin: 0 0 24px; padding: 0; list-style: none; }
+    .feco-how li { margin: 0 0 8px; }
+    .fd text { font-family: var(--font); font-size: 15px; fill: var(--text); }
+    .fd .mut { fill: var(--muted); }
+    .fd .small { font-size: 13px; }
+    .fd .b { font-weight: 600; }
+    .fd .acc { fill: var(--feco-acc); }
+    .fd .reg { fill: var(--feco-reg); }
+    .fd .path { stroke: var(--border); stroke-width: 6; stroke-linecap: round; }
+    .fd .arc { fill: none; stroke: var(--text); stroke-width: 2.5; }
+    .fd .arc-d { fill: none; stroke: var(--muted); stroke-width: 2; stroke-dasharray: 6 5; }
+    .fd .ar { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+    .fd .ar-acc { fill: none; stroke: var(--feco-acc); stroke-width: 2.5; }
+    .fd .ar-acc-d { fill: none; stroke: var(--feco-acc); stroke-width: 2; stroke-dasharray: 5 4; }
+    .fd .hd-text { fill: var(--text); }
+    .fd .hd-mut { fill: var(--muted); }
+    .fd .hd-acc { fill: var(--feco-acc); }
+    .fd .frame { fill: none; stroke: var(--feco-acc); stroke-width: 3; }
+    .fd .blk { fill: var(--surface); stroke: var(--muted); stroke-width: 1.2; }
+    .fd .blk-acc { fill: var(--feco-acc-soft); stroke: var(--feco-acc); stroke-width: 2; }
+    .fd .box { fill: var(--bg); stroke: var(--muted); stroke-width: 1.2; }
+    .fd .box-acc { fill: var(--feco-acc-soft); stroke: var(--feco-acc); stroke-width: 1.5; }
+    .fd .box-reg { fill: var(--feco-reg-soft); stroke: var(--feco-reg); stroke-width: 1.5; }
+    .fd .ring-reg { fill: none; stroke: var(--feco-reg); stroke-width: 2.5; }
+    .fd .grid { stroke: var(--border); stroke-width: 1; }
+    .fd .axis { stroke: var(--muted); stroke-width: 1; }
+    .fd .tick { font-size: 13px; fill: var(--muted); }
+    .fd .name { font-size: 15px; font-weight: 600; }
+    .fd .sub { font-size: 13px; fill: var(--muted); }
+    .fd .val { font-size: 15px; }
+    .fd .bold { font-weight: 700; }
+    .fd .track { stroke: var(--border); stroke-width: 2; }
+    .fd .repa-line { stroke: var(--feco-reg); stroke-width: 1.5; stroke-dasharray: 3 4; opacity: 0.5; }
+    .fd .repa-lab { font-size: 12px; fill: var(--feco-reg); }
+    .fd .best-bg { fill: var(--feco-acc-soft); }
+    .fd .hit { fill: transparent; }
+    .fd .row:hover .hit { fill: var(--surface); }
+    .fd .dot-base { fill: var(--muted); }
+    .fd .dot-repa { fill: var(--feco-reg); }
+    .fd .dot-feco { fill: var(--feco-acc); opacity: 0.55; }
+    .fd .dot-best { fill: var(--feco-acc); }
 </style>
 
 <section id="teaser" class="feco-wide">
-    {% include project/figure.html src="concept.png" alt="A path from noise to data. Two noisy versions of one image lie on it, a noisier one and a cleaner one. The flow-map loss asks the outputs to agree; FeCo asks an early block on the noisier version to predict a deep block on the cleaner version." caption="The composition rule links two points on one path. The flow-map loss asks the outputs to agree; FeCo asks the features to agree." %}
+    <figure class="feco-fig">
+        <div class="feco-scroll">
+        <svg class="fd" viewBox="0 0 1010 370" role="img" aria-labelledby="concept-title">
+            <title id="concept-title">A noise-to-data path with four images: noise, a noisier view, a cleaner view and data. One long jump goes from the noisier view to data; two short jumps go through the cleaner view. Below, an early block on the noisier view predicts a deep block on the cleaner view.</title>
+            <defs>
+                <marker id="cm-text" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-text" d="M0,0 L10,5 L0,10 z"/></marker>
+                <marker id="cm-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker>
+                <marker id="cm-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <line class="path" x1="90" y1="185" x2="810" y2="185"/>
+            <image href="view_noise.jpg" x="35" y="130" width="110" height="110"/>
+            <image href="view_noisier.jpg" x="275" y="130" width="110" height="110"/>
+            <image href="view_cleaner.jpg" x="515" y="130" width="110" height="110"/>
+            <image href="view_data.jpg" x="755" y="130" width="110" height="110"/>
+            <rect class="frame" x="275" y="130" width="110" height="110" rx="3"/>
+            <rect class="frame" x="515" y="130" width="110" height="110" rx="3"/>
+            <path class="arc" d="M330,124 Q570,0 806,124" marker-end="url(#cm-text)"/>
+            <path class="arc-d" d="M335,124 Q450,84 563,124" marker-end="url(#cm-mut)"/>
+            <path class="arc-d" d="M577,124 Q690,84 803,124" marker-end="url(#cm-mut)"/>
+            <text x="570" y="48" text-anchor="middle">one long jump</text>
+            <text class="mut" x="570" y="96" text-anchor="middle">two short jumps</text>
+            <text class="mut" x="90" y="266" text-anchor="middle">noise</text>
+            <text class="acc b" x="330" y="266" text-anchor="middle">noisier view</text>
+            <text class="acc b" x="570" y="266" text-anchor="middle">cleaner view</text>
+            <text class="mut" x="810" y="266" text-anchor="middle">data</text>
+            <line class="ar" x1="330" y1="278" x2="330" y2="310" marker-end="url(#cm-mut)"/>
+            <line class="ar" x1="570" y1="278" x2="570" y2="310" marker-end="url(#cm-mut)"/>
+            <text class="mut small" x="340" y="300">online model</text>
+            <text class="mut small" x="580" y="300">EMA model</text>
+            <rect class="blk-acc" x="265" y="314" width="130" height="40" rx="8"/>
+            <text x="330" y="339" text-anchor="middle">early block</text>
+            <rect class="blk-acc" x="505" y="314" width="130" height="40" rx="8"/>
+            <text x="570" y="339" text-anchor="middle">deep block</text>
+            <line class="ar-acc" x1="397" y1="334" x2="500" y2="334" marker-end="url(#cm-acc)"/>
+            <text class="acc small" x="448" y="325" text-anchor="middle">predicts</text>
+            <text class="b" x="885" y="84">Flow-map loss</text>
+            <text class="mut" x="885" y="105">outputs agree</text>
+            <text class="acc b" x="885" y="330">FeCo loss</text>
+            <text class="mut" x="885" y="351">features agree</text>
+        </svg>
+        </div>
+        <figcaption>The two views are the same image at two points on one noise-to-data path. A flow map should land in the same place with one long jump or with two short jumps through the cleaner view. FeCo also asks an early block on the noisier view to predict a deep block on the cleaner view.</figcaption>
+    </figure>
 </section>
 
 <section id="tldr">
@@ -50,8 +141,9 @@ bibtex: |
 
 <section id="context">
     <h2>Why this matters</h2>
-    <p>Diffusion and flow models are slow to train, in part because good semantic structure has to emerge from the denoising objective alone. Recent work points the same way from several directions: representation autoencoders generate in the feature space of a pretrained encoder, representation-conditioned generation conditions on self-supervised features, and representation alignment (REPA) aligns the generator's features with a frozen encoder. Each adds a self-supervised signal to generative training, and each makes training faster and generation better. All of them borrow that signal from an external encoder.</p>
-    <p>Flow maps do not need to borrow it. Their training already contains an elegant self-supervised signal: the composition rule gives two views of one image, and the teacher view is something the model computes anyway. Adding SIGReg as a distributional regularizer on the features, we get two concrete free lunches for training flow maps faster.</p>
+    <p>Diffusion training seems difficult partly because of the semantic structure that has to come out of it. We have seen representation autoencoders, representation generation and representation alignment. Much of this work says the same thing: diffusion training needs some form of self-supervised signal to train faster and generate better.</p>
+    <p>Since I was mostly working on few-step models, that is, flow maps, I noticed they are in principle a knowledge distillation algorithm: a student tries to distill from a multi-step teacher. Looked at closely, the student and the teacher see two views of the same data. The teacher gets the cleaner one and the student the noisier one. This gives another dimension of consistency, in feature space, without any additional forward pass. That is the first free lunch for flow map training.</p>
+    <p>Then I realized that even when you align features across these free views, their quality is still below what self-supervised learning gives. A distributional regularizer like SIGReg can also be applied to diffusion to shape its representations. That is the second free lunch.</p>
 </section>
 
 <section id="samples" class="feco-wide">
@@ -85,31 +177,124 @@ bibtex: |
 
 <section id="method">
     <h2>Method</h2>
-    {% include project/figure.html src="method.png" wide=true alt="Two stacks of transformer blocks. The online model takes the noisier view; a predictor on its early block feeds the FeCo loss. The EMA model takes the cleaner view; its deep block gives the target, with a stop-gradient." caption="An early block of the online model, on the noisier view, predicts a deep block of the EMA model on the cleaner view (stop-gradient). SIGReg, from LeJEPA, pushes the online model's features at the teacher-depth block toward an isotropic Gaussian (not drawn). Both terms are added to the usual flow-map loss." %}
+    <figure class="feco-fig feco-wide">
+        <div class="feco-scroll">
+        <svg class="fd" viewBox="0 0 1000 340" role="img" aria-labelledby="method-title">
+            <title id="method-title">The online model takes the noisier view. A predictor h on its early block feeds the FeCo loss. The EMA model takes the cleaner view; its deep block gives the target through a stop-gradient. SIGReg acts on the online model's block at the teacher depth.</title>
+            <defs>
+                <marker id="mm-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker>
+                <marker id="mm-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <text class="mut small" x="130" y="28">online model</text>
+            <image href="view_noisier.jpg" x="20" y="36" width="72" height="72"/>
+            <rect class="frame" x="20" y="36" width="72" height="72" rx="3"/>
+            <text class="acc small b" x="56" y="126" text-anchor="middle">noisier view</text>
+            <line class="ar" x1="96" y1="72" x2="124" y2="72" marker-end="url(#mm-mut)"/>
+            <rect class="blk" x="130" y="40" width="34" height="64" rx="5"/>
+            <rect class="blk" x="174" y="40" width="34" height="64" rx="5"/>
+            <rect class="blk-acc" x="218" y="40" width="34" height="64" rx="5"/>
+            <rect class="blk" x="262" y="40" width="34" height="64" rx="5"/>
+            <rect class="blk" x="306" y="40" width="34" height="64" rx="5"/>
+            <rect class="blk" x="350" y="40" width="34" height="64" rx="5"/>
+            <rect class="blk" x="394" y="40" width="34" height="64" rx="5"/>
+            <rect class="blk" x="438" y="40" width="34" height="64" rx="5"/>
+            <rect class="blk" x="482" y="40" width="34" height="64" rx="5"/>
+            <rect class="blk" x="526" y="40" width="34" height="64" rx="5"/>
+            <rect class="blk" x="570" y="40" width="34" height="64" rx="5"/>
+            <rect class="blk" x="614" y="40" width="34" height="64" rx="5"/>
+            <rect class="ring-reg" x="477" y="35" width="44" height="74" rx="7"/>
+            <rect class="box-reg" x="452" y="4" width="94" height="26" rx="13"/>
+            <text class="reg b small" x="499" y="22" text-anchor="middle">SIGReg</text>
+            <text class="mut small" x="556" y="22">features toward an isotropic Gaussian</text>
+            <line class="ar" x1="652" y1="72" x2="688" y2="72" marker-end="url(#mm-mut)"/>
+            <rect class="box" x="692" y="52" width="130" height="40" rx="8"/>
+            <text x="757" y="77" text-anchor="middle">flow-map loss</text>
+            <path class="arc-d" d="M650,104 Q720,170 652,232" marker-end="url(#mm-mut)"/>
+            <text class="mut small" x="698" y="176">EMA copy</text>
+
+            <line class="ar-acc" x1="235" y1="106" x2="235" y2="136" marker-end="url(#mm-acc)"/>
+            <rect class="box-acc" x="180" y="140" width="110" height="36" rx="8"/>
+            <text x="235" y="163" text-anchor="middle">predictor <tspan font-style="italic">h</tspan></text>
+            <line class="ar-acc" x1="292" y1="158" x2="429" y2="158" marker-end="url(#mm-acc)"/>
+            <text class="acc small" x="360" y="150" text-anchor="middle">predicts</text>
+            <rect class="box-acc" x="434" y="140" width="130" height="36" rx="8"/>
+            <text class="acc b" x="499" y="163" text-anchor="middle">FeCo loss</text>
+            <line class="ar-acc-d" x1="499" y1="234" x2="499" y2="182" marker-end="url(#mm-acc)"/>
+            <text class="mut small" x="508" y="212">stop-gradient</text>
+
+            <image href="view_cleaner.jpg" x="20" y="232" width="72" height="72"/>
+            <rect class="frame" x="20" y="232" width="72" height="72" rx="3"/>
+            <text class="acc small b" x="56" y="322" text-anchor="middle">cleaner view</text>
+            <line class="ar" x1="96" y1="268" x2="124" y2="268" marker-end="url(#mm-mut)"/>
+            <rect class="blk" x="130" y="236" width="34" height="64" rx="5"/>
+            <rect class="blk" x="174" y="236" width="34" height="64" rx="5"/>
+            <rect class="blk" x="218" y="236" width="34" height="64" rx="5"/>
+            <rect class="blk" x="262" y="236" width="34" height="64" rx="5"/>
+            <rect class="blk" x="306" y="236" width="34" height="64" rx="5"/>
+            <rect class="blk" x="350" y="236" width="34" height="64" rx="5"/>
+            <rect class="blk" x="394" y="236" width="34" height="64" rx="5"/>
+            <rect class="blk" x="438" y="236" width="34" height="64" rx="5"/>
+            <rect class="blk-acc" x="482" y="236" width="34" height="64" rx="5"/>
+            <rect class="blk" x="526" y="236" width="34" height="64" rx="5"/>
+            <rect class="blk" x="570" y="236" width="34" height="64" rx="5"/>
+            <rect class="blk" x="614" y="236" width="34" height="64" rx="5"/>
+            <text class="mut small" x="130" y="322">EMA model</text>
+            <text class="acc small" x="270" y="128">early block</text>
+            <text class="acc small" x="527" y="322">deep block</text>
+        </svg>
+        </div>
+    </figure>
+    <ul class="feco-how">
+        <li><strong>Student.</strong> An early block of the online model reads the noisier view.</li>
+        <li><strong>Teacher.</strong> A deep block of the EMA model reads the cleaner view. No gradient flows into it.</li>
+        <li><strong>Predictor <em>h</em>.</strong> A small network that maps the student's features to the teacher's. The FeCo loss compares the two.</li>
+        <li><strong>SIGReg</strong> (from LeJEPA). It acts on the online model's features at the teacher's depth and pushes their distribution toward an isotropic Gaussian.</li>
+    </ul>
+    <p class="caption">Both terms are added to the usual flow-map loss.</p>
 </section>
 
 <section id="free">
     <h2>Why it is free</h2>
+    <p>Every flow-map family builds its training target by moving along the path to a cleaner point. FeCo reads the teacher features at that point, so it needs no extra forward pass.</p>
     <div class="table-wrap">
         <table class="text">
             <thead>
-                <tr><th>Family</th><th>Teacher view</th><th>Extra forward pass</th></tr>
+                <tr><th>Family</th><th>Teacher view</th><th>Already there because</th></tr>
             </thead>
             <tbody>
-                <tr><td>Shortcut Models</td><td>EMA half step</td><td>none</td></tr>
-                <tr><td>MeanFlow</td><td>tangent from its JVP</td><td>none</td></tr>
-                <tr><td>LSD</td><td>landing point of its target forward</td><td>none</td></tr>
+                <tr><td>Shortcut Models</td><td>EMA half step</td><td>its target chains two half steps</td></tr>
+                <tr><td>MeanFlow</td><td>tangent from its JVP</td><td>its target runs a JVP</td></tr>
+                <tr><td>LSD</td><td>landing point of its target forward</td><td>its target runs that forward</td></tr>
             </tbody>
         </table>
     </div>
-    <p class="caption">Each family already computes the cleaner view for its own target. What remains is a small predictor and the SIGReg statistic.</p>
+    <p class="caption">What remains is the small predictor and the SIGReg statistic.</p>
 </section>
 
 <section id="preliminary">
     <h2>Preliminary results <span class="muted">(ImageNet-100 speedrun)</span></h2>
-    <figure class="fig feco-plot">
-        <div class="fig-img"><img src="speedrun_meanflow.png" alt="One-step FID for MeanFlow SiT-B/2 on the ImageNet-100 speedrun: baseline 57.3, REPA 51.2, FeCo with an extra EMA forward 54.4, FeCo with the tangent teacher 51.8, FeCo plus SIGReg at the student block 52.4, FeCo plus SIGReg at the teacher block 48.9." loading="lazy"></div>
-        <figcaption>MeanFlow SiT-B/2, one-step FID (lower is better). Preliminary, ImageNet-100 speedrun.</figcaption>
+    <figure class="feco-fig feco-chart">
+        <div class="feco-scroll">
+        <svg class="fd" viewBox="0 0 640 366" role="img" aria-labelledby="chart-title">
+            <title id="chart-title">One-step FID for MeanFlow SiT-B/2 on the ImageNet-100 speedrun: baseline 57.3, REPA 51.2, FeCo with an extra EMA forward 54.4, FeCo with the tangent teacher 51.8, FeCo plus SIGReg at the student block 52.4, FeCo plus SIGReg at the teacher block 48.9.</title>
+            <rect class="best-bg" x="0" y="260" width="640" height="46" rx="8"/>
+            <line class="grid" x1="302.9" y1="16" x2="302.9" y2="314"/><text class="tick" x="302.9" y="334" text-anchor="middle">48</text>
+            <line class="grid" x1="408.6" y1="16" x2="408.6" y2="314"/><text class="tick" x="408.6" y="334" text-anchor="middle">52</text>
+            <line class="grid" x1="514.3" y1="16" x2="514.3" y2="314"/><text class="tick" x="514.3" y="334" text-anchor="middle">56</text>
+            <line class="grid" x1="620.0" y1="16" x2="620.0" y2="314"/><text class="tick" x="620.0" y="334" text-anchor="middle">60</text>
+            <line class="axis" x1="250" y1="314" x2="620" y2="314"/>
+            <line class="repa-line" x1="387.4" y1="18" x2="387.4" y2="314"/><text class="repa-lab" x="387.4" y="12" text-anchor="middle">REPA</text>
+            <line class="grid" x1="20" y1="116" x2="620" y2="116"/>
+            <g class="row"><title>Baseline, MeanFlow: 57.3</title><rect class="hit" x="0" y="17" width="640" height="46"/><text class="name" x="230" y="39" text-anchor="end">Baseline</text><text class="sub" x="230" y="56" text-anchor="end">MeanFlow</text><line class="track" x1="250" y1="44" x2="548.6" y2="44"/><circle class="dot-base" cx="548.6" cy="44" r="6"/><text class="val" x="562.6" y="49">57.3</text></g>
+            <g class="row"><title>REPA, frozen DINOv2 encoder: 51.2</title><rect class="hit" x="0" y="63" width="640" height="46"/><text class="name" x="230" y="85" text-anchor="end">REPA</text><text class="sub" x="230" y="102" text-anchor="end">frozen DINOv2 encoder</text><line class="track" x1="250" y1="90" x2="387.4" y2="90"/><circle class="dot-repa" cx="387.4" cy="90" r="6"/><text class="val" x="401.4" y="95">51.2</text></g>
+            <g class="row"><title>FeCo, extra EMA forward: 54.4</title><rect class="hit" x="0" y="123" width="640" height="46"/><text class="name" x="230" y="145" text-anchor="end">FeCo</text><text class="sub" x="230" y="162" text-anchor="end">extra EMA forward</text><line class="track" x1="250" y1="150" x2="472.0" y2="150"/><circle class="dot-feco" cx="472.0" cy="150" r="6"/><text class="val" x="486.0" y="155">54.4</text></g>
+            <g class="row"><title>FeCo, tangent teacher: 51.8</title><rect class="hit" x="0" y="169" width="640" height="46"/><text class="name" x="230" y="191" text-anchor="end">FeCo</text><text class="sub" x="230" y="208" text-anchor="end">tangent teacher</text><line class="track" x1="250" y1="196" x2="403.3" y2="196"/><circle class="dot-feco" cx="403.3" cy="196" r="6"/><text class="val" x="417.3" y="201">51.8</text></g>
+            <g class="row"><title>FeCo + SIGReg, student block: 52.4</title><rect class="hit" x="0" y="215" width="640" height="46"/><text class="name" x="230" y="237" text-anchor="end">FeCo + SIGReg</text><text class="sub" x="230" y="254" text-anchor="end">student block</text><line class="track" x1="250" y1="242" x2="419.1" y2="242"/><circle class="dot-feco" cx="419.1" cy="242" r="6"/><text class="val" x="433.1" y="247">52.4</text></g>
+            <g class="row"><title>FeCo + SIGReg, teacher block: 48.9</title><rect class="hit" x="0" y="261" width="640" height="46"/><text class="name bold" x="230" y="283" text-anchor="end">FeCo + SIGReg</text><text class="sub" x="230" y="300" text-anchor="end">teacher block</text><line class="track" x1="250" y1="288" x2="326.6" y2="288"/><circle class="dot-best" cx="326.6" cy="288" r="8"/><text class="val bold" x="340.6" y="293">48.9</text></g>
+            <text class="tick" x="435" y="356" text-anchor="middle">one-step FID (lower is better)</text>
+        </svg>
+        </div>
+        <figcaption>MeanFlow SiT-B/2, one-step FID, lower is better. The dotted line marks REPA. Preliminary, ImageNet-100 speedrun.</figcaption>
     </figure>
     <div class="table-wrap">
         <table>
