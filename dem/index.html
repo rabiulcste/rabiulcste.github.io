@@ -38,7 +38,9 @@ bibtex: |
 
 <section id="method">
     <h2>Method</h2>
+    <p>In joint-embedding learning, a network predicts the embedding of one view of an image from another view. Suppose the network also receives a noisy copy of the embedding it predicts. If the copy is pure noise, it carries no information, and the task reduces exactly to self-supervised prediction.</p>
     {% include project/figure.html src="concept.png" wide=true alt="Three diagrams side by side. (a) A joint-embedding model predicts the embedding of view x from view x prime. (b) A diffusion model denoises x_t conditioned on z. (c) A denoising embedding model denoises the embedding z_tau of x, conditioned on x prime." caption="Denoising in embedding space turns joint-embedding prediction into a generative model." %}
+    <p>We train the network on this view-conditioned denoising at all noise levels. Without the view, it samples embeddings as a representation generator, and as a pixel denoiser it turns them into images. Its features also serve as the image representation.</p>
 </section>
 
 <section id="results">
@@ -60,12 +62,13 @@ bibtex: |
 
 <section id="one-embedding">
     <h2>One embedding, many images</h2>
+    <p>The embedding is learned from views of the image. It can therefore stay invariant to color and framing, while the pixel denoiser reproduces these variations.</p>
     {% include project/figure.html src="same_embedding.webp" bleed=true alt="Four rows of eight generated images. Images in a row share content and differ in detail." caption="Each row decodes one sampled embedding with different pixel noise." %}
 </section>
 
 <section id="completion">
     <h2>Completing a crop</h2>
-    <p>A small crop fits many images. DEM samples several embeddings given the crop, and each one decodes to a different image.</p>
+    <p>Below full noise, samples spread more as the view shows less of the image. A small crop fits many images, so the embeddings sampled from it decode to different images.</p>
     {% include project/figure.html src="completion.webp" alt="Four rows. Each starts with an image where only a small boxed crop is visible, followed by four generated images that contain the crop's content." caption="The first column shows the crop in a blue box, and the others show images decoded from sampled embeddings." %}
 </section>
 
