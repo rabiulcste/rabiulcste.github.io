@@ -1,11 +1,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="{{ site.description }}">
+    <meta name="description" content="{% if page.description and page.description != "" %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     <meta name="theme-color" content="{{ site.chrome-tab-theme-color }}">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="{% if page.title %}{{ page.title }} - {{ site.SEOTitle }}{% else %}{{ site.SEOTitle }}{% endif %}">
+    {%- if page.url == "/" -%}{%- assign full_title = site.SEOTitle -%}{%- elsif page.title -%}{%- capture full_title %}{{ page.title }} - {{ site.SEOTitle }}{% endcapture -%}{%- else -%}{%- assign full_title = site.SEOTitle -%}{%- endif %}
+    <meta property="og:title" content="{{ full_title }}">
     {% case page.layout %}
     {% when 'post' %}
     <meta property="og:type" content="article">
@@ -27,7 +28,28 @@
     <meta property="og:url" content="{{ page.url | prepend: site.baseurl | prepend: site.url | remove_first: 'index.html' }}">
     <meta property="og:site_name" content="{{ site.SEOTitle }}">
 
-    <title>{% if page.title %}{{ page.title }} - {{ site.SEOTitle }}{% else %}{{ site.SEOTitle }}{% endif %}</title>
+    <title>{{ full_title }}</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@{{ site.twitter_username }}">
+    {%- if page.url == "/" %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": {{ site.SEOTitle | jsonify }},
+        "url": {{ site.url | append: site.baseurl | append: '/' | jsonify }},
+        "image": {{ site.sidebar-avatar | jsonify }},
+        "jobTitle": "PhD student",
+        "affiliation": [{"@type": "Organization", "name": "Mila"}, {"@type": "CollegeOrUniversity", "name": "Université de Montréal"}],
+        "sameAs": [
+            "https://github.com/{{ site.github_username }}",
+            "https://x.com/{{ site.twitter_username }}",
+            "https://www.linkedin.com/in/{{ site.linkedin_username }}",
+            "https://scholar.google.ca/citations?user=oOcLfUMAAAAJ"
+        ]
+    }
+    </script>
+    {%- endif %}
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ site.baseurl }}/img/favicon.ico">

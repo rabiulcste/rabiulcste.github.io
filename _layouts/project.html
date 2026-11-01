@@ -6,7 +6,7 @@ blog stylesheet, only css/project.css.
 
 New project: copy dem/ to <name>/, then edit the front matter and the
 figure/table slots in <name>/index.html. Front matter fields:
-  title, description, venue
+  title, description, venue, year   (year feeds the Google Scholar tags)
   authors: list of {name, url, note}   (note is a marker like "*")
   affiliations: one line of text
   links: list of {label, url}           (empty url renders as "coming soon")
@@ -27,6 +27,38 @@ placeholder box.
     {%- if page.og_image %}
     <meta property="og:image" content="{{ page.og_image | prepend: page.url | prepend: site.baseurl | prepend: site.url }}">
     {%- endif %}
+    <meta property="og:site_name" content="{{ site.SEOTitle }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@{{ site.twitter_username }}">
+    {%- comment -%} Google Scholar reads these to index the page as a paper. {%- endcomment -%}
+    <meta name="citation_title" content="{{ page.title }}">
+    {%- for a in page.authors %}
+    <meta name="citation_author" content="{{ a.name }}">
+    {%- endfor %}
+    {%- if page.year %}
+    <meta name="citation_publication_date" content="{{ page.year }}">
+    {%- endif %}
+    {%- assign home = site.url | append: site.baseurl | append: '/' %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "headline": {{ page.title | jsonify }},
+        "description": {{ page.description | default: site.description | jsonify }},
+        "url": {{ page.url | prepend: site.baseurl | prepend: site.url | jsonify }},
+        {%- if page.og_image %}
+        "image": {{ page.og_image | prepend: page.url | prepend: site.baseurl | prepend: site.url | jsonify }},
+        {%- endif %}
+        {%- if page.year %}
+        "datePublished": {{ page.year | jsonify }},
+        {%- endif %}
+        "author": [
+            {%- for a in page.authors %}
+            {"@type": "Person", "name": {{ a.name | jsonify }}{% if a.url == "/" %}, "url": {{ home | jsonify }}{% elsif a.url %}, "url": {{ a.url | jsonify }}{% endif %}}{% unless forloop.last %},{% endunless %}
+            {%- endfor %}
+        ]
+    }
+    </script>
     <link rel="canonical" href="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
     <link rel="shortcut icon" href="{{ site.baseurl }}/img/favicon.ico">
     <link rel="stylesheet" href="{{ '/css/project.css' | prepend: site.baseurl }}">
