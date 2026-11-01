@@ -48,8 +48,25 @@ bibtex: |
     .feco-chart svg { min-width: 0; }
     .feco-panels { display: grid; grid-template-columns: repeat(3, 1fr); }
     .feco-panels svg { display: block; width: 100%; height: auto; }
+    .feco-scroll svg.feco-phone { display: none; }
+    .feco-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 12px; }
+    .feco-tabs[hidden] { display: none; }
+    .feco-tabs button { font: inherit; font-size: 0.875rem; color: var(--text); background: none; border: 1px solid var(--border); border-radius: 999px; padding: 4px 14px; cursor: pointer; }
+    .feco-tabs button[aria-selected="true"] { border-color: var(--text); }
+    @media (min-width: 701px) {
+        .feco-tabs { display: none; }
+    }
     @media (max-width: 700px) {
         .feco-panels { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+        .feco-panels[data-on="0"] > svg:not(:nth-child(1)),
+        .feco-panels[data-on="1"] > svg:not(:nth-child(2)),
+        .feco-panels[data-on="2"] > svg:not(:nth-child(3)) { display: none; }
+        .feco-scroll svg.feco-desk { display: none; }
+        .feco-scroll svg.feco-phone { display: block; min-width: 0; max-width: 480px; margin: 0 auto; }
+        .feco-samples { align-items: end; }
+        .feco-chart .fd .lab { font-size: 18px; }
+        .feco-chart .fd .val { font-size: 17px; }
+        .feco-chart .fd .tick { font-size: 16px; }
     }
     .feco-how { margin: 0 0 24px; padding: 0; list-style: none; }
     .feco-how li { margin: 0 0 8px; }
@@ -97,7 +114,7 @@ bibtex: |
 <section id="teaser" class="feco-wide">
     <figure class="feco-fig">
         <div class="feco-scroll">
-        <svg class="fd" viewBox="15 0 990 370" role="img" aria-labelledby="concept-title">
+        <svg class="fd feco-desk" viewBox="15 0 990 370" role="img" aria-labelledby="concept-title">
             <title id="concept-title">A noise-to-data path with four images: noise, a noisier view, a cleaner view and data. One long jump goes from the noisier view to data; two short jumps go through the cleaner view. Below, an early block on the noisier view predicts a deep block on the cleaner view.</title>
             <defs>
                 <marker id="cm-text" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-text" d="M0,0 L10,5 L0,10 z"/></marker>
@@ -134,6 +151,44 @@ bibtex: |
             <text class="mut" x="866" y="105">outputs agree</text>
             <text class="acc b" x="866" y="330">Consistency loss</text>
             <text class="mut" x="866" y="351">features agree</text>
+        </svg>
+        <svg class="fd feco-phone" viewBox="0 0 380 324" role="img" aria-labelledby="concept-title-p">
+            <title id="concept-title-p">A noise-to-data path with four images: noise, a noisier view, a cleaner view and data. One long jump goes from the noisier view to data; two short jumps go through the cleaner view. Below, an early block on the noisier view predicts a deep block on the cleaner view.</title>
+            <defs>
+                <marker id="cp-text" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-text" d="M0,0 L10,5 L0,10 z"/></marker>
+                <marker id="cp-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker>
+                <marker id="cp-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <text class="b" x="4" y="22">Flow-map loss</text>
+            <text class="mut" x="4" y="42">outputs agree</text>
+            <line class="path" x1="32" y1="156" x2="350" y2="156"/>
+            <image href="view_noise.jpg" x="4" y="128" width="56" height="56"/>
+            <image href="view_noisier.jpg" x="104" y="120" width="72" height="72"/>
+            <image href="view_cleaner.jpg" x="226" y="120" width="72" height="72"/>
+            <image href="view_data.jpg" x="322" y="128" width="56" height="56"/>
+            <rect class="frame" x="104" y="120" width="72" height="72" rx="3"/>
+            <rect class="frame" x="226" y="120" width="72" height="72" rx="3"/>
+            <path class="arc" d="M140,114 Q245,-10 346,120" marker-end="url(#cp-text)"/>
+            <path class="arc-d" d="M144,114 Q200,88 258,114" marker-end="url(#cp-mut)"/>
+            <path class="arc-d" d="M268,114 Q308,88 344,120" marker-end="url(#cp-mut)"/>
+            <text x="245" y="44" text-anchor="middle">one long jump</text>
+            <text class="mut" x="245" y="94" text-anchor="middle">two short jumps</text>
+            <text class="mut" x="32" y="212" text-anchor="middle">noise</text>
+            <text class="acc b" x="140" y="212" text-anchor="middle">noisier view</text>
+            <text class="acc b" x="262" y="212" text-anchor="middle">cleaner view</text>
+            <text class="mut" x="350" y="212" text-anchor="middle">data</text>
+            <line class="ar" x1="140" y1="220" x2="140" y2="244" marker-end="url(#cp-mut)"/>
+            <line class="ar" x1="262" y1="220" x2="262" y2="244" marker-end="url(#cp-mut)"/>
+            <text class="mut small" x="149" y="238">online model</text>
+            <text class="mut small" x="271" y="238">EMA model</text>
+            <rect class="blk-acc" x="58" y="248" width="114" height="40" rx="8"/>
+            <text x="115" y="273" text-anchor="middle">early block</text>
+            <rect class="blk-acc" x="230" y="248" width="114" height="40" rx="8"/>
+            <text x="287" y="273" text-anchor="middle">deep block</text>
+            <line class="ar-acc" x1="174" y1="268" x2="225" y2="268" marker-end="url(#cp-acc)"/>
+            <text class="acc small" x="200" y="259" text-anchor="middle">predicts</text>
+            <text class="acc b" x="196" y="316" text-anchor="end">Consistency loss</text>
+            <text class="mut" x="204" y="316">features agree</text>
         </svg>
         </div>
         <figcaption>A flow map should land in the same place with one long jump from the noisier view or two short jumps through the cleaner view. iFeCo applies this rule to features and asks an early block on the noisier view to predict a deep block on the cleaner view.</figcaption>
@@ -184,7 +239,7 @@ bibtex: |
     <h2>Method</h2>
     <figure class="feco-fig feco-wide feco-method">
         <div class="feco-scroll">
-        <svg class="fd" viewBox="4 0 834 340" role="img" aria-labelledby="method-title">
+        <svg class="fd feco-desk" viewBox="4 0 834 340" role="img" aria-labelledby="method-title">
             <title id="method-title">The online model reads the noisier view, and a predictor h on its early block feeds the consistency loss. The EMA model reads the cleaner view, and its deep block gives the target through a stop-gradient. SIGReg acts on the online model's features at the teacher's depth.</title>
             <defs>
                 <marker id="mm-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker>
@@ -248,6 +303,62 @@ bibtex: |
             <text class="acc small" x="270" y="128">early block</text>
             <text class="acc small" x="527" y="322">deep block</text>
         </svg>
+        <svg class="fd feco-phone" viewBox="0 0 400 292" role="img" aria-labelledby="method-title-p">
+            <title id="method-title-p">The online model reads the noisier view, and a predictor h on its early block feeds the consistency loss. The EMA model reads the cleaner view, and its deep block gives the target through a stop-gradient. SIGReg acts on the online model's features at the teacher's depth.</title>
+            <defs>
+                <marker id="mp-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker>
+                <marker id="mp-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <text class="mut small" x="172" y="13" text-anchor="end">pushes features toward</text>
+            <text class="mut small" x="172" y="28" text-anchor="end">an isotropic Gaussian</text>
+            <rect class="box-reg" x="178" y="4" width="72" height="26" rx="13"/>
+            <text class="reg b small" x="214" y="22" text-anchor="middle">SIGReg</text>
+            <text class="mut small" x="74" y="46">online model</text>
+            <image href="view_noisier.jpg" x="2" y="54" width="52" height="52"/>
+            <rect class="frame" x="2" y="54" width="52" height="52" rx="3"/>
+            <text class="acc small b" x="2" y="122">noisier view</text>
+            <line class="ar" x1="56" y1="80" x2="70" y2="80" marker-end="url(#mp-mut)"/>
+            <rect class="blk" x="74" y="52" width="20" height="56" rx="4"/>
+            <rect class="blk-acc" x="100" y="52" width="20" height="56" rx="4"/>
+            <rect class="blk" x="126" y="52" width="20" height="56" rx="4"/>
+            <rect class="blk" x="152" y="52" width="20" height="56" rx="4"/>
+            <rect class="blk" x="178" y="52" width="20" height="56" rx="4"/>
+            <rect class="blk" x="204" y="52" width="20" height="56" rx="4"/>
+            <rect class="blk" x="230" y="52" width="20" height="56" rx="4"/>
+            <rect class="blk" x="256" y="52" width="20" height="56" rx="4"/>
+            <rect class="ring-reg" x="199" y="47" width="30" height="66" rx="6"/>
+            <line class="ar" x1="280" y1="80" x2="294" y2="80" marker-end="url(#mp-mut)"/>
+            <rect class="box" x="298" y="64" width="100" height="32" rx="8"/>
+            <text class="small" x="348" y="85" text-anchor="middle">flow-map loss</text>
+            <path class="arc-d" d="M268,110 Q392,160 268,208" marker-end="url(#mp-mut)"/>
+            <text class="mut small" x="334" y="164">EMA copy</text>
+
+            <line class="ar-acc" x1="110" y1="110" x2="110" y2="140" marker-end="url(#mp-acc)"/>
+            <text class="acc small" x="116" y="126">early block</text>
+            <rect class="box-acc" x="50" y="144" width="80" height="32" rx="8"/>
+            <text class="small" x="90" y="165" text-anchor="middle">predictor <tspan font-style="italic">h</tspan></text>
+            <line class="ar-acc" x1="132" y1="160" x2="187" y2="160" marker-end="url(#mp-acc)"/>
+            <text class="acc small" x="160" y="152" text-anchor="middle">predicts</text>
+            <rect class="box-acc" x="192" y="144" width="130" height="32" rx="8"/>
+            <text class="acc b small" x="257" y="165" text-anchor="middle">consistency loss</text>
+            <line class="ar-acc-d" x1="214" y1="210" x2="214" y2="181" marker-end="url(#mp-acc)"/>
+            <text class="mut small" x="208" y="200" text-anchor="end">stop-gradient</text>
+
+            <image href="view_cleaner.jpg" x="2" y="214" width="52" height="52"/>
+            <rect class="frame" x="2" y="214" width="52" height="52" rx="3"/>
+            <text class="acc small b" x="2" y="284">cleaner view</text>
+            <line class="ar" x1="56" y1="240" x2="70" y2="240" marker-end="url(#mp-mut)"/>
+            <rect class="blk" x="74" y="212" width="20" height="56" rx="4"/>
+            <rect class="blk" x="100" y="212" width="20" height="56" rx="4"/>
+            <rect class="blk" x="126" y="212" width="20" height="56" rx="4"/>
+            <rect class="blk" x="152" y="212" width="20" height="56" rx="4"/>
+            <rect class="blk" x="178" y="212" width="20" height="56" rx="4"/>
+            <rect class="blk-acc" x="204" y="212" width="20" height="56" rx="4"/>
+            <rect class="blk" x="230" y="212" width="20" height="56" rx="4"/>
+            <rect class="blk" x="256" y="212" width="20" height="56" rx="4"/>
+            <text class="mut small" x="106" y="284">EMA model</text>
+            <text class="acc small" x="200" y="284">deep block</text>
+        </svg>
         </div>
     </figure>
     <ul class="feco-how">
@@ -262,7 +373,12 @@ bibtex: |
 <section id="free" class="feco-wide">
     <h2>Why it is free</h2>
     <p>Each flow-map family already passes through the cleaner view when it builds its training target. iFeCo reads the teacher from that pass, so it needs no extra forward pass.</p>
-    <figure class="feco-fig">
+    <figure class="feco-fig" id="feco-free">
+        <div class="feco-tabs" role="tablist" aria-label="Flow-map family" hidden>
+            <button type="button" role="tab" data-on="0" aria-selected="true">Shortcut</button>
+            <button type="button" role="tab" data-on="1" aria-selected="false">MeanFlow</button>
+            <button type="button" role="tab" data-on="2" aria-selected="false">LSD</button>
+        </div>
         <div class="feco-panels">
         <svg class="fd" viewBox="0.0 0 346.7 330" role="img" aria-label="Shortcut. Target: two EMA half steps. Teacher: EMA at the start of the second half step.">
             <defs>
@@ -347,6 +463,20 @@ bibtex: |
     </figure>
     <p class="caption">The only added cost is the small predictor and the SIGReg statistic.</p>
 </section>
+
+<script>
+(function () {
+  var fig = document.getElementById("feco-free");
+  var bar = fig.querySelector(".feco-tabs"), panels = fig.querySelector(".feco-panels");
+  panels.dataset.on = "0";
+  bar.hidden = false;
+  bar.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    panels.dataset.on = b.dataset.on;
+    bar.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-selected", x === b); });
+  });
+})();
+</script>
 
 <section id="preliminary">
     <h2>Preliminary results <span class="muted">(ImageNet-100 speedrun)</span></h2>
