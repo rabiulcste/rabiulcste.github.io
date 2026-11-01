@@ -255,6 +255,17 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .dch-abl { --labw: 232px; --rowh: 30px; }
 .dch-abl .dch-panel + .dch-panel { margin-top: 32px; }
 .dch-abl .dch-ax { padding: 0 var(--valw) 0 var(--labw); }
+/* DRIFT Craftium table (tab:craftium): the charts' type and colours, thin rules, no card */
+.dch-table { width: 100%; margin: 0; border-collapse: collapse; font-size: 13px; line-height: 1.25; color: var(--muted); font-variant-numeric: tabular-nums; }
+.dch-table .sr { position: absolute; left: -9999px; }
+.dch-table th, .dch-table td { padding: 6px 0 6px 12px; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; font-weight: 400; }
+.dch-table th:first-child, .dch-table td:first-child { padding-left: 0; text-align: left; }
+.dch-table thead th { color: var(--text); font-weight: 600; border-bottom-color: var(--muted); vertical-align: bottom; }
+.dch-table tbody th { color: var(--text); }
+.dch-table td { color: var(--text); }
+.dch-table td.best { font-weight: 600; }
+.dch-table td.ours { color: var(--drift); }
+.dch-table .dch-lab-short { display: none; }
 /* DRIFT clips: text-free video on a white canvas, labels drawn by the page in the canvas' blank strips. The Atari and Craftium
    grids come in a 4-column and a 2-column (phone) cut; only the one shown is loaded (preload none, played by the page script). */
 .drift-clip { position: relative; margin: 0 auto; container-type: inline-size; }
@@ -297,6 +308,9 @@ footer.site a { color: var(--muted); text-decoration: none; }
     .dch-seg button { min-height: 28px; padding: 0 14px; border: 0; border-radius: 999px; background: none; color: var(--muted); font: 600 13px/1 var(--font); cursor: pointer; }
     .dch-seg button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
     .dch-seg button:focus-visible { outline: 2px solid var(--drift); outline-offset: 1px; }
+    .dch-table th, .dch-table td { padding: 5px 0 5px 8px; }
+    .dch-table thead th { font-size: 12px; line-height: 1.2; }
+    .dch-table .dch-lab-full { display: none; } .dch-table .dch-lab-short { display: inline; }
     /* BibTeX: wrap instead of scrolling sideways (this page only) */
     .drift-page ~ #bibtex pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 }
