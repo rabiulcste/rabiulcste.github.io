@@ -5,7 +5,7 @@
     <meta name="theme-color" content="{{ site.chrome-tab-theme-color }}">
 
     <!-- Open Graph -->
-    {%- if page.url == "/" -%}{%- assign full_title = site.SEOTitle -%}{%- elsif page.title -%}{%- capture full_title %}{{ page.title }} - {{ site.SEOTitle }}{% endcapture -%}{%- else -%}{%- assign full_title = site.SEOTitle -%}{%- endif %}
+    {%- if page.url == "/" -%}{%- capture full_title %}{{ site.SEOTitle }} | PhD Student at Mila, World Models and Reinforcement Learning{% endcapture -%}{%- elsif page.title -%}{%- capture full_title %}{{ page.title }} - {{ site.SEOTitle }}{% endcapture -%}{%- else -%}{%- assign full_title = site.SEOTitle -%}{%- endif %}
     <meta property="og:title" content="{{ full_title }}">
     {% case page.layout %}
     {% when 'post' %}
