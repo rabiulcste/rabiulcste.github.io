@@ -209,12 +209,13 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-diagram--stack .hero-t { font-size: 22px; }
 .drift-diagram--stack .hero-s { font-size: 15px; }
 /* DRIFT results charts: HTML rows (label, track, value) that stretch to any width. Blue = DRIFT, light blue = DRIFT-symlog, grey = others. */
-.dch { font-size: 13px; line-height: 1.25; color: var(--muted); font-variant-numeric: tabular-nums; --labw: 164px; --valw: 40px; --kindw: 124px; --rowh: 44px; }
+.dch { font-size: 13px; line-height: 1.25; color: var(--muted); font-variant-numeric: tabular-nums; --labw: 164px; --valw: 40px; --kindw: 156px; --rowh: 44px; }
 .dch-head { height: 28px; font-size: 15px; font-weight: 600; color: var(--text); }
 .dch-head--full { position: relative; }
 .dch-note { position: absolute; right: 0; top: 2px; font-size: 13px; font-weight: 400; color: var(--muted); }
 .dch-row { display: grid; grid-template-columns: var(--labw) minmax(0, 1fr) var(--valw); align-items: center; height: var(--rowh); }
 .dch-lab { padding-right: 12px; text-align: right; }
+.dch-lab-short, .dch-seg, .dch-foot { display: none; }
 .dch-kind { font-size: 11.5px; line-height: 1.15; color: var(--muted); }
 .dch-val { text-align: right; color: var(--text); }
 .dch-trk { position: relative; display: block; height: 100%; }
@@ -233,6 +234,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .dch-ticks .dch-trk { border-top: 1px solid var(--muted); }
 .dch-ticks i { position: absolute; top: 4px; transform: translateX(-50%); font-size: 12px; font-style: normal; }
 .dch-ax { margin-top: 10px; text-align: center; font-size: 13px; }
+.dch-foot { margin: 8px 0 0; font-size: 12px; line-height: 1.35; color: var(--muted); }
 /* Atari: one panel per statistic beside a shared label column; a little wider than the column on large screens, like the diagrams */
 .dch-atari { width: min(760px, 100vw - 2 * var(--gutter)); margin-left: calc(50% - min(380px, 50vw - var(--gutter))); display: grid; grid-template-columns: var(--labw) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); column-gap: 14px; }
 .dch-atari .dch-panel .dch-row { grid-template-columns: minmax(0, 1fr) var(--valw); }
@@ -266,25 +268,35 @@ footer.site a { color: var(--muted); text-decoration: none; }
     .drift-media--stack { display: block; }
     .drift-clip--wide { display: none; }
     .drift-clip--phone { display: block; }
-    /* charts: each method on its own two lines, label and value above a full-width track */
-    .dch { --labw: 0px; }
-    .dch-atari { grid-template-columns: minmax(0, 1fr); row-gap: 24px; }
-    .dch-labels { display: none; }
+    /* charts: one tight line per method (short label, bar or interval, value); the Atari chart shows one statistic at a time */
+    .dch, .dch-crafter, .dch-abl { --labw: 108px; --valw: 38px; --rowh: 22px; font-size: 13px; }
+    .dch-abl { --labw: 174px; }
+    .dch-row, .dch-atari .dch-panel .dch-row { grid-template-columns: var(--labw) minmax(0, 1fr) var(--valw); }
+    .dch-crafter .dch-row { grid-template-columns: var(--labw) minmax(0, 1fr); }
+    .dch-lab { padding-right: 8px; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dch-lab-full { display: none; } .dch-lab-short { display: inline; }
+    .dch-kind, .dch-crafter .dch-row .dch-kind { display: none; }
+    .dch-foot { display: block; margin-top: 6px; }
+    .dch-trk .band { height: 6px; margin-top: -3px; }
+    .dch-trk .dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; }
+    .dch-trk .bar { height: 13px; margin-top: -6.5px; }
+    .dch-ticks { height: 20px; }
+    .dch-atari .dch-panel .dch-ticks .dch-trk { grid-column: 2; }
+    .dch-crafter .dch-ticks span:last-child { display: none; }
+    .dch-ticks i { top: 3px; }
+    .dch-head { height: 22px; font-size: 14px; }
+    .dch-group { height: 16px; margin: 6px 0 2px; font-size: 12px; }
+    .dch-ax, .dch-crafter .dch-ax, .dch-abl .dch-ax { margin-top: 4px; padding: 0; font-size: 12px; }
+    .dch-abl .dch-panel + .dch-panel { margin-top: 14px; }
+    .dch-atari { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+    .dch-labels, .dch-atari .dch-panel .dch-head { display: none; }
     .dch-atari .dch-panel .dch-lab { display: block; }
-    .dch-labels + .dch-panel .dch-kind { display: block; }
-    .dch-row, .dch-atari .dch-panel .dch-row, .dch-crafter .dch-row { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto 18px; row-gap: 3px; height: auto; padding: 5px 0; }
-    .dch-lab { grid-area: 1 / 1; padding: 0; text-align: left; }
-    .dch-kind, .dch-crafter .dch-row .dch-kind { grid-area: 1 / 2; align-self: baseline; padding-left: 8px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .dch-val { grid-area: 1 / 3; }
-    .dch-trk { grid-area: 2 / 1 / 3 / 4; }
-    .dch-trk .gl { display: none; }
-    .dch-atari .dch-trk::before, .dch-abl .dch-trk::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--drift-grid); }
-    .dch-trk .bar { height: 14px; margin-top: -7px; }
-    .dch-ticks, .dch-atari .dch-panel .dch-ticks { grid-template-rows: auto; height: 22px; padding: 0; }
-    .dch-ticks .dch-trk { grid-area: 1 / 1 / 2 / 4; }
-    .dch-head { height: auto; margin-bottom: 2px; }
-    .dch-group { margin-top: 12px; }
-    .dch-ax, .dch-crafter .dch-ax, .dch-abl .dch-ax { padding: 0; }
+    .dch-atari .dch-panel { display: none; }
+    .dch-atari[data-show="iqm"] .dch-panel[data-stat="iqm"], .dch-atari[data-show="median"] .dch-panel[data-stat="median"], .dch-atari[data-show="mean"] .dch-panel[data-stat="mean"] { display: block; }
+    .dch-seg { display: flex; gap: 2px; width: max-content; margin: 0 0 8px; padding: 2px; border: 1px solid var(--border); border-radius: 999px; }
+    .dch-seg button { min-height: 28px; padding: 0 14px; border: 0; border-radius: 999px; background: none; color: var(--muted); font: 600 13px/1 var(--font); cursor: pointer; }
+    .dch-seg button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+    .dch-seg button:focus-visible { outline: 2px solid var(--drift); outline-offset: 1px; }
     /* BibTeX: wrap instead of scrolling sideways (this page only) */
     .drift-page ~ #bibtex pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 }
