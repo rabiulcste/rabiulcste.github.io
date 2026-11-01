@@ -1,0 +1,43 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap: false
+---
+# Rabiul Awal
+
+> PhD student at Mila and Université de Montréal, advised by Aishwarya Agrawal, supported by FRQNT. Works on generative world models, representation learning and reinforcement learning: learning from experience with one generative model that imagines, represents and acts.
+
+Research interests: diffusion and flow world models, reinforcement learning in imagination, self-supervised representation learning, few-step generative models (flow maps), multimodal models and agents.
+
+This file summarizes the site for language models and AI agents. Each project page has the full method, figures, results and a BibTeX entry.
+
+## Projects
+
+- [One Flow Transformer for Imagination and Control (DRIFT)]({{ site.url }}/drift/): An online RL agent whose world model and policy share one Flow Transformer backbone, trained from scratch with no expert data. The actor-critic learns in imagination on the backbone's own features. A reconstruction-free next-latent prediction objective makes those features useful for control, and shortcut flow matching imagines each frame in one denoising step, using 33x fewer FLOPs per imagined transition than prior diffusion agents. Outperforms diffusion and flow baselines on Craftium and Crafter and is competitive on Atari 100k. Authors: Rabiul Awal, Jinseong Jeong, Ankur Sikarwar, Parisa Kordjamshidi, Andrii Zadaianchuk, Sai Rajeswar, Paul Hongsuck Seo, Aishwarya Agrawal. Under review, 2026.
+- [Denoising Embedding Models Are Self-Supervised Learners (DEM)]({{ site.url }}/dem/): One network trained only by denoising learns visual representations and generates images without labels. Joint-embedding self-supervised prediction is denoising at full noise; training this view-conditioned denoising at all noise levels gives a diffusion model in representation space. On ImageNet-100, its linear probe beats DINOv2 at the same training length (76.1% vs 72.8%), and a single network generates without labels at FID 26.1 (RCG, which trains three models: 22.9). Rabiul Awal, work in progress, 2026.
+- [A Self-Supervised Free Lunch for Flow Map Training (iFeCo)]({{ site.url }}/feco/): Flow-map training already distills a teacher on a cleaner view into a student on a noisier view. iFeCo extends this distillation to features, with no external encoder and no extra forward pass. In a preliminary ImageNet-100 speedrun with MeanFlow SiT-B/2, it lowers one-step FID from 57.3 to 48.9, ahead of REPA (51.2), which needs a frozen DINOv2 encoder. Rabiul Awal, work in progress, 2026.
+
+## Selected publications
+
+- [Self-supervised Dynamics Forcing in Diffusion World Models](https://openreview.net/forum?id=666zLHqL0t): Rabiul Awal. Under review, 2026.
+- [Grounding Computer-Use Agents from Demonstrations](https://arxiv.org/abs/2511.07332): Aarash Feizi, Shravan Nayak, Xiangru Jian, Kevin Qinghong Lin, Kaixin Li, Rabiul Awal, et al. ICLR 2026.
+- [The Promise of RL for Autoregressive Image Editing](https://arxiv.org/abs/2508.01119): Saba Ahmadi*, Rabiul Awal*, Ankur Sikarwar*, Amirhossein Kazemnejad*, et al. NeurIPS 2025.
+- [Rendering-Aware RL for Vector Graphics Generation](https://arxiv.org/abs/2505.20793): Juan A. Rodriguez*, Haotian Zhang*, et al., including Rabiul Awal. NeurIPS 2025.
+- [CTRL-O: Language-Controllable Object-Centric Representations](https://arxiv.org/abs/2503.21747): Aniket Rajiv Didolkar*, Andrii Zadaianchuk*, Rabiul Awal*, Maximilian Seitzer, Efstratios Gavves, Aishwarya Agrawal. CVPR 2025.
+- [VisMin: Visual Minimal-Change Understanding](https://arxiv.org/abs/2407.16772): Rabiul Awal*, Saba Ahmadi*, Le Zhang*, Aishwarya Agrawal. NeurIPS 2024.
+- [Contrasting Intra-Modal and Ranking Cross-Modal Hard Negatives to Enhance Visio-Linguistic Compositional Understanding](https://openaccess.thecvf.com/content/CVPR2024/html/Zhang_Contrasting_Intra-Modal_and_Ranking_Cross-Modal_Hard_Negatives_to_Enhance_Visio-Linguistic_CVPR_2024_paper.html): Le Zhang, Rabiul Awal, Aishwarya Agrawal. CVPR 2024.
+
+(* equal contribution)
+
+## Profiles
+
+- [Homepage]({{ site.url }}/)
+- [Google Scholar](https://scholar.google.ca/citations?user=oOcLfUMAAAAJ)
+- [GitHub](https://github.com/{{ site.github_username }})
+- [X / Twitter](https://x.com/{{ site.twitter_username }})
+- [LinkedIn](https://www.linkedin.com/in/{{ site.linkedin_username }})
+- Email: {{ site.email }}
+
+## Optional
+
+- [Blog archive]({{ site.url }}/archive/)
