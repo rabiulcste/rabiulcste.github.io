@@ -95,6 +95,8 @@ p { margin: 0 0 16px; }
 .fig { margin: 0 0 32px; }
 /* Paper figures are drawn for white paper, so they sit on a white card (visible in dark mode). */
 .fig-img { background: #fff; border-radius: var(--radius); padding: 12px; }
+/* In dark mode the white paper figures and clips are dimmed a little so they do not glare. */
+@media (prefers-color-scheme: dark) { .fig-img { filter: brightness(0.86); } }
 .fig img { display: block; width: 100%; height: auto; }
 .fig--wide .fig-img { overflow-x: auto; }
 @media (max-width: 600px) { .fig--wide img { width: 600px; max-width: none; } }

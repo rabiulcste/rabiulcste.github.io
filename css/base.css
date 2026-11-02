@@ -8,7 +8,7 @@
     --text: #1d1d1f;
     --text-muted: #6b6b70;
     --bg-page: #fbfbfd;
-    --bg-muted: #f5f5f7;
+    --bg-muted: #eeeef1;    /* panels (code, BibTeX, diagram boxes): about 1.13:1 against the page so they read as panels */
     --border-muted: #d2d2d7;
     --border-hairline: rgba(60, 60, 67, 0.12);
     --line: #86868b;        /* link underlines and control outlines: at least 3:1 against the page */
@@ -83,7 +83,7 @@
         --text: #ececec;
         --text-muted: #9a9aa0;
         --bg-page: #0d0d0d;
-        --bg-muted: #1a1a1c;
+        --bg-muted: #1f1f22;
         --border-muted: #4a4a50;
         --border-hairline: rgba(235, 235, 245, 0.12);
         --line: #6e6e74;
