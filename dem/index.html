@@ -76,9 +76,28 @@ bibtex: |
     .dem-svg .mdn { stroke-width: 1; stroke-dasharray: 3 3; }
     .dem-svg .mdn.emb { stroke: var(--emb); } .dem-svg .mdn.pix { stroke: var(--pix); }
     .dem-svg.dem-copy { max-width: 420px; }
-    .dem-svg .nd-none { stroke: var(--muted); stroke-dasharray: 4 3; }
-    .dem-svg .sym.none { fill: var(--muted); }
-    .dem-svg .ln.none { stroke: var(--muted); stroke-dasharray: 4 3; }
+    /* Tau slider: the copy is solid below full noise, dashed and muted at exactly 1. */
+    #dem-tau { --thumb: 28px; }
+    #dem-tau .cp-box { stroke: var(--emb); }
+    #dem-tau .cp-bars rect { fill: var(--emb); }
+    #dem-tau[data-full] .cp-box, #dem-tau[data-full] .cp-ln { stroke: var(--muted); stroke-dasharray: 4 3; }
+    #dem-tau[data-full] .cp-bars rect { fill: var(--muted); }
+    .dem-tau-ctl { max-width: 420px; margin: 8px auto 0; }
+    .dem-tau-ctl[hidden] { display: none; }
+    #dem-tau-r { display: block; width: 100%; height: 44px; margin: 0; padding: 0; background: none; -webkit-appearance: none; appearance: none; cursor: pointer; }
+    #dem-tau-r::-webkit-slider-runnable-track { height: 8px; background: linear-gradient(90deg, var(--nz0), var(--nz1)); box-shadow: 0 0 0 1px var(--border); }
+    #dem-tau-r::-moz-range-track { height: 8px; background: linear-gradient(90deg, var(--nz0), var(--nz1)); box-shadow: 0 0 0 1px var(--border); }
+    #dem-tau-r::-webkit-slider-thumb { -webkit-appearance: none; width: var(--thumb); height: var(--thumb); margin-top: calc((8px - var(--thumb)) / 2); border: 0; border-radius: 0; background: var(--text); }
+    #dem-tau-r::-moz-range-thumb { width: var(--thumb); height: var(--thumb); border: 0; border-radius: 0; background: var(--text); }
+    #dem-tau-r:focus { outline: none; }
+    #dem-tau-r:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--rep); outline-offset: 2px; }
+    #dem-tau-r:focus-visible::-moz-range-thumb { outline: 2px solid var(--rep); outline-offset: 2px; }
+    .dem-tau-scale { position: relative; height: 1.5em; color: var(--muted); font-size: 0.75rem; line-height: 1.5; }
+    .dem-tau-scale span { position: absolute; top: 0; white-space: nowrap; }
+    .dem-tau-scale .s0 { left: 0; } .dem-tau-scale .s1 { right: 0; }
+    .dem-tau-scale i { position: absolute; top: -14px; bottom: 100%; width: 1px; height: 10px; left: calc(var(--thumb) / 2 + 0.95 * (100% - var(--thumb))); background: var(--muted); }
+    .dem-tau-scale .med { right: calc(100% - (var(--thumb) / 2 + 0.95 * (100% - var(--thumb)))); }
+    .dem-tau-line { max-width: 420px; min-height: 3em; margin: 8px auto 0; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
     .dem-uses { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 12px; }
     .dem-uses[hidden], .dem-use-text[hidden] { display: none; }
     .dem-uses button { font: inherit; font-size: 0.875rem; color: var(--text); background: none; border: 1px solid var(--border); border-radius: 0; padding: 4px 14px; cursor: pointer; }
@@ -118,6 +137,7 @@ bibtex: |
         .dem-view figcaption { min-height: 3.9em; }
         #results td, #results th { white-space: normal; padding-left: 6px; padding-right: 6px; }
         .dem-svg.dem-plane { min-width: 0; }
+        #dem-tau { --thumb: 32px; }
         .dem-plane .lab, .dem-plane .tick { font-size: 21px; }
         .dem-plane .ax { font-size: 18px; }
         .dem-plane .lab-ours { font-size: 24px; }
@@ -251,36 +271,30 @@ bibtex: |
 <section id="special-case">
     <h2>The full-noise special case</h2>
     <p>Conceptually, joint-embedding SSL methods are a special case of DEM. These methods train a network to predict the embedding of one view of an image from another view. Suppose this network also receives a noisy copy of the embedding it predicts. If the copy is pure noise, it carries no information, and the task is unchanged. Prediction is thus view-conditioned embedding denoising at full noise. At lower noise, DEM learns the distribution that prediction reduces to its mean.</p>
-    <figure class="dem-fig"><svg class="dem-svg dem-svg--phone dem-copy" viewBox="0 0 360 310" role="img" aria-labelledby="cp-t">
-<title id="cp-t">The network's inputs in two rows with the same layout. At lower noise, in DEM, a view and a noisy copy of the embedding go into the network, which outputs the embedding, and the copy still carries information. At full noise, in joint-embedding self-supervised learning, the copy is pure noise and carries no information, so this is prediction from the view alone.</title>
+    <figure class="dem-fig" id="dem-tau">
+        <svg class="dem-svg dem-svg--phone dem-copy" viewBox="0 0 360 160" role="img" aria-labelledby="cp-t">
+<title id="cp-t">An illustration with one fixed embedding and one fixed noise draw, which are not model output. A view and a noisy copy of the embedding go into the network, which outputs the embedding. The slider sets the noise level tau of the copy, drawn as bars. At tau 1 the copy is pure noise and carries no information, so this is prediction from the view alone.</title>
 <defs><marker id="ah-cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
-<text class="lb strong" x="2" y="13">Lower noise (DEM)</text>
-<text class="lb" x="2" y="31">The copy still carries information.</text>
-<text class="lb" x="72" y="70" text-anchor="end">View x′</text>
-<image href="tile_view.webp" x="78" y="44" width="44" height="44" preserveAspectRatio="none"/>
-<text class="lb" x="72" y="123" text-anchor="end">Noisy copy</text>
-<circle class="nd nd-gen" cx="100" cy="118" r="21"/><text class="sym" x="100" y="123" text-anchor="middle">z<tspan class="sub" dy="5">τ</tspan></text>
-<path class="ln gen" d="M124 66 H155" marker-end="url(#ah-cp)"/>
-<path class="ln gen" d="M123 118 H155" marker-end="url(#ah-cp)"/>
-<rect class="net" x="158" y="42" width="88" height="99"/>
-<text class="net-t" x="202" y="97" text-anchor="middle">Network</text>
-<path class="ln gen" d="M248 91 H281" marker-end="url(#ah-cp)"/>
-<circle class="nd nd-gen" cx="304" cy="91" r="21"/><text class="sym" x="304" y="97" text-anchor="middle">ẑ</text>
-<text class="lb" x="304" y="129" text-anchor="middle">Embedding</text>
-<text class="lb strong" x="2" y="179">Full noise (joint-embedding SSL)</text>
-<text class="lb" x="2" y="197">The copy carries no information, so this is prediction.</text>
-<text class="lb" x="72" y="236" text-anchor="end">View x′</text>
-<image href="tile_view.webp" x="78" y="210" width="44" height="44" preserveAspectRatio="none"/>
-<text class="lb" x="72" y="289" text-anchor="end">Pure noise</text>
-<circle class="nd nd-none" cx="100" cy="284" r="21"/><text class="sym none" x="100" y="289" text-anchor="middle">ε</text>
-<path class="ln gen" d="M124 232 H155" marker-end="url(#ah-cp)"/>
-<path class="ln none" d="M123 284 H155" marker-end="url(#ah-cp)"/>
-<rect class="net" x="158" y="208" width="88" height="99"/>
-<text class="net-t" x="202" y="263" text-anchor="middle">Network</text>
-<path class="ln gen" d="M248 257 H281" marker-end="url(#ah-cp)"/>
-<circle class="nd nd-gen" cx="304" cy="257" r="21"/><text class="sym" x="304" y="263" text-anchor="middle">ẑ</text>
-<text class="lb" x="304" y="295" text-anchor="middle">Embedding</text>
-</svg></figure>
+<text class="lb" x="72" y="27" text-anchor="end">View x′</text>
+<image href="tile_view.webp" x="78" y="1" width="44" height="44" preserveAspectRatio="none"/>
+<rect class="nd cp-box" x="2" y="56" width="120" height="68"/>
+<g class="cp-bars"><rect x="7" y="90.0" width="4.5" height="10.1"/><rect x="13.75" y="88.2" width="4.5" height="1.8"/><rect x="20.5" y="90.0" width="4.5" height="13.1"/><rect x="27.25" y="90.0" width="4.5" height="4.0"/><rect x="34" y="90.0" width="4.5" height="10.7"/><rect x="40.75" y="89.0" width="4.5" height="1.0"/><rect x="47.5" y="90.0" width="4.5" height="16.1"/><rect x="54.25" y="82.6" width="4.5" height="7.4"/><rect x="61" y="85.4" width="4.5" height="4.6"/><rect x="67.75" y="83.7" width="4.5" height="6.3"/><rect x="74.5" y="86.7" width="4.5" height="3.3"/><rect x="81.25" y="88.9" width="4.5" height="1.1"/><rect x="88" y="90.0" width="4.5" height="7.0"/><rect x="94.75" y="71.4" width="4.5" height="18.6"/><rect x="101.5" y="90.0" width="4.5" height="9.3"/><rect x="108.25" y="90.0" width="4.5" height="11.1"/></g>
+<text class="lb" x="62" y="140" text-anchor="middle" id="dem-tau-name">Noisy copy</text>
+<text class="lb strong" x="62" y="156" text-anchor="middle" id="dem-tau-val">τ = 0.50</text>
+<path class="ln gen" d="M124 23 H155" marker-end="url(#ah-cp)"/>
+<path class="ln gen cp-ln" d="M124 90 H155" marker-end="url(#ah-cp)"/>
+<rect class="net" x="158" y="1" width="88" height="123"/>
+<text class="net-t" x="202" y="68" text-anchor="middle">Network</text>
+<path class="ln gen" d="M248 62 H281" marker-end="url(#ah-cp)"/>
+<circle class="nd nd-gen" cx="304" cy="62" r="21"/><text class="sym" x="304" y="68" text-anchor="middle">ẑ</text>
+<text class="lb" x="304" y="100" text-anchor="middle">Embedding</text>
+</svg>
+        <div class="dem-tau-ctl" hidden>
+            <input type="range" id="dem-tau-r" min="0" max="1" step="0.01" value="0.5" aria-label="Noise level tau of the copy, from 0 to 1">
+            <div class="dem-tau-scale" aria-hidden="true"><span class="s0">0</span><i></i><span class="med">embedding schedule median 0.95</span><span class="s1">1</span></div>
+        </div>
+        <p class="dem-tau-line" id="dem-tau-line" aria-live="polite">Lower noise (DEM). The copy still carries information.</p>
+    </figure>
 </section>
 
 <section id="views">
@@ -366,5 +380,29 @@ bibtex: |
     bar.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-selected", x.dataset.use === on); });
     out.hidden = !on; out.textContent = on ? text[on] : "";
   });
+})();
+</script>
+<script>
+(function () {
+  var fig = document.getElementById("dem-tau");
+  var Z = [-1.51, -1.16, -1.18, -0.31, -2.01, -0.16, -0.83, 0.78, 0.83, 1.21, 0.67, -0.05, 0.75, 1.31, -0.57, 0.53], E = [-0.04, 1.44, -0.84, -0.3, 0.36, 0.26, -1.64, 0.36, -0.12, -0.24, -0.16, 0.22, -1.82, 1.55, -0.86, -2.24];
+  var bars = fig.querySelectorAll(".cp-bars rect"), r = document.getElementById("dem-tau-r");
+  var val = document.getElementById("dem-tau-val"), name = document.getElementById("dem-tau-name"), line = document.getElementById("dem-tau-line");
+  function draw() {
+    var t = parseFloat(r.value), full = t === 1, txt = full ? "Full noise (joint-embedding SSL). The copy carries no information, so this is prediction." : "Lower noise (DEM). The copy still carries information.";
+    bars.forEach(function (b, i) {
+      var v = (1 - t) * Z[i] + t * E[i], h = Math.max(Math.abs(v) * 13, 1);
+      b.setAttribute("y", (v > 0 ? 90 - h : 90).toFixed(1)); b.setAttribute("height", h.toFixed(1));
+    });
+    val.textContent = "τ = " + t.toFixed(2);
+    r.setAttribute("aria-valuetext", t.toFixed(2));
+    name.textContent = full ? "Pure noise" : "Noisy copy";
+    if (full) fig.setAttribute("data-full", ""); else fig.removeAttribute("data-full");
+    if (line.textContent !== txt) line.textContent = txt;
+  }
+  r.parentNode.hidden = false;
+  r.addEventListener("input", draw);
+  r.value = "0.5";
+  draw();
 })();
 </script>
