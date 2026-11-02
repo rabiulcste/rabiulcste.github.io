@@ -3,94 +3,7 @@
  * Copyright 2024 Rabiul <rabiulawal6@gmail.com>
  */
 
-/* ======================================
-   VARIABLES
-   ====================================== */
-:root {
-    --text: #1d1d1f;
-    --text-muted: #6b6b70;
-    --bg-page: #fbfbfd;
-    --bg-muted: #f5f5f7;
-    --border-muted: #d2d2d7;
-    --border-hairline: rgba(60, 60, 67, 0.12);
-    --radius-soft: 8px;
-    --radius-pill: 999em;
-    --focus-ring: var(--text);
-    --gradient-era: linear-gradient(
-        118deg,
-        #0d9488 0%,
-        #2563eb 38%,
-        #6366f1 58%,
-        #9333ea 82%,
-        #c026d3 100%
-    );
-    --navbar-bg: rgba(251, 251, 253, 0.72);
-    --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
-    --duration: 0.2s;
-    --content-link: #1d1d1f;
-    --content-link-hover: #0a0a0a;
-    --font-sans: "Helvetica Neue", "SolaimanLipi", Helvetica, Arial, sans-serif;
-    --font-mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
-    /* Type scale — single coherent rhythm */
-    --text-micro: 0.75rem;
-    --text-caption: 0.8125rem;
-    --text-small: 0.875rem;
-    --text-body: clamp(0.9375rem, 0.9rem + 0.14vw, 1rem);
-    --text-body-lg: 1.0625rem;
-    --text-subtitle: 1rem;
-    --text-lede: 1.125rem;
-    --text-title-sm: 1.25rem;
-    --text-title-md: 1.375rem;
-    --text-title-lg: 1.5rem;
-    --text-headline: clamp(1.8125rem, 1.62rem + 0.42vw, 2.125rem);
-    --text-display: clamp(1.5625rem, 1.38rem + 0.38vw, 1.8125rem);
-    --leading-body: 1.5;
-    --leading-prose: 1.55;
-    --leading-snug: 1.3;
-    --leading-tight: 1.15;
-    --leading-display: 1.05;
-    --track-display: -0.018em;
-    --track-headline: -0.016em;
-    --track-title: -0.01em;
-    --track-ui: -0.011em;
-    --track-normal: 0;
-    --track-label: 0.02em;
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-5: 1.5rem;
-    --space-6: 2rem;
-    --space-section: var(--space-6);
-    --space-block: var(--space-4);
-    /* Layout — horizontal padding for .wrap / navbar; code blocks bleed full-width on small screens */
-    --gutter-x: 15px;
-    /* Section rhythm (named so components don’t rely on calc tricks) */
-    --space-about-h2-before: 1.75rem;
-    --wrap-max: 680px;
-}
-
-@media (min-width: 640px)  { :root { --wrap-max: 720px; } }
-@media (min-width: 1024px) { :root { --wrap-max: 760px; } }
-@media (min-width: 1280px) { :root { --wrap-max: 800px; } }
-
-/* Bengali posts: scoped via unicode-range so this only loads/applies to Bengali-script text */
-@font-face {
-    font-family: "SolaimanLipi";
-    src: url("https://cdn.jsdelivr.net/gh/maateen/bangla-web-fonts@master/fonts/solaiman-lipi/solaimanlipi-normal-v1.0.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0980-09FF;
-}
-@font-face {
-    font-family: "SolaimanLipi";
-    src: url("https://cdn.jsdelivr.net/gh/maateen/bangla-web-fonts@master/fonts/solaiman-lipi/solaimanlipi-bold-v1.0.ttf") format("truetype");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0980-09FF;
-}
+/* Shared tokens (colours with dark mode, type, spacing), .wrap and the navbar live in css/base.css. */
 
 /* ======================================
    BASE
@@ -148,7 +61,7 @@ h4, h5, h6 {
     letter-spacing: var(--track-normal);
 }
 
-::selection { color: #fff; background: rgba(29, 29, 31, 0.75); }
+::selection { color: var(--selection-text); background: var(--selection-bg); }
 img::selection { background: transparent; }
 
 code, kbd, pre, samp {
@@ -218,7 +131,7 @@ a:focus-visible {
     z-index: 9999;
     padding: var(--space-2) var(--space-3);
     background: var(--text);
-    color: #fff;
+    color: var(--bg-page);
     font-weight: 500;
     text-decoration: none;
     border-radius: var(--space-1);
@@ -231,15 +144,6 @@ a:focus-visible {
     outline-offset: 3px;
 }
 
-.wrap {
-    width: 100%;
-    max-width: var(--wrap-max);
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: max(var(--gutter-x), env(safe-area-inset-left, 0px));
-    padding-right: max(var(--gutter-x), env(safe-area-inset-right, 0px));
-    box-sizing: border-box;
-}
 
 
 /* Responsive 16:9 embed */
@@ -268,109 +172,6 @@ article { overflow: hidden; }
 main {
     min-height: 50vh;
 }
-
-/* ======================================
-   NAVIGATION
-   ====================================== */
-.navbar {
-    position: relative;
-    z-index: 1030;
-    padding: var(--space-3) 0;
-    background-color: var(--navbar-bg);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid var(--border-hairline);
-}
-@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-    .navbar { background-color: var(--bg-page); }
-}
-.navbar-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-2);
-    width: 100%;
-}
-
-/* Site name — same large treatment on home (h1 + link) and inner pages (compact link) */
-.navbar--home .navbar-brand--home {
-    margin: 0;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-}
-.navbar-brand--home a,
-.navbar-brand--compact {
-    font-size: var(--text-display);
-    font-weight: 600;
-    line-height: var(--leading-display);
-    letter-spacing: var(--track-display);
-    color: var(--text);
-    text-decoration: none;
-    transition: color var(--duration) var(--ease-standard), opacity var(--duration) var(--ease-standard);
-}
-.navbar-brand--home a:hover,
-.navbar-brand--compact:hover { color: var(--text); opacity: 0.85; }
-
-.navbar--home .nav-link,
-.navbar--compact .nav-link {
-    font-size: var(--text-small);
-    font-weight: 400;
-}
-
-/* Desktop nav — readable but secondary to page titles (not headline-sized) */
-@media (min-width: 768px) {
-    .navbar--home .nav-link,
-    .navbar--compact .nav-link {
-        font-size: var(--text-subtitle);
-    }
-    .navbar-nav {
-        gap: var(--space-6);
-    }
-}
-
-@media (min-width: 1024px) {
-    .navbar--home .nav-link,
-    .navbar--compact .nav-link {
-        font-size: var(--text-lede);
-    }
-}
-
-.nav-link {
-    line-height: var(--leading-snug);
-    letter-spacing: var(--track-normal);
-    color: var(--text-muted);
-    transition: color var(--duration) var(--ease-standard);
-    position: relative;
-}
-.nav-link:hover { color: var(--text); }
-.nav-link.active {
-    color: var(--text);
-    font-weight: 500;
-}
-.nav-link.active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -3px;
-    height: 1.5px;
-    background: var(--text);
-    border-radius: 1px;
-}
-
-.navbar-nav {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--space-5);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    line-height: 1.2;
-    width: 100%;
-}
-.nav-item { margin: 0; }
 
 /* ======================================
    HEADER / INTRO
@@ -620,7 +421,7 @@ main {
     line-height: 1.5;
     letter-spacing: var(--track-ui);
     color: var(--text);
-    background: rgba(29, 29, 31, 0.05);
+    background: var(--chip-bg);
     border: none;
     border-radius: var(--radius-pill);
     text-decoration: none;
@@ -630,7 +431,7 @@ main {
         transform var(--duration) var(--ease-standard);
 }
 .tags a:hover {
-    background: rgba(29, 29, 31, 0.11);
+    background: var(--chip-bg-hover);
     color: var(--text);
     text-decoration: none;
     transform: translateY(-1px);
@@ -639,11 +440,12 @@ main {
 .tags a.tag-button--all,
 .tags a.focus {
     background: var(--text);
-    color: #fff;
+    color: var(--bg-page);
 }
 .tags a.tag-button--all:hover,
 .tags a.focus:hover {
-    background: #2d2d2f;
+    background: var(--text);
+    opacity: 0.85;
 }
 
 /* Social links */

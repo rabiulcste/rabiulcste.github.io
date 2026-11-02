@@ -1,27 +1,18 @@
-/* Project pages (_layouts/project.html). One column, system font, light and dark. */
+/* Project pages (_layouts/project.html). One column, light and dark, on the tokens in css/base.css. */
 
 :root {
-    --text: #0d0d0d;
-    --muted: #6e6e73;
-    --bg: #ffffff;
-    --surface: #f5f5f7;
-    --border: #e3e3e6;
-    --link: #0d0d0d;
-    --font: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    /* Colours, dark mode and fonts come from css/base.css, shared with the main site. */
+    --muted: var(--text-muted);
+    --bg: var(--bg-page);
+    --surface: var(--bg-muted);
+    --border: var(--border-hairline);
+    --link: var(--content-link);
+    --font: var(--font-sans);
+    --mono: var(--font-mono);
     --col: 680px;
     --gutter: 16px;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --text: #ececec;
-        --muted: #9a9aa0;
-        --bg: #0d0d0d;
-        --surface: #1a1a1c;
-        --border: #2c2c2f;
-        --link: #ffffff;
-    }
+    --wide: 880px;     /* figures that run wider than the text column */
+    --radius: 0;       /* square corners on figures, buttons and code */
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -36,7 +27,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-main, header.site, footer.site {
+main, footer.site {
     max-width: calc(var(--col) + 2 * var(--gutter));
     margin: 0 auto;
     padding: 0 var(--gutter);
@@ -48,12 +39,9 @@ a:hover { text-decoration-color: currentColor; }
 .skip-link { position: absolute; left: -9999px; }
 .skip-link:focus { left: var(--gutter); top: 8px; background: var(--bg); padding: 4px 8px; }
 
-header.site { padding-top: 24px; font-size: 15px; }
-header.site a { text-decoration: none; color: var(--muted); }
-header.site a:hover { color: var(--text); }
 
 /* Title block */
-.hero { padding: 96px 0 56px; text-align: center; }
+.hero { padding: 72px 0 48px; text-align: center; }
 .hero h1 {
     margin: 0 0 24px;
     font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem);
@@ -79,7 +67,7 @@ header.site a:hover { color: var(--text); }
     display: inline-block;
     padding: 6px 16px;
     border: 1px solid var(--border);
-    border-radius: 999px;
+    border-radius: var(--radius);
     font-size: 0.9375rem;
     text-decoration: none;
 }
@@ -87,7 +75,8 @@ header.site a:hover { color: var(--text); }
 .links .soon { color: var(--muted); cursor: default; }
 
 /* Sections */
-section { margin: 0 0 64px; }
+section { margin: 0 0 88px; }
+section > :last-child { margin-bottom: 0; }
 h2 {
     margin: 0 0 16px;
     font-size: 1.25rem;
@@ -104,7 +93,7 @@ p { margin: 0 0 16px; }
 /* Figures */
 .fig { margin: 0 0 32px; }
 /* Paper figures are drawn for white paper, so they sit on a white card (visible in dark mode). */
-.fig-img { background: #fff; border-radius: 8px; padding: 12px; }
+.fig-img { background: #fff; border-radius: var(--radius); padding: 12px; }
 .fig img { display: block; width: 100%; height: auto; }
 .fig--wide .fig-img { overflow-x: auto; }
 @media (max-width: 600px) { .fig--wide img { width: 600px; max-width: none; } }
@@ -121,7 +110,7 @@ p { margin: 0 0 16px; }
     width: 100%;
     background: var(--surface);
     border: 1px dashed var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius);
     color: var(--muted);
     font-size: 0.875rem;
 }
@@ -143,12 +132,33 @@ pre {
     padding: 16px;
     overflow-x: auto;
     background: var(--surface);
-    border-radius: 8px;
+    border-radius: var(--radius);
     font: 0.8125rem/1.6 var(--mono);
 }
 
 footer.site { padding-top: 32px; padding-bottom: 48px; border-top: 1px solid var(--border); font-size: 0.875rem; }
 footer.site a { color: var(--muted); text-decoration: none; }
+
+/* Shared pieces used by every project page ------------------------------------------------ */
+/* Wider than the text column on large screens, the column on phones. */
+.wide { width: min(var(--wide), 100vw - 2 * var(--gutter)); margin-left: calc(50% - min(var(--wide) / 2, 50vw - var(--gutter))); }
+.scroll { overflow-x: auto; }
+/* A wide section keeps its heading and text in the column. */
+.wide > h2, .wide > p { max-width: var(--col); margin-left: auto; margin-right: auto; }
+/* One figure for large screens, another drawn for phones; the break is 768 px on every page. */
+@media (min-width: 768px) { .only-phone { display: none !important; } }
+@media (max-width: 767px) { .only-desk { display: none !important; } }
+/* Tabs and toggles above a figure */
+.tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 12px; }
+.tabs[hidden] { display: none; }
+.tabs button { font: inherit; font-size: 0.875rem; color: var(--text); background: none; border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 14px; cursor: pointer; }
+.tabs button[aria-selected="true"], .tabs button[aria-pressed="true"] { border-color: var(--text); }
+/* Phones: tables and BibTeX wrap instead of scrolling sideways. */
+@media (max-width: 767px) {
+    td, th { white-space: normal; padding-left: 6px; padding-right: 6px; }
+    td:first-child, th:first-child { padding-left: 0; }
+    #bibtex pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
 
 /* Videos: no card, the clip blends with the page */
 .fig video { display: block; width: 100%; height: auto; }
@@ -158,10 +168,8 @@ footer.site a { color: var(--muted); text-decoration: none; }
 :root { --drift: #1F4FB0; --drift-2: #79A8F2; --drift-grid: #ececef; }
 @media (prefers-color-scheme: dark) { :root { --drift: #79A8F2; --drift-2: #4A78C8; --drift-grid: #222225; } }
 .drift-media { margin: 0 0 12px; }
-/* Diagram width, as on DEM: wider than the column on large screens, the column on phones. */
-.drift-media--wide { width: min(880px, 100vw - 2 * var(--gutter)); margin-left: calc(50% - min(440px, 50vw - var(--gutter))); }
-/* The same diagram with its right panel drawn under the left one, shown instead of the wide one on phones. */
-.drift-media--stack { display: none; max-width: 480px; margin-left: auto; margin-right: auto; }
+/* The same diagram with its right panel drawn under the left one, for phones (.only-phone). */
+.drift-media--stack { max-width: 480px; margin-left: auto; margin-right: auto; }
 .drift-svg { display: block; width: 100%; height: auto; }
 .drift-svg text { font-family: var(--font); font-size: 15px; fill: var(--text); }
 /* DRIFT diagrams (teaser and overview), same palette as the paper: amber = actions and actor, teal = predictor heads */
@@ -275,12 +283,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-clip .clip-lab, .drift-clip .clip-name { position: absolute; transform: translateY(-100%); line-height: 1; white-space: nowrap; font-size: clamp(11px, 1.45cqw, 13px); color: #6e6e73; }
 .drift-clip .clip-name { font-weight: 600; color: #0d0d0d; }
 .drift-clip--phone .clip-lab, .drift-clip--phone .clip-name, .drift-clip--one .clip-lab, .drift-clip--one .clip-name { font-size: clamp(11px, 3.8cqw, 14px); }
-.drift-clip--phone { display: none; }
 @media (max-width: 767px) {
-    .drift-media--wide { display: none; }
-    .drift-media--stack { display: block; }
-    .drift-clip--wide { display: none; }
-    .drift-clip--phone { display: block; }
     /* charts: one tight line per method (short label, bar or interval, value); the Atari chart shows one statistic at a time */
     .dch, .dch-crafter, .dch-abl { --labw: 108px; --valw: 38px; --rowh: 22px; font-size: 13px; }
     .dch-abl { --labw: 174px; }
@@ -308,13 +311,11 @@ footer.site a { color: var(--muted); text-decoration: none; }
     .dch-atari .dch-panel .dch-lab { display: block; }
     .dch-atari .dch-panel { display: none; }
     .dch-atari[data-show="iqm"] .dch-panel[data-stat="iqm"], .dch-atari[data-show="median"] .dch-panel[data-stat="median"], .dch-atari[data-show="mean"] .dch-panel[data-stat="mean"] { display: block; }
-    .dch-seg { display: flex; gap: 2px; width: max-content; margin: 0 0 8px; padding: 2px; border: 1px solid var(--border); border-radius: 999px; }
-    .dch-seg button { min-height: 28px; padding: 0 14px; border: 0; border-radius: 999px; background: none; color: var(--muted); font: 600 13px/1 var(--font); cursor: pointer; }
+    .dch-seg { display: flex; gap: 2px; width: max-content; margin: 0 0 8px; padding: 2px; border: 1px solid var(--border); border-radius: var(--radius); }
+    .dch-seg button { min-height: 28px; padding: 0 14px; border: 0; border-radius: var(--radius); background: none; color: var(--muted); font: 600 13px/1 var(--font); cursor: pointer; }
     .dch-seg button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
     .dch-seg button:focus-visible { outline: 2px solid var(--drift); outline-offset: 1px; }
     .dch-table th, .dch-table td { padding: 5px 0 5px 10px; }
     .dch-table thead th { font-size: 12px; line-height: 1.2; }
     .dch-table .dch-lab-full { display: none; } .dch-table .dch-lab-short { display: inline; }
-    /* BibTeX: wrap instead of scrolling sideways (this page only) */
-    .drift-page ~ #bibtex pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 }

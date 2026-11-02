@@ -224,8 +224,8 @@ sup[role="doc-noteref"] a.footnote:hover { color: var(--fig-ink); text-decoratio
 .post-table td.muted .MathJax, .post-table td.muted .MathJax svg { color: #6a6660 !important; fill: #6a6660 !important; }
 @media (prefers-color-scheme: dark) {
   .post-table { border-top-color: #f0ece4; border-bottom-color: #f0ece4; }
-  .post-table th { color: #f0ece4; border-bottom-color: #f0ece4; }
-  .post-table td { color: #f0ece4; border-bottom-color: #4a4a50; }
+  .post-table th { color: #f0ece4 !important; border-bottom-color: #f0ece4; }
+  .post-table td { color: #f0ece4 !important; border-bottom-color: #4a4a50; }
   .post-table td.muted, .post-table .muted { color: #989288; }
   .post-table td.good, .post-table td.label { color: #f0ece4; }
   .post-table-note { color: #989288; }

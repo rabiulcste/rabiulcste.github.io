@@ -30,42 +30,27 @@ bibtex: |
     @media (prefers-color-scheme: dark) {
         :root { --feco-acc: #fb923c; --feco-acc-soft: #3a2414; --feco-reg: #b49cfc; --feco-reg-soft: #261f3d; }
     }
-    .hero { padding-bottom: 40px; }
     .feco-fig { margin: 0 0 32px; }
-    @media (min-width: 1100px) {
-        .feco-wide { width: 1040px; margin-left: calc(50% - 520px); }
-    }
-    .feco-tldr { text-align: center; font-size: 1.1875rem; line-height: 1.5; margin: 0 auto; max-width: 620px; }
     .feco-samples { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0 0 12px; }
     .feco-samples figure { margin: 0; }
-    .feco-samples img { display: block; width: 100%; height: auto; border-radius: 6px; }
+    .feco-samples img { display: block; width: 100%; height: auto; border-radius: var(--radius); }
     .feco-samples figcaption { margin: 0 0 8px; text-align: center; font-size: 0.9375rem; color: var(--text); }
     .feco-samples figcaption span { color: var(--muted); }
     .feco-family { margin: 32px 0 8px; text-align: center; font-size: 1rem; font-weight: 600; }
     .feco-family span { font-weight: 400; color: var(--muted); }
-    .feco-soon { padding: 14px 16px; border: 1px dashed var(--border); border-radius: 8px; background: var(--surface); color: var(--muted); text-align: center; font-size: 0.9375rem; }
-    .feco-scroll { overflow-x: auto; }
+    .feco-soon { padding: 14px 16px; border: 1px dashed var(--border); border-radius: var(--radius); background: var(--surface); color: var(--muted); text-align: center; font-size: 0.9375rem; }
     .feco-scroll svg { display: block; width: 100%; height: auto; min-width: 600px; }
     .feco-chart { max-width: 520px; margin: 0 auto; }
     .feco-method .feco-scroll { max-width: 860px; margin: 0 auto; }
     .feco-chart svg { min-width: 0; }
     .feco-panels { display: grid; grid-template-columns: repeat(3, 1fr); }
     .feco-panels svg { display: block; width: 100%; height: auto; }
-    .feco-scroll svg.feco-phone { display: none; }
-    .feco-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 12px; }
-    .feco-tabs[hidden] { display: none; }
-    .feco-tabs button { font: inherit; font-size: 0.875rem; color: var(--text); background: none; border: 1px solid var(--border); border-radius: 999px; padding: 4px 14px; cursor: pointer; }
-    .feco-tabs button[aria-selected="true"] { border-color: var(--text); }
-    @media (min-width: 701px) {
-        .feco-tabs { display: none; }
-    }
-    @media (max-width: 700px) {
+    .feco-scroll svg.only-phone { min-width: 0; max-width: 480px; margin: 0 auto; }
+    @media (max-width: 767px) {
         .feco-panels { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
         .feco-panels[data-on="0"] > svg:not(:nth-child(1)),
         .feco-panels[data-on="1"] > svg:not(:nth-child(2)),
         .feco-panels[data-on="2"] > svg:not(:nth-child(3)) { display: none; }
-        .feco-scroll svg.feco-desk { display: none; }
-        .feco-scroll svg.feco-phone { display: block; min-width: 0; max-width: 480px; margin: 0 auto; }
         .feco-samples { align-items: end; }
         .feco-chart .fd .lab { font-size: 18px; }
         .feco-chart .fd .val { font-size: 17px; }
@@ -114,10 +99,10 @@ bibtex: |
     .fd .dot-best { fill: var(--feco-acc); }
 </style>
 
-<section id="teaser" class="feco-wide">
+<section id="teaser" class="wide">
     <figure class="feco-fig">
-        <div class="feco-scroll">
-        <svg class="fd feco-desk" viewBox="15 0 990 370" role="img" aria-labelledby="concept-title">
+        <div class="feco-scroll scroll">
+        <svg class="fd only-desk" viewBox="15 0 990 370" role="img" aria-labelledby="concept-title">
             <title id="concept-title">A noise-to-data path with four images: noise, a noisier view, a cleaner view and data. One long jump goes from the noisier view to data; two short jumps go through the cleaner view. Below, an early block on the noisier view predicts a deep block on the cleaner view.</title>
             <defs>
                 <marker id="cm-text" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-text" d="M0,0 L10,5 L0,10 z"/></marker>
@@ -155,7 +140,7 @@ bibtex: |
             <text class="acc b" x="866" y="330">Consistency loss</text>
             <text class="mut" x="866" y="351">features agree</text>
         </svg>
-        <svg class="fd feco-phone" viewBox="0 0 380 324" role="img" aria-labelledby="concept-title-p">
+        <svg class="fd only-phone" viewBox="0 0 380 324" role="img" aria-labelledby="concept-title-p">
             <title id="concept-title-p">A noise-to-data path with four images: noise, a noisier view, a cleaner view and data. One long jump goes from the noisier view to data; two short jumps go through the cleaner view. Below, an early block on the noisier view predicts a deep block on the cleaner view.</title>
             <defs>
                 <marker id="cp-text" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-text" d="M0,0 L10,5 L0,10 z"/></marker>
@@ -199,17 +184,16 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="feco-tldr"><strong>TL;DR:</strong> Flow-map training already distills a teacher on a cleaner view into a student on a noisier view. iFeCo extends this distillation to features. It needs no external encoder and no extra forward pass.</p>
+    <p class="tldr"><strong>TL;DR:</strong> Flow-map training already distills a teacher on a cleaner view into a student on a noisier view. iFeCo extends this distillation to features. It needs no external encoder and no extra forward pass.</p>
 </section>
 
-<section id="context">
-    <h2>Why this matters</h2>
+<section id="context" class="intro">
     <p>Diffusion training seems difficult partly because of the semantic structure that has to come out of it. We have seen <a href="https://arxiv.org/abs/2510.11690">representation autoencoders</a>, <a href="https://arxiv.org/abs/2312.03701">representation generation</a> and <a href="https://arxiv.org/abs/2410.06940">representation alignment</a>. Much of this work says the same thing: diffusion training needs some form of self-supervised signal to train faster and generate better.</p>
     <p>Since I was mostly working on few-step models (flow maps), I noticed that they are, in principle, a knowledge distillation algorithm: a student tries to distill from a multi-step teacher. Looked at closely, the student and the teacher see two views of the same data. The teacher gets the cleaner one and the student the noisier one. This gives another dimension of consistency, in feature space, without any additional forward pass. That is the first free lunch for flow map training.</p>
     <p>Then I realized that even when you align features across these free views, their quality is still below what self-supervised learning gives. A distributional regularizer like <a href="https://arxiv.org/abs/2511.08544">SIGReg</a> can also be applied to diffusion to shape its representations. That is the second free lunch.</p>
 </section>
 
-<section id="samples" class="feco-wide">
+<section id="samples" class="wide">
     <h2>One-step samples, ImageNet 256&times;256</h2>
 
     <p class="feco-family"><a href="https://arxiv.org/abs/2505.13447">MeanFlow</a> <span>SiT-B/2, 1 step</span></p>
@@ -240,9 +224,9 @@ bibtex: |
 
 <section id="method">
     <h2>Method</h2>
-    <figure class="feco-fig feco-wide feco-method">
-        <div class="feco-scroll">
-        <svg class="fd feco-desk" viewBox="4 0 834 340" role="img" aria-labelledby="method-title">
+    <figure class="feco-fig wide feco-method">
+        <div class="feco-scroll scroll">
+        <svg class="fd only-desk" viewBox="4 0 834 340" role="img" aria-labelledby="method-title">
             <title id="method-title">The online model reads the noisier view, and a predictor h on its early block feeds the consistency loss. The EMA model reads the cleaner view, and its deep block gives the target through a stop-gradient. SIGReg acts on the online model's features at the teacher's depth.</title>
             <defs>
                 <marker id="mm-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker>
@@ -306,7 +290,7 @@ bibtex: |
             <text class="acc small" x="270" y="128">early block</text>
             <text class="acc small" x="527" y="322">deep block</text>
         </svg>
-        <svg class="fd feco-phone" viewBox="0 0 400 292" role="img" aria-labelledby="method-title-p">
+        <svg class="fd only-phone" viewBox="0 0 400 292" role="img" aria-labelledby="method-title-p">
             <title id="method-title-p">The online model reads the noisier view, and a predictor h on its early block feeds the consistency loss. The EMA model reads the cleaner view, and its deep block gives the target through a stop-gradient. SIGReg acts on the online model's features at the teacher's depth.</title>
             <defs>
                 <marker id="mp-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker>
@@ -373,11 +357,11 @@ bibtex: |
     <p class="caption">Both terms are added to the usual flow-map loss.</p>
 </section>
 
-<section id="free" class="feco-wide">
+<section id="free" class="wide">
     <h2>Why it is free</h2>
     <p>Each flow-map family already passes through the cleaner view when it builds its training target. iFeCo reads the teacher from that pass, so it needs no extra forward pass.</p>
     <figure class="feco-fig" id="feco-free">
-        <div class="feco-tabs" role="tablist" aria-label="Flow-map family" hidden>
+        <div class="feco-tabs tabs only-phone" role="tablist" aria-label="Flow-map family" hidden>
             <button type="button" role="tab" data-on="0" aria-selected="true">Shortcut</button>
             <button type="button" role="tab" data-on="1" aria-selected="false">MeanFlow</button>
             <button type="button" role="tab" data-on="2" aria-selected="false">LSD</button>
@@ -484,7 +468,7 @@ bibtex: |
 <section id="preliminary">
     <h2>Preliminary results <span class="muted">(ImageNet-100 speedrun)</span></h2>
     <figure class="feco-fig feco-chart">
-        <div class="feco-scroll">
+        <div class="feco-scroll scroll">
         <svg class="fd" viewBox="0 0 520 228" role="img" aria-labelledby="chart-title">
             <title id="chart-title">One-step FID for MeanFlow SiT-B/2 on the ImageNet-100 speedrun: baseline 57.3, REPA 51.2, SIGReg alone 56.3, consistency alone 51.8, iFeCo (consistency plus SIGReg) 48.9.</title>
             <line class="repa-line" x1="304.0" y1="10" x2="304.0" y2="176"/>

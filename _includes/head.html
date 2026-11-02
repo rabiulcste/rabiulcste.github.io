@@ -2,7 +2,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="description" content="{% if page.description and page.description != "" %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-    <meta name="theme-color" content="{{ site.chrome-tab-theme-color }}">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="{{ site.chrome-tab-theme-color }}" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
 
     <!-- Open Graph -->
     {%- if page.url == "/" -%}{%- capture full_title %}{{ site.SEOTitle }} | PhD Student at Mila, World Models and Reinforcement Learning{% endcapture -%}{%- elsif page.title -%}{%- capture full_title %}{{ page.title }} - {{ site.SEOTitle }}{% endcapture -%}{%- else -%}{%- assign full_title = site.SEOTitle -%}{%- endif %}
@@ -57,6 +59,7 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
+    <link rel="stylesheet" href="{{ "/css/base.css" | prepend: site.baseurl }}">
     <link rel="stylesheet" href="{{ "/css/rabiul-blog.css" | prepend: site.baseurl }}">
 
     <!-- Google Analytics -->

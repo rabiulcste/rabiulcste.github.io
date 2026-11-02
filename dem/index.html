@@ -28,16 +28,11 @@ bibtex: |
     @media (prefers-color-scheme: dark) {
         :root { --rep: #60a5fa; --emb: #a78bfa; --pix: #fbbf24; --grid: #222225; --nz0: #2c2c2f; --nz1: #d4d4d8; }
     }
-    /* One media width for every figure: wider than the text on large screens, the column on phones. */
-    .dem-media { margin: 0 0 16px; width: min(880px, 100vw - 2 * var(--gutter)); margin-left: calc(50% - min(440px, 50vw - var(--gutter))); }
+    .dem-media { margin-bottom: 16px; }
     .dem-media img { display: block; width: 100%; height: auto; }
     .dem-fig { margin: 0 0 48px; }
     .dem-fig > figcaption, main .caption { margin: 0; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
-    main section { margin-bottom: 88px; }
-    main section > :last-child { margin-bottom: 0; }
-    main h2 { font-size: 1.25rem; margin-bottom: 12px; }
-    .hero { padding: 72px 0 48px; }
-    .dem-scroll { overflow-x: auto; }
+    main h2 { margin-bottom: 12px; }
     .dem-svg { display: block; width: 100%; height: auto; min-width: 540px; }
     .dem-svg.dem-fit { min-width: 0; max-width: 560px; margin: 0 auto; }
     .dem-svg.dem-fit .lb { font-size: 14px; }
@@ -103,23 +98,12 @@ bibtex: |
     .dem-tau-scale i { position: absolute; top: -14px; bottom: 100%; width: 1px; height: 10px; left: calc(var(--thumb) / 2 + 0.95 * (100% - var(--thumb))); background: var(--muted); }
     .dem-tau-scale .med { right: calc(100% - (var(--thumb) / 2 + 0.95 * (100% - var(--thumb)))); }
     .dem-tau-line { max-width: 420px; min-height: 3em; margin: 8px auto 0; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
-    .dem-uses { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 12px; }
-    .dem-uses[hidden], .dem-use-text[hidden] { display: none; }
-    .dem-uses button { font: inherit; font-size: 0.875rem; color: var(--text); background: none; border: 1px solid var(--border); border-radius: 0; padding: 4px 14px; cursor: pointer; }
-    .dem-uses button[aria-selected="true"] { border-color: var(--text); }
-    /* Phones: the stacked concept figure replaces the wide one, and nothing scrolls sideways. */
-    .dem-phone { display: none; }
+    .dem-use-text[hidden] { display: none; }
+    /* Phones: the stacked concept figure (.only-phone) replaces the wide one. */
     .dem-svg--phone { min-width: 0; max-width: 480px; margin: 0 auto; }
     .dem-svg--phone .lb { font-size: 13px; }
     .dem-svg--phone .net-t { font-size: 16px; }
-    @media (max-width: 767px) {
-        .dem-desk { display: none; }
-        .dem-phone { display: block; }
-        #bibtex pre { white-space: pre-wrap; overflow-wrap: anywhere; }
-    }
     .dem-use-text { text-align: center; color: var(--muted); font-size: 0.875rem; margin: 8px 0 0; min-height: 1.5em; }
-    /* Square corners on this page, including the shared layout's link buttons and code block. */
-    .links a, .links .soon, pre { border-radius: 0; }
     /* Noise-map views: one column per view, its noise map above it. */
     .dem-views { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; max-width: 680px; margin: 0 auto; }
     .dem-view { margin: 0; text-align: center; font-size: 0.8125rem; line-height: 1.3; }
@@ -140,7 +124,6 @@ bibtex: |
         .dem-views { gap: 6px; }
         .dem-view { font-size: 0.6875rem; }
         .dem-view figcaption { min-height: 3.9em; }
-        #results td, #results th { white-space: normal; padding-left: 6px; padding-right: 6px; }
         .dem-svg.dem-plane { min-width: 0; }
         #dem-tau { --thumb: 32px; }
         .dem-plane .lab, .dem-plane .tick { font-size: 21px; }
@@ -152,11 +135,14 @@ bibtex: |
 
 <section>
     <figure class="dem-fig">
-        <div class="dem-media"><img src="samples.webp" width="1052" height="524" alt="A grid of 32 small images of animals, objects and scenes, generated without labels." loading="lazy"></div>
+        <div class="dem-media wide"><img src="samples.webp" width="1052" height="524" alt="A grid of 32 small images of animals, objects and scenes, generated without labels." loading="lazy"></div>
         <figcaption>Images generated without labels, by one network trained by denoising alone. All samples on this page are uncurated.</figcaption>
     </figure>
 </section>
 
+<section id="tldr">
+    <p class="tldr"><strong>TL;DR:</strong> A diffusion model at two levels. One network denoises a compact embedding and the pixels, so it learns visual representations and generates images without labels, trained by denoising alone.</p>
+</section>
 <section class="intro">
     <p>Representations learned by reconstructing, denoising or generating the image still trail those of non-generative self-supervised learning (SSL) methods. An image's exact color and framing are <em>stochastic details</em> that vary among images with the same content. A representation trained to reproduce the image is pushed to encode these details. Recognition, in contrast, benefits from invariance to them.</p>
 </section>
@@ -165,13 +151,13 @@ bibtex: |
     <h2>A diffusion model at two levels</h2>
     <p>DEM generates the representation and the image separately, within one network and with one denoising objective. In representation space, it denoises the embedding of an image given another view of the same image. In pixel space, it generates the image that this embedding describes.</p>
     <figure class="dem-fig" id="dem-concept">
-        <div class="dem-uses" role="tablist" aria-label="Uses of the network" hidden>
+        <div class="dem-uses tabs" role="tablist" aria-label="Uses of the network" hidden>
     <button type="button" role="tab" data-use="enc" aria-selected="false">Encode</button>
     <button type="button" role="tab" data-use="gen" aria-selected="false">Denoise the embedding</button>
     <button type="button" role="tab" data-use="dec" aria-selected="false">Generate the image</button>
 </div>
 <p class="dem-use-text" aria-live="polite" hidden></p>
-        <div class="dem-media dem-scroll dem-desk"><svg class="dem-svg" viewBox="0 0 760 368" role="img" aria-labelledby="cd-t">
+        <div class="dem-media wide scroll only-desk"><svg class="dem-svg" viewBox="0 0 760 368" role="img" aria-labelledby="cd-t">
 <title id="cd-t">One network at two levels. In representation space, a view of the image goes in and the network outputs its embedding, the representation, and given a noisy embedding the network outputs the denoised embedding. In pixel space, given an embedding and noisy pixels, the network outputs an image.</title>
 <defs>
 <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker>
@@ -209,7 +195,7 @@ bibtex: |
   <text class="lb" x="640" y="352" text-anchor="middle">Image</text>
 </g>
 </svg></div>
-        <div class="dem-media dem-phone"><svg class="dem-svg dem-svg--phone" viewBox="0 0 360 372" role="img" aria-labelledby="cd-pt">
+        <div class="dem-media wide only-phone"><svg class="dem-svg dem-svg--phone" viewBox="0 0 360 372" role="img" aria-labelledby="cd-pt">
 <title id="cd-pt">One network at two levels. In representation space, a view of the image goes in and the network outputs its embedding, the representation, and given a noisy embedding the network outputs the denoised embedding. In pixel space, given an embedding and noisy pixels, the network outputs an image.</title>
 <defs>
 <marker id="ah-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker>
@@ -320,7 +306,7 @@ bibtex: |
 <section id="results">
     <h2>Results</h2>
     <figure class="dem-fig">
-        <div class="dem-media dem-scroll"><svg class="dem-svg dem-plane" viewBox="0 0 640 352" role="img" aria-labelledby="sc-t">
+        <div class="dem-media wide scroll"><svg class="dem-svg dem-plane" viewBox="0 0 640 352" role="img" aria-labelledby="sc-t">
 <title id="sc-t">Linear probe accuracy on ImageNet-100 against FID. DEM has the highest probe. Without labels its FID of 19.5 is on par with RCG at 19.7, which has no probe of its own. Open markers use labels. DEM with a linear probe fit on 1% of the labels reaches 14.5, and class-conditional JiT trained on all labels reaches 12.4. Single-task methods sit on the N/A lanes.</title>
 <line class="grid" x1="95.0" y1="24" x2="95.0" y2="300"/><text class="tick" x="95.0" y="322" text-anchor="middle">N/A</text><line class="grid" x1="165.0" y1="24" x2="165.0" y2="300"/><text class="tick" x="165.0" y="322" text-anchor="middle">70</text><line class="grid" x1="237.5" y1="24" x2="237.5" y2="300"/><text class="tick" x="237.5" y="322" text-anchor="middle">60</text><line class="grid" x1="310.0" y1="24" x2="310.0" y2="300"/><text class="tick" x="310.0" y="322" text-anchor="middle">50</text><line class="grid" x1="382.5" y1="24" x2="382.5" y2="300"/><text class="tick" x="382.5" y="322" text-anchor="middle">40</text><line class="grid" x1="455.0" y1="24" x2="455.0" y2="300"/><text class="tick" x="455.0" y="322" text-anchor="middle">30</text><line class="grid" x1="527.5" y1="24" x2="527.5" y2="300"/><text class="tick" x="527.5" y="322" text-anchor="middle">20</text><line class="grid" x1="600.0" y1="24" x2="600.0" y2="300"/><text class="tick" x="600.0" y="322" text-anchor="middle">10</text><line class="grid" x1="70" y1="275.8" x2="620" y2="275.8"/><text class="tick" x="60" y="279.8" text-anchor="end">N/A</text><line class="grid" x1="70" y1="227.4" x2="620" y2="227.4"/><text class="tick" x="60" y="231.4" text-anchor="end">40</text><line class="grid" x1="70" y1="178.9" x2="620" y2="178.9"/><text class="tick" x="60" y="182.9" text-anchor="end">50</text><line class="grid" x1="70" y1="130.5" x2="620" y2="130.5"/><text class="tick" x="60" y="134.5" text-anchor="end">60</text><line class="grid" x1="70" y1="82.1" x2="620" y2="82.1"/><text class="tick" x="60" y="86.1" text-anchor="end">70</text><line class="grid" x1="70" y1="33.7" x2="620" y2="33.7"/><text class="tick" x="60" y="37.7" text-anchor="end">80</text>
 <line class="axis" x1="70" y1="300" x2="620" y2="300"/><line class="axis" x1="70" y1="24" x2="70" y2="300"/>
@@ -350,7 +336,7 @@ bibtex: |
     <h2>One embedding, many images</h2>
     <p>The embedding sets the content of the image, and the pixel noise supplies the stochastic details it leaves out.</p>
     <figure class="dem-fig">
-        <div class="dem-media dem-pair">
+        <div class="dem-media wide dem-pair">
             <div><img src="same_embedding.webp" width="656" height="392" alt="Three rows of five generated images. Images in a row share content and differ in detail." loading="lazy"><p>One sampled embedding per row, with varied pixel noise.</p></div>
             <div><img src="from_real.webp" width="668" height="392" alt="Three rows. Each starts with a validation image, followed by four generated images with the same content." loading="lazy"><p>A validation image and samples from its embedding.</p></div>
         </div>
@@ -361,7 +347,7 @@ bibtex: |
     <h2>Completion and in-painting</h2>
     <p>DEM completes crops and in-paints without training for either.</p>
     <figure class="dem-fig">
-        <div class="dem-media dem-pair even">
+        <div class="dem-media wide dem-pair even">
             <div><img src="completion.webp" width="668" height="392" alt="Three rows. Each starts with an image where only a boxed crop is visible, followed by four generated images consistent with the crop." loading="lazy"><p>Each image is decoded from an embedding sampled given the blue crop.</p></div>
             <div><img src="inpaint.webp" width="828" height="392" alt="Six examples in two blocks, one image per row. Each shows an image with hidden patches followed by two filled-in versions." loading="lazy"><p>A hole, blocks and out-painting, with two samples each.</p></div>
         </div>
