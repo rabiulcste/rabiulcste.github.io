@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'Tricks on array index range query'
 author: Rabiul
 subtitle: ''

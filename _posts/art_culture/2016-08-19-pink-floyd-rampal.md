@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'শৃঙ্খল ১'
 author: 'Rabiul Awal'
 layout: post

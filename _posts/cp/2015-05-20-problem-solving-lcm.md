@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'প্রবলেম সলভিং - এলসিএম (১)'
 author: Rabiul Awal
 layout: post

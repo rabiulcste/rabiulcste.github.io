@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'প্রাইমারিলিটি টেস্টিং (সিভ অব এরাটস্থেনিজ)'
 author: Rabiul Awal
 layout: post

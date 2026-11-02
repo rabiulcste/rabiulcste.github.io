@@ -15,6 +15,8 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+/* Reset the browser's side margins on block elements; components then set only vertical spacing (margin-block). */
+figure, blockquote { margin: 0; }
 
 html { -webkit-text-size-adjust: 100%; }
 
@@ -44,13 +46,13 @@ a:hover { text-decoration-color: currentColor; }
 /* Title block */
 .hero { padding: 72px 0 48px; text-align: center; }
 .hero h1 {
-    margin: 0 0 24px;
+    margin-block: 0 24px;
     font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem);
     line-height: 1.1;
     font-weight: 600;
     letter-spacing: -0.02em;
 }
-.authors { margin: 0 0 4px; font-size: var(--text-subtitle); }
+.authors { margin-block: 0 4px; font-size: var(--text-subtitle); }
 .authors a { text-decoration: none; }
 .authors a:hover { text-decoration: underline; }
 .meta { margin: 0; color: var(--muted); font-size: var(--text-secondary); }
@@ -60,7 +62,7 @@ a:hover { text-decoration-color: currentColor; }
     flex-wrap: wrap;
     justify-content: center;
     gap: 8px;
-    margin: 28px 0 0;
+    margin-block: 28px 0;
     padding: 0;
     list-style: none;
 }
@@ -76,23 +78,25 @@ a:hover { text-decoration-color: currentColor; }
 .links .soon { color: var(--muted); cursor: default; }
 
 /* Sections */
-section { margin: 0 0 88px; }
+section { margin-block: 0 88px; }
 section > :last-child { margin-bottom: 0; }
 h2 {
-    margin: 0 0 16px;
+    margin-block: 0 16px;
     font-size: var(--text-title-sm);
     font-weight: 600;
     letter-spacing: -0.01em;
 }
-p { margin: 0 0 16px; }
+p { margin-block: 0 16px; }
 .lede { font-size: var(--text-body-lg); }
 .muted { color: var(--muted); }
 .note { color: var(--muted); font-size: var(--text-secondary); }
 .intro { margin-bottom: 48px; }
-.tldr { text-align: center; font-size: var(--text-lede); line-height: 1.5; margin: 0 auto 48px; max-width: 620px; }
+/* The TL;DR opens the page as a slightly larger first paragraph, left-aligned in the column like the text after it. */
+.tldr { font-size: var(--text-lede); line-height: 1.55; margin: 0; }
+#tldr { margin-bottom: 40px; }
 
 /* Figures */
-.fig { margin: 0 0 32px; }
+.fig { margin-block: 0 32px; }
 /* Paper figures are drawn for white paper, so they sit on a white card (visible in dark mode). */
 .fig-img { background: #fff; border-radius: var(--radius); padding: 12px; }
 /* In dark mode the white paper figures and clips are dimmed a little so they do not glare. */
@@ -121,7 +125,7 @@ figcaption, .caption { margin-top: 12px; color: var(--muted); font-size: var(--t
 
 /* Tables */
 .table-wrap { overflow-x: auto; margin: 0; }
-.caption { margin: 12px 0 32px; }
+.caption { margin-block: 12px 32px; }
 table { width: 100%; border-collapse: collapse; font-size: var(--text-secondary); font-variant-numeric: tabular-nums; }
 th, td { padding: 8px 12px; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; }
 th:first-child, td:first-child { text-align: left; }
@@ -144,7 +148,8 @@ footer.site a { color: var(--muted); text-decoration: none; }
 
 /* Shared pieces used by every project page ------------------------------------------------ */
 /* Wider than the text column on large screens, the column on phones. */
-.wide { width: min(var(--wide), 100vw - 2 * var(--gutter)); margin-left: calc(50% - min(var(--wide) / 2, 50vw - var(--gutter))); }
+/* Layout owns horizontal placement; components set only vertical spacing (margin-block), so they never undo this. */
+.wide { width: min(var(--wide), 100vw - 2 * var(--gutter)); margin-left: calc(50% - min(var(--wide) / 2, 50vw - var(--gutter))); margin-right: 0; }
 .scroll { overflow-x: auto; }
 /* A wide section keeps its heading and text in the column. */
 .wide > h2, .wide > p { max-width: var(--col); margin-left: auto; margin-right: auto; }
@@ -152,7 +157,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
 @media (min-width: 768px) { .only-phone { display: none !important; } }
 @media (max-width: 767px) { .only-desk { display: none !important; } }
 /* Tabs and toggles above a figure */
-.tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 12px; }
+.tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-block: 0 12px; }
 .tabs[hidden] { display: none; }
 .tabs button { font: inherit; font-size: var(--text-small); color: var(--text); background: none; border: 1px solid var(--line); border-radius: var(--radius); padding: 4px 14px; cursor: pointer; }
 .tabs button[aria-selected="true"], .tabs button[aria-pressed="true"] { border-color: var(--text); }
@@ -170,7 +175,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
 /* DRIFT (drift/index.html): results charts, diagrams and clips that follow the theme and reflow on phones (no sideways scrolling) */
 :root { --drift: #1F4FB0; --drift-2: #4F86DB; --drift-grid: #ececef; }
 @media (prefers-color-scheme: dark) { :root { --drift: #79A8F2; --drift-2: #4A78C8; --drift-grid: #222225; } }
-.drift-media { margin: 0 0 12px; }
+.drift-media { margin-bottom: 12px; }
 /* The same diagram with its right panel drawn under the left one, for phones (.only-phone). */
 .drift-media--stack { max-width: 480px; margin-left: auto; margin-right: auto; }
 .drift-svg { display: block; width: 100%; height: auto; }
@@ -233,7 +238,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .dch-trk .gl { position: absolute; top: 0; bottom: 0; border-left: 1px solid var(--drift-grid); }
 .dch-trk .band, .dch-trk .dot, .dch-trk .bar { position: absolute; top: 50%; display: block; background: var(--muted); }
 .dch-trk .band { height: 8px; margin-top: -4px; border-radius: 4px; opacity: 0.3; }
-.dch-trk .dot { width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; }
+.dch-trk .dot { width: 10px; height: 10px; margin-block: -5px 0 -5px; border-radius: 50%; }
 .dch-trk .bar { left: 0; height: 18px; margin-top: -9px; border-radius: 2px; opacity: 0.45; }
 .dch-row--ours .dch-lab, .dch-row--ours .dch-val { font-weight: 600; color: var(--drift); }
 .dch-row--sym .dch-lab { color: var(--text); }
@@ -245,7 +250,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .dch-ticks .dch-trk { border-top: 1px solid var(--muted); }
 .dch-ticks i { position: absolute; top: 4px; transform: translateX(-50%); font-size: 12px; font-style: normal; }
 .dch-ax { margin-top: 10px; text-align: center; font-size: 13px; }
-.dch-foot { margin: 8px 0 0; font-size: 12px; line-height: 1.35; color: var(--muted); }
+.dch-foot { margin-block: 8px 0; font-size: 12px; line-height: 1.35; color: var(--muted); }
 /* Atari: one panel per statistic beside a shared label column; a little wider than the column on large screens, like the diagrams */
 .dch-atari { width: min(760px, 100vw - 2 * var(--gutter)); margin-left: calc(50% - min(380px, 50vw - var(--gutter))); display: grid; grid-template-columns: var(--labw) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); column-gap: 14px; }
 .dch-atari .dch-panel .dch-row { grid-template-columns: minmax(0, 1fr) var(--valw); }
@@ -260,7 +265,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .dch-crafter .dch-row { grid-template-columns: var(--labw) minmax(0, 1fr) var(--kindw); }
 .dch-crafter .dch-row .dch-kind { padding-left: 14px; font-size: 12px; white-space: nowrap; }
 .dch-crafter .dch-trk .dch-val { position: absolute; top: 50%; transform: translateY(-50%); margin-left: 8px; text-align: left; }
-.dch-group { height: 20px; margin: 16px 0 4px; font-weight: 600; }
+.dch-group { height: 20px; margin-block: 16px 4px; font-weight: 600; }
 .dch-group:first-child { margin-top: 0; }
 .dch-crafter .dch-ax { padding: 0 var(--kindw) 0 var(--labw); }
 /* Ablations: two dot panels, one under the other */
@@ -299,14 +304,14 @@ footer.site a { color: var(--muted); text-decoration: none; }
     .dch-kind, .dch-crafter .dch-row .dch-kind { display: none; }
     .dch-foot { display: block; margin-top: 6px; }
     .dch-trk .band { height: 6px; margin-top: -3px; }
-    .dch-trk .dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; }
+    .dch-trk .dot { width: 8px; height: 8px; margin-block: -4px 0 -4px; }
     .dch-trk .bar { height: 13px; margin-top: -6.5px; }
     .dch-ticks { height: 20px; }
     .dch-atari .dch-panel .dch-ticks .dch-trk { grid-column: 2; }
     .dch-crafter .dch-ticks span:last-child { display: none; }
     .dch-ticks i { top: 3px; }
     .dch-head { height: 22px; font-size: 14px; }
-    .dch-group { height: 16px; margin: 6px 0 2px; font-size: 12px; }
+    .dch-group { height: 16px; margin-block: 6px 2px; font-size: 12px; }
     .dch-ax, .dch-crafter .dch-ax, .dch-abl .dch-ax { margin-top: 4px; padding: 0; font-size: 12px; }
     .dch-abl .dch-panel + .dch-panel { margin-top: 14px; }
     .dch-atari { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
@@ -314,7 +319,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
     .dch-atari .dch-panel .dch-lab { display: block; }
     .dch-atari .dch-panel { display: none; }
     .dch-atari[data-show="iqm"] .dch-panel[data-stat="iqm"], .dch-atari[data-show="median"] .dch-panel[data-stat="median"], .dch-atari[data-show="mean"] .dch-panel[data-stat="mean"] { display: block; }
-    .dch-seg { display: flex; gap: 2px; width: max-content; margin: 0 0 8px; padding: 2px; border: 1px solid var(--line); border-radius: var(--radius); }
+    .dch-seg { display: flex; gap: 2px; width: max-content; margin-block: 0 8px; padding: 2px; border: 1px solid var(--line); border-radius: var(--radius); }
     .dch-seg button { min-height: 28px; padding: 0 14px; border: 0; border-radius: var(--radius); background: none; color: var(--muted); font: 600 13px/1 var(--font); cursor: pointer; }
     .dch-seg button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
     .dch-seg button:focus-visible { outline: 2px solid var(--drift); outline-offset: 1px; }

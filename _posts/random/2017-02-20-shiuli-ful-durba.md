@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'শিউলি ফুল এবং দূর্বা বিষয়ক'
 author: 'Rabiul Awal'
 layout: post

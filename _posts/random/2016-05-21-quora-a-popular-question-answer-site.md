@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'Quora: বর্তমান সময়ের সেরা প্রশ্ন-উত্তর সাইট'
 
 author: 'Rabiul Awal'

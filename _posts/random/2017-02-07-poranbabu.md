@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: পরানবাবু
 author: 'Rabiul Awal'
 layout: post

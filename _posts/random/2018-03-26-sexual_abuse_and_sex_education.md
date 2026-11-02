@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'শিশুদের বইপত্রে সেক্স এডুকেশন এবং অন্যান্য'
 author: 'Rabiul Awal'
 layout: post

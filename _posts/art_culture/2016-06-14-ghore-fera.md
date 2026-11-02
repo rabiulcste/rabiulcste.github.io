@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'ঘরে ফেরা বিষয়ক'
 author: 'Rabiul Awal'
 layout: post

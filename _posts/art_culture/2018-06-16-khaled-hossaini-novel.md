@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'খালেদ হোসাইনির নোভেল বিষয়ক'
 author: 'Rabiul Awal'
 layout: post

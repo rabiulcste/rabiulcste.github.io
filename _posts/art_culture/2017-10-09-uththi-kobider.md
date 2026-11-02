@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'উঠতি কবিদের বলি'
 author: 'Rabiul Awal'
 layout: post

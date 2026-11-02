@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'গ্রামে হার্ডওয়ার দোকান বাইড়া গেছে, বেচাকেনা কম'
 author: 'Rabiul Awal'
 layout: post

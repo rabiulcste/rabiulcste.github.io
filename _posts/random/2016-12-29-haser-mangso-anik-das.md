@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'হাঁসের মাংস এবং অনিক দাস বিষয়ক'
 author: 'Rabiul Awal'
 layout: post

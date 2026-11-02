@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: BARRICADE a film by IRU KHAIRUL KARIM
 author: Rabiul Awal
 layout: post

@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'SPOJ Problem ADFRUITS'
 author: 'Rabiul Awal'
 subtitle: 'এই প্রবলেমটি একটি স্ট্রেইট ফরোয়ার্ড Shortest Common Subsequence প্রবলেম।'

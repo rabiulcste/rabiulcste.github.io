@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'পাবলিক বিশ্ববিদ্যালয়ে গবেষণা সংকট প্রসঙ্গে'
 author: 'Rabiul Awal'
 layout: post

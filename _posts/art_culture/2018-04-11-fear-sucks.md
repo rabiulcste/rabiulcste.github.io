@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'ভয় সাকস'
 author: 'Rabiul Awal'
 layout: post

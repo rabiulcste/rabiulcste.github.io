@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'কবিতা উৎসবের পত্র ২০১৭, মশাল'
 author: 'Rabiul Awal'
 layout: post

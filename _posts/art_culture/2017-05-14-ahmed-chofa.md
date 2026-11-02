@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'আহমেদ ছফা ১'
 author: 'Rabiul Awal'
 layout: post

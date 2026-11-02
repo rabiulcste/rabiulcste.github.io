@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'তেরোর পরে'
 author: 'Rabiul Awal'
 excerpt: ''

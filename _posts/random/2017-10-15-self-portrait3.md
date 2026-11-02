@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'সেলফ পোট্রেট ৩'
 author: 'Rabiul Awal'
 layout: post

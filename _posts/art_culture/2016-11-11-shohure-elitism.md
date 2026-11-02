@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'শহুরে এলিটিজম বিষয়ক'
 author: 'Rabiul Awal'
 layout: post

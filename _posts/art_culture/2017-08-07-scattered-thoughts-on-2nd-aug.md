@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: '১০১ একরের দিকে দেখি'
 author: 'Rabiul Awal'
 layout: post

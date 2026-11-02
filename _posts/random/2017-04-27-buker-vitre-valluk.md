@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'বুকের ভিত্রে ভাল্লুক'
 author: 'Rabiul Awal'
 layout: post

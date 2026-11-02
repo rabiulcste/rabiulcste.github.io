@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'মজার সংখ্যা পাই'
 author: Rabiul Awal
 excerpt: ''

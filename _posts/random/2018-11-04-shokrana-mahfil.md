@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'শোকরানা মাহফিল ও কওমি বিদ্যালয় প্রসঙ্গে'
 author: 'Rabiul Awal'
 layout: post

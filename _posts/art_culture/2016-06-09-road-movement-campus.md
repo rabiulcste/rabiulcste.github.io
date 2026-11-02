@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'রাস্তার আন্দোলন বিষয়ক, ক্যাম্পাস'
 author: 'Rabiul Awal'
 excerpt: ''

@@ -30,7 +30,7 @@ bibtex: |
     }
     .dem-media { margin-bottom: 16px; }
     .dem-media img { display: block; width: 100%; height: auto; }
-    .dem-fig { margin: 0 0 48px; }
+    .dem-fig { margin-block: 0 48px; }
     .dem-fig > figcaption, main .caption { margin: 0; }
     main h2 { margin-bottom: 12px; }
     .dem-svg { display: block; width: 100%; height: auto; min-width: 540px; }
@@ -103,22 +103,22 @@ bibtex: |
     .dem-svg--phone { min-width: 0; max-width: 480px; margin: 0 auto; }
     .dem-svg--phone .lb { font-size: 13px; }
     .dem-svg--phone .net-t { font-size: 16px; }
-    .dem-use-text { text-align: center; color: var(--muted); font-size: var(--text-secondary); margin: 8px 0 0; min-height: 1.5em; }
+    .dem-use-text { text-align: center; color: var(--muted); font-size: var(--text-secondary); margin-block: 8px 0; min-height: 1.5em; }
     /* Noise-map views: one column per view, its noise map above it. */
     .dem-views { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; max-width: 680px; margin: 0 auto; }
     .dem-view { margin: 0; text-align: center; font-size: var(--text-caption); line-height: 1.3; }
-    .dem-view figcaption { display: flex; flex-direction: column; justify-content: flex-end; min-height: 2.6em; margin: 0 0 6px; color: var(--text); font-size: inherit; line-height: 1.3; }
+    .dem-view figcaption { display: flex; flex-direction: column; justify-content: flex-end; min-height: 2.6em; margin-block: 0 6px; color: var(--text); font-size: inherit; line-height: 1.3; }
     .dem-view figcaption span { display: block; }
     .dem-role { color: var(--muted); }
     .dem-view .dem-map { display: block; width: 44%; margin: 0 auto 10px; outline: 1px solid var(--border); }
     .dem-view img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
-    .dem-legend { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 16px 0 0; color: var(--muted); font-size: var(--text-caption); }
+    .dem-legend { display: flex; align-items: center; justify-content: center; gap: 8px; margin-block: 16px 0; color: var(--muted); font-size: var(--text-caption); }
     .dem-legend i { width: 96px; height: 8px; outline: 1px solid var(--border); background: linear-gradient(90deg, #fff, #1e293b); }
     /* Paired image panels: side by side on large screens, stacked on phones. */
     .dem-pair { display: grid; grid-template-columns: 656fr 668fr; gap: 32px; align-items: start; }
     .dem-pair.even { grid-template-columns: 668fr 828fr; }
     .dem-pair img { display: block; width: 100%; height: auto; }
-    .dem-pair p { margin: 8px 0 0; color: var(--muted); font-size: var(--text-secondary); line-height: 1.5; }
+    .dem-pair p { margin-block: 8px 0; color: var(--muted); font-size: var(--text-secondary); line-height: 1.5; }
     @media (max-width: 640px) {
         .dem-pair, .dem-pair.even { grid-template-columns: 1fr; gap: 24px; }
         .dem-views { gap: 6px; }

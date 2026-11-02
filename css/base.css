@@ -98,7 +98,7 @@
 }
 
 
-/* Bengali posts: scoped via unicode-range so this only loads/applies to Bengali-script text */
+/* Bengali text: scoped via unicode-range so this only loads/applies to Bengali-script text */
 @font-face {
     font-family: "SolaimanLipi";
     src: url("https://cdn.jsdelivr.net/gh/maateen/bangla-web-fonts@master/fonts/solaiman-lipi/solaimanlipi-normal-v1.0.ttf") format("truetype");
@@ -106,6 +106,7 @@
     font-style: normal;
     font-display: swap;
     unicode-range: U+0980-09FF;
+    size-adjust: 110%;      /* SolaimanLipi sits small next to Helvetica; this matches the visual size */
 }
 @font-face {
     font-family: "SolaimanLipi";
@@ -114,8 +115,11 @@
     font-style: normal;
     font-display: swap;
     unicode-range: U+0980-09FF;
+    size-adjust: 110%;      /* SolaimanLipi sits small next to Helvetica; this matches the visual size */
 }
 
+/* Bangla needs more room between lines for its vowel signs and conjuncts. Posts set lang: bn in front matter. */
+:lang(bn) { --leading-body: 1.75; --leading-prose: 1.8; }
 
 .wrap {
     width: 100%;

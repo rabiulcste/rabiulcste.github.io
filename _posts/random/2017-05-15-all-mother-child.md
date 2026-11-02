@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'অল মাদার আউট দেয়ার আ''ম হার চাইল্ড'
 author: 'Rabiul Awal'
 layout: post

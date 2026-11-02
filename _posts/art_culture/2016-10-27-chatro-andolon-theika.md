@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'ছাত্র আন্দোলন থেইকা ২০১৬'
 author: 'Rabiul Awal'
 layout: post

@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'শহিদুল জহির'
 author: 'Rabiul Awal'
 layout: post

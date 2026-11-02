@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'জাতিসংঘের পেটে ঢুইকা বইসা থাকা শিক্ষার্থী বিষয়ক'
 author: 'Rabiul Awal'
 layout: post

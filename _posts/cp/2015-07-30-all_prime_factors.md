@@ -1,4 +1,5 @@
 ---
+lang: bn
 title: 'পূর্ণ সংখ্যার প্রাইম ফ্যাক্টরাইজেশন'
 author: Rabiul Awal
 subtitle: ''
