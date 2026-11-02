@@ -2,7 +2,7 @@
 layout: project
 title: "Denoising Embedding Models Are Self-Supervised Learners"
 seo_title: "DEM: Denoising Embedding Models Are Self-Supervised Learners"
-description: "DEM: a diffusion model in representation space that unifies self-supervised representation learning and image generation, beating DINOv2 on ImageNet-100."
+description: "DEM: a diffusion model at two levels that learns visual representations and generates images in one network, trained by denoising alone."
 keywords: ["DEM", "denoising embedding model", "self-supervised learning", "representation learning", "visual representation learning", "diffusion models", "diffusion models as representation learners", "representation alignment", "REPA", "unified representation learning and generation", "joint-embedding", "JEPA", "I-JEPA", "DINOv2", "DINO", "linear probe", "representation generation", "RCG", "unconditional image generation", "generation without labels", "latent diffusion", "diffusion transformer", "ImageNet"]
 authors:
   - name: Rabiul Awal
@@ -33,12 +33,15 @@ bibtex: |
     .dem-media img { display: block; width: 100%; height: auto; }
     .dem-media.narrow img { max-width: 668px; margin: 0 auto; }
     .dem-fig { margin: 0 0 48px; }
-    .dem-fig figcaption, main .caption { margin: 0; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
+    .dem-fig > figcaption, main .caption { margin: 0; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
     main section { margin-bottom: 88px; }
+    main section > :last-child { margin-bottom: 0; }
     main h2 { font-size: 1.25rem; margin-bottom: 12px; }
     .hero { padding: 72px 0 48px; }
     .dem-scroll { overflow-x: auto; }
     .dem-svg { display: block; width: 100%; height: auto; min-width: 540px; }
+    .dem-svg.dem-fit { min-width: 0; max-width: 560px; margin: 0 auto; }
+    .dem-svg.dem-fit .lb { font-size: 14px; }
     .dem-svg text { font-family: var(--font); font-size: 15px; fill: var(--text); }
     .dem-svg .lb, .dem-svg .tick { font-size: 13px; fill: var(--muted); }
     .dem-svg .strong { fill: var(--text); font-weight: 600; }
@@ -50,6 +53,7 @@ bibtex: |
     .dem-svg .nd-enc, .dem-svg .bars rect { stroke: var(--rep); }
     .dem-svg .bars rect { fill: var(--rep); stroke: none; }
     .dem-svg .nd-gen { stroke: var(--emb); }
+    .dem-svg.dem-plane { min-width: 460px; }
     .dem-svg .tile { clip-path: inset(0 round 6px); }
     .dem-svg .ln { fill: none; stroke-width: 2; }
     .dem-svg .ln.enc { stroke: var(--rep); } .dem-svg .ln.gen { stroke: var(--emb); } .dem-svg .ln.dec { stroke: var(--pix); }
@@ -65,60 +69,89 @@ bibtex: |
     .dem-svg .lab { font-size: 13px; fill: var(--muted); }
     .dem-svg .lab-ours { font-size: 15px; font-weight: 600; fill: var(--rep); }
     .dem-svg .pt-g:hover .pt { opacity: 1; fill: var(--text); }
+    .dem-svg .lvl { font-size: 13px; font-weight: 600; }
+    .dem-svg .lvl.emb, .dem-svg .sch-t.emb { fill: var(--emb); }
+    .dem-svg .lvl.pix, .dem-svg .sch-t.pix { fill: var(--pix); }
+    .dem-svg .sch-t { font-weight: 600; }
+    .dem-svg .sch.emb { fill: var(--emb); fill-opacity: 0.18; stroke: var(--emb); stroke-width: 1.5; }
+    .dem-svg .sch.pix { fill: var(--pix); fill-opacity: 0.18; stroke: var(--pix); stroke-width: 1.5; }
+    .dem-svg .mdn { stroke-width: 1; stroke-dasharray: 3 3; }
+    .dem-svg .mdn.emb { stroke: var(--emb); } .dem-svg .mdn.pix { stroke: var(--pix); }
+    .dem-svg .zb rect { fill: var(--emb); }
+    .dem-svg .zb-end rect { fill: var(--muted); }
     .dem-uses { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 12px; }
     .dem-uses[hidden], .dem-use-text[hidden] { display: none; }
     .dem-uses button { font: inherit; font-size: 0.875rem; color: var(--text); background: none; border: 1px solid var(--border); border-radius: 999px; padding: 4px 14px; cursor: pointer; }
     .dem-uses button[aria-selected="true"] { border-color: var(--text); }
-    /* Phones: stacked or re-plotted figures replace the wide ones, and nothing scrolls sideways. */
+    /* Phones: the stacked concept figure replaces the wide one, and nothing scrolls sideways. */
     .dem-phone { display: none; }
     .dem-svg--phone { min-width: 0; }
-    .dem-svg--phone .lb, .dem-svg--phone .tick, .dem-svg--phone .lab, .dem-svg--phone .ax { font-size: 13px; }
+    .dem-svg--phone .lb { font-size: 13px; }
     .dem-svg--phone .net-t { font-size: 16px; }
     @media (max-width: 767px) {
         .dem-desk { display: none; }
         .dem-phone { display: block; }
-        #results td, #results th { white-space: normal; padding: 8px 6px; }
-        #results td:first-child { padding-left: 0; }
         #bibtex pre { white-space: pre-wrap; overflow-wrap: anywhere; }
     }
     .dem-use-text { text-align: center; color: var(--muted); font-size: 0.875rem; margin: 8px 0 0; min-height: 1.5em; }
+    /* Noise-map views: one column per view, its noise map above it. */
+    .dem-views { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; max-width: 680px; margin: 0 auto; }
+    .dem-view { margin: 0; text-align: center; font-size: 0.8125rem; line-height: 1.3; }
+    .dem-view figcaption { display: flex; flex-direction: column; justify-content: flex-end; min-height: 2.6em; margin: 0 0 6px; color: var(--text); font-size: inherit; line-height: 1.3; }
+    .dem-view figcaption span { display: block; }
+    .dem-role { color: var(--muted); }
+    .dem-view .dem-map { display: block; width: 44%; margin: 0 auto 10px; outline: 1px solid var(--border); }
+    .dem-view img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+    .dem-legend { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 16px 0 0; color: var(--muted); font-size: 0.8125rem; }
+    .dem-legend i { width: 96px; height: 8px; border-radius: 4px; outline: 1px solid var(--border); background: linear-gradient(90deg, #fff, #1e293b); }
+    /* Paired image panels: side by side on large screens, stacked on phones. */
+    .dem-pair { display: grid; grid-template-columns: 656fr 668fr; gap: 32px; align-items: start; }
+    .dem-pair.even { grid-template-columns: 668fr 404fr; }
+    .dem-pair img { display: block; width: 100%; height: auto; }
+    .dem-pair p { margin: 8px 0 0; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
+    @media (max-width: 640px) {
+        .dem-pair, .dem-pair.even { grid-template-columns: 1fr; gap: 24px; }
+        .dem-pair .sm { width: 66%; }
+        .dem-views { gap: 6px; }
+        .dem-view { font-size: 0.6875rem; }
+        .dem-view figcaption { min-height: 3.9em; }
+        #results td, #results th { white-space: normal; padding-left: 6px; padding-right: 6px; }
+        .dem-svg.dem-plane { min-width: 0; }
+        .dem-plane .lab, .dem-plane .tick, .dem-plane .ax { font-size: 18px; }
+        .dem-plane .lab-ours { font-size: 21px; }
+    }
 </style>
 
 <section>
     <figure class="dem-fig">
-        <div class="dem-media"><img src="samples.webp" alt="A grid of 32 small generated images of animals, objects and scenes." loading="lazy"></div>
-        <figcaption>Uncurated images generated without labels, by one network trained only by denoising.</figcaption>
+        <div class="dem-media narrow"><img src="samples.webp" width="656" height="392" alt="A grid of 15 small images of animals, objects and scenes, generated without labels." loading="lazy"></div>
+        <figcaption>Images generated without labels, by one network trained by denoising alone. All samples on this page are uncurated.</figcaption>
     </figure>
 </section>
 
 <section class="intro">
-    <p>For the past two years, I have worked on generative world models for control. In my <a href="/drift/">DRIFT</a> project, I found that the features of a denoising model are less suited to control. One explanation is that reconstruction does not produce invariant, abstract features. This is also part of why Yann LeCun favors joint-embedding methods such as <a href="https://openreview.net/forum?id=BZ5a1r-kVsf">JEPA</a> over generative models.</p>
-    <p>I was mostly fascinated and consumed by diffusion models, so I went looking for a diffusion-native solution to both representation and generation. In this project, a single denoising objective trains one network to do both. The network generates representations and pixels, so representation learning and generation share one model and one objective. In this view, self-supervised learning becomes a form of generative modeling.</p>
-</section>
-
-<section id="abstract">
-    <h2>Abstract</h2>
-    <p>This paper shows that a generative model trained only by denoising can learn visual representations competitive with self-supervised learning and generate images without labels. Our approach is simple. In joint-embedding self-supervised learning, a network predicts the embedding of one view of an image from another view. We observe that this prediction is denoising at full noise, where the noisy embedding carries no information. We train the network on this <em>view-conditioned denoising</em> at all noise levels and call the result a <em>denoising embedding model</em> (DEM). A DEM is a diffusion model in representation space, with self-supervised prediction at its full-noise end. Without the view, the same network generates embeddings, and as a pixel denoiser it turns them into images. On ImageNet-100, DEM's linear probe exceeds that of <a href="https://arxiv.org/abs/2304.07193">DINOv2</a> at the same training length (76.1% against 72.8%). With a single network, it generates without labels at FID 26.1, against 22.9 for <a href="https://arxiv.org/abs/2312.03701">RCG</a>, which trains three separate models. We hope this simple model will motivate rethinking self-supervised learning as a form of generative modeling.</p>
-    <p class="note">These are current results on ImageNet-100 at 64x64 resolution. They may change as the work progresses.</p>
+    <p>Representations learned by reconstructing, denoising or generating the image still trail those of non-generative self-supervised learning (SSL) methods. An image's exact color and framing are <em>stochastic details</em> that vary among images with the same content. A representation trained to reproduce the image is pushed to encode these details. Recognition, in contrast, benefits from invariance to them.</p>
 </section>
 
 <section id="method">
-    <h2>Method</h2>
-    <p>In joint-embedding learning, a network predicts the embedding of one view of an image from another view. Suppose the network also receives a noisy copy of the embedding it predicts. If the copy is pure noise, it carries no information, and the task reduces exactly to self-supervised prediction.</p>
+    <h2>A diffusion model at two levels</h2>
+    <p>DEM generates the representation and the image separately, within one network and with one denoising objective. In representation space, it denoises the embedding of an image given another view of the same image. In pixel space, it generates the image that this embedding describes.</p>
     <figure class="dem-fig" id="dem-concept">
         <div class="dem-uses" role="tablist" aria-label="Uses of the network" hidden>
     <button type="button" role="tab" data-use="enc" aria-selected="false">Encode</button>
-    <button type="button" role="tab" data-use="gen" aria-selected="false">Generate an embedding</button>
-    <button type="button" role="tab" data-use="dec" aria-selected="false">Decode to pixels</button>
+    <button type="button" role="tab" data-use="gen" aria-selected="false">Denoise the embedding</button>
+    <button type="button" role="tab" data-use="dec" aria-selected="false">Generate the image</button>
 </div>
 <p class="dem-use-text" aria-live="polite" hidden></p>
-        <div class="dem-media dem-scroll dem-desk"><svg class="dem-svg" viewBox="0 0 760 420" role="img" aria-labelledby="cd-t">
-<title id="cd-t">One network with three uses. A view of the image goes in and the network outputs its embedding, the representation. Given a noisy embedding, the network outputs the denoised embedding, and without the view it generates embeddings from noise. Given an embedding and noisy pixels, it outputs an image. A noise-level axis below runs from no noise to full noise, where denoising the embedding is self-supervised prediction.</title>
+        <div class="dem-media dem-scroll dem-desk"><svg class="dem-svg" viewBox="0 0 760 368" role="img" aria-labelledby="cd-t">
+<title id="cd-t">One network at two levels. In representation space, a view of the image goes in and the network outputs its embedding, the representation, and given a noisy embedding the network outputs the denoised embedding. In pixel space, given an embedding and noisy pixels, the network outputs an image.</title>
 <defs>
 <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker>
-<linearGradient id="nz" x1="0" x2="1"><stop offset="0" class="nz0"/><stop offset="1" class="nz1"/></linearGradient>
 <filter id="noisy"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="g"/><feBlend in="SourceGraphic" in2="g" mode="overlay"/></filter>
 </defs>
+<text class="lvl emb" transform="translate(30 146) rotate(-90)" text-anchor="middle">Representation space</text>
+<text class="lvl pix" transform="translate(30 306) rotate(-90)" text-anchor="middle">Pixel space</text>
+<line class="grid" x1="16" x2="744" y1="252" y2="252" stroke-dasharray="4 4"/>
 <g class="u enc gen">
   <image href="tile_view.webp" x="70" y="34" width="72" height="72" preserveAspectRatio="none" class="tile"/>
   <text class="lb" x="106" y="124" text-anchor="middle">View x′</text>
@@ -147,19 +180,11 @@ bibtex: |
   <image href="tile_sample.webp" x="604" y="262" width="72" height="72" preserveAspectRatio="none" class="tile"/>
   <text class="lb" x="640" y="352" text-anchor="middle">Image</text>
 </g>
-<g class="u gen axis-g">
-  <rect x="150" y="384" width="460" height="10" rx="5" fill="url(#nz)"/>
-  <text class="lb" x="150" y="374">no noise</text>
-  <text class="lb" x="610" y="374" text-anchor="end">full noise</text>
-  <text class="lb strong" x="610" y="414" text-anchor="end">full noise = self-supervised prediction</text>
-  <text class="lb" x="150" y="414">noise level of z<tspan class="sub" dy="4">τ</tspan></text>
-</g>
 </svg></div>
-        <div class="dem-media dem-phone"><svg class="dem-svg dem-svg--phone" viewBox="0 0 360 426" role="img" aria-labelledby="cd-pt">
-<title id="cd-pt">One network with three uses, one per column. A view of the image goes in and the network outputs its embedding, the representation. Given a noisy embedding, and the view, the network outputs the denoised embedding. Given an embedding and noisy pixels, it outputs an image. A noise-level axis below runs from no noise to full noise, where denoising the embedding is self-supervised prediction.</title>
+        <div class="dem-media dem-phone"><svg class="dem-svg dem-svg--phone" viewBox="0 0 360 372" role="img" aria-labelledby="cd-pt">
+<title id="cd-pt">One network at two levels. In representation space, a view of the image goes in and the network outputs its embedding, the representation, and given a noisy embedding the network outputs the denoised embedding. In pixel space, given an embedding and noisy pixels, the network outputs an image.</title>
 <defs>
 <marker id="ah-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker>
-<linearGradient id="nz-p" x1="0" x2="1"><stop offset="0" class="nz0"/><stop offset="1" class="nz1"/></linearGradient>
 <filter id="noisy-p"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="g"/><feBlend in="SourceGraphic" in2="g" mode="overlay"/></filter>
 </defs>
 <g class="u enc gen">
@@ -193,39 +218,71 @@ bibtex: |
   <image href="tile_sample.webp" x="272" y="236" width="56" height="56" preserveAspectRatio="none" class="tile"/>
   <text class="lb" x="300" y="312" text-anchor="middle">Image</text>
 </g>
-<g class="u gen axis-g">
-  <text class="lb" x="10" y="356">no noise</text>
-  <text class="lb" x="350" y="356" text-anchor="end">full noise</text>
-  <rect x="10" y="364" width="340" height="10" rx="5" fill="url(#nz-p)"/>
-  <text class="lb" x="10" y="394">noise level of z<tspan class="sub" dy="4">τ</tspan></text>
-  <text class="lb strong" x="350" y="418" text-anchor="end">full noise = self-supervised prediction</text>
-</g>
+<text class="lvl emb" x="120" y="362" text-anchor="middle">Representation space</text>
+<text class="lvl pix" x="300" y="362" text-anchor="middle">Pixel space</text>
+<line class="grid" x1="240" x2="240" y1="346" y2="368" stroke-dasharray="4 4"/>
 </svg></div>
-        <figcaption>Denoising in embedding space turns joint-embedding prediction into a generative model.</figcaption>
     </figure>
-    <p>We train the network on this view-conditioned denoising at all noise levels. Without the view, it samples embeddings as a representation generator, and as a pixel denoiser it turns them into images. Its features also serve as the image representation.</p>
+</section>
+
+<section id="schedules">
+    <h2>Asymmetric noise schedules</h2>
+    <p>The embedding is denoised mostly near full noise, close to the SSL task where semantics are learned, and the pixels at lower noise, where the stochastic details are drawn.</p>
+    <figure class="dem-fig"><svg class="dem-svg dem-fit" viewBox="0 0 480 224" role="img" aria-labelledby="sch-t">
+<title id="sch-t">Two logit-normal noise schedules on an axis from clean to full noise. The embedding level has median 0.95 and sits close to full noise. The pixel level has median 0.69. Each curve is scaled to its own peak.</title>
+<defs><linearGradient id="nz" x1="0" x2="1"><stop offset="0" class="nz0"/><stop offset="1" class="nz1"/></linearGradient></defs>
+<path class="sch pix" d="M10.0 170.0 L10.5 170.0 L11.6 170.0 L12.8 170.0 L13.9 170.0 L15.1 170.0 L16.2 170.0 L17.4 170.0 L18.5 170.0 L19.7 170.0 L20.8 170.0 L22.0 170.0 L23.1 170.0 L24.3 170.0 L25.4 170.0 L26.6 170.0 L27.7 170.0 L28.9 170.0 L30.0 170.0 L31.2 170.0 L32.3 170.0 L33.5 170.0 L34.6 170.0 L35.8 170.0 L36.9 170.0 L38.1 170.0 L39.2 170.0 L40.4 170.0 L41.5 170.0 L42.7 170.0 L43.8 169.9 L45.0 169.9 L46.1 169.9 L47.3 169.9 L48.4 169.9 L49.6 169.9 L50.7 169.9 L51.9 169.9 L53.0 169.8 L54.2 169.8 L55.3 169.8 L56.5 169.8 L57.6 169.7 L58.8 169.7 L59.9 169.7 L61.1 169.7 L62.2 169.6 L63.4 169.6 L64.5 169.5 L65.7 169.5 L66.8 169.5 L68.0 169.4 L69.1 169.4 L70.3 169.3 L71.4 169.3 L72.6 169.2 L73.7 169.2 L74.9 169.1 L76.0 169.0 L77.2 169.0 L78.3 168.9 L79.5 168.8 L80.6 168.7 L81.8 168.7 L82.9 168.6 L84.1 168.5 L85.2 168.4 L86.4 168.3 L87.5 168.2 L88.7 168.1 L89.8 168.0 L91.0 167.9 L92.2 167.8 L93.3 167.7 L94.5 167.6 L95.6 167.4 L96.8 167.3 L97.9 167.2 L99.1 167.1 L100.2 166.9 L101.4 166.8 L102.5 166.6 L103.7 166.5 L104.8 166.3 L106.0 166.2 L107.1 166.0 L108.3 165.8 L109.4 165.7 L110.6 165.5 L111.7 165.3 L112.9 165.1 L114.0 165.0 L115.2 164.8 L116.3 164.6 L117.5 164.4 L118.6 164.2 L119.8 164.0 L120.9 163.7 L122.1 163.5 L123.2 163.3 L124.4 163.1 L125.5 162.8 L126.7 162.6 L127.8 162.4 L129.0 162.1 L130.1 161.9 L131.3 161.6 L132.4 161.4 L133.6 161.1 L134.7 160.8 L135.9 160.5 L137.0 160.3 L138.2 160.0 L139.3 159.7 L140.5 159.4 L141.6 159.1 L142.8 158.8 L143.9 158.5 L145.1 158.2 L146.2 157.9 L147.4 157.5 L148.5 157.2 L149.7 156.9 L150.8 156.5 L152.0 156.2 L153.1 155.9 L154.3 155.5 L155.4 155.2 L156.6 154.8 L157.7 154.4 L158.9 154.1 L160.0 153.7 L161.2 153.3 L162.3 152.9 L163.5 152.5 L164.6 152.1 L165.8 151.7 L166.9 151.3 L168.1 150.9 L169.2 150.5 L170.4 150.1 L171.5 149.7 L172.7 149.2 L173.8 148.8 L175.0 148.3 L176.1 147.9 L177.3 147.5 L178.4 147.0 L179.6 146.5 L180.7 146.1 L181.9 145.6 L183.0 145.1 L184.2 144.7 L185.3 144.2 L186.5 143.7 L187.6 143.2 L188.8 142.7 L189.9 142.2 L191.1 141.7 L192.3 141.2 L193.4 140.7 L194.6 140.2 L195.7 139.6 L196.9 139.1 L198.0 138.6 L199.2 138.0 L200.3 137.5 L201.5 136.9 L202.6 136.4 L203.8 135.8 L204.9 135.3 L206.1 134.7 L207.2 134.2 L208.4 133.6 L209.5 133.0 L210.7 132.4 L211.8 131.8 L213.0 131.3 L214.1 130.7 L215.3 130.1 L216.4 129.5 L217.6 128.9 L218.7 128.3 L219.9 127.6 L221.0 127.0 L222.2 126.4 L223.3 125.8 L224.5 125.2 L225.6 124.5 L226.8 123.9 L227.9 123.3 L229.1 122.6 L230.2 122.0 L231.4 121.3 L232.5 120.7 L233.7 120.0 L234.8 119.4 L236.0 118.7 L237.1 118.0 L238.3 117.4 L239.4 116.7 L240.6 116.0 L241.7 115.4 L242.9 114.7 L244.0 114.0 L245.2 113.3 L246.3 112.6 L247.5 112.0 L248.6 111.3 L249.8 110.6 L250.9 109.9 L252.1 109.2 L253.2 108.5 L254.4 107.8 L255.5 107.1 L256.7 106.4 L257.8 105.7 L259.0 105.0 L260.1 104.3 L261.3 103.6 L262.4 102.9 L263.6 102.2 L264.7 101.5 L265.9 100.8 L267.0 100.1 L268.2 99.4 L269.3 98.6 L270.5 97.9 L271.6 97.2 L272.8 96.5 L273.9 95.8 L275.1 95.1 L276.2 94.4 L277.4 93.7 L278.5 93.0 L279.7 92.3 L280.8 91.6 L282.0 90.9 L283.1 90.2 L284.3 89.5 L285.4 88.8 L286.6 88.1 L287.7 87.4 L288.9 86.7 L290.1 86.0 L291.2 85.3 L292.4 84.7 L293.5 84.0 L294.7 83.3 L295.8 82.6 L297.0 82.0 L298.1 81.3 L299.3 80.7 L300.4 80.0 L301.6 79.4 L302.7 78.7 L303.9 78.1 L305.0 77.4 L306.2 76.8 L307.3 76.2 L308.5 75.6 L309.6 75.0 L310.8 74.4 L311.9 73.8 L313.1 73.2 L314.2 72.6 L315.4 72.1 L316.5 71.5 L317.7 70.9 L318.8 70.4 L320.0 69.9 L321.1 69.3 L322.3 68.8 L323.4 68.3 L324.6 67.8 L325.7 67.3 L326.9 66.9 L328.0 66.4 L329.2 66.0 L330.3 65.5 L331.5 65.1 L332.6 64.7 L333.8 64.3 L334.9 63.9 L336.1 63.6 L337.2 63.2 L338.4 62.9 L339.5 62.6 L340.7 62.3 L341.8 62.0 L343.0 61.7 L344.1 61.5 L345.3 61.2 L346.4 61.0 L347.6 60.8 L348.7 60.6 L349.9 60.5 L351.0 60.4 L352.2 60.2 L353.3 60.1 L354.5 60.1 L355.6 60.0 L356.8 60.0 L357.9 60.0 L359.1 60.0 L360.2 60.1 L361.4 60.1 L362.5 60.2 L363.7 60.4 L364.8 60.5 L366.0 60.7 L367.1 60.9 L368.3 61.2 L369.4 61.4 L370.6 61.7 L371.7 62.0 L372.9 62.4 L374.0 62.8 L375.2 63.2 L376.3 63.7 L377.5 64.2 L378.6 64.7 L379.8 65.2 L380.9 65.8 L382.1 66.5 L383.2 67.1 L384.4 67.8 L385.5 68.6 L386.7 69.4 L387.8 70.2 L389.0 71.0 L390.2 71.9 L391.3 72.9 L392.5 73.8 L393.6 74.9 L394.8 75.9 L395.9 77.0 L397.1 78.2 L398.2 79.3 L399.4 80.6 L400.5 81.8 L401.7 83.1 L402.8 84.5 L404.0 85.9 L405.1 87.3 L406.3 88.8 L407.4 90.3 L408.6 91.9 L409.7 93.5 L410.9 95.1 L412.0 96.8 L413.2 98.6 L414.3 100.3 L415.5 102.1 L416.6 104.0 L417.8 105.8 L418.9 107.8 L420.1 109.7 L421.2 111.7 L422.4 113.7 L423.5 115.7 L424.7 117.8 L425.8 119.8 L427.0 121.9 L428.1 124.0 L429.3 126.2 L430.4 128.3 L431.6 130.5 L432.7 132.6 L433.9 134.7 L435.0 136.9 L436.2 139.0 L437.3 141.1 L438.5 143.2 L439.6 145.2 L440.8 147.2 L441.9 149.2 L443.1 151.1 L444.2 153.0 L445.4 154.8 L446.5 156.5 L447.7 158.2 L448.8 159.7 L450.0 161.2 L451.1 162.5 L452.3 163.8 L453.4 164.9 L454.6 165.9 L455.7 166.8 L456.9 167.6 L458.0 168.3 L459.2 168.8 L460.3 169.2 L461.5 169.5 L462.6 169.7 L463.8 169.9 L464.9 170.0 L466.1 170.0 L467.2 170.0 L468.4 170.0 L469.5 170.0 L470.0 170.0Z"/>
+<path class="sch emb" d="M10.0 170.0 L10.5 170.0 L11.6 170.0 L12.8 170.0 L13.9 170.0 L15.1 170.0 L16.2 170.0 L17.4 170.0 L18.5 170.0 L19.7 170.0 L20.8 170.0 L22.0 170.0 L23.1 170.0 L24.3 170.0 L25.4 170.0 L26.6 170.0 L27.7 170.0 L28.9 170.0 L30.0 170.0 L31.2 170.0 L32.3 170.0 L33.5 170.0 L34.6 170.0 L35.8 170.0 L36.9 170.0 L38.1 170.0 L39.2 170.0 L40.4 170.0 L41.5 170.0 L42.7 170.0 L43.8 170.0 L45.0 170.0 L46.1 170.0 L47.3 170.0 L48.4 170.0 L49.6 170.0 L50.7 170.0 L51.9 170.0 L53.0 170.0 L54.2 170.0 L55.3 170.0 L56.5 170.0 L57.6 170.0 L58.8 170.0 L59.9 170.0 L61.1 170.0 L62.2 170.0 L63.4 170.0 L64.5 170.0 L65.7 170.0 L66.8 170.0 L68.0 170.0 L69.1 170.0 L70.3 170.0 L71.4 170.0 L72.6 170.0 L73.7 170.0 L74.9 170.0 L76.0 170.0 L77.2 170.0 L78.3 170.0 L79.5 170.0 L80.6 170.0 L81.8 170.0 L82.9 170.0 L84.1 170.0 L85.2 170.0 L86.4 170.0 L87.5 170.0 L88.7 170.0 L89.8 170.0 L91.0 170.0 L92.2 170.0 L93.3 170.0 L94.5 170.0 L95.6 170.0 L96.8 170.0 L97.9 170.0 L99.1 170.0 L100.2 170.0 L101.4 170.0 L102.5 170.0 L103.7 170.0 L104.8 170.0 L106.0 170.0 L107.1 170.0 L108.3 170.0 L109.4 170.0 L110.6 170.0 L111.7 170.0 L112.9 170.0 L114.0 170.0 L115.2 170.0 L116.3 170.0 L117.5 170.0 L118.6 170.0 L119.8 170.0 L120.9 170.0 L122.1 170.0 L123.2 170.0 L124.4 170.0 L125.5 170.0 L126.7 170.0 L127.8 170.0 L129.0 170.0 L130.1 170.0 L131.3 170.0 L132.4 170.0 L133.6 170.0 L134.7 170.0 L135.9 170.0 L137.0 170.0 L138.2 170.0 L139.3 170.0 L140.5 170.0 L141.6 170.0 L142.8 170.0 L143.9 170.0 L145.1 170.0 L146.2 170.0 L147.4 170.0 L148.5 170.0 L149.7 170.0 L150.8 170.0 L152.0 170.0 L153.1 170.0 L154.3 170.0 L155.4 170.0 L156.6 170.0 L157.7 170.0 L158.9 170.0 L160.0 170.0 L161.2 170.0 L162.3 170.0 L163.5 170.0 L164.6 170.0 L165.8 170.0 L166.9 170.0 L168.1 170.0 L169.2 170.0 L170.4 170.0 L171.5 170.0 L172.7 170.0 L173.8 170.0 L175.0 170.0 L176.1 170.0 L177.3 170.0 L178.4 170.0 L179.6 170.0 L180.7 170.0 L181.9 170.0 L183.0 170.0 L184.2 170.0 L185.3 170.0 L186.5 170.0 L187.6 170.0 L188.8 170.0 L189.9 170.0 L191.1 170.0 L192.3 170.0 L193.4 170.0 L194.6 170.0 L195.7 170.0 L196.9 170.0 L198.0 170.0 L199.2 170.0 L200.3 170.0 L201.5 169.9 L202.6 169.9 L203.8 169.9 L204.9 169.9 L206.1 169.9 L207.2 169.9 L208.4 169.9 L209.5 169.9 L210.7 169.9 L211.8 169.9 L213.0 169.9 L214.1 169.9 L215.3 169.9 L216.4 169.9 L217.6 169.9 L218.7 169.9 L219.9 169.9 L221.0 169.9 L222.2 169.9 L223.3 169.9 L224.5 169.9 L225.6 169.9 L226.8 169.9 L227.9 169.9 L229.1 169.9 L230.2 169.9 L231.4 169.9 L232.5 169.9 L233.7 169.9 L234.8 169.9 L236.0 169.9 L237.1 169.9 L238.3 169.9 L239.4 169.9 L240.6 169.9 L241.7 169.9 L242.9 169.8 L244.0 169.8 L245.2 169.8 L246.3 169.8 L247.5 169.8 L248.6 169.8 L249.8 169.8 L250.9 169.8 L252.1 169.8 L253.2 169.8 L254.4 169.8 L255.5 169.8 L256.7 169.8 L257.8 169.8 L259.0 169.8 L260.1 169.8 L261.3 169.8 L262.4 169.7 L263.6 169.7 L264.7 169.7 L265.9 169.7 L267.0 169.7 L268.2 169.7 L269.3 169.7 L270.5 169.7 L271.6 169.7 L272.8 169.7 L273.9 169.7 L275.1 169.7 L276.2 169.6 L277.4 169.6 L278.5 169.6 L279.7 169.6 L280.8 169.6 L282.0 169.6 L283.1 169.6 L284.3 169.6 L285.4 169.5 L286.6 169.5 L287.7 169.5 L288.9 169.5 L290.1 169.5 L291.2 169.5 L292.4 169.5 L293.5 169.4 L294.7 169.4 L295.8 169.4 L297.0 169.4 L298.1 169.4 L299.3 169.4 L300.4 169.3 L301.6 169.3 L302.7 169.3 L303.9 169.3 L305.0 169.3 L306.2 169.2 L307.3 169.2 L308.5 169.2 L309.6 169.2 L310.8 169.1 L311.9 169.1 L313.1 169.1 L314.2 169.1 L315.4 169.0 L316.5 169.0 L317.7 169.0 L318.8 168.9 L320.0 168.9 L321.1 168.9 L322.3 168.8 L323.4 168.8 L324.6 168.8 L325.7 168.7 L326.9 168.7 L328.0 168.6 L329.2 168.6 L330.3 168.6 L331.5 168.5 L332.6 168.5 L333.8 168.4 L334.9 168.4 L336.1 168.3 L337.2 168.3 L338.4 168.2 L339.5 168.2 L340.7 168.1 L341.8 168.0 L343.0 168.0 L344.1 167.9 L345.3 167.9 L346.4 167.8 L347.6 167.7 L348.7 167.6 L349.9 167.6 L351.0 167.5 L352.2 167.4 L353.3 167.3 L354.5 167.2 L355.6 167.1 L356.8 167.1 L357.9 167.0 L359.1 166.9 L360.2 166.8 L361.4 166.6 L362.5 166.5 L363.7 166.4 L364.8 166.3 L366.0 166.2 L367.1 166.0 L368.3 165.9 L369.4 165.8 L370.6 165.6 L371.7 165.5 L372.9 165.3 L374.0 165.2 L375.2 165.0 L376.3 164.8 L377.5 164.6 L378.6 164.5 L379.8 164.3 L380.9 164.1 L382.1 163.8 L383.2 163.6 L384.4 163.4 L385.5 163.1 L386.7 162.9 L387.8 162.6 L389.0 162.4 L390.2 162.1 L391.3 161.8 L392.5 161.5 L393.6 161.2 L394.8 160.8 L395.9 160.5 L397.1 160.1 L398.2 159.7 L399.4 159.3 L400.5 158.9 L401.7 158.5 L402.8 158.0 L404.0 157.5 L405.1 157.0 L406.3 156.5 L407.4 156.0 L408.6 155.4 L409.7 154.8 L410.9 154.2 L412.0 153.5 L413.2 152.8 L414.3 152.1 L415.5 151.3 L416.6 150.5 L417.8 149.7 L418.9 148.8 L420.1 147.8 L421.2 146.8 L422.4 145.8 L423.5 144.7 L424.7 143.6 L425.8 142.3 L427.0 141.1 L428.1 139.7 L429.3 138.3 L430.4 136.8 L431.6 135.2 L432.7 133.5 L433.9 131.7 L435.0 129.8 L436.2 127.9 L437.3 125.8 L438.5 123.5 L439.6 121.2 L440.8 118.7 L441.9 116.1 L443.1 113.3 L444.2 110.4 L445.4 107.3 L446.5 104.1 L447.7 100.7 L448.8 97.1 L450.0 93.4 L451.1 89.6 L452.3 85.6 L453.4 81.5 L454.6 77.4 L455.7 73.4 L456.9 69.5 L458.0 65.9 L459.2 62.9 L460.3 60.8 L461.5 60.0 L462.6 61.3 L463.8 65.6 L464.9 74.3 L466.1 89.1 L467.2 112.0 L468.4 142.7 L469.5 168.4 L470.0 170.0Z"/>
+<line class="mdn emb" x1="447.0" x2="447.0" y1="170.0" y2="44"/>
+<line class="mdn pix" x1="327.4" x2="327.4" y1="170.0" y2="60"/>
+<text class="sch-t emb" x="447.0" y="18" text-anchor="end">Embedding, median 0.95</text>
+<text class="lb" x="447.0" y="36" text-anchor="end">where semantics are learned</text>
+<text class="sch-t pix" x="203.2" y="88" text-anchor="end">Pixels, median 0.69</text>
+<text class="lb" x="203.2" y="106" text-anchor="end">where details are drawn</text>
+<rect x="10.0" y="178" width="460.0" height="8" rx="4" fill="url(#nz)"/>
+<text class="lb" x="10.0" y="208">clean</text>
+<text class="lb" x="470.0" y="208" text-anchor="end">full noise</text>
+</svg></figure>
+</section>
+
+<section id="special-case">
+    <h2>The full-noise special case</h2>
+    <p>Conceptually, joint-embedding SSL methods are a special case of DEM. These methods train a network to predict the embedding of one view of an image from another view. Suppose this network also receives a noisy copy of the embedding it predicts. If the copy is pure noise, it carries no information, and the task is unchanged.</p>
+    <figure class="dem-fig"><svg class="dem-svg dem-fit" viewBox="0 0 480 152" role="img" aria-labelledby="cp-t">
+<title id="cp-t">A noisy copy of an embedding at five noise levels. At no noise it shows the embedding. At full noise it is pure noise and carries no information, which leaves joint-embedding prediction.</title>
+<g class="zb"><rect x="8" y="52.0" width="4" height="1.0"/><rect x="14" y="46.9" width="4" height="5.1"/><rect x="20" y="52.0" width="4" height="4.7"/><rect x="26" y="52.0" width="4" height="15.2"/><rect x="32" y="52.0" width="4" height="7.8"/><rect x="38" y="52.0" width="4" height="16.9"/><rect x="44" y="51.0" width="4" height="1.0"/><rect x="50" y="29.1" width="4" height="22.9"/><rect x="56" y="52.0" width="4" height="8.4"/><rect x="62" y="52.0" width="4" height="10.6"/><rect x="68" y="43.6" width="4" height="8.4"/><rect x="74" y="45.9" width="4" height="6.1"/><rect x="80" y="50.2" width="4" height="1.8"/><rect x="86" y="52.0" width="4" height="15.9"/><text class="lb" x="49.0" y="118" text-anchor="middle">τ = 0</text></g><g class="zb"><rect x="104" y="52.0" width="4" height="1.0"/><rect x="110" y="46.3" width="4" height="5.7"/><rect x="116" y="52.0" width="4" height="7.2"/><rect x="122" y="52.0" width="4" height="12.7"/><rect x="128" y="52.0" width="4" height="11.0"/><rect x="134" y="52.0" width="4" height="16.2"/><rect x="140" y="52.0" width="4" height="4.3"/><rect x="146" y="35.5" width="4" height="16.5"/><rect x="152" y="52.0" width="4" height="9.8"/><rect x="158" y="52.0" width="4" height="7.2"/><rect x="164" y="45.3" width="4" height="6.7"/><rect x="170" y="47.9" width="4" height="4.1"/><rect x="176" y="52.0" width="4" height="5.6"/><rect x="182" y="52.0" width="4" height="13.4"/><text class="lb" x="145.0" y="118" text-anchor="middle">τ = 0.25</text></g><g class="zb"><rect x="200" y="52.0" width="4" height="1.0"/><rect x="206" y="45.6" width="4" height="6.4"/><rect x="212" y="52.0" width="4" height="9.7"/><rect x="218" y="52.0" width="4" height="10.1"/><rect x="224" y="52.0" width="4" height="14.3"/><rect x="230" y="52.0" width="4" height="15.6"/><rect x="236" y="52.0" width="4" height="9.6"/><rect x="242" y="41.9" width="4" height="10.1"/><rect x="248" y="52.0" width="4" height="11.2"/><rect x="254" y="52.0" width="4" height="3.8"/><rect x="260" y="47.0" width="4" height="5.0"/><rect x="266" y="50.0" width="4" height="2.0"/><rect x="272" y="52.0" width="4" height="12.9"/><rect x="278" y="52.0" width="4" height="10.9"/><text class="lb" x="241.0" y="118" text-anchor="middle">τ = 0.5</text></g><g class="zb"><rect x="296" y="52.0" width="4" height="1.0"/><rect x="302" y="45.0" width="4" height="7.0"/><rect x="308" y="52.0" width="4" height="12.3"/><rect x="314" y="52.0" width="4" height="7.6"/><rect x="320" y="52.0" width="4" height="17.6"/><rect x="326" y="52.0" width="4" height="14.9"/><rect x="332" y="52.0" width="4" height="14.9"/><rect x="338" y="48.2" width="4" height="3.8"/><rect x="344" y="52.0" width="4" height="12.6"/><rect x="350" y="52.0" width="4" height="1.0"/><rect x="356" y="48.6" width="4" height="3.4"/><rect x="362" y="52.0" width="4" height="1.0"/><rect x="368" y="52.0" width="4" height="20.3"/><rect x="374" y="52.0" width="4" height="8.4"/><text class="lb" x="337.0" y="118" text-anchor="middle">τ = 0.75</text></g><g class="zb zb-end"><rect x="392" y="52.0" width="4" height="1.0"/><rect x="398" y="44.4" width="4" height="7.6"/><rect x="404" y="52.0" width="4" height="14.8"/><rect x="410" y="52.0" width="4" height="5.0"/><rect x="416" y="52.0" width="4" height="20.9"/><rect x="422" y="52.0" width="4" height="14.2"/><rect x="428" y="52.0" width="4" height="20.3"/><rect x="434" y="52.0" width="4" height="2.6"/><rect x="440" y="52.0" width="4" height="13.9"/><rect x="446" y="49.0" width="4" height="3.0"/><rect x="452" y="50.3" width="4" height="1.7"/><rect x="458" y="52.0" width="4" height="2.1"/><rect x="464" y="52.0" width="4" height="27.7"/><rect x="470" y="52.0" width="4" height="5.9"/><text class="lb" x="433.0" y="118" text-anchor="middle">τ = 1</text></g>
+<text class="lb" x="8" y="144">the embedding</text>
+<text class="lb strong" x="472" y="144" text-anchor="end">pure noise, the task is prediction</text>
+</svg></figure>
+</section>
+
+<section id="views">
+    <h2>Noise-map views</h2>
+    <p>Masking and cropping amount to full noise on some patches. A single noising process, which sets a noise level for each patch, can thus produce both the views of SSL and the noisy images of diffusion. DEM draws all its inputs from this process, so its two tasks train on the same inputs.</p>
+    <figure class="dem-fig">
+        <div class="dem-views">
+            <figure class="dem-view"><figcaption><span>Clean</span><span class="dem-role">Image</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_clean.webp" width="64" height="64" alt="A clean image of a parrot, with an all-white noise map." loading="lazy"></figure>
+            <figure class="dem-view"><figcaption><span>Noise</span><span class="dem-role">Diffusion</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#868b95" d="M0 0h10v10h-10zM10 0h10v10h-10zM20 0h10v10h-10zM30 0h10v10h-10zM40 0h10v10h-10zM50 0h10v10h-10zM60 0h10v10h-10zM70 0h10v10h-10zM0 10h10v10h-10zM10 10h10v10h-10zM20 10h10v10h-10zM30 10h10v10h-10zM40 10h10v10h-10zM50 10h10v10h-10zM60 10h10v10h-10zM70 10h10v10h-10zM0 20h10v10h-10zM10 20h10v10h-10zM20 20h10v10h-10zM30 20h10v10h-10zM40 20h10v10h-10zM50 20h10v10h-10zM60 20h10v10h-10zM70 20h10v10h-10zM0 30h10v10h-10zM10 30h10v10h-10zM20 30h10v10h-10zM30 30h10v10h-10zM40 30h10v10h-10zM50 30h10v10h-10zM60 30h10v10h-10zM70 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM20 40h10v10h-10zM30 40h10v10h-10zM40 40h10v10h-10zM50 40h10v10h-10zM60 40h10v10h-10zM70 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM30 50h10v10h-10zM40 50h10v10h-10zM50 50h10v10h-10zM60 50h10v10h-10zM70 50h10v10h-10zM0 60h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10zM30 60h10v10h-10zM40 60h10v10h-10zM50 60h10v10h-10zM60 60h10v10h-10zM70 60h10v10h-10zM0 70h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10zM30 70h10v10h-10zM40 70h10v10h-10zM50 70h10v10h-10zM60 70h10v10h-10zM70 70h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_noise.webp" width="64" height="64" alt="The image with noise on every patch at level 0.54." loading="lazy"></figure>
+            <figure class="dem-view"><figcaption><span>Random mask</span><span class="dem-role">SSL</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#1e293b" d="M0 20h10v10h-10zM10 20h10v10h-10zM0 30h10v10h-10zM10 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_random.webp" width="64" height="64" alt="The image with scattered blocks of patches at full noise." loading="lazy"></figure>
+            <figure class="dem-view"><figcaption><span>Crop mask</span><span class="dem-role">SSL</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#1e293b" d="M0 0h10v10h-10zM10 0h10v10h-10zM20 0h10v10h-10zM30 0h10v10h-10zM40 0h10v10h-10zM50 0h10v10h-10zM60 0h10v10h-10zM70 0h10v10h-10zM0 10h10v10h-10zM10 10h10v10h-10zM20 10h10v10h-10zM30 10h10v10h-10zM40 10h10v10h-10zM50 10h10v10h-10zM60 10h10v10h-10zM70 10h10v10h-10zM0 20h10v10h-10zM10 20h10v10h-10zM20 20h10v10h-10zM0 30h10v10h-10zM10 30h10v10h-10zM20 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM20 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM0 60h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10zM0 70h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_crop.webp" width="64" height="64" alt="The image with everything outside a box at full noise." loading="lazy"></figure>
+            <figure class="dem-view"><figcaption><span>Combined</span><span class="dem-role">DEM</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#9ea3ab" d="M0 0h10v10h-10zM10 0h10v10h-10zM20 0h10v10h-10zM30 0h10v10h-10zM40 0h10v10h-10zM50 0h10v10h-10zM60 0h10v10h-10zM70 0h10v10h-10zM0 10h10v10h-10zM10 10h10v10h-10zM20 10h10v10h-10zM30 10h10v10h-10zM40 10h10v10h-10zM50 10h10v10h-10zM60 10h10v10h-10zM70 10h10v10h-10zM0 20h10v10h-10zM10 20h10v10h-10zM20 20h10v10h-10zM30 20h10v10h-10zM40 20h10v10h-10zM50 20h10v10h-10zM60 20h10v10h-10zM70 20h10v10h-10zM10 30h10v10h-10zM50 30h10v10h-10zM60 30h10v10h-10zM70 30h10v10h-10zM50 40h10v10h-10zM60 40h10v10h-10zM70 40h10v10h-10zM30 50h10v10h-10zM40 50h10v10h-10zM50 50h10v10h-10zM60 50h10v10h-10zM70 50h10v10h-10zM30 60h10v10h-10zM40 60h10v10h-10zM50 60h10v10h-10zM60 60h10v10h-10zM70 60h10v10h-10zM0 70h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10zM30 70h10v10h-10zM40 70h10v10h-10zM50 70h10v10h-10zM60 70h10v10h-10zM70 70h10v10h-10z"/><path fill="#1e293b" d="M0 30h10v10h-10zM20 30h10v10h-10zM30 30h10v10h-10zM40 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM20 40h10v10h-10zM30 40h10v10h-10zM40 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM0 60h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_all.webp" width="64" height="64" alt="A zoomed view at level 0.43 with masked blocks at full noise." loading="lazy"></figure>
+        </div>
+        <p class="dem-legend"><span>clean</span><i></i><span>full noise</span></p>
+    </figure>
 </section>
 
 <section id="results">
     <h2>Results</h2>
     <figure class="dem-fig">
-        <div class="dem-media dem-scroll dem-desk"><svg class="dem-svg" style="min-width: 460px" viewBox="0 0 640 350" role="img" aria-labelledby="sc-t">
-<title id="sc-t">Linear probe accuracy on ImageNet-100 against FID without labels. DEM has the highest probe and the second lowest FID. Single-task methods sit on the N/A lanes.</title>
+        <div class="dem-media dem-scroll"><svg class="dem-svg dem-plane" viewBox="0 0 640 350" role="img" aria-labelledby="sc-t">
+<title id="sc-t">Linear probe accuracy on ImageNet-100 against FID without labels. DEM has the highest probe, and its FID is on par with RCG, which has no probe of its own. Single-task methods sit on the N/A lanes.</title>
 <line class="grid" x1="110.4" y1="24" x2="110.4" y2="300"/><text class="tick" x="110.4" y="322" text-anchor="middle">N/A</text><line class="grid" x1="183.2" y1="24" x2="183.2" y2="300"/><text class="tick" x="183.2" y="322" text-anchor="middle">70</text><line class="grid" x1="264.1" y1="24" x2="264.1" y2="300"/><text class="tick" x="264.1" y="322" text-anchor="middle">60</text><line class="grid" x1="345.0" y1="24" x2="345.0" y2="300"/><text class="tick" x="345.0" y="322" text-anchor="middle">50</text><line class="grid" x1="425.9" y1="24" x2="425.9" y2="300"/><text class="tick" x="425.9" y="322" text-anchor="middle">40</text><line class="grid" x1="506.8" y1="24" x2="506.8" y2="300"/><text class="tick" x="506.8" y="322" text-anchor="middle">30</text><line class="grid" x1="587.6" y1="24" x2="587.6" y2="300"/><text class="tick" x="587.6" y="322" text-anchor="middle">20</text><line class="grid" x1="70" y1="275.8" x2="620" y2="275.8"/><text class="tick" x="60" y="279.8" text-anchor="end">N/A</text><line class="grid" x1="70" y1="227.4" x2="620" y2="227.4"/><text class="tick" x="60" y="231.4" text-anchor="end">40</text><line class="grid" x1="70" y1="178.9" x2="620" y2="178.9"/><text class="tick" x="60" y="182.9" text-anchor="end">50</text><line class="grid" x1="70" y1="130.5" x2="620" y2="130.5"/><text class="tick" x="60" y="134.5" text-anchor="end">60</text><line class="grid" x1="70" y1="82.1" x2="620" y2="82.1"/><text class="tick" x="60" y="86.1" text-anchor="end">70</text><line class="grid" x1="70" y1="33.7" x2="620" y2="33.7"/><text class="tick" x="60" y="37.7" text-anchor="end">80</text>
 <line class="axis" x1="70" y1="300" x2="620" y2="300"/><line class="axis" x1="70" y1="24" x2="70" y2="300"/>
 <text class="ax" x="345" y="346" text-anchor="middle">FID without labels (lower is better, right)</text>
 <text class="ax" transform="translate(16 162) rotate(-90)" text-anchor="middle">Linear probe (%)</text>
-<g class="pt-g"><title>DINOv2: probe 72.8%, FID N/A</title><circle class="pt" cx="110.4" cy="68.5" r="5"/><a href="https://arxiv.org/abs/2304.07193"><text class="lab" x="122.4" y="73.5" text-anchor="start">DINOv2</text></a></g><g class="pt-g"><title>BYOL: probe 70.1%, FID N/A</title><circle class="pt" cx="110.4" cy="81.6" r="5"/><a href="https://arxiv.org/abs/2006.07733"><text class="lab" x="122.4" y="86.6" text-anchor="start">BYOL</text></a></g><g class="pt-g"><title>I-JEPA: probe 39.7%, FID N/A</title><circle class="pt" cx="110.4" cy="228.8" r="5"/><a href="https://arxiv.org/abs/2301.08243"><text class="lab" x="122.4" y="239.8" text-anchor="start">I-JEPA</text></a></g><g class="pt-g"><title>MAE: probe 43.1%, FID N/A</title><circle class="pt" cx="110.4" cy="212.4" r="5"/><a href="https://arxiv.org/abs/2111.06377"><text class="lab" x="122.4" y="213.4" text-anchor="start">MAE</text></a></g><g class="pt-g"><title>JiT (uncond.): probe N/A, FID 64.0</title><circle class="pt" cx="231.8" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2511.13720"><text class="lab" x="243.8" y="280.8" text-anchor="start">JiT (uncond.)</text></a></g><g class="pt-g"><title>RCG (DINOv2 enc.): probe N/A, FID 22.9</title><circle class="pt" cx="564.2" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2312.03701"><text class="lab" x="550.2" y="266.8" text-anchor="end">RCG (DINOv2 enc.)</text></a></g><g class="pt-g"><title>MAGE: probe 35.4%, FID 67.9</title><circle class="pt" cx="200.2" cy="249.6" r="5"/><a href="https://arxiv.org/abs/2211.09117"><text class="lab" x="212.2" y="254.6" text-anchor="start">MAGE</text></a></g><g class="pt-g"><title>DEM: probe 76.1%, FID 26.1</title><circle class="pt-ours" cx="538.3" cy="52.6" r="8"/><text class="lab-ours" x="524.3" y="57.6" text-anchor="end">DEM</text></g>
+<g class="pt-g"><title>DINOv2: probe 72.8%, FID N/A</title><circle class="pt" cx="110.4" cy="68.5" r="5"/><a href="https://arxiv.org/abs/2304.07193"><text class="lab" x="122.4" y="69.5" text-anchor="start">DINOv2</text></a></g><g class="pt-g"><title>BYOL: probe 70.1%, FID N/A</title><circle class="pt" cx="110.4" cy="81.6" r="5"/><a href="https://arxiv.org/abs/2006.07733"><text class="lab" x="122.4" y="90.6" text-anchor="start">BYOL</text></a></g><g class="pt-g"><title>I-JEPA: probe 39.7%, FID N/A</title><circle class="pt" cx="110.4" cy="228.8" r="5"/><a href="https://arxiv.org/abs/2301.08243"><text class="lab" x="122.4" y="239.8" text-anchor="start">I-JEPA</text></a></g><g class="pt-g"><title>MAE: probe 43.1%, FID N/A</title><circle class="pt" cx="110.4" cy="212.4" r="5"/><a href="https://arxiv.org/abs/2111.06377"><text class="lab" x="122.4" y="213.4" text-anchor="start">MAE</text></a></g><g class="pt-g"><title>JiT (uncond.): probe N/A, FID 64.0</title><circle class="pt" cx="231.8" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2511.13720"><text class="lab" x="243.8" y="280.8" text-anchor="start">JiT (uncond.)</text></a></g><g class="pt-g"><title>RCG (BYOL enc.): probe N/A, FID 19.7</title><circle class="pt" cx="590.0" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2312.03701"><text class="lab" x="576.0" y="266.8" text-anchor="end">RCG (BYOL enc.)</text></a></g><g class="pt-g"><title>MAGE: probe 35.4%, FID 67.9</title><circle class="pt" cx="200.2" cy="249.6" r="5"/><a href="https://arxiv.org/abs/2211.09117"><text class="lab" x="212.2" y="254.6" text-anchor="start">MAGE</text></a></g><g class="pt-g"><title>DEM: probe 76.1%, FID 19.5</title><circle class="pt-ours" cx="591.6" cy="52.6" r="8"/><text class="lab-ours" x="577.6" y="57.6" text-anchor="end">DEM</text></g>
 </svg></div>
-        <div class="dem-media dem-phone"><svg class="dem-svg dem-svg--phone" viewBox="0 0 360 324" role="img" aria-labelledby="sc-pt">
-<title id="sc-pt">Linear probe accuracy on ImageNet-100 against FID without labels. DEM has the highest probe and the second lowest FID. Single-task methods sit on the N/A lanes.</title>
-<line class="grid" x1="66.5" y1="20.0" x2="66.5" y2="270.0"/><text class="tick" x="66.5" y="290" text-anchor="middle">N/A</text><line class="grid" x1="107.0" y1="20.0" x2="107.0" y2="270.0"/><text class="tick" x="107.0" y="290" text-anchor="middle">70</text><line class="grid" x1="152.0" y1="20.0" x2="152.0" y2="270.0"/><text class="tick" x="152.0" y="290" text-anchor="middle">60</text><line class="grid" x1="197.0" y1="20.0" x2="197.0" y2="270.0"/><text class="tick" x="197.0" y="290" text-anchor="middle">50</text><line class="grid" x1="242.0" y1="20.0" x2="242.0" y2="270.0"/><text class="tick" x="242.0" y="290" text-anchor="middle">40</text><line class="grid" x1="287.0" y1="20.0" x2="287.0" y2="270.0"/><text class="tick" x="287.0" y="290" text-anchor="middle">30</text><line class="grid" x1="332.0" y1="20.0" x2="332.0" y2="270.0"/><text class="tick" x="332.0" y="290" text-anchor="middle">20</text><line class="grid" x1="44.0" y1="248.1" x2="350.0" y2="248.1"/><text class="tick" x="38" y="251.7" text-anchor="end">N/A</text><line class="grid" x1="44.0" y1="204.2" x2="350.0" y2="204.2"/><text class="tick" x="38" y="207.9" text-anchor="end">40</text><line class="grid" x1="44.0" y1="160.3" x2="350.0" y2="160.3"/><text class="tick" x="38" y="163.9" text-anchor="end">50</text><line class="grid" x1="44.0" y1="116.5" x2="350.0" y2="116.5"/><text class="tick" x="38" y="120.1" text-anchor="end">60</text><line class="grid" x1="44.0" y1="72.6" x2="350.0" y2="72.6"/><text class="tick" x="38" y="76.2" text-anchor="end">70</text><line class="grid" x1="44.0" y1="28.8" x2="350.0" y2="28.8"/><text class="tick" x="38" y="32.4" text-anchor="end">80</text>
-<line class="axis" x1="44.0" y1="270.0" x2="350.0" y2="270.0"/><line class="axis" x1="44.0" y1="20.0" x2="44.0" y2="270.0"/>
-<text class="ax" x="197" y="318" text-anchor="middle">FID without labels (lower is better, right)</text>
-<text class="ax" transform="translate(10 145) rotate(-90)" text-anchor="middle">Linear probe (%)</text>
-<g class="pt-g"><title>DINOv2: probe 72.8%, FID N/A</title><circle class="pt" cx="66.5" cy="60.3" r="4.5"/><a href="https://arxiv.org/abs/2304.07193"><text class="lab" x="76.5" y="64.8" text-anchor="start">DINOv2</text></a></g><g class="pt-g"><title>BYOL: probe 70.1%, FID N/A</title><circle class="pt" cx="66.5" cy="72.2" r="4.5"/><a href="https://arxiv.org/abs/2006.07733"><text class="lab" x="76.5" y="76.7" text-anchor="start">BYOL</text></a></g><g class="pt-g"><title>I-JEPA: probe 39.7%, FID N/A</title><circle class="pt" cx="66.5" cy="205.5" r="4.5"/><a href="https://arxiv.org/abs/2301.08243"><text class="lab" x="76.5" y="215.5" text-anchor="start">I-JEPA</text></a></g><g class="pt-g"><title>MAE: probe 43.1%, FID N/A</title><circle class="pt" cx="66.5" cy="190.7" r="4.5"/><a href="https://arxiv.org/abs/2111.06377"><text class="lab" x="76.5" y="191.6" text-anchor="start">MAE</text></a></g><g class="pt-g"><title>JiT (uncond.): probe N/A, FID 64.0</title><circle class="pt" cx="134.0" cy="248.1" r="4.5"/><a href="https://arxiv.org/abs/2511.13720"><text class="lab" x="144.0" y="252.6" text-anchor="start">JiT (uncond.)</text></a></g><g class="pt-g"><title>RCG (DINOv2 enc.): probe N/A, FID 22.9</title><circle class="pt" cx="319.0" cy="248.1" r="4.5"/><a href="https://arxiv.org/abs/2312.03701"><text class="lab" x="309.0" y="239.9" text-anchor="end">RCG (DINOv2 enc.)</text></a></g><g class="pt-g"><title>MAGE: probe 35.4%, FID 67.9</title><circle class="pt" cx="116.4" cy="224.3" r="4.5"/><a href="https://arxiv.org/abs/2211.09117"><text class="lab" x="126.4" y="228.9" text-anchor="start">MAGE</text></a></g><g class="pt-g"><title>DEM: probe 76.1%, FID 26.1</title><circle class="pt-ours" cx="304.5" cy="45.9" r="7"/><text class="lab-ours" x="291.5" y="50.4" text-anchor="end">DEM</text></g>
-</svg></div>
-        <figcaption>One generative model learns representations competitive with self-supervised methods and generates images without labels.</figcaption>
+        <figcaption>One generative model learns representations competitive with self-supervised methods and generates images without labels. DEM uses guidance, and RCG does not.</figcaption>
     </figure>
     <div class="table-wrap">
         <table>
@@ -234,37 +291,33 @@ bibtex: |
             </thead>
             <tbody>
                 <tr><td>Linear probe</td><td>76.1%</td><td>72.8% (<a href="https://arxiv.org/abs/2304.07193">DINOv2</a>)</td></tr>
-                <tr><td>FID-50k without labels</td><td>26.1</td><td>22.9 (<a href="https://arxiv.org/abs/2312.03701">RCG</a>, three models)</td></tr>
+                <tr><td>FID-50k without labels</td><td>19.5</td><td>19.7 (<a href="https://arxiv.org/abs/2312.03701">RCG</a>, three models)</td></tr>
+                <tr><td>Class-conditional FID-50k</td><td>14.5 (1% of labels)</td><td>12.4 (<a href="https://arxiv.org/abs/2511.13720">JiT</a>, all labels)</td></tr>
             </tbody>
         </table>
     </div>
-    <p class="caption">ImageNet-100, 64x64, current results.</p>
+    <p class="caption">ImageNet-100, 64x64, current results. DINOv2 at the same training length. RCG trains three separate models. For class-conditional generation, DEM uses a linear probe fit on 1% of the labels, against class-conditional JiT trained on all labels.</p>
 </section>
 
 <section id="one-embedding">
     <h2>One embedding, many images</h2>
-    <p>The embedding is learned from views of the image. It can therefore stay invariant to color and framing, while the pixel denoiser reproduces these variations.</p>
+    <p>The embedding sets the content of the image, and the pixel noise supplies the stochastic details it leaves out.</p>
     <figure class="dem-fig">
-        <div class="dem-media"><img src="same_embedding.webp" alt="Four rows of eight generated images. Images in a row share content and differ in detail." loading="lazy"></div>
-        <figcaption>Each row decodes one sampled embedding with different pixel noise.</figcaption>
+        <div class="dem-media dem-pair">
+            <div><img src="same_embedding.webp" width="656" height="392" alt="Three rows of five generated images. Images in a row share content and differ in detail." loading="lazy"><p>One sampled embedding per row, with varied pixel noise.</p></div>
+            <div><img src="from_real.webp" width="668" height="392" alt="Three rows. Each starts with a validation image, followed by four generated images with the same content." loading="lazy"><p>A validation image and samples from its embedding.</p></div>
+        </div>
     </figure>
 </section>
 
 <section id="completion">
-    <h2>Completing a crop</h2>
-    <p>Below full noise, samples spread more as the view shows less of the image. A small crop fits many images, so the embeddings sampled from it decode to different images.</p>
+    <h2>Completion and in-painting</h2>
+    <p>DEM completes crops and in-paints without training for either.</p>
     <figure class="dem-fig">
-        <div class="dem-media narrow"><img src="completion.webp" alt="Four rows. Each starts with an image where only a small boxed crop is visible, followed by four generated images that contain the crop's content." loading="lazy"></div>
-        <figcaption>The first column shows the crop in a blue box, and the others show images decoded from sampled embeddings.</figcaption>
-    </figure>
-</section>
-
-<section id="inpainting">
-    <h2>In-painting</h2>
-    <p>If we keep the visible pixels while sampling, DEM fills in a hidden region without being trained for this task.</p>
-    <figure class="dem-fig">
-        <div class="dem-media"><img src="inpaint.webp" alt="Eight examples in two blocks. Each shows an image with its centre hidden, then two filled-in versions." loading="lazy"></div>
-        <figcaption>Each triple shows the input with its centre hidden and two samples. The examples are uncurated.</figcaption>
+        <div class="dem-media dem-pair even">
+            <div><img src="completion.webp" width="668" height="392" alt="Three rows. Each starts with an image where only a boxed crop is visible, followed by four generated images consistent with the crop." loading="lazy"><p>Each image is decoded from an embedding sampled given the blue crop.</p></div>
+            <div class="sm"><img src="inpaint.webp" width="404" height="392" alt="Three rows, each with an image with hidden patches followed by two filled-in versions." loading="lazy"><p>A hole, blocks and out-painting, with two samples each.</p></div>
+        </div>
     </figure>
 </section>
 
@@ -275,7 +328,7 @@ bibtex: |
   var text = {
     enc: "The network embeds a view of the image. The embedding is the representation.",
     gen: "Given a noisy embedding and a view, the network denoises it. Without the view, it generates embeddings from noise.",
-    dec: "As a pixel denoiser, the network turns an embedding into an image."
+    dec: "As a pixel denoiser, the network generates the image that the embedding describes."
   };
   bar.hidden = false;
   bar.addEventListener("click", function (e) {
