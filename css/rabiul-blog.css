@@ -110,7 +110,7 @@ a:focus-visible {
 .about-content > p a,
 .list-entry a {
     text-decoration: underline;
-    text-decoration-color: var(--border-muted);
+    text-decoration-color: var(--line);
     text-underline-offset: 0.14em;
     text-decoration-thickness: 1px;
 }
@@ -368,7 +368,7 @@ main {
     line-height: 1.4;
     color: var(--text-muted);
     text-decoration: underline;
-    text-decoration-color: var(--border-muted);
+    text-decoration-color: var(--line);
     text-underline-offset: 0.14em;
     text-decoration-thickness: 1px;
 }
@@ -384,7 +384,7 @@ main {
 .top-catalog .catalog-body .h1_nav > a,
 .top-catalog .catalog-body .h2_nav > a {
     color: var(--text);
-    text-decoration-color: var(--border-muted);
+    text-decoration-color: var(--line);
 }
 .top-catalog .catalog-body .h3_nav {
     margin-left: var(--space-3);
@@ -462,7 +462,7 @@ main {
     font-size: var(--text-secondary);
     font-weight: 400;
     text-decoration: underline;
-    text-decoration-color: var(--border-muted);
+    text-decoration-color: var(--line);
     text-underline-offset: 0.14em;
     text-decoration-thickness: 1px;
     display: inline-flex;
@@ -557,7 +557,7 @@ main {
     font-family: var(--font-mono);
     font-size: 0.65rem;
     line-height: 1.3;
-    color: var(--border-muted);
+    color: var(--line);
     white-space: pre;
     margin: 0.2em 0 0;
     padding-bottom: 0.2em;

@@ -35,7 +35,7 @@ main, footer.site {
     padding: 0 var(--gutter);
 }
 
-a { color: var(--link); text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 0.2em; }
+a { color: var(--link); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 0.2em; }
 a:hover { text-decoration-color: currentColor; }
 
 .skip-link { position: absolute; left: -9999px; }
@@ -68,7 +68,7 @@ a:hover { text-decoration-color: currentColor; }
 .links a, .links .soon {
     display: inline-block;
     padding: 6px 16px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--line);
     border-radius: var(--radius);
     font-size: var(--text-secondary);
     text-decoration: none;
@@ -153,7 +153,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
 /* Tabs and toggles above a figure */
 .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 12px; }
 .tabs[hidden] { display: none; }
-.tabs button { font: inherit; font-size: var(--text-small); color: var(--text); background: none; border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 14px; cursor: pointer; }
+.tabs button { font: inherit; font-size: var(--text-small); color: var(--text); background: none; border: 1px solid var(--line); border-radius: var(--radius); padding: 4px 14px; cursor: pointer; }
 .tabs button[aria-selected="true"], .tabs button[aria-pressed="true"] { border-color: var(--text); }
 /* Phones: tables and BibTeX wrap instead of scrolling sideways. */
 @media (max-width: 767px) {
@@ -167,7 +167,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .fig--video .fig-img { background: none; padding: 0; }
 
 /* DRIFT (drift/index.html): results charts, diagrams and clips that follow the theme and reflow on phones (no sideways scrolling) */
-:root { --drift: #1F4FB0; --drift-2: #79A8F2; --drift-grid: #ececef; }
+:root { --drift: #1F4FB0; --drift-2: #4F86DB; --drift-grid: #ececef; }
 @media (prefers-color-scheme: dark) { :root { --drift: #79A8F2; --drift-2: #4A78C8; --drift-grid: #222225; } }
 .drift-media { margin: 0 0 12px; }
 /* The same diagram with its right panel drawn under the left one, for phones (.only-phone). */
@@ -313,7 +313,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
     .dch-atari .dch-panel .dch-lab { display: block; }
     .dch-atari .dch-panel { display: none; }
     .dch-atari[data-show="iqm"] .dch-panel[data-stat="iqm"], .dch-atari[data-show="median"] .dch-panel[data-stat="median"], .dch-atari[data-show="mean"] .dch-panel[data-stat="mean"] { display: block; }
-    .dch-seg { display: flex; gap: 2px; width: max-content; margin: 0 0 8px; padding: 2px; border: 1px solid var(--border); border-radius: var(--radius); }
+    .dch-seg { display: flex; gap: 2px; width: max-content; margin: 0 0 8px; padding: 2px; border: 1px solid var(--line); border-radius: var(--radius); }
     .dch-seg button { min-height: 28px; padding: 0 14px; border: 0; border-radius: var(--radius); background: none; color: var(--muted); font: 600 13px/1 var(--font); cursor: pointer; }
     .dch-seg button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
     .dch-seg button:focus-visible { outline: 2px solid var(--drift); outline-offset: 1px; }

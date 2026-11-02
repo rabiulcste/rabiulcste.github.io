@@ -11,6 +11,7 @@
     --bg-muted: #f5f5f7;
     --border-muted: #d2d2d7;
     --border-hairline: rgba(60, 60, 67, 0.12);
+    --line: #86868b;        /* link underlines and control outlines: at least 3:1 against the page */
     --radius-soft: 8px;
     --radius-pill: 999em;
     --focus-ring: var(--text);
@@ -84,6 +85,7 @@
         --bg-muted: #1a1a1c;
         --border-muted: #4a4a50;
         --border-hairline: rgba(235, 235, 245, 0.12);
+        --line: #6e6e74;
         --navbar-bg: rgba(13, 13, 13, 0.72);
         --content-link: #ececec;
         --content-link-hover: #ffffff;

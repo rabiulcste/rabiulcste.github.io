@@ -17,7 +17,7 @@ tag: [flow-matching, diffusion, one-step-generation]
   --fig-frame:    #d8d0bd;
   --fig-ink:      #3a3833;
   --fig-ink-soft: #6a6660;
-  --fig-ink-mute: #a8a298;
+  --fig-ink-mute: #76716a;
   --fig-blue:     #6b8caf;
   --fig-sage:     #8fa68a;
   --fig-amber:    #c89060;
@@ -32,7 +32,7 @@ tag: [flow-matching, diffusion, one-step-generation]
     --fig-frame:    #3a3a40;
     --fig-ink:      #d8d4cc;
     --fig-ink-soft: #989288;
-    --fig-ink-mute: #6a6660;
+    --fig-ink-mute: #8a847a;
     --fig-blue:     #87a4c2;
     --fig-sage:     #a6bba0;
     --fig-amber:    #d8a578;
@@ -106,7 +106,7 @@ figure.fig-paper > figcaption {
 .eq .MathJax_Display { margin: 0 !important; }
 .eq-label {
   font-size: 12px;
-  color: #999;
+  color: var(--text-muted);
   margin: 0 0 1.4rem;
   font-style: italic;
   padding-left: 4px;
@@ -153,13 +153,13 @@ figure.fig-paper > figcaption {
 }
 @media (prefers-color-scheme: dark) {
   .eq .MathJax, .eq .MathJax_Display, .eq .MathJax svg { color: #e0e0e0 !important; fill: #e0e0e0 !important; }
-  .eq-label { color: #666; }
+  .eq-label { color: var(--text-muted); }
   .callout { background: #222; border-color: #444; color: #aaa; }
   .interactive-box { border-color: #333; }
   #unifiedDetail { background: #252525 !important; color: #b0b0b0 !important; }
   .trajectory-sketch { background: #252525; border-color: #333; color: #c8c8c8; }
 }
-.ref-list { font-size: 13px; color: #888; padding-left: 1.4rem; }
+.ref-list { font-size: 13px; color: var(--text-muted); padding-left: 1.4rem; }
 .ref-list li { margin-bottom: 0.35rem; line-height: 1.5; }
 sup.cite a { color: var(--fig-blue); text-decoration: none; font-size: 11px; vertical-align: super; }
 sup.cite a:hover { text-decoration: underline; }
@@ -1670,7 +1670,7 @@ The benchmark numbers have largely caught up to multi-step diffusion. CIFAR-10 a
 <tr>
   <td class="center">4</td>
   <td class="center">IN-512 (280M)</td>
-  <td class="center good">1.70 <span style="font-weight:400;color:#aaa;font-size:11px;">0.24s</span></td>
+  <td class="center good">1.70 <span style="font-weight:400;color:var(--text-muted);font-size:11px;">0.24s</span></td>
 </tr>
 </tbody>
 </table>
