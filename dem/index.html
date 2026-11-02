@@ -69,6 +69,18 @@ bibtex: |
     .dem-uses[hidden], .dem-use-text[hidden] { display: none; }
     .dem-uses button { font: inherit; font-size: 0.875rem; color: var(--text); background: none; border: 1px solid var(--border); border-radius: 999px; padding: 4px 14px; cursor: pointer; }
     .dem-uses button[aria-selected="true"] { border-color: var(--text); }
+    /* Phones: stacked or re-plotted figures replace the wide ones, and nothing scrolls sideways. */
+    .dem-phone { display: none; }
+    .dem-svg--phone { min-width: 0; }
+    .dem-svg--phone .lb, .dem-svg--phone .tick, .dem-svg--phone .lab, .dem-svg--phone .ax { font-size: 13px; }
+    .dem-svg--phone .net-t { font-size: 16px; }
+    @media (max-width: 767px) {
+        .dem-desk { display: none; }
+        .dem-phone { display: block; }
+        #results td, #results th { white-space: normal; padding: 8px 6px; }
+        #results td:first-child { padding-left: 0; }
+        #bibtex pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+    }
     .dem-use-text { text-align: center; color: var(--muted); font-size: 0.875rem; margin: 8px 0 0; min-height: 1.5em; }
 </style>
 
@@ -100,7 +112,7 @@ bibtex: |
     <button type="button" role="tab" data-use="dec" aria-selected="false">Decode to pixels</button>
 </div>
 <p class="dem-use-text" aria-live="polite" hidden></p>
-        <div class="dem-media dem-scroll"><svg class="dem-svg" viewBox="0 0 760 420" role="img" aria-labelledby="cd-t">
+        <div class="dem-media dem-scroll dem-desk"><svg class="dem-svg" viewBox="0 0 760 420" role="img" aria-labelledby="cd-t">
 <title id="cd-t">One network with three uses. A view of the image goes in and the network outputs its embedding, the representation. Given a noisy embedding, the network outputs the denoised embedding, and without the view it generates embeddings from noise. Given an embedding and noisy pixels, it outputs an image. A noise-level axis below runs from no noise to full noise, where denoising the embedding is self-supervised prediction.</title>
 <defs>
 <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker>
@@ -143,6 +155,52 @@ bibtex: |
   <text class="lb" x="150" y="414">noise level of z<tspan class="sub" dy="4">τ</tspan></text>
 </g>
 </svg></div>
+        <div class="dem-media dem-phone"><svg class="dem-svg dem-svg--phone" viewBox="0 0 360 426" role="img" aria-labelledby="cd-pt">
+<title id="cd-pt">One network with three uses, one per column. A view of the image goes in and the network outputs its embedding, the representation. Given a noisy embedding, and the view, the network outputs the denoised embedding. Given an embedding and noisy pixels, it outputs an image. A noise-level axis below runs from no noise to full noise, where denoising the embedding is self-supervised prediction.</title>
+<defs>
+<marker id="ah-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker>
+<linearGradient id="nz-p" x1="0" x2="1"><stop offset="0" class="nz0"/><stop offset="1" class="nz1"/></linearGradient>
+<filter id="noisy-p"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="g"/><feBlend in="SourceGraphic" in2="g" mode="overlay"/></filter>
+</defs>
+<g class="u enc gen">
+  <image href="tile_view.webp" x="32" y="10" width="56" height="56" preserveAspectRatio="none" class="tile"/>
+  <text class="lb" x="60" y="86" text-anchor="middle">View x′</text>
+</g>
+<g class="u gen">
+  <circle class="nd nd-gen" cx="180" cy="38" r="24"/><text class="sym" x="180" y="44" text-anchor="middle">z<tspan class="sub" dy="5">τ</tspan></text>
+  <text class="lb" x="180" y="86" text-anchor="middle">Noisy embedding</text>
+</g>
+<g class="u dec">
+  <image href="tile_sample.webp" x="272" y="10" width="56" height="56" preserveAspectRatio="none" filter="url(#noisy-p)" class="tile"/>
+  <text class="lb" x="300" y="86" text-anchor="middle">Noisy pixels,</text>
+  <text class="lb" x="300" y="102" text-anchor="middle">given ẑ</text>
+</g>
+<rect class="net" x="10" y="140" width="340" height="60" rx="14"/>
+<text class="net-t" x="180" y="168" text-anchor="middle">One network</text>
+<text class="lb" x="180" y="188" text-anchor="middle">Transformer</text>
+<g class="u enc"><path class="ln enc" d="M60 108 V136" marker-end="url(#ah-p)"/><path class="ln enc" d="M60 204 V232" marker-end="url(#ah-p)"/>
+  <rect class="nd nd-enc" x="24" y="236" width="72" height="36" rx="6"/>
+  <g class="bars"><rect x="34" y="246" width="6" height="16"/><rect x="44" y="250" width="6" height="12"/><rect x="54" y="244" width="6" height="18"/><rect x="64" y="252" width="6" height="10"/><rect x="74" y="247" width="6" height="15"/></g>
+  <text class="lb" x="60" y="312" text-anchor="middle">Embedding,</text>
+  <text class="lb" x="60" y="328" text-anchor="middle">the representation</text>
+</g>
+<g class="u gen"><path class="ln gen" d="M92 58 C110 66 114 96 114 134" marker-end="url(#ah-p)"/><path class="ln gen" d="M180 108 V136" marker-end="url(#ah-p)"/><path class="ln gen" d="M180 204 V230" marker-end="url(#ah-p)"/>
+  <circle class="nd nd-gen" cx="180" cy="258" r="24"/><text class="sym" x="180" y="264" text-anchor="middle">ẑ</text>
+  <text class="lb" x="180" y="312" text-anchor="middle">Denoised</text>
+  <text class="lb" x="180" y="328" text-anchor="middle">embedding</text>
+</g>
+<g class="u dec"><path class="ln dec" d="M300 108 V136" marker-end="url(#ah-p)"/><path class="ln dec" d="M300 204 V232" marker-end="url(#ah-p)"/>
+  <image href="tile_sample.webp" x="272" y="236" width="56" height="56" preserveAspectRatio="none" class="tile"/>
+  <text class="lb" x="300" y="312" text-anchor="middle">Image</text>
+</g>
+<g class="u gen axis-g">
+  <text class="lb" x="10" y="356">no noise</text>
+  <text class="lb" x="350" y="356" text-anchor="end">full noise</text>
+  <rect x="10" y="364" width="340" height="10" rx="5" fill="url(#nz-p)"/>
+  <text class="lb" x="10" y="394">noise level of z<tspan class="sub" dy="4">τ</tspan></text>
+  <text class="lb strong" x="350" y="418" text-anchor="end">full noise = self-supervised prediction</text>
+</g>
+</svg></div>
         <figcaption>Denoising in embedding space turns joint-embedding prediction into a generative model.</figcaption>
     </figure>
     <p>We train the network on this view-conditioned denoising at all noise levels. Without the view, it samples embeddings as a representation generator, and as a pixel denoiser it turns them into images. Its features also serve as the image representation.</p>
@@ -151,13 +209,21 @@ bibtex: |
 <section id="results">
     <h2>Results</h2>
     <figure class="dem-fig">
-        <div class="dem-media dem-scroll"><svg class="dem-svg" style="min-width: 460px" viewBox="0 0 640 350" role="img" aria-labelledby="sc-t">
+        <div class="dem-media dem-scroll dem-desk"><svg class="dem-svg" style="min-width: 460px" viewBox="0 0 640 350" role="img" aria-labelledby="sc-t">
 <title id="sc-t">Linear probe accuracy on ImageNet-100 against FID without labels. DEM has the highest probe and the second lowest FID. Single-task methods sit on the N/A lanes.</title>
 <line class="grid" x1="110.4" y1="24" x2="110.4" y2="300"/><text class="tick" x="110.4" y="322" text-anchor="middle">N/A</text><line class="grid" x1="183.2" y1="24" x2="183.2" y2="300"/><text class="tick" x="183.2" y="322" text-anchor="middle">70</text><line class="grid" x1="264.1" y1="24" x2="264.1" y2="300"/><text class="tick" x="264.1" y="322" text-anchor="middle">60</text><line class="grid" x1="345.0" y1="24" x2="345.0" y2="300"/><text class="tick" x="345.0" y="322" text-anchor="middle">50</text><line class="grid" x1="425.9" y1="24" x2="425.9" y2="300"/><text class="tick" x="425.9" y="322" text-anchor="middle">40</text><line class="grid" x1="506.8" y1="24" x2="506.8" y2="300"/><text class="tick" x="506.8" y="322" text-anchor="middle">30</text><line class="grid" x1="587.6" y1="24" x2="587.6" y2="300"/><text class="tick" x="587.6" y="322" text-anchor="middle">20</text><line class="grid" x1="70" y1="275.8" x2="620" y2="275.8"/><text class="tick" x="60" y="279.8" text-anchor="end">N/A</text><line class="grid" x1="70" y1="227.4" x2="620" y2="227.4"/><text class="tick" x="60" y="231.4" text-anchor="end">40</text><line class="grid" x1="70" y1="178.9" x2="620" y2="178.9"/><text class="tick" x="60" y="182.9" text-anchor="end">50</text><line class="grid" x1="70" y1="130.5" x2="620" y2="130.5"/><text class="tick" x="60" y="134.5" text-anchor="end">60</text><line class="grid" x1="70" y1="82.1" x2="620" y2="82.1"/><text class="tick" x="60" y="86.1" text-anchor="end">70</text><line class="grid" x1="70" y1="33.7" x2="620" y2="33.7"/><text class="tick" x="60" y="37.7" text-anchor="end">80</text>
 <line class="axis" x1="70" y1="300" x2="620" y2="300"/><line class="axis" x1="70" y1="24" x2="70" y2="300"/>
 <text class="ax" x="345" y="346" text-anchor="middle">FID without labels (lower is better, right)</text>
 <text class="ax" transform="translate(16 162) rotate(-90)" text-anchor="middle">Linear probe (%)</text>
 <g class="pt-g"><title>DINOv2: probe 72.8%, FID N/A</title><circle class="pt" cx="110.4" cy="68.5" r="5"/><a href="https://arxiv.org/abs/2304.07193"><text class="lab" x="122.4" y="73.5" text-anchor="start">DINOv2</text></a></g><g class="pt-g"><title>BYOL: probe 70.1%, FID N/A</title><circle class="pt" cx="110.4" cy="81.6" r="5"/><a href="https://arxiv.org/abs/2006.07733"><text class="lab" x="122.4" y="86.6" text-anchor="start">BYOL</text></a></g><g class="pt-g"><title>I-JEPA: probe 39.7%, FID N/A</title><circle class="pt" cx="110.4" cy="228.8" r="5"/><a href="https://arxiv.org/abs/2301.08243"><text class="lab" x="122.4" y="239.8" text-anchor="start">I-JEPA</text></a></g><g class="pt-g"><title>MAE: probe 43.1%, FID N/A</title><circle class="pt" cx="110.4" cy="212.4" r="5"/><a href="https://arxiv.org/abs/2111.06377"><text class="lab" x="122.4" y="213.4" text-anchor="start">MAE</text></a></g><g class="pt-g"><title>JiT (uncond.): probe N/A, FID 64.0</title><circle class="pt" cx="231.8" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2511.13720"><text class="lab" x="243.8" y="280.8" text-anchor="start">JiT (uncond.)</text></a></g><g class="pt-g"><title>RCG (DINOv2 enc.): probe N/A, FID 22.9</title><circle class="pt" cx="564.2" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2312.03701"><text class="lab" x="550.2" y="266.8" text-anchor="end">RCG (DINOv2 enc.)</text></a></g><g class="pt-g"><title>MAGE: probe 35.4%, FID 67.9</title><circle class="pt" cx="200.2" cy="249.6" r="5"/><a href="https://arxiv.org/abs/2211.09117"><text class="lab" x="212.2" y="254.6" text-anchor="start">MAGE</text></a></g><g class="pt-g"><title>DEM: probe 76.1%, FID 26.1</title><circle class="pt-ours" cx="538.3" cy="52.6" r="8"/><text class="lab-ours" x="524.3" y="57.6" text-anchor="end">DEM</text></g>
+</svg></div>
+        <div class="dem-media dem-phone"><svg class="dem-svg dem-svg--phone" viewBox="0 0 360 324" role="img" aria-labelledby="sc-pt">
+<title id="sc-pt">Linear probe accuracy on ImageNet-100 against FID without labels. DEM has the highest probe and the second lowest FID. Single-task methods sit on the N/A lanes.</title>
+<line class="grid" x1="66.5" y1="20.0" x2="66.5" y2="270.0"/><text class="tick" x="66.5" y="290" text-anchor="middle">N/A</text><line class="grid" x1="107.0" y1="20.0" x2="107.0" y2="270.0"/><text class="tick" x="107.0" y="290" text-anchor="middle">70</text><line class="grid" x1="152.0" y1="20.0" x2="152.0" y2="270.0"/><text class="tick" x="152.0" y="290" text-anchor="middle">60</text><line class="grid" x1="197.0" y1="20.0" x2="197.0" y2="270.0"/><text class="tick" x="197.0" y="290" text-anchor="middle">50</text><line class="grid" x1="242.0" y1="20.0" x2="242.0" y2="270.0"/><text class="tick" x="242.0" y="290" text-anchor="middle">40</text><line class="grid" x1="287.0" y1="20.0" x2="287.0" y2="270.0"/><text class="tick" x="287.0" y="290" text-anchor="middle">30</text><line class="grid" x1="332.0" y1="20.0" x2="332.0" y2="270.0"/><text class="tick" x="332.0" y="290" text-anchor="middle">20</text><line class="grid" x1="44.0" y1="248.1" x2="350.0" y2="248.1"/><text class="tick" x="38" y="251.7" text-anchor="end">N/A</text><line class="grid" x1="44.0" y1="204.2" x2="350.0" y2="204.2"/><text class="tick" x="38" y="207.9" text-anchor="end">40</text><line class="grid" x1="44.0" y1="160.3" x2="350.0" y2="160.3"/><text class="tick" x="38" y="163.9" text-anchor="end">50</text><line class="grid" x1="44.0" y1="116.5" x2="350.0" y2="116.5"/><text class="tick" x="38" y="120.1" text-anchor="end">60</text><line class="grid" x1="44.0" y1="72.6" x2="350.0" y2="72.6"/><text class="tick" x="38" y="76.2" text-anchor="end">70</text><line class="grid" x1="44.0" y1="28.8" x2="350.0" y2="28.8"/><text class="tick" x="38" y="32.4" text-anchor="end">80</text>
+<line class="axis" x1="44.0" y1="270.0" x2="350.0" y2="270.0"/><line class="axis" x1="44.0" y1="20.0" x2="44.0" y2="270.0"/>
+<text class="ax" x="197" y="318" text-anchor="middle">FID without labels (lower is better, right)</text>
+<text class="ax" transform="translate(10 145) rotate(-90)" text-anchor="middle">Linear probe (%)</text>
+<g class="pt-g"><title>DINOv2: probe 72.8%, FID N/A</title><circle class="pt" cx="66.5" cy="60.3" r="4.5"/><a href="https://arxiv.org/abs/2304.07193"><text class="lab" x="76.5" y="64.8" text-anchor="start">DINOv2</text></a></g><g class="pt-g"><title>BYOL: probe 70.1%, FID N/A</title><circle class="pt" cx="66.5" cy="72.2" r="4.5"/><a href="https://arxiv.org/abs/2006.07733"><text class="lab" x="76.5" y="76.7" text-anchor="start">BYOL</text></a></g><g class="pt-g"><title>I-JEPA: probe 39.7%, FID N/A</title><circle class="pt" cx="66.5" cy="205.5" r="4.5"/><a href="https://arxiv.org/abs/2301.08243"><text class="lab" x="76.5" y="215.5" text-anchor="start">I-JEPA</text></a></g><g class="pt-g"><title>MAE: probe 43.1%, FID N/A</title><circle class="pt" cx="66.5" cy="190.7" r="4.5"/><a href="https://arxiv.org/abs/2111.06377"><text class="lab" x="76.5" y="191.6" text-anchor="start">MAE</text></a></g><g class="pt-g"><title>JiT (uncond.): probe N/A, FID 64.0</title><circle class="pt" cx="134.0" cy="248.1" r="4.5"/><a href="https://arxiv.org/abs/2511.13720"><text class="lab" x="144.0" y="252.6" text-anchor="start">JiT (uncond.)</text></a></g><g class="pt-g"><title>RCG (DINOv2 enc.): probe N/A, FID 22.9</title><circle class="pt" cx="319.0" cy="248.1" r="4.5"/><a href="https://arxiv.org/abs/2312.03701"><text class="lab" x="309.0" y="239.9" text-anchor="end">RCG (DINOv2 enc.)</text></a></g><g class="pt-g"><title>MAGE: probe 35.4%, FID 67.9</title><circle class="pt" cx="116.4" cy="224.3" r="4.5"/><a href="https://arxiv.org/abs/2211.09117"><text class="lab" x="126.4" y="228.9" text-anchor="start">MAGE</text></a></g><g class="pt-g"><title>DEM: probe 76.1%, FID 26.1</title><circle class="pt-ours" cx="304.5" cy="45.9" r="7"/><text class="lab-ours" x="291.5" y="50.4" text-anchor="end">DEM</text></g>
 </svg></div>
         <figcaption>One generative model learns representations competitive with self-supervised methods and generates images without labels.</figcaption>
     </figure>
