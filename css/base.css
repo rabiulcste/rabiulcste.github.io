@@ -70,10 +70,11 @@
     --space-section: var(--space-6);
     --space-block: var(--space-4);
     /* Layout — horizontal padding for .wrap / navbar; code blocks bleed full-width on small screens */
-    --gutter-x: 15px;
+    --gutter-x: 16px;
+    --col: 680px;           /* the text column on every page: about 75 characters per line */
     /* Section rhythm (named so components don’t rely on calc tricks) */
-    --space-about-h2-before: 1.75rem;
-    --wrap-max: 680px;
+    --space-about-h2-before: 2.5rem;
+    --wrap-max: calc(var(--col) + 2 * var(--gutter-x));
 }
 
 /* Dark mode follows the device setting; the project pages (css/project.css) use the same values. */
@@ -96,9 +97,6 @@
     }
 }
 
-@media (min-width: 640px)  { :root { --wrap-max: 720px; } }
-@media (min-width: 1024px) { :root { --wrap-max: 760px; } }
-@media (min-width: 1280px) { :root { --wrap-max: 800px; } }
 
 /* Bengali posts: scoped via unicode-range so this only loads/applies to Bengali-script text */
 @font-face {

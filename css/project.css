@@ -9,8 +9,7 @@
     --link: var(--content-link);
     --font: var(--font-sans);
     --mono: var(--font-mono);
-    --col: 680px;
-    --gutter: 16px;
+    --gutter: var(--gutter-x);   /* --col comes from base.css */
     --wide: 880px;     /* figures that run wider than the text column */
     --radius: 0;       /* square corners on figures, buttons and code */
 }
