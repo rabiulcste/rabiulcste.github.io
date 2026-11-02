@@ -254,6 +254,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .dch-crafter .dch-ax { padding: 0 var(--kindw) 0 var(--labw); }
 /* Ablations: two dot panels, one under the other */
 .dch-abl { --labw: 232px; --rowh: 30px; max-width: 560px; margin: 0 auto; }
+.dch-abl .dch-kind { display: none; }
 .dch-abl .dch-panel + .dch-panel { margin-top: 32px; }
 .dch-abl .dch-ax { padding: 0 var(--valw) 0 var(--labw); }
 /* DRIFT Craftium table (tab:craftium): the charts' type and colours, thin rules, no card */
