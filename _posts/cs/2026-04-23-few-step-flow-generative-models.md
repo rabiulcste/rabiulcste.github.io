@@ -1,5 +1,6 @@
 ---
 title: "One-step generative models"
+description: "How one-step generative models work: flow matching, consistency models, shortcut models and MeanFlow, where their math comes from, and why they are hard to train."
 author: "Rabiul Awal"
 layout: post
 date: 2026-04-23
