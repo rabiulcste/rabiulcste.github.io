@@ -31,7 +31,6 @@ bibtex: |
     /* One media width for every figure: wider than the text on large screens, the column on phones. */
     .dem-media { margin: 0 0 16px; width: min(880px, 100vw - 2 * var(--gutter)); margin-left: calc(50% - min(440px, 50vw - var(--gutter))); }
     .dem-media img { display: block; width: 100%; height: auto; }
-    .dem-media.narrow img { max-width: 668px; margin: 0 auto; }
     .dem-fig { margin: 0 0 48px; }
     .dem-fig > figcaption, main .caption { margin: 0; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
     main section { margin-bottom: 88px; }
@@ -54,7 +53,6 @@ bibtex: |
     .dem-svg .bars rect { fill: var(--rep); stroke: none; }
     .dem-svg .nd-gen { stroke: var(--emb); }
     .dem-svg.dem-plane { min-width: 460px; }
-    .dem-svg .tile { clip-path: inset(0 round 6px); }
     .dem-svg .ln { fill: none; stroke-width: 2; }
     .dem-svg .ln.enc { stroke: var(--rep); } .dem-svg .ln.gen { stroke: var(--emb); } .dem-svg .ln.dec { stroke: var(--pix); }
     .dem-svg .ahd { fill: var(--muted); }
@@ -77,11 +75,13 @@ bibtex: |
     .dem-svg .sch.pix { fill: var(--pix); fill-opacity: 0.18; stroke: var(--pix); stroke-width: 1.5; }
     .dem-svg .mdn { stroke-width: 1; stroke-dasharray: 3 3; }
     .dem-svg .mdn.emb { stroke: var(--emb); } .dem-svg .mdn.pix { stroke: var(--pix); }
-    .dem-svg .zb rect { fill: var(--emb); }
-    .dem-svg .zb-end rect { fill: var(--muted); }
+    .dem-svg.dem-copy { max-width: 420px; }
+    .dem-svg .nd-none { stroke: var(--muted); stroke-dasharray: 4 3; }
+    .dem-svg .sym.none { fill: var(--muted); }
+    .dem-svg .ln.none { stroke: var(--muted); stroke-dasharray: 4 3; }
     .dem-uses { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 12px; }
     .dem-uses[hidden], .dem-use-text[hidden] { display: none; }
-    .dem-uses button { font: inherit; font-size: 0.875rem; color: var(--text); background: none; border: 1px solid var(--border); border-radius: 999px; padding: 4px 14px; cursor: pointer; }
+    .dem-uses button { font: inherit; font-size: 0.875rem; color: var(--text); background: none; border: 1px solid var(--border); border-radius: 0; padding: 4px 14px; cursor: pointer; }
     .dem-uses button[aria-selected="true"] { border-color: var(--text); }
     /* Phones: the stacked concept figure replaces the wide one, and nothing scrolls sideways. */
     .dem-phone { display: none; }
@@ -94,6 +94,8 @@ bibtex: |
         #bibtex pre { white-space: pre-wrap; overflow-wrap: anywhere; }
     }
     .dem-use-text { text-align: center; color: var(--muted); font-size: 0.875rem; margin: 8px 0 0; min-height: 1.5em; }
+    /* Square corners on this page, including the shared layout's link buttons and code block. */
+    .links a, .links .soon, pre { border-radius: 0; }
     /* Noise-map views: one column per view, its noise map above it. */
     .dem-views { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; max-width: 680px; margin: 0 auto; }
     .dem-view { margin: 0; text-align: center; font-size: 0.8125rem; line-height: 1.3; }
@@ -103,15 +105,14 @@ bibtex: |
     .dem-view .dem-map { display: block; width: 44%; margin: 0 auto 10px; outline: 1px solid var(--border); }
     .dem-view img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
     .dem-legend { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 16px 0 0; color: var(--muted); font-size: 0.8125rem; }
-    .dem-legend i { width: 96px; height: 8px; border-radius: 4px; outline: 1px solid var(--border); background: linear-gradient(90deg, #fff, #1e293b); }
+    .dem-legend i { width: 96px; height: 8px; outline: 1px solid var(--border); background: linear-gradient(90deg, #fff, #1e293b); }
     /* Paired image panels: side by side on large screens, stacked on phones. */
     .dem-pair { display: grid; grid-template-columns: 656fr 668fr; gap: 32px; align-items: start; }
-    .dem-pair.even { grid-template-columns: 668fr 404fr; }
+    .dem-pair.even { grid-template-columns: 668fr 828fr; }
     .dem-pair img { display: block; width: 100%; height: auto; }
     .dem-pair p { margin: 8px 0 0; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
     @media (max-width: 640px) {
         .dem-pair, .dem-pair.even { grid-template-columns: 1fr; gap: 24px; }
-        .dem-pair .sm { width: 66%; }
         .dem-views { gap: 6px; }
         .dem-view { font-size: 0.6875rem; }
         .dem-view figcaption { min-height: 3.9em; }
@@ -126,7 +127,7 @@ bibtex: |
 
 <section>
     <figure class="dem-fig">
-        <div class="dem-media narrow"><img src="samples.webp" width="656" height="392" alt="A grid of 15 small images of animals, objects and scenes, generated without labels." loading="lazy"></div>
+        <div class="dem-media"><img src="samples.webp" width="1052" height="524" alt="A grid of 32 small images of animals, objects and scenes, generated without labels." loading="lazy"></div>
         <figcaption>Images generated without labels, by one network trained by denoising alone. All samples on this page are uncurated.</figcaption>
     </figure>
 </section>
@@ -155,7 +156,7 @@ bibtex: |
 <text class="lvl pix" transform="translate(30 306) rotate(-90)" text-anchor="middle">Pixel space</text>
 <line class="grid" x1="16" x2="744" y1="252" y2="252" stroke-dasharray="4 4"/>
 <g class="u enc gen">
-  <image href="tile_view.webp" x="70" y="34" width="72" height="72" preserveAspectRatio="none" class="tile"/>
+  <image href="tile_view.webp" x="70" y="34" width="72" height="72" preserveAspectRatio="none"/>
   <text class="lb" x="106" y="124" text-anchor="middle">View x′</text>
 </g>
 <g class="u gen">
@@ -163,14 +164,14 @@ bibtex: |
   <text class="lb" x="106" y="238" text-anchor="middle">Noisy embedding</text>
 </g>
 <g class="u dec">
-  <image href="tile_sample.webp" x="70" y="262" width="72" height="72" preserveAspectRatio="none" filter="url(#noisy)" class="tile"/>
+  <image href="tile_sample.webp" x="70" y="262" width="72" height="72" preserveAspectRatio="none" filter="url(#noisy)"/>
   <text class="lb" x="106" y="352" text-anchor="middle">Noisy pixels, given ẑ</text>
 </g>
-<rect class="net" x="290" y="40" width="180" height="290" rx="14"/>
+<rect class="net" x="290" y="40" width="180" height="290"/>
 <text class="net-t" x="380" y="180" text-anchor="middle">One network</text>
 <text class="lb" x="380" y="204" text-anchor="middle">Transformer</text>
 <g class="u enc"><path class="ln enc" d="M150 70 H286" marker-end="url(#ah)"/><path class="ln enc" d="M474 70 H600" marker-end="url(#ah)"/>
-  <rect class="nd nd-enc" x="604" y="52" width="72" height="36" rx="6"/>
+  <rect class="nd nd-enc" x="604" y="52" width="72" height="36"/>
   <g class="bars"><rect x="614" y="62" width="6" height="16"/><rect x="624" y="66" width="6" height="12"/><rect x="634" y="60" width="6" height="18"/><rect x="644" y="68" width="6" height="10"/><rect x="654" y="63" width="6" height="15"/></g>
   <text class="lb" x="640" y="110" text-anchor="middle">Embedding, the representation</text>
 </g>
@@ -179,7 +180,7 @@ bibtex: |
   <text class="lb" x="640" y="238" text-anchor="middle">Denoised embedding</text>
 </g>
 <g class="u dec"><path class="ln dec" d="M150 298 H286" marker-end="url(#ah)"/><path class="ln dec" d="M474 298 H600" marker-end="url(#ah)"/>
-  <image href="tile_sample.webp" x="604" y="262" width="72" height="72" preserveAspectRatio="none" class="tile"/>
+  <image href="tile_sample.webp" x="604" y="262" width="72" height="72" preserveAspectRatio="none"/>
   <text class="lb" x="640" y="352" text-anchor="middle">Image</text>
 </g>
 </svg></div>
@@ -190,7 +191,7 @@ bibtex: |
 <filter id="noisy-p"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="g"/><feBlend in="SourceGraphic" in2="g" mode="overlay"/></filter>
 </defs>
 <g class="u enc gen">
-  <image href="tile_view.webp" x="32" y="10" width="56" height="56" preserveAspectRatio="none" class="tile"/>
+  <image href="tile_view.webp" x="32" y="10" width="56" height="56" preserveAspectRatio="none"/>
   <text class="lb" x="60" y="86" text-anchor="middle">View x′</text>
 </g>
 <g class="u gen">
@@ -198,18 +199,18 @@ bibtex: |
   <text class="lb" x="180" y="86" text-anchor="middle">Noisy embedding</text>
 </g>
 <g class="u dec">
-  <image href="tile_sample.webp" x="272" y="10" width="56" height="56" preserveAspectRatio="none" filter="url(#noisy-p)" class="tile"/>
+  <image href="tile_sample.webp" x="272" y="10" width="56" height="56" preserveAspectRatio="none" filter="url(#noisy-p)"/>
   <text class="lb" x="300" y="86" text-anchor="middle">Noisy pixels,</text>
   <text class="lb" x="300" y="102" text-anchor="middle">given ẑ</text>
 </g>
-<rect class="net" x="10" y="140" width="340" height="60" rx="14"/>
+<rect class="net" x="10" y="140" width="340" height="60"/>
 <text class="net-t" x="180" y="168" text-anchor="middle">One network</text>
 <text class="lb" x="180" y="188" text-anchor="middle">Transformer</text>
 <g class="u enc"><path class="ln enc" d="M60 108 V136" marker-end="url(#ah-p)"/><path class="ln enc" d="M60 204 V232" marker-end="url(#ah-p)"/>
-  <rect class="nd nd-enc" x="24" y="236" width="72" height="36" rx="6"/>
+  <rect class="nd nd-enc" x="24" y="236" width="72" height="36"/>
   <g class="bars"><rect x="34" y="246" width="6" height="16"/><rect x="44" y="250" width="6" height="12"/><rect x="54" y="244" width="6" height="18"/><rect x="64" y="252" width="6" height="10"/><rect x="74" y="247" width="6" height="15"/></g>
   <text class="lb" x="60" y="312" text-anchor="middle">Embedding,</text>
-  <text class="lb" x="60" y="328" text-anchor="middle">the representation</text>
+  <text class="lb" x="61" y="328" text-anchor="middle">the representation</text>
 </g>
 <g class="u gen"><path class="ln gen" d="M92 58 C110 66 114 96 114 134" marker-end="url(#ah-p)"/><path class="ln gen" d="M180 108 V136" marker-end="url(#ah-p)"/><path class="ln gen" d="M180 204 V230" marker-end="url(#ah-p)"/>
   <circle class="nd nd-gen" cx="180" cy="258" r="24"/><text class="sym" x="180" y="264" text-anchor="middle">ẑ</text>
@@ -217,7 +218,7 @@ bibtex: |
   <text class="lb" x="180" y="328" text-anchor="middle">embedding</text>
 </g>
 <g class="u dec"><path class="ln dec" d="M300 108 V136" marker-end="url(#ah-p)"/><path class="ln dec" d="M300 204 V232" marker-end="url(#ah-p)"/>
-  <image href="tile_sample.webp" x="272" y="236" width="56" height="56" preserveAspectRatio="none" class="tile"/>
+  <image href="tile_sample.webp" x="272" y="236" width="56" height="56" preserveAspectRatio="none"/>
   <text class="lb" x="300" y="312" text-anchor="middle">Image</text>
 </g>
 <text class="lvl emb" x="120" y="362" text-anchor="middle">Representation space</text>
@@ -241,7 +242,7 @@ bibtex: |
 <text class="lb" x="447.0" y="36" text-anchor="end">where semantics are learned</text>
 <text class="sch-t pix" x="203.2" y="88" text-anchor="end">Pixels, median 0.69</text>
 <text class="lb" x="203.2" y="106" text-anchor="end">where details are drawn</text>
-<rect x="10.0" y="178" width="460.0" height="8" rx="4" fill="url(#nz)"/>
+<rect x="10.0" y="178" width="460.0" height="8" fill="url(#nz)"/>
 <text class="lb" x="10.0" y="208">clean</text>
 <text class="lb" x="470.0" y="208" text-anchor="end">full noise</text>
 </svg></figure>
@@ -250,11 +251,35 @@ bibtex: |
 <section id="special-case">
     <h2>The full-noise special case</h2>
     <p>Conceptually, joint-embedding SSL methods are a special case of DEM. These methods train a network to predict the embedding of one view of an image from another view. Suppose this network also receives a noisy copy of the embedding it predicts. If the copy is pure noise, it carries no information, and the task is unchanged. Prediction is thus view-conditioned embedding denoising at full noise. At lower noise, DEM learns the distribution that prediction reduces to its mean.</p>
-    <figure class="dem-fig"><svg class="dem-svg dem-fit" viewBox="0 0 480 152" role="img" aria-labelledby="cp-t">
-<title id="cp-t">A noisy copy of an embedding at five noise levels. At no noise it shows the embedding. At full noise it is pure noise and carries no information, which leaves joint-embedding prediction.</title>
-<g class="zb"><rect x="8" y="52.0" width="4" height="1.0"/><rect x="14" y="46.9" width="4" height="5.1"/><rect x="20" y="52.0" width="4" height="4.7"/><rect x="26" y="52.0" width="4" height="15.2"/><rect x="32" y="52.0" width="4" height="7.8"/><rect x="38" y="52.0" width="4" height="16.9"/><rect x="44" y="51.0" width="4" height="1.0"/><rect x="50" y="29.1" width="4" height="22.9"/><rect x="56" y="52.0" width="4" height="8.4"/><rect x="62" y="52.0" width="4" height="10.6"/><rect x="68" y="43.6" width="4" height="8.4"/><rect x="74" y="45.9" width="4" height="6.1"/><rect x="80" y="50.2" width="4" height="1.8"/><rect x="86" y="52.0" width="4" height="15.9"/><text class="lb" x="49.0" y="118" text-anchor="middle">τ = 0</text></g><g class="zb"><rect x="104" y="52.0" width="4" height="1.0"/><rect x="110" y="46.3" width="4" height="5.7"/><rect x="116" y="52.0" width="4" height="7.2"/><rect x="122" y="52.0" width="4" height="12.7"/><rect x="128" y="52.0" width="4" height="11.0"/><rect x="134" y="52.0" width="4" height="16.2"/><rect x="140" y="52.0" width="4" height="4.3"/><rect x="146" y="35.5" width="4" height="16.5"/><rect x="152" y="52.0" width="4" height="9.8"/><rect x="158" y="52.0" width="4" height="7.2"/><rect x="164" y="45.3" width="4" height="6.7"/><rect x="170" y="47.9" width="4" height="4.1"/><rect x="176" y="52.0" width="4" height="5.6"/><rect x="182" y="52.0" width="4" height="13.4"/><text class="lb" x="145.0" y="118" text-anchor="middle">τ = 0.25</text></g><g class="zb"><rect x="200" y="52.0" width="4" height="1.0"/><rect x="206" y="45.6" width="4" height="6.4"/><rect x="212" y="52.0" width="4" height="9.7"/><rect x="218" y="52.0" width="4" height="10.1"/><rect x="224" y="52.0" width="4" height="14.3"/><rect x="230" y="52.0" width="4" height="15.6"/><rect x="236" y="52.0" width="4" height="9.6"/><rect x="242" y="41.9" width="4" height="10.1"/><rect x="248" y="52.0" width="4" height="11.2"/><rect x="254" y="52.0" width="4" height="3.8"/><rect x="260" y="47.0" width="4" height="5.0"/><rect x="266" y="50.0" width="4" height="2.0"/><rect x="272" y="52.0" width="4" height="12.9"/><rect x="278" y="52.0" width="4" height="10.9"/><text class="lb" x="241.0" y="118" text-anchor="middle">τ = 0.5</text></g><g class="zb"><rect x="296" y="52.0" width="4" height="1.0"/><rect x="302" y="45.0" width="4" height="7.0"/><rect x="308" y="52.0" width="4" height="12.3"/><rect x="314" y="52.0" width="4" height="7.6"/><rect x="320" y="52.0" width="4" height="17.6"/><rect x="326" y="52.0" width="4" height="14.9"/><rect x="332" y="52.0" width="4" height="14.9"/><rect x="338" y="48.2" width="4" height="3.8"/><rect x="344" y="52.0" width="4" height="12.6"/><rect x="350" y="52.0" width="4" height="1.0"/><rect x="356" y="48.6" width="4" height="3.4"/><rect x="362" y="52.0" width="4" height="1.0"/><rect x="368" y="52.0" width="4" height="20.3"/><rect x="374" y="52.0" width="4" height="8.4"/><text class="lb" x="337.0" y="118" text-anchor="middle">τ = 0.75</text></g><g class="zb zb-end"><rect x="392" y="52.0" width="4" height="1.0"/><rect x="398" y="44.4" width="4" height="7.6"/><rect x="404" y="52.0" width="4" height="14.8"/><rect x="410" y="52.0" width="4" height="5.0"/><rect x="416" y="52.0" width="4" height="20.9"/><rect x="422" y="52.0" width="4" height="14.2"/><rect x="428" y="52.0" width="4" height="20.3"/><rect x="434" y="52.0" width="4" height="2.6"/><rect x="440" y="52.0" width="4" height="13.9"/><rect x="446" y="49.0" width="4" height="3.0"/><rect x="452" y="50.3" width="4" height="1.7"/><rect x="458" y="52.0" width="4" height="2.1"/><rect x="464" y="52.0" width="4" height="27.7"/><rect x="470" y="52.0" width="4" height="5.9"/><text class="lb" x="433.0" y="118" text-anchor="middle">τ = 1</text></g>
-<text class="lb" x="8" y="144">the embedding</text>
-<text class="lb strong" x="472" y="144" text-anchor="end">pure noise, the task is prediction</text>
+    <figure class="dem-fig"><svg class="dem-svg dem-svg--phone dem-copy" viewBox="0 0 360 310" role="img" aria-labelledby="cp-t">
+<title id="cp-t">The network's inputs in two rows with the same layout. At lower noise, in DEM, a view and a noisy copy of the embedding go into the network, which outputs the embedding, and the copy still carries information. At full noise, in joint-embedding self-supervised learning, the copy is pure noise and carries no information, so this is prediction from the view alone.</title>
+<defs><marker id="ah-cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
+<text class="lb strong" x="2" y="13">Lower noise (DEM)</text>
+<text class="lb" x="2" y="31">The copy still carries information.</text>
+<text class="lb" x="72" y="70" text-anchor="end">View x′</text>
+<image href="tile_view.webp" x="78" y="44" width="44" height="44" preserveAspectRatio="none"/>
+<text class="lb" x="72" y="123" text-anchor="end">Noisy copy</text>
+<circle class="nd nd-gen" cx="100" cy="118" r="21"/><text class="sym" x="100" y="123" text-anchor="middle">z<tspan class="sub" dy="5">τ</tspan></text>
+<path class="ln gen" d="M124 66 H155" marker-end="url(#ah-cp)"/>
+<path class="ln gen" d="M123 118 H155" marker-end="url(#ah-cp)"/>
+<rect class="net" x="158" y="42" width="88" height="99"/>
+<text class="net-t" x="202" y="97" text-anchor="middle">Network</text>
+<path class="ln gen" d="M248 91 H281" marker-end="url(#ah-cp)"/>
+<circle class="nd nd-gen" cx="304" cy="91" r="21"/><text class="sym" x="304" y="97" text-anchor="middle">ẑ</text>
+<text class="lb" x="304" y="129" text-anchor="middle">Embedding</text>
+<text class="lb strong" x="2" y="179">Full noise (joint-embedding SSL)</text>
+<text class="lb" x="2" y="197">The copy carries no information, so this is prediction.</text>
+<text class="lb" x="72" y="236" text-anchor="end">View x′</text>
+<image href="tile_view.webp" x="78" y="210" width="44" height="44" preserveAspectRatio="none"/>
+<text class="lb" x="72" y="289" text-anchor="end">Pure noise</text>
+<circle class="nd nd-none" cx="100" cy="284" r="21"/><text class="sym none" x="100" y="289" text-anchor="middle">ε</text>
+<path class="ln gen" d="M124 232 H155" marker-end="url(#ah-cp)"/>
+<path class="ln none" d="M123 284 H155" marker-end="url(#ah-cp)"/>
+<rect class="net" x="158" y="208" width="88" height="99"/>
+<text class="net-t" x="202" y="263" text-anchor="middle">Network</text>
+<path class="ln gen" d="M248 257 H281" marker-end="url(#ah-cp)"/>
+<circle class="nd nd-gen" cx="304" cy="257" r="21"/><text class="sym" x="304" y="263" text-anchor="middle">ẑ</text>
+<text class="lb" x="304" y="295" text-anchor="middle">Embedding</text>
 </svg></figure>
 </section>
 
@@ -276,7 +301,7 @@ bibtex: |
 <section id="results">
     <h2>Results</h2>
     <figure class="dem-fig">
-        <div class="dem-media dem-scroll"><svg class="dem-svg dem-plane" viewBox="0 0 640 350" role="img" aria-labelledby="sc-t">
+        <div class="dem-media dem-scroll"><svg class="dem-svg dem-plane" viewBox="0 0 640 352" role="img" aria-labelledby="sc-t">
 <title id="sc-t">Linear probe accuracy on ImageNet-100 against FID without labels. DEM has the highest probe, and its FID is on par with RCG, which has no probe of its own. Single-task methods sit on the N/A lanes.</title>
 <line class="grid" x1="110.4" y1="24" x2="110.4" y2="300"/><text class="tick" x="110.4" y="322" text-anchor="middle">N/A</text><line class="grid" x1="183.2" y1="24" x2="183.2" y2="300"/><text class="tick" x="183.2" y="322" text-anchor="middle">70</text><line class="grid" x1="264.1" y1="24" x2="264.1" y2="300"/><text class="tick" x="264.1" y="322" text-anchor="middle">60</text><line class="grid" x1="345.0" y1="24" x2="345.0" y2="300"/><text class="tick" x="345.0" y="322" text-anchor="middle">50</text><line class="grid" x1="425.9" y1="24" x2="425.9" y2="300"/><text class="tick" x="425.9" y="322" text-anchor="middle">40</text><line class="grid" x1="506.8" y1="24" x2="506.8" y2="300"/><text class="tick" x="506.8" y="322" text-anchor="middle">30</text><line class="grid" x1="587.6" y1="24" x2="587.6" y2="300"/><text class="tick" x="587.6" y="322" text-anchor="middle">20</text><line class="grid" x1="70" y1="275.8" x2="620" y2="275.8"/><text class="tick" x="60" y="279.8" text-anchor="end">N/A</text><line class="grid" x1="70" y1="227.4" x2="620" y2="227.4"/><text class="tick" x="60" y="231.4" text-anchor="end">40</text><line class="grid" x1="70" y1="178.9" x2="620" y2="178.9"/><text class="tick" x="60" y="182.9" text-anchor="end">50</text><line class="grid" x1="70" y1="130.5" x2="620" y2="130.5"/><text class="tick" x="60" y="134.5" text-anchor="end">60</text><line class="grid" x1="70" y1="82.1" x2="620" y2="82.1"/><text class="tick" x="60" y="86.1" text-anchor="end">70</text><line class="grid" x1="70" y1="33.7" x2="620" y2="33.7"/><text class="tick" x="60" y="37.7" text-anchor="end">80</text>
 <line class="axis" x1="70" y1="300" x2="620" y2="300"/><line class="axis" x1="70" y1="24" x2="70" y2="300"/>
@@ -319,7 +344,7 @@ bibtex: |
     <figure class="dem-fig">
         <div class="dem-media dem-pair even">
             <div><img src="completion.webp" width="668" height="392" alt="Three rows. Each starts with an image where only a boxed crop is visible, followed by four generated images consistent with the crop." loading="lazy"><p>Each image is decoded from an embedding sampled given the blue crop.</p></div>
-            <div class="sm"><img src="inpaint.webp" width="404" height="392" alt="Three rows, each with an image with hidden patches followed by two filled-in versions." loading="lazy"><p>A hole, blocks and out-painting, with two samples each.</p></div>
+            <div><img src="inpaint.webp" width="828" height="392" alt="Six examples in two blocks, one image per row. Each shows an image with hidden patches followed by two filled-in versions." loading="lazy"><p>A hole, blocks and out-painting, with two samples each.</p></div>
         </div>
     </figure>
 </section>
