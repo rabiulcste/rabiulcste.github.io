@@ -45,7 +45,7 @@
     var resultRoot = document.querySelector('.js-result');
     if (!tagsRoot || !resultRoot) return;
 
-    var buttons = $$('a[data-encode]', tagsRoot);
+    var buttons = $$('[data-encode]', tagsRoot);
     var showAll = tagsRoot.querySelector('.tag-button--all');
     var items = $$('.item', resultRoot);
     var baseUrl = window.location.href.split('?')[0];
@@ -58,7 +58,7 @@
         return btn.getAttribute('data-encode') === tag;
       })[0] || showAll;
       buttons.forEach(function (btn) {
-        btn.classList.toggle('focus', btn === active);
+        btn.setAttribute('aria-pressed', btn === active ? 'true' : 'false');
       });
       items.forEach(function (item) {
         var tags = (item.getAttribute('data-tags') || '').split(',');
@@ -70,7 +70,7 @@
     }
 
     tagsRoot.addEventListener('click', function (e) {
-      var a = e.target.closest('a[data-encode]');
+      var a = e.target.closest('[data-encode]');
       if (!a || !tagsRoot.contains(a)) return;
       e.preventDefault();
       select(a.getAttribute('data-encode'), true);

@@ -11,7 +11,6 @@
     --mono: var(--font-mono);
     --gutter: var(--gutter-x);   /* --col comes from base.css */
     --wide: 880px;     /* figures that run wider than the text column */
-    --radius: 0;       /* square corners on figures, buttons and code */
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -66,16 +65,6 @@ a:hover { text-decoration-color: currentColor; }
     padding: 0;
     list-style: none;
 }
-.links a, .links .soon {
-    display: inline-block;
-    padding: 6px 16px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    font-size: var(--text-secondary);
-    text-decoration: none;
-}
-.links a:hover { border-color: var(--text); }
-.links .soon { color: var(--muted); cursor: default; }
 
 /* Sections */
 section { margin-block: 0 88px; }
@@ -159,8 +148,6 @@ footer.site a { color: var(--muted); text-decoration: none; }
 /* Tabs and toggles above a figure */
 .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-block: 0 12px; }
 .tabs[hidden] { display: none; }
-.tabs button { font: inherit; font-size: var(--text-small); color: var(--text); background: none; border: 1px solid var(--line); border-radius: var(--radius); padding: 4px 14px; cursor: pointer; }
-.tabs button[aria-selected="true"], .tabs button[aria-pressed="true"] { border-color: var(--text); }
 /* Phones: tables and BibTeX wrap instead of scrolling sideways. */
 @media (max-width: 767px) {
     td, th { white-space: normal; padding-left: 6px; padding-right: 6px; }
@@ -296,7 +283,6 @@ footer.site a { color: var(--muted); text-decoration: none; }
     .dch, .dch-crafter, .dch-abl { --labw: 108px; --valw: 38px; --rowh: 22px; font-size: 13px; }
     .dch-abl { --labw: 174px; }
     .dch, .dch-atari { width: auto; max-width: calc(100% - 24px); margin-left: auto; margin-right: auto; }
-    .drift-media--stack { max-width: min(480px, 100% - 24px); }
     .dch-row, .dch-atari .dch-panel .dch-row { grid-template-columns: var(--labw) minmax(0, 1fr) var(--valw); }
     .dch-crafter .dch-row { grid-template-columns: var(--labw) minmax(0, 1fr); }
     .dch-lab { padding-right: 8px; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -319,10 +305,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
     .dch-atari .dch-panel .dch-lab { display: block; }
     .dch-atari .dch-panel { display: none; }
     .dch-atari[data-show="iqm"] .dch-panel[data-stat="iqm"], .dch-atari[data-show="median"] .dch-panel[data-stat="median"], .dch-atari[data-show="mean"] .dch-panel[data-stat="mean"] { display: block; }
-    .dch-seg { display: flex; gap: 2px; width: max-content; margin-block: 0 8px; padding: 2px; border: 1px solid var(--line); border-radius: var(--radius); }
-    .dch-seg button { min-height: 28px; padding: 0 14px; border: 0; border-radius: var(--radius); background: none; color: var(--muted); font: 600 13px/1 var(--font); cursor: pointer; }
-    .dch-seg button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
-    .dch-seg button:focus-visible { outline: 2px solid var(--drift); outline-offset: 1px; }
+    .dch-seg { display: flex; gap: 8px; margin-block: 0 8px; }
     .dch-table th, .dch-table td { padding: 5px 0 5px 10px; }
     .dch-table thead th { font-size: 12px; line-height: 1.2; }
     .dch-table .dch-lab-full { display: none; } .dch-table .dch-lab-short { display: inline; }

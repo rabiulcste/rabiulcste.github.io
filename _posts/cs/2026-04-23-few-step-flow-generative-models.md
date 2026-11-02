@@ -423,14 +423,12 @@ Scrub the demo below to watch this happen: at $t=1$ the field points toward the 
 
 <style>
 .mv-label { font-size: 11px; color: var(--fig-ink-mute); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
-.mv-nbtn { transition: background 0.15s, color 0.15s; }
-.mv-nbtn.mv-active { background: var(--fig-blue); color: var(--fig-paper); border-color: var(--fig-blue); }
 </style>
 <figure class="fig-card">
 <div class="fig-card-title">Marginal velocity field with k clusters</div>
 <div class="fig-card-inner">
   <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;">
-    <button id="mvPlay" class="play-btn">&#9654; play</button>
+    <button id="mvPlay" class="btn">&#9654; play</button>
     <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:160px;">
       <span style="font-size:12px;color:var(--fig-ink-mute);white-space:nowrap;">t =</span>
       <input type="range" min="0" max="100" value="100" step="1" id="mvScrub" style="flex:1;">
@@ -438,9 +436,9 @@ Scrub the demo below to watch this happen: at $t=1$ the field points toward the 
     </div>
     <div style="display:flex;align-items:center;gap:6px;">
       <span style="font-size:12px;color:var(--fig-ink-mute);">candidates</span>
-      <button id="mvN1" class="play-btn mv-nbtn" style="min-width:28px;padding:3px 8px;">1</button>
-      <button id="mvN3" class="play-btn mv-nbtn" style="min-width:28px;padding:3px 8px;">3</button>
-      <button id="mvN5" class="play-btn mv-nbtn" style="min-width:28px;padding:3px 8px;">5</button>
+      <button id="mvN1" class="btn mv-nbtn" aria-pressed="false">1</button>
+      <button id="mvN3" class="btn mv-nbtn" aria-pressed="false">3</button>
+      <button id="mvN5" class="btn mv-nbtn" aria-pressed="false">5</button>
     </div>
   </div>
   <canvas id="cvMarginal" style="width:100%;display:block;border-radius:4px;"></canvas>
@@ -864,9 +862,9 @@ Scrub the demo below to watch this happen: at $t=1$ the field points toward the 
   function setN(n){
     nActive = n;
     var btns = document.querySelectorAll('.mv-nbtn');
-    for(var b = 0; b < btns.length; b++) btns[b].classList.remove('mv-active');
+    for(var b = 0; b < btns.length; b++) btns[b].setAttribute('aria-pressed', 'false');
     var ids = {1:'mvN1', 3:'mvN3', 5:'mvN5'};
-    if(ids[n]) document.getElementById(ids[n]).classList.add('mv-active');
+    if(ids[n]) document.getElementById(ids[n]).setAttribute('aria-pressed', 'true');
     redraw();
   }
   document.getElementById('mvN1').addEventListener('click', function(){ setN(1); });
@@ -994,7 +992,7 @@ Neither extreme works. The remedy is a curriculum: start small (strong signal, r
 <div class="fig-card-title">Discretisation tradeoff: signal vs target accuracy</div>
 <div class="fig-card-inner">
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
-  <button id="playDisc" class="play-btn">&#9654; play</button>
+  <button id="playDisc" class="btn">&#9654; play</button>
   <label style="font-size:13px;color:var(--fig-ink-soft);min-width:80px;">steps N</label>
   <input type="range" min="1" max="8" value="1" step="1" id="nSteps" oninput="drawDisc()" style="flex:1;">
   <span id="nStepsOut" style="font-size:13px;font-weight:500;color:var(--fig-ink-soft);min-width:46px;text-align:right;">N = 1</span>
@@ -1213,7 +1211,7 @@ Drag the split point $u$ in the figure below to see this in action: the direct j
 <div class="fig-card-title">Semigroup property: one jump = two composed jumps</div>
 <div class="fig-card-inner">
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
-  <button id="playSemi" class="play-btn">&#9654; play</button>
+  <button id="playSemi" class="btn">&#9654; play</button>
   <label style="font-size:13px;color:var(--fig-ink-soft);min-width:80px;">split point</label>
   <input type="range" min="15" max="85" value="40" step="1" id="splitPct" oninput="drawSemi()" style="flex:1;">
   <span id="splitOut" style="font-size:13px;font-weight:500;color:var(--fig-ink-soft);min-width:46px;text-align:right;">u = 0.40</span>

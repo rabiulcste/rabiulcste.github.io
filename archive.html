@@ -10,21 +10,21 @@ hide-title: true
 
 <div class="wrap">
     <div class="tags js-tags">
-        <a class="tag-button--all" data-encode="">
+        <button type="button" class="btn tag-button--all" data-encode="" aria-pressed="true">
             Show All
             <sup>{{site.posts.size}}</sup>
-        </a>
+        </button>
 
         {% capture tags %}
         {% for tag in site.tags %}
-        <a data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}"
+        <button type="button" data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}"
             data-encode="{{ tag[0] | strip | url_encode }}"
-            class="tag-button"
+            class="btn tag-button" aria-pressed="false"
             title="{{ tag[0] }}"
             rel="{{ tag[1].size }}">
             {{ tag[0] }}
             <sup>{{tag[1].size}}</sup>
-        </a>__SEPARATOR__
+        </button>__SEPARATOR__
         {% endfor %}
         {% endcapture %}
         {{ tags | split:'__SEPARATOR__' | sort }}

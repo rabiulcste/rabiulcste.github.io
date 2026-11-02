@@ -12,8 +12,9 @@
     --border-muted: #d2d2d7;
     --border-hairline: rgba(60, 60, 67, 0.12);
     --line: #86868b;        /* link underlines and control outlines: at least 3:1 against the page */
-    --radius-soft: 8px;
-    --radius-pill: 999em;
+    --radius: 0;            /* square corners everywhere: panels, buttons, code */
+    --radius-soft: var(--radius);
+    --radius-pill: var(--radius);
     --focus-ring: var(--text);
     --gradient-era: linear-gradient(
         118deg,
@@ -120,6 +121,30 @@
 
 /* Bangla needs more room between lines for its vowel signs and conjuncts. Posts set lang: bn in front matter. */
 :lang(bn) { --leading-body: 1.75; --leading-prose: 1.8; }
+
+/* Buttons: one look for every control on the site (tags, paper links, figure tabs, play).
+   Selected state comes from aria-pressed / aria-selected, so it is announced as well as shown. */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    min-height: 34px;
+    padding: 6px 14px;
+    font: 400 var(--text-small)/1.2 var(--font-sans);
+    color: var(--text);
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color var(--duration) var(--ease-standard), background-color var(--duration) var(--ease-standard), color var(--duration) var(--ease-standard);
+}
+.btn:hover { border-color: var(--text); color: var(--text); }
+.btn:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.btn[aria-pressed="true"], .btn[aria-selected="true"] { background: var(--text); border-color: var(--text); color: var(--bg-page); }
+.btn[aria-disabled="true"] { color: var(--text-muted); border-style: dashed; cursor: default; }
+.btn[aria-disabled="true"]:hover { border-color: var(--line); color: var(--text-muted); }
+.btn sup { font-size: 0.75em; color: inherit; opacity: 0.7; }
 
 .wrap {
     width: 100%;

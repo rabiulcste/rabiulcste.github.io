@@ -101,10 +101,10 @@ placeholder box.
             {%- if page.links %}
             <ul class="links" role="list">
                 {%- for l in page.links %}
-                <li>{% if l.url and l.url != "" %}<a href="{{ l.url }}">{{ l.label }}</a>{% else %}<span class="soon" title="Coming soon">{{ l.label }}</span>{% endif %}</li>
+                <li>{% if l.url and l.url != "" %}<a class="btn" href="{{ l.url }}">{{ l.label }}</a>{% else %}<span class="btn" aria-disabled="true" title="Coming soon">{{ l.label }}</span>{% endif %}</li>
                 {%- endfor %}
                 {%- if page.bibtex %}
-                <li><a href="#bibtex">BibTeX</a></li>
+                <li><a class="btn" href="#bibtex">BibTeX</a></li>
                 {%- endif %}
             </ul>
             {%- endif %}
