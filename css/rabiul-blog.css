@@ -11,7 +11,7 @@
 html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    color-scheme: light;
+    color-scheme: light dark;
 }
 
 body {
@@ -459,7 +459,7 @@ main {
 }
 .social-links a {
     color: var(--text-muted);
-    font-size: var(--text-small);
+    font-size: var(--text-secondary);
     font-weight: 400;
     text-decoration: underline;
     text-decoration-color: var(--border-muted);
@@ -517,30 +517,30 @@ main {
 }
 
 .publication-list-note {
-    font-size: var(--text-small);
+    font-size: var(--text-secondary);
     color: var(--text-muted);
-    margin: 0 0 var(--space-2);
-    line-height: var(--leading-snug);
+    margin: 0 0 var(--space-3);
+    line-height: var(--leading-body);
 }
 
 .about-content .about-subheading-note {
-    font-size: var(--text-small);
+    font-size: var(--text-secondary);
     color: var(--text-muted);
-    line-height: var(--leading-snug);
+    line-height: var(--leading-body);
     margin: 0 0 var(--space-4);
 }
 
 /* Shared plain-paragraph style: publications and misc are both just lists of entries */
 .list-entry {
     font-size: var(--text-body);
-    line-height: var(--leading-snug);
+    line-height: var(--leading-list);
     margin: 0 0 0.4em;
     color: var(--text-muted);
 }
 .list-entry:last-child { margin-bottom: 0; }
 .list-entry-title { font-weight: 500; color: var(--text); }
 .list-entry .link-group {
-    font-size: var(--text-small);
+    font-size: var(--text-secondary);
     font-weight: 500;
 }
 
@@ -624,11 +624,11 @@ main {
 }
 .profile-bio > p:first-child { margin-top: 0; }
 .about-content .research-note {
-    font-size: var(--text-small);
+    font-size: var(--text-secondary);
     color: var(--text-muted);
     margin-top: var(--space-2);
     margin-bottom: var(--space-3);
-    line-height: var(--leading-snug);
+    line-height: var(--leading-prose);
 }
 /* ======================================
    ARCHIVE

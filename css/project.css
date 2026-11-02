@@ -5,7 +5,7 @@
     --muted: var(--text-muted);
     --bg: var(--bg-page);
     --surface: var(--bg-muted);
-    --border: var(--border-hairline);
+    --border: var(--border-muted);   /* solid grey: link underlines, rules, button outlines */
     --link: var(--content-link);
     --font: var(--font-sans);
     --mono: var(--font-mono);
@@ -23,7 +23,9 @@ body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font: 17px/1.6 var(--font);
+    font-family: var(--font);
+    font-size: var(--text-body);
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -49,10 +51,10 @@ a:hover { text-decoration-color: currentColor; }
     font-weight: 600;
     letter-spacing: -0.02em;
 }
-.authors { margin: 0 0 4px; font-size: 1rem; }
+.authors { margin: 0 0 4px; font-size: var(--text-subtitle); }
 .authors a { text-decoration: none; }
 .authors a:hover { text-decoration: underline; }
-.meta { margin: 0; color: var(--muted); font-size: 0.9375rem; }
+.meta { margin: 0; color: var(--muted); font-size: var(--text-secondary); }
 
 .links {
     display: flex;
@@ -68,7 +70,7 @@ a:hover { text-decoration-color: currentColor; }
     padding: 6px 16px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    font-size: 0.9375rem;
+    font-size: var(--text-secondary);
     text-decoration: none;
 }
 .links a:hover { border-color: var(--text); }
@@ -79,16 +81,16 @@ section { margin: 0 0 88px; }
 section > :last-child { margin-bottom: 0; }
 h2 {
     margin: 0 0 16px;
-    font-size: 1.25rem;
+    font-size: var(--text-title-sm);
     font-weight: 600;
     letter-spacing: -0.01em;
 }
 p { margin: 0 0 16px; }
-.lede { font-size: 1.0625rem; }
+.lede { font-size: var(--text-body-lg); }
 .muted { color: var(--muted); }
-.note { color: var(--muted); font-size: 0.875rem; }
+.note { color: var(--muted); font-size: var(--text-secondary); }
 .intro { margin-bottom: 48px; }
-.tldr { text-align: center; font-size: 1.1875rem; line-height: 1.5; margin: 0 auto 48px; max-width: 620px; }
+.tldr { text-align: center; font-size: var(--text-lede); line-height: 1.5; margin: 0 auto 48px; max-width: 620px; }
 
 /* Figures */
 .fig { margin: 0 0 32px; }
@@ -112,14 +114,14 @@ p { margin: 0 0 16px; }
     border: 1px dashed var(--border);
     border-radius: var(--radius);
     color: var(--muted);
-    font-size: 0.875rem;
+    font-size: var(--text-secondary);
 }
-figcaption, .caption { margin-top: 12px; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
+figcaption, .caption { margin-top: 12px; color: var(--muted); font-size: var(--text-secondary); line-height: 1.5; }
 
 /* Tables */
 .table-wrap { overflow-x: auto; margin: 0; }
 .caption { margin: 12px 0 32px; }
-table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; font-variant-numeric: tabular-nums; }
+table { width: 100%; border-collapse: collapse; font-size: var(--text-secondary); font-variant-numeric: tabular-nums; }
 th, td { padding: 8px 12px; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; }
 th:first-child, td:first-child { text-align: left; }
 thead th { font-weight: 600; border-bottom-color: var(--text); }
@@ -133,10 +135,10 @@ pre {
     overflow-x: auto;
     background: var(--surface);
     border-radius: var(--radius);
-    font: 0.8125rem/1.6 var(--mono);
+    font: var(--text-caption)/1.6 var(--mono);
 }
 
-footer.site { padding-top: 32px; padding-bottom: 48px; border-top: 1px solid var(--border); font-size: 0.875rem; }
+footer.site { padding-top: 32px; padding-bottom: 48px; border-top: 1px solid var(--border); font-size: var(--text-small); }
 footer.site a { color: var(--muted); text-decoration: none; }
 
 /* Shared pieces used by every project page ------------------------------------------------ */
@@ -151,7 +153,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
 /* Tabs and toggles above a figure */
 .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 12px; }
 .tabs[hidden] { display: none; }
-.tabs button { font: inherit; font-size: 0.875rem; color: var(--text); background: none; border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 14px; cursor: pointer; }
+.tabs button { font: inherit; font-size: var(--text-small); color: var(--text); background: none; border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 14px; cursor: pointer; }
 .tabs button[aria-selected="true"], .tabs button[aria-pressed="true"] { border-color: var(--text); }
 /* Phones: tables and BibTeX wrap instead of scrolling sideways. */
 @media (max-width: 767px) {
