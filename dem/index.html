@@ -82,9 +82,9 @@ bibtex: |
     /* Tau slider: the copy is solid below full noise, dashed and muted at exactly 1. */
     #dem-tau { --thumb: 28px; }
     #dem-tau .cp-box { stroke: var(--emb); }
-    #dem-tau .cp-bars rect { fill: var(--emb); }
+    #dem-tau .cp-bars { fill: var(--emb); }
+    #dem-tau .cp-ghost { fill: none; stroke: var(--text); stroke-width: 1; }
     #dem-tau[data-full] .cp-box, #dem-tau[data-full] .cp-ln { stroke: var(--muted); stroke-dasharray: 4 3; }
-    #dem-tau[data-full] .cp-bars rect { fill: var(--muted); }
     .dem-tau-ctl { max-width: 420px; margin: 8px auto 0; }
     .dem-tau-ctl[hidden] { display: none; }
     #dem-tau-r { display: block; width: 100%; height: 44px; margin: 0; padding: 0; background: none; -webkit-appearance: none; appearance: none; cursor: pointer; }
@@ -276,12 +276,13 @@ bibtex: |
     <p>Conceptually, joint-embedding SSL methods are a special case of DEM. These methods train a network to predict the embedding of one view of an image from another view. Suppose this network also receives a noisy copy of the embedding it predicts. If the copy is pure noise, it carries no information, and the task is unchanged. Prediction is thus view-conditioned embedding denoising at full noise. At lower noise, DEM learns the distribution that prediction reduces to its mean.</p>
     <figure class="dem-fig" id="dem-tau">
         <svg class="dem-svg dem-svg--phone dem-copy" viewBox="0 0 360 160" role="img" aria-labelledby="cp-t">
-<title id="cp-t">An illustration with one fixed embedding and one fixed noise draw, which are not model output. A view and a noisy copy of the embedding go into the network, which outputs the embedding. The slider sets the noise level tau of the copy, drawn as bars. At tau 1 the copy is pure noise and carries no information, so this is prediction from the view alone.</title>
+<title id="cp-t">An illustration with one fixed smooth embedding and one fixed noise draw, which are not model output. A view and a noisy copy of the embedding go into the network, which outputs the embedding. The slider sets the noise level tau of the copy, drawn as bars over a faint outline of the clean embedding. As tau rises, noise covers the shape. At tau 1 the copy is pure noise and carries no information, so this is prediction from the view alone.</title>
 <defs><marker id="ah-cp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
 <text class="lb" x="72" y="27" text-anchor="end">View x′</text>
 <image href="tile_view.webp" x="78" y="1" width="44" height="44" preserveAspectRatio="none"/>
 <rect class="nd cp-box" x="2" y="56" width="120" height="68"/>
-<g class="cp-bars"><rect x="7" y="90.0" width="4.5" height="10.1"/><rect x="13.75" y="88.2" width="4.5" height="1.8"/><rect x="20.5" y="90.0" width="4.5" height="13.1"/><rect x="27.25" y="90.0" width="4.5" height="4.0"/><rect x="34" y="90.0" width="4.5" height="10.7"/><rect x="40.75" y="89.0" width="4.5" height="1.0"/><rect x="47.5" y="90.0" width="4.5" height="16.1"/><rect x="54.25" y="82.6" width="4.5" height="7.4"/><rect x="61" y="85.4" width="4.5" height="4.6"/><rect x="67.75" y="83.7" width="4.5" height="6.3"/><rect x="74.5" y="86.7" width="4.5" height="3.3"/><rect x="81.25" y="88.9" width="4.5" height="1.1"/><rect x="88" y="90.0" width="4.5" height="7.0"/><rect x="94.75" y="71.4" width="4.5" height="18.6"/><rect x="101.5" y="90.0" width="4.5" height="9.3"/><rect x="108.25" y="90.0" width="4.5" height="11.1"/></g>
+<polyline class="cp-ghost" points="6.2,89.1 8.6,88.0 10.9,86.2 13.3,83.5 15.7,79.9 18.1,75.8 20.4,72.1 22.8,69.7 25.2,69.5 27.6,71.2 29.9,74.5 32.3,78.7 34.7,82.7 37.1,86.4 39.4,89.5 41.8,92.6 44.2,96.2 46.6,100.0 48.9,103.7 51.3,106.1 53.7,106.4 56.1,104.6 58.4,101.2 60.8,97.0 63.2,93.1 65.6,89.5 67.9,86.0 70.3,81.9 72.7,77.5 75.1,72.7 77.4,68.3 79.8,64.9 82.2,63.5 84.6,64.3 86.9,67.1 89.3,71.4 91.7,76.1 94.1,80.5 96.4,84.3 98.8,87.7 101.2,91.4 103.6,96.1 105.9,100.3 108.3,101.3 110.7,98.6 113.1,94.5 115.4,91.7 117.8,90.5" opacity="0.57"/>
+<g class="cp-bars" style="fill: color-mix(in srgb, var(--emb) 50%, var(--muted))"><rect x="5.45" y="90.0" width="1.47" height="7.4"/><rect x="7.83" y="88.2" width="1.47" height="1.8"/><rect x="10.2" y="89.4" width="1.47" height="0.6"/><rect x="12.58" y="90.0" width="1.47" height="0.6"/><rect x="14.95" y="83.0" width="1.47" height="7.0"/><rect x="17.33" y="76.9" width="1.47" height="13.1"/><rect x="19.7" y="81.1" width="1.47" height="8.9"/><rect x="22.08" y="87.5" width="1.47" height="2.5"/><rect x="24.45" y="77.1" width="1.47" height="12.9"/><rect x="26.83" y="83.6" width="1.47" height="6.4"/><rect x="29.2" y="75.8" width="1.47" height="14.2"/><rect x="31.58" y="86.6" width="1.47" height="3.4"/><rect x="33.95" y="81.7" width="1.47" height="8.3"/><rect x="36.33" y="90.0" width="1.47" height="5.7"/><rect x="38.7" y="78.6" width="1.47" height="11.4"/><rect x="41.08" y="90.0" width="1.47" height="6.5"/><rect x="43.45" y="90.0" width="1.47" height="6.8"/><rect x="45.83" y="90.0" width="1.47" height="2.7"/><rect x="48.2" y="81.6" width="1.47" height="8.4"/><rect x="50.58" y="90.0" width="1.47" height="8.5"/><rect x="52.95" y="90.0" width="1.47" height="6.8"/><rect x="55.33" y="90.0" width="1.47" height="21.8"/><rect x="57.7" y="89.4" width="1.47" height="0.6"/><rect x="60.08" y="90.0" width="1.47" height="5.5"/><rect x="62.45" y="87.1" width="1.47" height="2.9"/><rect x="64.83" y="78.4" width="1.47" height="11.6"/><rect x="67.2" y="90.0" width="1.47" height="8.8"/><rect x="69.58" y="88.2" width="1.47" height="1.8"/><rect x="71.95" y="75.8" width="1.47" height="14.2"/><rect x="74.33" y="72.3" width="1.47" height="17.7"/><rect x="76.7" y="76.7" width="1.47" height="13.3"/><rect x="79.08" y="83.9" width="1.47" height="6.1"/><rect x="81.45" y="82.0" width="1.47" height="8.0"/><rect x="83.83" y="82.0" width="1.47" height="8.0"/><rect x="86.2" y="77.1" width="1.47" height="12.9"/><rect x="88.58" y="77.5" width="1.47" height="12.5"/><rect x="90.95" y="81.9" width="1.47" height="8.1"/><rect x="93.33" y="84.3" width="1.47" height="5.7"/><rect x="95.7" y="84.8" width="1.47" height="5.2"/><rect x="98.08" y="90.0" width="1.47" height="4.0"/><rect x="100.45" y="90.0" width="1.47" height="0.6"/><rect x="102.83" y="90.0" width="1.47" height="16.1"/><rect x="105.2" y="90.0" width="1.47" height="10.6"/><rect x="107.58" y="90.0" width="1.47" height="0.7"/><rect x="109.95" y="90.0" width="1.47" height="1.1"/><rect x="112.33" y="84.0" width="1.47" height="6.0"/><rect x="114.7" y="90.0" width="1.47" height="11.2"/><rect x="117.08" y="85.3" width="1.47" height="4.7"/></g>
 <text class="lb" x="62" y="140" text-anchor="middle" id="dem-tau-name">Noisy copy</text>
 <text class="lb strong" x="62" y="156" text-anchor="middle" id="dem-tau-val">τ = 0.50</text>
 <path class="ln gen" d="M124 23 H155" marker-end="url(#ah-cp)"/>
@@ -388,15 +389,18 @@ bibtex: |
 <script>
 (function () {
   var fig = document.getElementById("dem-tau");
-  var Z = [-1.51, -1.16, -1.18, -0.31, -2.01, -0.16, -0.83, 0.78, 0.83, 1.21, 0.67, -0.05, 0.75, 1.31, -0.57, 0.53], E = [-0.04, 1.44, -0.84, -0.3, 0.36, 0.26, -1.64, 0.36, -0.12, -0.24, -0.16, 0.22, -1.82, 1.55, -0.86, -2.24];
+  var Z = [0.07, 0.15, 0.29, 0.5, 0.78, 1.09, 1.38, 1.56, 1.58, 1.45, 1.19, 0.87, 0.56, 0.28, 0.04, -0.2, -0.48, -0.77, -1.05, -1.24, -1.26, -1.12, -0.86, -0.54, -0.24, 0.04, 0.31, 0.62, 0.96, 1.33, 1.67, 1.93, 2.04, 1.98, 1.76, 1.43, 1.07, 0.73, 0.44, 0.18, -0.11, -0.47, -0.79, -0.87, -0.66, -0.35, -0.13, -0.04], E = [-1.21, 0.13, -0.23, -0.52, 0.29, 0.93, -0.01, -1.18, 0.41, -0.46, 1.0, -0.34, 0.71, -1.16, 1.71, -0.8, -0.57, 0.35, 2.34, -0.07, 0.22, -2.24, 0.92, -0.31, 0.69, 1.74, -1.66, -0.34, 1.22, 1.4, 0.37, -0.99, -0.81, -0.75, 0.22, 0.49, 0.18, 0.15, 0.36, -0.79, 0.03, -2.01, -0.84, 0.76, 0.49, 1.28, -1.6, 0.77];
   var bars = fig.querySelectorAll(".cp-bars rect"), r = document.getElementById("dem-tau-r");
+  var ghost = fig.querySelector(".cp-ghost");
   var val = document.getElementById("dem-tau-val"), name = document.getElementById("dem-tau-name"), line = document.getElementById("dem-tau-line");
   function draw() {
     var t = parseFloat(r.value), full = t === 1, txt = full ? "Full noise (joint-embedding SSL). The copy carries no information, so this is prediction." : "Lower noise (DEM). The copy still carries information.";
     bars.forEach(function (b, i) {
-      var v = (1 - t) * Z[i] + t * E[i], h = Math.max(Math.abs(v) * 13, 1);
+      var v = (1 - t) * Z[i] + t * E[i], h = Math.max(Math.abs(v) * 13, 0.6);
       b.setAttribute("y", (v > 0 ? 90 - h : 90).toFixed(1)); b.setAttribute("height", h.toFixed(1));
     });
+    bars[0].parentNode.style.fill = "color-mix(in srgb, var(--emb) " + Math.round((1 - t) * 100) + "%, var(--muted))";
+    ghost.setAttribute("opacity", (0.8 * Math.sqrt(1 - t)).toFixed(2));
     val.textContent = "τ = " + t.toFixed(2);
     r.setAttribute("aria-valuetext", t.toFixed(2));
     name.textContent = full ? "Pure noise" : "Noisy copy";
