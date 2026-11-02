@@ -85,7 +85,7 @@ bibtex: |
     .dem-uses button[aria-selected="true"] { border-color: var(--text); }
     /* Phones: the stacked concept figure replaces the wide one, and nothing scrolls sideways. */
     .dem-phone { display: none; }
-    .dem-svg--phone { min-width: 0; }
+    .dem-svg--phone { min-width: 0; max-width: 480px; margin: 0 auto; }
     .dem-svg--phone .lb { font-size: 13px; }
     .dem-svg--phone .net-t { font-size: 16px; }
     @media (max-width: 767px) {
@@ -117,8 +117,10 @@ bibtex: |
         .dem-view figcaption { min-height: 3.9em; }
         #results td, #results th { white-space: normal; padding-left: 6px; padding-right: 6px; }
         .dem-svg.dem-plane { min-width: 0; }
-        .dem-plane .lab, .dem-plane .tick, .dem-plane .ax { font-size: 18px; }
-        .dem-plane .lab-ours { font-size: 21px; }
+        .dem-plane .lab, .dem-plane .tick { font-size: 21px; }
+        .dem-plane .ax { font-size: 18px; }
+        .dem-plane .lab-ours { font-size: 24px; }
+        .dem-svg.dem-fit .lb { font-size: 15px; }
     }
 </style>
 
