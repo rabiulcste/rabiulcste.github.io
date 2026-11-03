@@ -24,9 +24,9 @@ bibtex: |
   }
 ---
 <style>
-    :root { --rep: #2563eb; --emb: #7c3aed; --pix: #b45309; --grid: #ececef; --nz0: #ffffff; --nz1: #9ca3af; }
+    :root { --rep: #2563eb; --emb: #7c3aed; --pix: #b45309; --sl: #475569; --rep-f: #eff6ff; --emb-f: #f5f3ff; --pix-f: #fffbeb; --sl-f: #f1f5f9; --grid: #ececef; --nz0: #ffffff; --nz1: #9ca3af; }
     @media (prefers-color-scheme: dark) {
-        :root { --rep: #60a5fa; --emb: #a78bfa; --pix: #fbbf24; --grid: #222225; --nz0: #2c2c2f; --nz1: #d4d4d8; }
+        :root { --rep: #60a5fa; --emb: #a78bfa; --pix: #fbbf24; --sl: #94a3b8; --rep-f: rgba(96, 165, 250, 0.14); --emb-f: rgba(167, 139, 250, 0.16); --pix-f: rgba(251, 191, 36, 0.13); --sl-f: rgba(148, 163, 184, 0.14); --grid: #222225; --nz0: #2c2c2f; --nz1: #d4d4d8; }
     }
     .dem-media { margin-bottom: 16px; }
     .dem-media img { display: block; width: 100%; height: auto; }
@@ -44,16 +44,12 @@ bibtex: |
     .dem-svg .net { fill: var(--surface); stroke: var(--border); }
     .dem-svg .net-t { font-size: 17px; font-weight: 600; }
     .dem-svg .nd { fill: var(--bg); stroke-width: 2; }
-    .dem-svg .nd-enc, .dem-svg .bars rect { stroke: var(--rep); }
-    .dem-svg .bars rect { fill: var(--rep); stroke: none; }
     .dem-svg .nd-gen { stroke: var(--emb); }
     .dem-svg.dem-plane { min-width: 460px; }
     .dem-svg .ln { fill: none; stroke-width: 2; }
     .dem-svg .ln.enc { stroke: var(--rep); } .dem-svg .ln.gen { stroke: var(--emb); } .dem-svg .ln.dec { stroke: var(--pix); }
     .dem-svg .ahd { fill: var(--muted); }
     .dem-svg .nz0 { stop-color: var(--nz0); } .dem-svg .nz1 { stop-color: var(--nz1); }
-    .dem-svg .u { transition: opacity 0.2s; }
-    #dem-concept[data-use="enc"] .u:not(.enc), #dem-concept[data-use="gen"] .u:not(.gen), #dem-concept[data-use="dec"] .u:not(.dec) { opacity: 0.15; }
     .dem-svg .grid { stroke: var(--grid); }
     .dem-svg .axis { stroke: var(--muted); }
     .dem-svg .ax { font-size: 13px; fill: var(--text); }
@@ -98,18 +94,41 @@ bibtex: |
     .dem-tau-scale i { position: absolute; top: -14px; bottom: 100%; width: 1px; height: 10px; left: calc(var(--thumb) / 2 + 0.95 * (100% - var(--thumb))); background: var(--muted); }
     .dem-tau-scale .med { right: calc(100% - (var(--thumb) / 2 + 0.95 * (100% - var(--thumb)))); }
     .dem-tau-line { max-width: 420px; min-height: 3em; margin: 8px auto 0; color: var(--muted); font-size: var(--text-secondary); line-height: 1.5; }
-    .dem-use-text[hidden] { display: none; }
-    /* Phones: the stacked concept figure (.only-phone) replaces the wide one. */
+    /* Phones: the stacked method figures (.only-phone) replace the wide ones. */
     .dem-svg--phone { min-width: 0; max-width: 480px; margin: 0 auto; }
     .dem-svg--phone .lb { font-size: 13px; }
     .dem-svg--phone .net-t { font-size: 16px; }
-    .dem-use-text { text-align: center; color: var(--muted); font-size: var(--text-secondary); margin-block: 8px 0; min-height: 1.5em; }
+    /* Training and inference figures: pastel boxes with a 600-level outline. Blue is the network and its embeddings, violet the embedding denoiser, amber pixels, slate the teacher and noise. */
+    main h3 { margin-block: 40px 8px; font-size: var(--text-lede); font-weight: 600; }
+    .dem-flow .bx { stroke-width: 1.5; }
+    .dem-flow .bx.rep { fill: var(--rep-f); stroke: var(--rep); } .dem-flow .bx.emb { fill: var(--emb-f); stroke: var(--emb); }
+    .dem-flow .bx.pix { fill: var(--pix-f); stroke: var(--pix); } .dem-flow .bx.sl { fill: var(--sl-f); stroke: var(--sl); }
+    .dem-flow .bx.dash, .dem-flow .ln.dash { stroke-dasharray: 5 4; }
+    .dem-flow .bt { font-size: 15px; font-weight: 600; fill: var(--text); }
+    .dem-flow .sm { font-size: 12px; fill: var(--muted); }
+    .dem-flow .strong { fill: var(--text); font-weight: 600; }
+    .dem-flow .hd { font-size: 14px; font-weight: 600; fill: var(--text); }
+    .dem-flow .role { font-size: 13px; font-weight: 600; }
+    .dem-flow .t-rep { fill: var(--rep); } .dem-flow .t-emb { fill: var(--emb); } .dem-flow .t-pix { fill: var(--pix); } .dem-flow .t-sl { fill: var(--sl); }
+    .dem-flow .ln.rep { stroke: var(--rep); } .dem-flow .ln.emb { stroke: var(--emb); } .dem-flow .ln.pix { stroke: var(--pix); } .dem-flow .ln.sl { stroke: var(--sl); }
+    .dem-flow .chip .cb { fill: var(--bg); stroke-width: 1.5; }
+    .dem-flow .chip.rep .cb { stroke: var(--rep); } .dem-flow .chip.rep .bars { fill: var(--rep); }
+    .dem-flow .chip.emb .cb { stroke: var(--emb); } .dem-flow .chip.emb .bars { fill: var(--emb); }
+    .dem-flow .chip.sl .cb { stroke: var(--sl); } .dem-flow .chip.sl .bars { fill: var(--sl); }
+    .dem-flow .chip.nz .cb { stroke-dasharray: 3 2; } .dem-flow .chip.nz .bars { fill: var(--nz1); }
+    .dem-flow .tf { fill: none; stroke-width: 2; } .dem-flow .tf.pix { stroke: var(--pix); }
+    .dem-flow .tf.void { fill: var(--surface); stroke: var(--sl); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    .dem-flow .pl { fill: var(--bg); stroke: var(--sl); stroke-width: 1.5; } .dem-flow .pl-x { stroke: var(--sl); stroke-width: 1.5; }
+    .dem-flow .jn { fill: var(--sl); }
+    .dem-svg.dem-flow { min-width: 0; }
+    .dem-svg--phone.dem-flow .bt { font-size: 14px; }
     /* Noise-map views: one column per view, its noise map above it. */
     .dem-views { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; max-width: 680px; margin: 0 auto; }
     .dem-view { margin: 0; text-align: center; font-size: var(--text-caption); line-height: 1.3; }
     .dem-view figcaption { display: flex; flex-direction: column; justify-content: flex-end; min-height: 2.6em; margin-block: 0 6px; color: var(--text); font-size: inherit; line-height: 1.3; }
     .dem-view figcaption span { display: block; }
     .dem-role { color: var(--muted); }
+    .dem-role.rep { color: var(--rep); font-weight: 600; } .dem-role.sl { color: var(--sl); font-weight: 600; } .dem-role.pix { color: var(--pix); font-weight: 600; }
     .dem-view .dem-map { display: block; width: 44%; margin: 0 auto 10px; outline: 1px solid var(--border); }
     .dem-view img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
     .dem-legend { display: flex; align-items: center; justify-content: center; gap: 8px; margin-block: 16px 0; color: var(--muted); font-size: var(--text-caption); }
@@ -123,7 +142,7 @@ bibtex: |
         .dem-pair, .dem-pair.even { grid-template-columns: 1fr; gap: 24px; }
         .dem-views { gap: 6px; }
         .dem-view { font-size: var(--text-micro); }
-        .dem-view figcaption { min-height: 3.9em; }
+        .dem-view figcaption { min-height: 5.2em; }
         .dem-svg.dem-plane { min-width: 0; }
         #dem-tau { --thumb: 32px; }
         .dem-plane .lab, .dem-plane .tick { font-size: 21px; }
@@ -149,93 +168,254 @@ bibtex: |
 
 <section id="method">
     <h2>A diffusion model at two levels</h2>
-    <p>DEM generates the representation and the image separately, within one network and with one denoising objective. In representation space, it denoises the embedding of an image given another view of the same image. In pixel space, it generates the image that this embedding describes.</p>
-    <figure class="dem-fig" id="dem-concept">
-        <div class="dem-uses tabs" role="tablist" aria-label="Uses of the network" hidden>
-    <button type="button" class="btn" role="tab" data-use="enc" aria-selected="false">Encode</button>
-    <button type="button" class="btn" role="tab" data-use="gen" aria-selected="false">Denoise the embedding</button>
-    <button type="button" class="btn" role="tab" data-use="dec" aria-selected="false">Generate the image</button>
-</div>
-<p class="dem-use-text" aria-live="polite" hidden></p>
-        <div class="dem-media wide scroll only-desk"><svg class="dem-svg" viewBox="0 0 760 368" role="img" aria-labelledby="cd-t">
-<title id="cd-t">One network at two levels. In representation space, a view of the image goes in and the network outputs its embedding, the representation, and given a noisy embedding the network outputs the denoised embedding. In pixel space, given an embedding and noisy pixels, the network outputs an image.</title>
-<defs>
-<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker>
-<filter id="noisy"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="g"/><feBlend in="SourceGraphic" in2="g" mode="overlay"/></filter>
-</defs>
-<text class="lvl emb" transform="translate(30 146) rotate(-90)" text-anchor="middle">Representation space</text>
-<text class="lvl pix" transform="translate(30 306) rotate(-90)" text-anchor="middle">Pixel space</text>
-<line class="grid" x1="16" x2="744" y1="252" y2="252" stroke-dasharray="4 4"/>
-<g class="u enc gen">
-  <image href="tile_view.webp" x="70" y="34" width="72" height="72" preserveAspectRatio="none"/>
-  <text class="lb" x="106" y="124" text-anchor="middle">View x′</text>
-</g>
-<g class="u gen">
-  <circle class="nd nd-gen" cx="106" cy="190" r="26"/><text class="sym" x="106" y="196" text-anchor="middle">z<tspan class="sub" dy="5">τ</tspan></text>
-  <text class="lb" x="106" y="238" text-anchor="middle">Noisy embedding</text>
-</g>
-<g class="u dec">
-  <image href="tile_sample.webp" x="70" y="262" width="72" height="72" preserveAspectRatio="none" filter="url(#noisy)"/>
-  <text class="lb" x="106" y="352" text-anchor="middle">Noisy pixels, given ẑ</text>
-</g>
-<rect class="net" x="290" y="40" width="180" height="290"/>
-<text class="net-t" x="380" y="180" text-anchor="middle">One network</text>
-<text class="lb" x="380" y="204" text-anchor="middle">Transformer</text>
-<g class="u enc"><path class="ln enc" d="M150 70 H286" marker-end="url(#ah)"/><path class="ln enc" d="M474 70 H600" marker-end="url(#ah)"/>
-  <rect class="nd nd-enc" x="604" y="52" width="72" height="36"/>
-  <g class="bars"><rect x="614" y="62" width="6" height="16"/><rect x="624" y="66" width="6" height="12"/><rect x="634" y="60" width="6" height="18"/><rect x="644" y="68" width="6" height="10"/><rect x="654" y="63" width="6" height="15"/></g>
-  <text class="lb" x="640" y="110" text-anchor="middle">Embedding, the representation</text>
-</g>
-<g class="u gen"><path class="ln gen" d="M150 120 C210 120 230 175 286 182" marker-end="url(#ah)"/><path class="ln gen" d="M134 190 H286" marker-end="url(#ah)"/><path class="ln gen" d="M474 190 H612" marker-end="url(#ah)"/>
-  <circle class="nd nd-gen" cx="640" cy="190" r="26"/><text class="sym" x="640" y="196" text-anchor="middle">ẑ</text>
-  <text class="lb" x="640" y="238" text-anchor="middle">Denoised embedding</text>
-</g>
-<g class="u dec"><path class="ln dec" d="M150 298 H286" marker-end="url(#ah)"/><path class="ln dec" d="M474 298 H600" marker-end="url(#ah)"/>
-  <image href="tile_sample.webp" x="604" y="262" width="72" height="72" preserveAspectRatio="none"/>
-  <text class="lb" x="640" y="352" text-anchor="middle">Image</text>
-</g>
+    <p>DEM generates the representation and the image separately, within one network and with one denoising objective. In representation space, it denoises the embedding of an image given another view of the same image. In pixel space, it generates the image that this embedding describes. Training and inference use the network in different ways, so we show them apart.</p>
+    <h3>Training</h3>
+    <p>Each training step takes three views of one image. The teacher, an exponential moving average (EMA) of the network, embeds a clean view into the target embedding. At the embedding level, the network embeds the student's view, and a small embedding denoiser recovers the target from a noisy copy of it (loss 1). At the pixel level, the same network denoises a noisy copy of the image, given the target embedding (loss 2).</p>
+    <figure class="dem-fig" id="dem-train">
+        <div class="dem-media wide only-desk"><svg class="dem-svg dem-flow" viewBox="0 0 860 420" role="img" aria-labelledby="tr-t">
+<title id="tr-t">One training step. Three views of one image. The teacher, an EMA copy of the network, embeds the clean view into the target embedding. Embedding level: the network embeds the student view, and the embedding denoiser takes this student embedding and a noisy copy of the target embedding and predicts the target (loss 1). Pixel level: the network takes a noisy copy of the image, given the target embedding, and predicts the clean image (loss 2). Both network boxes are the same network.</title>
+<defs><marker id="ah-tr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
+<text class="sm strong" x="8" y="22" text-anchor="start">Three views of one image</text>
+<image href="view_all.webp" x="28" y="48" width="64" height="64" preserveAspectRatio="none"/>
+<text class="role t-rep" x="60" y="130" text-anchor="middle">student sees</text>
+<text class="sm" x="60" y="146" text-anchor="middle">noise and a mask</text>
+<image href="view_clean.webp" x="28" y="178" width="64" height="64" preserveAspectRatio="none"/>
+<text class="role t-sl" x="60" y="260" text-anchor="middle">teacher sees</text>
+<text class="sm" x="60" y="276" text-anchor="middle">clean view</text>
+<image href="view_noise.webp" x="28" y="308" width="64" height="64" preserveAspectRatio="none"/>
+<text class="role t-pix" x="60" y="390" text-anchor="middle">pixel pass sees</text>
+<text class="sm" x="60" y="406" text-anchor="middle">noisy image</text>
+<path class="ln rep" d="M96 80H148" marker-end="url(#ah-tr)"/>
+<path class="ln sl" d="M96 210H148" marker-end="url(#ah-tr)"/>
+<path class="ln pix" d="M96 340H148" marker-end="url(#ah-tr)"/>
+<rect class="bx rep" x="150" y="54" width="140" height="52" rx="6"/><text class="bt" x="220.0" y="78.0" text-anchor="middle">Network</text><text class="sm" x="220.0" y="95.0" text-anchor="middle">shared weights</text>
+<rect class="bx sl dash" x="150" y="186" width="140" height="48" rx="6"/><text class="bt" x="220.0" y="208.0" text-anchor="middle">Teacher</text><text class="sm" x="220.0" y="225.0" text-anchor="middle">copy of the network</text>
+<rect class="bx rep" x="150" y="314" width="140" height="52" rx="6"/><text class="bt" x="220.0" y="338.0" text-anchor="middle">Network</text><text class="sm" x="220.0" y="355.0" text-anchor="middle">shared weights</text>
+<path class="ln sl dash" d="M220 106V184" marker-end="url(#ah-tr)"/>
+<text class="sm" x="228" y="149.0" text-anchor="start">EMA</text>
+<path class="ln rep" d="M290 80H322" marker-end="url(#ah-tr)"/>
+<g class="chip rep"><rect class="cb" x="324.0" y="66.0" width="52" height="28"/><g class="bars"><rect x="329.0" y="74.0" width="6" height="16.0"/><rect x="338.0" y="78.0" width="6" height="12.0"/><rect x="347.0" y="72.0" width="6" height="18.0"/><rect x="356.0" y="80.0" width="6" height="10.0"/><rect x="365.0" y="75.0" width="6" height="15.0"/></g></g>
+<text class="sm" x="350" y="114" text-anchor="middle">student embedding</text>
+<path class="ln rep" d="M376 80H428" marker-end="url(#ah-tr)"/>
+<rect class="bx emb" x="430" y="54" width="130" height="52" rx="6"/><text class="bt" x="495.0" y="77.0" text-anchor="middle">Embedding</text><text class="bt" x="495.0" y="94.0" text-anchor="middle">denoiser</text>
+<path class="ln emb" d="M560 80H592" marker-end="url(#ah-tr)"/>
+<g class="chip emb"><rect class="cb" x="594.0" y="66.0" width="52" height="28"/><g class="bars"><rect x="599.0" y="74.0" width="6" height="16.0"/><rect x="608.0" y="78.0" width="6" height="12.0"/><rect x="617.0" y="72.0" width="6" height="18.0"/><rect x="626.0" y="80.0" width="6" height="10.0"/><rect x="635.0" y="75.0" width="6" height="15.0"/></g></g>
+<text class="sm" x="620" y="114" text-anchor="middle">predicted embedding</text>
+<path class="ln emb" d="M646 80H698" marker-end="url(#ah-tr)"/>
+<rect class="bx emb" x="700" y="58" width="140" height="44" rx="6"/><text class="bt t-emb" x="770.0" y="78.0" text-anchor="middle">Loss 1</text><text class="sm" x="770.0" y="94.0" text-anchor="middle">embedding level</text>
+<path class="ln sl" d="M290 210H322" marker-end="url(#ah-tr)"/>
+<g class="chip sl"><rect class="cb" x="324.0" y="196.0" width="52" height="28"/><g class="bars"><rect x="329.0" y="204.0" width="6" height="16.0"/><rect x="338.0" y="208.0" width="6" height="12.0"/><rect x="347.0" y="202.0" width="6" height="18.0"/><rect x="356.0" y="210.0" width="6" height="10.0"/><rect x="365.0" y="205.0" width="6" height="15.0"/></g></g>
+<text class="sm strong" x="350" y="188" text-anchor="middle">target embedding</text>
+<path class="ln sl" d="M376 210H495"/>
+<circle class="jn" cx="495" cy="210" r="3"/>
+<path class="ln sl" d="M495 210V189" marker-end="url(#ah-tr)"/>
+<circle class="pl" cx="495" cy="178" r="10"/><path class="pl-x" d="M490 178H500M495 173V183"/>
+<text class="sm" x="511" y="182" text-anchor="start">+ noise</text>
+<path class="ln sl" d="M495 168V154" marker-end="url(#ah-tr)"/>
+<g class="chip nz sl"><rect class="cb" x="469.0" y="124.0" width="52" height="28"/><g class="bars"><rect x="474.0" y="139.0" width="6" height="9.0"/><rect x="483.0" y="131.0" width="6" height="17.0"/><rect x="492.0" y="142.0" width="6" height="6.0"/><rect x="501.0" y="134.0" width="6" height="14.0"/><rect x="510.0" y="137.0" width="6" height="11.0"/></g></g>
+<text class="sm" x="529" y="143" text-anchor="start">noisy embedding</text>
+<path class="ln emb" d="M495 124V108" marker-end="url(#ah-tr)"/>
+<path class="ln sl dash" d="M495 210H770"/>
+<path class="ln sl dash" d="M770 210V104" marker-end="url(#ah-tr)"/>
+<text class="sm" x="762" y="202" text-anchor="end">target</text>
+<path class="ln sl" d="M350 224V284H220"/>
+<path class="ln sl" d="M220 284V312" marker-end="url(#ah-tr)"/>
+<text class="sm" x="358" y="274" text-anchor="start">given to the pixel pass</text>
+<path class="ln pix" d="M290 340H586" marker-end="url(#ah-tr)"/>
+<image href="view_clean.webp" x="588" y="308" width="64" height="64" preserveAspectRatio="none"/><rect class="tf pix" x="588" y="308" width="64" height="64"/>
+<text class="sm" x="620" y="390" text-anchor="middle">predicted image</text>
+<path class="ln pix" d="M652 340H698" marker-end="url(#ah-tr)"/>
+<rect class="bx pix" x="700" y="318" width="140" height="44" rx="6"/><text class="bt t-pix" x="770.0" y="338.0" text-anchor="middle">Loss 2</text><text class="sm" x="770.0" y="354.0" text-anchor="middle">pixel level</text>
+<text class="sm" x="770" y="380" text-anchor="middle">against the clean image</text>
 </svg></div>
-        <div class="dem-media wide only-phone"><svg class="dem-svg dem-svg--phone" viewBox="0 0 360 372" role="img" aria-labelledby="cd-pt">
-<title id="cd-pt">One network at two levels. In representation space, a view of the image goes in and the network outputs its embedding, the representation, and given a noisy embedding the network outputs the denoised embedding. In pixel space, given an embedding and noisy pixels, the network outputs an image.</title>
-<defs>
-<marker id="ah-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker>
-<filter id="noisy-p"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="g"/><feBlend in="SourceGraphic" in2="g" mode="overlay"/></filter>
-</defs>
-<g class="u enc gen">
-  <image href="tile_view.webp" x="32" y="10" width="56" height="56" preserveAspectRatio="none"/>
-  <text class="lb" x="60" y="86" text-anchor="middle">View x′</text>
-</g>
-<g class="u gen">
-  <circle class="nd nd-gen" cx="180" cy="38" r="24"/><text class="sym" x="180" y="44" text-anchor="middle">z<tspan class="sub" dy="5">τ</tspan></text>
-  <text class="lb" x="180" y="86" text-anchor="middle">Noisy embedding</text>
-</g>
-<g class="u dec">
-  <image href="tile_sample.webp" x="272" y="10" width="56" height="56" preserveAspectRatio="none" filter="url(#noisy-p)"/>
-  <text class="lb" x="300" y="86" text-anchor="middle">Noisy pixels,</text>
-  <text class="lb" x="300" y="102" text-anchor="middle">given ẑ</text>
-</g>
-<rect class="net" x="10" y="140" width="340" height="60"/>
-<text class="net-t" x="180" y="168" text-anchor="middle">One network</text>
-<text class="lb" x="180" y="188" text-anchor="middle">Transformer</text>
-<g class="u enc"><path class="ln enc" d="M60 108 V136" marker-end="url(#ah-p)"/><path class="ln enc" d="M60 204 V232" marker-end="url(#ah-p)"/>
-  <rect class="nd nd-enc" x="24" y="236" width="72" height="36"/>
-  <g class="bars"><rect x="34" y="246" width="6" height="16"/><rect x="44" y="250" width="6" height="12"/><rect x="54" y="244" width="6" height="18"/><rect x="64" y="252" width="6" height="10"/><rect x="74" y="247" width="6" height="15"/></g>
-  <text class="lb" x="60" y="312" text-anchor="middle">Embedding,</text>
-  <text class="lb" x="61" y="328" text-anchor="middle">the representation</text>
-</g>
-<g class="u gen"><path class="ln gen" d="M92 58 C110 66 114 96 114 134" marker-end="url(#ah-p)"/><path class="ln gen" d="M180 108 V136" marker-end="url(#ah-p)"/><path class="ln gen" d="M180 204 V230" marker-end="url(#ah-p)"/>
-  <circle class="nd nd-gen" cx="180" cy="258" r="24"/><text class="sym" x="180" y="264" text-anchor="middle">ẑ</text>
-  <text class="lb" x="180" y="312" text-anchor="middle">Denoised</text>
-  <text class="lb" x="180" y="328" text-anchor="middle">embedding</text>
-</g>
-<g class="u dec"><path class="ln dec" d="M300 108 V136" marker-end="url(#ah-p)"/><path class="ln dec" d="M300 204 V232" marker-end="url(#ah-p)"/>
-  <image href="tile_sample.webp" x="272" y="236" width="56" height="56" preserveAspectRatio="none"/>
-  <text class="lb" x="300" y="312" text-anchor="middle">Image</text>
-</g>
-<text class="lvl emb" x="120" y="362" text-anchor="middle">Representation space</text>
-<text class="lvl pix" x="300" y="362" text-anchor="middle">Pixel space</text>
-<line class="grid" x1="240" x2="240" y1="346" y2="368" stroke-dasharray="4 4"/>
+        <div class="dem-media wide only-phone"><svg class="dem-svg dem-svg--phone dem-flow" viewBox="0 0 360 664" role="img" aria-labelledby="trp-t">
+<title id="trp-t">One training step, in three parts. The teacher, an EMA copy of the network, embeds the clean view into the target embedding. Embedding level: the network embeds the student view, and the embedding denoiser takes this student embedding and a noisy copy of the target embedding and predicts the target (loss 1). Pixel level: the network takes a noisy copy of the image, given the target embedding, and predicts the clean image (loss 2). Both network boxes are the same network.</title>
+<defs><marker id="ah-trp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
+<text class="hd t-sl" x="4" y="16" text-anchor="start">The teacher makes the target</text>
+<image href="view_clean.webp" x="8" y="38" width="48" height="48" preserveAspectRatio="none"/>
+<text class="role t-sl" x="8" y="104" text-anchor="start">teacher sees</text>
+<text class="sm" x="8" y="119" text-anchor="start">clean view</text>
+<path class="ln sl" d="M60 62H98" marker-end="url(#ah-trp)"/>
+<rect class="bx sl dash" x="100" y="38" width="120" height="48" rx="6"/><text class="bt" x="160.0" y="60.0" text-anchor="middle">Teacher</text><text class="sm" x="160.0" y="77.0" text-anchor="middle">EMA copy</text>
+<path class="ln sl" d="M220 62H262" marker-end="url(#ah-trp)"/>
+<g class="chip sl"><rect class="cb" x="264.0" y="48.0" width="52" height="28"/><g class="bars"><rect x="269.0" y="56.0" width="6" height="16.0"/><rect x="278.0" y="60.0" width="6" height="12.0"/><rect x="287.0" y="54.0" width="6" height="18.0"/><rect x="296.0" y="62.0" width="6" height="10.0"/><rect x="305.0" y="57.0" width="6" height="15.0"/></g></g>
+<text class="sm strong" x="290" y="96" text-anchor="middle">target embedding</text>
+<line class="grid" x1="0" x2="360" y1="138" y2="138"/>
+<text class="hd t-emb" x="4" y="162" text-anchor="start">Embedding level, loss 1</text>
+<image href="view_all.webp" x="8" y="182" width="48" height="48" preserveAspectRatio="none"/>
+<text class="role t-rep" x="8" y="248" text-anchor="start">student sees</text>
+<text class="sm" x="8" y="263" text-anchor="start">noise and a mask</text>
+<path class="ln rep" d="M60 206H98" marker-end="url(#ah-trp)"/>
+<rect class="bx rep" x="100" y="182" width="120" height="48" rx="6"/><text class="bt" x="160.0" y="204.0" text-anchor="middle">Network</text><text class="sm" x="160.0" y="221.0" text-anchor="middle">shared weights</text>
+<path class="ln rep" d="M220 206H262" marker-end="url(#ah-trp)"/>
+<g class="chip rep"><rect class="cb" x="264.0" y="192.0" width="52" height="28"/><g class="bars"><rect x="269.0" y="200.0" width="6" height="16.0"/><rect x="278.0" y="204.0" width="6" height="12.0"/><rect x="287.0" y="198.0" width="6" height="18.0"/><rect x="296.0" y="206.0" width="6" height="10.0"/><rect x="305.0" y="201.0" width="6" height="15.0"/></g></g>
+<text class="sm" x="290" y="184" text-anchor="middle">student embedding</text>
+<path class="ln rep" d="M290 220V272" marker-end="url(#ah-trp)"/>
+<g class="chip sl"><rect class="cb" x="8.0" y="284.0" width="52" height="28"/><g class="bars"><rect x="13.0" y="292.0" width="6" height="16.0"/><rect x="22.0" y="296.0" width="6" height="12.0"/><rect x="31.0" y="290.0" width="6" height="18.0"/><rect x="40.0" y="298.0" width="6" height="10.0"/><rect x="49.0" y="293.0" width="6" height="15.0"/></g></g>
+<text class="sm" x="34" y="328" text-anchor="middle">target</text>
+<text class="sm" x="34" y="342" text-anchor="middle">embedding</text>
+<path class="ln sl" d="M60 298H80" marker-end="url(#ah-trp)"/>
+<circle class="pl" cx="92" cy="298" r="10"/><path class="pl-x" d="M87 298H97M92 293V303"/>
+<text class="sm" x="92" y="280" text-anchor="middle">+ noise</text>
+<path class="ln sl" d="M102 298H126" marker-end="url(#ah-trp)"/>
+<g class="chip nz sl"><rect class="cb" x="128.0" y="284.0" width="52" height="28"/><g class="bars"><rect x="133.0" y="299.0" width="6" height="9.0"/><rect x="142.0" y="291.0" width="6" height="17.0"/><rect x="151.0" y="302.0" width="6" height="6.0"/><rect x="160.0" y="294.0" width="6" height="14.0"/><rect x="169.0" y="297.0" width="6" height="11.0"/></g></g>
+<text class="sm" x="154" y="328" text-anchor="middle">noisy embedding</text>
+<path class="ln emb" d="M180 298H234" marker-end="url(#ah-trp)"/>
+<rect class="bx emb" x="236" y="274" width="108" height="48" rx="6"/><text class="bt" x="290.0" y="295.0" text-anchor="middle">Embedding</text><text class="bt" x="290.0" y="312.0" text-anchor="middle">denoiser</text>
+<path class="ln emb" d="M290 322V348" marker-end="url(#ah-trp)"/>
+<g class="chip emb"><rect class="cb" x="264.0" y="350.0" width="52" height="28"/><g class="bars"><rect x="269.0" y="358.0" width="6" height="16.0"/><rect x="278.0" y="362.0" width="6" height="12.0"/><rect x="287.0" y="356.0" width="6" height="18.0"/><rect x="296.0" y="364.0" width="6" height="10.0"/><rect x="305.0" y="359.0" width="6" height="15.0"/></g></g>
+<text class="sm" x="256" y="369" text-anchor="end">predicted embedding</text>
+<path class="ln emb" d="M290 378V398" marker-end="url(#ah-trp)"/>
+<rect class="bx emb" x="200" y="400" width="156" height="42" rx="6"/><text class="bt t-emb" x="278.0" y="419.0" text-anchor="middle">Loss 1</text><text class="sm" x="278.0" y="435.0" text-anchor="middle">against the target</text>
+<line class="grid" x1="0" x2="360" y1="466" y2="466"/>
+<text class="hd t-pix" x="4" y="490" text-anchor="start">Pixel level, loss 2</text>
+<image href="view_noise.webp" x="8" y="510" width="48" height="48" preserveAspectRatio="none"/>
+<text class="role t-pix" x="8" y="576" text-anchor="start">pixel pass sees</text>
+<text class="sm" x="8" y="591" text-anchor="start">noisy image</text>
+<path class="ln pix" d="M60 534H98" marker-end="url(#ah-trp)"/>
+<rect class="bx rep" x="100" y="510" width="120" height="48" rx="6"/><text class="bt" x="160.0" y="532.0" text-anchor="middle">Network</text><text class="sm" x="160.0" y="549.0" text-anchor="middle">shared weights</text>
+<g class="chip sl"><rect class="cb" x="134.0" y="596.0" width="52" height="28"/><g class="bars"><rect x="139.0" y="604.0" width="6" height="16.0"/><rect x="148.0" y="608.0" width="6" height="12.0"/><rect x="157.0" y="602.0" width="6" height="18.0"/><rect x="166.0" y="610.0" width="6" height="10.0"/><rect x="175.0" y="605.0" width="6" height="15.0"/></g></g>
+<path class="ln sl" d="M160 596V560" marker-end="url(#ah-trp)"/>
+<text class="sm" x="160" y="640" text-anchor="middle">target embedding</text>
+<path class="ln pix" d="M220 534H262" marker-end="url(#ah-trp)"/>
+<image href="view_clean.webp" x="264" y="510" width="48" height="48" preserveAspectRatio="none"/><rect class="tf pix" x="264" y="510" width="48" height="48"/>
+<text class="sm" x="288" y="504" text-anchor="middle">predicted image</text>
+<path class="ln pix" d="M288 558V582" marker-end="url(#ah-trp)"/>
+<rect class="bx pix" x="200" y="584" width="156" height="42" rx="6"/><text class="bt t-pix" x="278.0" y="603.0" text-anchor="middle">Loss 2</text><text class="sm" x="278.0" y="619.0" text-anchor="middle">against the clean image</text>
 </svg></div>
+        <figcaption>One network serves both losses, and the teacher supplies the target embedding for both.</figcaption>
+    </figure>
+    <h3>Inference</h3>
+    <p>After training, the teacher is no longer used. The network embeds an image as its representation. To generate without labels, the model first samples an embedding from noise with no view, and then draws the pixels given that embedding. Given only a crop, it samples several embeddings that fit the crop and draws one image for each.</p>
+    <figure class="dem-fig" id="dem-infer">
+        <div class="dem-media wide only-desk"><svg class="dem-svg dem-flow" viewBox="0 0 880 440" role="img" aria-labelledby="in-t">
+<title id="in-t">Three uses of the trained model, with no teacher. Represent: an image goes through the network to its representation, read by a linear probe or k-NN. Generate without labels: with no view, the embedding denoiser turns noise into a sampled embedding, and then the network, as a pixel denoiser, turns pixel noise into an image given that embedding. Complete a crop: the network embeds the crop, the embedding denoiser samples several embeddings given it, and the network draws one image for each.</title>
+<defs><marker id="ah-in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
+<text class="hd" x="8" y="48" text-anchor="start">Represent</text>
+<text class="sm" x="8" y="66" text-anchor="start">an image</text>
+<image href="tile_view.webp" x="142" y="24" width="56" height="56" preserveAspectRatio="none"/>
+<path class="ln rep" d="M198 52H230" marker-end="url(#ah-in)"/>
+<rect class="bx rep" x="232" y="28" width="100" height="48" rx="6"/><text class="bt" x="282.0" y="57.0" text-anchor="middle">Network</text>
+<path class="ln rep" d="M332 52H357" marker-end="url(#ah-in)"/>
+<g class="chip rep"><rect class="cb" x="359.0" y="38.0" width="52" height="28"/><g class="bars"><rect x="364.0" y="46.0" width="6" height="16.0"/><rect x="373.0" y="50.0" width="6" height="12.0"/><rect x="382.0" y="44.0" width="6" height="18.0"/><rect x="391.0" y="52.0" width="6" height="10.0"/><rect x="400.0" y="47.0" width="6" height="15.0"/></g></g>
+<text class="sm" x="385" y="86" text-anchor="middle">representation</text>
+<path class="ln rep" d="M411 52H438" marker-end="url(#ah-in)"/>
+<rect class="bx sl" x="440" y="28" width="120" height="48" rx="6"/><text class="bt" x="500.0" y="50.0" text-anchor="middle">Linear probe</text><text class="sm" x="500.0" y="67.0" text-anchor="middle">or k-NN</text>
+<path class="ln sl" d="M560 52H585" marker-end="url(#ah-in)"/>
+<text class="lb strong" x="589" y="57" text-anchor="start">class</text>
+<line class="grid" x1="0" x2="880" y1="106" y2="106"/>
+<text class="hd" x="8" y="192" text-anchor="start">Generate</text>
+<text class="sm" x="8" y="210" text-anchor="start">without labels</text>
+<rect class="tf void" x="142" y="168" width="56" height="56"/>
+<text class="sm" x="170" y="201" text-anchor="middle">no view</text>
+<path class="ln sl dash" d="M198 196H438" marker-end="url(#ah-in)"/>
+<text class="sm" x="509.0" y="163" text-anchor="start">+ noise</text>
+<path class="ln sl" d="M500.0 150V168" marker-end="url(#ah-in)"/>
+<rect class="bx emb" x="440" y="170" width="120" height="52" rx="6"/><text class="bt" x="500.0" y="193.0" text-anchor="middle">Embedding</text><text class="bt" x="500.0" y="210.0" text-anchor="middle">denoiser</text>
+<text class="sm t-emb strong" x="500.0" y="142" text-anchor="middle">1. sample an embedding</text>
+<path class="ln emb" d="M560 196H587" marker-end="url(#ah-in)"/>
+<g class="chip emb"><rect class="cb" x="589.0" y="182.0" width="52" height="28"/><g class="bars"><rect x="594.0" y="190.0" width="6" height="16.0"/><rect x="603.0" y="194.0" width="6" height="12.0"/><rect x="612.0" y="188.0" width="6" height="18.0"/><rect x="621.0" y="196.0" width="6" height="10.0"/><rect x="630.0" y="191.0" width="6" height="15.0"/></g></g>
+<text class="sm" x="615" y="228" text-anchor="middle">sampled</text>
+<text class="sm" x="615" y="242" text-anchor="middle">embedding</text>
+<path class="ln emb" d="M641 196H670" marker-end="url(#ah-in)"/>
+<text class="sm" x="731.0" y="163" text-anchor="start">+ noise</text>
+<path class="ln sl" d="M722.0 150V168" marker-end="url(#ah-in)"/>
+<rect class="bx rep" x="672" y="170" width="100" height="52" rx="6"/><text class="bt" x="722.0" y="194.0" text-anchor="middle">Network</text><text class="sm" x="722.0" y="211.0" text-anchor="middle">pixel pass</text>
+<text class="sm t-pix strong" x="722.0" y="142" text-anchor="middle">2. draw its pixels</text>
+<path class="ln pix" d="M772 196H800" marker-end="url(#ah-in)"/>
+<image href="tile_sample.webp" x="802" y="168" width="56" height="56" preserveAspectRatio="none"/><rect class="tf pix" x="802" y="168" width="56" height="56"/>
+<text class="sm" x="830" y="240" text-anchor="middle">image</text>
+<line class="grid" x1="0" x2="880" y1="262" y2="262"/>
+<text class="hd" x="8" y="342" text-anchor="start">Complete</text>
+<text class="sm" x="8" y="360" text-anchor="start">a crop</text>
+<svg x="142" y="318" width="56" height="56" viewBox="0 0 128 128"><image href="completion.webp" width="668" height="392"/></svg>
+<path class="ln rep" d="M198 346H230" marker-end="url(#ah-in)"/>
+<rect class="bx rep" x="232" y="322" width="100" height="48" rx="6"/><text class="bt" x="282.0" y="351.0" text-anchor="middle">Network</text>
+<path class="ln rep" d="M332 346H357" marker-end="url(#ah-in)"/>
+<g class="chip rep"><rect class="cb" x="359.0" y="332.0" width="52" height="28"/><g class="bars"><rect x="364.0" y="340.0" width="6" height="16.0"/><rect x="373.0" y="344.0" width="6" height="12.0"/><rect x="382.0" y="338.0" width="6" height="18.0"/><rect x="391.0" y="346.0" width="6" height="10.0"/><rect x="400.0" y="341.0" width="6" height="15.0"/></g></g>
+<text class="sm" x="385" y="380" text-anchor="middle">crop embedding</text>
+<path class="ln rep" d="M411 346H438" marker-end="url(#ah-in)"/>
+<text class="sm" x="509.0" y="313" text-anchor="start">+ noise</text>
+<path class="ln sl" d="M500.0 300V318" marker-end="url(#ah-in)"/>
+<rect class="bx emb" x="440" y="320" width="120" height="52" rx="6"/><text class="bt" x="500.0" y="343.0" text-anchor="middle">Embedding</text><text class="bt" x="500.0" y="360.0" text-anchor="middle">denoiser</text>
+<text class="sm" x="500.0" y="390" text-anchor="middle">given the crop</text>
+<path class="ln emb" d="M560 346H581" marker-end="url(#ah-in)"/>
+<g class="chip emb"><rect class="cb" x="595.0" y="324.0" width="52" height="28"/><g class="bars"><rect x="600.0" y="332.0" width="6" height="16.0"/><rect x="609.0" y="336.0" width="6" height="12.0"/><rect x="618.0" y="330.0" width="6" height="18.0"/><rect x="627.0" y="338.0" width="6" height="10.0"/><rect x="636.0" y="333.0" width="6" height="15.0"/></g></g>
+<g class="chip emb"><rect class="cb" x="589.0" y="332.0" width="52" height="28"/><g class="bars"><rect x="594.0" y="340.0" width="6" height="16.0"/><rect x="603.0" y="344.0" width="6" height="12.0"/><rect x="612.0" y="338.0" width="6" height="18.0"/><rect x="621.0" y="346.0" width="6" height="10.0"/><rect x="630.0" y="341.0" width="6" height="15.0"/></g></g>
+<g class="chip emb"><rect class="cb" x="583.0" y="340.0" width="52" height="28"/><g class="bars"><rect x="588.0" y="348.0" width="6" height="16.0"/><rect x="597.0" y="352.0" width="6" height="12.0"/><rect x="606.0" y="346.0" width="6" height="18.0"/><rect x="615.0" y="354.0" width="6" height="10.0"/><rect x="624.0" y="349.0" width="6" height="15.0"/></g></g>
+<text class="sm" x="615" y="386" text-anchor="middle">several sampled</text>
+<text class="sm" x="615" y="400" text-anchor="middle">embeddings</text>
+<path class="ln emb" d="M645 346H670" marker-end="url(#ah-in)"/>
+<text class="sm" x="731.0" y="313" text-anchor="start">+ noise</text>
+<path class="ln sl" d="M722.0 300V318" marker-end="url(#ah-in)"/>
+<rect class="bx rep" x="672" y="320" width="100" height="52" rx="6"/><text class="bt" x="722.0" y="344.0" text-anchor="middle">Network</text><text class="sm" x="722.0" y="361.0" text-anchor="middle">pixel pass</text>
+<text class="sm" x="722.0" y="390" text-anchor="middle">one image each</text>
+<path class="ln pix" d="M772 346H792" marker-end="url(#ah-in)"/>
+<svg x="810" y="326" width="56" height="56" viewBox="408 0 128 128"><image href="completion.webp" width="668" height="392"/></svg><rect class="tf pix" x="810" y="326" width="56" height="56"/>
+<svg x="802" y="318" width="56" height="56" viewBox="276 0 128 128"><image href="completion.webp" width="668" height="392"/></svg><rect class="tf pix" x="802" y="318" width="56" height="56"/>
+<svg x="794" y="310" width="56" height="56" viewBox="144 0 128 128"><image href="completion.webp" width="668" height="392"/></svg><rect class="tf pix" x="794" y="310" width="56" height="56"/>
+<text class="sm" x="830" y="396" text-anchor="middle">several images</text>
+</svg></div>
+        <div class="dem-media wide only-phone"><svg class="dem-svg dem-svg--phone dem-flow" viewBox="0 0 360 536" role="img" aria-labelledby="inp-t">
+<title id="inp-t">Three uses of the trained model, with no teacher, read from top to bottom. Represent: an image goes through the network to its representation, read by a linear probe or k-NN. Generate without labels: with no view, the embedding denoiser turns noise into a sampled embedding, and then the network, as a pixel denoiser, turns pixel noise into an image given that embedding. Complete a crop: the network embeds the crop, the embedding denoiser samples several embeddings given it, and the network draws one image for each.</title>
+<defs><marker id="ah-inp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
+<text class="hd" x="60" y="16" text-anchor="middle">Represent</text>
+<text class="sm" x="60" y="32" text-anchor="middle">an image</text>
+<text class="hd" x="180" y="16" text-anchor="middle">Generate</text>
+<text class="sm" x="180" y="32" text-anchor="middle">without labels</text>
+<text class="hd" x="300" y="16" text-anchor="middle">Complete</text>
+<text class="sm" x="300" y="32" text-anchor="middle">a crop</text>
+<line class="grid" x1="120" x2="120" y1="4" y2="532" stroke-dasharray="4 4"/><line class="grid" x1="240" x2="240" y1="4" y2="532" stroke-dasharray="4 4"/>
+<image href="tile_view.webp" x="36" y="44" width="48" height="48" preserveAspectRatio="none"/>
+<rect class="tf void" x="150" y="50" width="60" height="36"/>
+<text class="sm" x="180" y="73" text-anchor="middle">no view</text>
+<svg x="276" y="44" width="48" height="48" viewBox="0 0 128 128"><image href="completion.webp" width="668" height="392"/></svg>
+<path class="ln rep" d="M60 94V112" marker-end="url(#ah-inp)"/>
+<rect class="bx rep" x="10" y="114" width="100" height="36" rx="6"/><text class="bt" x="60.0" y="137.0" text-anchor="middle">Network</text>
+<path class="ln rep" d="M60 150V170" marker-end="url(#ah-inp)"/>
+<path class="ln rep" d="M300 94V112" marker-end="url(#ah-inp)"/>
+<rect class="bx rep" x="250" y="114" width="100" height="36" rx="6"/><text class="bt" x="300.0" y="137.0" text-anchor="middle">Network</text>
+<path class="ln rep" d="M300 150V170" marker-end="url(#ah-inp)"/>
+<g class="chip rep"><rect class="cb" x="34.0" y="171.0" width="52" height="26"/><g class="bars"><rect x="39.0" y="178.8" width="6" height="14.2"/><rect x="48.0" y="182.3" width="6" height="10.7"/><rect x="57.0" y="177.0" width="6" height="16.0"/><rect x="66.0" y="184.1" width="6" height="8.9"/><rect x="75.0" y="179.7" width="6" height="13.3"/></g></g>
+<text class="sm" x="60" y="214" text-anchor="middle">representation</text>
+<g class="chip rep"><rect class="cb" x="274.0" y="171.0" width="52" height="26"/><g class="bars"><rect x="279.0" y="178.8" width="6" height="14.2"/><rect x="288.0" y="182.3" width="6" height="10.7"/><rect x="297.0" y="177.0" width="6" height="16.0"/><rect x="306.0" y="184.1" width="6" height="8.9"/><rect x="315.0" y="179.7" width="6" height="13.3"/></g></g>
+<text class="sm" x="300" y="214" text-anchor="middle">crop embedding</text>
+<path class="ln rep" d="M60 222V242" marker-end="url(#ah-inp)"/>
+<rect class="bx sl" x="10" y="244" width="100" height="44" rx="6"/><text class="bt" x="60.0" y="264.0" text-anchor="middle">Probe</text><text class="sm" x="60.0" y="281.0" text-anchor="middle">linear or k-NN</text>
+<path class="ln sl" d="M60 288V306" marker-end="url(#ah-inp)"/>
+<text class="lb strong" x="60" y="324" text-anchor="middle">class</text>
+<path class="ln sl dash" d="M180 88V246" marker-end="url(#ah-inp)"/>
+<path class="ln rep" d="M300 222V246" marker-end="url(#ah-inp)"/>
+<text class="sm" x="186" y="238" text-anchor="start">+ noise</text>
+<rect class="bx emb" x="128" y="248" width="104" height="46" rx="6"/><text class="bt" x="180.0" y="268.0" text-anchor="middle">Embedding</text><text class="bt" x="180.0" y="285.0" text-anchor="middle">denoiser</text>
+<path class="ln emb" d="M180 294V310" marker-end="url(#ah-inp)"/>
+<text class="sm" x="306" y="238" text-anchor="start">+ noise</text>
+<rect class="bx emb" x="248" y="248" width="104" height="46" rx="6"/><text class="bt" x="300.0" y="268.0" text-anchor="middle">Embedding</text><text class="bt" x="300.0" y="285.0" text-anchor="middle">denoiser</text>
+<path class="ln emb" d="M300 294V310" marker-end="url(#ah-inp)"/>
+<g class="chip emb"><rect class="cb" x="154.0" y="317.0" width="52" height="26"/><g class="bars"><rect x="159.0" y="324.8" width="6" height="14.2"/><rect x="168.0" y="328.3" width="6" height="10.7"/><rect x="177.0" y="323.0" width="6" height="16.0"/><rect x="186.0" y="330.1" width="6" height="8.9"/><rect x="195.0" y="325.7" width="6" height="13.3"/></g></g>
+<text class="sm" x="180" y="364" text-anchor="middle">sampled</text>
+<text class="sm" x="180" y="378" text-anchor="middle">embedding</text>
+<g class="chip emb"><rect class="cb" x="279.0" y="311.0" width="52" height="26"/><g class="bars"><rect x="284.0" y="318.8" width="6" height="14.2"/><rect x="293.0" y="322.3" width="6" height="10.7"/><rect x="302.0" y="317.0" width="6" height="16.0"/><rect x="311.0" y="324.1" width="6" height="8.9"/><rect x="320.0" y="319.6" width="6" height="13.3"/></g></g>
+<g class="chip emb"><rect class="cb" x="274.0" y="317.0" width="52" height="26"/><g class="bars"><rect x="279.0" y="324.8" width="6" height="14.2"/><rect x="288.0" y="328.3" width="6" height="10.7"/><rect x="297.0" y="323.0" width="6" height="16.0"/><rect x="306.0" y="330.1" width="6" height="8.9"/><rect x="315.0" y="325.7" width="6" height="13.3"/></g></g>
+<g class="chip emb"><rect class="cb" x="269.0" y="323.0" width="52" height="26"/><g class="bars"><rect x="274.0" y="330.8" width="6" height="14.2"/><rect x="283.0" y="334.3" width="6" height="10.7"/><rect x="292.0" y="329.0" width="6" height="16.0"/><rect x="301.0" y="336.1" width="6" height="8.9"/><rect x="310.0" y="331.7" width="6" height="13.3"/></g></g>
+<text class="sm" x="300" y="364" text-anchor="middle">several sampled</text>
+<text class="sm" x="300" y="378" text-anchor="middle">embeddings</text>
+<path class="ln emb" d="M180 384V402" marker-end="url(#ah-inp)"/>
+<text class="sm" x="186" y="398" text-anchor="start">+ noise</text>
+<rect class="bx rep" x="130" y="404" width="100" height="44" rx="6"/><text class="bt" x="180.0" y="424.0" text-anchor="middle">Network</text><text class="sm" x="180.0" y="441.0" text-anchor="middle">pixel pass</text>
+<path class="ln pix" d="M180 448V464" marker-end="url(#ah-inp)"/>
+<path class="ln emb" d="M300 384V402" marker-end="url(#ah-inp)"/>
+<text class="sm" x="306" y="398" text-anchor="start">+ noise</text>
+<rect class="bx rep" x="250" y="404" width="100" height="44" rx="6"/><text class="bt" x="300.0" y="424.0" text-anchor="middle">Network</text><text class="sm" x="300.0" y="441.0" text-anchor="middle">pixel pass</text>
+<path class="ln pix" d="M300 448V464" marker-end="url(#ah-inp)"/>
+<image href="tile_sample.webp" x="156" y="466" width="48" height="48" preserveAspectRatio="none"/><rect class="tf pix" x="156" y="466" width="48" height="48"/>
+<text class="sm" x="180" y="530" text-anchor="middle">image</text>
+<svg x="244" y="472" width="36" height="36" viewBox="144 0 128 128"><image href="completion.webp" width="668" height="392"/></svg><rect class="tf pix" x="244" y="472" width="36" height="36"/>
+<svg x="282" y="472" width="36" height="36" viewBox="276 0 128 128"><image href="completion.webp" width="668" height="392"/></svg><rect class="tf pix" x="282" y="472" width="36" height="36"/>
+<svg x="320" y="472" width="36" height="36" viewBox="408 0 128 128"><image href="completion.webp" width="668" height="392"/></svg><rect class="tf pix" x="320" y="472" width="36" height="36"/>
+<text class="sm" x="300" y="530" text-anchor="middle">several images</text>
+</svg></div>
+        <figcaption>Every use runs the same trained model, and generation always samples the embedding before the pixels.</figcaption>
     </figure>
 </section>
 
@@ -245,8 +425,8 @@ bibtex: |
     <figure class="dem-fig"><svg class="dem-svg dem-fit" viewBox="0 0 480 224" role="img" aria-labelledby="sch-t">
 <title id="sch-t">Two logit-normal noise schedules on an axis from clean to full noise. The embedding level has median 0.95 and sits close to full noise. The pixel level has median 0.69. Each curve is scaled to its own peak.</title>
 <defs><linearGradient id="nz" x1="0" x2="1"><stop offset="0" class="nz0"/><stop offset="1" class="nz1"/></linearGradient></defs>
-<path class="sch pix" d="M10.0 170.0 L10.5 170.0 L11.6 170.0 L12.8 170.0 L13.9 170.0 L15.1 170.0 L16.2 170.0 L17.4 170.0 L18.5 170.0 L19.7 170.0 L20.8 170.0 L22.0 170.0 L23.1 170.0 L24.3 170.0 L25.4 170.0 L26.6 170.0 L27.7 170.0 L28.9 170.0 L30.0 170.0 L31.2 170.0 L32.3 170.0 L33.5 170.0 L34.6 170.0 L35.8 170.0 L36.9 170.0 L38.1 170.0 L39.2 170.0 L40.4 170.0 L41.5 170.0 L42.7 170.0 L43.8 169.9 L45.0 169.9 L46.1 169.9 L47.3 169.9 L48.4 169.9 L49.6 169.9 L50.7 169.9 L51.9 169.9 L53.0 169.8 L54.2 169.8 L55.3 169.8 L56.5 169.8 L57.6 169.7 L58.8 169.7 L59.9 169.7 L61.1 169.7 L62.2 169.6 L63.4 169.6 L64.5 169.5 L65.7 169.5 L66.8 169.5 L68.0 169.4 L69.1 169.4 L70.3 169.3 L71.4 169.3 L72.6 169.2 L73.7 169.2 L74.9 169.1 L76.0 169.0 L77.2 169.0 L78.3 168.9 L79.5 168.8 L80.6 168.7 L81.8 168.7 L82.9 168.6 L84.1 168.5 L85.2 168.4 L86.4 168.3 L87.5 168.2 L88.7 168.1 L89.8 168.0 L91.0 167.9 L92.2 167.8 L93.3 167.7 L94.5 167.6 L95.6 167.4 L96.8 167.3 L97.9 167.2 L99.1 167.1 L100.2 166.9 L101.4 166.8 L102.5 166.6 L103.7 166.5 L104.8 166.3 L106.0 166.2 L107.1 166.0 L108.3 165.8 L109.4 165.7 L110.6 165.5 L111.7 165.3 L112.9 165.1 L114.0 165.0 L115.2 164.8 L116.3 164.6 L117.5 164.4 L118.6 164.2 L119.8 164.0 L120.9 163.7 L122.1 163.5 L123.2 163.3 L124.4 163.1 L125.5 162.8 L126.7 162.6 L127.8 162.4 L129.0 162.1 L130.1 161.9 L131.3 161.6 L132.4 161.4 L133.6 161.1 L134.7 160.8 L135.9 160.5 L137.0 160.3 L138.2 160.0 L139.3 159.7 L140.5 159.4 L141.6 159.1 L142.8 158.8 L143.9 158.5 L145.1 158.2 L146.2 157.9 L147.4 157.5 L148.5 157.2 L149.7 156.9 L150.8 156.5 L152.0 156.2 L153.1 155.9 L154.3 155.5 L155.4 155.2 L156.6 154.8 L157.7 154.4 L158.9 154.1 L160.0 153.7 L161.2 153.3 L162.3 152.9 L163.5 152.5 L164.6 152.1 L165.8 151.7 L166.9 151.3 L168.1 150.9 L169.2 150.5 L170.4 150.1 L171.5 149.7 L172.7 149.2 L173.8 148.8 L175.0 148.3 L176.1 147.9 L177.3 147.5 L178.4 147.0 L179.6 146.5 L180.7 146.1 L181.9 145.6 L183.0 145.1 L184.2 144.7 L185.3 144.2 L186.5 143.7 L187.6 143.2 L188.8 142.7 L189.9 142.2 L191.1 141.7 L192.3 141.2 L193.4 140.7 L194.6 140.2 L195.7 139.6 L196.9 139.1 L198.0 138.6 L199.2 138.0 L200.3 137.5 L201.5 136.9 L202.6 136.4 L203.8 135.8 L204.9 135.3 L206.1 134.7 L207.2 134.2 L208.4 133.6 L209.5 133.0 L210.7 132.4 L211.8 131.8 L213.0 131.3 L214.1 130.7 L215.3 130.1 L216.4 129.5 L217.6 128.9 L218.7 128.3 L219.9 127.6 L221.0 127.0 L222.2 126.4 L223.3 125.8 L224.5 125.2 L225.6 124.5 L226.8 123.9 L227.9 123.3 L229.1 122.6 L230.2 122.0 L231.4 121.3 L232.5 120.7 L233.7 120.0 L234.8 119.4 L236.0 118.7 L237.1 118.0 L238.3 117.4 L239.4 116.7 L240.6 116.0 L241.7 115.4 L242.9 114.7 L244.0 114.0 L245.2 113.3 L246.3 112.6 L247.5 112.0 L248.6 111.3 L249.8 110.6 L250.9 109.9 L252.1 109.2 L253.2 108.5 L254.4 107.8 L255.5 107.1 L256.7 106.4 L257.8 105.7 L259.0 105.0 L260.1 104.3 L261.3 103.6 L262.4 102.9 L263.6 102.2 L264.7 101.5 L265.9 100.8 L267.0 100.1 L268.2 99.4 L269.3 98.6 L270.5 97.9 L271.6 97.2 L272.8 96.5 L273.9 95.8 L275.1 95.1 L276.2 94.4 L277.4 93.7 L278.5 93.0 L279.7 92.3 L280.8 91.6 L282.0 90.9 L283.1 90.2 L284.3 89.5 L285.4 88.8 L286.6 88.1 L287.7 87.4 L288.9 86.7 L290.1 86.0 L291.2 85.3 L292.4 84.7 L293.5 84.0 L294.7 83.3 L295.8 82.6 L297.0 82.0 L298.1 81.3 L299.3 80.7 L300.4 80.0 L301.6 79.4 L302.7 78.7 L303.9 78.1 L305.0 77.4 L306.2 76.8 L307.3 76.2 L308.5 75.6 L309.6 75.0 L310.8 74.4 L311.9 73.8 L313.1 73.2 L314.2 72.6 L315.4 72.1 L316.5 71.5 L317.7 70.9 L318.8 70.4 L320.0 69.9 L321.1 69.3 L322.3 68.8 L323.4 68.3 L324.6 67.8 L325.7 67.3 L326.9 66.9 L328.0 66.4 L329.2 66.0 L330.3 65.5 L331.5 65.1 L332.6 64.7 L333.8 64.3 L334.9 63.9 L336.1 63.6 L337.2 63.2 L338.4 62.9 L339.5 62.6 L340.7 62.3 L341.8 62.0 L343.0 61.7 L344.1 61.5 L345.3 61.2 L346.4 61.0 L347.6 60.8 L348.7 60.6 L349.9 60.5 L351.0 60.4 L352.2 60.2 L353.3 60.1 L354.5 60.1 L355.6 60.0 L356.8 60.0 L357.9 60.0 L359.1 60.0 L360.2 60.1 L361.4 60.1 L362.5 60.2 L363.7 60.4 L364.8 60.5 L366.0 60.7 L367.1 60.9 L368.3 61.2 L369.4 61.4 L370.6 61.7 L371.7 62.0 L372.9 62.4 L374.0 62.8 L375.2 63.2 L376.3 63.7 L377.5 64.2 L378.6 64.7 L379.8 65.2 L380.9 65.8 L382.1 66.5 L383.2 67.1 L384.4 67.8 L385.5 68.6 L386.7 69.4 L387.8 70.2 L389.0 71.0 L390.2 71.9 L391.3 72.9 L392.5 73.8 L393.6 74.9 L394.8 75.9 L395.9 77.0 L397.1 78.2 L398.2 79.3 L399.4 80.6 L400.5 81.8 L401.7 83.1 L402.8 84.5 L404.0 85.9 L405.1 87.3 L406.3 88.8 L407.4 90.3 L408.6 91.9 L409.7 93.5 L410.9 95.1 L412.0 96.8 L413.2 98.6 L414.3 100.3 L415.5 102.1 L416.6 104.0 L417.8 105.8 L418.9 107.8 L420.1 109.7 L421.2 111.7 L422.4 113.7 L423.5 115.7 L424.7 117.8 L425.8 119.8 L427.0 121.9 L428.1 124.0 L429.3 126.2 L430.4 128.3 L431.6 130.5 L432.7 132.6 L433.9 134.7 L435.0 136.9 L436.2 139.0 L437.3 141.1 L438.5 143.2 L439.6 145.2 L440.8 147.2 L441.9 149.2 L443.1 151.1 L444.2 153.0 L445.4 154.8 L446.5 156.5 L447.7 158.2 L448.8 159.7 L450.0 161.2 L451.1 162.5 L452.3 163.8 L453.4 164.9 L454.6 165.9 L455.7 166.8 L456.9 167.6 L458.0 168.3 L459.2 168.8 L460.3 169.2 L461.5 169.5 L462.6 169.7 L463.8 169.9 L464.9 170.0 L466.1 170.0 L467.2 170.0 L468.4 170.0 L469.5 170.0 L470.0 170.0Z"/>
-<path class="sch emb" d="M10.0 170.0 L10.5 170.0 L11.6 170.0 L12.8 170.0 L13.9 170.0 L15.1 170.0 L16.2 170.0 L17.4 170.0 L18.5 170.0 L19.7 170.0 L20.8 170.0 L22.0 170.0 L23.1 170.0 L24.3 170.0 L25.4 170.0 L26.6 170.0 L27.7 170.0 L28.9 170.0 L30.0 170.0 L31.2 170.0 L32.3 170.0 L33.5 170.0 L34.6 170.0 L35.8 170.0 L36.9 170.0 L38.1 170.0 L39.2 170.0 L40.4 170.0 L41.5 170.0 L42.7 170.0 L43.8 170.0 L45.0 170.0 L46.1 170.0 L47.3 170.0 L48.4 170.0 L49.6 170.0 L50.7 170.0 L51.9 170.0 L53.0 170.0 L54.2 170.0 L55.3 170.0 L56.5 170.0 L57.6 170.0 L58.8 170.0 L59.9 170.0 L61.1 170.0 L62.2 170.0 L63.4 170.0 L64.5 170.0 L65.7 170.0 L66.8 170.0 L68.0 170.0 L69.1 170.0 L70.3 170.0 L71.4 170.0 L72.6 170.0 L73.7 170.0 L74.9 170.0 L76.0 170.0 L77.2 170.0 L78.3 170.0 L79.5 170.0 L80.6 170.0 L81.8 170.0 L82.9 170.0 L84.1 170.0 L85.2 170.0 L86.4 170.0 L87.5 170.0 L88.7 170.0 L89.8 170.0 L91.0 170.0 L92.2 170.0 L93.3 170.0 L94.5 170.0 L95.6 170.0 L96.8 170.0 L97.9 170.0 L99.1 170.0 L100.2 170.0 L101.4 170.0 L102.5 170.0 L103.7 170.0 L104.8 170.0 L106.0 170.0 L107.1 170.0 L108.3 170.0 L109.4 170.0 L110.6 170.0 L111.7 170.0 L112.9 170.0 L114.0 170.0 L115.2 170.0 L116.3 170.0 L117.5 170.0 L118.6 170.0 L119.8 170.0 L120.9 170.0 L122.1 170.0 L123.2 170.0 L124.4 170.0 L125.5 170.0 L126.7 170.0 L127.8 170.0 L129.0 170.0 L130.1 170.0 L131.3 170.0 L132.4 170.0 L133.6 170.0 L134.7 170.0 L135.9 170.0 L137.0 170.0 L138.2 170.0 L139.3 170.0 L140.5 170.0 L141.6 170.0 L142.8 170.0 L143.9 170.0 L145.1 170.0 L146.2 170.0 L147.4 170.0 L148.5 170.0 L149.7 170.0 L150.8 170.0 L152.0 170.0 L153.1 170.0 L154.3 170.0 L155.4 170.0 L156.6 170.0 L157.7 170.0 L158.9 170.0 L160.0 170.0 L161.2 170.0 L162.3 170.0 L163.5 170.0 L164.6 170.0 L165.8 170.0 L166.9 170.0 L168.1 170.0 L169.2 170.0 L170.4 170.0 L171.5 170.0 L172.7 170.0 L173.8 170.0 L175.0 170.0 L176.1 170.0 L177.3 170.0 L178.4 170.0 L179.6 170.0 L180.7 170.0 L181.9 170.0 L183.0 170.0 L184.2 170.0 L185.3 170.0 L186.5 170.0 L187.6 170.0 L188.8 170.0 L189.9 170.0 L191.1 170.0 L192.3 170.0 L193.4 170.0 L194.6 170.0 L195.7 170.0 L196.9 170.0 L198.0 170.0 L199.2 170.0 L200.3 170.0 L201.5 169.9 L202.6 169.9 L203.8 169.9 L204.9 169.9 L206.1 169.9 L207.2 169.9 L208.4 169.9 L209.5 169.9 L210.7 169.9 L211.8 169.9 L213.0 169.9 L214.1 169.9 L215.3 169.9 L216.4 169.9 L217.6 169.9 L218.7 169.9 L219.9 169.9 L221.0 169.9 L222.2 169.9 L223.3 169.9 L224.5 169.9 L225.6 169.9 L226.8 169.9 L227.9 169.9 L229.1 169.9 L230.2 169.9 L231.4 169.9 L232.5 169.9 L233.7 169.9 L234.8 169.9 L236.0 169.9 L237.1 169.9 L238.3 169.9 L239.4 169.9 L240.6 169.9 L241.7 169.9 L242.9 169.8 L244.0 169.8 L245.2 169.8 L246.3 169.8 L247.5 169.8 L248.6 169.8 L249.8 169.8 L250.9 169.8 L252.1 169.8 L253.2 169.8 L254.4 169.8 L255.5 169.8 L256.7 169.8 L257.8 169.8 L259.0 169.8 L260.1 169.8 L261.3 169.8 L262.4 169.7 L263.6 169.7 L264.7 169.7 L265.9 169.7 L267.0 169.7 L268.2 169.7 L269.3 169.7 L270.5 169.7 L271.6 169.7 L272.8 169.7 L273.9 169.7 L275.1 169.7 L276.2 169.6 L277.4 169.6 L278.5 169.6 L279.7 169.6 L280.8 169.6 L282.0 169.6 L283.1 169.6 L284.3 169.6 L285.4 169.5 L286.6 169.5 L287.7 169.5 L288.9 169.5 L290.1 169.5 L291.2 169.5 L292.4 169.5 L293.5 169.4 L294.7 169.4 L295.8 169.4 L297.0 169.4 L298.1 169.4 L299.3 169.4 L300.4 169.3 L301.6 169.3 L302.7 169.3 L303.9 169.3 L305.0 169.3 L306.2 169.2 L307.3 169.2 L308.5 169.2 L309.6 169.2 L310.8 169.1 L311.9 169.1 L313.1 169.1 L314.2 169.1 L315.4 169.0 L316.5 169.0 L317.7 169.0 L318.8 168.9 L320.0 168.9 L321.1 168.9 L322.3 168.8 L323.4 168.8 L324.6 168.8 L325.7 168.7 L326.9 168.7 L328.0 168.6 L329.2 168.6 L330.3 168.6 L331.5 168.5 L332.6 168.5 L333.8 168.4 L334.9 168.4 L336.1 168.3 L337.2 168.3 L338.4 168.2 L339.5 168.2 L340.7 168.1 L341.8 168.0 L343.0 168.0 L344.1 167.9 L345.3 167.9 L346.4 167.8 L347.6 167.7 L348.7 167.6 L349.9 167.6 L351.0 167.5 L352.2 167.4 L353.3 167.3 L354.5 167.2 L355.6 167.1 L356.8 167.1 L357.9 167.0 L359.1 166.9 L360.2 166.8 L361.4 166.6 L362.5 166.5 L363.7 166.4 L364.8 166.3 L366.0 166.2 L367.1 166.0 L368.3 165.9 L369.4 165.8 L370.6 165.6 L371.7 165.5 L372.9 165.3 L374.0 165.2 L375.2 165.0 L376.3 164.8 L377.5 164.6 L378.6 164.5 L379.8 164.3 L380.9 164.1 L382.1 163.8 L383.2 163.6 L384.4 163.4 L385.5 163.1 L386.7 162.9 L387.8 162.6 L389.0 162.4 L390.2 162.1 L391.3 161.8 L392.5 161.5 L393.6 161.2 L394.8 160.8 L395.9 160.5 L397.1 160.1 L398.2 159.7 L399.4 159.3 L400.5 158.9 L401.7 158.5 L402.8 158.0 L404.0 157.5 L405.1 157.0 L406.3 156.5 L407.4 156.0 L408.6 155.4 L409.7 154.8 L410.9 154.2 L412.0 153.5 L413.2 152.8 L414.3 152.1 L415.5 151.3 L416.6 150.5 L417.8 149.7 L418.9 148.8 L420.1 147.8 L421.2 146.8 L422.4 145.8 L423.5 144.7 L424.7 143.6 L425.8 142.3 L427.0 141.1 L428.1 139.7 L429.3 138.3 L430.4 136.8 L431.6 135.2 L432.7 133.5 L433.9 131.7 L435.0 129.8 L436.2 127.9 L437.3 125.8 L438.5 123.5 L439.6 121.2 L440.8 118.7 L441.9 116.1 L443.1 113.3 L444.2 110.4 L445.4 107.3 L446.5 104.1 L447.7 100.7 L448.8 97.1 L450.0 93.4 L451.1 89.6 L452.3 85.6 L453.4 81.5 L454.6 77.4 L455.7 73.4 L456.9 69.5 L458.0 65.9 L459.2 62.9 L460.3 60.8 L461.5 60.0 L462.6 61.3 L463.8 65.6 L464.9 74.3 L466.1 89.1 L467.2 112.0 L468.4 142.7 L469.5 168.4 L470.0 170.0Z"/>
+<path class="sch pix" d="M10.0 170.0 L10.5 170.0 L11.6 170.0 L12.8 170.0 L13.9 170.0 L15.1 170.0 L16.2 170.0 L17.4 170.0 L18.5 170.0 L19.8 170.0 L20.8 170.0 L22.0 170.0 L23.1 170.0 L24.3 170.0 L25.4 170.0 L26.6 170.0 L27.7 170.0 L28.9 170.0 L30.0 170.0 L31.2 170.0 L32.3 170.0 L33.5 170.0 L34.6 170.0 L35.8 170.0 L36.9 170.0 L38.1 170.0 L39.2 170.0 L40.4 170.0 L41.5 170.0 L42.7 170.0 L43.8 169.9 L45.0 169.9 L46.1 169.9 L47.3 169.9 L48.4 169.9 L49.6 169.9 L50.7 169.9 L51.9 169.9 L53.0 169.8 L54.2 169.8 L55.3 169.8 L56.5 169.8 L57.6 169.7 L58.8 169.7 L59.9 169.7 L61.1 169.7 L62.2 169.6 L63.4 169.6 L64.5 169.5 L65.7 169.5 L66.8 169.5 L68.0 169.4 L69.1 169.4 L70.3 169.3 L71.4 169.3 L72.6 169.2 L73.7 169.2 L74.9 169.1 L76.0 169.0 L77.2 169.0 L78.3 168.9 L79.5 168.8 L80.6 168.7 L81.8 168.7 L82.9 168.6 L84.1 168.5 L85.2 168.4 L86.4 168.3 L87.5 168.2 L88.7 168.1 L89.8 168.0 L91.0 167.9 L92.2 167.8 L93.3 167.7 L94.5 167.6 L95.6 167.4 L96.8 167.3 L97.9 167.2 L99.1 167.1 L100.2 166.9 L101.4 166.8 L102.5 166.6 L103.7 166.5 L104.8 166.3 L106.0 166.2 L107.1 166.0 L108.3 165.8 L109.4 165.7 L110.6 165.5 L111.7 165.3 L112.9 165.1 L114.0 165.0 L115.2 164.8 L116.3 164.6 L117.5 164.4 L118.6 164.2 L119.8 164.0 L120.9 163.7 L122.1 163.5 L123.2 163.3 L124.4 163.1 L125.5 162.8 L126.7 162.6 L127.8 162.4 L129.0 162.1 L130.1 161.9 L131.3 161.6 L132.4 161.4 L133.6 161.1 L134.7 160.8 L135.9 160.5 L137.0 160.3 L138.2 160.0 L139.3 159.7 L140.5 159.4 L141.6 159.1 L142.8 158.8 L143.9 158.5 L145.1 158.2 L146.2 157.9 L147.4 157.5 L148.5 157.2 L149.7 156.9 L150.8 156.5 L152.0 156.2 L153.1 155.9 L154.3 155.5 L155.4 155.2 L156.6 154.8 L157.7 154.4 L158.9 154.1 L160.0 153.7 L161.2 153.3 L162.3 152.9 L163.5 152.5 L164.6 152.1 L165.8 151.7 L166.9 151.3 L168.1 150.9 L169.2 150.5 L170.4 150.1 L171.5 149.7 L172.7 149.2 L173.8 148.8 L175.0 148.3 L176.1 147.9 L177.3 147.5 L178.4 147.0 L179.6 146.5 L180.7 146.1 L181.9 145.6 L183.0 145.1 L184.2 144.7 L185.3 144.2 L186.5 143.7 L187.6 143.2 L188.8 142.7 L189.9 142.2 L191.1 141.7 L192.3 141.2 L193.4 140.7 L194.6 140.2 L195.7 139.6 L196.9 139.1 L198.0 138.6 L199.2 138.0 L200.3 137.5 L201.5 136.9 L202.6 136.4 L203.8 135.8 L204.9 135.3 L206.1 134.7 L207.2 134.2 L208.4 133.6 L209.5 133.0 L210.7 132.4 L211.8 131.8 L213.0 131.3 L214.1 130.7 L215.3 130.1 L216.4 129.5 L217.6 128.9 L218.7 128.3 L219.9 127.6 L221.0 127.0 L222.2 126.4 L223.3 125.8 L224.5 125.2 L225.6 124.5 L226.8 123.9 L227.9 123.3 L229.1 122.6 L230.2 122.0 L231.4 121.3 L232.5 120.7 L233.7 120.0 L234.8 119.4 L236.0 118.7 L237.1 118.0 L238.3 117.4 L239.4 116.7 L240.6 116.0 L241.7 115.4 L242.9 114.7 L244.0 114.0 L245.2 113.3 L246.3 112.6 L247.5 112.0 L248.6 111.3 L249.8 110.6 L250.9 109.9 L252.1 109.2 L253.2 108.5 L254.4 107.8 L255.5 107.1 L256.7 106.4 L257.8 105.7 L259.0 105.0 L260.1 104.3 L261.3 103.6 L262.4 102.9 L263.6 102.2 L264.7 101.5 L265.9 100.8 L267.0 100.1 L268.2 99.4 L269.3 98.6 L270.5 97.9 L271.6 97.2 L272.8 96.5 L273.9 95.8 L275.1 95.1 L276.2 94.4 L277.4 93.7 L278.5 93.0 L279.7 92.3 L280.8 91.6 L282.0 90.9 L283.1 90.2 L284.3 89.5 L285.4 88.8 L286.6 88.1 L287.7 87.4 L288.9 86.7 L290.1 86.0 L291.2 85.3 L292.4 84.7 L293.5 84.0 L294.7 83.3 L295.8 82.6 L297.0 82.0 L298.1 81.3 L299.3 80.7 L300.4 80.0 L301.6 79.4 L302.7 78.7 L303.9 78.1 L305.0 77.4 L306.2 76.8 L307.3 76.2 L308.5 75.6 L309.6 75.0 L310.8 74.4 L311.9 73.8 L313.1 73.2 L314.2 72.6 L315.4 72.1 L316.5 71.5 L317.7 70.9 L318.8 70.4 L320.0 69.9 L321.1 69.3 L322.3 68.8 L323.4 68.3 L324.6 67.8 L325.7 67.3 L326.9 66.9 L328.0 66.4 L329.2 66.0 L330.3 65.5 L331.5 65.1 L332.6 64.7 L333.8 64.3 L334.9 63.9 L336.1 63.6 L337.2 63.2 L338.4 62.9 L339.5 62.6 L340.7 62.3 L341.8 62.0 L343.0 61.7 L344.1 61.5 L345.3 61.2 L346.4 61.0 L347.6 60.8 L348.7 60.6 L349.9 60.5 L351.0 60.4 L352.2 60.2 L353.3 60.1 L354.5 60.1 L355.6 60.0 L356.8 60.0 L357.9 60.0 L359.1 60.0 L360.2 60.1 L361.4 60.1 L362.5 60.2 L363.7 60.4 L364.8 60.5 L366.0 60.7 L367.1 60.9 L368.3 61.2 L369.4 61.4 L370.6 61.7 L371.7 62.0 L372.9 62.4 L374.0 62.8 L375.2 63.2 L376.3 63.7 L377.5 64.2 L378.6 64.7 L379.8 65.2 L380.9 65.8 L382.1 66.5 L383.2 67.1 L384.4 67.8 L385.5 68.6 L386.7 69.4 L387.8 70.2 L389.0 71.0 L390.2 71.9 L391.3 72.9 L392.5 73.8 L393.6 74.9 L394.8 75.9 L395.9 77.0 L397.1 78.2 L398.2 79.3 L399.4 80.6 L400.5 81.8 L401.7 83.1 L402.8 84.5 L404.0 85.9 L405.1 87.3 L406.3 88.8 L407.4 90.3 L408.6 91.9 L409.7 93.5 L410.9 95.1 L412.0 96.8 L413.2 98.6 L414.3 100.3 L415.5 102.1 L416.6 104.0 L417.8 105.8 L418.9 107.8 L420.1 109.7 L421.2 111.7 L422.4 113.7 L423.5 115.7 L424.7 117.8 L425.8 119.8 L427.0 121.9 L428.1 124.0 L429.3 126.2 L430.4 128.3 L431.6 130.5 L432.7 132.6 L433.9 134.7 L435.0 136.9 L436.2 139.0 L437.3 141.1 L438.5 143.2 L439.6 145.2 L440.8 147.2 L441.9 149.2 L443.1 151.1 L444.2 153.0 L445.4 154.8 L446.5 156.5 L447.7 158.2 L448.8 159.7 L450.0 161.2 L451.1 162.5 L452.3 163.8 L453.4 164.9 L454.6 165.9 L455.7 166.8 L456.9 167.6 L458.0 168.3 L459.2 168.8 L460.3 169.2 L461.5 169.5 L462.6 169.7 L463.8 169.9 L464.9 170.0 L466.1 170.0 L467.2 170.0 L468.4 170.0 L469.5 170.0 L470.0 170.0Z"/>
+<path class="sch emb" d="M10.0 170.0 L10.5 170.0 L11.6 170.0 L12.8 170.0 L13.9 170.0 L15.1 170.0 L16.2 170.0 L17.4 170.0 L18.5 170.0 L19.8 170.0 L20.8 170.0 L22.0 170.0 L23.1 170.0 L24.3 170.0 L25.4 170.0 L26.6 170.0 L27.7 170.0 L28.9 170.0 L30.0 170.0 L31.2 170.0 L32.3 170.0 L33.5 170.0 L34.6 170.0 L35.8 170.0 L36.9 170.0 L38.1 170.0 L39.2 170.0 L40.4 170.0 L41.5 170.0 L42.7 170.0 L43.8 170.0 L45.0 170.0 L46.1 170.0 L47.3 170.0 L48.4 170.0 L49.6 170.0 L50.7 170.0 L51.9 170.0 L53.0 170.0 L54.2 170.0 L55.3 170.0 L56.5 170.0 L57.6 170.0 L58.8 170.0 L59.9 170.0 L61.1 170.0 L62.2 170.0 L63.4 170.0 L64.5 170.0 L65.7 170.0 L66.8 170.0 L68.0 170.0 L69.1 170.0 L70.3 170.0 L71.4 170.0 L72.6 170.0 L73.7 170.0 L74.9 170.0 L76.0 170.0 L77.2 170.0 L78.3 170.0 L79.5 170.0 L80.6 170.0 L81.8 170.0 L82.9 170.0 L84.1 170.0 L85.2 170.0 L86.4 170.0 L87.5 170.0 L88.7 170.0 L89.8 170.0 L91.0 170.0 L92.2 170.0 L93.3 170.0 L94.5 170.0 L95.6 170.0 L96.8 170.0 L97.9 170.0 L99.1 170.0 L100.2 170.0 L101.4 170.0 L102.5 170.0 L103.7 170.0 L104.8 170.0 L106.0 170.0 L107.1 170.0 L108.3 170.0 L109.4 170.0 L110.6 170.0 L111.7 170.0 L112.9 170.0 L114.0 170.0 L115.2 170.0 L116.3 170.0 L117.5 170.0 L118.6 170.0 L119.8 170.0 L120.9 170.0 L122.1 170.0 L123.2 170.0 L124.4 170.0 L125.5 170.0 L126.7 170.0 L127.8 170.0 L129.0 170.0 L130.1 170.0 L131.3 170.0 L132.4 170.0 L133.6 170.0 L134.7 170.0 L135.9 170.0 L137.0 170.0 L138.2 170.0 L139.3 170.0 L140.5 170.0 L141.6 170.0 L142.8 170.0 L143.9 170.0 L145.1 170.0 L146.2 170.0 L147.4 170.0 L148.5 170.0 L149.7 170.0 L150.8 170.0 L152.0 170.0 L153.1 170.0 L154.3 170.0 L155.4 170.0 L156.6 170.0 L157.7 170.0 L158.9 170.0 L160.0 170.0 L161.2 170.0 L162.3 170.0 L163.5 170.0 L164.6 170.0 L165.8 170.0 L166.9 170.0 L168.1 170.0 L169.2 170.0 L170.4 170.0 L171.5 170.0 L172.7 170.0 L173.8 170.0 L175.0 170.0 L176.1 170.0 L177.3 170.0 L178.4 170.0 L179.6 170.0 L180.7 170.0 L181.9 170.0 L183.0 170.0 L184.2 170.0 L185.3 170.0 L186.5 170.0 L187.6 170.0 L188.8 170.0 L189.9 170.0 L191.1 170.0 L192.3 170.0 L193.4 170.0 L194.6 170.0 L195.7 170.0 L196.9 170.0 L198.0 170.0 L199.2 170.0 L200.3 170.0 L201.5 169.9 L202.6 169.9 L203.8 169.9 L204.9 169.9 L206.1 169.9 L207.2 169.9 L208.4 169.9 L209.5 169.9 L210.7 169.9 L211.8 169.9 L213.0 169.9 L214.1 169.9 L215.3 169.9 L216.4 169.9 L217.6 169.9 L218.7 169.9 L219.9 169.9 L221.0 169.9 L222.2 169.9 L223.3 169.9 L224.5 169.9 L225.6 169.9 L226.8 169.9 L227.9 169.9 L229.1 169.9 L230.2 169.9 L231.4 169.9 L232.5 169.9 L233.7 169.9 L234.8 169.9 L236.0 169.9 L237.1 169.9 L238.3 169.9 L239.4 169.9 L240.6 169.9 L241.7 169.9 L242.9 169.8 L244.0 169.8 L245.2 169.8 L246.3 169.8 L247.5 169.8 L248.6 169.8 L249.8 169.8 L250.9 169.8 L252.1 169.8 L253.2 169.8 L254.4 169.8 L255.5 169.8 L256.7 169.8 L257.8 169.8 L259.0 169.8 L260.1 169.8 L261.3 169.8 L262.4 169.7 L263.6 169.7 L264.7 169.7 L265.9 169.7 L267.0 169.7 L268.2 169.7 L269.3 169.7 L270.5 169.7 L271.6 169.7 L272.8 169.7 L273.9 169.7 L275.1 169.7 L276.2 169.6 L277.4 169.6 L278.5 169.6 L279.7 169.6 L280.8 169.6 L282.0 169.6 L283.1 169.6 L284.3 169.6 L285.4 169.5 L286.6 169.5 L287.7 169.5 L288.9 169.5 L290.1 169.5 L291.2 169.5 L292.4 169.5 L293.5 169.4 L294.7 169.4 L295.8 169.4 L297.0 169.4 L298.1 169.4 L299.3 169.4 L300.4 169.3 L301.6 169.3 L302.7 169.3 L303.9 169.3 L305.0 169.3 L306.2 169.2 L307.3 169.2 L308.5 169.2 L309.6 169.2 L310.8 169.1 L311.9 169.1 L313.1 169.1 L314.2 169.1 L315.4 169.0 L316.5 169.0 L317.7 169.0 L318.8 168.9 L320.0 168.9 L321.1 168.9 L322.3 168.8 L323.4 168.8 L324.6 168.8 L325.7 168.7 L326.9 168.7 L328.0 168.6 L329.2 168.6 L330.3 168.6 L331.5 168.5 L332.6 168.5 L333.8 168.4 L334.9 168.4 L336.1 168.3 L337.2 168.3 L338.4 168.2 L339.5 168.2 L340.7 168.1 L341.8 168.0 L343.0 168.0 L344.1 167.9 L345.3 167.9 L346.4 167.8 L347.6 167.7 L348.7 167.6 L349.9 167.6 L351.0 167.5 L352.2 167.4 L353.3 167.3 L354.5 167.2 L355.6 167.1 L356.8 167.1 L357.9 167.0 L359.1 166.9 L360.2 166.8 L361.4 166.6 L362.5 166.5 L363.7 166.4 L364.8 166.3 L366.0 166.2 L367.1 166.0 L368.3 165.9 L369.4 165.8 L370.6 165.6 L371.7 165.5 L372.9 165.3 L374.0 165.2 L375.2 165.0 L376.3 164.8 L377.5 164.6 L378.6 164.5 L379.8 164.3 L380.9 164.1 L382.1 163.8 L383.2 163.6 L384.4 163.4 L385.5 163.1 L386.7 162.9 L387.8 162.6 L389.0 162.4 L390.2 162.1 L391.3 161.8 L392.5 161.5 L393.6 161.2 L394.8 160.8 L395.9 160.5 L397.1 160.1 L398.2 159.7 L399.4 159.3 L400.5 158.9 L401.7 158.5 L402.8 158.0 L404.0 157.5 L405.1 157.0 L406.3 156.5 L407.4 156.0 L408.6 155.4 L409.7 154.8 L410.9 154.2 L412.0 153.5 L413.2 152.8 L414.3 152.1 L415.5 151.3 L416.6 150.5 L417.8 149.7 L418.9 148.8 L420.1 147.8 L421.2 146.8 L422.4 145.8 L423.5 144.7 L424.7 143.6 L425.8 142.3 L427.0 141.1 L428.1 139.7 L429.3 138.3 L430.4 136.8 L431.6 135.2 L432.7 133.5 L433.9 131.7 L435.0 129.8 L436.2 127.9 L437.3 125.8 L438.5 123.5 L439.6 121.2 L440.8 118.7 L441.9 116.1 L443.1 113.3 L444.2 110.4 L445.4 107.3 L446.5 104.1 L447.7 100.7 L448.8 97.1 L450.0 93.4 L451.1 89.6 L452.3 85.6 L453.4 81.5 L454.6 77.4 L455.7 73.4 L456.9 69.5 L458.0 65.9 L459.2 62.9 L460.3 60.8 L461.5 60.0 L462.6 61.3 L463.8 65.6 L464.9 74.3 L466.1 89.1 L467.2 112.0 L468.4 142.7 L469.5 168.4 L470.0 170.0Z"/>
 <line class="mdn emb" x1="447.0" x2="447.0" y1="170.0" y2="44"/>
 <line class="mdn pix" x1="327.4" x2="327.4" y1="170.0" y2="60"/>
 <text class="sch-t emb" x="447.0" y="18" text-anchor="end">Embedding, median 0.95</text>
@@ -290,14 +470,14 @@ bibtex: |
 
 <section id="views">
     <h2>Noise-map views</h2>
-    <p>Masking and cropping amount to full noise on some patches. A single noising process, which sets a noise level for each patch, can thus produce both the views of SSL and the noisy images of diffusion. DEM draws all its inputs from this process, so its two tasks train on the same inputs.</p>
+    <p>Masking and cropping amount to full noise on some patches. A single noising process, which sets a noise level for each patch, can thus produce both the views of SSL and the noisy images of diffusion. DEM draws all its inputs from this process, so its two tasks train on the same inputs. In training, the student sees noise combined with a mask, the teacher sees a clean view, and the pixel pass sees the whole image at one noise level.</p>
     <figure class="dem-fig">
         <div class="dem-views">
-            <figure class="dem-view"><figcaption><span>Clean</span><span class="dem-role">Image</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_clean.webp" width="64" height="64" alt="A clean image of a parrot, with an all-white noise map." loading="lazy"></figure>
-            <figure class="dem-view"><figcaption><span>Noise</span><span class="dem-role">Diffusion</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#868b95" d="M0 0h10v10h-10zM10 0h10v10h-10zM20 0h10v10h-10zM30 0h10v10h-10zM40 0h10v10h-10zM50 0h10v10h-10zM60 0h10v10h-10zM70 0h10v10h-10zM0 10h10v10h-10zM10 10h10v10h-10zM20 10h10v10h-10zM30 10h10v10h-10zM40 10h10v10h-10zM50 10h10v10h-10zM60 10h10v10h-10zM70 10h10v10h-10zM0 20h10v10h-10zM10 20h10v10h-10zM20 20h10v10h-10zM30 20h10v10h-10zM40 20h10v10h-10zM50 20h10v10h-10zM60 20h10v10h-10zM70 20h10v10h-10zM0 30h10v10h-10zM10 30h10v10h-10zM20 30h10v10h-10zM30 30h10v10h-10zM40 30h10v10h-10zM50 30h10v10h-10zM60 30h10v10h-10zM70 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM20 40h10v10h-10zM30 40h10v10h-10zM40 40h10v10h-10zM50 40h10v10h-10zM60 40h10v10h-10zM70 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM30 50h10v10h-10zM40 50h10v10h-10zM50 50h10v10h-10zM60 50h10v10h-10zM70 50h10v10h-10zM0 60h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10zM30 60h10v10h-10zM40 60h10v10h-10zM50 60h10v10h-10zM60 60h10v10h-10zM70 60h10v10h-10zM0 70h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10zM30 70h10v10h-10zM40 70h10v10h-10zM50 70h10v10h-10zM60 70h10v10h-10zM70 70h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_noise.webp" width="64" height="64" alt="The image with noise on every patch at level 0.54." loading="lazy"></figure>
+            <figure class="dem-view"><figcaption><span>Clean</span><span class="dem-role sl">teacher sees</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_clean.webp" width="64" height="64" alt="A clean image of a parrot, with an all-white noise map." loading="lazy"></figure>
+            <figure class="dem-view"><figcaption><span>Noise</span><span class="dem-role pix">pixel pass sees</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#868b95" d="M0 0h10v10h-10zM10 0h10v10h-10zM20 0h10v10h-10zM30 0h10v10h-10zM40 0h10v10h-10zM50 0h10v10h-10zM60 0h10v10h-10zM70 0h10v10h-10zM0 10h10v10h-10zM10 10h10v10h-10zM20 10h10v10h-10zM30 10h10v10h-10zM40 10h10v10h-10zM50 10h10v10h-10zM60 10h10v10h-10zM70 10h10v10h-10zM0 20h10v10h-10zM10 20h10v10h-10zM20 20h10v10h-10zM30 20h10v10h-10zM40 20h10v10h-10zM50 20h10v10h-10zM60 20h10v10h-10zM70 20h10v10h-10zM0 30h10v10h-10zM10 30h10v10h-10zM20 30h10v10h-10zM30 30h10v10h-10zM40 30h10v10h-10zM50 30h10v10h-10zM60 30h10v10h-10zM70 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM20 40h10v10h-10zM30 40h10v10h-10zM40 40h10v10h-10zM50 40h10v10h-10zM60 40h10v10h-10zM70 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM30 50h10v10h-10zM40 50h10v10h-10zM50 50h10v10h-10zM60 50h10v10h-10zM70 50h10v10h-10zM0 60h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10zM30 60h10v10h-10zM40 60h10v10h-10zM50 60h10v10h-10zM60 60h10v10h-10zM70 60h10v10h-10zM0 70h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10zM30 70h10v10h-10zM40 70h10v10h-10zM50 70h10v10h-10zM60 70h10v10h-10zM70 70h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_noise.webp" width="64" height="64" alt="The image with noise on every patch at level 0.54." loading="lazy"></figure>
             <figure class="dem-view"><figcaption><span>Random mask</span><span class="dem-role">SSL</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#1e293b" d="M0 20h10v10h-10zM10 20h10v10h-10zM0 30h10v10h-10zM10 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_random.webp" width="64" height="64" alt="The image with scattered blocks of patches at full noise." loading="lazy"></figure>
             <figure class="dem-view"><figcaption><span>Crop mask</span><span class="dem-role">SSL</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#1e293b" d="M0 0h10v10h-10zM10 0h10v10h-10zM20 0h10v10h-10zM30 0h10v10h-10zM40 0h10v10h-10zM50 0h10v10h-10zM60 0h10v10h-10zM70 0h10v10h-10zM0 10h10v10h-10zM10 10h10v10h-10zM20 10h10v10h-10zM30 10h10v10h-10zM40 10h10v10h-10zM50 10h10v10h-10zM60 10h10v10h-10zM70 10h10v10h-10zM0 20h10v10h-10zM10 20h10v10h-10zM20 20h10v10h-10zM0 30h10v10h-10zM10 30h10v10h-10zM20 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM20 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM0 60h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10zM0 70h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_crop.webp" width="64" height="64" alt="The image with everything outside a box at full noise." loading="lazy"></figure>
-            <figure class="dem-view"><figcaption><span>Combined</span><span class="dem-role">DEM</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#9ea3ab" d="M0 0h10v10h-10zM10 0h10v10h-10zM20 0h10v10h-10zM30 0h10v10h-10zM40 0h10v10h-10zM50 0h10v10h-10zM60 0h10v10h-10zM70 0h10v10h-10zM0 10h10v10h-10zM10 10h10v10h-10zM20 10h10v10h-10zM30 10h10v10h-10zM40 10h10v10h-10zM50 10h10v10h-10zM60 10h10v10h-10zM70 10h10v10h-10zM0 20h10v10h-10zM10 20h10v10h-10zM20 20h10v10h-10zM30 20h10v10h-10zM40 20h10v10h-10zM50 20h10v10h-10zM60 20h10v10h-10zM70 20h10v10h-10zM10 30h10v10h-10zM50 30h10v10h-10zM60 30h10v10h-10zM70 30h10v10h-10zM50 40h10v10h-10zM60 40h10v10h-10zM70 40h10v10h-10zM30 50h10v10h-10zM40 50h10v10h-10zM50 50h10v10h-10zM60 50h10v10h-10zM70 50h10v10h-10zM30 60h10v10h-10zM40 60h10v10h-10zM50 60h10v10h-10zM60 60h10v10h-10zM70 60h10v10h-10zM0 70h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10zM30 70h10v10h-10zM40 70h10v10h-10zM50 70h10v10h-10zM60 70h10v10h-10zM70 70h10v10h-10z"/><path fill="#1e293b" d="M0 30h10v10h-10zM20 30h10v10h-10zM30 30h10v10h-10zM40 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM20 40h10v10h-10zM30 40h10v10h-10zM40 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM0 60h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_all.webp" width="64" height="64" alt="A zoomed view at level 0.43 with masked blocks at full noise." loading="lazy"></figure>
+            <figure class="dem-view"><figcaption><span>Combined</span><span class="dem-role rep">student sees</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#9ea3ab" d="M0 0h10v10h-10zM10 0h10v10h-10zM20 0h10v10h-10zM30 0h10v10h-10zM40 0h10v10h-10zM50 0h10v10h-10zM60 0h10v10h-10zM70 0h10v10h-10zM0 10h10v10h-10zM10 10h10v10h-10zM20 10h10v10h-10zM30 10h10v10h-10zM40 10h10v10h-10zM50 10h10v10h-10zM60 10h10v10h-10zM70 10h10v10h-10zM0 20h10v10h-10zM10 20h10v10h-10zM20 20h10v10h-10zM30 20h10v10h-10zM40 20h10v10h-10zM50 20h10v10h-10zM60 20h10v10h-10zM70 20h10v10h-10zM10 30h10v10h-10zM50 30h10v10h-10zM60 30h10v10h-10zM70 30h10v10h-10zM50 40h10v10h-10zM60 40h10v10h-10zM70 40h10v10h-10zM30 50h10v10h-10zM40 50h10v10h-10zM50 50h10v10h-10zM60 50h10v10h-10zM70 50h10v10h-10zM30 60h10v10h-10zM40 60h10v10h-10zM50 60h10v10h-10zM60 60h10v10h-10zM70 60h10v10h-10zM0 70h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10zM30 70h10v10h-10zM40 70h10v10h-10zM50 70h10v10h-10zM60 70h10v10h-10zM70 70h10v10h-10z"/><path fill="#1e293b" d="M0 30h10v10h-10zM20 30h10v10h-10zM30 30h10v10h-10zM40 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM20 40h10v10h-10zM30 40h10v10h-10zM40 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM0 60h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_all.webp" width="64" height="64" alt="A zoomed view at level 0.43 with masked blocks at full noise." loading="lazy"></figure>
         </div>
         <p class="dem-legend"><span>clean</span><i></i><span>full noise</span></p>
     </figure>
@@ -307,12 +487,12 @@ bibtex: |
     <h2>Results</h2>
     <figure class="dem-fig">
         <div class="dem-media wide scroll"><svg class="dem-svg dem-plane" viewBox="0 0 640 352" role="img" aria-labelledby="sc-t">
-<title id="sc-t">Linear probe accuracy on ImageNet-100 against FID. DEM has the highest probe. Without labels its FID of 19.5 is on par with RCG at 19.7, which has no probe of its own. Open markers use labels. DEM with a linear probe fit on 1% of the labels reaches 14.5, and class-conditional JiT trained on all labels reaches 12.4. Single-task methods sit on the N/A lanes.</title>
+<title id="sc-t">Linear probe accuracy on ImageNet-100 against FID. DEM has the highest probe. Without labels it generates at an FID of 19.5 with one network, against 12.3 for RCG, which trains three separate models and has no probe of its own. Open markers use labels. DEM with a linear probe fit on 1% of the labels reaches 14.5, and class-conditional JiT trained on all labels reaches 12.4. Single-task methods sit on the N/A lanes.</title>
 <line class="grid" x1="95.0" y1="24" x2="95.0" y2="300"/><text class="tick" x="95.0" y="322" text-anchor="middle">N/A</text><line class="grid" x1="165.0" y1="24" x2="165.0" y2="300"/><text class="tick" x="165.0" y="322" text-anchor="middle">70</text><line class="grid" x1="237.5" y1="24" x2="237.5" y2="300"/><text class="tick" x="237.5" y="322" text-anchor="middle">60</text><line class="grid" x1="310.0" y1="24" x2="310.0" y2="300"/><text class="tick" x="310.0" y="322" text-anchor="middle">50</text><line class="grid" x1="382.5" y1="24" x2="382.5" y2="300"/><text class="tick" x="382.5" y="322" text-anchor="middle">40</text><line class="grid" x1="455.0" y1="24" x2="455.0" y2="300"/><text class="tick" x="455.0" y="322" text-anchor="middle">30</text><line class="grid" x1="527.5" y1="24" x2="527.5" y2="300"/><text class="tick" x="527.5" y="322" text-anchor="middle">20</text><line class="grid" x1="600.0" y1="24" x2="600.0" y2="300"/><text class="tick" x="600.0" y="322" text-anchor="middle">10</text><line class="grid" x1="70" y1="275.8" x2="620" y2="275.8"/><text class="tick" x="60" y="279.8" text-anchor="end">N/A</text><line class="grid" x1="70" y1="227.4" x2="620" y2="227.4"/><text class="tick" x="60" y="231.4" text-anchor="end">40</text><line class="grid" x1="70" y1="178.9" x2="620" y2="178.9"/><text class="tick" x="60" y="182.9" text-anchor="end">50</text><line class="grid" x1="70" y1="130.5" x2="620" y2="130.5"/><text class="tick" x="60" y="134.5" text-anchor="end">60</text><line class="grid" x1="70" y1="82.1" x2="620" y2="82.1"/><text class="tick" x="60" y="86.1" text-anchor="end">70</text><line class="grid" x1="70" y1="33.7" x2="620" y2="33.7"/><text class="tick" x="60" y="37.7" text-anchor="end">80</text>
 <line class="axis" x1="70" y1="300" x2="620" y2="300"/><line class="axis" x1="70" y1="24" x2="70" y2="300"/>
 <text class="ax" x="345" y="346" text-anchor="middle">FID (lower is better)</text>
 <text class="ax" transform="translate(16 162) rotate(-90)" text-anchor="middle">Linear probe (%)</text>
-<g class="pt-g"><title>DINOv2: probe 72.8%, FID N/A</title><circle class="pt" cx="95.0" cy="68.5" r="5"/><a href="https://arxiv.org/abs/2304.07193"><text class="lab" x="107.0" y="69.5" text-anchor="start">DINOv2</text></a></g><g class="pt-g"><title>BYOL: probe 70.1%, FID N/A</title><circle class="pt" cx="95.0" cy="81.6" r="5"/><a href="https://arxiv.org/abs/2006.07733"><text class="lab" x="107.0" y="90.6" text-anchor="start">BYOL</text></a></g><g class="pt-g"><title>I-JEPA: probe 39.7%, FID N/A</title><circle class="pt" cx="95.0" cy="228.8" r="5"/><a href="https://arxiv.org/abs/2301.08243"><text class="lab" x="107.0" y="239.8" text-anchor="start">I-JEPA</text></a></g><g class="pt-g"><title>MAE: probe 43.1%, FID N/A</title><circle class="pt" cx="95.0" cy="212.4" r="5"/><a href="https://arxiv.org/abs/2111.06377"><text class="lab" x="107.0" y="213.4" text-anchor="start">MAE</text></a></g><g class="pt-g"><title>JiT (uncond.): probe N/A, FID 64.0</title><circle class="pt" cx="208.5" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2511.13720"><text class="lab" x="220.5" y="280.8" text-anchor="start">JiT (uncond.)</text></a></g><g class="pt-g"><title>RCG (BYOL enc.): probe N/A, FID 19.7</title><circle class="pt" cx="529.7" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2312.03701"><text class="lab" x="517.7" y="280.8" text-anchor="end">RCG</text></a></g><g class="pt-g"><title>MAGE: probe 35.4%, FID 67.9</title><circle class="pt" cx="180.2" cy="249.6" r="5"/><a href="https://arxiv.org/abs/2211.09117"><text class="lab" x="192.2" y="254.6" text-anchor="start">MAGE</text></a></g><g class="pt-g"><title>JiT (class-cond.), uses all labels: probe N/A, FID 12.4</title><circle class="pt-open" cx="582.6" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2511.13720"><text class="lab" x="620.0" y="257.0" text-anchor="end">JiT (class-cond.)</text></a></g><g class="pt-g"><title>DEM: probe 76.1%, FID 19.5</title><polygon class="pt-ours" points="531.1,40.6 534.1,48.5 542.5,48.9 535.9,54.1 538.2,62.3 531.1,57.6 524.1,62.3 526.3,54.1 519.7,48.9 528.2,48.5"/><text class="lab-ours" x="514.1" y="57.6" text-anchor="end">DEM</text></g><g class="pt-g"><title>DEM with a linear probe fit on 1% of the labels: same network, probe 76.1%, FID 14.5</title><polygon class="pt-ours-open" points="567.4,44.1 569.5,49.7 575.5,49.9 570.8,53.7 572.4,59.5 567.4,56.1 562.4,59.5 564.0,53.7 559.3,49.9 565.3,49.7"/><text class="lab lab-rep" x="567.4" y="82.6" text-anchor="middle">1% labels</text></g>
+<g class="pt-g"><title>DINOv2: probe 72.8%, FID N/A</title><circle class="pt" cx="95.0" cy="68.5" r="5"/><a href="https://arxiv.org/abs/2304.07193"><text class="lab" x="107.0" y="69.5" text-anchor="start">DINOv2</text></a></g><g class="pt-g"><title>BYOL: probe 70.1%, FID N/A</title><circle class="pt" cx="95.0" cy="81.6" r="5"/><a href="https://arxiv.org/abs/2006.07733"><text class="lab" x="107.0" y="90.6" text-anchor="start">BYOL</text></a></g><g class="pt-g"><title>I-JEPA: probe 39.7%, FID N/A</title><circle class="pt" cx="95.0" cy="228.8" r="5"/><a href="https://arxiv.org/abs/2301.08243"><text class="lab" x="107.0" y="239.8" text-anchor="start">I-JEPA</text></a></g><g class="pt-g"><title>MAE: probe 43.1%, FID N/A</title><circle class="pt" cx="95.0" cy="212.4" r="5"/><a href="https://arxiv.org/abs/2111.06377"><text class="lab" x="107.0" y="213.4" text-anchor="start">MAE</text></a></g><g class="pt-g"><title>JiT (uncond.): probe N/A, FID 64.0</title><circle class="pt" cx="208.5" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2511.13720"><text class="lab" x="220.5" y="280.8" text-anchor="start">JiT (uncond.)</text></a></g><g class="pt-g"><title>RCG (BYOL enc.), three separate models: probe N/A, FID 12.3</title><circle class="pt" cx="583.3" cy="287.0" r="5"/><a href="https://arxiv.org/abs/2312.03701"><text class="lab" x="571.3" y="292.0" text-anchor="end">RCG</text></a></g><g class="pt-g"><title>MAGE: probe 35.4%, FID 67.9</title><circle class="pt" cx="180.2" cy="249.6" r="5"/><a href="https://arxiv.org/abs/2211.09117"><text class="lab" x="192.2" y="254.6" text-anchor="start">MAGE</text></a></g><g class="pt-g"><title>JiT (class-cond.), uses all labels: probe N/A, FID 12.4</title><circle class="pt-open" cx="582.6" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2511.13720"><text class="lab" x="620.0" y="257.0" text-anchor="end">JiT (class-cond.)</text></a></g><g class="pt-g"><title>DEM: probe 76.1%, FID 19.5</title><polygon class="pt-ours" points="531.1,40.6 534.1,48.5 542.5,48.9 535.9,54.1 538.2,62.3 531.1,57.6 524.1,62.3 526.3,54.1 519.6,48.9 528.2,48.5"/><text class="lab-ours" x="514.1" y="57.6" text-anchor="end">DEM</text></g><g class="pt-g"><title>DEM with a linear probe fit on 1% of the labels: same network, probe 76.1%, FID 14.5</title><polygon class="pt-ours-open" points="567.4,44.1 569.5,49.7 575.5,49.9 570.8,53.7 572.4,59.5 567.4,56.1 562.4,59.5 564.0,53.7 559.3,49.9 565.3,49.7"/><text class="lab lab-rep" x="567.4" y="82.6" text-anchor="middle">1% labels</text></g>
 </svg></div>
         <figcaption>One generative model learns representations competitive with self-supervised methods and generates images without labels. Open markers use labels. DEM uses guidance, and RCG does not.</figcaption>
     </figure>
@@ -324,7 +504,7 @@ bibtex: |
             <tbody>
                 <tr><td>Linear probe</td><td>76.1%</td><td>72.8% (<a href="https://arxiv.org/abs/2304.07193">DINOv2</a>)</td></tr>
                 <tr><td>k-NN</td><td>69.9%</td><td>72.5% (<a href="https://arxiv.org/abs/2304.07193">DINOv2</a>)</td></tr>
-                <tr><td>FID-50k without labels</td><td>19.5</td><td>19.7 (<a href="https://arxiv.org/abs/2312.03701">RCG</a>, three models)</td></tr>
+                <tr><td>FID-50k without labels</td><td>19.5</td><td>12.3 (<a href="https://arxiv.org/abs/2312.03701">RCG</a>, three separate models)</td></tr>
                 <tr><td>Class-conditional FID-50k</td><td>14.5 (1% of labels)</td><td>12.4 (<a href="https://arxiv.org/abs/2511.13720">JiT</a>, all labels)</td></tr>
             </tbody>
         </table>
@@ -354,25 +534,6 @@ bibtex: |
     </figure>
 </section>
 
-<script>
-(function () {
-  var fig = document.getElementById("dem-concept");
-  var bar = fig.querySelector(".dem-uses"), out = fig.querySelector(".dem-use-text");
-  var text = {
-    enc: "The network embeds a view of the image. The embedding is the representation.",
-    gen: "Given a noisy embedding and a view, the network denoises it. Without the view, it generates embeddings from noise.",
-    dec: "As a pixel denoiser, the network generates the image that the embedding describes."
-  };
-  bar.hidden = false;
-  bar.addEventListener("click", function (e) {
-    var b = e.target.closest("button"); if (!b) return;
-    var on = fig.dataset.use === b.dataset.use ? "" : b.dataset.use;
-    fig.dataset.use = on;
-    bar.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-selected", x.dataset.use === on); });
-    out.hidden = !on; out.textContent = on ? text[on] : "";
-  });
-})();
-</script>
 <script>
 (function () {
   var fig = document.getElementById("dem-tau"), wrap = fig.querySelector(".dem-tau-wrap"), svg = wrap.querySelector("svg");
