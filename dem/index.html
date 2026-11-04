@@ -202,6 +202,7 @@ bibtex: |
     .dem-front .fr-pt { fill: var(--sl); opacity: 0.32; }
     .dem-front .fr-front { fill: none; stroke: var(--rep); stroke-width: 1.5; opacity: 0.3; }
     .dem-front .fr-pair { stroke: var(--rep); stroke-width: 1.5; opacity: 0.35; }
+    .dem-front .fr-lead { stroke: var(--muted); stroke-width: 1; }
     .dem-front .fr-path { fill: none; stroke: var(--rep); stroke-width: 1.5; stroke-dasharray: 2 3; }
     .dem-front .fr-rec { fill: var(--bg); stroke: var(--rep); stroke-width: 2; }
     .dem-front .fr-rec.fail { stroke: var(--pix); }
@@ -541,8 +542,8 @@ bibtex: |
             <button type="button" class="btn" data-set="adopted" aria-pressed="true">Adopted sampler</button>
         </div>
 <div class="dem-media wide fr-set fr-earlier"><svg class="dem-svg dem-plane dem-front" viewBox="0 0 640 402" role="img" aria-labelledby="fr-t-earlier">
-<title id="fr-t-earlier">Linear probe against FID-5k without labels for the 253 20k-iteration runs with the earlier sampler. The dotted path follows successive records; the star marks DEM, 20 Oct.</title>
-<defs><clipPath id="fr-clip-earlier"><rect x="70" y="20" width="550" height="320"/></clipPath></defs>
+<title id="fr-t-earlier">Linear probe against FID-5k without labels for the 253 20k-iteration runs with the earlier sampler, plus later records. The dotted path follows successive records; the star marks DEM, 20 Oct.</title>
+<defs><clipPath id="fr-clip-earlier"><rect x="63" y="13" width="564" height="334"/></clipPath></defs>
 <line class="grid" x1="70.0" y1="20" x2="70.0" y2="340"/><text class="tick" x="70.0" y="362" text-anchor="middle">50</text>
 <line class="grid" x1="189.6" y1="20" x2="189.6" y2="340"/><text class="tick" x="189.6" y="362" text-anchor="middle">55</text>
 <line class="grid" x1="309.1" y1="20" x2="309.1" y2="340"/><text class="tick" x="309.1" y="362" text-anchor="middle">60</text>
@@ -599,7 +600,6 @@ bibtex: |
 <circle class="fr-pt" cx="257.0" cy="176.3" r="3.5"><title>joint_mc4nav_patch_dense8_d0: probe 57.82, FID 78.1</title></circle>
 <circle class="fr-pt" cx="245.0" cy="190.8" r="3.5"><title>joint_mc4nav_patch_dense8_d03: probe 57.32, FID 81.7</title></circle>
 <circle class="fr-pt" cx="298.1" cy="145.7" r="3.5"><title>joint_mc4nav_phema: probe 59.54, FID 71.0</title></circle>
-<circle class="fr-pt" cx="49.0" cy="228.3" r="3.5"><title>joint_pw4_cls: probe 49.12, FID 91.8</title></circle>
 <circle class="fr-pt" cx="100.6" cy="198.2" r="3.5"><title>joint_pw4_crop25: probe 51.28, FID 83.6</title></circle>
 <circle class="fr-pt" cx="74.3" cy="192.8" r="3.5"><title>joint_pw4_dec2: probe 50.18, FID 82.2</title></circle>
 <circle class="fr-pt" cx="74.3" cy="207.3" r="3.5"><title>joint_pw4_dec4: probe 50.18, FID 86.0</title></circle>
@@ -629,8 +629,6 @@ bibtex: |
 <circle class="fr-pt" cx="400.5" cy="134.2" r="3.5"><title>joint_r16_lnoise: probe 63.82, FID 68.5</title></circle>
 <circle class="fr-pt" cx="497.1" cy="129.5" r="3.5"><title>joint_r16_pd512: probe 67.86, FID 67.5</title></circle>
 <circle class="fr-pt" cx="501.9" cy="105.3" r="3.5"><title>joint_r16_wd0.2: probe 68.06, FID 62.6</title></circle>
-<circle class="fr-pt" cx="541.6" cy="504.7" r="3.5"><title>joint_r17_muon_tau1: probe 69.72, FID 217.1</title></circle>
-<circle class="fr-pt" cx="567.4" cy="536.8" r="3.5"><title>joint_r17_muon_tau1_s1: probe 70.80, FID 239.9</title></circle>
 <circle class="fr-pt" cx="468.4" cy="73.5" r="3.5"><title>joint_r18_prior_whole: probe 66.66, FID 56.7</title></circle>
 <circle class="fr-pt" cx="536.8" cy="85.2" r="3.5"><title>joint_r19_lc8: probe 69.52, FID 58.8</title></circle>
 <circle class="fr-pt" cx="532.5" cy="63.1" r="3.5"><title>joint_r19_lm3: probe 69.34, FID 54.9</title></circle>
@@ -705,14 +703,6 @@ bibtex: |
 <circle class="fr-pt" cx="585.6" cy="110.4" r="3.5"><title>joint_r36_tau1mix05_s1: probe 71.56, FID 63.6</title></circle>
 <circle class="fr-pt" cx="555.0" cy="103.2" r="3.5"><title>joint_r36_wgamma025: probe 70.28, FID 62.2</title></circle>
 <circle class="fr-pt" cx="564.5" cy="78.0" r="3.5"><title>joint_r36_wgamma025_s1: probe 70.68, FID 57.5</title></circle>
-<circle class="fr-pt" cx="-484.3" cy="198.6" r="3.5"><title>joint_r37_a0: probe 26.82, FID 83.7</title></circle>
-<circle class="fr-pt" cx="-502.5" cy="216.5" r="3.5"><title>joint_r37_a0_s1: probe 26.06, FID 88.5</title></circle>
-<circle class="fr-pt" cx="-470.0" cy="209.9" r="3.5"><title>joint_r37_a1: probe 27.42, FID 86.7</title></circle>
-<circle class="fr-pt" cx="-439.8" cy="198.6" r="3.5"><title>joint_r37_a1_s1: probe 28.68, FID 83.7</title></circle>
-<circle class="fr-pt" cx="-311.7" cy="208.8" r="3.5"><title>joint_r37_a2: probe 34.04, FID 86.4</title></circle>
-<circle class="fr-pt" cx="-303.5" cy="208.0" r="3.5"><title>joint_r37_a2_s1: probe 34.38, FID 86.2</title></circle>
-<circle class="fr-pt" cx="-145.7" cy="153.3" r="3.5"><title>joint_r37_a3: probe 40.98, FID 72.7</title></circle>
-<circle class="fr-pt" cx="-149.5" cy="162.5" r="3.5"><title>joint_r37_a3_s1: probe 40.82, FID 74.8</title></circle>
 <circle class="fr-pt" cx="568.3" cy="89.5" r="3.5"><title>joint_r37_b10_muonlr45: probe 70.84, FID 59.6</title></circle>
 <circle class="fr-pt" cx="567.9" cy="99.6" r="3.5"><title>joint_r37_b10_muonlr45_s1: probe 70.82, FID 61.5</title></circle>
 <circle class="fr-pt" cx="547.3" cy="93.8" r="3.5"><title>joint_r37_b1_jitter05: probe 69.96, FID 60.4</title></circle>
@@ -768,17 +758,7 @@ bibtex: |
 <circle class="fr-pt" cx="126.0" cy="189.2" r="3.5"><title>joint_ref_lm3: probe 52.34, FID 81.3</title></circle>
 <circle class="fr-pt" cx="144.6" cy="234.8" r="3.5"><title>joint_ref_lm4: probe 53.12, FID 93.7</title></circle>
 <circle class="fr-pt" cx="347.4" cy="227.2" r="3.5"><title>joint_ref_mc6_lw05: probe 61.60, FID 91.5</title></circle>
-<circle class="fr-pt" cx="-341.8" cy="357.8" r="3.5"><title>joint_ref_pcs05: probe 32.78, FID 137.4</title></circle>
-<circle class="fr-pt" cx="-345.6" cy="410.9" r="3.5"><title>joint_ref_pcs1: probe 32.62, FID 162.1</title></circle>
-<circle class="fr-pt" cx="62.8" cy="142.6" r="3.5"><title>joint_ref_pw8: probe 49.70, FID 70.3</title></circle>
 <circle class="fr-pt" cx="104.4" cy="180.0" r="3.5"><title>joint_ref_snap: probe 51.44, FID 79.0</title></circle>
-<circle class="fr-pt" cx="121.2" cy="410.9" r="3.5"><title>joint_ref_tau1: probe 52.14, FID 162.1</title></circle>
-<circle class="fr-pt" cx="141.3" cy="436.8" r="3.5"><title>joint_ref_tau1_s1: probe 52.98, FID 175.7</title></circle>
-<circle class="fr-pt" cx="126.0" cy="401.4" r="3.5"><title>joint_ref_tau1_snap: probe 52.34, FID 157.4</title></circle>
-<circle class="fr-pt" cx="-325.0" cy="304.2" r="3.5"><title>joint_rg_pcs05: probe 33.48, FID 116.3</title></circle>
-<circle class="fr-pt" cx="-341.8" cy="305.3" r="3.5"><title>joint_rg_pcs05_s1: probe 32.78, FID 116.7</title></circle>
-<circle class="fr-pt" cx="-329.8" cy="333.5" r="3.5"><title>joint_rg_pcs1: probe 33.28, FID 127.4</title></circle>
-<circle class="fr-pt" cx="-334.6" cy="330.5" r="3.5"><title>joint_rg_pcs1_s1: probe 33.08, FID 126.2</title></circle>
 <circle class="fr-pt" cx="347.9" cy="149.3" r="3.5"><title>joint_simp_ADE: probe 61.62, FID 71.8</title></circle>
 <circle class="fr-pt" cx="349.8" cy="141.6" r="3.5"><title>joint_simp_masknoise: probe 61.70, FID 70.1</title></circle>
 <circle class="fr-pt" cx="308.2" cy="210.6" r="3.5"><title>joint_simp_nobn: probe 59.96, FID 86.9</title></circle>
@@ -787,7 +767,6 @@ bibtex: |
 <circle class="fr-pt" cx="342.1" cy="131.4" r="3.5"><title>joint_simp_teachersample: probe 61.38, FID 67.9</title></circle>
 <circle class="fr-pt" cx="87.7" cy="226.1" r="3.5"><title>joint_stack_lr2e-3: probe 50.74, FID 91.2</title></circle>
 <circle class="fr-pt" cx="116.9" cy="212.8" r="3.5"><title>joint_stack_lr2e-3_s1: probe 51.96, FID 87.5</title></circle>
-<circle class="fr-pt" cx="53.3" cy="238.9" r="3.5"><title>joint_stack_lr3e-3: probe 49.30, FID 94.9</title></circle>
 <line class="fr-pair" x1="217.8" y1="189.6" x2="241.2" y2="210.3"/>
 <line class="fr-pair" x1="322.0" y1="226.9" x2="301.0" y2="154.7"/>
 <line class="fr-pair" x1="297.7" y1="120.3" x2="332.6" y2="128.5"/>
@@ -832,8 +811,8 @@ bibtex: |
 <text class="lab fr-lab" x="480.8" y="125.8" text-anchor="end">Muon</text>
 </svg></div>
 <div class="dem-media wide fr-set fr-adopted"><svg class="dem-svg dem-plane dem-front" viewBox="0 0 640 402" role="img" aria-labelledby="fr-t-adopted">
-<title id="fr-t-adopted">Linear probe against FID-5k without labels for the 171 20k-iteration runs with the adopted sampler. The dotted path follows successive records; the star marks DEM v2.</title>
-<defs><clipPath id="fr-clip-adopted"><rect x="70" y="20" width="550" height="320"/></clipPath></defs>
+<title id="fr-t-adopted">Linear probe against FID-5k without labels for the 171 20k-iteration runs with the adopted sampler, plus later records. The dotted path follows successive records; the star marks DEM v2.</title>
+<defs><clipPath id="fr-clip-adopted"><rect x="63" y="13" width="564" height="334"/></clipPath></defs>
 <line class="grid" x1="70.0" y1="20" x2="70.0" y2="340"/><text class="tick" x="70.0" y="362" text-anchor="middle">64</text>
 <line class="grid" x1="170.0" y1="20" x2="170.0" y2="340"/><text class="tick" x="170.0" y="362" text-anchor="middle">66</text>
 <line class="grid" x1="270.0" y1="20" x2="270.0" y2="340"/><text class="tick" x="270.0" y="362" text-anchor="middle">68</text>
@@ -849,7 +828,7 @@ bibtex: |
 <text class="ax" x="345.0" y="392" text-anchor="middle">Linear probe (%), higher is better</text>
 <text class="ax" transform="translate(16 180.0) rotate(-90)" text-anchor="middle">FID-5k without labels, lower is better</text>
 <g clip-path="url(#fr-clip-adopted)">
-<path class="fr-front" d="M497.0 47.1 L516.0 47.1 L516.0 74.9 L517.0 74.9 L517.0 78.3 L519.0 78.3 L519.0 91.8 L575.0 91.8 L575.0 138.5"/>
+<path class="fr-front" d="M391.0 33.9 L497.0 33.9 L497.0 47.1 L516.0 47.1 L516.0 74.9 L517.0 74.9 L517.0 78.3 L519.0 78.3 L519.0 91.8 L575.0 91.8 L575.0 138.5"/>
 <circle class="fr-pt" cx="442.0" cy="86.8" r="3.5"><title>joint_abl2_tau1: probe 71.44, FID 41.8</title></circle>
 <circle class="fr-pt" cx="261.0" cy="310.2" r="3.5"><title>joint_abl2_tau1_s1: probe 67.82, FID 57.5</title></circle>
 <circle class="fr-pt" cx="415.0" cy="125.9" r="3.5"><title>joint_abl3_tau1: probe 70.90, FID 44.2</title></circle>
@@ -859,7 +838,6 @@ bibtex: |
 <circle class="fr-pt" cx="298.0" cy="168.9" r="3.5"><title>joint_abl5_nopatch_s1: probe 68.56, FID 47.0</title></circle>
 <circle class="fr-pt" cx="354.0" cy="168.9" r="3.5"><title>joint_abl5_noviews: probe 69.68, FID 47.0</title></circle>
 <circle class="fr-pt" cx="370.0" cy="132.2" r="3.5"><title>joint_abl5_noviews_s1: probe 70.00, FID 44.6</title></circle>
-<circle class="fr-pt" cx="-1542.0" cy="841.8" r="3.5"><title>joint_abl5_pixgrad05: probe 31.76, FID 122.8</title></circle>
 <circle class="fr-pt" cx="422.0" cy="241.1" r="3.5"><title>joint_abl5_pxw2: probe 71.04, FID 52.1</title></circle>
 <circle class="fr-pt" cx="424.0" cy="224.8" r="3.5"><title>joint_abl5_pxw2_s1: probe 71.08, FID 50.9</title></circle>
 <circle class="fr-pt" cx="287.0" cy="90.1" r="3.5"><title>joint_abl5_pxw8: probe 68.34, FID 42.0</title></circle>
@@ -867,11 +845,9 @@ bibtex: |
 <circle class="fr-pt" cx="375.0" cy="155.4" r="3.5"><title>joint_abl5_viewprior: probe 70.10, FID 46.1</title></circle>
 <circle class="fr-pt" cx="366.0" cy="186.6" r="3.5"><title>joint_abl5_viewprior_s1: probe 69.92, FID 48.2</title></circle>
 <circle class="fr-pt" cx="118.0" cy="212.3" r="3.5"><title>joint_bt1_area10: probe 64.96, FID 50.0</title></circle>
-<circle class="fr-pt" cx="47.0" cy="242.4" r="3.5"><title>joint_cvpr_abl_adamw: probe 63.54, FID 52.2</title></circle>
 <circle class="fr-pt" cx="89.0" cy="222.0" r="3.5"><title>joint_cvpr_abl_adamw_s1: probe 64.38, FID 50.7</title></circle>
 <circle class="fr-pt" cx="282.0" cy="114.7" r="3.5"><title>joint_cvpr_abl_nopatch: probe 68.24, FID 43.5</title></circle>
 <circle class="fr-pt" cx="330.0" cy="155.4" r="3.5"><title>joint_cvpr_abl_nopatch_s1: probe 69.20, FID 46.1</title></circle>
-<circle class="fr-pt" cx="-1493.0" cy="797.0" r="3.5"><title>joint_cvpr_abl_pcs05: probe 32.74, FID 115.2</title></circle>
 <circle class="fr-pt" cx="390.0" cy="231.6" r="3.5"><title>joint_cvpr_abl_pxw2: probe 70.40, FID 51.4</title></circle>
 <circle class="fr-pt" cx="418.0" cy="216.5" r="3.5"><title>joint_cvpr_abl_pxw2_s1: probe 70.96, FID 50.3</title></circle>
 <circle class="fr-pt" cx="296.0" cy="85.1" r="3.5"><title>joint_cvpr_abl_pxw8: probe 68.52, FID 41.7</title></circle>
@@ -882,26 +858,16 @@ bibtex: |
 <circle class="fr-pt" cx="474.0" cy="186.6" r="3.5"><title>joint_cvpr_abl_stdviews_s1: probe 72.08, FID 48.2</title></circle>
 <circle class="fr-pt" cx="298.0" cy="231.6" r="3.5"><title>joint_cvpr_abl_viewprior: probe 68.56, FID 51.4</title></circle>
 <circle class="fr-pt" cx="346.0" cy="146.2" r="3.5"><title>joint_cvpr_abl_viewprior_s1: probe 69.52, FID 45.5</title></circle>
-<circle class="fr-pt" cx="-265.0" cy="224.8" r="3.5"><title>joint_cvpr_tc_all_lm0: probe 57.30, FID 50.9</title></circle>
-<circle class="fr-pt" cx="-287.0" cy="215.1" r="3.5"><title>joint_cvpr_tc_all_lm0_s1: probe 56.86, FID 50.2</title></circle>
 <circle class="fr-pt" cx="70.0" cy="186.6" r="3.5"><title>joint_cvpr_tc_all_lm1: probe 64.00, FID 48.2</title></circle>
 <circle class="fr-pt" cx="135.0" cy="186.6" r="3.5"><title>joint_cvpr_tc_all_lm1_s1: probe 65.30, FID 48.2</title></circle>
 <circle class="fr-pt" cx="385.0" cy="213.7" r="3.5"><title>joint_cvpr_tc_all_lm4: probe 70.30, FID 50.1</title></circle>
 <circle class="fr-pt" cx="396.0" cy="216.5" r="3.5"><title>joint_cvpr_tc_all_lm4_s1: probe 70.52, FID 50.3</title></circle>
-<circle class="fr-pt" cx="363.0" cy="1309.2" r="3.5"><title>joint_cvpr_tc_all_tau1: probe 69.86, FID 239.3</title></circle>
-<circle class="fr-pt" cx="397.0" cy="1251.9" r="3.5"><title>joint_cvpr_tc_all_tau1_s1: probe 70.54, FID 220.5</title></circle>
-<circle class="fr-pt" cx="-155.0" cy="208.1" r="3.5"><title>joint_cvpr_tc_all_unif: probe 59.50, FID 49.7</title></circle>
-<circle class="fr-pt" cx="-101.0" cy="189.5" r="3.5"><title>joint_cvpr_tc_all_unif_s1: probe 60.58, FID 48.4</title></circle>
-<circle class="fr-pt" cx="-311.0" cy="250.4" r="3.5"><title>joint_cvpr_tc_cond_lm0: probe 56.38, FID 52.8</title></circle>
-<circle class="fr-pt" cx="-219.0" cy="243.8" r="3.5"><title>joint_cvpr_tc_cond_lm0_s1: probe 58.22, FID 52.3</title></circle>
 <circle class="fr-pt" cx="72.0" cy="185.1" r="3.5"><title>joint_cvpr_tc_cond_lm1: probe 64.04, FID 48.1</title></circle>
 <circle class="fr-pt" cx="98.0" cy="174.9" r="3.5"><title>joint_cvpr_tc_cond_lm1_s1: probe 64.56, FID 47.4</title></circle>
 <circle class="fr-pt" cx="370.0" cy="146.2" r="3.5"><title>joint_cvpr_tc_cond_lm4: probe 70.00, FID 45.5</title></circle>
 <circle class="fr-pt" cx="365.0" cy="185.1" r="3.5"><title>joint_cvpr_tc_cond_lm4_s1: probe 69.90, FID 48.1</title></circle>
 <circle class="fr-pt" cx="362.0" cy="146.2" r="3.5"><title>joint_cvpr_tc_cond_tau1: probe 69.84, FID 45.5</title></circle>
 <circle class="fr-pt" cx="383.0" cy="171.9" r="3.5"><title>joint_cvpr_tc_cond_tau1_s1: probe 70.26, FID 47.2</title></circle>
-<circle class="fr-pt" cx="-109.0" cy="164.4" r="3.5"><title>joint_cvpr_tc_cond_unif: probe 60.42, FID 46.7</title></circle>
-<circle class="fr-pt" cx="-89.0" cy="189.5" r="3.5"><title>joint_cvpr_tc_cond_unif_s1: probe 60.82, FID 48.4</title></circle>
 <circle class="fr-pt" cx="258.0" cy="170.4" r="3.5"><title>joint_cvpr_tc_lm2: probe 67.76, FID 47.1</title></circle>
 <circle class="fr-pt" cx="326.0" cy="150.8" r="3.5"><title>joint_cvpr_tc_lm2_s1: probe 69.12, FID 45.8</title></circle>
 <circle class="fr-pt" cx="429.0" cy="237.0" r="3.5"><title>joint_r42_sn0_s1: probe 71.18, FID 51.8</title></circle>
@@ -917,20 +883,13 @@ bibtex: |
 <circle class="fr-pt" cx="294.0" cy="185.1" r="3.5"><title>joint_r45_cutmixmain: probe 68.48, FID 48.1</title></circle>
 <circle class="fr-pt" cx="270.0" cy="176.3" r="3.5"><title>joint_r45_cutmixmain_s1: probe 68.00, FID 47.5</title></circle>
 <circle class="fr-pt" cx="169.0" cy="231.6" r="3.5"><title>joint_r45_cutmixmain_tau1: probe 65.98, FID 51.4</title></circle>
-<circle class="fr-pt" cx="280.0" cy="465.8" r="3.5"><title>joint_r45_joint: probe 68.20, FID 71.8</title></circle>
 <circle class="fr-pt" cx="360.0" cy="141.6" r="3.5"><title>joint_r45_nlm3box1: probe 69.80, FID 45.2</title></circle>
-<circle class="fr-pt" cx="-269.0" cy="212.3" r="3.5"><title>joint_r45_nmap11: probe 57.22, FID 50.0</title></circle>
-<circle class="fr-pt" cx="-367.0" cy="279.0" r="3.5"><title>joint_r45_nmap22: probe 55.26, FID 55.0</title></circle>
-<circle class="fr-pt" cx="341.0" cy="1594.1" r="3.5"><title>joint_r45_pcond: probe 69.42, FID 359.4</title></circle>
 <circle class="fr-pt" cx="379.0" cy="189.5" r="3.5"><title>joint_r45_pxw3: probe 70.18, FID 48.4</title></circle>
 <circle class="fr-pt" cx="406.0" cy="133.8" r="3.5"><title>joint_r45_tbox: probe 70.72, FID 44.7</title></circle>
 <circle class="fr-pt" cx="433.0" cy="119.5" r="3.5"><title>joint_r45_tbox_lc8: probe 71.26, FID 43.8</title></circle>
 <circle class="fr-pt" cx="447.0" cy="164.4" r="3.5"><title>joint_r45_tbox_lc8_s1: probe 71.54, FID 46.7</title></circle>
 <circle class="fr-pt" cx="400.0" cy="158.4" r="3.5"><title>joint_r45_tbox_s1: probe 70.60, FID 46.3</title></circle>
 <circle class="fr-pt" cx="274.0" cy="222.0" r="3.5"><title>joint_r45_tclean: probe 68.08, FID 50.7</title></circle>
-<circle class="fr-pt" cx="-221.0" cy="231.6" r="3.5"><title>joint_r45_tilt11: probe 58.18, FID 51.4</title></circle>
-<circle class="fr-pt" cx="-314.0" cy="263.6" r="3.5"><title>joint_r45_tilt22: probe 56.32, FID 53.8</title></circle>
-<circle class="fr-pt" cx="45.0" cy="271.4" r="3.5"><title>joint_r46_boxpatch: probe 63.50, FID 54.4</title></circle>
 <circle class="fr-pt" cx="229.0" cy="186.6" r="3.5"><title>joint_r46n_area: probe 67.18, FID 48.2</title></circle>
 <circle class="fr-pt" cx="305.0" cy="140.0" r="3.5"><title>joint_r46n_light25: probe 68.70, FID 45.1</title></circle>
 <circle class="fr-pt" cx="158.0" cy="186.6" r="3.5"><title>joint_r46n_loc1: probe 65.76, FID 48.2</title></circle>
@@ -941,11 +900,9 @@ bibtex: |
 <circle class="fr-pt" cx="359.0" cy="138.5" r="3.5"><title>joint_r46n_patchtau1: probe 69.78, FID 45.0</title></circle>
 <circle class="fr-pt" cx="287.0" cy="182.2" r="3.5"><title>joint_r46n_std15: probe 68.34, FID 47.9</title></circle>
 <circle class="fr-pt" cx="348.0" cy="201.0" r="3.5"><title>joint_r46n_std20: probe 69.56, FID 49.2</title></circle>
-<circle class="fr-pt" cx="-82.0" cy="312.6" r="3.5"><title>joint_r47_ctw: probe 60.96, FID 57.7</title></circle>
 <circle class="fr-pt" cx="484.0" cy="105.0" r="3.5"><title>joint_r47_lc10: probe 72.28, FID 42.9</title></circle>
 <circle class="fr-pt" cx="456.0" cy="117.9" r="3.5"><title>joint_r47_plev: probe 71.72, FID 43.7</title></circle>
 <circle class="fr-pt" cx="379.0" cy="138.5" r="3.5"><title>joint_r48_blocklevels: probe 70.18, FID 45.0</title></circle>
-<circle class="fr-pt" cx="61.0" cy="233.0" r="3.5"><title>joint_r48_boxmask_adamw: probe 63.82, FID 51.5</title></circle>
 <circle class="fr-pt" cx="70.0" cy="230.3" r="3.5"><title>joint_r48_boxmask_adamw_s1: probe 64.00, FID 51.3</title></circle>
 <circle class="fr-pt" cx="401.0" cy="125.9" r="3.5"><title>joint_r49_copies2: probe 70.62, FID 44.2</title></circle>
 <circle class="fr-pt" cx="408.0" cy="114.7" r="3.5"><title>joint_r49_phema: probe 70.76, FID 43.5</title></circle>
@@ -963,43 +920,29 @@ bibtex: |
 <circle class="fr-pt" cx="371.0" cy="96.8" r="3.5"><title>joint_r51_s1b_s1: probe 70.02, FID 42.4</title></circle>
 <circle class="fr-pt" cx="363.0" cy="105.0" r="3.5"><title>joint_r51_s1d: probe 69.86, FID 42.9</title></circle>
 <circle class="fr-pt" cx="403.0" cy="88.4" r="3.5"><title>joint_r51_s1d_s1: probe 70.66, FID 41.9</title></circle>
-<circle class="fr-pt" cx="-764.0" cy="630.3" r="3.5"><title>joint_r51_stpix: probe 47.32, FID 90.8</title></circle>
-<circle class="fr-pt" cx="-686.0" cy="653.0" r="3.5"><title>joint_r51_stpix_s1: probe 48.88, FID 93.8</title></circle>
-<circle class="fr-pt" cx="67.0" cy="237.0" r="3.5"><title>joint_r52_nophot: probe 63.94, FID 51.8</title></circle>
 <circle class="fr-pt" cx="459.0" cy="73.2" r="3.5"><title>joint_r53_lc8_gnws: probe 71.78, FID 41.0</title></circle>
 <circle class="fr-pt" cx="468.0" cy="138.5" r="3.5"><title>joint_r53_lc8_s1d: probe 71.96, FID 45.0</title></circle>
 <circle class="fr-pt" cx="513.0" cy="127.5" r="3.5"><title>joint_r54_pixdual: probe 72.86, FID 44.3</title></circle>
 <circle class="fr-pt" cx="575.0" cy="138.5" r="3.5"><title>joint_r55_prior_uniform: probe 74.10, FID 45.0</title></circle>
 <circle class="fr-pt" cx="496.0" cy="105.0" r="3.5"><title>joint_r55_tauband08: probe 72.52, FID 42.9</title></circle>
-<circle class="fr-pt" cx="556.0" cy="528.3" r="3.5"><title>joint_r56_nullshare: probe 73.72, FID 78.5</title></circle>
 <circle class="fr-pt" cx="185.0" cy="146.2" r="3.5"><title>joint_r57a_mom998: probe 66.30, FID 45.5</title></circle>
 <circle class="fr-pt" cx="265.0" cy="122.7" r="3.5"><title>joint_r57a_mom998_s1: probe 67.90, FID 44.0</title></circle>
 <circle class="fr-pt" cx="396.0" cy="168.9" r="3.5"><title>joint_snapcand: probe 70.52, FID 47.0</title></circle>
 <circle class="fr-pt" cx="454.0" cy="138.5" r="3.5"><title>joint_snapcand_n1: probe 71.68, FID 45.0</title></circle>
 <circle class="fr-pt" cx="451.0" cy="171.9" r="3.5"><title>joint_snapcand_n1_s1: probe 71.62, FID 47.2</title></circle>
 <circle class="fr-pt" cx="464.0" cy="206.6" r="3.5"><title>joint_snapcand_s1: probe 71.88, FID 49.6</title></circle>
-<circle class="fr-pt" cx="-257.0" cy="242.4" r="3.5"><title>joint_tc5_all_lm0: probe 57.46, FID 52.2</title></circle>
-<circle class="fr-pt" cx="-184.0" cy="220.6" r="3.5"><title>joint_tc5_all_lm0_s1: probe 58.92, FID 50.6</title></circle>
 <circle class="fr-pt" cx="136.0" cy="165.9" r="3.5"><title>joint_tc5_all_lm1: probe 65.32, FID 46.8</title></circle>
 <circle class="fr-pt" cx="162.0" cy="182.2" r="3.5"><title>joint_tc5_all_lm1_s1: probe 65.84, FID 47.9</title></circle>
 <circle class="fr-pt" cx="369.0" cy="171.9" r="3.5"><title>joint_tc5_all_lm3: probe 69.98, FID 47.2</title></circle>
 <circle class="fr-pt" cx="395.0" cy="162.9" r="3.5"><title>joint_tc5_all_lm3_s1: probe 70.50, FID 46.6</title></circle>
 <circle class="fr-pt" cx="411.0" cy="246.4" r="3.5"><title>joint_tc5_all_lm4: probe 70.82, FID 52.5</title></circle>
 <circle class="fr-pt" cx="386.0" cy="291.7" r="3.5"><title>joint_tc5_all_lm4_s1: probe 70.32, FID 56.0</title></circle>
-<circle class="fr-pt" cx="385.0" cy="1314.7" r="3.5"><title>joint_tc5_all_tau1: probe 70.30, FID 241.2</title></circle>
-<circle class="fr-pt" cx="403.0" cy="1426.9" r="3.5"><title>joint_tc5_all_tau1_s1: probe 70.66, FID 283.1</title></circle>
-<circle class="fr-pt" cx="-79.0" cy="189.5" r="3.5"><title>joint_tc5_all_unif: probe 61.02, FID 48.4</title></circle>
-<circle class="fr-pt" cx="-41.0" cy="177.8" r="3.5"><title>joint_tc5_all_unif_s1: probe 61.78, FID 47.6</title></circle>
-<circle class="fr-pt" cx="-287.0" cy="284.1" r="3.5"><title>joint_tc5_cond_lm0: probe 56.86, FID 55.4</title></circle>
-<circle class="fr-pt" cx="-249.0" cy="235.7" r="3.5"><title>joint_tc5_cond_lm0_s1: probe 57.62, FID 51.7</title></circle>
 <circle class="fr-pt" cx="133.0" cy="230.3" r="3.5"><title>joint_tc5_cond_lm1: probe 65.26, FID 51.3</title></circle>
 <circle class="fr-pt" cx="153.0" cy="155.4" r="3.5"><title>joint_tc5_cond_lm1_s1: probe 65.66, FID 46.1</title></circle>
 <circle class="fr-pt" cx="366.0" cy="155.4" r="3.5"><title>joint_tc5_cond_lm4: probe 69.92, FID 46.1</title></circle>
 <circle class="fr-pt" cx="372.0" cy="174.9" r="3.5"><title>joint_tc5_cond_lm4_s1: probe 70.04, FID 47.4</title></circle>
 <circle class="fr-pt" cx="405.0" cy="147.7" r="3.5"><title>joint_tc5_cond_tau1: probe 70.70, FID 45.6</title></circle>
 <circle class="fr-pt" cx="383.0" cy="127.5" r="3.5"><title>joint_tc5_cond_tau1_s1: probe 70.26, FID 44.3</title></circle>
-<circle class="fr-pt" cx="-127.0" cy="202.4" r="3.5"><title>joint_tc5_cond_unif: probe 60.06, FID 49.3</title></circle>
-<circle class="fr-pt" cx="-91.0" cy="208.1" r="3.5"><title>joint_tc5_cond_unif_s1: probe 60.78, FID 49.7</title></circle>
 <circle class="fr-pt" cx="245.0" cy="182.2" r="3.5"><title>joint_tc5_lm2: probe 67.50, FID 47.9</title></circle>
 <circle class="fr-pt" cx="293.0" cy="185.1" r="3.5"><title>joint_tc5_lm2_s1: probe 68.46, FID 48.1</title></circle>
 <circle class="fr-pt" cx="402.0" cy="101.7" r="3.5"><title>joint_v2_patchtau1: probe 70.64, FID 42.7</title></circle>
@@ -1014,7 +957,8 @@ bibtex: |
 <line class="fr-pair" x1="488.0" y1="109.9" x2="460.0" y2="101.7"/>
 <line class="fr-pair" x1="516.0" y1="74.9" x2="517.0" y2="78.3"/>
 <line class="fr-pair" x1="497.0" y1="47.1" x2="519.0" y2="91.8"/>
-<path class="fr-path" d="M457.0 122.7 L487.0 107.4 L380.5 145.4 L396.5 103.3 L474.0 105.8 L516.5 76.6 L508.0 69.8"/>
+<line class="fr-pair" x1="391.0" y1="33.9" x2="414.0" y2="72.2"/>
+<path class="fr-path" d="M457.0 122.7 L487.0 107.4 L380.5 145.4 L396.5 103.3 L474.0 105.8 L516.5 76.6 L508.0 69.8 L402.5 53.3"/>
 <circle class="fr-rec" cx="465.0" cy="132.2" r="5"><title>eight local crops (joint_r45_lc8): probe 71.90, FID 44.6</title></circle>
 <circle class="fr-rec" cx="449.0" cy="113.1" r="5"><title>eight local crops (joint_r45_lc8_s1): probe 71.58, FID 43.4</title></circle>
 <circle class="fr-rec" cx="470.0" cy="105.0" r="5"><title>eight crops, no box (joint_snapcand_n1plain): probe 72.00, FID 42.9</title></circle>
@@ -1027,16 +971,20 @@ bibtex: |
 <circle class="fr-rec fail" cx="517.0" cy="78.3" r="5"><title>dual-level masks (joint_r53_lc8_s1d_dual_s1): probe 72.94, FID 41.3</title></circle>
 <circle class="fr-rec fail" cx="497.0" cy="47.1" r="5"><title>dual-level masks, no student pixels (joint_r54_nostpix): probe 72.54, FID 39.5</title></circle>
 <circle class="fr-rec fail" cx="519.0" cy="91.8" r="5"><title>dual-level masks, no student pixels (joint_r54_nostpix_s1): probe 72.98, FID 42.1</title></circle>
+<circle class="fr-rec" cx="391.0" cy="33.9" r="5"><title>pixel patch view (joint_r65_pixpatch4): probe 70.42, FID 38.76</title></circle>
+<circle class="fr-rec" cx="414.0" cy="72.2" r="5"><title>pixel patch view (joint_r65_pixpatch4_s1): probe 70.88, FID 40.94</title></circle>
 </g>
 <polygon class="fr-star" points="383.0,94.3 385.2,100.3 391.6,100.6 386.6,104.5 388.3,110.6 383.0,107.1 377.7,110.6 379.4,104.5 374.4,100.6 380.8,100.3"><title>DEM v2: probe 70.26, FID 42.8</title></polygon>
 <polygon class="fr-star" points="410.0,94.3 412.2,100.3 418.6,100.6 413.6,104.5 415.3,110.6 410.0,107.1 404.7,110.6 406.4,104.5 401.4,100.6 407.8,100.3"><title>DEM v2: probe 70.80, FID 42.8</title></polygon>
 <text class="lab lab-rep fr-lab" x="380.5" y="89.3" text-anchor="end">DEM v2</text>
-<text class="lab fr-lab" x="486.0" y="147.8" text-anchor="start">eight crops</text>
+<line class="fr-lead" x1="474.0" y1="105.8" x2="486.0" y2="135.8"/>
+<text class="lab fr-lab" x="488.0" y="149.8" text-anchor="start">eight crops</text>
+<text class="lab fr-lab" x="372.5" y="39.3" text-anchor="end">pixel patch view, 3 Nov</text>
 <text class="lab fr-lab" x="504.5" y="64.6" text-anchor="end">dual-level masks</text>
 </svg></div>
         <div class="fr-key" aria-hidden="true"><span><i class="k-pt"></i>other runs</span><span><i class="k-rec"></i>record runs, seeds joined</span><span class="fr-k-fail"><i class="k-fail"></i>record that failed at 100k</span><span><i class="k-path"></i>records in order</span><span><i class="k-front"></i>best trade-off</span></div>
         <figcaption class="fr-cap fr-cap-earlier">Each point is one 20k-iteration run, 253 with the earlier sampler (22 lie outside the plotted range). The star marks DEM on 20 October. FIDs from the two samplers do not compare.</figcaption>
-        <figcaption class="fr-cap fr-cap-adopted">Each point is one 20k-iteration run, 171 with the adopted sampler (36 lie outside the plotted range). The star marks snapshot v2 of 26 October. FIDs from the two samplers do not compare.</figcaption>
+        <figcaption class="fr-cap fr-cap-adopted">Each point is one 20k-iteration run, 171 with the adopted sampler (36 lie outside the plotted range), plus the pixel patch view record of 3 November, whose 100k check is running. The star marks snapshot v2 of 26 October. FIDs from the two samplers do not compare.</figcaption>
     </figure>
     <div class="table-wrap">
         <table>
@@ -1056,7 +1004,7 @@ bibtex: |
     <p class="caption">Selected records, two-seed means, 20k iterations, FID-5k without labels. The last two rows use the adopted sampler (guidance on an interval), which lowered the FID of the 20 October model from 59.4 to 46.1 without retraining.</p>
     <p><strong>Representation and generation mostly improve together.</strong> Across the 253 runs with the earlier sampler, a higher probe goes with a lower FID (Spearman −0.69), and across the 171 runs with the adopted sampler the correlation is −0.51. Single changes are less predictable. Among the 231 runs that modify a base configuration under the earlier sampler, the changes in the two metrics correlate at only −0.22.</p>
     <p><strong>A 20k record can fail at 100k.</strong> Eight local crops set a 20k record three times. On snapshot v2 they raised the two-seed probe from 70.53 to 72.08 at level FID. At 100k the run became unstable after 44k and finished at a probe of 75.54, below v2's 76.06. A 20k record now enters the model only after a 100k check.</p>
-    <p><strong>Generation may help the representation with training.</strong> At 20k, removing the pixel loss raises the probe from 70.53 to 72.93 (two seeds). At 100k the sign reverses, and without the pixel loss the probe reaches 71.44 against 75.66 for the matching DEM run. This is a single seed, so we treat it as a hypothesis until the second seed finishes.</p>
+    <p><strong>Generation may help the representation with training.</strong> At 20k, removing the pixel loss raises the probe from 70.53 to 72.93 (two seeds). At 100k the sign reverses, and without the pixel loss the probe reaches 71.44 against 75.66 for seed 0 of the matching DEM run (the Results numbers are two-seed means). This is a single seed, so we treat it as a hypothesis until the second seed finishes.</p>
 </section>
 
 <script>
