@@ -98,30 +98,46 @@ bibtex: |
     .dem-svg--phone { min-width: 0; max-width: 480px; margin: 0 auto; }
     .dem-svg--phone .lb { font-size: 13px; }
     .dem-svg--phone .net-t { font-size: 16px; }
-    /* Training and inference figures: pastel boxes with a 600-level outline. Blue is the network and its embeddings, violet the embedding denoiser, amber pixels, slate the teacher and noise. */
+    /* Method figures: one shared backbone (blue, layered) with two heads attached, the embedding denoiser (violet) and the pixel head (amber). Slate is the teacher, the target and noise. */
     main h3 { margin-block: 40px 8px; font-size: var(--text-lede); font-weight: 600; }
-    .dem-flow .bx { stroke-width: 1.5; }
-    .dem-flow .bx.rep { fill: var(--rep-f); stroke: var(--rep); } .dem-flow .bx.emb { fill: var(--emb-f); stroke: var(--emb); }
-    .dem-flow .bx.pix { fill: var(--pix-f); stroke: var(--pix); } .dem-flow .bx.sl { fill: var(--sl-f); stroke: var(--sl); }
-    .dem-flow .bx.dash, .dem-flow .ln.dash { stroke-dasharray: 5 4; }
-    .dem-flow .bt { font-size: 15px; font-weight: 600; fill: var(--text); }
-    .dem-flow .sm { font-size: 12px; fill: var(--muted); }
-    .dem-flow .strong { fill: var(--text); font-weight: 600; }
-    .dem-flow .hd { font-size: 14px; font-weight: 600; fill: var(--text); }
-    .dem-flow .role { font-size: 13px; font-weight: 600; }
-    .dem-flow .t-rep { fill: var(--rep); } .dem-flow .t-emb { fill: var(--emb); } .dem-flow .t-pix { fill: var(--pix); } .dem-flow .t-sl { fill: var(--sl); }
-    .dem-flow .ln.rep { stroke: var(--rep); } .dem-flow .ln.emb { stroke: var(--emb); } .dem-flow .ln.pix { stroke: var(--pix); } .dem-flow .ln.sl { stroke: var(--sl); }
-    .dem-flow .chip .cb { fill: var(--bg); stroke-width: 1.5; }
-    .dem-flow .chip.rep .cb { stroke: var(--rep); } .dem-flow .chip.rep .bars { fill: var(--rep); }
-    .dem-flow .chip.emb .cb { stroke: var(--emb); } .dem-flow .chip.emb .bars { fill: var(--emb); }
-    .dem-flow .chip.sl .cb { stroke: var(--sl); } .dem-flow .chip.sl .bars { fill: var(--sl); }
-    .dem-flow .chip.nz .cb { stroke-dasharray: 3 2; } .dem-flow .chip.nz .bars { fill: var(--nz1); }
-    .dem-flow .tf { fill: none; stroke-width: 2; } .dem-flow .tf.pix { stroke: var(--pix); }
-    .dem-flow .tf.void { fill: var(--surface); stroke: var(--sl); stroke-width: 1.5; stroke-dasharray: 4 3; }
-    .dem-flow .pl { fill: var(--bg); stroke: var(--sl); stroke-width: 1.5; } .dem-flow .pl-x { stroke: var(--sl); stroke-width: 1.5; }
-    .dem-flow .jn { fill: var(--sl); }
-    .dem-svg.dem-flow { min-width: 0; }
-    .dem-svg--phone.dem-flow .bt { font-size: 14px; }
+    .dem-svg.dem-bf { min-width: 0; }
+    .dem-bf image { image-rendering: pixelated; }
+    .dem-bf .bb { fill: var(--rep-f); stroke: var(--rep); stroke-width: 2; }
+    .dem-bf .lyr { fill: var(--rep); fill-opacity: 0.1; }
+    .dem-bf .bbt-bg { fill: var(--rep-f); }
+    .dem-bf .bbt { font-size: 16px; font-weight: 700; fill: var(--text); } .dem-bf .bbs { font-size: 13px; font-weight: 400; fill: var(--muted); }
+    .dem-bf .hd-b { stroke-width: 2; } .dem-bf .hd-b.emb { fill: var(--emb-f); stroke: var(--emb); } .dem-bf .hd-b.pix { fill: var(--pix-f); stroke: var(--pix); }
+    .dem-bf .hdt { font-size: 14px; font-weight: 700; }
+    .dem-bf .sm13 .hdt { font-size: 13px; } .dem-bf .l11b { font-size: 11px; font-weight: 600; fill: var(--text); }
+    .dem-bf .bx { stroke-width: 1.5; } .dem-bf .bx.emb { fill: var(--emb-f); stroke: var(--emb); } .dem-bf .bx.pix { fill: var(--pix-f); stroke: var(--pix); }
+    .dem-bf .bx.sl { fill: var(--sl-f); stroke: var(--sl); } .dem-bf .bx.dash, .dem-bf .ln.dash { stroke-dasharray: 5 4; }
+    .dem-bf .bt { font-size: 15px; font-weight: 600; fill: var(--text); }
+    .dem-bf .l12 { font-size: 12px; fill: var(--muted); } .dem-bf .l13 { font-size: 13px; fill: var(--muted); }
+    .dem-bf .l13b, .dem-bf .l12b { font-size: 13px; font-weight: 600; fill: var(--text); } .dem-bf .l12b { font-size: 12px; }
+    .dem-bf .role { font-size: 13px; font-weight: 600; } .dem-bf .cls { font-size: 16px; font-weight: 700; fill: var(--text); }
+    .dem-bf .t-rep { fill: var(--rep); } .dem-bf .t-emb { fill: var(--emb); } .dem-bf .t-pix { fill: var(--pix); } .dem-bf .t-sl { fill: var(--sl); }
+    .dem-bf .ln { fill: none; stroke-width: 2; }
+    .dem-bf .ln.rep { stroke: var(--rep); } .dem-bf .ln.emb { stroke: var(--emb); } .dem-bf .ln.pix { stroke: var(--pix); } .dem-bf .ln.sl { stroke: var(--sl); }
+    .dem-bf .chip .cb { fill: var(--bg); stroke-width: 1.5; }
+    .dem-bf .chip.rep .cb { stroke: var(--rep); } .dem-bf .chip.rep .bars { fill: var(--rep); }
+    .dem-bf .chip.emb .cb { stroke: var(--emb); } .dem-bf .chip.emb .bars { fill: var(--emb); }
+    .dem-bf .chip.sl .cb { stroke: var(--sl); } .dem-bf .chip.sl .bars { fill: var(--sl); }
+    .dem-bf .nvec .cb { fill: var(--bg); stroke: var(--sl); stroke-width: 1.5; stroke-dasharray: 3 2; } .dem-bf .nvec .cells rect { fill: var(--sl); }
+    .dem-bf .tl { fill: none; stroke: var(--border); stroke-width: 1; }
+    .dem-bf .void { fill: var(--surface); stroke: var(--sl); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    .dem-bf .pbg { fill: var(--bg); } .dem-bf .pl1 { font-size: 13px; font-weight: 700; }
+    .dem-bf .pl { fill: var(--bg); stroke: var(--sl); stroke-width: 1.5; } .dem-bf .pl-x { stroke: var(--sl); stroke-width: 1.5; } .dem-bf .jn { fill: var(--sl); }
+    .dem-bf .bdg.emb { fill: var(--emb); } .dem-bf .bdg.pix { fill: var(--pix); } .dem-bf .bdg-t { font-size: 12px; font-weight: 700; fill: var(--bg); }
+    /* Button states: .u parts dim outside their tasks, .v parts show only in theirs, and the used head gets a heavier outline. */
+    .dem-bf .u { transition: opacity 0.25s; }
+    @media (prefers-reduced-motion: reduce) { .dem-bf .u { transition: none; } }
+    .dem-btnfig[data-task="emb"] .u:not(.on-emb), .dem-btnfig[data-task="pix"] .u:not(.on-pix), .dem-btnfig[data-task="rep"] .u:not(.on-rep),
+    .dem-btnfig[data-task="gen"] .u:not(.on-gen), .dem-btnfig[data-task="cmp"] .u:not(.on-cmp) { opacity: 0.14; }
+    .dem-btnfig[data-task="rep"] .v:not(.in-rep), .dem-btnfig[data-task="gen"] .v:not(.in-gen), .dem-btnfig[data-task="cmp"] .v:not(.in-cmp) { display: none; }
+    .dem-btnfig[data-task="emb"] .head.on-emb .hd-b, .dem-btnfig[data-task="pix"] .head.on-pix .hd-b,
+    .dem-btnfig[data-task="gen"] .head.on-gen .hd-b, .dem-btnfig[data-task="cmp"] .head.on-cmp .hd-b { stroke-width: 3; }
+    .dem-btns { margin-block: 0 16px; }
+    .dem-task-text { min-height: 3em; }
     /* Noise-map views: one column per view, its noise map above it. */
     .dem-views { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; max-width: 680px; margin: 0 auto; }
     .dem-view { margin: 0; text-align: center; font-size: var(--text-caption); line-height: 1.3; }
@@ -168,254 +184,76 @@ bibtex: |
 
 <section id="method">
     <h2>A diffusion model at two levels</h2>
-    <p>DEM generates the representation and the image separately, within one network and with one denoising objective. In representation space, it denoises the embedding of an image given another view of the same image. In pixel space, it generates the image that this embedding describes. Training and inference use the network in different ways, so we show them apart.</p>
+    <p>DEM generates the representation and the image separately, within one network and with one denoising objective. In representation space, it denoises the embedding of an image given another view of the same image. In pixel space, it generates the image that this embedding describes. The network is one shared backbone, a Transformer, with two small heads on it. The embedding denoiser works at the embedding level, and the pixel head works at the pixel level.</p>
     <h3>Training</h3>
-    <p>Each training step takes three views of one image. The teacher, an exponential moving average (EMA) of the network, embeds a clean view into the target embedding. At the embedding level, the network embeds the student's view, and a small embedding denoiser recovers the target from a noisy copy of it (loss 1). At the pixel level, the same network denoises a noisy copy of the image, given the target embedding (loss 2).</p>
-    <figure class="dem-fig" id="dem-train">
-        <div class="dem-media wide only-desk"><svg class="dem-svg dem-flow" viewBox="0 0 860 420" role="img" aria-labelledby="tr-t">
-<title id="tr-t">One training step. Three views of one image. The teacher, an EMA copy of the network, embeds the clean view into the target embedding. Embedding level: the network embeds the student view, and the embedding denoiser takes this student embedding and a noisy copy of the target embedding and predicts the target (loss 1). Pixel level: the network takes a noisy copy of the image, given the target embedding, and predicts the clean image (loss 2). Both network boxes are the same network.</title>
-<defs><marker id="ah-tr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
-<text class="sm strong" x="8" y="22" text-anchor="start">Three views of one image</text>
-<image href="view_all.webp" x="28" y="48" width="64" height="64" preserveAspectRatio="none"/>
-<text class="role t-rep" x="60" y="130" text-anchor="middle">student sees</text>
-<text class="sm" x="60" y="146" text-anchor="middle">noise and a mask</text>
-<image href="view_clean.webp" x="28" y="178" width="64" height="64" preserveAspectRatio="none"/>
-<text class="role t-sl" x="60" y="260" text-anchor="middle">teacher sees</text>
-<text class="sm" x="60" y="276" text-anchor="middle">clean view</text>
-<image href="view_noise.webp" x="28" y="308" width="64" height="64" preserveAspectRatio="none"/>
-<text class="role t-pix" x="60" y="390" text-anchor="middle">pixel pass sees</text>
-<text class="sm" x="60" y="406" text-anchor="middle">noisy image</text>
-<path class="ln rep" d="M96 80H148" marker-end="url(#ah-tr)"/>
-<path class="ln sl" d="M96 210H148" marker-end="url(#ah-tr)"/>
-<path class="ln pix" d="M96 340H148" marker-end="url(#ah-tr)"/>
-<rect class="bx rep" x="150" y="54" width="140" height="52" rx="6"/><text class="bt" x="220.0" y="78.0" text-anchor="middle">Network</text><text class="sm" x="220.0" y="95.0" text-anchor="middle">shared weights</text>
-<rect class="bx sl dash" x="150" y="186" width="140" height="48" rx="6"/><text class="bt" x="220.0" y="208.0" text-anchor="middle">Teacher</text><text class="sm" x="220.0" y="225.0" text-anchor="middle">copy of the network</text>
-<rect class="bx rep" x="150" y="314" width="140" height="52" rx="6"/><text class="bt" x="220.0" y="338.0" text-anchor="middle">Network</text><text class="sm" x="220.0" y="355.0" text-anchor="middle">shared weights</text>
-<path class="ln sl dash" d="M220 106V184" marker-end="url(#ah-tr)"/>
-<text class="sm" x="228" y="149.0" text-anchor="start">EMA</text>
-<path class="ln rep" d="M290 80H322" marker-end="url(#ah-tr)"/>
-<g class="chip rep"><rect class="cb" x="324.0" y="66.0" width="52" height="28"/><g class="bars"><rect x="329.0" y="74.0" width="6" height="16.0"/><rect x="338.0" y="78.0" width="6" height="12.0"/><rect x="347.0" y="72.0" width="6" height="18.0"/><rect x="356.0" y="80.0" width="6" height="10.0"/><rect x="365.0" y="75.0" width="6" height="15.0"/></g></g>
-<text class="sm" x="350" y="114" text-anchor="middle">student embedding</text>
-<path class="ln rep" d="M376 80H428" marker-end="url(#ah-tr)"/>
-<rect class="bx emb" x="430" y="54" width="130" height="52" rx="6"/><text class="bt" x="495.0" y="77.0" text-anchor="middle">Embedding</text><text class="bt" x="495.0" y="94.0" text-anchor="middle">denoiser</text>
-<path class="ln emb" d="M560 80H592" marker-end="url(#ah-tr)"/>
-<g class="chip emb"><rect class="cb" x="594.0" y="66.0" width="52" height="28"/><g class="bars"><rect x="599.0" y="74.0" width="6" height="16.0"/><rect x="608.0" y="78.0" width="6" height="12.0"/><rect x="617.0" y="72.0" width="6" height="18.0"/><rect x="626.0" y="80.0" width="6" height="10.0"/><rect x="635.0" y="75.0" width="6" height="15.0"/></g></g>
-<text class="sm" x="620" y="114" text-anchor="middle">predicted embedding</text>
-<path class="ln emb" d="M646 80H698" marker-end="url(#ah-tr)"/>
-<rect class="bx emb" x="700" y="58" width="140" height="44" rx="6"/><text class="bt t-emb" x="770.0" y="78.0" text-anchor="middle">Loss 1</text><text class="sm" x="770.0" y="94.0" text-anchor="middle">embedding level</text>
-<path class="ln sl" d="M290 210H322" marker-end="url(#ah-tr)"/>
-<g class="chip sl"><rect class="cb" x="324.0" y="196.0" width="52" height="28"/><g class="bars"><rect x="329.0" y="204.0" width="6" height="16.0"/><rect x="338.0" y="208.0" width="6" height="12.0"/><rect x="347.0" y="202.0" width="6" height="18.0"/><rect x="356.0" y="210.0" width="6" height="10.0"/><rect x="365.0" y="205.0" width="6" height="15.0"/></g></g>
-<text class="sm strong" x="350" y="188" text-anchor="middle">target embedding</text>
-<path class="ln sl" d="M376 210H495"/>
-<circle class="jn" cx="495" cy="210" r="3"/>
-<path class="ln sl" d="M495 210V189" marker-end="url(#ah-tr)"/>
-<circle class="pl" cx="495" cy="178" r="10"/><path class="pl-x" d="M490 178H500M495 173V183"/>
-<text class="sm" x="511" y="182" text-anchor="start">+ noise</text>
-<path class="ln sl" d="M495 168V154" marker-end="url(#ah-tr)"/>
-<g class="chip nz sl"><rect class="cb" x="469.0" y="124.0" width="52" height="28"/><g class="bars"><rect x="474.0" y="139.0" width="6" height="9.0"/><rect x="483.0" y="131.0" width="6" height="17.0"/><rect x="492.0" y="142.0" width="6" height="6.0"/><rect x="501.0" y="134.0" width="6" height="14.0"/><rect x="510.0" y="137.0" width="6" height="11.0"/></g></g>
-<text class="sm" x="529" y="143" text-anchor="start">noisy embedding</text>
-<path class="ln emb" d="M495 124V108" marker-end="url(#ah-tr)"/>
-<path class="ln sl dash" d="M495 210H770"/>
-<path class="ln sl dash" d="M770 210V104" marker-end="url(#ah-tr)"/>
-<text class="sm" x="762" y="202" text-anchor="end">target</text>
-<path class="ln sl" d="M350 224V284H220"/>
-<path class="ln sl" d="M220 284V312" marker-end="url(#ah-tr)"/>
-<text class="sm" x="358" y="274" text-anchor="start">given to the pixel pass</text>
-<path class="ln pix" d="M290 340H586" marker-end="url(#ah-tr)"/>
-<image href="view_clean.webp" x="588" y="308" width="64" height="64" preserveAspectRatio="none"/><rect class="tf pix" x="588" y="308" width="64" height="64"/>
-<text class="sm" x="620" y="390" text-anchor="middle">predicted image</text>
-<path class="ln pix" d="M652 340H698" marker-end="url(#ah-tr)"/>
-<rect class="bx pix" x="700" y="318" width="140" height="44" rx="6"/><text class="bt t-pix" x="770.0" y="338.0" text-anchor="middle">Loss 2</text><text class="sm" x="770.0" y="354.0" text-anchor="middle">pixel level</text>
-<text class="sm" x="770" y="380" text-anchor="middle">against the clean image</text>
+    <p>Each training step takes three views of one image. The teacher, an exponential moving average (EMA) of the network, embeds a clean view into the target. At the embedding level, the backbone reads the student view, and the embedding denoiser recovers the target from a noisy copy of it (loss 1). At the pixel level, the backbone reads a noisy copy of the image with the target as its condition, and the pixel head predicts the image (loss 2).</p>
+    <figure class="dem-fig dem-btnfig" id="dem-train">
+        <div class="tabs dem-btns" role="group" aria-label="Training levels" hidden>
+            <button type="button" class="btn" data-task="" aria-pressed="true">Both levels</button>
+            <button type="button" class="btn" data-task="emb" aria-pressed="false">Embedding level</button>
+            <button type="button" class="btn" data-task="pix" aria-pressed="false">Pixel level</button>
+        </div>
+        <div class="dem-media wide only-desk"><svg class="dem-svg dem-bf" viewBox="0 0 880 392" role="img" aria-labelledby="tb-t">
+<title id="tb-t">One training step. One shared backbone carries two heads: an embedding denoiser and a pixel head. The teacher, an EMA copy of the network, embeds a clean view into the target. Embedding level: the backbone reads the student view, and the embedding denoiser recovers the target from a noisy copy of it (loss 1). Pixel level: the backbone reads a noisy image with the target as its condition, and the pixel head predicts the image (loss 2).</title>
+<defs><marker id="ah-tb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker><clipPath id="rt-ah-tb" clipPathUnits="objectBoundingBox"><rect width="1" height="1" rx="0.09"/></clipPath></defs>
+<g class="u on-emb on-pix"><image href="view_clean.webp" x="28.0" y="24.0" width="64" height="64" preserveAspectRatio="none" clip-path="url(#rt-ah-tb)"/><rect class="tl" x="28.0" y="24.0" width="64" height="64" rx="5.8"/><text class="role t-sl" x="60" y="106" text-anchor="middle">teacher sees</text><text class="l12" x="60" y="120" text-anchor="middle">clean view</text><path class="ln sl" d="M94 56H138" marker-end="url(#ah-tb)"/><rect class="bx sl dash" x="140" y="34" width="140" height="44" rx="7"/><text class="bt" x="210" y="54" text-anchor="middle">Teacher</text><text class="l12" x="210" y="70" text-anchor="middle">EMA copy</text><path class="ln sl" d="M280 56H360" marker-end="url(#ah-tb)"/><g class="chip sl"><rect class="cb" x="362.0" y="42.0" width="56" height="28" rx="4"/><g class="bars"><rect x="366.0" y="49.0" width="6.4" height="16.0"/><rect x="376.4" y="53.0" width="6.4" height="12.0"/><rect x="386.8" y="47.0" width="6.4" height="18.0"/><rect x="397.2" y="55.0" width="6.4" height="10.0"/><rect x="407.6" y="50.0" width="6.4" height="15.0"/></g></g><text class="l13b" x="390" y="34" text-anchor="middle">target</text><path class="ln sl dash" d="M345 128V100H210V80" marker-end="url(#ah-tb)"/><text class="l12" x="218" y="94" text-anchor="start">EMA</text></g>
+<g class="u on-emb"><path class="ln sl" d="M418 56H530"/><circle class="jn" cx="530" cy="56" r="3"/><path class="ln sl" d="M530 56V86" marker-end="url(#ah-tb)"/><circle class="pl" cx="530" cy="96" r="9"/><path class="pl-x" d="M525.5 96H534.5M530 91.5V100.5"/><g class="nvec"><rect class="cb" x="572.0" y="88.0" width="56" height="16" rx="3"/><g class="cells"><rect x="574.0" y="90.0" width="5.5" height="12" fill-opacity="0.33"/><rect x="580.5" y="90.0" width="5.5" height="12" fill-opacity="0.56"/><rect x="587.0" y="90.0" width="5.5" height="12" fill-opacity="0.43"/><rect x="593.5" y="90.0" width="5.5" height="12" fill-opacity="0.60"/><rect x="600.0" y="90.0" width="5.5" height="12" fill-opacity="0.62"/><rect x="606.5" y="90.0" width="5.5" height="12" fill-opacity="0.20"/><rect x="613.0" y="90.0" width="5.5" height="12" fill-opacity="0.16"/><rect x="619.5" y="90.0" width="5.5" height="12" fill-opacity="0.78"/></g></g><path class="ln sl" d="M572 96H541" marker-end="url(#ah-tb)"/><text class="l12" x="600" y="80" text-anchor="middle">noise</text><path class="ln emb" d="M530 105V148" marker-end="url(#ah-tb)"/><text class="l13b" x="540" y="132" text-anchor="start">noisy target</text><path class="ln sl dash" d="M530 56H750"/><path class="ln sl dash" d="M750 56V162" marker-end="url(#ah-tb)"/><image href="view_all.webp" x="28.0" y="144.0" width="64" height="64" preserveAspectRatio="none" clip-path="url(#rt-ah-tb)"/><rect class="tl" x="28.0" y="144.0" width="64" height="64" rx="5.8"/><text class="role t-rep" x="60" y="226" text-anchor="middle">student sees</text><text class="l12" x="60" y="240" text-anchor="middle">noise and a mask</text><path class="ln rep" d="M94 176H328" marker-end="url(#ah-tb)"/><path class="ln emb" d="M590 176H620" marker-end="url(#ah-tb)"/><g class="chip rep"><rect class="cb" x="622.0" y="162.0" width="56" height="28" rx="4"/><g class="bars"><rect x="626.0" y="169.0" width="6.4" height="16.0"/><rect x="636.4" y="173.0" width="6.4" height="12.0"/><rect x="646.8" y="167.0" width="6.4" height="18.0"/><rect x="657.2" y="175.0" width="6.4" height="10.0"/><rect x="667.6" y="170.0" width="6.4" height="15.0"/></g></g><text class="l13b" x="650" y="218" text-anchor="middle">predicted target</text><path class="ln sl dash" d="M678 176H720"/><rect class="pbg" x="720.0" y="164" width="60" height="24" rx="12"/><rect class="bx emb" x="720.0" y="164" width="60" height="24" rx="12"/><text class="pl1 t-emb" x="750" y="180.5" text-anchor="middle">loss 1</text></g>
+<g class="u on-pix"><path class="ln pix" d="M390 70V128" marker-end="url(#ah-tb)"/><text class="l12" x="398" y="114" text-anchor="start">pixel condition</text><image href="view_noise.webp" x="28.0" y="284.0" width="64" height="64" preserveAspectRatio="none" clip-path="url(#rt-ah-tb)"/><rect class="tl" x="28.0" y="284.0" width="64" height="64" rx="5.8"/><text class="role t-pix" x="60" y="366" text-anchor="middle">pixel pass sees</text><text class="l12" x="60" y="380" text-anchor="middle">noisy image</text><path class="ln pix" d="M94 316H328" marker-end="url(#ah-tb)"/><path class="ln pix" d="M590 316H616" marker-end="url(#ah-tb)"/><image href="tile_view.webp" x="618.0" y="284.0" width="64" height="64" preserveAspectRatio="none" clip-path="url(#rt-ah-tb)"/><rect class="tl" x="618.0" y="284.0" width="64" height="64" rx="5.8"/><text class="l13" x="650" y="366" text-anchor="middle">predicted image</text><path class="ln sl dash" d="M682 316H720"/><rect class="pbg" x="720.0" y="304" width="60" height="24" rx="12"/><rect class="bx pix" x="720.0" y="304" width="60" height="24" rx="12"/><text class="pl1 t-pix" x="750" y="320.5" text-anchor="middle">loss 2</text><path class="ln sl dash" d="M780 316H798"/><image href="tile_view.webp" x="798.0" y="284.0" width="64" height="64" preserveAspectRatio="none" clip-path="url(#rt-ah-tb)"/><rect class="tl" x="798.0" y="284.0" width="64" height="64" rx="5.8"/><text class="l13" x="830" y="366" text-anchor="middle">image</text></g>
+<g class="u on-emb head"><rect class="hd-b emb" x="468" y="150" width="122" height="52" rx="7"/><text class="hdt t-emb" x="529.0" y="174.0" text-anchor="middle">Embedding</text><text class="hdt t-emb" x="529.0" y="190.0" text-anchor="middle">denoiser</text></g>
+<g class="u on-pix head"><rect class="hd-b pix" x="468" y="290" width="122" height="52" rx="7"/><text class="hdt t-pix" x="529.0" y="321.0" text-anchor="middle">Pixel head</text></g>
+<g class="bbg"><rect class="bb" x="330" y="130" width="140" height="232" rx="10"/><rect class="lyr" x="342.0" y="138" width="18.0" height="216" rx="3"/><rect class="lyr" x="366.0" y="138" width="18.0" height="216" rx="3"/><rect class="lyr" x="390.0" y="138" width="18.0" height="216" rx="3"/><rect class="lyr" x="414.0" y="138" width="18.0" height="216" rx="3"/><rect class="lyr" x="438.0" y="138" width="18.0" height="216" rx="3"/><rect class="pbg" x="350.0" y="224.0" width="100" height="42" rx="6"/><rect class="bbt-bg" x="350.0" y="224.0" width="100" height="42" rx="6"/><text class="bbt" x="400.0" y="244.0" text-anchor="middle">Backbone</text><text class="bbs" x="400.0" y="260.0" text-anchor="middle">(shared)</text></g>
 </svg></div>
-        <div class="dem-media wide only-phone"><svg class="dem-svg dem-svg--phone dem-flow" viewBox="0 0 360 664" role="img" aria-labelledby="trp-t">
-<title id="trp-t">One training step, in three parts. The teacher, an EMA copy of the network, embeds the clean view into the target embedding. Embedding level: the network embeds the student view, and the embedding denoiser takes this student embedding and a noisy copy of the target embedding and predicts the target (loss 1). Pixel level: the network takes a noisy copy of the image, given the target embedding, and predicts the clean image (loss 2). Both network boxes are the same network.</title>
-<defs><marker id="ah-trp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
-<text class="hd t-sl" x="4" y="16" text-anchor="start">The teacher makes the target</text>
-<image href="view_clean.webp" x="8" y="38" width="48" height="48" preserveAspectRatio="none"/>
-<text class="role t-sl" x="8" y="104" text-anchor="start">teacher sees</text>
-<text class="sm" x="8" y="119" text-anchor="start">clean view</text>
-<path class="ln sl" d="M60 62H98" marker-end="url(#ah-trp)"/>
-<rect class="bx sl dash" x="100" y="38" width="120" height="48" rx="6"/><text class="bt" x="160.0" y="60.0" text-anchor="middle">Teacher</text><text class="sm" x="160.0" y="77.0" text-anchor="middle">EMA copy</text>
-<path class="ln sl" d="M220 62H262" marker-end="url(#ah-trp)"/>
-<g class="chip sl"><rect class="cb" x="264.0" y="48.0" width="52" height="28"/><g class="bars"><rect x="269.0" y="56.0" width="6" height="16.0"/><rect x="278.0" y="60.0" width="6" height="12.0"/><rect x="287.0" y="54.0" width="6" height="18.0"/><rect x="296.0" y="62.0" width="6" height="10.0"/><rect x="305.0" y="57.0" width="6" height="15.0"/></g></g>
-<text class="sm strong" x="290" y="96" text-anchor="middle">target embedding</text>
-<line class="grid" x1="0" x2="360" y1="138" y2="138"/>
-<text class="hd t-emb" x="4" y="162" text-anchor="start">Embedding level, loss 1</text>
-<image href="view_all.webp" x="8" y="182" width="48" height="48" preserveAspectRatio="none"/>
-<text class="role t-rep" x="8" y="248" text-anchor="start">student sees</text>
-<text class="sm" x="8" y="263" text-anchor="start">noise and a mask</text>
-<path class="ln rep" d="M60 206H98" marker-end="url(#ah-trp)"/>
-<rect class="bx rep" x="100" y="182" width="120" height="48" rx="6"/><text class="bt" x="160.0" y="204.0" text-anchor="middle">Network</text><text class="sm" x="160.0" y="221.0" text-anchor="middle">shared weights</text>
-<path class="ln rep" d="M220 206H262" marker-end="url(#ah-trp)"/>
-<g class="chip rep"><rect class="cb" x="264.0" y="192.0" width="52" height="28"/><g class="bars"><rect x="269.0" y="200.0" width="6" height="16.0"/><rect x="278.0" y="204.0" width="6" height="12.0"/><rect x="287.0" y="198.0" width="6" height="18.0"/><rect x="296.0" y="206.0" width="6" height="10.0"/><rect x="305.0" y="201.0" width="6" height="15.0"/></g></g>
-<text class="sm" x="290" y="184" text-anchor="middle">student embedding</text>
-<path class="ln rep" d="M290 220V272" marker-end="url(#ah-trp)"/>
-<g class="chip sl"><rect class="cb" x="8.0" y="284.0" width="52" height="28"/><g class="bars"><rect x="13.0" y="292.0" width="6" height="16.0"/><rect x="22.0" y="296.0" width="6" height="12.0"/><rect x="31.0" y="290.0" width="6" height="18.0"/><rect x="40.0" y="298.0" width="6" height="10.0"/><rect x="49.0" y="293.0" width="6" height="15.0"/></g></g>
-<text class="sm" x="34" y="328" text-anchor="middle">target</text>
-<text class="sm" x="34" y="342" text-anchor="middle">embedding</text>
-<path class="ln sl" d="M60 298H80" marker-end="url(#ah-trp)"/>
-<circle class="pl" cx="92" cy="298" r="10"/><path class="pl-x" d="M87 298H97M92 293V303"/>
-<text class="sm" x="92" y="280" text-anchor="middle">+ noise</text>
-<path class="ln sl" d="M102 298H126" marker-end="url(#ah-trp)"/>
-<g class="chip nz sl"><rect class="cb" x="128.0" y="284.0" width="52" height="28"/><g class="bars"><rect x="133.0" y="299.0" width="6" height="9.0"/><rect x="142.0" y="291.0" width="6" height="17.0"/><rect x="151.0" y="302.0" width="6" height="6.0"/><rect x="160.0" y="294.0" width="6" height="14.0"/><rect x="169.0" y="297.0" width="6" height="11.0"/></g></g>
-<text class="sm" x="154" y="328" text-anchor="middle">noisy embedding</text>
-<path class="ln emb" d="M180 298H234" marker-end="url(#ah-trp)"/>
-<rect class="bx emb" x="236" y="274" width="108" height="48" rx="6"/><text class="bt" x="290.0" y="295.0" text-anchor="middle">Embedding</text><text class="bt" x="290.0" y="312.0" text-anchor="middle">denoiser</text>
-<path class="ln emb" d="M290 322V348" marker-end="url(#ah-trp)"/>
-<g class="chip emb"><rect class="cb" x="264.0" y="350.0" width="52" height="28"/><g class="bars"><rect x="269.0" y="358.0" width="6" height="16.0"/><rect x="278.0" y="362.0" width="6" height="12.0"/><rect x="287.0" y="356.0" width="6" height="18.0"/><rect x="296.0" y="364.0" width="6" height="10.0"/><rect x="305.0" y="359.0" width="6" height="15.0"/></g></g>
-<text class="sm" x="256" y="369" text-anchor="end">predicted embedding</text>
-<path class="ln emb" d="M290 378V398" marker-end="url(#ah-trp)"/>
-<rect class="bx emb" x="200" y="400" width="156" height="42" rx="6"/><text class="bt t-emb" x="278.0" y="419.0" text-anchor="middle">Loss 1</text><text class="sm" x="278.0" y="435.0" text-anchor="middle">against the target</text>
-<line class="grid" x1="0" x2="360" y1="466" y2="466"/>
-<text class="hd t-pix" x="4" y="490" text-anchor="start">Pixel level, loss 2</text>
-<image href="view_noise.webp" x="8" y="510" width="48" height="48" preserveAspectRatio="none"/>
-<text class="role t-pix" x="8" y="576" text-anchor="start">pixel pass sees</text>
-<text class="sm" x="8" y="591" text-anchor="start">noisy image</text>
-<path class="ln pix" d="M60 534H98" marker-end="url(#ah-trp)"/>
-<rect class="bx rep" x="100" y="510" width="120" height="48" rx="6"/><text class="bt" x="160.0" y="532.0" text-anchor="middle">Network</text><text class="sm" x="160.0" y="549.0" text-anchor="middle">shared weights</text>
-<g class="chip sl"><rect class="cb" x="134.0" y="596.0" width="52" height="28"/><g class="bars"><rect x="139.0" y="604.0" width="6" height="16.0"/><rect x="148.0" y="608.0" width="6" height="12.0"/><rect x="157.0" y="602.0" width="6" height="18.0"/><rect x="166.0" y="610.0" width="6" height="10.0"/><rect x="175.0" y="605.0" width="6" height="15.0"/></g></g>
-<path class="ln sl" d="M160 596V560" marker-end="url(#ah-trp)"/>
-<text class="sm" x="160" y="640" text-anchor="middle">target embedding</text>
-<path class="ln pix" d="M220 534H262" marker-end="url(#ah-trp)"/>
-<image href="view_clean.webp" x="264" y="510" width="48" height="48" preserveAspectRatio="none"/><rect class="tf pix" x="264" y="510" width="48" height="48"/>
-<text class="sm" x="288" y="504" text-anchor="middle">predicted image</text>
-<path class="ln pix" d="M288 558V582" marker-end="url(#ah-trp)"/>
-<rect class="bx pix" x="200" y="584" width="156" height="42" rx="6"/><text class="bt t-pix" x="278.0" y="603.0" text-anchor="middle">Loss 2</text><text class="sm" x="278.0" y="619.0" text-anchor="middle">against the clean image</text>
+        <div class="dem-media wide only-phone"><svg class="dem-svg dem-svg--phone dem-bf" viewBox="0 0 360 530" role="img" aria-labelledby="tp-t">
+<title id="tp-t">One training step. One shared backbone carries two heads: an embedding denoiser and a pixel head. The teacher, an EMA copy of the network, embeds a clean view into the target. Embedding level: the backbone reads the student view, and the embedding denoiser recovers the target from a noisy copy of it (loss 1). Pixel level: the backbone reads a noisy image with the target as its condition, and the pixel head predicts the image (loss 2).</title>
+<defs><marker id="ah-tp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker><clipPath id="rt-ah-tp" clipPathUnits="objectBoundingBox"><rect width="1" height="1" rx="0.09"/></clipPath></defs>
+<g class="u on-emb on-pix"><image href="view_clean.webp" x="8.0" y="16.0" width="48" height="48" preserveAspectRatio="none" clip-path="url(#rt-ah-tp)"/><rect class="tl" x="8.0" y="16.0" width="48" height="48" rx="4.3"/><text class="role t-sl" x="4" y="80" text-anchor="start">teacher sees</text><text class="l12" x="4" y="94" text-anchor="start">clean view</text><path class="ln sl" d="M58 40H68" marker-end="url(#ah-tp)"/><rect class="bx sl dash" x="70" y="18" width="96" height="44" rx="7"/><text class="bt" x="118" y="38" text-anchor="middle">Teacher</text><text class="l12" x="118" y="54" text-anchor="middle">EMA copy</text><path class="ln sl" d="M166 40H184" marker-end="url(#ah-tp)"/><g class="chip sl"><rect class="cb" x="188.0" y="27.0" width="52" height="26" rx="4"/><g class="bars"><rect x="192.0" y="33.8" width="5.6" height="14.2"/><rect x="201.6" y="37.3" width="5.6" height="10.7"/><rect x="211.2" y="32.0" width="5.6" height="16.0"/><rect x="220.8" y="39.1" width="5.6" height="8.9"/><rect x="230.4" y="34.7" width="5.6" height="13.3"/></g></g><text class="l13b" x="214" y="18" text-anchor="middle">target</text></g>
+<g class="u on-emb"><path class="ln sl" d="M240 40H350"/><path class="ln sl" d="M350 40V81" marker-end="url(#ah-tp)"/><circle class="pl" cx="350" cy="92" r="9"/><path class="pl-x" d="M345.5 92H354.5M350 87.5V96.5"/><text class="l12" x="336" y="96" text-anchor="end">+ noise</text><path class="ln emb" d="M350 101V284H336" marker-end="url(#ah-tp)"/><text class="l11b" transform="translate(347 236) rotate(-90)" text-anchor="middle">noisy target</text><image href="view_all.webp" x="276.0" y="108.0" width="48" height="48" preserveAspectRatio="none" clip-path="url(#rt-ah-tp)"/><rect class="tl" x="276.0" y="108.0" width="48" height="48" rx="4.3"/><text class="role t-rep" x="270" y="128" text-anchor="end">student</text><text class="l12" x="270" y="143" text-anchor="end">noise and mask</text><path class="ln rep" d="M300 158V198" marker-end="url(#ah-tp)"/><path class="ln emb" d="M255 306V334" marker-end="url(#ah-tp)"/><g class="chip rep"><rect class="cb" x="229.0" y="335.0" width="52" height="26" rx="4"/><g class="bars"><rect x="233.0" y="341.8" width="5.6" height="14.2"/><rect x="242.6" y="345.3" width="5.6" height="10.7"/><rect x="252.2" y="340.0" width="5.6" height="16.0"/><rect x="261.8" y="347.1" width="5.6" height="8.9"/><rect x="271.4" y="342.7" width="5.6" height="13.3"/></g></g><text class="l13b" x="255" y="378" text-anchor="middle">predicted target</text><path class="ln sl dash" d="M255 386V404"/><rect class="pbg" x="225.0" y="404" width="60" height="24" rx="12"/><rect class="bx emb" x="225.0" y="404" width="60" height="24" rx="12"/><text class="pl1 t-emb" x="255" y="420.5" text-anchor="middle">loss 1</text><path class="ln sl dash" d="M255 428V444"/><g class="chip sl"><rect class="cb" x="229.0" y="445.0" width="52" height="26" rx="4"/><g class="bars"><rect x="233.0" y="451.8" width="5.6" height="14.2"/><rect x="242.6" y="455.3" width="5.6" height="10.7"/><rect x="252.2" y="450.0" width="5.6" height="16.0"/><rect x="261.8" y="457.1" width="5.6" height="8.9"/><rect x="271.4" y="452.7" width="5.6" height="13.3"/></g></g><text class="l13b" x="255" y="488" text-anchor="middle">target</text></g>
+<g class="u on-pix"><path class="ln pix" d="M214 54V70H172V198" marker-end="url(#ah-tp)"/><text class="l12" x="166" y="104" text-anchor="end">pixel condition</text><image href="view_noise.webp" x="10.0" y="108.0" width="48" height="48" preserveAspectRatio="none" clip-path="url(#rt-ah-tp)"/><rect class="tl" x="10.0" y="108.0" width="48" height="48" rx="4.3"/><text class="role t-pix" x="64" y="128" text-anchor="start">pixel pass</text><text class="l12" x="64" y="143" text-anchor="start">noisy image</text><path class="ln pix" d="M34 158V198" marker-end="url(#ah-tp)"/><path class="ln pix" d="M85 306V330" marker-end="url(#ah-tp)"/><image href="tile_view.webp" x="61.0" y="332.0" width="48" height="48" preserveAspectRatio="none" clip-path="url(#rt-ah-tp)"/><rect class="tl" x="61.0" y="332.0" width="48" height="48" rx="4.3"/><text class="l13" x="85" y="396" text-anchor="middle">predicted image</text><path class="ln sl dash" d="M85 404V410"/><rect class="pbg" x="55.0" y="410" width="60" height="24" rx="12"/><rect class="bx pix" x="55.0" y="410" width="60" height="24" rx="12"/><text class="pl1 t-pix" x="85" y="426.5" text-anchor="middle">loss 2</text><path class="ln sl dash" d="M85 434V454"/><image href="tile_view.webp" x="61.0" y="456.0" width="48" height="48" preserveAspectRatio="none" clip-path="url(#rt-ah-tp)"/><rect class="tl" x="61.0" y="456.0" width="48" height="48" rx="4.3"/><text class="l13" x="85" y="520" text-anchor="middle">image</text></g>
+<g class="u on-emb sm13 head"><rect class="hd-b emb" x="178" y="260" width="156" height="46" rx="7"/><text class="hdt t-emb" x="256.0" y="288.0" text-anchor="middle">Embedding denoiser</text></g>
+<g class="u on-pix head"><rect class="hd-b pix" x="10" y="260" width="156" height="46" rx="7"/><text class="hdt t-pix" x="88.0" y="288.0" text-anchor="middle">Pixel head</text></g>
+<g class="bbg"><rect class="bb" x="10" y="200" width="324" height="62" rx="10"/><rect class="lyr" x="22.0" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="55.8" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="89.6" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="123.3" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="157.1" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="190.9" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="224.7" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="258.4" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="292.2" y="208" width="27.8" height="46" rx="3"/><rect class="pbg" x="92.0" y="217" width="160" height="26" rx="6"/><rect class="bbt-bg" x="92.0" y="217" width="160" height="26" rx="6"/><text class="bbt" x="172.0" y="236" text-anchor="middle">Backbone <tspan class="bbs">(shared)</tspan></text></g>
 </svg></div>
-        <figcaption>One network serves both losses, and the teacher supplies the target embedding for both.</figcaption>
+        <figcaption class="dem-task-text" aria-live="polite">One step trains both levels on one backbone, and the teacher supplies the target for both.</figcaption>
     </figure>
     <h3>Inference</h3>
-    <p>After training, the teacher is no longer used. The network embeds an image as its representation. To generate without labels, the model first samples an embedding from noise with no view, and then draws the pixels given that embedding. Given only a crop, it samples several embeddings that fit the crop and draws one image for each.</p>
-    <figure class="dem-fig" id="dem-infer">
-        <div class="dem-media wide only-desk"><svg class="dem-svg dem-flow" viewBox="0 0 880 440" role="img" aria-labelledby="in-t">
-<title id="in-t">Three uses of the trained model, with no teacher. Represent: an image goes through the network to its representation, read by a linear probe or k-NN. Generate without labels: with no view, the embedding denoiser turns noise into a sampled embedding, and then the network, as a pixel denoiser, turns pixel noise into an image given that embedding. Complete a crop: the network embeds the crop, the embedding denoiser samples several embeddings given it, and the network draws one image for each.</title>
-<defs><marker id="ah-in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
-<text class="hd" x="8" y="48" text-anchor="start">Represent</text>
-<text class="sm" x="8" y="66" text-anchor="start">an image</text>
-<image href="tile_view.webp" x="142" y="24" width="56" height="56" preserveAspectRatio="none"/>
-<path class="ln rep" d="M198 52H230" marker-end="url(#ah-in)"/>
-<rect class="bx rep" x="232" y="28" width="100" height="48" rx="6"/><text class="bt" x="282.0" y="57.0" text-anchor="middle">Network</text>
-<path class="ln rep" d="M332 52H357" marker-end="url(#ah-in)"/>
-<g class="chip rep"><rect class="cb" x="359.0" y="38.0" width="52" height="28"/><g class="bars"><rect x="364.0" y="46.0" width="6" height="16.0"/><rect x="373.0" y="50.0" width="6" height="12.0"/><rect x="382.0" y="44.0" width="6" height="18.0"/><rect x="391.0" y="52.0" width="6" height="10.0"/><rect x="400.0" y="47.0" width="6" height="15.0"/></g></g>
-<text class="sm" x="385" y="86" text-anchor="middle">representation</text>
-<path class="ln rep" d="M411 52H438" marker-end="url(#ah-in)"/>
-<rect class="bx sl" x="440" y="28" width="120" height="48" rx="6"/><text class="bt" x="500.0" y="50.0" text-anchor="middle">Linear probe</text><text class="sm" x="500.0" y="67.0" text-anchor="middle">or k-NN</text>
-<path class="ln sl" d="M560 52H585" marker-end="url(#ah-in)"/>
-<text class="lb strong" x="589" y="57" text-anchor="start">class</text>
-<line class="grid" x1="0" x2="880" y1="106" y2="106"/>
-<text class="hd" x="8" y="192" text-anchor="start">Generate</text>
-<text class="sm" x="8" y="210" text-anchor="start">without labels</text>
-<rect class="tf void" x="142" y="168" width="56" height="56"/>
-<text class="sm" x="170" y="201" text-anchor="middle">no view</text>
-<path class="ln sl dash" d="M198 196H438" marker-end="url(#ah-in)"/>
-<text class="sm" x="509.0" y="163" text-anchor="start">+ noise</text>
-<path class="ln sl" d="M500.0 150V168" marker-end="url(#ah-in)"/>
-<rect class="bx emb" x="440" y="170" width="120" height="52" rx="6"/><text class="bt" x="500.0" y="193.0" text-anchor="middle">Embedding</text><text class="bt" x="500.0" y="210.0" text-anchor="middle">denoiser</text>
-<text class="sm t-emb strong" x="500.0" y="142" text-anchor="middle">1. sample an embedding</text>
-<path class="ln emb" d="M560 196H587" marker-end="url(#ah-in)"/>
-<g class="chip emb"><rect class="cb" x="589.0" y="182.0" width="52" height="28"/><g class="bars"><rect x="594.0" y="190.0" width="6" height="16.0"/><rect x="603.0" y="194.0" width="6" height="12.0"/><rect x="612.0" y="188.0" width="6" height="18.0"/><rect x="621.0" y="196.0" width="6" height="10.0"/><rect x="630.0" y="191.0" width="6" height="15.0"/></g></g>
-<text class="sm" x="615" y="228" text-anchor="middle">sampled</text>
-<text class="sm" x="615" y="242" text-anchor="middle">embedding</text>
-<path class="ln emb" d="M641 196H670" marker-end="url(#ah-in)"/>
-<text class="sm" x="731.0" y="163" text-anchor="start">+ noise</text>
-<path class="ln sl" d="M722.0 150V168" marker-end="url(#ah-in)"/>
-<rect class="bx rep" x="672" y="170" width="100" height="52" rx="6"/><text class="bt" x="722.0" y="194.0" text-anchor="middle">Network</text><text class="sm" x="722.0" y="211.0" text-anchor="middle">pixel pass</text>
-<text class="sm t-pix strong" x="722.0" y="142" text-anchor="middle">2. draw its pixels</text>
-<path class="ln pix" d="M772 196H800" marker-end="url(#ah-in)"/>
-<image href="tile_sample.webp" x="802" y="168" width="56" height="56" preserveAspectRatio="none"/><rect class="tf pix" x="802" y="168" width="56" height="56"/>
-<text class="sm" x="830" y="240" text-anchor="middle">image</text>
-<line class="grid" x1="0" x2="880" y1="262" y2="262"/>
-<text class="hd" x="8" y="342" text-anchor="start">Complete</text>
-<text class="sm" x="8" y="360" text-anchor="start">a crop</text>
-<svg x="142" y="318" width="56" height="56" viewBox="0 0 128 128"><image href="completion.webp" width="668" height="392"/></svg>
-<path class="ln rep" d="M198 346H230" marker-end="url(#ah-in)"/>
-<rect class="bx rep" x="232" y="322" width="100" height="48" rx="6"/><text class="bt" x="282.0" y="351.0" text-anchor="middle">Network</text>
-<path class="ln rep" d="M332 346H357" marker-end="url(#ah-in)"/>
-<g class="chip rep"><rect class="cb" x="359.0" y="332.0" width="52" height="28"/><g class="bars"><rect x="364.0" y="340.0" width="6" height="16.0"/><rect x="373.0" y="344.0" width="6" height="12.0"/><rect x="382.0" y="338.0" width="6" height="18.0"/><rect x="391.0" y="346.0" width="6" height="10.0"/><rect x="400.0" y="341.0" width="6" height="15.0"/></g></g>
-<text class="sm" x="385" y="380" text-anchor="middle">crop embedding</text>
-<path class="ln rep" d="M411 346H438" marker-end="url(#ah-in)"/>
-<text class="sm" x="509.0" y="313" text-anchor="start">+ noise</text>
-<path class="ln sl" d="M500.0 300V318" marker-end="url(#ah-in)"/>
-<rect class="bx emb" x="440" y="320" width="120" height="52" rx="6"/><text class="bt" x="500.0" y="343.0" text-anchor="middle">Embedding</text><text class="bt" x="500.0" y="360.0" text-anchor="middle">denoiser</text>
-<text class="sm" x="500.0" y="390" text-anchor="middle">given the crop</text>
-<path class="ln emb" d="M560 346H581" marker-end="url(#ah-in)"/>
-<g class="chip emb"><rect class="cb" x="595.0" y="324.0" width="52" height="28"/><g class="bars"><rect x="600.0" y="332.0" width="6" height="16.0"/><rect x="609.0" y="336.0" width="6" height="12.0"/><rect x="618.0" y="330.0" width="6" height="18.0"/><rect x="627.0" y="338.0" width="6" height="10.0"/><rect x="636.0" y="333.0" width="6" height="15.0"/></g></g>
-<g class="chip emb"><rect class="cb" x="589.0" y="332.0" width="52" height="28"/><g class="bars"><rect x="594.0" y="340.0" width="6" height="16.0"/><rect x="603.0" y="344.0" width="6" height="12.0"/><rect x="612.0" y="338.0" width="6" height="18.0"/><rect x="621.0" y="346.0" width="6" height="10.0"/><rect x="630.0" y="341.0" width="6" height="15.0"/></g></g>
-<g class="chip emb"><rect class="cb" x="583.0" y="340.0" width="52" height="28"/><g class="bars"><rect x="588.0" y="348.0" width="6" height="16.0"/><rect x="597.0" y="352.0" width="6" height="12.0"/><rect x="606.0" y="346.0" width="6" height="18.0"/><rect x="615.0" y="354.0" width="6" height="10.0"/><rect x="624.0" y="349.0" width="6" height="15.0"/></g></g>
-<text class="sm" x="615" y="386" text-anchor="middle">several sampled</text>
-<text class="sm" x="615" y="400" text-anchor="middle">embeddings</text>
-<path class="ln emb" d="M645 346H670" marker-end="url(#ah-in)"/>
-<text class="sm" x="731.0" y="313" text-anchor="start">+ noise</text>
-<path class="ln sl" d="M722.0 300V318" marker-end="url(#ah-in)"/>
-<rect class="bx rep" x="672" y="320" width="100" height="52" rx="6"/><text class="bt" x="722.0" y="344.0" text-anchor="middle">Network</text><text class="sm" x="722.0" y="361.0" text-anchor="middle">pixel pass</text>
-<text class="sm" x="722.0" y="390" text-anchor="middle">one image each</text>
-<path class="ln pix" d="M772 346H792" marker-end="url(#ah-in)"/>
-<svg x="810" y="326" width="56" height="56" viewBox="408 0 128 128"><image href="completion.webp" width="668" height="392"/></svg><rect class="tf pix" x="810" y="326" width="56" height="56"/>
-<svg x="802" y="318" width="56" height="56" viewBox="276 0 128 128"><image href="completion.webp" width="668" height="392"/></svg><rect class="tf pix" x="802" y="318" width="56" height="56"/>
-<svg x="794" y="310" width="56" height="56" viewBox="144 0 128 128"><image href="completion.webp" width="668" height="392"/></svg><rect class="tf pix" x="794" y="310" width="56" height="56"/>
-<text class="sm" x="830" y="396" text-anchor="middle">several images</text>
+    <p>After training, the teacher is no longer used. The backbone's features of an image are its embedding, the representation, and no head is needed. To generate without labels, the embedding denoiser first samples an embedding from noise with no view, and the backbone and pixel head then draw the image given it. Given only a crop, the embedding denoiser samples several embeddings that fit the crop, and the pixel head draws one image for each.</p>
+    <figure class="dem-fig dem-btnfig" id="dem-infer" data-task="gen">
+        <div class="tabs dem-btns" role="group" aria-label="Uses of the trained model" hidden>
+            <button type="button" class="btn" data-task="rep" aria-pressed="false">Represent</button>
+            <button type="button" class="btn" data-task="gen" aria-pressed="true">Generate</button>
+            <button type="button" class="btn" data-task="cmp" aria-pressed="false">Complete a crop</button>
+        </div>
+        <div class="dem-media wide only-desk"><svg class="dem-svg dem-bf" viewBox="0 0 880 392" role="img" aria-labelledby="ib-t">
+<title id="ib-t">Three uses of the trained model, on the same backbone and heads. Represent: the backbone's features of an image are its embedding, read by a linear probe or k-NN, with no head. Generate: with no view, the embedding denoiser samples an embedding from noise, then the backbone and pixel head draw an image given it. Complete a crop: given the crop, the embedding denoiser samples several embeddings, and each becomes an image.</title>
+<defs><marker id="ah-ib" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker><clipPath id="rt-ah-ib" clipPathUnits="objectBoundingBox"><rect width="1" height="1" rx="0.09"/></clipPath></defs>
+<g class="v in-rep"><image href="tile_view.webp" x="28.0" y="144.0" width="64" height="64" preserveAspectRatio="none" clip-path="url(#rt-ah-ib)"/><rect class="tl" x="28.0" y="144.0" width="64" height="64" rx="5.8"/><text class="l13b" x="60" y="226" text-anchor="middle">image</text><path class="ln rep" d="M94 176H328" marker-end="url(#ah-ib)"/></g>
+<g class="v in-gen"><rect class="void" x="28.0" y="144.0" width="64" height="64" rx="5.8"/><text class="l13b" x="60" y="226" text-anchor="middle">no view</text></g>
+<g class="v in-cmp"><image href="dog_crop.webp" x="28.0" y="144.0" width="64" height="64" preserveAspectRatio="none" clip-path="url(#rt-ah-ib)"/><rect class="tl" x="28.0" y="144.0" width="64" height="64" rx="5.8"/><text class="l13b" x="60" y="226" text-anchor="middle">crop</text><path class="ln rep" d="M94 176H328" marker-end="url(#ah-ib)"/></g>
+<g class="v in-gen in-cmp"><image href="noise.webp" x="28.0" y="284.0" width="64" height="64" preserveAspectRatio="none" clip-path="url(#rt-ah-ib)"/><rect class="tl" x="28.0" y="284.0" width="64" height="64" rx="5.8"/><text class="l13" x="60" y="366" text-anchor="middle">pixel noise</text><path class="ln pix" d="M94 316H328" marker-end="url(#ah-ib)"/><g class="nvec"><rect class="cb" x="502.0" y="232.0" width="56" height="16" rx="3"/><g class="cells"><rect x="504.0" y="234.0" width="5.5" height="12" fill-opacity="0.33"/><rect x="510.5" y="234.0" width="5.5" height="12" fill-opacity="0.56"/><rect x="517.0" y="234.0" width="5.5" height="12" fill-opacity="0.43"/><rect x="523.5" y="234.0" width="5.5" height="12" fill-opacity="0.60"/><rect x="530.0" y="234.0" width="5.5" height="12" fill-opacity="0.62"/><rect x="536.5" y="234.0" width="5.5" height="12" fill-opacity="0.20"/><rect x="543.0" y="234.0" width="5.5" height="12" fill-opacity="0.16"/><rect x="549.5" y="234.0" width="5.5" height="12" fill-opacity="0.78"/></g></g><path class="ln sl" d="M530 230V204" marker-end="url(#ah-ib)"/><text class="l12" x="564" y="244" text-anchor="start">noise</text><path class="ln pix" d="M590 316H616" marker-end="url(#ah-ib)"/><text class="l12" x="398" y="114" text-anchor="start">pixel condition</text></g>
+<g class="v in-rep"><path class="ln rep" d="M470 246H620" marker-end="url(#ah-ib)"/><g class="chip rep"><rect class="cb" x="622.0" y="232.0" width="56" height="28" rx="4"/><g class="bars"><rect x="626.0" y="239.0" width="6.4" height="16.0"/><rect x="636.4" y="243.0" width="6.4" height="12.0"/><rect x="646.8" y="237.0" width="6.4" height="18.0"/><rect x="657.2" y="245.0" width="6.4" height="10.0"/><rect x="667.6" y="240.0" width="6.4" height="15.0"/></g></g><text class="l13b" x="650" y="278" text-anchor="middle">embedding</text><path class="ln sl" d="M680 246H724" marker-end="url(#ah-ib)"/><text class="l12" x="703" y="236" text-anchor="middle">probe</text><text class="cls" x="730" y="252" text-anchor="start">class</text><text class="l12" x="730" y="270" text-anchor="start">linear probe or k-NN</text></g>
+<g class="v in-gen"><path class="ln emb" d="M590 176H620" marker-end="url(#ah-ib)"/><g class="chip emb"><rect class="cb" x="622.0" y="162.0" width="56" height="28" rx="4"/><g class="bars"><rect x="626.0" y="169.0" width="6.4" height="16.0"/><rect x="636.4" y="173.0" width="6.4" height="12.0"/><rect x="646.8" y="167.0" width="6.4" height="18.0"/><rect x="657.2" y="175.0" width="6.4" height="10.0"/><rect x="667.6" y="170.0" width="6.4" height="15.0"/></g></g><text class="l13b" x="650" y="218" text-anchor="middle">sampled embedding</text><path class="ln emb" d="M650 160V100H390V128" marker-end="url(#ah-ib)"/><image href="gen_sample.webp" x="618.0" y="284.0" width="64" height="64" preserveAspectRatio="none" clip-path="url(#rt-ah-ib)"/><rect class="tl" x="618.0" y="284.0" width="64" height="64" rx="5.8"/><text class="l13" x="650" y="366" text-anchor="middle">generated image</text></g>
+<g class="v in-cmp"><path class="ln emb" d="M590 176H614" marker-end="url(#ah-ib)"/><g class="chip emb"><rect class="cb" x="628.0" y="155.0" width="56" height="28" rx="4"/><g class="bars"><rect x="632.0" y="162.0" width="6.4" height="16.0"/><rect x="642.4" y="166.0" width="6.4" height="12.0"/><rect x="652.8" y="160.0" width="6.4" height="18.0"/><rect x="663.2" y="168.0" width="6.4" height="10.0"/><rect x="673.6" y="163.0" width="6.4" height="15.0"/></g></g><g class="chip emb"><rect class="cb" x="622.0" y="162.0" width="56" height="28" rx="4"/><g class="bars"><rect x="626.0" y="169.0" width="6.4" height="16.0"/><rect x="636.4" y="173.0" width="6.4" height="12.0"/><rect x="646.8" y="167.0" width="6.4" height="18.0"/><rect x="657.2" y="175.0" width="6.4" height="10.0"/><rect x="667.6" y="170.0" width="6.4" height="15.0"/></g></g><g class="chip emb"><rect class="cb" x="616.0" y="169.0" width="56" height="28" rx="4"/><g class="bars"><rect x="620.0" y="176.0" width="6.4" height="16.0"/><rect x="630.4" y="180.0" width="6.4" height="12.0"/><rect x="640.8" y="174.0" width="6.4" height="18.0"/><rect x="651.2" y="182.0" width="6.4" height="10.0"/><rect x="661.6" y="177.0" width="6.4" height="15.0"/></g></g><text class="l13b" x="650" y="218" text-anchor="middle">sampled embeddings</text><path class="ln emb" d="M656 153V100H390V128" marker-end="url(#ah-ib)"/><text class="l12" x="664" y="92" text-anchor="start">one at a time</text><image href="dog_done1.webp" x="618.0" y="284.0" width="64" height="64" preserveAspectRatio="none" clip-path="url(#rt-ah-ib)"/><rect class="tl" x="618.0" y="284.0" width="64" height="64" rx="5.8"/><image href="dog_done2.webp" x="698.0" y="284.0" width="64" height="64" preserveAspectRatio="none" clip-path="url(#rt-ah-ib)"/><rect class="tl" x="698.0" y="284.0" width="64" height="64" rx="5.8"/><image href="dog_done3.webp" x="778.0" y="284.0" width="64" height="64" preserveAspectRatio="none" clip-path="url(#rt-ah-ib)"/><rect class="tl" x="778.0" y="284.0" width="64" height="64" rx="5.8"/><text class="l13" x="730" y="366" text-anchor="middle">generated completions</text></g>
+<g class="u on-gen on-cmp head"><rect class="hd-b emb" x="468" y="150" width="122" height="52" rx="7"/><text class="hdt t-emb" x="529.0" y="174.0" text-anchor="middle">Embedding</text><text class="hdt t-emb" x="529.0" y="190.0" text-anchor="middle">denoiser</text></g>
+<g class="u on-gen on-cmp head"><rect class="hd-b pix" x="468" y="290" width="122" height="52" rx="7"/><text class="hdt t-pix" x="529.0" y="321.0" text-anchor="middle">Pixel head</text></g>
+<g class="bbg"><rect class="bb" x="330" y="130" width="140" height="232" rx="10"/><rect class="lyr" x="342.0" y="138" width="18.0" height="216" rx="3"/><rect class="lyr" x="366.0" y="138" width="18.0" height="216" rx="3"/><rect class="lyr" x="390.0" y="138" width="18.0" height="216" rx="3"/><rect class="lyr" x="414.0" y="138" width="18.0" height="216" rx="3"/><rect class="lyr" x="438.0" y="138" width="18.0" height="216" rx="3"/><rect class="pbg" x="350.0" y="224.0" width="100" height="42" rx="6"/><rect class="bbt-bg" x="350.0" y="224.0" width="100" height="42" rx="6"/><text class="bbt" x="400.0" y="244.0" text-anchor="middle">Backbone</text><text class="bbs" x="400.0" y="260.0" text-anchor="middle">(shared)</text></g>
+<g class="v in-gen in-cmp"><circle class="bdg emb" cx="588" cy="150" r="10"/><text class="bdg-t" x="588" y="154.5" text-anchor="middle">1</text><circle class="bdg pix" cx="588" cy="290" r="10"/><text class="bdg-t" x="588" y="294.5" text-anchor="middle">2</text></g>
 </svg></div>
-        <div class="dem-media wide only-phone"><svg class="dem-svg dem-svg--phone dem-flow" viewBox="0 0 360 536" role="img" aria-labelledby="inp-t">
-<title id="inp-t">Three uses of the trained model, with no teacher, read from top to bottom. Represent: an image goes through the network to its representation, read by a linear probe or k-NN. Generate without labels: with no view, the embedding denoiser turns noise into a sampled embedding, and then the network, as a pixel denoiser, turns pixel noise into an image given that embedding. Complete a crop: the network embeds the crop, the embedding denoiser samples several embeddings given it, and the network draws one image for each.</title>
-<defs><marker id="ah-inp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
-<text class="hd" x="60" y="16" text-anchor="middle">Represent</text>
-<text class="sm" x="60" y="32" text-anchor="middle">an image</text>
-<text class="hd" x="180" y="16" text-anchor="middle">Generate</text>
-<text class="sm" x="180" y="32" text-anchor="middle">without labels</text>
-<text class="hd" x="300" y="16" text-anchor="middle">Complete</text>
-<text class="sm" x="300" y="32" text-anchor="middle">a crop</text>
-<line class="grid" x1="120" x2="120" y1="4" y2="532" stroke-dasharray="4 4"/><line class="grid" x1="240" x2="240" y1="4" y2="532" stroke-dasharray="4 4"/>
-<image href="tile_view.webp" x="36" y="44" width="48" height="48" preserveAspectRatio="none"/>
-<rect class="tf void" x="150" y="50" width="60" height="36"/>
-<text class="sm" x="180" y="73" text-anchor="middle">no view</text>
-<svg x="276" y="44" width="48" height="48" viewBox="0 0 128 128"><image href="completion.webp" width="668" height="392"/></svg>
-<path class="ln rep" d="M60 94V112" marker-end="url(#ah-inp)"/>
-<rect class="bx rep" x="10" y="114" width="100" height="36" rx="6"/><text class="bt" x="60.0" y="137.0" text-anchor="middle">Network</text>
-<path class="ln rep" d="M60 150V170" marker-end="url(#ah-inp)"/>
-<path class="ln rep" d="M300 94V112" marker-end="url(#ah-inp)"/>
-<rect class="bx rep" x="250" y="114" width="100" height="36" rx="6"/><text class="bt" x="300.0" y="137.0" text-anchor="middle">Network</text>
-<path class="ln rep" d="M300 150V170" marker-end="url(#ah-inp)"/>
-<g class="chip rep"><rect class="cb" x="34.0" y="171.0" width="52" height="26"/><g class="bars"><rect x="39.0" y="178.8" width="6" height="14.2"/><rect x="48.0" y="182.3" width="6" height="10.7"/><rect x="57.0" y="177.0" width="6" height="16.0"/><rect x="66.0" y="184.1" width="6" height="8.9"/><rect x="75.0" y="179.7" width="6" height="13.3"/></g></g>
-<text class="sm" x="60" y="214" text-anchor="middle">representation</text>
-<g class="chip rep"><rect class="cb" x="274.0" y="171.0" width="52" height="26"/><g class="bars"><rect x="279.0" y="178.8" width="6" height="14.2"/><rect x="288.0" y="182.3" width="6" height="10.7"/><rect x="297.0" y="177.0" width="6" height="16.0"/><rect x="306.0" y="184.1" width="6" height="8.9"/><rect x="315.0" y="179.7" width="6" height="13.3"/></g></g>
-<text class="sm" x="300" y="214" text-anchor="middle">crop embedding</text>
-<path class="ln rep" d="M60 222V242" marker-end="url(#ah-inp)"/>
-<rect class="bx sl" x="10" y="244" width="100" height="44" rx="6"/><text class="bt" x="60.0" y="264.0" text-anchor="middle">Probe</text><text class="sm" x="60.0" y="281.0" text-anchor="middle">linear or k-NN</text>
-<path class="ln sl" d="M60 288V306" marker-end="url(#ah-inp)"/>
-<text class="lb strong" x="60" y="324" text-anchor="middle">class</text>
-<path class="ln sl dash" d="M180 88V246" marker-end="url(#ah-inp)"/>
-<path class="ln rep" d="M300 222V246" marker-end="url(#ah-inp)"/>
-<text class="sm" x="186" y="238" text-anchor="start">+ noise</text>
-<rect class="bx emb" x="128" y="248" width="104" height="46" rx="6"/><text class="bt" x="180.0" y="268.0" text-anchor="middle">Embedding</text><text class="bt" x="180.0" y="285.0" text-anchor="middle">denoiser</text>
-<path class="ln emb" d="M180 294V310" marker-end="url(#ah-inp)"/>
-<text class="sm" x="306" y="238" text-anchor="start">+ noise</text>
-<rect class="bx emb" x="248" y="248" width="104" height="46" rx="6"/><text class="bt" x="300.0" y="268.0" text-anchor="middle">Embedding</text><text class="bt" x="300.0" y="285.0" text-anchor="middle">denoiser</text>
-<path class="ln emb" d="M300 294V310" marker-end="url(#ah-inp)"/>
-<g class="chip emb"><rect class="cb" x="154.0" y="317.0" width="52" height="26"/><g class="bars"><rect x="159.0" y="324.8" width="6" height="14.2"/><rect x="168.0" y="328.3" width="6" height="10.7"/><rect x="177.0" y="323.0" width="6" height="16.0"/><rect x="186.0" y="330.1" width="6" height="8.9"/><rect x="195.0" y="325.7" width="6" height="13.3"/></g></g>
-<text class="sm" x="180" y="364" text-anchor="middle">sampled</text>
-<text class="sm" x="180" y="378" text-anchor="middle">embedding</text>
-<g class="chip emb"><rect class="cb" x="279.0" y="311.0" width="52" height="26"/><g class="bars"><rect x="284.0" y="318.8" width="6" height="14.2"/><rect x="293.0" y="322.3" width="6" height="10.7"/><rect x="302.0" y="317.0" width="6" height="16.0"/><rect x="311.0" y="324.1" width="6" height="8.9"/><rect x="320.0" y="319.6" width="6" height="13.3"/></g></g>
-<g class="chip emb"><rect class="cb" x="274.0" y="317.0" width="52" height="26"/><g class="bars"><rect x="279.0" y="324.8" width="6" height="14.2"/><rect x="288.0" y="328.3" width="6" height="10.7"/><rect x="297.0" y="323.0" width="6" height="16.0"/><rect x="306.0" y="330.1" width="6" height="8.9"/><rect x="315.0" y="325.7" width="6" height="13.3"/></g></g>
-<g class="chip emb"><rect class="cb" x="269.0" y="323.0" width="52" height="26"/><g class="bars"><rect x="274.0" y="330.8" width="6" height="14.2"/><rect x="283.0" y="334.3" width="6" height="10.7"/><rect x="292.0" y="329.0" width="6" height="16.0"/><rect x="301.0" y="336.1" width="6" height="8.9"/><rect x="310.0" y="331.7" width="6" height="13.3"/></g></g>
-<text class="sm" x="300" y="364" text-anchor="middle">several sampled</text>
-<text class="sm" x="300" y="378" text-anchor="middle">embeddings</text>
-<path class="ln emb" d="M180 384V402" marker-end="url(#ah-inp)"/>
-<text class="sm" x="186" y="398" text-anchor="start">+ noise</text>
-<rect class="bx rep" x="130" y="404" width="100" height="44" rx="6"/><text class="bt" x="180.0" y="424.0" text-anchor="middle">Network</text><text class="sm" x="180.0" y="441.0" text-anchor="middle">pixel pass</text>
-<path class="ln pix" d="M180 448V464" marker-end="url(#ah-inp)"/>
-<path class="ln emb" d="M300 384V402" marker-end="url(#ah-inp)"/>
-<text class="sm" x="306" y="398" text-anchor="start">+ noise</text>
-<rect class="bx rep" x="250" y="404" width="100" height="44" rx="6"/><text class="bt" x="300.0" y="424.0" text-anchor="middle">Network</text><text class="sm" x="300.0" y="441.0" text-anchor="middle">pixel pass</text>
-<path class="ln pix" d="M300 448V464" marker-end="url(#ah-inp)"/>
-<image href="tile_sample.webp" x="156" y="466" width="48" height="48" preserveAspectRatio="none"/><rect class="tf pix" x="156" y="466" width="48" height="48"/>
-<text class="sm" x="180" y="530" text-anchor="middle">image</text>
-<svg x="244" y="472" width="36" height="36" viewBox="144 0 128 128"><image href="completion.webp" width="668" height="392"/></svg><rect class="tf pix" x="244" y="472" width="36" height="36"/>
-<svg x="282" y="472" width="36" height="36" viewBox="276 0 128 128"><image href="completion.webp" width="668" height="392"/></svg><rect class="tf pix" x="282" y="472" width="36" height="36"/>
-<svg x="320" y="472" width="36" height="36" viewBox="408 0 128 128"><image href="completion.webp" width="668" height="392"/></svg><rect class="tf pix" x="320" y="472" width="36" height="36"/>
-<text class="sm" x="300" y="530" text-anchor="middle">several images</text>
+        <div class="dem-media wide only-phone"><svg class="dem-svg dem-svg--phone dem-bf" viewBox="0 0 360 420" role="img" aria-labelledby="ip-t">
+<title id="ip-t">Three uses of the trained model, on the same backbone and heads. Represent: the backbone's features of an image are its embedding, read by a linear probe or k-NN, with no head. Generate: with no view, the embedding denoiser samples an embedding from noise, then the backbone and pixel head draw an image given it. Complete a crop: given the crop, the embedding denoiser samples several embeddings, and each becomes an image.</title>
+<defs><marker id="ah-ip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker><clipPath id="rt-ah-ip" clipPathUnits="objectBoundingBox"><rect width="1" height="1" rx="0.09"/></clipPath></defs>
+<g class="v in-rep"><image href="tile_view.webp" x="276.0" y="108.0" width="48" height="48" preserveAspectRatio="none" clip-path="url(#rt-ah-ip)"/><rect class="tl" x="276.0" y="108.0" width="48" height="48" rx="4.3"/><text class="l13b" x="270" y="136" text-anchor="end">image</text><path class="ln rep" d="M300 158V198" marker-end="url(#ah-ip)"/></g>
+<g class="v in-gen"><rect class="void" x="276.0" y="108.0" width="48" height="48" rx="4.3"/><text class="l13b" x="270" y="136" text-anchor="end">no view</text></g>
+<g class="v in-cmp"><image href="dog_crop.webp" x="276.0" y="108.0" width="48" height="48" preserveAspectRatio="none" clip-path="url(#rt-ah-ip)"/><rect class="tl" x="276.0" y="108.0" width="48" height="48" rx="4.3"/><text class="l13b" x="270" y="136" text-anchor="end">crop</text><path class="ln rep" d="M300 158V198" marker-end="url(#ah-ip)"/></g>
+<g class="v in-gen in-cmp"><image href="noise.webp" x="10.0" y="108.0" width="48" height="48" preserveAspectRatio="none" clip-path="url(#rt-ah-ip)"/><rect class="tl" x="10.0" y="108.0" width="48" height="48" rx="4.3"/><text class="l13" x="64" y="136" text-anchor="start">pixel noise</text><path class="ln pix" d="M34 158V198" marker-end="url(#ah-ip)"/><g class="nvec"><rect class="cb" x="278.0" y="76.0" width="52" height="16" rx="3"/><g class="cells"><rect x="280.0" y="78.0" width="5.0" height="12" fill-opacity="0.33"/><rect x="286.0" y="78.0" width="5.0" height="12" fill-opacity="0.56"/><rect x="292.0" y="78.0" width="5.0" height="12" fill-opacity="0.43"/><rect x="298.0" y="78.0" width="5.0" height="12" fill-opacity="0.60"/><rect x="304.0" y="78.0" width="5.0" height="12" fill-opacity="0.62"/><rect x="310.0" y="78.0" width="5.0" height="12" fill-opacity="0.20"/><rect x="316.0" y="78.0" width="5.0" height="12" fill-opacity="0.16"/><rect x="322.0" y="78.0" width="5.0" height="12" fill-opacity="0.78"/></g></g><text class="l12" x="272" y="88" text-anchor="end">noise</text><path class="ln sl" d="M330 84H350"/><path class="ln sl" d="M350 84V284H336" marker-end="url(#ah-ip)"/><path class="ln emb" d="M214 54V70H172V198" marker-end="url(#ah-ip)"/><text class="l12" x="166" y="104" text-anchor="end">pixel condition</text></g>
+<g class="v in-rep"><path class="ln rep" d="M172 262V322" marker-end="url(#ah-ip)"/><g class="chip rep"><rect class="cb" x="146.0" y="325.0" width="52" height="26" rx="4"/><g class="bars"><rect x="150.0" y="331.8" width="5.6" height="14.2"/><rect x="159.6" y="335.3" width="5.6" height="10.7"/><rect x="169.2" y="330.0" width="5.6" height="16.0"/><rect x="178.8" y="337.1" width="5.6" height="8.9"/><rect x="188.4" y="332.7" width="5.6" height="13.3"/></g></g><text class="l13b" x="172" y="368" text-anchor="middle">embedding</text><path class="ln sl" d="M198 338H250" marker-end="url(#ah-ip)"/><text class="l12" x="224" y="330" text-anchor="middle">probe</text><text class="cls" x="256" y="343" text-anchor="start">class</text><text class="l12" x="172" y="384" text-anchor="middle">linear probe or k-NN</text></g>
+<g class="v in-gen"><g class="chip emb"><rect class="cb" x="188.0" y="27.0" width="52" height="26" rx="4"/><g class="bars"><rect x="192.0" y="33.8" width="5.6" height="14.2"/><rect x="201.6" y="37.3" width="5.6" height="10.7"/><rect x="211.2" y="32.0" width="5.6" height="16.0"/><rect x="220.8" y="39.1" width="5.6" height="8.9"/><rect x="230.4" y="34.7" width="5.6" height="13.3"/></g></g><text class="l13b" x="214" y="18" text-anchor="middle">sampled embedding</text><path class="ln emb" d="M255 306V334" marker-end="url(#ah-ip)"/><g class="chip emb"><rect class="cb" x="229.0" y="335.0" width="52" height="26" rx="4"/><g class="bars"><rect x="233.0" y="341.8" width="5.6" height="14.2"/><rect x="242.6" y="345.3" width="5.6" height="10.7"/><rect x="252.2" y="340.0" width="5.6" height="16.0"/><rect x="261.8" y="347.1" width="5.6" height="8.9"/><rect x="271.4" y="342.7" width="5.6" height="13.3"/></g></g><text class="l13b" x="255" y="378" text-anchor="middle">sampled embedding</text><path class="ln pix" d="M85 306V330" marker-end="url(#ah-ip)"/><image href="gen_sample.webp" x="61.0" y="332.0" width="48" height="48" preserveAspectRatio="none" clip-path="url(#rt-ah-ip)"/><rect class="tl" x="61.0" y="332.0" width="48" height="48" rx="4.3"/><text class="l13" x="85" y="396" text-anchor="middle">generated image</text></g>
+<g class="v in-cmp"><g class="chip emb"><rect class="cb" x="194.0" y="20.0" width="52" height="26" rx="4"/><g class="bars"><rect x="198.0" y="26.8" width="5.6" height="14.2"/><rect x="207.6" y="30.3" width="5.6" height="10.7"/><rect x="217.2" y="25.0" width="5.6" height="16.0"/><rect x="226.8" y="32.1" width="5.6" height="8.9"/><rect x="236.4" y="27.7" width="5.6" height="13.3"/></g></g><g class="chip emb"><rect class="cb" x="188.0" y="27.0" width="52" height="26" rx="4"/><g class="bars"><rect x="192.0" y="33.8" width="5.6" height="14.2"/><rect x="201.6" y="37.3" width="5.6" height="10.7"/><rect x="211.2" y="32.0" width="5.6" height="16.0"/><rect x="220.8" y="39.1" width="5.6" height="8.9"/><rect x="230.4" y="34.7" width="5.6" height="13.3"/></g></g><g class="chip emb"><rect class="cb" x="182.0" y="34.0" width="52" height="26" rx="4"/><g class="bars"><rect x="186.0" y="40.8" width="5.6" height="14.2"/><rect x="195.6" y="44.3" width="5.6" height="10.7"/><rect x="205.2" y="39.0" width="5.6" height="16.0"/><rect x="214.8" y="46.1" width="5.6" height="8.9"/><rect x="224.4" y="41.7" width="5.6" height="13.3"/></g></g><text class="l12" x="214" y="14" text-anchor="middle">one sampled embedding each</text><path class="ln emb" d="M255 306V334" marker-end="url(#ah-ip)"/><g class="chip emb"><rect class="cb" x="235.0" y="330.0" width="52" height="26" rx="4"/><g class="bars"><rect x="239.0" y="336.8" width="5.6" height="14.2"/><rect x="248.6" y="340.3" width="5.6" height="10.7"/><rect x="258.2" y="335.0" width="5.6" height="16.0"/><rect x="267.8" y="342.1" width="5.6" height="8.9"/><rect x="277.4" y="337.7" width="5.6" height="13.3"/></g></g><g class="chip emb"><rect class="cb" x="229.0" y="337.0" width="52" height="26" rx="4"/><g class="bars"><rect x="233.0" y="343.8" width="5.6" height="14.2"/><rect x="242.6" y="347.3" width="5.6" height="10.7"/><rect x="252.2" y="342.0" width="5.6" height="16.0"/><rect x="261.8" y="349.1" width="5.6" height="8.9"/><rect x="271.4" y="344.7" width="5.6" height="13.3"/></g></g><g class="chip emb"><rect class="cb" x="223.0" y="344.0" width="52" height="26" rx="4"/><g class="bars"><rect x="227.0" y="350.8" width="5.6" height="14.2"/><rect x="236.6" y="354.3" width="5.6" height="10.7"/><rect x="246.2" y="349.0" width="5.6" height="16.0"/><rect x="255.8" y="356.1" width="5.6" height="8.9"/><rect x="265.4" y="351.7" width="5.6" height="13.3"/></g></g><text class="l13b" x="255" y="384" text-anchor="middle">sampled embeddings</text><path class="ln pix" d="M85 306V320" marker-end="url(#ah-ip)"/><image href="dog_done3.webp" x="77.0" y="326.0" width="48" height="48" preserveAspectRatio="none" clip-path="url(#rt-ah-ip)"/><rect class="tl" x="77.0" y="326.0" width="48" height="48" rx="4.3"/><image href="dog_done2.webp" x="69.0" y="334.0" width="48" height="48" preserveAspectRatio="none" clip-path="url(#rt-ah-ip)"/><rect class="tl" x="69.0" y="334.0" width="48" height="48" rx="4.3"/><image href="dog_done1.webp" x="61.0" y="342.0" width="48" height="48" preserveAspectRatio="none" clip-path="url(#rt-ah-ip)"/><rect class="tl" x="61.0" y="342.0" width="48" height="48" rx="4.3"/><text class="l13" x="93" y="408" text-anchor="middle">generated completions</text></g>
+<g class="u on-gen on-cmp sm13 head"><rect class="hd-b emb" x="178" y="260" width="156" height="46" rx="7"/><text class="hdt t-emb" x="256.0" y="288.0" text-anchor="middle">Embedding denoiser</text></g>
+<g class="u on-gen on-cmp head"><rect class="hd-b pix" x="10" y="260" width="156" height="46" rx="7"/><text class="hdt t-pix" x="88.0" y="288.0" text-anchor="middle">Pixel head</text></g>
+<g class="bbg"><rect class="bb" x="10" y="200" width="324" height="62" rx="10"/><rect class="lyr" x="22.0" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="55.8" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="89.6" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="123.3" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="157.1" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="190.9" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="224.7" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="258.4" y="208" width="27.8" height="46" rx="3"/><rect class="lyr" x="292.2" y="208" width="27.8" height="46" rx="3"/><rect class="pbg" x="92.0" y="217" width="160" height="26" rx="6"/><rect class="bbt-bg" x="92.0" y="217" width="160" height="26" rx="6"/><text class="bbt" x="172.0" y="236" text-anchor="middle">Backbone <tspan class="bbs">(shared)</tspan></text></g>
+<g class="v in-gen in-cmp"><circle class="bdg emb" cx="322" cy="264" r="10"/><text class="bdg-t" x="322" y="268.5" text-anchor="middle">1</text><circle class="bdg pix" cx="154" cy="264" r="10"/><text class="bdg-t" x="154" y="268.5" text-anchor="middle">2</text></g>
 </svg></div>
-        <figcaption>Every use runs the same trained model, and generation always samples the embedding before the pixels.</figcaption>
+        <figcaption class="dem-task-text" aria-live="polite">Generate. With no view, the embedding denoiser first samples an embedding from noise, and the pixel head then draws an image given it.</figcaption>
     </figure>
 </section>
 
@@ -424,7 +262,7 @@ bibtex: |
     <p>Masking and cropping amount to full noise on some patches. A single noising process, which sets a noise level for each patch, can thus produce both the views of SSL and the noisy images of diffusion. DEM draws all its inputs from this process, so its two tasks train on the same inputs. In training, the student sees noise combined with a mask, the teacher sees a clean view, and the pixel pass sees the whole image at one noise level.</p>
     <figure class="dem-fig">
         <div class="dem-views">
-            <figure class="dem-view"><figcaption><span>Clean</span><span class="dem-role sl">teacher sees</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_clean.webp" width="64" height="64" alt="A clean image of a parrot, with an all-white noise map." loading="lazy"></figure>
+            <figure class="dem-view"><figcaption><span>Clean</span><span class="dem-role sl">teacher sees</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_clean.webp" width="64" height="64" alt="A clean image of a dog, with an all-white noise map." loading="lazy"></figure>
             <figure class="dem-view"><figcaption><span>Noise</span><span class="dem-role pix">pixel pass sees</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#868b95" d="M0 0h10v10h-10zM10 0h10v10h-10zM20 0h10v10h-10zM30 0h10v10h-10zM40 0h10v10h-10zM50 0h10v10h-10zM60 0h10v10h-10zM70 0h10v10h-10zM0 10h10v10h-10zM10 10h10v10h-10zM20 10h10v10h-10zM30 10h10v10h-10zM40 10h10v10h-10zM50 10h10v10h-10zM60 10h10v10h-10zM70 10h10v10h-10zM0 20h10v10h-10zM10 20h10v10h-10zM20 20h10v10h-10zM30 20h10v10h-10zM40 20h10v10h-10zM50 20h10v10h-10zM60 20h10v10h-10zM70 20h10v10h-10zM0 30h10v10h-10zM10 30h10v10h-10zM20 30h10v10h-10zM30 30h10v10h-10zM40 30h10v10h-10zM50 30h10v10h-10zM60 30h10v10h-10zM70 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM20 40h10v10h-10zM30 40h10v10h-10zM40 40h10v10h-10zM50 40h10v10h-10zM60 40h10v10h-10zM70 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM30 50h10v10h-10zM40 50h10v10h-10zM50 50h10v10h-10zM60 50h10v10h-10zM70 50h10v10h-10zM0 60h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10zM30 60h10v10h-10zM40 60h10v10h-10zM50 60h10v10h-10zM60 60h10v10h-10zM70 60h10v10h-10zM0 70h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10zM30 70h10v10h-10zM40 70h10v10h-10zM50 70h10v10h-10zM60 70h10v10h-10zM70 70h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_noise.webp" width="64" height="64" alt="The image with noise on every patch at level 0.54." loading="lazy"></figure>
             <figure class="dem-view"><figcaption><span>Random mask</span><span class="dem-role">SSL</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#1e293b" d="M0 20h10v10h-10zM10 20h10v10h-10zM0 30h10v10h-10zM10 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_random.webp" width="64" height="64" alt="The image with scattered blocks of patches at full noise." loading="lazy"></figure>
             <figure class="dem-view"><figcaption><span>Crop mask</span><span class="dem-role">SSL</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path fill="#1e293b" d="M0 0h10v10h-10zM10 0h10v10h-10zM20 0h10v10h-10zM30 0h10v10h-10zM40 0h10v10h-10zM50 0h10v10h-10zM60 0h10v10h-10zM70 0h10v10h-10zM0 10h10v10h-10zM10 10h10v10h-10zM20 10h10v10h-10zM30 10h10v10h-10zM40 10h10v10h-10zM50 10h10v10h-10zM60 10h10v10h-10zM70 10h10v10h-10zM0 20h10v10h-10zM10 20h10v10h-10zM20 20h10v10h-10zM0 30h10v10h-10zM10 30h10v10h-10zM20 30h10v10h-10zM0 40h10v10h-10zM10 40h10v10h-10zM20 40h10v10h-10zM0 50h10v10h-10zM10 50h10v10h-10zM20 50h10v10h-10zM0 60h10v10h-10zM10 60h10v10h-10zM20 60h10v10h-10zM0 70h10v10h-10zM10 70h10v10h-10zM20 70h10v10h-10z"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_crop.webp" width="64" height="64" alt="The image with everything outside a box at full noise." loading="lazy"></figure>
@@ -535,6 +373,30 @@ bibtex: |
     </figure>
 </section>
 
+<script>
+(function () {
+  // Method figures: a button lights the parts its task uses and dims the rest; without JS every part stays lit.
+  var text = {
+    "": "One step trains both levels on one backbone, and the teacher supplies the target for both.",
+    emb: "Embedding level. The embedding denoiser recovers the target from a noisy copy, given the backbone's features of the student view (loss 1).",
+    pix: "Pixel level. With the target as its condition, the backbone and pixel head turn a noisy image into the image (loss 2).",
+    rep: "Represent. The backbone's features of an image are its embedding, read by a linear probe or k-NN. No head is used.",
+    gen: "Generate. With no view, the embedding denoiser first samples an embedding from noise, and the pixel head then draws an image given it.",
+    cmp: "Complete a crop. Given the crop, the embedding denoiser samples several embeddings, and the pixel head draws one image for each."
+  };
+  document.querySelectorAll(".dem-btnfig").forEach(function (fig) {
+    var bar = fig.querySelector(".dem-btns"), out = fig.querySelector(".dem-task-text");
+    bar.hidden = false;
+    bar.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      var k = b.dataset.task;
+      if (k) fig.dataset.task = k; else delete fig.dataset.task;
+      bar.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      out.textContent = text[k];
+    });
+  });
+})();
+</script>
 <script>
 (function () {
   var fig = document.getElementById("dem-tau"), wrap = fig.querySelector(".dem-tau-wrap"), svg = wrap.querySelector("svg");
