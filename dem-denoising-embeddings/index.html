@@ -237,7 +237,7 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> One network, trained only with view-conditioned denoising, learns a visual representation and generates images without labels. Its linear probe matches DINOv2, and by 100k iterations, learning to generate also makes the representation better.</p>
+    <p class="tldr"><strong>TL;DR:</strong> Representation learning and image generation usually need separate models. DEM does both in one network, trained only with view-conditioned denoising. Its linear probe matches DINOv2, and it generates images without labels.</p>
 </section>
 <section class="intro">
     <p>Representation learning and image generation usually live in separate models. If we train a representation to reproduce an image, it also has to encode the image's <em>stochastic details</em>, such as its exact colors and framing. Recognition is better off ignoring those. Denoising embedding models (DEMs) keep high-level semantics and low-level stochastic details in different places inside one network. A DEM first denoises an image's embedding given another view of the same image, and then denoises the pixels given that embedding. The embedding learns what the views share, which leaves the remaining detail for the pixel level to draw.</p>
