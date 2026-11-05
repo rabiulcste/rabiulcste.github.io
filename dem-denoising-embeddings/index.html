@@ -237,7 +237,7 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> We train one network with denoising losses alone. It learns a visual representation whose linear probe matches <a href="https://arxiv.org/abs/2304.07193">DINOv2</a>, and it generates images without labels. At 100k iterations, training it to generate also improves the representation.</p>
+    <p class="tldr"><strong>TL;DR:</strong> We train one network with a denoising objective alone. It learns a visual representation whose linear probe matches <a href="https://arxiv.org/abs/2304.07193">DINOv2</a>, and it generates images without labels. At 100k iterations, training it to generate also improves the representation.</p>
 </section>
 <section class="intro">
     <p>The strongest methods for representation learning and for image generation are separate models. A representation trained to reproduce an image must also encode the image's <em>stochastic details</em>, such as its exact colors and framing, which recognition has to ignore. Denoising embedding models (DEMs) keep the semantics and the details in different places inside one network. A DEM first denoises an image's embedding given another view of the same image, and then denoises the pixels given that embedding. The embedding is trained to hold what the views share, and the pixel level draws the remaining detail.</p>
