@@ -237,18 +237,18 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> We train one network with a denoising objective alone. It learns a visual representation whose linear probe matches <a href="https://arxiv.org/abs/2304.07193">DINOv2</a>, and it generates images without labels. At 100k iterations, training it to generate also improves the representation.</p>
+    <p class="tldr"><strong>TL;DR:</strong> We train one network with a denoising objective alone, and it learns a visual representation and generates images without labels. Its linear probe matches <a href="https://arxiv.org/abs/2304.07193">DINOv2</a>, and by 100k iterations, learning to generate also makes the representation better.</p>
 </section>
 <section class="intro">
-    <p>The strongest methods for representation learning and for image generation are separate models. A representation trained to reproduce an image must also encode the image's <em>stochastic details</em>, such as its exact colors and framing, which recognition has to ignore. Denoising embedding models (DEMs) keep the semantics and the details in different places inside one network. A DEM first denoises an image's embedding given another view of the same image, and then denoises the pixels given that embedding. The embedding is trained to hold what the views share, and the pixel level draws the remaining detail.</p>
-    <p>On ImageNet-100, a single Transformer trained in pixel space, with no <a href="https://arxiv.org/abs/2112.10752">latent tokenizer</a> and no pretrained encoder, matches DINOv2 in linear probe accuracy (77.2% against 76.2%) and generates images without labels. Learning to generate also improves the representation. Without the pixel loss, the probe at 100k iterations falls from 76.1% to 72.5%.</p>
+    <p>Representation learning and image generation usually live in separate models. If we train a representation to reproduce an image, it also has to encode the image's <em>stochastic details</em>, such as its exact colors and framing. Recognition is better off ignoring those. Denoising embedding models (DEMs) keep the semantics and the details in different places inside one network. A DEM first denoises an image's embedding given another view of the same image, and then denoises the pixels given that embedding. The embedding learns what the views share, which leaves the remaining detail for the pixel level to draw.</p>
+    <p>On ImageNet-100, a single Transformer trained in pixel space, with no <a href="https://arxiv.org/abs/2112.10752">latent tokenizer</a> and no pretrained encoder, matches DINOv2 in linear probe accuracy (77.2% against 76.2%) and also generates images without labels. Learning to generate helps the representation too. When we remove the pixel loss, the probe at 100k iterations drops from 76.1% to 72.5%.</p>
 </section>
 
 <section id="method">
     <h2>Denoising at two levels</h2>
-    <p>DEM generates an image in two steps, first an embedding and then the pixels. The embedding level denoises the embedding of an image given another view of the same image, which teaches it what different views have in common. The pixel level generates the image from that embedding and draws the details the embedding leaves out. The embedding is the model's semantic latent. Latent diffusion models also generate a latent before the image, but their latent comes from a separately trained autoencoder, whereas DEM learns its latent in the same network, from views of the image. Both levels share one backbone, a Vision Transformer, and each adds a small head on top of it, the embedding denoiser for the embedding level and the pixel head for the pixel level.</p>
+    <p>DEM generates an image in two steps, first an embedding and then the pixels. The embedding level denoises the embedding of an image given another view of the same image, and this teaches it what different views have in common. The pixel level generates the image from that embedding and draws the details the embedding leaves out. The embedding is DEM's semantic latent. Latent diffusion models also generate a latent first and then the image, but their latent comes from a separately trained autoencoder. DEM learns its latent in the same network, from views of the image. Both levels share one backbone, a Vision Transformer, and each level adds its own small head on top (the embedding denoiser and the pixel head).</p>
     <h3>Training</h3>
-    <p>Each training step uses three views of one image, a clean view, a noised view and a noised image. The teacher, an <a href="https://arxiv.org/abs/2104.14294">exponential moving average (EMA)</a> of the network, embeds the clean view into the target. On the embedding level, the backbone reads the noised view, and the embedding denoiser uses the resulting student embedding to recover the target from a noisy copy of the target (loss 1). On the pixel level, the backbone reads the noised image with the target as its condition, and the pixel head predicts the original image (loss 2).</p>
+    <p>Each training step uses three views of one image, a clean view, a noised view and a noised image. The teacher is an <a href="https://arxiv.org/abs/2104.14294">exponential moving average (EMA)</a> of the network, and it embeds the clean view into the target. At the embedding level, the backbone reads the noised view, and the embedding denoiser takes the resulting student embedding together with a noisy copy of the target and recovers the target (loss 1). At the pixel level, the backbone reads the noised image with the target as its condition, and the pixel head predicts the original image (loss 2).</p>
     <figure class="dem-fig dem-btnfig" id="dem-train">
         <div class="tabs dem-btns" role="group" aria-label="Training levels" hidden>
             <button type="button" class="btn" data-task="" aria-pressed="true">Both<span class="dem-long"> levels</span></button>
@@ -373,7 +373,7 @@ bibtex: |
         <figcaption class="dem-task-text" aria-live="polite">One training step. The teacher embeds a clean view into the target z. The denoised ẑ is trained toward z (loss 1), and the denoised image x̂ toward the original image (loss 2).</figcaption>
     </figure>
     <h3>Inference</h3>
-    <p>After training we discard the teacher, and the same network both encodes and generates images. The representation of an image is the output of the <a href="https://arxiv.org/abs/2010.11929">Vision Transformer</a>, with no head on top. To generate without labels, the embedding denoiser samples an embedding from noise with no view as input, and the Vision Transformer and pixel head then draw an image from that embedding. Given only a crop, the embedding denoiser samples several embeddings consistent with the crop, and the pixel head draws one image for each.</p>
+    <p>After training, we drop the teacher, and the same network both encodes and generates images. To get a representation, we take the <a href="https://arxiv.org/abs/2010.11929">Vision Transformer</a>'s output for an image, with no head on top. To generate without labels, the embedding denoiser first samples an embedding from noise, with no view at all. The Vision Transformer and the pixel head then draw an image from that embedding. Given only a crop, the embedding denoiser samples several embeddings that fit the crop, and the pixel head draws one image for each.</p>
     <figure class="dem-fig dem-btnfig" id="dem-infer" data-task="gen">
         <div class="tabs dem-btns" role="group" aria-label="Uses of the trained model" hidden>
             <button type="button" class="btn" data-task="rep" aria-pressed="false">Encode</button>
@@ -421,7 +421,7 @@ bibtex: |
 
 <section id="views">
     <h2>Views as noise maps</h2>
-    <p>To train both levels as one task, we need them to read the same kind of input. Self-supervised learning (SSL) methods learn from masked or cropped views, and diffusion models learn from images with noise on every patch. Masking or cropping a patch has the same effect as noising it fully. A noising process that <a href="https://arxiv.org/abs/2407.01392">sets a noise level for each patch</a> therefore produces both kinds of input, and DEM draws all of its inputs from this one process. Each input is described by its noise map, which gives the noise level of every patch. The student sees a noised view, which combines a mask with noise, and the teacher sees a clean view. The pixel pass sees a noised image, the whole image at one noise level.</p>
+    <p>To train both levels as one task, we need them to read the same kind of input. Self-supervised learning (SSL) methods learn from masked or cropped views, and diffusion models learn from images with noise on every patch. Masking or cropping a patch has the same effect as noising it fully, so a single noising process that <a href="https://arxiv.org/abs/2407.01392">sets a noise level for each patch</a> can produce both kinds of input. DEM draws all of its inputs from this one process, and we describe each input by its noise map, the noise level of every patch. The student sees a noised view, which combines a mask with noise, and the teacher sees a clean view. The pixel pass sees a noised image, the whole image at one noise level.</p>
     <figure class="dem-fig">
         <div class="dem-views">
             <figure class="dem-view"><figcaption><span>Clean</span><span class="dem-role sl">clean view</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_clean.webp" width="64" height="64" alt="A clean image of a dog, with an all-white noise map." loading="lazy"></figure>
@@ -436,7 +436,7 @@ bibtex: |
 
 <section id="schedules">
     <h2>One noise schedule per level</h2>
-    <p>Each level has its own noise schedule, and the schedules decide which part of the image each level learns. Embedding noise levels sit near full noise (median 0.95), where the task is close to SSL and the semantics are learned. Pixel noise levels sit lower (median 0.69), in the range where the stochastic details are drawn.</p>
+    <p>Each level has its own noise schedule, and the schedules decide which part of the image each level learns. We denoise the embedding mostly near full noise (median 0.95), close to the SSL task, where the semantics are learned. Pixel noise sits lower, with a median of 0.69, and that is the range where the stochastic details get drawn.</p>
     <figure class="dem-fig"><svg class="dem-svg dem-fit" viewBox="0 0 480 224" role="img" aria-labelledby="sch-t">
 <title id="sch-t">Two logit-normal noise schedules on an axis from clean to full noise. The embedding level has median 0.95 and sits close to full noise. The pixel level has median 0.69. Each curve is scaled to its own peak.</title>
 <defs><linearGradient id="nz" x1="0" x2="1"><stop offset="0" class="nz0"/><stop offset="1" class="nz1"/></linearGradient></defs>
@@ -456,7 +456,7 @@ bibtex: |
 
 <section id="special-case">
     <h2>SSL is the full-noise case</h2>
-    <p><a href="https://arxiv.org/abs/2006.07733">Joint-embedding SSL methods</a> are a special case of DEM. These methods train a network to predict the embedding of one view of an image from another view. Suppose the network is also given a noisy copy of the embedding it predicts. When the copy is pure noise it carries no information and the task is unchanged, so prediction equals view-conditioned embedding denoising at full noise. At lower noise levels DEM learns the full distribution of embeddings that fit the view, whereas a predictor learns only its mean. With no view, this distribution is a prior over embeddings, and DEM samples from it to generate images without labels.</p>
+    <p><a href="https://arxiv.org/abs/2006.07733">Joint-embedding SSL methods</a> are a special case of DEM. These methods train a network to predict the embedding of one view of an image from another view. Give that network a noisy copy of the embedding it predicts as an extra input. If the copy is pure noise, it carries no information and the task stays the same, so prediction is view-conditioned embedding denoising at full noise. At lower noise levels, DEM learns the full distribution of embeddings that fit the view, while a predictor collapses this distribution to its mean. With no view, the distribution becomes a prior over embeddings, and DEM samples from it to generate images without labels.</p>
     <figure class="dem-fig" id="dem-tau">
         <div class="dem-tau-wrap"><svg class="dem-svg dem-svg--phone dem-flow dem-copy" viewBox="0 0 360 176" role="img" aria-labelledby="cp-t">
 <title id="cp-t">An illustration, not model output. The noised view and a noisy copy of the target go into the backbone and embedding denoiser, which predict the target. The slider sets the noise level tau of the copy, a mix of the target and one fixed draw of Gaussian noise. As tau rises, the copy's bars move from the target's toward the noise. At tau 1 the copy is pure noise and carries no information, so this is prediction from the view alone.</title>
@@ -508,12 +508,12 @@ bibtex: |
             </tbody>
         </table>
     </div>
-    <p class="caption">ImageNet-100, 64x64, ViT-S/8, 100k iterations, FID-50k. DINOv2 is trained for the same number of iterations. DEM's linear probe matches DINOv2's, and its k-NN accuracy is lower. RCG trains three separate models. For class-conditional generation, DEM uses a linear probe fit on 1% of the labels and is compared with class-conditional <a href="https://arxiv.org/abs/2511.13720">JiT</a> trained on all labels.</p>
+    <p class="caption">ImageNet-100, 64x64, ViT-S/8, 100k iterations, FID-50k. DINOv2 is trained for the same number of iterations. DEM's linear probe matches DINOv2's, and its k-NN accuracy is lower. RCG trains three separate models. For class-conditional generation, DEM uses a linear probe fit on 1% of the labels, and we compare it with class-conditional <a href="https://arxiv.org/abs/2511.13720">JiT</a> trained on all labels.</p>
 </section>
 
 <section id="one-embedding">
     <h2>One embedding, many images</h2>
-    <p>The embedding sets the content of an image. Sampling the pixel level again with fresh noise changes the stochastic details and keeps the content.</p>
+    <p>The embedding sets what is in the image. When we sample the pixel level again with fresh noise, the stochastic details change and the content stays.</p>
     <figure class="dem-fig">
         <div class="dem-media wide dem-pair">
             <div><img src="same_embedding.webp" width="656" height="392" alt="Three rows of five generated images. Images in a row share content and differ in detail." loading="lazy"><p>Each row uses one sampled embedding with different pixel noise.</p></div>
@@ -524,7 +524,7 @@ bibtex: |
 
 <section id="completion">
     <h2>Completion and in-painting</h2>
-    <p>DEM completes a crop without being trained for it. A small crop is consistent with many images, and a predictor can only return the mean of their embeddings. DEM samples several embeddings consistent with the crop and decodes each into a different completion. Keeping the visible pixels fixed during sampling gives in-painting and out-painting, which DEM is also never trained for.</p>
+    <p>DEM completes crops without ever being trained to. A small crop fits many different images, and a predictor can only return the mean of their embeddings. DEM samples several embeddings that fit the crop and decodes each one into a different completion. If we keep the visible pixels fixed during sampling, DEM also in-paints and out-paints, again with no training for either task.</p>
     <figure class="dem-fig">
         <div class="dem-media wide dem-pair even">
             <div><img src="completion.webp" width="668" height="392" alt="Three rows. Each starts with an image where only a boxed crop is visible, followed by four generated images consistent with the crop." loading="lazy"><p>Each image comes from an embedding sampled given the blue crop.</p></div>
@@ -535,8 +535,8 @@ bibtex: |
 
 <section id="speedrun">
     <h2>How we built DEM</h2>
-    <p>We built DEM through a speedrun in the style of <a href="https://github.com/KellerJordan/modded-nanogpt">modded-nanogpt</a>, keeping a component only when it improved results on a fixed protocol. Every run changes one component of the current best model and trains a ViT-S/8 for 20k iterations at batch size 512 on ImageNet-100 at 64x64. Two numbers decide whether the change stays, the linear probe and FID-5k without labels. Before launching a run, we write the change into the project journal with its hypothesis, its predicted effect and numeric thresholds for success and refutation. Seed 0 nominates a change and seed 1 confirms it. A change sets a record when its two-seed mean improves one metric by more than the seed spread (1.0 probe points or 2.5 FID) and does not worsen the other metric by more than its spread.</p>
-    <p>We chose the initial idea and every change of direction. AI agents implemented candidate changes, launched the runs, checked each outcome against the prediction written down before launch and proposed the next experiments. Because this process adds components quickly, we periodically paused to simplify the model by removing components the central claim did not need, and we kept a removal when both metrics stayed level.</p>
+    <p>We built DEM through a speedrun in the style of <a href="https://github.com/KellerJordan/modded-nanogpt">modded-nanogpt</a>, and a component stayed in the model only if it improved results on a fixed protocol. Every run changes one component of the current best model and trains a ViT-S/8 for 20k iterations at batch size 512 on ImageNet-100 at 64x64. Two numbers decide whether the change stays, the linear probe and FID-5k without labels. Before we launch a run, we write the change into the project journal with its hypothesis, its predicted effect and numeric thresholds for success and refutation. Seed 0 nominates a change and seed 1 confirms it. A change sets a record when its two-seed mean improves one metric by more than the seed spread (1.0 probe points or 2.5 FID) and the other metric does not get worse by more than its spread.</p>
+    <p>We set the initial idea and every change of direction. AI agents implemented candidate changes, launched the runs, checked each outcome against the prediction written down before launch and proposed the next experiments. This process adds components quickly, so every so often we paused to simplify the model and removed the components the central claim did not need. We kept a removal when both metrics stayed level.</p>
     <figure class="dem-fig" id="dem-front" data-set="adopted">
         <div class="tabs dem-btns" role="group" aria-label="Sampler" hidden>
             <button type="button" class="btn" data-set="earlier" aria-pressed="false">Earlier sampler</button>
@@ -1003,9 +1003,9 @@ bibtex: |
         </table>
     </div>
     <p class="caption">Selected records, two-seed means, 20k iterations, FID-5k without labels. The last two rows use the adopted sampler (<a href="https://arxiv.org/abs/2404.07724">guidance on an interval</a>). Switching to it lowered the FID of the 20 October model from 59.4 to 46.1 with no retraining.</p>
-    <p><strong>Representation and generation improve together.</strong> Across the 253 runs with the earlier sampler, runs with a higher probe have a lower FID (Spearman −0.69), and the correlation is −0.51 across the 171 runs with the adopted sampler. The effect of a single change is less predictable. Among the 231 runs that modify a base configuration under the earlier sampler, the changes in the two metrics correlate at only −0.22.</p>
-    <p><strong>Some 20k records fail at 100k.</strong> Adding eight local crops set a 20k record three times. On snapshot v2 it raised the two-seed probe from 70.53 to 72.08 at level FID. At 100k iterations, however, the run became unstable after 44k and finished at a probe of 75.54, below the 76.06 of v2. Since then, a 20k record enters the model only after it passes a 100k check.</p>
-    <p><strong>By 100k iterations, generation helps the representation.</strong> At 20k iterations, removing the pixel loss raises the probe from 70.53 to 72.93 (two seeds). At 100k the effect reverses, and removing the pixel loss lowers the probe from 76.1% to 72.5%.</p>
+    <p><strong>Representation and generation improve together.</strong> Across the 253 runs with the earlier sampler, runs with a higher probe have a lower FID (Spearman −0.69). Across the 171 runs with the adopted sampler, the correlation is −0.51. Single changes are harder to predict. Among the 231 runs that modify a base configuration under the earlier sampler, the changes in the two metrics correlate at only −0.22.</p>
+    <p><strong>Some 20k records fail at 100k.</strong> Adding eight local crops set a 20k record three times. On snapshot v2, the crops raised the two-seed probe from 70.53 to 72.08 at level FID. At 100k iterations, though, the run became unstable after 44k and finished at a probe of 75.54, below the 76.06 of v2. Since then, a 20k record enters the model only after it passes a 100k check.</p>
+    <p><strong>By 100k iterations, generation helps the representation.</strong> At 20k iterations, removing the pixel loss raises the probe, from 70.53 to 72.93 (two seeds). By 100k the sign flips, and removing the pixel loss lowers the probe from 76.1% to 72.5%.</p>
 </section>
 
 <script>
@@ -1015,7 +1015,7 @@ bibtex: |
     "": "One training step. The teacher embeds a clean view into the target z. The denoised ẑ is trained toward z (loss 1), and the denoised image x̂ toward the original image (loss 2).",
     emb: "Embedding level. The embedding denoiser takes the noisy target and the student’s embedding c from the projector g, and its output ẑ is trained toward z (loss 1).",
     pix: "Pixel level. The Vision Transformer reads the noised image with z as its condition, and the pixel head’s output x̂ is trained toward the original image (loss 2).",
-    rep: "Encode. The Vision Transformer maps an image to its representation, with no head or denoiser. Results evaluates this representation.",
+    rep: "Encode. The Vision Transformer maps an image to its representation, with no head or denoiser. The Results section evaluates this representation.",
     gen: "Generate. In pass 1, the embedding denoiser samples an embedding from noise, with no view. In pass 2, the Vision Transformer takes that embedding as its condition, and the pixel head draws the image.",
     cmp: "Complete a crop. In pass 1, the embedding denoiser samples several embeddings given the crop. In pass 2, the Vision Transformer takes each one as its condition, and the pixel head draws one image per embedding."
   };
