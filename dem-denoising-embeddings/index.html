@@ -237,7 +237,7 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> One network learns a visual representation and generates images without labels, trained with denoising losses alone. Its linear probe matches DINOv2, and learning to generate improves the representation.</p>
+    <p class="tldr"><strong>TL;DR:</strong> One network learns a visual representation and generates images without labels, trained with denoising losses alone. Its linear probe matches <a href="https://arxiv.org/abs/2304.07193">DINOv2</a>, and learning to generate improves the representation.</p>
 </section>
 <section class="intro">
     <p>Representation learning and image generation usually rely on separate models. A representation trained to reproduce an image also encodes its <em>stochastic details</em>, such as exact color and framing, which recognition should ignore. Denoising embedding models (DEMs) separate the two within one network. A DEM denoises an image's embedding given another view, and the pixels given that embedding, so the embedding keeps what the views share and the pixels carry the rest.</p>
@@ -493,7 +493,7 @@ bibtex: |
 <text class="ax" transform="translate(16 162) rotate(-90)" text-anchor="middle">Linear probe (%)</text>
 <g class="pt-g"><title>DINOv2: probe 76.2%, FID N/A</title><circle class="pt" cx="95.0" cy="52.1" r="5"/><a href="https://arxiv.org/abs/2304.07193"><text class="lab" x="107.0" y="46.1" text-anchor="start">DINOv2</text></a></g><g class="pt-g"><title>BYOL: probe 72.1%, FID N/A</title><circle class="pt" cx="95.0" cy="71.9" r="5"/><a href="https://arxiv.org/abs/2006.07733"><text class="lab" x="107.0" y="83.9" text-anchor="start">BYOL</text></a></g><g class="pt-g"><title>MAE: probe 48.6%, FID N/A</title><circle class="pt" cx="89.0" cy="185.7" r="5"/><a href="https://arxiv.org/abs/2111.06377"><text class="lab" x="107.0" y="178.7" text-anchor="start">MAE</text></a></g><g class="pt-g"><title>I-JEPA: probe 47.3%, FID N/A</title><circle class="pt" cx="101.0" cy="192.0" r="5"/><a href="https://arxiv.org/abs/2301.08243"><text class="lab" x="113.0" y="207.0" text-anchor="start">I-JEPA</text></a></g><g class="pt-g"><title>JiT (uncond.): probe N/A, FID 64.0</title><circle class="pt" cx="208.5" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2511.13720"><text class="lab" x="220.5" y="280.8" text-anchor="start">JiT (uncond.)</text></a></g><g class="pt-g"><title>RCG (BYOL enc.), three separate models: probe N/A, FID 12.3</title><circle class="pt" cx="583.3" cy="287.0" r="5"/><a href="https://arxiv.org/abs/2312.03701"><text class="lab" x="571.3" y="292.0" text-anchor="end">RCG</text></a></g><g class="pt-g"><title>MAGE: probe 47.0%, FID 60.5</title><circle class="pt" cx="233.9" cy="193.4" r="5"/><a href="https://arxiv.org/abs/2211.09117"><text class="lab" x="245.9" y="198.4" text-anchor="start">MAGE</text></a></g><g class="pt-g"><title>JiT (class-cond.), uses all labels: probe N/A, FID 12.4</title><circle class="pt-open" cx="582.6" cy="275.8" r="5"/><a href="https://arxiv.org/abs/2511.13720"><text class="lab" x="620.0" y="257.0" text-anchor="end">JiT (class-cond.)</text></a></g><g class="pt-g"><title>DEM: probe 77.2%, FID 19.5</title><polygon class="pt-ours" points="531.1,35.3 534.1,43.2 542.5,43.6 535.9,48.8 538.2,57.0 531.1,52.3 524.1,57.0 526.3,48.8 519.6,43.6 528.2,43.2"/><text class="lab-ours" x="514.1" y="52.3" text-anchor="end">DEM</text></g><g class="pt-g"><title>DEM with a linear probe fit on 1% of the labels: same network, probe 77.2%, FID 14.5</title><polygon class="pt-ours-open" points="567.4,38.8 569.5,44.4 575.5,44.6 570.8,48.4 572.4,54.2 567.4,50.8 562.4,54.2 564.0,48.4 559.3,44.6 565.3,44.4"/><text class="lab lab-rep" x="567.4" y="77.3" text-anchor="middle">1% labels</text></g>
 </svg></div>
-        <figcaption>One generative model learns representations competitive with self-supervised methods and generates images without labels. Open markers use labels. DEM uses guidance, and RCG does not.</figcaption>
+        <figcaption>One generative model learns representations competitive with self-supervised methods and generates images without labels. Open markers use labels. DEM uses guidance, and <a href="https://arxiv.org/abs/2312.03701">RCG</a> does not.</figcaption>
     </figure>
     <div class="table-wrap">
         <table>
@@ -508,7 +508,7 @@ bibtex: |
             </tbody>
         </table>
     </div>
-    <p class="caption">ImageNet-100, 64x64, ViT-S/8, 100k iterations, FID-50k. DINOv2 at the same training length. The linear probe of DEM matches that of DINOv2, and its k-NN accuracy is lower. RCG trains three separate models. For class-conditional generation, DEM uses a linear probe fit on 1% of the labels, against class-conditional JiT trained on all labels.</p>
+    <p class="caption">ImageNet-100, 64x64, ViT-S/8, 100k iterations, FID-50k. DINOv2 at the same training length. The linear probe of DEM matches that of DINOv2, and its k-NN accuracy is lower. RCG trains three separate models. For class-conditional generation, DEM uses a linear probe fit on 1% of the labels, against class-conditional <a href="https://arxiv.org/abs/2511.13720">JiT</a> trained on all labels.</p>
 </section>
 
 <section id="one-embedding">
@@ -995,7 +995,7 @@ bibtex: |
             <tbody>
                 <tr><td>Joint model, pixel loss on the embedding denoiser</td><td>9 Oct</td><td>52.6%</td><td>95.4</td></tr>
                 <tr><td>Noise as a view</td><td>16 Oct</td><td>60.3%</td><td>66.5</td></tr>
-                <tr><td>Muon optimizer</td><td>17 Oct</td><td>67.7%</td><td>63.1</td></tr>
+                <tr><td><a href="https://kellerjordan.github.io/posts/muon/">Muon</a> optimizer</td><td>17 Oct</td><td>67.7%</td><td>63.1</td></tr>
                 <tr><td>Asymmetric noise schedules</td><td>19 Oct</td><td>70.5%</td><td>58.1</td></tr>
                 <tr><td>Snapshot v2, adopted sampler</td><td>26 Oct</td><td>70.53%</td><td>42.76</td></tr>
                 <tr><td>Pixel pass as a view of the patch term</td><td>3 Nov</td><td>70.65%</td><td>39.85</td></tr>
