@@ -241,7 +241,7 @@ bibtex: |
 </section>
 <section class="intro">
     <p>Generative models learn representations that still trail those of self-supervised methods. The reason lies in what they have to encode. To reproduce an image, a representation must also carry its <em>stochastic details</em>, such as its exact colors and framing, and recognition works better without them. So if we want one model to do both tasks well, it has to keep the semantics and the details apart. Prior work does this with <a href="https://arxiv.org/abs/2312.03701">separate models</a> and <a href="https://arxiv.org/abs/2211.09117">objectives</a>, first a representation learner and then a generator built on top of it.</p>
-    <p>We keep the separation but simplify the design space. A denoising embedding model (DEM) does both in one network, trained with a single task, view-conditioned denoising. It denoises an image's embedding given another view of the image, and then the pixels given that embedding.</p>
+    <p>We retain this separation, which has seemed to demand a second model, but simplify the design space. A denoising embedding model (DEM) does both in one network, trained with a single task, view-conditioned denoising. It denoises an image's embedding given another view of the image, and then the pixels given that embedding.</p>
     <p>We train a single Transformer on ImageNet-100 in pixel space, with no <a href="https://arxiv.org/abs/2112.10752">latent tokenizer</a> and no pretrained encoder. Its linear probe matches DINOv2 (77.2% against 76.2%), and the same network generates images without labels. Generation also improves the representation. At 100k iterations, removing the pixel loss drops the probe from 76.1% to 72.5%.</p>
 </section>
 
