@@ -241,7 +241,7 @@ bibtex: |
 </section>
 <section class="intro">
     <p>Representation learning and image generation usually rely on separate models. A representation trained to reproduce an image also encodes its <em>stochastic details</em>, such as exact color and framing, which recognition should ignore. Denoising embedding models (DEMs) separate the two within one network. A DEM denoises an image's embedding given another view, and the pixels given that embedding, so the embedding keeps what the views share and the pixels carry the rest.</p>
-    <p>On ImageNet-100, a single Transformer trained in pixel space matches DINOv2 in linear probe (77.2% against 76.2%) and generates images without labels. Removing the generation task lowers its probe from 76.1% to 72.5%, so learning to generate improves the representation.</p>
+    <p>On ImageNet-100, a single Transformer trained in pixel space, with no <a href="https://arxiv.org/abs/2112.10752">latent tokenizer</a> and no pretrained encoder, matches DINOv2 in linear probe (77.2% against 76.2%) and generates images without labels. Removing the generation task lowers its probe from 76.1% to 72.5%, so learning to generate improves the representation.</p>
 </section>
 
 <section id="method">
