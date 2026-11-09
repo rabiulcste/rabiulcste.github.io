@@ -2,8 +2,8 @@
 layout: project
 title: "A Self-Supervised Free Lunch for Flow Map Training"
 seo_title: "iFeCo: A Self-Supervised Free Lunch for Flow Map Training"
-description: "iFeCo: flow maps supervise their own features for one-step diffusion (MeanFlow), beating representation alignment (REPA) in early results, no encoder needed."
-keywords: ["iFeCo", "flow map", "flow maps", "flow map training", "one-step generation", "one-step diffusion", "few-step diffusion", "few-step generation", "fast diffusion sampling", "MeanFlow", "mean flows", "shortcut models", "consistency models", "consistency training", "diffusion distillation", "self-distillation", "knowledge distillation", "representation alignment", "REPA", "representation alignment for diffusion", "SIGReg", "self-supervised learning", "diffusion transformer", "SiT", "DINOv2", "ImageNet"]
+description: "iFeCo: flow maps learn from their own features. One consistency loss, no external encoder, no extra forward pass. Preliminary ImageNet 256 results."
+keywords: ["iFeCo", "flow map", "flow maps", "flow map training", "one-step generation", "one-step diffusion", "few-step diffusion", "few-step generation", "fast diffusion sampling", "MeanFlow", "mean flows", "shortcut models", "LSD", "Lagrangian self-distillation", "consistency models", "consistency training", "diffusion distillation", "self-distillation", "knowledge distillation", "representation alignment", "REPA", "representation alignment for diffusion", "self-supervised learning", "diffusion transformer", "SiT", "DINOv2", "ImageNet"]
 authors:
   - name: Rabiul Awal
     url: /
@@ -81,13 +81,13 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> Flow-map training already distills a teacher on a cleaner view into a student on a noisier view. iFeCo extends this distillation to features. It needs no external encoder and no extra forward pass.</p>
+    <p class="tldr"><strong>TL;DR:</strong> Flow-map training already evaluates a teacher on a cleaner view to build the target for a student on a noisier view. iFeCo adds one loss: early features of the noisier view predict the teacher's deep features of the cleaner view. It needs no external encoder and no extra forward pass.</p>
+    <p class="note">Work in progress. The results on this page are preliminary: each model is trained once, and some models have not finished training.</p>
 </section>
 
 <section id="context" class="intro">
     <p>Diffusion training seems difficult partly because of the semantic structure that has to come out of it. We have seen <a href="https://arxiv.org/abs/2510.11690">representation autoencoders</a>, <a href="https://arxiv.org/abs/2312.03701">representation generation</a> and <a href="https://arxiv.org/abs/2410.06940">representation alignment</a>. Much of this work says the same thing: diffusion training needs some form of self-supervised signal to train faster and generate better.</p>
-    <p>Since I was mostly working on few-step models (flow maps), I noticed that they are, in principle, a knowledge distillation algorithm: a student tries to distill from a multi-step teacher. Looked at closely, the student and the teacher see two views of the same data. The teacher gets the cleaner one and the student the noisier one. This gives another dimension of consistency, in feature space, without any additional forward pass. That is the first free lunch for flow map training.</p>
-    <p>Then I realized that even when you align features across these free views, their quality is still below what self-supervised learning gives. A distributional regularizer like <a href="https://arxiv.org/abs/2511.08544">SIGReg</a> can also be applied to diffusion to shape its representations. That is the second free lunch.</p>
+    <p>Since I was mostly working on few-step models (flow maps), I noticed that they are, in principle, a knowledge distillation algorithm: a student tries to distill from a multi-step teacher. Looked at closely, the student and the teacher see two views of the same data. The teacher gets the cleaner one and the student the noisier one. This gives a consistency target in feature space, without any additional forward pass. That is the free lunch for flow map training.</p>
 </section>
 
 <section id="samples" class="wide">
@@ -100,8 +100,8 @@ bibtex: |
             <img src="samples_meanflow_baseline.jpg" alt="MeanFlow baseline, one-step samples: four classes, four samples each." loading="lazy">
         </figure>
         <figure>
-            <figcaption>Consistency only <span>(without SIGReg)</span></figcaption>
-            <img src="samples_meanflow_feco.jpg" alt="MeanFlow with the consistency loss only (without SIGReg), one-step samples with the same classes and noise as the baseline." loading="lazy">
+            <figcaption>iFeCo</figcaption>
+            <img src="samples_meanflow_feco.jpg" alt="MeanFlow with iFeCo, one-step samples with the same classes and noise as the baseline." loading="lazy">
         </figure>
     </div>
 
@@ -112,11 +112,11 @@ bibtex: |
             <img src="samples_shortcut_baseline.jpg" alt="Shortcut baseline, one-step samples: four classes, four samples each." loading="lazy">
         </figure>
         <figure>
-            <figcaption>Consistency only <span>(without SIGReg)</span></figcaption>
-            <img src="samples_shortcut_feco.jpg" alt="Shortcut with the consistency loss only (without SIGReg), one-step samples with the same classes and noise as the baseline." loading="lazy">
+            <figcaption>iFeCo</figcaption>
+            <img src="samples_shortcut_feco.jpg" alt="Shortcut with iFeCo, one-step samples with the same classes and noise as the baseline." loading="lazy">
         </figure>
     </div>
-    <p class="caption">Uncurated, after 1.2M training steps. Each row is one class, and both grids in a pair share classes and noise. iFeCo samples (with SIGReg) will follow.</p>
+    <p class="caption">Uncurated, after 1.2M training steps. Each row is one class, and both grids in a pair share classes and noise.</p>
 </section>
 
 <section id="method">
@@ -126,12 +126,11 @@ bibtex: |
         <figcaption>The predictor maps the student's block-2 features of the noisier view to the teacher's block-7 features of the cleaner view, with no gradient to the teacher. The teacher's forward already builds the flow-map target, so the loss adds no forward pass. The flow-map loss is unchanged.</figcaption>
     </figure>
     <ul class="feco-how">
-        <li><strong>Student.</strong> An early block of the online model reads the noisier view.</li>
-        <li><strong>Teacher.</strong> A deep block of the EMA model reads the cleaner view. No gradient flows into it.</li>
-        <li><strong>Predictor <em>h</em>.</strong> A small network maps the student's features to the teacher's. The consistency loss compares the two.</li>
-        <li><strong>SIGReg</strong> (from <a href="https://arxiv.org/abs/2511.08544">LeJEPA</a>). It spreads the online model's features at the teacher's depth by pushing their distribution toward an isotropic Gaussian.</li>
+        <li><strong>Student.</strong> An early block of the model being trained (block 2 of 12 at B/2) reads the noisier view.</li>
+        <li><strong>Teacher.</strong> A deep block (block 7 of 12) reads the cleaner view, in the forward pass that the training target already runs. No gradient flows into it.</li>
+        <li><strong>Predictor <em>h</em>.</strong> A two-layer MLP maps the student's features to the teacher's. The consistency loss is the cosine distance between the two, per token. The predictor is discarded after training.</li>
     </ul>
-    <p class="caption">Both terms are added to the usual flow-map loss.</p>
+    <p class="caption">The consistency loss is added to the usual flow-map loss, which is unchanged. One setting (loss weight 0.25, student at a quarter of the depth, teacher at 70%) serves all three families.</p>
 </section>
 
 <section id="free" class="wide">
@@ -225,7 +224,7 @@ bibtex: |
         </div>
         <figcaption>Black dot: the noisier view, where the student starts. Orange ring: the cleaner view, where the teacher reads its deep features. Dashed: steps the training target already takes. <a href="https://arxiv.org/abs/2410.12557">Shortcut Models</a>, <a href="https://arxiv.org/abs/2505.13447">MeanFlow</a>, <a href="https://arxiv.org/abs/2505.18825">LSD</a>.</figcaption>
     </figure>
-    <p class="caption">The only added cost is the small predictor and the SIGReg statistic.</p>
+    <p class="caption">The added cost is the small predictor and its loss. Each training step takes 4 to 6% more time.</p>
 </section>
 
 <script>
