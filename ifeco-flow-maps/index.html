@@ -241,44 +241,29 @@ bibtex: |
 })();
 </script>
 
-<section id="preliminary">
-    <h2>Preliminary results <span class="muted">(ImageNet-100 speedrun)</span></h2>
-    <figure class="feco-fig feco-chart">
-        <div class="feco-scroll scroll">
-        <svg class="fd" viewBox="0 0 520 228" role="img" aria-labelledby="chart-title">
-            <title id="chart-title">One-step FID for MeanFlow SiT-B/2 on the ImageNet-100 speedrun: baseline 57.3, REPA 51.2, SIGReg alone 56.3, consistency alone 51.8, iFeCo (consistency plus SIGReg) 48.9.</title>
-            <line class="repa-line" x1="304.0" y1="10" x2="304.0" y2="176"/>
-            <g class="row"><title>Baseline: 57.3</title><rect class="hit" x="0" y="10" width="520" height="28"/><text class="lab" x="200" y="29" text-anchor="end">Baseline</text><circle class="dot-n" cx="426.0" cy="24" r="4.5"/><text class="val" x="436.0" y="29">57.3</text></g>
-            <g class="row"><title>REPA (DINOv2): 51.2</title><rect class="hit" x="0" y="38" width="520" height="28"/><text class="lab" x="200" y="57" text-anchor="end">REPA (DINOv2)</text><circle class="dot-repa" cx="304.0" cy="52" r="4.5"/><text class="val" x="314.0" y="57">51.2</text></g>
-            <g class="row"><title>SIGReg alone: 56.3</title><rect class="hit" x="0" y="82" width="520" height="28"/><text class="lab" x="200" y="101" text-anchor="end">SIGReg alone</text><circle class="dot-n" cx="406.0" cy="96" r="4.5"/><text class="val" x="416.0" y="101">56.3</text></g>
-            <g class="row"><title>Consistency alone: 51.8</title><rect class="hit" x="0" y="110" width="520" height="28"/><text class="lab" x="200" y="129" text-anchor="end">Consistency alone</text><circle class="dot-n" cx="316.0" cy="124" r="4.5"/><text class="val" x="326.0" y="129">51.8</text></g>
-            <g class="row"><title>iFeCo: 48.9</title><rect class="hit" x="0" y="138" width="520" height="28"/><text class="lab best" x="200" y="157" text-anchor="end">iFeCo (both)</text><circle class="dot-best" cx="258.0" cy="152" r="5.5"/><text class="val best" x="268.0" y="157">48.9</text></g>
-            <line class="axis" x1="220" y1="176" x2="480" y2="176"/>
-            <line class="axis" x1="240.0" y1="176" x2="240.0" y2="180"/><text class="tick" x="240.0" y="196" text-anchor="middle">48</text>
-            <line class="axis" x1="320.0" y1="176" x2="320.0" y2="180"/><text class="tick" x="320.0" y="196" text-anchor="middle">52</text>
-            <line class="axis" x1="400.0" y1="176" x2="400.0" y2="180"/><text class="tick" x="400.0" y="196" text-anchor="middle">56</text>
-            <line class="axis" x1="480.0" y1="176" x2="480.0" y2="180"/><text class="tick" x="480.0" y="196" text-anchor="middle">60</text>
-            <text class="tick" x="350" y="218" text-anchor="middle">1-step FID (lower is better)</text>
-        </svg>
-        </div>
-        <figcaption>SIGReg alone barely helps, but on top of the consistency loss it lowers FID by 2.9 and passes <a href="https://arxiv.org/abs/2410.06940">REPA</a> (dotted line). MeanFlow SiT-B/2, one-step FID, preliminary ImageNet-100 speedrun.</figcaption>
+<section id="results">
+    <h2>Results <span class="muted">(ImageNet 256&times;256)</span></h2>
+    <p>iFeCo reaches the baseline's final 1-step FID 1.3 to 3.0 times sooner in five of six settings. On Shortcut, the speedup grows with training. On MeanFlow XL/2, iFeCo leads until 300k steps and then falls behind.</p>
+    <figure class="fig fig--wide wide">
+        <div class="fig-img"><img src="fid_curves.png" width="1350" height="550" alt="Six panels of 1-step FID over training steps: MeanFlow, Shortcut and LSD at B/2 (top) and XL/2 (bottom). iFeCo reaches the baseline's final FID 1.3, 3.0 and 2.4 times sooner at B/2, and 2.7 times sooner on Shortcut XL/2. On MeanFlow XL/2 it ends above the baseline. REPA is shown at B/2." loading="lazy"></div>
+        <figcaption>1-step FID over training. Labels: how many times sooner iFeCo reaches the baseline's final FID. XL/2 models are still training. REPA: our reference with a frozen DINOv2 encoder.</figcaption>
     </figure>
     <div class="table-wrap">
         <table>
             <thead>
-                <tr><th>Family</th><th>Baseline</th><th>Consistency</th><th>iFeCo (+ <a href="https://arxiv.org/abs/2511.08544">SIGReg</a>)</th><th><a href="https://arxiv.org/abs/2410.06940">REPA</a></th></tr>
+                <tr><th>Model</th><th>Steps</th><th>Baseline</th><th>iFeCo</th><th><a href="https://arxiv.org/abs/2410.06940">REPA</a></th><th>Speedup</th></tr>
             </thead>
             <tbody>
-                <tr><td>MeanFlow (SiT-B/2)</td><td>57.3</td><td>51.8</td><td>48.9</td><td>51.2</td></tr>
-                <tr><td>Shortcut (DiT-B/2)</td><td>139.9</td><td>135.4</td><td>116.8</td><td>137.3</td></tr>
-                <tr><td>LSD (SiT-B/2)</td><td>76.8</td><td>72.7</td><td>64.6</td><td>74.6</td></tr>
+                <tr><td><a href="https://arxiv.org/abs/2410.12557">Shortcut</a> DiT-B/2</td><td>1.2M</td><td>36.95</td><td><strong>27.72</strong></td><td>36.11</td><td>3.0&times;</td></tr>
+                <tr><td>Shortcut DiT-XL/2</td><td>1.0M</td><td>19.34</td><td><strong>13.17</strong></td><td>&ndash;</td><td>2.7&times;</td></tr>
+                <tr><td><a href="https://arxiv.org/abs/2505.13447">MeanFlow</a> SiT-B/2</td><td>1.2M</td><td>6.12</td><td>5.69</td><td><strong>4.86</strong></td><td>1.3&times;</td></tr>
+                <tr><td>MeanFlow SiT-XL/2</td><td>500k</td><td><strong>3.80</strong></td><td>4.33</td><td>&ndash;</td><td>&ndash;</td></tr>
+                <tr><td><a href="https://arxiv.org/abs/2505.18825">LSD</a> SiT-B/2</td><td>1.2M</td><td>12.42</td><td><strong>9.96</strong></td><td>&ndash;</td><td>2.4&times;</td></tr>
+                <tr><td>LSD SiT-XL/2</td><td>900k</td><td>7.72</td><td><strong>7.28</strong></td><td>&ndash;</td><td>1.5&times;</td></tr>
             </tbody>
         </table>
     </div>
-    <p class="caption">One-step FID (lower is better), mean of 2 seeds after 39.5k steps on the preliminary ImageNet-100 speedrun, shorter than the paper budget. <a href="https://arxiv.org/abs/2410.06940">REPA</a> aligns features with a frozen <a href="https://arxiv.org/abs/2304.07193">DINOv2</a> encoder.</p>
-</section>
-
-<section id="main-results">
-    <h2>Main results</h2>
-    <div class="feco-soon">ImageNet-1k 256&times;256 results at standard training budgets are coming soon.</div>
+    <p class="caption">1-step FID-50k (lower is better) with ADM reference statistics. Speedup: how many times sooner iFeCo reaches the baseline's final 1-step FID. MeanFlow XL/2 and LSD XL/2 have not finished their schedules. The MeanFlow and LSD models here use an extra EMA teacher forward pass in place of the free teacher; models with the free teacher are in training.</p>
+    <p><strong>Multi-step sampling.</strong> On Shortcut and LSD B/2, the gain carries over to multi-step sampling: iFeCo lowers the 8-step FID of Shortcut B/2 from 23.89 to 17.78 and the 4-step FID of LSD B/2 from 6.47 to 5.58. On MeanFlow B/2, the 4-step FIDs tie (5.53 against 5.52).</p>
+    <p><strong>Comparison with REPA.</strong> <a href="https://arxiv.org/abs/2410.06940">REPA</a> aligns features with a frozen <a href="https://arxiv.org/abs/2304.07193">DINOv2</a> encoder. Our REPA reference uses the same student block as iFeCo, is not tuned for flow maps, and does not reproduce the published REPA. Which target is better depends on the family and on the number of sampling steps. iFeCo has the lower 1-step FID on Shortcut B/2 (27.72 against 36.11) and on LSD B/2 (10.98 against 12.07 at 900k steps). REPA is better on MeanFlow B/2 (4.86 against 5.69) and with 8 sampling steps on Shortcut B/2 (16.14 against 17.78) and LSD B/2 (4.97 against 5.78).</p>
 </section>
