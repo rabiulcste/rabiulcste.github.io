@@ -502,7 +502,7 @@ bibtex: |
 <image href="view_clean.webp" x="296" y="44" width="56" height="56" preserveAspectRatio="none"/><text class="sm" x="324" y="118" text-anchor="middle">55 dB</text>
 </svg></figure>
     <h3 id="repa">REPA without a frozen encoder</h3>
-    <p><a href="https://arxiv.org/abs/2410.06940">REPA</a> speeds up diffusion training by aligning the generator's features with a frozen, pretrained encoder such as <a href="https://arxiv.org/abs/2304.07193">DINOv2</a>. In DEM, the network that generates pixels is the same network that learns the embedding, and its target comes from its own EMA teacher, so no outside encoder is needed.</p>
+    <p><a href="https://arxiv.org/abs/2410.06940">REPA</a> (representation alignment) speeds up diffusion training by aligning the generator's features with a frozen, pretrained encoder such as <a href="https://arxiv.org/abs/2304.07193">DINOv2</a>. In DEM, the network that generates pixels is the same network that learns the embedding, and its target comes from its own EMA teacher, so no outside encoder is needed.</p>
     <figure class="dem-fig"><svg class="dem-svg dem-flow dem-sketch" viewBox="0 0 400 176" role="img" aria-labelledby="repa-t">
 <title id="repa-t">Left, REPA: a frozen DINOv2 encoder aligns the features of a diffusion transformer. Right, DEM: the network's own EMA teacher gives the target to a diffusion transformer that outputs both embeddings and pixels.</title>
 <defs><marker id="ah-repa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
