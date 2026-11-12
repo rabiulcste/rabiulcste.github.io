@@ -135,6 +135,7 @@ bibtex: |
     .dem-reads { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px 20px; }
     .dem-reads p { margin: 0; font-size: var(--text-secondary); color: var(--muted); line-height: 1.5; }
     .dem-reads p strong { color: var(--text); }
+    .dem-grp th { padding-top: 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 1px solid var(--border); }
     /* Phone figures: two type sizes (11 px labels, 14 px titles), see the layout comment in the generator. */
     .dem-svg--phone.dem-flow:not(.dem-copy) :is(.sm, .lb, .pl1) { font-size: 11px; }
     .dem-svg--phone.dem-flow:not(.dem-copy) :is(.bt, .steplab, .mth) { font-size: 13px; } .dem-svg--phone.dem-flow:not(.dem-copy) .msub { font-size: 11px; }
@@ -551,8 +552,10 @@ bibtex: |
                 <tr><th></th><th>DEM</th><th>Baseline</th></tr>
             </thead>
             <tbody>
+                <tr class="dem-grp"><th colspan="3">Representation</th></tr>
                 <tr><td>Linear probe</td><td>77.2%</td><td>76.2% (<a href="https://arxiv.org/abs/2304.07193">DINOv2</a>)</td></tr>
                 <tr><td>k-NN</td><td>69.9%</td><td>74.7% (<a href="https://arxiv.org/abs/2304.07193">DINOv2</a>)</td></tr>
+                <tr class="dem-grp"><th colspan="3">Generation</th></tr>
                 <tr><td>FID-50k without labels</td><td>19.5</td><td>12.3 (<a href="https://arxiv.org/abs/2312.03701">RCG</a>, three separate models)</td></tr>
                 <tr><td>Class-conditional FID-50k</td><td>14.5 (1% of labels)</td><td>12.4 (<a href="https://arxiv.org/abs/2511.13720">JiT</a>, all labels)</td></tr>
             </tbody>
