@@ -129,13 +129,12 @@ bibtex: |
     .dem-btnfig[data-task="gen"] .u:not(.on-gen), .dem-btnfig[data-task="cmp"] .u:not(.on-cmp) { opacity: var(--dim); }
     .dem-btnfig[data-task="rep"] .v:not(.in-rep), .dem-btnfig[data-task="gen"] .v:not(.in-gen), .dem-btnfig[data-task="cmp"] .v:not(.in-cmp) { display: none; }
     .dem-btns { margin-block: 0 12px; }
-    /* Three readings: one small sketch each, side by side, stacked on phones. */
-    .dem-reads { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-    .dem-reads figure { margin: 0; min-width: 0; }
-    .dem-reads svg { width: 100%; height: auto; display: block; min-width: 0; max-width: 300px; margin-inline: auto; }
-    .dem-reads p { margin: 8px 0 0; font-size: 0.92em; color: var(--muted); }
+    /* Connections figure: DEM as the hub, one short caption per connection below (three columns, stacked on phones). */
+    .dem-svg.dem-hub { min-width: 0; max-width: 680px; margin: 0 auto; }
+    .dem-svg--phone.dem-hub { max-width: 360px; }
+    .dem-reads { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px 20px; }
+    .dem-reads p { margin: 0; font-size: var(--text-secondary); color: var(--muted); line-height: 1.5; }
     .dem-reads p strong { color: var(--text); }
-    .dem-reads .strike { stroke: var(--muted); stroke-width: 1.5; }
     /* Phone figures: two type sizes (11 px labels, 14 px titles), see the layout comment in the generator. */
     .dem-svg--phone.dem-flow:not(.dem-copy) :is(.sm, .lb, .pl1) { font-size: 11px; }
     .dem-svg--phone.dem-flow:not(.dem-copy) :is(.bt, .steplab, .mth) { font-size: 13px; } .dem-svg--phone.dem-flow:not(.dem-copy) .msub { font-size: 11px; }
@@ -245,18 +244,18 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> One network, trained only to denoise, that both understands images and generates them. Its linear probe matches DINOv2, and it draws images without any labels.</p>
+    <p class="tldr"><strong>TL;DR:</strong> Representation learning and image generation usually need separate models. DEM does both in one network, trained only to denoise. Its linear probe matches DINOv2, and it generates images without labels.</p>
 </section>
 <section class="intro">
-    <p>Models that understand images and models that generate them are usually trained separately, and for a good reason. A model that has to redraw an image must remember everything about it, down to the exact shade of the grass and where the frame cuts off. A recognizer is better off ignoring those details. So the usual recipe learns a representation first and builds <a href="https://arxiv.org/abs/2312.03701">a generator on top of it</a>, or trains <a href="https://arxiv.org/abs/2211.09117">one model on a separately learned tokenizer</a>.</p>
-    <p>We wanted one network to do both, while keeping that split. A denoising embedding model (DEM) is a diffusion model at two levels. It learns to denoise an image's embedding from another view of the image, and to draw the image from that embedding. The embedding holds what the image is about, and the pixel level fills in the rest.</p>
-    <p>We train one Transformer on ImageNet-100, in pixel space, with no <a href="https://arxiv.org/abs/2112.10752">latent tokenizer</a> and no pretrained encoder. Its linear probe matches DINOv2 (77.2% against 76.2%), and the same network generates images without labels. The two tasks also help each other. At 100k iterations, dropping the pixel loss costs the probe 3.6 points (76.1% to 72.5%).</p>
+    <p>Generative models learn representations that still trail those of self-supervised methods. A model that has to redraw an image must remember everything about it, down to the exact shade of the grass and where the frame cuts off, while a recognizer is better off ignoring those details. So the usual recipe learns a representation first and builds <a href="https://arxiv.org/abs/2312.03701">a generator on top of it</a>, or trains <a href="https://arxiv.org/abs/2211.09117">one model on a separately learned tokenizer</a>.</p>
+    <p>We keep this split inside one network, trained with denoising alone. A denoising embedding model (DEM) is a diffusion model at two levels. It denoises an image's embedding given another view of the image, and it generates the image from that embedding. The embedding holds what the image is about, and the pixel level fills in the rest.</p>
+    <p>We train one Transformer on ImageNet-100, in pixel space, with no <a href="https://arxiv.org/abs/2112.10752">latent tokenizer</a> and no pretrained encoder. Its linear probe matches DINOv2 (77.2% against 76.2%), and the same network generates images without labels. Generation also helps the representation. At 100k iterations, removing the pixel loss drops the probe from 76.1% to 72.5%.</p>
 </section>
 
 <section id="method">
     <h2>Diffusion at two levels</h2>
     <p>DEM has an encoder and two denoisers. The encoder turns an image into an embedding. One denoiser works on embeddings. Shown part of an image, it learns which embeddings could fit. The other works on pixels, and given an embedding, it learns which images could fit. Since the embedding is learned from different views of the same image, it ends up keeping what the views have in common, and the pixel level takes care of the rest.</p>
-    <p>Both levels do the same thing, which we call <em>view-conditioned denoising</em>. For the embedding, the condition is another view of the image. For the pixels, it is the embedding itself, which you can think of as the coarsest possible view. Take the view away and the embedding denoiser simply samples an embedding, much like picking a class label, so DEM can generate images without any labels. In practice it is one Vision Transformer with two small heads.</p>
+    <p>Both levels do the same thing, which we call <em>view-conditioned denoising</em>. For the embedding, the condition is another view of the image. For the pixels, it is the embedding, the image's coarsest view. Take the view away and the embedding denoiser samples an embedding on its own, which then takes the place of a class label, so DEM generates images without labels. In practice it is one Vision Transformer with two small heads.</p>
     <h3>Training</h3>
     <p>A training step looks at one image in three forms, a clean view, a noised view and a noised image. The teacher, an <a href="https://arxiv.org/abs/2104.14294">exponential moving average (EMA)</a> of the network, turns the clean view into the target embedding. The student reads the noised view, and the embedding denoiser uses it to clean up a noisy copy of the target (loss 1). The same backbone then reads the noised image, conditioned on the target, and the pixel head recovers the original (loss 2).</p>
     <figure class="dem-fig dem-btnfig" id="dem-train">
@@ -431,7 +430,7 @@ bibtex: |
 
 <section id="views">
     <h2>Views as noise maps</h2>
-    <p>Self-supervised learning (SSL) usually learns from masked or cropped images, and diffusion models learn from noisy ones. The two are closely related. A masked patch is simply a patch noised all the way, so one process that <a href="https://arxiv.org/abs/2407.01392">picks a noise level for each patch</a> can produce every input DEM needs. We describe each input by its noise map, one level per patch. The student gets a noised view, the teacher a clean one, and the pixel pass the whole image at a single noise level.</p>
+    <p>Self-supervised learning (SSL) usually learns from masked or cropped images, and diffusion models learn from noisy ones. A masked patch is simply a patch noised all the way, so one process that <a href="https://arxiv.org/abs/2407.01392">picks a noise level for each patch</a> can produce every input DEM needs. We describe each input by its noise map, one level per patch. The student gets a noised view, the teacher a clean one, and the pixel pass the whole image at a single noise level.</p>
     <figure class="dem-fig">
         <div class="dem-views">
             <figure class="dem-view"><figcaption><span>Clean</span><span class="dem-role sl">clean view</span></figcaption><svg class="dem-map" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" fill="#fff"/><path d="M10 0V80M0 10H80M20 0V80M0 20H80M30 0V80M0 30H80M40 0V80M0 40H80M50 0V80M0 50H80M60 0V80M0 60H80M70 0V80M0 70H80" stroke="#fff" stroke-width="0.8"/></svg><img src="view_clean.webp" width="64" height="64" alt="A clean image of a dog, with an all-white noise map." loading="lazy"></figure>
@@ -493,42 +492,43 @@ bibtex: |
 
 <section id="readings">
     <h2>Connections to SSL, diffusion autoencoders and REPA</h2>
-    <div class="dem-reads">
-        <figure><svg class="dem-svg dem-flow" viewBox="0 0 220 140" role="img" aria-labelledby="rd1-t">
-<title id="rd1-t">A view and a pure-noise copy of the target go into the network, which outputs the predicted embedding.</title>
-<defs><marker id="ah-rd1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
-<image href="view_all.webp" x="8" y="14" width="48" height="48" preserveAspectRatio="none"/>
-<text class="sm" x="32" y="76" text-anchor="middle">view</text>
-<rect class="bx sl dash" x="8" y="92" width="48" height="28" rx="6"/><text class="sm" x="32" y="110" text-anchor="middle">τ = 1</text>
-<path class="ln rep" d="M60 38H86" marker-end="url(#ah-rd1)"/><path class="ln sl" d="M60 106H86" marker-end="url(#ah-rd1)"/>
-<rect class="bx rep" x="88" y="22" width="68" height="100" rx="8"/><text class="bt" x="122" y="77" text-anchor="middle">DEM</text>
-<path class="ln emb" d="M160 72H174" marker-end="url(#ah-rd1)"/>
-<rect class="bx emb" x="176" y="58" width="36" height="28" rx="6"/><text class="bt" x="194" y="77" text-anchor="middle">ẑ</text>
-</svg><p><strong>SSL.</strong> Give the denoiser pure noise and it predicts from the view alone, just like BYOL or I-JEPA.</p></figure>
-        <figure><svg class="dem-svg dem-flow" viewBox="0 0 220 140" role="img" aria-labelledby="rd2-t">
-<title id="rd2-t">An image encodes into its embedding z and a pixel noise eta. Decoding both gives the image back.</title>
-<defs><marker id="ah-rd2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
-<image href="view_clean.webp" x="6" y="40" width="48" height="48" preserveAspectRatio="none"/>
-<path class="ln rep" d="M58 56L88 40" marker-end="url(#ah-rd2)"/><path class="ln sl" d="M58 72L88 92" marker-end="url(#ah-rd2)"/>
-<rect class="bx rep" x="90" y="24" width="40" height="28" rx="6"/><text class="bt" x="110" y="43" text-anchor="middle">z</text>
-<rect class="bx sl dash" x="90" y="80" width="40" height="28" rx="6"/><text class="bt" x="110" y="99" text-anchor="middle">η</text>
-<path class="ln pix" d="M134 40L162 56" marker-end="url(#ah-rd2)"/><path class="ln pix" d="M134 92L162 72" marker-end="url(#ah-rd2)"/>
-<image href="view_clean.webp" x="166" y="40" width="48" height="48" preserveAspectRatio="none"/>
-<text class="sm" x="30" y="104" text-anchor="middle">encode</text><text class="sm" x="190" y="104" text-anchor="middle">decode</text>
-<text class="sm" x="110" y="130" text-anchor="middle">content · details</text>
-</svg><p><strong>Diffusion autoencoder.</strong> An image splits into its embedding z and a pixel noise η, and comes back almost exactly (55 dB). Swap in a new η and only the details change.</p></figure>
-        <figure><svg class="dem-svg dem-flow" viewBox="0 0 220 140" role="img" aria-labelledby="rd3-t">
-<title id="rd3-t">A frozen pretrained encoder, crossed out, would guide the generator in REPA. In DEM the guide is the network's own EMA.</title>
-<defs><marker id="ah-rd3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
-<rect class="bx sl dash" x="2" y="10" width="108" height="30" rx="6"/><text class="sm" x="56" y="30" text-anchor="middle">frozen DINOv2</text>
-<path class="strike" d="M6 14L106 36"/>
-<rect class="bx sl" x="122" y="10" width="92" height="30" rx="6"/><text class="sm" x="168" y="30" text-anchor="middle">own EMA</text>
-<path class="ln sl dash" d="M56 44V66" marker-end="url(#ah-rd3)"/><path class="ln sl" d="M168 44V66" marker-end="url(#ah-rd3)"/>
-<rect class="bx rep" x="30" y="70" width="160" height="34" rx="8"/><text class="bt" x="110" y="92" text-anchor="middle">one network</text>
-<path class="ln emb" d="M80 108V122"/><path class="ln pix" d="M140 108V122"/>
-<text class="sm t-emb" x="80" y="136" text-anchor="middle">embedding</text><text class="sm t-pix" x="140" y="136" text-anchor="middle">pixels</text>
-</svg><p><strong>REPA.</strong> REPA steers a generator with a frozen, pretrained encoder. DEM gets its guide from its own EMA instead.</p></figure>
-    </div>
+    <figure class="dem-fig">
+        <div class="dem-media only-desk"><svg class="dem-svg dem-flow dem-hub" viewBox="0 0 680 260" role="img" aria-labelledby="hub-t">
+<title id="hub-t">DEM in the centre, with an EMA teacher, an embedding level and a pixel level. Setting the embedding noise to tau equals 1 gives SSL prediction such as BYOL and I-JEPA. Inverting the pixel ODE gives a diffusion autoencoder. The EMA teacher plays the role of REPA's guide, with no frozen encoder.</title>
+<defs><marker id="ah-hub" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
+<rect class="bx sl" x="290" y="18" width="100" height="28" rx="6"/><text class="sm" x="340" y="37" text-anchor="middle">EMA teacher</text>
+<path class="ln sl dash" d="M340 46V60"/>
+<rect class="bx rep" x="250" y="60" width="180" height="176" rx="10"/><text class="bt" x="340" y="86" text-anchor="middle">DEM</text>
+<rect class="bx emb" x="266" y="102" width="148" height="50" rx="6"/><text class="role t-emb" x="340" y="125" text-anchor="middle">embedding level</text><text class="sm" x="340" y="142" text-anchor="middle">view → z</text>
+<rect class="bx pix" x="266" y="168" width="148" height="50" rx="6"/><text class="role t-pix" x="340" y="191" text-anchor="middle">pixel level</text><text class="sm" x="340" y="208" text-anchor="middle">z → image</text>
+<path class="ln emb" d="M264 127H190" marker-end="url(#ah-hub)"/><text class="sm" x="227" y="118" text-anchor="middle">τ = 1</text>
+<rect class="bx sl" x="16" y="101" width="172" height="52" rx="8"/><text class="bt" x="102" y="123" text-anchor="middle">SSL prediction</text><text class="sm" x="102" y="142" text-anchor="middle">BYOL, I-JEPA</text>
+<path class="ln pix" d="M416 193H490" marker-end="url(#ah-hub)"/><text class="sm" x="453" y="184" text-anchor="middle">invert ODE</text>
+<rect class="bx sl" x="492" y="167" width="172" height="52" rx="8"/><text class="bt" x="578" y="189" text-anchor="middle">Diff. autoencoder</text><text class="sm" x="578" y="208" text-anchor="middle">image ↔ (z, η)</text>
+<path class="ln sl" d="M392 32H490" marker-end="url(#ah-hub)"/><text class="sm" x="441" y="24" text-anchor="middle">guide</text>
+<rect class="bx sl" x="492" y="6" width="172" height="52" rx="8"/><text class="bt" x="578" y="28" text-anchor="middle">REPA</text><text class="sm" x="578" y="47" text-anchor="middle">no frozen encoder</text>
+</svg></div>
+        <div class="dem-media only-phone"><svg class="dem-svg dem-svg--phone dem-flow dem-hub" viewBox="0 0 360 384" role="img" aria-labelledby="hubp-t">
+<title id="hubp-t">DEM in the centre, with an EMA teacher, an embedding level and a pixel level. The teacher links to REPA, the embedding level at tau equals 1 to SSL prediction, and the pixel level, by inverting its ODE, to a diffusion autoencoder.</title>
+<defs><marker id="ah-hubp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
+<rect class="bx sl" x="95" y="6" width="170" height="50" rx="8"/><text class="bt" x="180" y="27" text-anchor="middle">REPA</text><text class="sm" x="180" y="45" text-anchor="middle">no frozen encoder</text>
+<path class="ln sl" d="M180 84V60" marker-end="url(#ah-hubp)"/><text class="sm" x="188" y="76">guide</text>
+<rect class="bx sl" x="130" y="86" width="100" height="26" rx="6"/><text class="sm" x="180" y="103" text-anchor="middle">EMA teacher</text>
+<path class="ln sl dash" d="M180 112V122"/>
+<rect class="bx rep" x="70" y="122" width="220" height="160" rx="10"/><text class="bt" x="180" y="144" text-anchor="middle">DEM</text>
+<rect class="bx emb" x="86" y="156" width="188" height="48" rx="6"/><text class="role t-emb" x="180" y="177" text-anchor="middle">embedding level</text><text class="sm" x="180" y="195" text-anchor="middle">view → z</text>
+<rect class="bx pix" x="86" y="216" width="188" height="48" rx="6"/><text class="role t-pix" x="180" y="237" text-anchor="middle">pixel level</text><text class="sm" x="180" y="255" text-anchor="middle">z → image</text>
+<path class="ln emb" d="M84 180H40V326" marker-end="url(#ah-hubp)"/><text class="sm" x="46" y="304">τ = 1</text>
+<path class="ln pix" d="M276 240H320V326" marker-end="url(#ah-hubp)"/><text class="sm" x="314" y="304" text-anchor="end">invert ODE</text>
+<rect class="bx sl" x="6" y="328" width="168" height="50" rx="8"/><text class="bt" x="90" y="349" text-anchor="middle">SSL prediction</text><text class="sm" x="90" y="367" text-anchor="middle">BYOL, I-JEPA</text>
+<rect class="bx sl" x="186" y="328" width="168" height="50" rx="8"/><text class="bt" x="270" y="349" text-anchor="middle">Diff. autoencoder</text><text class="sm" x="270" y="367" text-anchor="middle">image ↔ (z, η)</text>
+</svg></div>
+        <div class="dem-reads">
+            <p><strong>SSL.</strong> Give the denoiser pure noise in place of its target, and it predicts from the view alone, as BYOL and I-JEPA do.</p>
+            <p><strong>Diffusion autoencoder.</strong> An image splits into its embedding z and a pixel noise η, and comes back almost exactly (55 dB). Swap in a new η and only the details change.</p>
+            <p><strong>REPA.</strong> REPA steers a generator with a frozen, pretrained encoder. DEM gets its guide from its own EMA instead.</p>
+        </div>
+    </figure>
 </section>
 
 
