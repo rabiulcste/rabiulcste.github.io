@@ -3,6 +3,7 @@ layout: project
 title: "A Self-Supervised Free Lunch for Flow Map Training"
 seo_title: "iFeCo: A Self-Supervised Free Lunch for Flow Map Training"
 description: "iFeCo: flow maps learn from their own features. One consistency loss, no external encoder, no extra forward pass. Preliminary ImageNet 256 results."
+abstract: "Flow-map training already evaluates a teacher on a cleaner view to build its target. iFeCo adds one feature consistency loss, in which early features of the noisier view predict the teacher's deep features of the cleaner view, with no external encoder and no extra forward pass. It works as representation alignment (REPA) without a pretrained encoder for one-step and few-step generators such as MeanFlow and shortcut models. In preliminary ImageNet 256 results (1-step FID), it reaches the baseline's final FID 1.3 to 3.0 times sooner in five of six settings, for example 36.95 to 27.72 on Shortcut DiT-B/2 at 1.2M steps."
 keywords: ["iFeCo", "flow map", "flow maps", "flow map training", "one-step generation", "one-step diffusion", "few-step diffusion", "few-step generation", "fast diffusion sampling", "MeanFlow", "mean flows", "shortcut models", "LSD", "Lagrangian self-distillation", "consistency models", "consistency training", "diffusion distillation", "self-distillation", "knowledge distillation", "representation alignment", "REPA", "representation alignment for diffusion", "self-supervised learning", "diffusion transformer", "SiT", "DINOv2", "ImageNet"]
 authors:
   - name: Rabiul Awal
