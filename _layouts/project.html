@@ -47,6 +47,9 @@ placeholder box.
     {%- if page.year %}
     <meta name="citation_publication_date" content="{{ page.year }}">
     {%- endif %}
+    {%- if page.abstract %}
+    <meta name="citation_abstract" content="{{ page.abstract | escape }}">
+    {%- endif %}
     {%- assign home = site.url | append: site.baseurl | append: '/' %}
     <script type="application/ld+json">
     {
@@ -57,6 +60,9 @@ placeholder box.
         "keywords": {{ page.keywords | join: ', ' | jsonify }},
         {%- endif %}
         "description": {{ page.description | default: site.description | jsonify }},
+        {%- if page.abstract %}
+        "abstract": {{ page.abstract | jsonify }},
+        {%- endif %}
         "url": {{ page.url | prepend: site.baseurl | prepend: site.url | jsonify }},
         {%- if page.og_image %}
         "image": {{ page.og_image | prepend: page.url | prepend: site.baseurl | prepend: site.url | jsonify }},
