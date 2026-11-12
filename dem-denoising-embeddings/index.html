@@ -129,13 +129,8 @@ bibtex: |
     .dem-btnfig[data-task="gen"] .u:not(.on-gen), .dem-btnfig[data-task="cmp"] .u:not(.on-cmp) { opacity: var(--dim); }
     .dem-btnfig[data-task="rep"] .v:not(.in-rep), .dem-btnfig[data-task="gen"] .v:not(.in-gen), .dem-btnfig[data-task="cmp"] .v:not(.in-cmp) { display: none; }
     .dem-btns { margin-block: 0 12px; }
-    /* Connections figure: DEM as the hub, one short caption per connection below (three columns, stacked on phones). */
-    .dem-svg.dem-hub { min-width: 0; max-width: 796px; margin: 0 auto; }
-    .dem-svg--phone.dem-hub { max-width: 360px; }
-    .dem-reads { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px 20px; }
-    .dem-reads p { margin: 0; font-size: var(--text-secondary); color: var(--muted); line-height: 1.5; }
-    .dem-reads p strong { color: var(--text); }
-    .dem-hub a { text-decoration: none; } .dem-hub .hub-card:hover rect { stroke: var(--text); } .dem-hub .hub-card:focus-visible rect { stroke: var(--rep); stroke-width: 2.5; }
+    /* Connection sketches: small, centred, the column width on phones. */
+    .dem-svg.dem-sketch { min-width: 0; max-width: 400px; margin: 0 auto; }
     .dem-grp th { padding-top: 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 1px solid var(--border); }
     /* Phone figures: two type sizes (11 px labels, 14 px titles), see the layout comment in the generator. */
     .dem-svg--phone.dem-flow:not(.dem-copy) :is(.sm, .lb, .pl1) { font-size: 11px; }
@@ -465,8 +460,9 @@ bibtex: |
 </svg></figure>
 </section>
 
-<section id="special-case">
-    <h2>SSL is the full-noise case</h2>
+<section id="connections">
+    <h2>Connections to SSL, diffusion autoencoders and REPA</h2>
+    <h3 id="special-case">SSL is the full-noise case</h3>
     <p><a href="https://arxiv.org/abs/2006.07733">Joint-embedding SSL methods</a> turn out to be a special case of DEM. Imagine handing such a predictor a noisy copy of its own target. If the copy is pure noise, it tells the predictor nothing, and we are back to the standard SSL prediction task. Prediction is DEM at full noise. Below full noise, DEM learns the whole range of embeddings that fit the view, where a predictor can only give their average.</p>
     <figure class="dem-fig" id="dem-tau">
         <div class="dem-tau-wrap"><svg class="dem-svg dem-svg--phone dem-flow dem-copy" viewBox="0 0 360 176" role="img" aria-labelledby="cp-t">
@@ -490,48 +486,41 @@ bibtex: |
         </div>
         <p class="dem-tau-line" id="dem-tau-line" aria-live="polite">Lower noise (DEM). The copy still carries information.</p>
     </figure>
+
+    <h3 id="autoencoder">A diffusion autoencoder</h3>
+    <p>DEM can also be read as a <a href="https://arxiv.org/abs/2111.15640">diffusion autoencoder</a>. An image splits into two latents, its embedding z, which holds the high-level semantics, and a pixel noise η, which holds the low-level details. We find η by running the pixel denoiser's ODE from the image back to noise. Running it forward again reconstructs the image almost exactly (55 dB PSNR), and a new η changes only the low-level details.</p>
+    <figure class="dem-fig"><svg class="dem-svg dem-flow dem-sketch" viewBox="0 0 360 150" role="img" aria-labelledby="dae-t">
+<title id="dae-t">An image is encoded into its embedding z, which holds the high-level semantics, and a pixel noise eta, which holds the low-level details. Decoding both gives the image back at 55 dB PSNR.</title>
+<defs><marker id="ah-dae" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
+<image href="view_clean.webp" x="8" y="44" width="56" height="56" preserveAspectRatio="none"/><text class="sm" x="36" y="118" text-anchor="middle">image</text>
+<path class="ln rep" d="M68 62L148 42" marker-end="url(#ah-dae)"/><path class="ln sl" d="M68 82L148 102" marker-end="url(#ah-dae)"/>
+<text class="sm" x="104" y="77" text-anchor="middle">encode</text>
+<rect class="bx rep" x="152" y="26" width="56" height="30" rx="6"/><text class="bt" x="180" y="46" text-anchor="middle">z</text><text class="sm t-rep" x="180" y="17" text-anchor="middle">high-level semantics</text>
+<rect class="bx sl dash" x="152" y="88" width="56" height="30" rx="6"/><text class="bt" x="180" y="108" text-anchor="middle">η</text><text class="sm" x="180" y="137" text-anchor="middle">low-level details</text>
+<path class="ln pix" d="M212 42L290 62" marker-end="url(#ah-dae)"/><path class="ln pix" d="M212 102L290 82" marker-end="url(#ah-dae)"/>
+<text class="sm" x="256" y="77" text-anchor="middle">decode</text>
+<image href="view_clean.webp" x="296" y="44" width="56" height="56" preserveAspectRatio="none"/><text class="sm" x="324" y="118" text-anchor="middle">55 dB</text>
+</svg></figure>
+    <h3 id="repa">REPA without a frozen encoder</h3>
+    <p><a href="https://arxiv.org/abs/2410.06940">REPA</a> speeds up diffusion training by aligning the generator's features with a frozen, pretrained encoder such as <a href="https://arxiv.org/abs/2304.07193">DINOv2</a>. In DEM, the network that generates pixels is the same network that learns the embedding, and its target comes from its own EMA teacher, so no outside encoder is needed.</p>
+    <figure class="dem-fig"><svg class="dem-svg dem-flow dem-sketch" viewBox="0 0 400 176" role="img" aria-labelledby="repa-t">
+<title id="repa-t">Left, REPA: a frozen DINOv2 encoder aligns the features of a separate generator. Right, DEM: the network's own EMA teacher gives the target to one network that outputs both embeddings and pixels.</title>
+<defs><marker id="ah-repa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
+<text class="bt" x="100" y="18" text-anchor="middle">REPA</text>
+<rect class="bx sl dash" x="30" y="32" width="140" height="30" rx="6"/><text class="sm" x="100" y="52" text-anchor="middle">frozen DINOv2</text>
+<path class="ln sl" d="M100 64V92" marker-end="url(#ah-repa)"/><text class="sm" x="108" y="83">align</text>
+<rect class="bx pix" x="30" y="94" width="140" height="34" rx="6"/><text class="bt" x="100" y="116" text-anchor="middle">generator</text>
+<text class="sm t-pix" x="100" y="150" text-anchor="middle">pixels</text>
+<path class="ln sl" d="M200 26V166" style="stroke-opacity:0.3"/>
+<text class="bt t-rep" x="300" y="18" text-anchor="middle">DEM</text>
+<rect class="bx sl" x="230" y="32" width="140" height="30" rx="6"/><text class="sm" x="300" y="52" text-anchor="middle">own EMA teacher</text>
+<path class="ln sl" d="M300 64V92" marker-end="url(#ah-repa)"/><text class="sm" x="308" y="83">target</text>
+<rect class="bx rep" x="230" y="94" width="140" height="34" rx="6"/><text class="bt" x="300" y="116" text-anchor="middle">one network</text>
+<path class="ln sl dash" d="M372 111C394 111 394 47 374 47" marker-end="url(#ah-repa)"/><text class="sm t-emb" x="262" y="150" text-anchor="middle">embeddings</text><text class="sm t-pix" x="340" y="150" text-anchor="middle">pixels</text>
+</svg></figure>
 </section>
 
-<section id="readings">
-    <h2>Connections to SSL, diffusion autoencoders and REPA</h2>
-    <figure class="dem-fig">
-        <div class="dem-media wide only-desk"><svg class="dem-svg dem-flow dem-hub" viewBox="0 0 796 280" role="img" aria-labelledby="hub-t">
-<title id="hub-t">DEM in the centre. Its embedding level turns a view into an embedding z, and its pixel level turns z into an image, with an EMA teacher on top. With a pure-noise copy of the target (tau equals 1), the embedding level is SSL prediction such as BYOL and I-JEPA. Inverting the pixel ODE makes DEM a diffusion autoencoder. The EMA teacher plays the role of REPA's guide, with no frozen encoder.</title>
-<defs><marker id="ah-hub" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker><marker id="as-hub" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
-<rect class="bx sl" x="348" y="20" width="100" height="28" rx="6"/><text class="sm" x="398" y="39" text-anchor="middle">EMA teacher</text>
-<path class="ln sl dash" d="M398 48V62"/>
-<rect class="bx rep" x="300" y="62" width="196" height="208" rx="10"/><text class="bt" x="398" y="88" text-anchor="middle">DEM</text>
-<rect class="bx emb" x="316" y="104" width="164" height="58" rx="6"/><text class="role t-emb" x="398" y="121" text-anchor="middle">embedding level</text><image href="view_all.webp" x="354" y="128" width="26" height="26" preserveAspectRatio="none"/><path class="ln emb" d="M384 141H410" marker-end="url(#as-hub)"/><rect class="bx emb" x="414" y="132" width="28" height="18" rx="4"/><text class="sm" x="428" y="145" text-anchor="middle">z</text>
-<rect class="bx pix" x="316" y="174" width="164" height="58" rx="6"/><text class="role t-pix" x="398" y="191" text-anchor="middle">pixel level</text><rect class="bx emb" x="354" y="202" width="28" height="18" rx="4"/><text class="sm" x="368" y="215" text-anchor="middle">z</text><path class="ln pix" d="M386 211H412" marker-end="url(#as-hub)"/><image href="view_clean.webp" x="416" y="198" width="26" height="26" preserveAspectRatio="none"/>
-<path class="ln emb" d="M314 133H186" marker-end="url(#ah-hub)"/><text class="sm" x="243" y="124" text-anchor="middle">copy at τ = 1</text>
-<a href="https://arxiv.org/abs/2006.07733" class="hub-card"><rect class="bx sl" x="8" y="107" width="176" height="52" rx="8"/><text class="bt" x="96" y="129" text-anchor="middle">SSL prediction</text><text class="sm" x="96" y="147" text-anchor="middle">BYOL, I-JEPA</text></a>
-<path class="ln pix" d="M482 203H610" marker-end="url(#ah-hub)"/><text class="sm" x="553" y="194" text-anchor="middle">invert the ODE</text>
-<a href="https://arxiv.org/abs/2111.15640" class="hub-card"><rect class="bx sl" x="612" y="177" width="176" height="52" rx="8"/><text class="bt" x="700" y="199" text-anchor="middle">Diff. autoencoder</text><text class="sm" x="700" y="217" text-anchor="middle">image ↔ (z, η)</text></a>
-<path class="ln sl" d="M450 34H610" marker-end="url(#ah-hub)"/><text class="sm" x="530" y="25" text-anchor="middle">teacher as guide</text>
-<a href="https://arxiv.org/abs/2410.06940" class="hub-card"><rect class="bx sl" x="612" y="8" width="176" height="52" rx="8"/><text class="bt" x="700" y="30" text-anchor="middle">REPA</text><text class="sm" x="700" y="48" text-anchor="middle">no frozen encoder</text></a>
-</svg></div>
-        <div class="dem-media only-phone"><svg class="dem-svg dem-svg--phone dem-flow dem-hub" viewBox="0 0 360 430" role="img" aria-labelledby="hubp-t">
-<title id="hubp-t">DEM in the centre, with an EMA teacher, an embedding level (view to z) and a pixel level (z to image). The teacher links to REPA as its guide, the embedding level with a pure-noise copy to SSL prediction, and the pixel level, by inverting its ODE, to a diffusion autoencoder.</title>
-<defs><marker id="ah-hubp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahd"/></marker><marker id="as-hubp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" class="ahd"/></marker></defs>
-<a href="https://arxiv.org/abs/2410.06940" class="hub-card"><rect class="bx sl" x="95" y="6" width="170" height="52" rx="8"/><text class="bt" x="180" y="28" text-anchor="middle">REPA</text><text class="sm" x="180" y="46" text-anchor="middle">no frozen encoder</text></a>
-<path class="ln sl" d="M180 86V62" marker-end="url(#ah-hubp)"/><text class="sm" x="188" y="78">teacher as guide</text>
-<rect class="bx sl" x="130" y="88" width="100" height="26" rx="6"/><text class="sm" x="180" y="105" text-anchor="middle">EMA teacher</text>
-<path class="ln sl dash" d="M180 114V122"/>
-<rect class="bx rep" x="70" y="122" width="220" height="226" rx="10"/><text class="bt" x="180" y="146" text-anchor="middle">DEM</text>
-<rect class="bx emb" x="86" y="160" width="188" height="58" rx="6"/><text class="role t-emb" x="180" y="177" text-anchor="middle">embedding level</text><image href="view_all.webp" x="136" y="184" width="26" height="26" preserveAspectRatio="none"/><path class="ln emb" d="M166 197H192" marker-end="url(#as-hubp)"/><rect class="bx emb" x="196" y="188" width="28" height="18" rx="4"/><text class="sm" x="210" y="201" text-anchor="middle">z</text>
-<rect class="bx pix" x="86" y="230" width="188" height="58" rx="6"/><text class="role t-pix" x="180" y="247" text-anchor="middle">pixel level</text><rect class="bx emb" x="136" y="258" width="28" height="18" rx="4"/><text class="sm" x="150" y="271" text-anchor="middle">z</text><path class="ln pix" d="M168 267H194" marker-end="url(#as-hubp)"/><image href="view_clean.webp" x="198" y="254" width="26" height="26" preserveAspectRatio="none"/>
-<path class="ln emb" d="M84 189H40V368" marker-end="url(#ah-hubp)"/><text class="sm" x="48" y="363">copy at τ = 1</text>
-<path class="ln pix" d="M276 259H320V368" marker-end="url(#ah-hubp)"/><text class="sm" x="312" y="363" text-anchor="end">invert the ODE</text>
-<a href="https://arxiv.org/abs/2006.07733" class="hub-card"><rect class="bx sl" x="6" y="372" width="168" height="52" rx="8"/><text class="bt" x="90" y="394" text-anchor="middle">SSL prediction</text><text class="sm" x="90" y="412" text-anchor="middle">BYOL, I-JEPA</text></a>
-<a href="https://arxiv.org/abs/2111.15640" class="hub-card"><rect class="bx sl" x="186" y="372" width="168" height="52" rx="8"/><text class="bt" x="270" y="394" text-anchor="middle">Diff. autoencoder</text><text class="sm" x="270" y="412" text-anchor="middle">image ↔ (z, η)</text></a>
-</svg></div>
-        <div class="dem-reads">
-            <p><strong>SSL.</strong> Give the denoiser pure noise in place of its target, and it predicts from the view alone, as <a href="https://arxiv.org/abs/2006.07733">BYOL</a> and <a href="https://arxiv.org/abs/2301.08243">I-JEPA</a> do.</p>
-            <p><strong><a href="https://arxiv.org/abs/2111.15640">Diffusion autoencoder</a>.</strong> An image splits into its embedding z and a pixel noise η, and comes back almost exactly (55 dB). Swap in a new η and only the details change.</p>
-            <p><strong><a href="https://arxiv.org/abs/2410.06940">REPA</a>.</strong> REPA steers a generator with a frozen, pretrained encoder. DEM gets its guide from its own EMA instead.</p>
-        </div>
-    </figure>
-</section>
+
 
 
 <section id="results">
