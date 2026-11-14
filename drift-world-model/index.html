@@ -135,7 +135,7 @@ bibtex: |
 </section>
 
 <section id="method">
-    <h2>One network for the world and the agent</h2>
+    <h2>DRIFT world model agent</h2>
     <p>One Flow Transformer does both jobs. It learns the world from real experience, then imagines new experience for the actor and critic, which read the same control state the world model computes.</p>
     <figure class="fig">
         <div class="drift-media wide only-desk"><svg class="drift-svg drift-diagram" viewBox="0 22 901 240" role="img" aria-labelledby="ov-t"><title id="ov-t">Left, world-model training: an observation is encoded, noised and passed with its tokens through DRIFT, which outputs a control state feeding predictor heads, including a next-latent head aligned with the encoder latent of the next observation. Right, actor-critic learning in imagination: DRIFT generates each next latent in one step, and the actor and critic take the resulting control state.</title><defs><marker id="d-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="d-ah-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="d-ah-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker></defs>
