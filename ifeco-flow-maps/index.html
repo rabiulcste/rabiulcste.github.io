@@ -27,6 +27,9 @@ bibtex: |
 ---
 <!-- TODO: co-authors (add them to the authors list and the bibtex) -->
 <style>
+    :root { --accent: var(--acc); }
+    .fe-short { display: none; }
+    @media (max-width: 767px) { .fe-desk { display: none; } }
     /* Amber is iFeCo (student block, teacher's cleaner view, loss), slate the baseline and the flow-map loss, violet REPA. */
     :root { --dim: 0.1; --acc: #c2410c; --acc-f: #fff1e6; --acc-s: #ffedd5; --sl: #475569; --sl-f: #f1f5f9; --rep: #7c3aed; --grid: #ececef; }
     @media (prefers-color-scheme: dark) {
@@ -110,10 +113,7 @@ bibtex: |
         .fe-pair { gap: 12px; }
         .fe-long { display: none; }
         .fe-btns { flex-wrap: nowrap; }
-        /* six columns in 358px: smaller type, tighter cells, no backbone prefix */
-        #results table { font-size: 13px; }
-        #results td, #results th { padding-left: 4px; padding-right: 4px; }
-        #results td:first-child, #results th:first-child { padding-left: 0; }
+        .fe-short { display: inline; }
     }
 </style>
 
@@ -787,15 +787,15 @@ bibtex: |
     <div class="table-wrap">
         <table>
             <thead>
-                <tr><th>Model</th><th>Steps</th><th>Baseline</th><th>iFeCo</th><th><a href="https://arxiv.org/abs/2410.06940">REPA</a></th><th>Speedup</th></tr>
+                <tr><th>Method</th><th class="l"><span class="fe-long">Backbone</span><span class="fe-short">Size</span></th><th class="fe-desk">Steps</th><th>Baseline</th><th class="ours">iFeCo</th><th><a href="https://arxiv.org/abs/2410.06940">REPA</a></th><th>Speedup</th></tr>
             </thead>
             <tbody>
-                <tr><td><a href="https://arxiv.org/abs/2410.12557">Shortcut</a> <span class="fe-long">DiT-</span>B/2</td><td>1.2M</td><td>36.95</td><td><strong>28.03</strong></td><td>36.11</td><td>2.9&times;</td></tr>
-                <tr><td>Shortcut <span class="fe-long">DiT-</span>XL/2</td><td>1.0M</td><td>19.34</td><td><strong>13.17</strong></td><td>&ndash;</td><td>2.7&times;</td></tr>
-                <tr><td><a href="https://arxiv.org/abs/2505.13447">MeanFlow</a> <span class="fe-long">SiT-</span>B/2</td><td>1.2M</td><td>6.12</td><td>5.69</td><td><strong>4.86</strong></td><td>1.3&times;</td></tr>
-                <tr><td>MeanFlow <span class="fe-long">SiT-</span>XL/2</td><td>500k</td><td><strong>3.80</strong></td><td>4.33</td><td>&ndash;</td><td>&ndash;</td></tr>
-                <tr><td><a href="https://arxiv.org/abs/2505.18825">LSD</a> <span class="fe-long">SiT-</span>B/2</td><td>1.2M</td><td>12.42</td><td><strong>9.96</strong></td><td>&ndash;</td><td>2.4&times;</td></tr>
-                <tr><td>LSD <span class="fe-long">SiT-</span>XL/2</td><td>900k</td><td>7.72</td><td><strong>7.28</strong></td><td>&ndash;</td><td>1.5&times;</td></tr>
+                <tr><td><a href="https://arxiv.org/abs/2410.12557">Shortcut</a></td><td class="l"><span class="fe-long">DiT-</span>B/2</td><td class="fe-desk">1.2M</td><td>36.95</td><td class="ours"><strong>28.03</strong></td><td>36.11</td><td>2.9&times;</td></tr>
+                <tr><td></td><td class="l"><span class="fe-long">DiT-</span>XL/2</td><td class="fe-desk">1.0M</td><td>19.34</td><td class="ours"><strong>13.17</strong></td><td>&ndash;</td><td>2.7&times;</td></tr>
+                <tr class="grp"><td><a href="https://arxiv.org/abs/2505.13447">MeanFlow</a></td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td class="fe-desk">1.2M</td><td>6.12</td><td class="ours">5.69</td><td><strong>4.86</strong></td><td>1.3&times;</td></tr>
+                <tr><td></td><td class="l"><span class="fe-long">SiT-</span>XL/2</td><td class="fe-desk">500k</td><td><strong>3.80</strong></td><td class="ours">4.33</td><td>&ndash;</td><td>&ndash;</td></tr>
+                <tr class="grp"><td><a href="https://arxiv.org/abs/2505.18825">LSD</a></td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td class="fe-desk">1.2M</td><td>12.42</td><td class="ours"><strong>9.96</strong></td><td>&ndash;</td><td>2.4&times;</td></tr>
+                <tr><td></td><td class="l"><span class="fe-long">SiT-</span>XL/2</td><td class="fe-desk">900k</td><td>7.72</td><td class="ours"><strong>7.28</strong></td><td>&ndash;</td><td>1.5&times;</td></tr>
             </tbody>
         </table>
     </div>
@@ -803,12 +803,12 @@ bibtex: |
     <div class="table-wrap">
         <table>
             <thead>
-                <tr><th>Model</th><th>Sampling<span class="fe-long"> steps</span></th><th>Baseline</th><th>iFeCo</th><th>REPA</th></tr>
+                <tr><th>Method</th><th class="l"><span class="fe-long">Backbone</span><span class="fe-short">Size</span></th><th>Sampling<span class="fe-long"> steps</span></th><th>Baseline</th><th class="ours">iFeCo</th><th>REPA</th></tr>
             </thead>
             <tbody>
-                <tr><td>Shortcut <span class="fe-long">DiT-</span>B/2</td><td>8</td><td>23.89</td><td>18.04</td><td><strong>16.14</strong></td></tr>
-                <tr><td>MeanFlow <span class="fe-long">SiT-</span>B/2</td><td>4</td><td><strong>5.52</strong></td><td>5.53</td><td>&ndash;</td></tr>
-                <tr><td>LSD <span class="fe-long">SiT-</span>B/2</td><td>4</td><td>6.47</td><td><strong>5.58</strong></td><td>&ndash;</td></tr>
+                <tr><td>Shortcut</td><td class="l"><span class="fe-long">DiT-</span>B/2</td><td>8</td><td>23.89</td><td class="ours">18.04</td><td><strong>16.14</strong></td></tr>
+                <tr><td>MeanFlow</td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td>4</td><td><strong>5.52</strong></td><td class="ours">5.53</td><td>&ndash;</td></tr>
+                <tr><td>LSD</td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td>4</td><td>6.47</td><td class="ours"><strong>5.58</strong></td><td>&ndash;</td></tr>
             </tbody>
         </table>
     </div>

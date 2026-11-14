@@ -25,6 +25,7 @@ bibtex: |
   }
 ---
 <style>
+    :root { --accent: var(--rep); }
     :root { --dim: 0.08; --rep: #2563eb; --emb: #7c3aed; --pix: #b45309; --sl: #475569; --rep-f: #eff6ff; --emb-f: #f5f3ff; --pix-f: #fffbeb; --sl-f: #f1f5f9; --grid: #ececef; --nz0: #ffffff; --nz1: #9ca3af; }
     @media (prefers-color-scheme: dark) {
         :root { --dim: 0.12; --rep: #60a5fa; --emb: #a78bfa; --pix: #fbbf24; --sl: #94a3b8; --rep-f: rgba(96, 165, 250, 0.14); --emb-f: rgba(167, 139, 250, 0.16); --pix-f: rgba(251, 191, 36, 0.13); --sl-f: rgba(148, 163, 184, 0.14); --grid: #222225; --nz0: #2c2c2f; --nz1: #d4d4d8; }
@@ -561,15 +562,15 @@ bibtex: |
     <div class="table-wrap">
         <table>
             <thead>
-                <tr><th></th><th>DEM</th><th>Baseline</th></tr>
+                <tr><th></th><th class="ours">DEM</th><th>Baseline</th></tr>
             </thead>
             <tbody>
                 <tr class="dem-grp"><th colspan="3">Representation</th></tr>
-                <tr><td>Linear probe</td><td>77.2%</td><td>76.2% (<a href="https://arxiv.org/abs/2304.07193">DINOv2</a>)</td></tr>
-                <tr><td>k-NN</td><td>69.9%</td><td>74.7% (<a href="https://arxiv.org/abs/2304.07193">DINOv2</a>)</td></tr>
+                <tr><td>Linear probe</td><td class="ours">77.2%</td><td>76.2% (<a href="https://arxiv.org/abs/2304.07193">DINOv2</a>)</td></tr>
+                <tr><td>k-NN</td><td class="ours">69.9%</td><td>74.7% (<a href="https://arxiv.org/abs/2304.07193">DINOv2</a>)</td></tr>
                 <tr class="dem-grp"><th colspan="3">Generation</th></tr>
-                <tr><td>FID-50k without labels</td><td>19.5</td><td>12.3 (<a href="https://arxiv.org/abs/2312.03701">RCG</a>, three separate models)</td></tr>
-                <tr><td>Class-conditional FID-50k</td><td>14.5 (1% of labels)</td><td>12.4 (<a href="https://arxiv.org/abs/2511.13720">JiT</a>, all labels)</td></tr>
+                <tr><td>FID-50k without labels</td><td class="ours">19.5</td><td>12.3 (<a href="https://arxiv.org/abs/2312.03701">RCG</a>, three separate models)</td></tr>
+                <tr><td>Class-conditional FID-50k</td><td class="ours">14.5 (1% of labels)</td><td>12.4 (<a href="https://arxiv.org/abs/2511.13720">JiT</a>, all labels)</td></tr>
             </tbody>
         </table>
     </div>
