@@ -336,6 +336,26 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-bar { height: 28px; }
 .drift-hns-row { height: 28px; }
 .drift-pair { gap: 40px; }
+/* Standard axes for the dot plots: a left spine and a bottom axis line around the plot area only; uniform tick labels. */
+.drift-abl-ticks { border-top: 0; }
+.drift-abl-ticks .drift-abl-trk { border-top: 1px solid var(--muted); }
+.drift-abl-row:not(.drift-abl-ticks) .drift-abl-trk { border-left: 1px solid var(--muted); }
+.drift-abl-lab, .drift-abl-val { font-weight: 400; color: var(--text); }
+.drift-abl--sf .drift-abl-lab, .drift-abl--sf .drift-abl-val { font-weight: 400; color: var(--drift); }
+.drift-probe .drift-abl-val { font-weight: 400; color: var(--text); }
+.drift-abl-ticks .drift-abl-trk i::before { content: ""; position: absolute; left: 50%; top: -4px; height: 3px; border-left: 1px solid var(--muted); }
+/* One vertical rhythm for every dot plot: title, 8px, plot with a little headroom, ticks tight under the axis, axis title under the ticks. */
+.drift-abl-head { margin-bottom: 8px; line-height: 1.2; }
+.drift-abl-row:not(.drift-abl-ticks):not(.drift-abl-leg) { height: 28px; }
+.drift-abl-head + .drift-abl-row .drift-abl-trk, .drift-legend--right + .drift-abl-row .drift-abl-trk { padding-top: 6px; }
+.drift-abl-head + .drift-abl-row, .drift-legend--right + .drift-abl-row { height: 34px; padding-top: 6px; }
+.drift-abl-head + .drift-abl-row .drift-abl-trk, .drift-legend--right + .drift-abl-row .drift-abl-trk { padding-top: 0; margin-top: -6px; height: calc(100% + 6px); }
+.drift-abl-ticks { height: 18px; }
+.drift-abl-ticks .drift-abl-trk i { top: 5px; line-height: 1; }
+.drift-abl .drift-abl-ax { margin-top: 3px; line-height: 1.2; }
+.drift-legend { margin-bottom: 12px; }
+.drift-legend--right { margin-bottom: 8px; }
+.drift-pair-cap { margin-top: 12px; }
 /* DRIFT clips: text-free video on a white canvas, labels drawn by the page in the canvas' blank strips. The Atari and Craftium
    grids come in a 4-column and a 2-column (phone) cut; only the one shown is loaded (preload none, played by the page script). */
 .drift-clip { position: relative; margin: 0 auto; container-type: inline-size; }
