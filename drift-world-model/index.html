@@ -136,7 +136,7 @@ bibtex: |
 
 <section id="method">
     <h2>DRIFT world model agent</h2>
-    <p>One Flow Transformer does both jobs. It learns the world from real experience, then imagines new experience for the actor and critic, which read the same control state the world model computes.</p>
+    <p>One Flow Transformer learns the world from real experience, imagines new experience in one denoising step, and gives the actor and critic their state. We tested whether this sharing matters on four Atari games. A policy with its own encoder learned less than the shared backbone on all four, even when that encoder was trained with the same next-latent loss, and so did a policy that reads the imagined frames.</p>
     <figure class="fig">
         <div class="drift-media wide only-desk"><svg class="drift-svg drift-diagram" viewBox="0 22 901 240" role="img" aria-labelledby="ov-t"><title id="ov-t">Left, world-model training: an observation is encoded, noised and passed with its tokens through DRIFT, which outputs a control state feeding predictor heads, including a next-latent head aligned with the encoder latent of the next observation. Right, actor-critic learning in imagination: DRIFT generates each next latent in one step, and the actor and critic take the resulting control state.</title><defs><marker id="d-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="d-ah-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="d-ah-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker></defs>
 <path class="ln-faint" d="M3.6 84.0 L3.6 259.8" marker-end="url(#d-ah)"/>
@@ -306,7 +306,7 @@ bibtex: |
 
 <section id="control">
     <h2>Self-supervised features shaped for control</h2>
-    <p>A network trained only to denoise frames gives a weak control state. DRIFT adds a next-latent head, which predicts the latent of the next observation from the control state and the action. To make that prediction, the control state has to carry how the world moves. On 8 Atari games, this raises the IQM human-normalized score from 0.20 to 0.79.</p>
+    <p>Dreamer's state is trained to predict the future, so it is a natural state for control. A flow model is trained to denoise its input instead, and when trained online from scratch, its features alone make a poor state for the policy. DRIFT borrows the predictive idea of <a href="https://arxiv.org/abs/2007.05929">SPR</a>. SPR matches encoders on augmented views, which do not fit noised latent inputs, so DRIFT trains the control state to predict the latent of the next real frame, given the action. On 8 Atari games, this raises the IQM human-normalized score from 0.20 to 0.79.</p>
     <figure class="fig">
 <div class="drift-abl" role="img" aria-label="IQM human-normalized score with 95% intervals on 8 Atari games: Frozen tokenizer 0.20 [0.13, 0.33], Online tokenizer 0.24 [0.13, 0.39], Frozen tokenizer + next-latent 0.79 [0.61, 1.02], Online tokenizer + next-latent 0.82 [0.63, 1.04], + self-rollouts (DRIFT) 1.24 [1.06, 1.41].">
 <div class="drift-abl-head"><span>Next-latent prediction</span><span class="drift-abl-note">8 games</span></div>
@@ -322,7 +322,7 @@ bibtex: |
 
 <section id="self-rollouts">
     <h2>Tackling exposure bias in generation</h2>
-    <p>The reward and continuation heads learn from latents of real frames. In imagination they score latents the model generated itself, and there the reward head is less accurate. Following <a href="https://arxiv.org/abs/2506.08009">Self Forcing</a>, DRIFT generates a few latents from real context and also trains these heads on them, with the real rewards as targets. On all 26 Atari games, this raises the IQM from 0.45 to 0.67.</p>
+    <p>A world model trained only on real frames first meets its own generations in imagination, where small errors pile up. This is exposure bias. <a href="https://arxiv.org/abs/2506.08009">Self Forcing</a> reduces it in video generation by training on the model's own rollouts. An agent also needs reward and continuation heads that work on generated latents. So DRIFT generates a few latents from real context and trains on them in two ways. The heads learn to predict the real rewards and continuations there, and the backbone learns to denoise the next real latent with the generated ones as context. On all 26 Atari games, this raises the IQM from 0.45 to 0.67.</p>
     <figure class="fig">
 <div class="drift-abl" role="img" aria-label="IQM human-normalized score with 95% intervals on 26 Atari games: Sign rewards 0.45 [0.39, 0.50], + self-rollouts (DRIFT) 0.67 [0.60, 0.76], DRIFT-symlog 0.62 [0.55, 0.70].">
 <div class="drift-abl-head"><span>Self-generated rollouts</span><span class="drift-abl-note">26 games</span></div>
@@ -336,7 +336,7 @@ bibtex: |
 
 <section id="results">
     <h2>Results</h2>
-    <p>On Atari 100k, DRIFT is competitive with DIAMOND, the closest prior diffusion world model. It has a higher IQM and median and a lower mean, while using 33&times; fewer FLOPs per imagined step. The paper has the full results on Atari, Craftium and Crafter, with all baselines and ablations.</p>
+    <p>On Atari 100k, DRIFT is competitive with DIAMOND, the closest prior diffusion world model. It has a higher IQM and median and a lower mean, while using 33&times; fewer FLOPs per imagined step and about a third of DIAMOND's GPU-hours end to end. The paper has the full results on Atari, Craftium and Crafter, with all baselines and ablations.</p>
     <figure class="fig">
         <div class="drift-hns" role="img" aria-label="Atari 100k human-normalized score over 26 games. IQM: DreamerV3 0.47, DIAMOND 0.64, DRIFT 0.67. Median: DreamerV3 0.44, DIAMOND 0.37, DRIFT 0.52. Mean: DreamerV3 1.18, DIAMOND 1.46, DRIFT 1.35.">
 <div class="drift-hns-row drift-hns-head"><span></span><span>IQM</span><span>Median</span><span>Mean</span></div>
