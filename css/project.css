@@ -211,66 +211,17 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-diagram--stack .approx { font-size: 18px; }
 .drift-diagram--stack .hero-t { font-size: 22px; }
 .drift-diagram--stack .hero-s { font-size: 15px; }
-/* DRIFT results charts: HTML rows (label, track, value) that stretch to any width. Blue = DRIFT, light blue = DRIFT-symlog, grey = others. */
-.dch { font-size: 13px; line-height: 1.25; color: var(--muted); font-variant-numeric: tabular-nums; --labw: 164px; --valw: 40px; --kindw: 156px; --rowh: 44px; }
-.dch-head { height: 28px; font-size: 15px; font-weight: 600; color: var(--text); }
-.dch-head--full { position: relative; }
-.dch-note { position: absolute; right: 0; top: 2px; font-size: 13px; font-weight: 400; color: var(--muted); }
-.dch-row { display: grid; grid-template-columns: var(--labw) minmax(0, 1fr) var(--valw); align-items: center; height: var(--rowh); }
-.dch-lab { padding-right: 12px; text-align: right; }
-.dch-lab-short, .dch-seg, .dch-foot { display: none; }
-.dch-kind { font-size: 11.5px; line-height: 1.15; color: var(--muted); }
-.dch-val { text-align: right; color: var(--text); }
-.dch-trk { position: relative; display: block; height: 100%; }
-.dch-trk .gl { position: absolute; top: 0; bottom: 0; border-left: 1px solid var(--drift-grid); }
-.dch-trk .band, .dch-trk .dot, .dch-trk .bar { position: absolute; top: 50%; display: block; background: var(--muted); }
-.dch-trk .band { height: 8px; margin-top: -4px; border-radius: 4px; opacity: 0.3; }
-.dch-trk .dot { width: 10px; height: 10px; margin-block: -5px 0 -5px; border-radius: 50%; }
-.dch-trk .bar { left: 0; height: 18px; margin-top: -9px; border-radius: 2px; opacity: 0.45; }
-.dch-row--ours .dch-lab, .dch-row--ours .dch-val { font-weight: 600; color: var(--drift); }
-.dch-row--sym .dch-lab { color: var(--text); }
-.dch-row--ours .band, .dch-row--ours .dot, .dch-row--ours .bar { background: var(--drift); }
-.dch-row--sym .band, .dch-row--sym .dot, .dch-row--sym .bar { background: var(--drift-2); }
-.dch-row--ours .bar, .dch-row--sym .bar { opacity: 1; }
-.dch-row:hover .dot, .dch-row:hover .bar { background: var(--text); opacity: 1; }
-.dch-ticks { height: 22px; align-items: start; }
-.dch-ticks .dch-trk { border-top: 1px solid var(--muted); }
-.dch-ticks i { position: absolute; top: 4px; transform: translateX(-50%); font-size: 12px; font-style: normal; }
-.dch-ax { margin-top: 10px; text-align: center; font-size: 13px; }
-.dch-foot { margin-block: 8px 0; font-size: 12px; line-height: 1.35; color: var(--muted); }
-/* Atari: one panel per statistic beside a shared label column; a little wider than the column on large screens, like the diagrams */
-.dch-atari { width: min(760px, 100vw - 2 * var(--gutter)); margin-left: calc(50% - min(380px, 50vw - var(--gutter))); display: grid; grid-template-columns: var(--labw) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); column-gap: 14px; }
-.dch-atari .dch-panel .dch-row { grid-template-columns: minmax(0, 1fr) var(--valw); }
-.dch-atari .dch-panel .dch-lab, .dch-atari .dch-panel .dch-kind { display: none; }
-.dch-labels .dch-row { display: block; padding-right: 12px; text-align: right; }
-.dch-labels .dch-row:not(.dch-ticks) { display: flex; flex-direction: column; justify-content: center; }
-.dch-labels .dch-lab { padding: 0; }
-.dch-atari .dch-ax { grid-column: 1 / -1; }
-/* Crafter: bars in three groups, the value after each bar, the imagination space at the right */
-/* Data visuals take the width they need, centered; on phones they sit 12px inside the text edge. */
-.dch-crafter { --labw: 132px; --rowh: 26px; max-width: 620px; margin: 0 auto; }
-.dch-crafter .dch-row { grid-template-columns: var(--labw) minmax(0, 1fr) var(--kindw); }
-.dch-crafter .dch-row .dch-kind { padding-left: 14px; font-size: 12px; white-space: nowrap; }
-.dch-crafter .dch-trk .dch-val { position: absolute; top: 50%; transform: translateY(-50%); margin-left: 8px; text-align: left; }
-.dch-group { height: 20px; margin-block: 16px 4px; font-weight: 600; }
-.dch-group:first-child { margin-top: 0; }
-.dch-crafter .dch-ax { padding: 0 var(--kindw) 0 var(--labw); }
-/* Ablations: two dot panels, one under the other */
-.dch-abl { --labw: 232px; --rowh: 30px; max-width: 560px; margin: 0 auto; }
-.dch-abl .dch-kind { display: none; }
-.dch-abl .dch-panel + .dch-panel { margin-top: 32px; }
-.dch-abl .dch-ax { padding: 0 var(--valw) 0 var(--labw); }
-/* DRIFT Craftium table (tab:craftium): the charts' type and colours, thin rules, no card */
-.dch-table { width: auto; margin: 0 auto; border-collapse: collapse; font-size: 13px; line-height: 1.25; color: var(--muted); font-variant-numeric: tabular-nums; }
-.dch-table .sr { position: absolute; left: -9999px; }
-.dch-table th, .dch-table td { padding: 6px 0 6px 28px; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; font-weight: 400; }
-.dch-table th:first-child, .dch-table td:first-child { padding-left: 0; text-align: left; }
-.dch-table thead th { color: var(--text); font-weight: 600; border-bottom-color: var(--muted); vertical-align: bottom; }
-.dch-table tbody th { color: var(--text); }
-.dch-table td { color: var(--text); }
-.dch-table td.best { font-weight: 600; }
-.dch-table td.ours { color: var(--drift); }
-.dch-table .dch-lab-short { display: none; }
+/* DRIFT results: two small bar panels side by side (stacked on phones). Blue = DRIFT, grey = others. */
+.drift-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 760px; margin: 0 auto; }
+.drift-bars { font-size: 14px; line-height: 1.3; color: var(--muted); font-variant-numeric: tabular-nums; }
+.drift-bars-ttl { font-size: 15px; font-weight: 600; color: var(--text); }
+.drift-bars-sub { font-size: 13px; margin-bottom: 10px; }
+.drift-bar { display: grid; grid-template-columns: 140px minmax(0, 1fr) 44px; align-items: center; height: 34px; }
+.drift-bar-trk { position: relative; height: 14px; }
+.drift-bar-trk b { position: absolute; left: 0; top: 0; bottom: 0; background: var(--muted); opacity: 0.35; border-radius: 0 3px 3px 0; min-width: 3px; }
+.drift-bar-val { text-align: right; color: var(--text); }
+.drift-bar--ours .drift-bar-lab, .drift-bar--ours .drift-bar-val { color: var(--drift); font-weight: 600; }
+.drift-bar--ours .drift-bar-trk b { background: var(--drift); opacity: 1; }
 /* DRIFT clips: text-free video on a white canvas, labels drawn by the page in the canvas' blank strips. The Atari and Craftium
    grids come in a 4-column and a 2-column (phone) cut; only the one shown is loaded (preload none, played by the page script). */
 .drift-clip { position: relative; margin: 0 auto; container-type: inline-size; }
@@ -279,34 +230,6 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-clip .clip-name { font-weight: 600; color: #0d0d0d; }
 .drift-clip--phone .clip-lab, .drift-clip--phone .clip-name, .drift-clip--one .clip-lab, .drift-clip--one .clip-name { font-size: clamp(11px, 3.8cqw, 14px); }
 @media (max-width: 767px) {
-    /* charts: one tight line per method (short label, bar or interval, value); the Atari chart shows one statistic at a time */
-    .dch, .dch-crafter, .dch-abl { --labw: 108px; --valw: 38px; --rowh: 22px; font-size: 13px; }
-    .dch-abl { --labw: 174px; }
-    .dch, .dch-atari { width: auto; max-width: calc(100% - 24px); margin-left: auto; margin-right: auto; }
-    .dch-row, .dch-atari .dch-panel .dch-row { grid-template-columns: var(--labw) minmax(0, 1fr) var(--valw); }
-    .dch-crafter .dch-row { grid-template-columns: var(--labw) minmax(0, 1fr); }
-    .dch-lab { padding-right: 8px; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .dch-lab-full { display: none; } .dch-lab-short { display: inline; }
-    .dch-kind, .dch-crafter .dch-row .dch-kind { display: none; }
-    .dch-foot { display: block; margin-top: 6px; }
-    .dch-trk .band { height: 6px; margin-top: -3px; }
-    .dch-trk .dot { width: 8px; height: 8px; margin-block: -4px 0 -4px; }
-    .dch-trk .bar { height: 13px; margin-top: -6.5px; }
-    .dch-ticks { height: 20px; }
-    .dch-atari .dch-panel .dch-ticks .dch-trk { grid-column: 2; }
-    .dch-crafter .dch-ticks span:last-child { display: none; }
-    .dch-ticks i { top: 3px; }
-    .dch-head { height: 22px; font-size: 14px; }
-    .dch-group { height: 16px; margin-block: 6px 2px; font-size: 12px; }
-    .dch-ax, .dch-crafter .dch-ax, .dch-abl .dch-ax { margin-top: 4px; padding: 0; font-size: 12px; }
-    .dch-abl .dch-panel + .dch-panel { margin-top: 14px; }
-    .dch-atari { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
-    .dch-labels, .dch-atari .dch-panel .dch-head { display: none; }
-    .dch-atari .dch-panel .dch-lab { display: block; }
-    .dch-atari .dch-panel { display: none; }
-    .dch-atari[data-show="iqm"] .dch-panel[data-stat="iqm"], .dch-atari[data-show="median"] .dch-panel[data-stat="median"], .dch-atari[data-show="mean"] .dch-panel[data-stat="mean"] { display: block; }
-    .dch-seg { display: flex; gap: 8px; margin-block: 0 8px; }
-    .dch-table th, .dch-table td { padding: 5px 0 5px 10px; }
-    .dch-table thead th { font-size: 12px; line-height: 1.2; }
-    .dch-table .dch-lab-full { display: none; } .dch-table .dch-lab-short { display: inline; }
+    .drift-duo { grid-template-columns: 1fr; gap: 28px; max-width: calc(100% - 24px); }
+    .drift-bar { grid-template-columns: 124px minmax(0, 1fr) 40px; height: 30px; }
 }
