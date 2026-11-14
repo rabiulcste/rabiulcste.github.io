@@ -300,7 +300,7 @@ bibtex: |
 <path class="ln" d="M137.7 559.8 L33.6 559.8 L33.6 548.1" marker-end="url(#d-ah)"/>
 <path class="ln-amb" d="M33.6 475.5 L33.6 450.6 L88.6 450.6 L88.6 425.1" marker-end="url(#d-ah-amb)"/></g></g>
 </svg></div>
-        <figcaption><strong>World-model training.</strong> DRIFT denoises the latent of each time step and outputs the control state, from which small heads predict the reward (trophy) and the continuation (flag). A next-latent head also uses the control state and the action to predict the encoder's latent of the next observation. <strong>Actor&ndash;critic learning in imagination.</strong> DRIFT generates each next latent in one denoising step, and the actor and critic take the resulting control state as input.</figcaption>
+        <figcaption class="drift-steps wide"><p><strong>World-model training.</strong> DRIFT denoises the latent of each time step and outputs the control state, from which small heads predict the reward (trophy) and the continuation (flag). A next-latent head also uses the control state and the action to predict the encoder's latent of the next observation.</p><p><strong>Actor&ndash;critic learning in imagination.</strong> DRIFT generates each next latent in one denoising step, and the actor and critic take the resulting control state as input.</p></figcaption>
     </figure>
 </section>
 

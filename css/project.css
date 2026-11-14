@@ -249,6 +249,11 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-abl-ticks { height: 22px; border-top: 1px solid var(--border); }
 .drift-abl-ticks .drift-abl-trk i { position: absolute; top: 4px; transform: translateX(-50%); font-style: normal; font-size: 13px; color: var(--muted); }
 .drift-abl-ax { padding-left: 230px; padding-right: 44px; text-align: center; font-size: 13px; color: var(--muted); margin-top: 2px; }
+/* Method caption in two columns under the two diagram halves; stacked on phones. */
+.drift-steps { display: grid; grid-template-columns: minmax(0, 59fr) minmax(0, 41fr); }
+.drift-steps p:first-child { padding-right: 40px; }
+.drift-steps p { margin: 0; }
+.drift-steps strong { color: var(--text); }
 /* DRIFT clips: text-free video on a white canvas, labels drawn by the page in the canvas' blank strips. The Atari and Craftium
    grids come in a 4-column and a 2-column (phone) cut; only the one shown is loaded (preload none, played by the page script). */
 .drift-clip { position: relative; margin: 0 auto; container-type: inline-size; }
@@ -258,6 +263,8 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-clip--phone .clip-lab, .drift-clip--phone .clip-name, .drift-clip--one .clip-lab, .drift-clip--one .clip-name { font-size: clamp(11px, 3.8cqw, 14px); }
 @media (max-width: 767px) {
     .drift-hns, .drift-bars--one { max-width: calc(100% - 24px); }
+    .drift-steps { grid-template-columns: 1fr; row-gap: 10px; }
+    .drift-steps p:first-child { padding-right: 0; }
     .drift-abl { max-width: calc(100% - 24px); font-size: 13px; }
     .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 38px; height: 28px; }
     .drift-abl .lab-full { display: none; } .drift-abl .lab-short { display: inline; }
