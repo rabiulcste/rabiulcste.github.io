@@ -160,12 +160,64 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: center; margin-block: 8px 24px; }
 .split p { margin-bottom: 0; }
 .split > figure { margin: 0; }
-@media (max-width: 767px) { .split { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+
+.split--sm { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+/* Charts, used by any page. Row charts (dot plots with intervals, bars, one column per statistic): right-aligned labels against a
+   soft left axis, a value after the marks, grey for others and the page accent for our method. Each page sets --accent (and --alt). */
+:root { --grid: #ececef; --alt: var(--muted); --accent: var(--text); --accent-2: var(--muted); }
+@media (prefers-color-scheme: dark) { :root { --grid: #222225; } }
+.chart { --lab: 148px; --val: 36px; --c: var(--muted); max-width: 600px; margin-inline: auto; font-size: 13px; line-height: 1.3; color: var(--text); font-variant-numeric: tabular-nums; }
+.chart-head { margin-bottom: 10px; line-height: 1.2; }
+.chart-head strong { display: block; font-size: 14px; font-weight: 600; }
+.chart-sub { display: block; margin-top: 2px; font-size: 12px; color: var(--muted); }
+.chart-row { display: grid; grid-template-columns: var(--lab) minmax(0, 1fr) var(--val); align-items: center; height: 28px; }
+.chart-lab { padding-right: 10px; text-align: right; white-space: nowrap; }
+.chart-val { padding-left: 6px; }
+.chart .is-ours :is(.chart-lab, .chart-val) { color: var(--accent); }
+.chart-trk { position: relative; height: 100%; border-left: 1px solid var(--border); }
+.chart :is(.chart-head, .legend) + .chart-row { height: 34px; padding-top: 6px; }
+.chart :is(.chart-head, .legend) + .chart-row .chart-trk { margin-top: -6px; height: calc(100% + 6px); }
+.chart-trk .gl { position: absolute; top: 0; bottom: 0; border-left: 1px solid var(--grid); }
+.chart-trk .band { position: absolute; top: 50%; height: 6px; margin-top: -3px; border-radius: 3px; background: var(--c); opacity: 0.3; }
+.chart-trk .dot { position: absolute; top: 50%; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 1.5px var(--bg-page); }
+.chart-trk .pair { position: absolute; top: 50%; height: 1px; background: var(--border); }
+.chart-trk .bar { position: absolute; left: 0; top: 50%; height: 8px; margin-top: -4px; min-width: 3px; border-radius: 0 2px 2px 0; background: var(--c); opacity: 0.35; }
+.chart .is-ours .bar { opacity: 1; }
+.chart-ticks { height: 18px; }
+.chart-ticks .chart-trk { border-left: 0; border-top: 1px solid var(--border); }
+.chart-ticks i { position: absolute; top: 5px; transform: translateX(-50%); font-style: normal; font-size: 12px; line-height: 1; color: var(--muted); }
+.chart-ticks i::before { content: ""; position: absolute; left: 50%; top: -4px; height: 3px; border-left: 1px solid var(--muted); }
+.chart-ax { margin-top: 3px; padding: 0 var(--val) 0 var(--lab); text-align: center; font-size: 12px; line-height: 1.2; color: var(--muted); }
+.c-base { --c: var(--muted); } .c-alt { --c: var(--alt); } .c-ours { --c: var(--accent); } .c-ours2 { --c: var(--accent-2); }
+.chart--short { --lab: 74px; }
+.chart--bars { --lab: 96px; --val: 40px; max-width: 420px; }
+.chart--cols { --lab: 84px; max-width: 560px; }
+.chart--cols .chart-row { grid-template-columns: var(--lab) repeat(3, minmax(0, 1fr)); column-gap: 18px; }
+.chart-cell { display: grid; grid-template-columns: minmax(0, 1fr) var(--val); align-items: center; height: 100%; }
+.chart-colhead { height: 22px; font-size: 14px; font-weight: 600; }
+/* Legend: one line of round markers and muted labels, left-aligned above the plot area */
+.legend { --c: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 18px; margin-bottom: 12px; font-size: 12px; color: var(--muted); }
+.chart > .legend { margin-bottom: 8px; }
+.legend span { white-space: nowrap; }
+.legend span::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: var(--c); }
+/* Figures side by side with a short caption each (.panels), and a stack of charts in one panel (.stack); stacked on phones */
+.panels { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+.panel-cap { margin: 12px 0 0; color: var(--muted); font-size: var(--text-secondary); line-height: 1.5; }
+.stack { display: grid; gap: 16px; }
+:is(.panels, .stack, .split) .chart { max-width: none; margin: 0; }
 /* Tabs and toggles above a figure */
 .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-block: 0 12px; }
 .tabs[hidden] { display: none; }
 /* Phones: tables and BibTeX wrap instead of scrolling sideways. */
 @media (max-width: 767px) {
+    .split, .split--sm, .panels { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .panels { gap: 28px; }
+    .chart { max-width: calc(100% - 24px); }
+    :is(.panels, .split) .chart { max-width: none; }
+    .panels, .split > figure { padding: 0 12px; }
+    .chart--bars { --lab: 124px; --val: 40px; }
+    .chart--cols { --lab: 76px; --val: 34px; }
+    .chart--cols .chart-row { column-gap: 10px; }
     td, th { white-space: normal; padding-left: 6px; padding-right: 0; }
     table { font-size: 12.5px; min-width: 0; }
     thead th { font-size: 12px; }
@@ -229,43 +281,6 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-diagram--stack .approx { font-size: 18px; }
 .drift-diagram--stack .hero-t { font-size: 22px; }
 .drift-diagram--stack .hero-s { font-size: 15px; }
-/* DRIFT results: Atari scores as three bar columns (IQM, median, mean), then one compute panel. Blue = DRIFT, grey = others. */
-.drift-hns { max-width: 680px; margin: 0 auto; font-size: 14px; line-height: 1.3; color: var(--muted); font-variant-numeric: tabular-nums; }
-.drift-hns-row { display: grid; grid-template-columns: 110px repeat(3, minmax(0, 1fr)); column-gap: 24px; align-items: center; height: 34px; }
-.drift-hns-head { height: 26px; font-size: 15px; font-weight: 600; color: var(--text); }
-.drift-hns-cell { display: grid; grid-template-columns: minmax(0, 1fr) 40px; align-items: center; }
-.drift-hns-row--ours .drift-bar-lab, .drift-hns-row--ours .drift-bar-val { color: var(--drift); font-weight: 600; }
-.drift-hns-row--ours .drift-bar-trk b { background: var(--drift); opacity: 1; }
-.drift-bars--one { max-width: 420px; margin: 0 auto; }
-.drift-bars { font-size: 14px; line-height: 1.3; color: var(--muted); font-variant-numeric: tabular-nums; }
-.drift-bars-ttl { font-size: 15px; font-weight: 600; color: var(--text); }
-.drift-bars-sub { font-size: 13px; margin-bottom: 10px; }
-.drift-bar { display: grid; grid-template-columns: 140px minmax(0, 1fr) 44px; align-items: center; height: 34px; }
-.drift-bar-trk { position: relative; height: 14px; }
-.drift-bar-trk b { position: absolute; left: 0; top: 0; bottom: 0; background: var(--muted); opacity: 0.35; border-radius: 0 3px 3px 0; min-width: 3px; }
-.drift-bar-val { text-align: right; color: var(--text); }
-.drift-bar--ours .drift-bar-lab, .drift-bar--ours .drift-bar-val { color: var(--drift); font-weight: 600; }
-.drift-bar--ours .drift-bar-trk b { background: var(--drift); opacity: 1; }
-/* DRIFT ablations, drawn like the paper's figure: 95% interval as a tinted band, IQM as a dot. 
-   Slate = neither addition, teal = next-latent prediction, blue = DRIFT, light blue = DRIFT-symlog. */
-.drift-abl { max-width: 600px; margin: 0 auto; font-size: 14px; line-height: 1.3; color: var(--text); font-variant-numeric: tabular-nums; --c: var(--muted); }
-.drift-abl-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-.drift-abl-note { font-size: 13px; font-weight: 400; color: var(--muted); }
-.drift-abl-row { display: grid; grid-template-columns: 230px minmax(0, 1fr) 44px; align-items: center; height: 28px; }
-.drift-abl-lab { padding-right: 14px; text-align: right; white-space: nowrap; }
-.drift-abl .lab-short { display: none; }
-.drift-abl-trk { position: relative; height: 100%; }
-.drift-abl-trk .gl { position: absolute; top: 0; bottom: 0; border-left: 1px solid var(--drift-grid); }
-.drift-abl-trk .band { position: absolute; top: 50%; height: 6px; margin-top: -3px; border-radius: 3px; background: var(--c); opacity: 0.3; }
-.drift-abl-trk .dot { position: absolute; top: 50%; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 1.5px var(--bg-page); }
-.drift-abl-val { padding-left: 8px; }
-.drift-abl--nl { --c: var(--drift-teal); }
-.drift-abl--sf { --c: var(--drift); }
-.drift-abl--sym { --c: var(--drift-2); }
-.drift-abl--sf .drift-abl-lab, .drift-abl--sf .drift-abl-val { color: var(--drift); font-weight: 600; }
-.drift-abl-ticks { height: 22px; border-top: 1px solid var(--border); }
-.drift-abl-ticks .drift-abl-trk i { position: absolute; top: 4px; transform: translateX(-50%); font-style: normal; font-size: 13px; color: var(--muted); }
-.drift-abl-ax { padding-left: 230px; padding-right: 44px; text-align: center; font-size: 13px; color: var(--muted); margin-top: 2px; }
 /* Method caption in two columns under the two diagram halves; stacked on phones. */
 .drift-steps { display: grid; grid-template-columns: minmax(0, 59fr) minmax(0, 41fr); }
 .drift-steps p:first-child { padding-right: 40px; }
@@ -277,155 +292,23 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-frames-row img { display: block; width: 100%; height: auto; image-rendering: pixelated; border-radius: 3px; }
 .drift-frames-head span { text-align: center; font-variant-numeric: tabular-nums; }
 .drift-frames-lab { color: var(--text); white-space: nowrap; }
-.drift-steps-row--ours .drift-frames-lab { color: var(--drift); font-weight: 400; }
-/* DRIFT probes: two dots per game (grey without, teal with next-latent), joined by a hairline, spread as a band */
-.drift-probe .drift-abl-row { grid-template-columns: 110px minmax(0, 1fr) 44px; }
-.drift-probe .drift-abl-ax { padding-left: 110px; }
-.drift-probe .pair { position: absolute; top: 50%; height: 1px; background: var(--border); }
-.drift-probe .band { --c: var(--muted); }
-.drift-probe .band-w, .drift-probe .dot-w { --c: var(--drift-teal); }
-.drift-probe .drift-abl-val { color: var(--drift-teal-t); font-weight: 600; }
-.drift-probe-key { display: flex; gap: 20px; justify-content: flex-start; margin-bottom: 6px; font-size: 13px; color: var(--muted); }
-.drift-probe-key span { white-space: nowrap; }
-.drift-probe-key span::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; background: var(--muted); }
-.drift-probe-key .k-w::before { background: var(--drift-teal); }
-/* Two result panels side by side (next-latent ablation, probe); stacked on phones. Panel (a) uses short labels here. */
-.drift-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
-.drift-pair .drift-abl { max-width: none; }
-.drift-pair .drift-abl .lab-full { display: none; } .drift-pair .drift-abl .lab-short { display: inline; }
-.drift-pair .drift-abl:not(.drift-probe) .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 40px; }
-.drift-pair .drift-abl:not(.drift-probe) .drift-abl-ax { padding-left: 150px; padding-right: 40px; }
-.drift-pair .drift-probe-key { justify-content: flex-start; flex-wrap: wrap; gap: 4px 16px; }
-.drift-pair--steps { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; }
-.drift-pair--steps .drift-frames .t1, .drift-pair--steps .drift-frames .t3, .drift-pair--steps .drift-frames .t5, .drift-pair--steps .drift-frames .t7 { display: none; }
-.drift-pair--steps .drift-frames-row { grid-template-columns: 58px repeat(4, minmax(0, 1fr)); }
-.drift-pair--steps .drift-frames, .drift-pair--steps .drift-bars--one { max-width: none; }
-.drift-compute { display: grid; gap: 22px; }
-.drift-compute .drift-bars--one { margin: 0; width: 100%; }
-.drift-abl--narrow { max-width: 440px; }
-.drift-abl--narrow .drift-abl-row { grid-template-columns: 170px minmax(0, 1fr) 40px; }
-.drift-abl--narrow .drift-abl-ax { padding-left: 170px; padding-right: 40px; }
-/* Text beside its plot on desktop; stacked on phones. */
-/* Text and plot side by side, both inside the text column. */
-.drift-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 40px; align-items: center; margin-block: 8px;
- }
-.drift-split p { margin-bottom: 0; }
-.drift-split > .fig { margin: 0; }
-.drift-split .drift-abl--narrow { max-width: none; }
-.drift-pair-cap { margin: 10px 0 0; color: var(--muted); font-size: var(--text-secondary); line-height: 1.5; }
-/* Compact plots: text-sized type, tight rows, values next to the marks. Overrides the sizes above. */
-.drift-abl, .drift-hns, .drift-bars { font-size: 13px; }
-.drift-abl-head, .drift-bars-ttl, .drift-hns-head { font-size: 14px; }
-.drift-abl-note, .drift-bars-sub, .drift-abl-ax, .drift-abl-ticks .drift-abl-trk i, .drift-probe-key { font-size: 12px; }
-.drift-abl-row { height: 24px; grid-template-columns: 200px minmax(0, 1fr) 36px; }
-.drift-abl-ax { padding-left: 200px; padding-right: 36px; }
-.drift-abl-ticks { height: 20px; }
-.drift-abl-lab { padding-right: 10px; }
-.drift-abl-val { padding-left: 6px; }
-.drift-pair { gap: 32px; }
-.drift-pair .drift-abl:not(.drift-probe) .drift-abl-row, .drift-abl--narrow .drift-abl-row { grid-template-columns: 148px minmax(0, 1fr) 36px; }
-.drift-pair .drift-abl:not(.drift-probe) .drift-abl-ax, .drift-abl--narrow .drift-abl-ax { padding-left: 148px; padding-right: 36px; }
-.drift-probe .drift-abl-row { grid-template-columns: 70px minmax(0, 1fr) 36px; }
-.drift-probe .drift-abl-ax { padding-left: 70px; }
-.drift-abl--narrow { max-width: 380px; }
-.drift-split .drift-abl--narrow { max-width: 330px; margin: 0; }
-.drift-split > .fig { max-width: 330px; }
-.drift-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; }
-.drift-bar { height: 26px; grid-template-columns: 96px minmax(0, 1fr) 40px; }
-.drift-bar-trk { height: 10px; }
-.drift-bars-sub { margin-bottom: 6px; }
-.drift-hns { max-width: 560px; }
-.drift-hns-row { height: 26px; grid-template-columns: 84px repeat(3, minmax(0, 1fr)); column-gap: 18px; }
-.drift-hns-head { height: 22px; }
-.drift-hns-cell { grid-template-columns: minmax(0, 1fr) 36px; }
-.drift-pair--steps { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
-.drift-pair--steps .drift-frames-row { grid-template-columns: 52px repeat(4, minmax(0, 1fr)); gap: 4px; }
-.drift-pair--steps .drift-frames { gap: 4px; font-size: 12px; }
-.drift-compute { gap: 16px; }
-/* Plot legend: one line, small round markers, muted text, no frame. Shared and centred above a multi-panel figure; top right for a single plot. */
-.drift-legend { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 18px; margin-bottom: 14px; font-size: 12px; color: var(--muted); }
-.drift-legend--right { justify-content: flex-end; margin-bottom: 6px; }
-.drift-legend span { white-space: nowrap; }
-.drift-legend span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: var(--muted); }
-.drift-legend .drift-leg-nl::before { background: var(--drift-teal); }
-.drift-legend .drift-leg-sf::before { background: var(--drift); }
-/* Room to breathe: compact, not crammed. */
-.drift-abl-row { height: 28px; }
-.drift-bar { height: 28px; }
-.drift-hns-row { height: 28px; }
-.drift-pair { gap: 40px; }
-/* Standard axes for the dot plots: a left spine and a bottom axis line around the plot area only; uniform tick labels. */
-.drift-abl-ticks { border-top: 0; }
-.drift-abl-ticks .drift-abl-trk { border-top: 1px solid var(--muted); }
-.drift-abl-row:not(.drift-abl-ticks) .drift-abl-trk { border-left: 1px solid var(--muted); }
-.drift-abl-lab, .drift-abl-val { font-weight: 400; color: var(--text); }
-.drift-abl--sf .drift-abl-lab, .drift-abl--sf .drift-abl-val { font-weight: 400; color: var(--drift); }
-.drift-probe .drift-abl-val { font-weight: 400; color: var(--text); }
-.drift-abl-ticks .drift-abl-trk i::before { content: ""; position: absolute; left: 50%; top: -4px; height: 3px; border-left: 1px solid var(--muted); }
-/* One vertical rhythm for every dot plot: title, 8px, plot with a little headroom, ticks tight under the axis, axis title under the ticks. */
-.drift-abl-head { margin-bottom: 8px; line-height: 1.2; }
-.drift-abl-row:not(.drift-abl-ticks):not(.drift-abl-leg) { height: 28px; }
-.drift-abl-head + .drift-abl-row .drift-abl-trk, .drift-legend--right + .drift-abl-row .drift-abl-trk { padding-top: 6px; }
-.drift-abl-head + .drift-abl-row, .drift-legend--right + .drift-abl-row { height: 34px; padding-top: 6px; }
-.drift-abl-head + .drift-abl-row .drift-abl-trk, .drift-legend--right + .drift-abl-row .drift-abl-trk { padding-top: 0; margin-top: -6px; height: calc(100% + 6px); }
-.drift-abl-ticks { height: 18px; }
-.drift-abl-ticks .drift-abl-trk i { top: 5px; line-height: 1; }
-.drift-abl .drift-abl-ax { margin-top: 3px; line-height: 1.2; }
-.drift-legend { margin-bottom: 12px; }
-.drift-legend--right { margin-bottom: 8px; }
-.drift-pair-cap { margin-top: 12px; }
-/* Anthropic-style chart header: bold title, grey subtitle naming the metric, legend top left, quiet axes. */
-.drift-abl-head { display: block; margin-bottom: 10px; }
-.drift-abl-head .drift-abl-note { display: block; margin-top: 2px; font-weight: 400; color: var(--muted); }
-.drift-legend { justify-content: flex-start; }
-.drift-legend--right { justify-content: flex-start; padding-left: 0; }
-.drift-abl-ticks .drift-abl-trk, .drift-abl-row:not(.drift-abl-ticks) .drift-abl-trk { border-color: var(--border); }
-/* One design language for every chart: right-aligned row labels against a soft left axis, regular weight, DRIFT tinted blue,
-   plain values right after the marks, thin grey marks for the others. Bar charts follow the dot plots. */
-.drift-bar-lab { text-align: right; padding-right: 10px; color: var(--text); font-weight: 400; white-space: nowrap; }
-.drift-bar-val { text-align: left; padding-left: 6px; color: var(--text); font-weight: 400; }
-.drift-bar--ours .drift-bar-lab, .drift-bar--ours .drift-bar-val, .drift-hns-row--ours .drift-bar-lab, .drift-hns-row--ours .drift-bar-val { color: var(--drift); font-weight: 400; }
-.drift-bar-trk { border-left: 1px solid var(--border); }
-.drift-bar-trk b { top: 50%; bottom: auto; height: 8px; margin-top: -4px; border-radius: 0 2px 2px 0; opacity: 0.35; }
-.drift-bar--ours .drift-bar-trk b, .drift-hns-row--ours .drift-bar-trk b { opacity: 1; }
-.drift-bar-trk { height: 100%; }
-.drift-hns-cell { height: 100%; }
-.drift-hns-cell .drift-bar-trk { height: 100%; }
-.drift-hns-head span { font-size: 14px; font-weight: 600; color: var(--text); }
-.drift-bars-ttl { font-size: 14px; font-weight: 600; }
-.drift-bars-sub { font-size: 12px; color: var(--muted); margin-top: 2px; margin-bottom: 10px; }
+.drift-frames-row.is-ours .drift-frames-lab { color: var(--drift); font-weight: 400; }
+.panels--steps { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: center; }
+.panels--steps .drift-frames { max-width: none; gap: 4px; font-size: 12px; }
+.panels--steps .drift-frames-row { grid-template-columns: 52px repeat(4, minmax(0, 1fr)); gap: 4px; }
+.panels--steps .drift-frames :is(.t1, .t3, .t5, .t7) { display: none; }
 /* DRIFT clips: text-free video on a white canvas, labels drawn by the page in the canvas' blank strips. The Atari and Craftium
    grids come in a 4-column and a 2-column (phone) cut; only the one shown is loaded (preload none, played by the page script). */
 .drift-clip { position: relative; margin: 0 auto; container-type: inline-size; }
 .drift-clip video { position: absolute; inset: 0; width: 100%; height: 100%; }
 .drift-clip .clip-lab, .drift-clip .clip-name { position: absolute; transform: translateY(-100%); line-height: 1; white-space: nowrap; font-size: clamp(11px, 1.45cqw, 13px); color: #6e6e73; }
 .drift-clip .clip-name { font-weight: 600; color: #0d0d0d; }
-.drift-clip--phone .clip-lab, .drift-clip--phone .clip-name, .drift-clip--one .clip-lab, .drift-clip--one .clip-name { font-size: clamp(11px, 3.8cqw, 14px); }
+.drift-clip--phone .clip-lab, .drift-clip--phone .clip-name { font-size: clamp(11px, 3.8cqw, 14px); }
 @media (max-width: 767px) {
-    .drift-hns, .drift-bars--one { max-width: calc(100% - 24px); }
-    .drift-pair { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 0 12px; }
-    .drift-pair .drift-abl { max-width: none; }
-    .drift-pair .drift-abl:not(.drift-probe) .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 38px; }
-    .drift-pair .drift-probe-key { font-size: 12px; }
-    .drift-split { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-    .drift-split > .fig { padding: 0 12px; max-width: none; }
-    .drift-split .drift-abl--narrow { max-width: none; }
-    .drift-abl--narrow .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 38px; }
-    .drift-abl--narrow .drift-abl-ax { padding-left: 150px; padding-right: 38px; }
     .drift-frames { max-width: calc(100% - 24px); gap: 5px; }
     .drift-frames-row { grid-template-columns: 54px repeat(4, minmax(0, 1fr)); gap: 5px; }
     .drift-frames .t1, .drift-frames .t3, .drift-frames .t5, .drift-frames .t7 { display: none; }
-    .drift-probe .drift-abl-row { grid-template-columns: 80px minmax(0, 1fr) 38px; }
-    .drift-probe .drift-abl-ax { padding-left: 80px; }
+    .panels--steps { grid-template-columns: minmax(0, 1fr); }
     .drift-steps { grid-template-columns: 1fr; row-gap: 10px; }
     .drift-steps p:first-child { padding-right: 0; }
-    .drift-abl { max-width: calc(100% - 24px); font-size: 13px; }
-    .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 38px; height: 28px; }
-    .drift-abl .lab-full { display: none; } .drift-abl .lab-short { display: inline; }
-    .drift-abl-lab { padding-right: 10px; }
-    .drift-abl-ax { padding-left: 150px; padding-right: 38px; white-space: nowrap; }
-    .drift-hns { font-size: 13px; }
-    .drift-hns-row { grid-template-columns: 76px repeat(3, minmax(0, 1fr)); column-gap: 10px; height: 30px; }
-    .drift-hns-cell { grid-template-columns: minmax(0, 1fr) 34px; }
-    .drift-bar { grid-template-columns: 124px minmax(0, 1fr) 40px; height: 30px; }
 }

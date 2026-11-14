@@ -472,7 +472,7 @@ bibtex: |
 
 <section id="connections">
     <h2>Connections to SSL, diffusion autoencoders and REPA</h2>
-    <div class="split">
+    <div class="split split--sm">
 <div>
     <h3 id="special-case">SSL is the full-noise case</h3>
     <p><a href="https://arxiv.org/abs/2006.07733">Joint-embedding SSL methods</a> turn out to be a special case of DEM. Imagine handing such a predictor a noisy copy of its own target. If the copy is pure noise, it tells the predictor nothing, and we are back to the standard SSL prediction task. Prediction is DEM at full noise. Below full noise, DEM learns the whole range of embeddings that fit the view, where a predictor can only give their average.</p>
@@ -528,8 +528,11 @@ bibtex: |
         </div>
         <figcaption>Top, encoding into z and η and decoding back. Bottom, reconstructions and decodes of the same z from fresh pixel noise (ViT-S, 100k iterations).</figcaption>
     </figure>
+    <div class="split">
+<div>
     <h3 id="repa">Native representation alignment</h3>
     <p><a href="https://arxiv.org/abs/2410.06940">REPA</a> (representation alignment) speeds up diffusion training by aligning the generator's features with a frozen, pretrained encoder such as <a href="https://arxiv.org/abs/2304.07193">DINOv2</a>. DEM has this alignment natively, by design. The network that generates pixels is the same network that learns the embedding, and its target comes from its own EMA teacher, a representation whose linear probe matches DINOv2 (77.2% against 76.2%). No outside encoder is needed.</p>
+</div>
     <figure class="dem-fig"><svg class="dem-svg dem-flow dem-sketch" viewBox="0 0 400 176" role="img" aria-labelledby="repa-t">
 <title id="repa-t">Left, REPA: a frozen DINOv2 encoder aligns the features of a diffusion transformer. Right, DEM: the network's own EMA teacher gives the target to a diffusion transformer that outputs both embeddings and pixels.</title>
 <defs><marker id="ah-repa-sl" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" class="ah-sl"/></marker></defs>
@@ -545,6 +548,7 @@ bibtex: |
 <rect class="bx rep" x="218" y="94" width="164" height="34" rx="6"/><text class="bt" x="300" y="116" text-anchor="middle" style="font-size:13px">diffusion transformer</text>
 <path class="ln sl dash" d="M384 111C398 111 398 47 374 47" marker-end="url(#ah-repa-sl)"/><text class="sm t-emb" x="262" y="150" text-anchor="middle">embeddings</text><text class="sm t-pix" x="340" y="150" text-anchor="middle">pixels</text>
 </svg></figure>
+    </div>
 </section>
 
 
