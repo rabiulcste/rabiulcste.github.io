@@ -268,8 +268,17 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-probe .band-w, .drift-probe .dot-w { --c: var(--drift-teal); }
 .drift-probe .drift-abl-val { color: var(--drift-teal-t); font-weight: 600; }
 .drift-probe-key { display: flex; gap: 20px; justify-content: center; margin-bottom: 6px; font-size: 13px; color: var(--muted); }
+.drift-probe-key span { white-space: nowrap; }
 .drift-probe-key span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; background: var(--muted); }
 .drift-probe-key .k-w::before { background: var(--drift-teal); }
+/* Two result panels side by side (next-latent ablation, probe); stacked on phones. Panel (a) uses short labels here. */
+.drift-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.drift-pair .drift-abl { max-width: none; }
+.drift-pair .drift-abl .lab-full { display: none; } .drift-pair .drift-abl .lab-short { display: inline; }
+.drift-pair .drift-abl:not(.drift-probe) .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 40px; }
+.drift-pair .drift-abl:not(.drift-probe) .drift-abl-ax { padding-left: 150px; padding-right: 40px; }
+.drift-pair .drift-probe-key { justify-content: flex-start; padding-left: 110px; }
+.drift-pair-cap { margin: 10px 0 0; color: var(--muted); font-size: var(--text-secondary); line-height: 1.5; }
 /* DRIFT clips: text-free video on a white canvas, labels drawn by the page in the canvas' blank strips. The Atari and Craftium
    grids come in a 4-column and a 2-column (phone) cut; only the one shown is loaded (preload none, played by the page script). */
 .drift-clip { position: relative; margin: 0 auto; container-type: inline-size; }
@@ -279,6 +288,10 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-clip--phone .clip-lab, .drift-clip--phone .clip-name, .drift-clip--one .clip-lab, .drift-clip--one .clip-name { font-size: clamp(11px, 3.8cqw, 14px); }
 @media (max-width: 767px) {
     .drift-hns, .drift-bars--one { max-width: calc(100% - 24px); }
+    .drift-pair { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 0 12px; }
+    .drift-pair .drift-abl { max-width: none; }
+    .drift-pair .drift-abl:not(.drift-probe) .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 38px; }
+    .drift-pair .drift-probe-key { padding-left: 0; justify-content: center; gap: 14px; font-size: 12px; }
     .drift-frames { max-width: calc(100% - 24px); gap: 5px; }
     .drift-frames-row { grid-template-columns: 54px repeat(4, minmax(0, 1fr)); gap: 5px; }
     .drift-frames .t1, .drift-frames .t3, .drift-frames .t5, .drift-frames .t7 { display: none; }
