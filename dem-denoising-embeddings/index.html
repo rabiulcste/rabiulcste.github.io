@@ -41,16 +41,9 @@ bibtex: |
     .dem-svg text { font-family: var(--font); font-size: 15px; fill: var(--text); }
     .dem-svg .lb, .dem-svg .tick { font-size: 13px; fill: var(--muted); }
     .dem-svg .strong { fill: var(--text); font-weight: 600; }
-    .dem-svg .sym { font-size: 20px; font-style: italic; }
-    .dem-svg .sub { font-size: 12px; }
-    .dem-svg .net { fill: var(--surface); stroke: var(--border); }
-    .dem-svg .net-t { font-size: 17px; font-weight: 600; }
-    .dem-svg .nd { fill: var(--bg); stroke-width: 2; }
-    .dem-svg .nd-gen { stroke: var(--emb); }
     .dem-svg.dem-plane { min-width: 460px; }
     .dem-svg .ln { fill: none; stroke-width: 2; }
     .dem-svg .ln.enc { stroke: var(--rep); } .dem-svg .ln.gen { stroke: var(--emb); } .dem-svg .ln.dec { stroke: var(--pix); }
-    .dem-svg .ahd { fill: var(--muted); }
     .dem-svg .nz0 { stop-color: var(--nz0); } .dem-svg .nz1 { stop-color: var(--nz1); }
     .dem-svg .grid { stroke: var(--grid); }
     .dem-svg .axis { stroke: var(--muted); }
@@ -63,9 +56,8 @@ bibtex: |
     .dem-svg .lab { font-size: 13px; fill: var(--muted); }
     .dem-svg .lab-ours { font-size: 15px; font-weight: 600; fill: var(--rep); }
     .dem-svg .pt-g:hover .pt { opacity: 1; fill: var(--text); }
-    .dem-svg .lvl { font-size: 13px; font-weight: 600; }
-    .dem-svg .lvl.emb, .dem-svg .sch-t.emb { fill: var(--emb); }
-    .dem-svg .lvl.pix, .dem-svg .sch-t.pix { fill: var(--pix); }
+    .dem-svg .sch-t.emb { fill: var(--emb); }
+    .dem-svg .sch-t.pix { fill: var(--pix); }
     .dem-svg .sch-t { font-weight: 600; }
     .dem-svg .sch.emb { fill: var(--emb); fill-opacity: 0.18; stroke: var(--emb); stroke-width: 1.5; }
     .dem-svg .sch.pix { fill: var(--pix); fill-opacity: 0.18; stroke: var(--pix); stroke-width: 1.5; }
@@ -96,7 +88,6 @@ bibtex: |
     /* Phones: the stacked method figures (.only-phone) replace the wide ones. */
     .dem-svg--phone { min-width: 0; max-width: 480px; margin: 0 auto; }
     .dem-svg--phone .lb { font-size: 13px; }
-    .dem-svg--phone .net-t { font-size: 16px; }
     /* Training and inference figures: pastel boxes with a 600-level outline. Blue is the network and its embeddings, violet the embedding denoiser, amber pixels, slate the teacher and noise. */
     main h3 { margin-block: 40px 8px; font-size: var(--text-lede); font-weight: 600; }
     .dem-flow .bx { stroke-width: 1.5; }
@@ -106,24 +97,16 @@ bibtex: |
     .dem-flow .bt { font-size: 15px; font-weight: 600; fill: var(--text); }
     .dem-flow .sm { font-size: 12px; fill: var(--muted); }
     .dem-flow .strong { fill: var(--text); font-weight: 600; }
-    .dem-flow .hd { font-size: 14px; font-weight: 600; fill: var(--text); }
     .dem-flow .role { font-size: 13px; font-weight: 600; }
-    .dem-flow .t-rep { fill: var(--rep); } .dem-flow .t-emb { fill: var(--emb); } .dem-flow .t-pix { fill: var(--pix); } .dem-flow .t-sl { fill: var(--sl); }
+    .dem-flow .t-rep { fill: var(--rep); } .dem-flow .t-emb { fill: var(--emb); } .dem-flow .t-pix { fill: var(--pix); }
     .dem-flow .ln.rep { stroke: var(--rep); } .dem-flow .ln.emb { stroke: var(--emb); } .dem-flow .ln.pix { stroke: var(--pix); } .dem-flow .ln.sl { stroke: var(--sl); }
-    .dem-flow .chip .cb { fill: var(--bg); stroke-width: 1.5; }
-    .dem-flow .chip.rep .cb { stroke: var(--rep); } .dem-flow .chip.rep .bars { fill: var(--rep); }
-    .dem-flow .chip.emb .cb { stroke: var(--emb); } .dem-flow .chip.emb .bars { fill: var(--emb); }
-    .dem-flow .chip.sl .cb { stroke: var(--sl); } .dem-flow .chip.sl .bars { fill: var(--sl); }
-    .dem-flow .chip.nz .cb { stroke-dasharray: 3 2; } .dem-flow .chip.nz .bars { fill: var(--nz1); }
     .dem-flow .tf { fill: none; stroke-width: 2; } .dem-flow .tf.pix { stroke: var(--pix); }
     .dem-flow .tf.void { fill: var(--surface); stroke: var(--sl); stroke-width: 1.5; stroke-dasharray: 4 3; }
     .dem-flow .pl { fill: var(--bg); stroke: var(--sl); stroke-width: 1.5; } .dem-flow .pl-x { stroke: var(--sl); stroke-width: 1.5; }
-    .dem-flow .jn { fill: var(--sl); }
     .dem-svg.dem-flow { min-width: 0; }
     .dem-svg--phone.dem-flow .bt { font-size: 13px; }
     .dem-flow .dfill { fill: var(--emb); fill-opacity: 0.12; } .dem-flow .dline { fill: none; stroke: var(--emb); stroke-width: 1.5; }
     .dem-flow .dbase { stroke: var(--sl); stroke-width: 1; } .dem-flow .dtick { stroke: var(--emb); stroke-width: 1; } .dem-flow .dot { fill: var(--emb); stroke: var(--bg); stroke-width: 1.5; }
-    .dem-flow .chip.nv .cb { stroke: var(--sl); stroke-dasharray: 3 2; } .dem-flow .chip.nv .bars { fill: var(--sl); } .dem-flow .zl { stroke: var(--sl); stroke-opacity: 0.35; stroke-width: 1; }
     /* Task buttons: .u parts dim outside their tasks, .v parts show only in theirs. Without JS everything stays lit. */
     .dem-flow .u { transition: opacity 0.2s; }
     @media (prefers-reduced-motion: reduce) { .dem-flow .u { transition: none; } }
@@ -143,7 +126,7 @@ bibtex: |
     .dem-ae-head .fresh { grid-column: span 3; }
     .dem-grp th { padding-top: 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 1px solid var(--border); }
     /* Phone figures: two type sizes (11 px labels, 14 px titles), see the layout comment in the generator. */
-    .dem-svg--phone.dem-flow:not(.dem-copy) :is(.sm, .lb, .pl1) { font-size: 11px; }
+    .dem-svg--phone.dem-flow:not(.dem-copy) :is(.sm, .lb) { font-size: 11px; }
     .dem-svg--phone.dem-flow:not(.dem-copy) :is(.bt, .steplab, .mth) { font-size: 13px; } .dem-svg--phone.dem-flow:not(.dem-copy) .msub { font-size: 11px; }
     @media (max-width: 767px) {
         .dem-long { display: none; }
