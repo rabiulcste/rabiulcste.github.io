@@ -211,8 +211,14 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-diagram--stack .approx { font-size: 18px; }
 .drift-diagram--stack .hero-t { font-size: 22px; }
 .drift-diagram--stack .hero-s { font-size: 15px; }
-/* DRIFT results: two small bar panels side by side (stacked on phones). Blue = DRIFT, grey = others. */
-.drift-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 760px; margin: 0 auto; }
+/* DRIFT results: Atari scores as three bar columns (IQM, median, mean), then one compute panel. Blue = DRIFT, grey = others. */
+.drift-hns { max-width: 680px; margin: 0 auto; font-size: 14px; line-height: 1.3; color: var(--muted); font-variant-numeric: tabular-nums; }
+.drift-hns-row { display: grid; grid-template-columns: 110px repeat(3, minmax(0, 1fr)); column-gap: 24px; align-items: center; height: 34px; }
+.drift-hns-head { height: 26px; font-size: 15px; font-weight: 600; color: var(--text); }
+.drift-hns-cell { display: grid; grid-template-columns: minmax(0, 1fr) 40px; align-items: center; }
+.drift-hns-row--ours .drift-bar-lab, .drift-hns-row--ours .drift-bar-val { color: var(--drift); font-weight: 600; }
+.drift-hns-row--ours .drift-bar-trk b { background: var(--drift); opacity: 1; }
+.drift-bars--one { max-width: 420px; margin: 0 auto; }
 .drift-bars { font-size: 14px; line-height: 1.3; color: var(--muted); font-variant-numeric: tabular-nums; }
 .drift-bars-ttl { font-size: 15px; font-weight: 600; color: var(--text); }
 .drift-bars-sub { font-size: 13px; margin-bottom: 10px; }
@@ -222,6 +228,27 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-bar-val { text-align: right; color: var(--text); }
 .drift-bar--ours .drift-bar-lab, .drift-bar--ours .drift-bar-val { color: var(--drift); font-weight: 600; }
 .drift-bar--ours .drift-bar-trk b { background: var(--drift); opacity: 1; }
+/* DRIFT ablations, drawn like the paper's figure: 95% interval as a tinted band, IQM as a dot, dashed line at DRIFT's IQM.
+   Slate = neither addition, teal = next-latent prediction, blue = DRIFT, light blue = DRIFT-symlog. */
+.drift-abl { max-width: 600px; margin: 0 auto; font-size: 14px; line-height: 1.3; color: var(--text); font-variant-numeric: tabular-nums; --c: var(--muted); }
+.drift-abl-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.drift-abl-note { font-size: 13px; font-weight: 400; color: var(--muted); }
+.drift-abl-row { display: grid; grid-template-columns: 230px minmax(0, 1fr) 44px; align-items: center; height: 32px; }
+.drift-abl-lab { padding-right: 14px; text-align: right; white-space: nowrap; }
+.drift-abl .lab-short { display: none; }
+.drift-abl-trk { position: relative; height: 100%; }
+.drift-abl-trk .gl { position: absolute; top: 0; bottom: 0; border-left: 1px solid var(--drift-grid); }
+.drift-abl-trk .ref { position: absolute; top: 0; bottom: 0; border-left: 1px dashed var(--drift); opacity: 0.5; }
+.drift-abl-trk .band { position: absolute; top: 50%; height: 10px; margin-top: -5px; border-radius: 5px; background: var(--c); opacity: 0.3; }
+.drift-abl-trk .dot { position: absolute; top: 50%; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 1.5px var(--bg-page); }
+.drift-abl-val { padding-left: 8px; }
+.drift-abl--nl { --c: var(--drift-teal); }
+.drift-abl--sf { --c: var(--drift); }
+.drift-abl--sym { --c: var(--drift-2); }
+.drift-abl--sf .drift-abl-lab, .drift-abl--sf .drift-abl-val { color: var(--drift); font-weight: 600; }
+.drift-abl-ticks { height: 22px; border-top: 1px solid var(--border); }
+.drift-abl-ticks .drift-abl-trk i { position: absolute; top: 4px; transform: translateX(-50%); font-style: normal; font-size: 13px; color: var(--muted); }
+.drift-abl-ax { padding-left: 230px; padding-right: 44px; text-align: center; font-size: 13px; color: var(--muted); margin-top: 2px; }
 /* DRIFT clips: text-free video on a white canvas, labels drawn by the page in the canvas' blank strips. The Atari and Craftium
    grids come in a 4-column and a 2-column (phone) cut; only the one shown is loaded (preload none, played by the page script). */
 .drift-clip { position: relative; margin: 0 auto; container-type: inline-size; }
@@ -230,6 +257,14 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-clip .clip-name { font-weight: 600; color: #0d0d0d; }
 .drift-clip--phone .clip-lab, .drift-clip--phone .clip-name, .drift-clip--one .clip-lab, .drift-clip--one .clip-name { font-size: clamp(11px, 3.8cqw, 14px); }
 @media (max-width: 767px) {
-    .drift-duo { grid-template-columns: 1fr; gap: 28px; max-width: calc(100% - 24px); }
+    .drift-hns, .drift-bars--one { max-width: calc(100% - 24px); }
+    .drift-abl { max-width: calc(100% - 24px); font-size: 13px; }
+    .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 38px; height: 28px; }
+    .drift-abl .lab-full { display: none; } .drift-abl .lab-short { display: inline; }
+    .drift-abl-lab { padding-right: 10px; }
+    .drift-abl-ax { padding-left: 150px; padding-right: 38px; }
+    .drift-hns { font-size: 13px; }
+    .drift-hns-row { grid-template-columns: 76px repeat(3, minmax(0, 1fr)); column-gap: 10px; height: 30px; }
+    .drift-hns-cell { grid-template-columns: minmax(0, 1fr) 34px; }
     .drift-bar { grid-template-columns: 124px minmax(0, 1fr) 40px; height: 30px; }
 }
