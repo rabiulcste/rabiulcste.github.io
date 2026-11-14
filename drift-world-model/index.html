@@ -305,21 +305,22 @@ bibtex: |
     <h3>Self-supervised features shaped for control</h3>
     <p>Denoising features alone make a weak policy state. Following <a href="https://arxiv.org/abs/2007.05929">SPR</a>, DRIFT trains the control state to predict the next frame's latent, given the action. This lifts IQM from 0.24 to 0.82 (left), and the state explains more of the player's motion beyond the actions (right).</p>
     <figure class="fig">
-        <div class="drift-pair wide">
+        <div class="drift-pair">
 <div>
 <div class="drift-abl" role="img" aria-label="IQM human-normalized score with 95% intervals on 8 Atari games: Frozen tokenizer 0.20 [0.13, 0.33], Online tokenizer 0.24 [0.13, 0.39], Online tokenizer + next-latent 0.82 [0.63, 1.04], + self-rollouts (DRIFT) 1.24 [1.06, 1.41].">
 <div class="drift-abl-head"><span>Next-latent prediction</span><span class="drift-abl-note">8 games</span></div>
+<div class="drift-abl-row drift-abl-leg"><span></span><span class="drift-leg"><span class="drift-leg-base">without next-latent</span><span class="drift-leg-nl">with next-latent</span></span></div>
 <div class="drift-abl-row drift-abl--base"><span class="drift-abl-lab"><span class="lab-full">Frozen tokenizer</span><span class="lab-short">Frozen tokenizer</span></span><span class="drift-abl-trk"><i class="gl" style="left:0.00%"></i><i class="gl" style="left:31.25%"></i><i class="gl" style="left:62.50%"></i><i class="gl" style="left:93.75%"></i><b class="band" style="left:7.91%;width:13.01%"></b><b class="dot" style="left:12.42%"></b></span><span class="drift-abl-val">0.20</span></div>
 <div class="drift-abl-row drift-abl--base"><span class="drift-abl-lab"><span class="lab-full">Online tokenizer</span><span class="lab-short">Online tokenizer</span></span><span class="drift-abl-trk"><i class="gl" style="left:0.00%"></i><i class="gl" style="left:31.25%"></i><i class="gl" style="left:62.50%"></i><i class="gl" style="left:93.75%"></i><b class="band" style="left:8.00%;width:16.38%"></b><b class="dot" style="left:15.11%"></b></span><span class="drift-abl-val">0.24</span></div>
 <div class="drift-abl-row drift-abl--nl"><span class="drift-abl-lab"><span class="lab-full">Online tokenizer + next-latent</span><span class="lab-short">Online + next-latent</span></span><span class="drift-abl-trk"><i class="gl" style="left:0.00%"></i><i class="gl" style="left:31.25%"></i><i class="gl" style="left:62.50%"></i><i class="gl" style="left:93.75%"></i><b class="band" style="left:39.36%;width:25.68%"></b><b class="dot" style="left:51.13%"></b></span><span class="drift-abl-val">0.82</span></div>
 <div class="drift-abl-row drift-abl--sf"><span class="drift-abl-lab"><span class="lab-full">+ self-rollouts (DRIFT)</span><span class="lab-short">+ self-rollouts (DRIFT)</span></span><span class="drift-abl-trk"><i class="gl" style="left:0.00%"></i><i class="gl" style="left:31.25%"></i><i class="gl" style="left:62.50%"></i><i class="gl" style="left:93.75%"></i><b class="band" style="left:66.08%;width:22.30%"></b><b class="dot" style="left:77.66%"></b></span><span class="drift-abl-val">1.24</span></div>
-<div class="drift-abl-row drift-abl-ticks"><span></span><span class="drift-abl-trk"><i style="left:0.00%">0</i><i style="left:31.25%">0.5</i><i style="left:62.50%">1</i><i style="left:93.75%">1.5</i></span><span></span></div><div class="drift-abl-ax">IQM (human-normalized)</div></div>
-<p class="drift-pair-cap">IQM with 95% intervals. The ablation rows use an earlier setup without self-generated rollouts.</p>
+<div class="drift-abl-row drift-abl-ticks"><span></span><span class="drift-abl-trk"><i style="left:0.00%">0</i><i style="left:31.25%">0.5</i><i style="left:62.50%">1</i><i style="left:93.75%">1.5</i></span><span></span></div><div class="drift-abl-ax">IQM</div></div>
+<p class="drift-pair-cap">Human-normalized IQM with 95% intervals. The ablation rows use an earlier setup without self-generated rollouts.</p>
 </div>
 <div>
 <div class="drift-abl drift-probe" role="img" aria-label="Share of the controlled object's motion explained by the control state beyond the actions, one step ahead, mean over 3 seeds. Without and with next-latent prediction: Boxing 0.15 and 0.26, Pong 0.60 and 0.70, Breakout 0.22 and 0.37, Hero 0.07 and 0.21.">
 <div class="drift-abl-head"><span>Player-motion probe</span><span class="drift-abl-note">4 games</span></div>
-<div class="drift-probe-key"><span class="k-wo">without next-latent</span><span class="k-w">with next-latent</span></div>
+<div class="drift-abl-row drift-abl-leg"><span></span><span class="drift-leg"><span class="drift-leg-base">without next-latent</span><span class="drift-leg-nl">with next-latent</span></span></div>
 <div class="drift-abl-row"><span class="drift-abl-lab">Boxing</span><span class="drift-abl-trk"><i class="gl" style="left:0.00%"></i><i class="gl" style="left:23.53%"></i><i class="gl" style="left:47.06%"></i><i class="gl" style="left:70.59%"></i><i class="gl" style="left:94.12%"></i><b class="pair" style="left:17.98%;width:12.13%"></b><b class="band" style="left:15.63%;width:4.70%"></b><b class="band band-w" style="left:28.51%;width:3.19%"></b><b class="dot" style="left:17.98%"></b><b class="dot dot-w" style="left:30.11%"></b></span><span class="drift-abl-val">0.26</span></div>
 <div class="drift-abl-row"><span class="drift-abl-lab">Pong</span><span class="drift-abl-trk"><i class="gl" style="left:0.00%"></i><i class="gl" style="left:23.53%"></i><i class="gl" style="left:47.06%"></i><i class="gl" style="left:70.59%"></i><i class="gl" style="left:94.12%"></i><b class="pair" style="left:70.84%;width:11.46%"></b><b class="band" style="left:65.92%;width:9.84%"></b><b class="band band-w" style="left:81.17%;width:2.27%"></b><b class="dot" style="left:70.84%"></b><b class="dot dot-w" style="left:82.31%"></b></span><span class="drift-abl-val">0.70</span></div>
 <div class="drift-abl-row"><span class="drift-abl-lab">Breakout</span><span class="drift-abl-trk"><i class="gl" style="left:0.00%"></i><i class="gl" style="left:23.53%"></i><i class="gl" style="left:47.06%"></i><i class="gl" style="left:70.59%"></i><i class="gl" style="left:94.12%"></i><b class="pair" style="left:25.55%;width:17.82%"></b><b class="band" style="left:12.75%;width:25.60%"></b><b class="band band-w" style="left:41.61%;width:3.54%"></b><b class="dot" style="left:25.55%"></b><b class="dot dot-w" style="left:43.38%"></b></span><span class="drift-abl-val">0.37</span></div>
@@ -329,7 +330,7 @@ bibtex: |
 </div>
         </div>
     </figure>
-    <div class="drift-split wide">
+    <div class="drift-split">
 <div>
     <h3>Tackling exposure bias in generation</h3>
     <p>In imagination, the model builds on its own generations, and errors compound. Following <a href="https://arxiv.org/abs/2506.08009">Self Forcing</a>, DRIFT also trains on its own short rollouts. The reward and continuation heads learn to score them, and the backbone learns to continue from them. This lifts IQM on all 26 games from 0.45 to 0.67.</p>
@@ -337,11 +338,12 @@ bibtex: |
     <figure class="fig">
 <div class="drift-abl drift-abl--narrow" role="img" aria-label="IQM human-normalized score with 95% intervals on 26 Atari games: Sign rewards 0.45 [0.39, 0.50], + self-rollouts (DRIFT) 0.67 [0.60, 0.76], DRIFT-symlog 0.62 [0.55, 0.70].">
 <div class="drift-abl-head"><span>Self-generated rollouts</span><span class="drift-abl-note">26 games</span></div>
+<div class="drift-abl-row drift-abl-leg"><span></span><span class="drift-leg"><span class="drift-leg-base">without self-rollouts</span><span class="drift-leg-sf">with self-rollouts</span></span></div>
 <div class="drift-abl-row drift-abl--base"><span class="drift-abl-lab"><span class="lab-full">Sign rewards</span><span class="lab-short">Sign rewards</span></span><span class="drift-abl-trk"><i class="gl" style="left:10.64%"></i><i class="gl" style="left:53.19%"></i><i class="gl" style="left:95.74%"></i><b class="band" style="left:9.06%;width:23.91%"></b><b class="dot" style="left:20.67%"></b></span><span class="drift-abl-val">0.45</span></div>
 <div class="drift-abl-row drift-abl--sf"><span class="drift-abl-lab"><span class="lab-full">+ self-rollouts (DRIFT)</span><span class="lab-short">+ self-rollouts (DRIFT)</span></span><span class="drift-abl-trk"><i class="gl" style="left:10.64%"></i><i class="gl" style="left:53.19%"></i><i class="gl" style="left:95.74%"></i><b class="band" style="left:53.69%;width:32.98%"></b><b class="dot" style="left:68.71%"></b></span><span class="drift-abl-val">0.67</span></div>
 <div class="drift-abl-row drift-abl--sym"><span class="drift-abl-lab"><span class="lab-full">DRIFT-symlog</span><span class="lab-short">DRIFT-symlog</span></span><span class="drift-abl-trk"><i class="gl" style="left:10.64%"></i><i class="gl" style="left:53.19%"></i><i class="gl" style="left:95.74%"></i><b class="band" style="left:42.94%;width:31.10%"></b><b class="dot" style="left:57.40%"></b></span><span class="drift-abl-val">0.62</span></div>
-<div class="drift-abl-row drift-abl-ticks"><span></span><span class="drift-abl-trk"><i style="left:10.64%">0.4</i><i style="left:53.19%">0.6</i><i style="left:95.74%">0.8</i></span><span></span></div><div class="drift-abl-ax">IQM (human-normalized)</div></div>
-        <figcaption>IQM on 26 Atari games with 95% intervals. Sign rewards is the same agent without self-generated rollouts, and DRIFT-symlog uses symlog rewards.</figcaption>
+<div class="drift-abl-row drift-abl-ticks"><span></span><span class="drift-abl-trk"><i style="left:10.64%">0.4</i><i style="left:53.19%">0.6</i><i style="left:95.74%">0.8</i></span><span></span></div><div class="drift-abl-ax">IQM</div></div>
+        <figcaption>Human-normalized IQM on 26 Atari games with 95% intervals. Sign rewards is the same agent without self-generated rollouts, and DRIFT-symlog uses symlog rewards.</figcaption>
     </figure>
     </div>
 </section>
@@ -351,7 +353,7 @@ bibtex: |
     <h3>One step is enough</h3>
     <p>Each imagined frame takes one denoising step. Four steps give almost the same frames and cost more.</p>
     <figure class="fig">
-        <div class="drift-pair drift-pair--steps wide">
+        <div class="drift-pair drift-pair--steps">
 <div>
 <div class="drift-frames" role="img" aria-label="A Boxing rollout. Real frames on top, then frames imagined with 1 and 4 denoising steps, at every second step from 1 to 15. The two imagined rows look almost the same and all track both boxers.">
 <div class="drift-frames-row drift-frames-head"><span></span><span class="t0">t = 1</span><span class="t1">t = 3</span><span class="t2">t = 5</span><span class="t3">t = 7</span><span class="t4">t = 9</span><span class="t5">t = 11</span><span class="t6">t = 13</span><span class="t7">t = 15</span></div>
@@ -368,7 +370,7 @@ bibtex: |
 <div class="drift-bar"><span class="drift-bar-lab">DIAMOND</span><span class="drift-bar-trk"><b style="width:77.9%"></b></span><span class="drift-bar-val">18.7</span></div>
 <div class="drift-bar drift-bar--ours"><span class="drift-bar-lab">DRIFT</span><span class="drift-bar-trk"><b style="width:2.3%"></b></span><span class="drift-bar-val">0.56</span></div>
         </div>
-<div class="drift-bars drift-bars--one" role="img" aria-label="End-to-end training cost of one Atari 100k run in GPU-hours: DIAMOND 79, DRIFT about 25."><div class="drift-bars-ttl">End to end</div><div class="drift-bars-sub">GPU-hours for one Atari 100k run, lower is better</div>
+<div class="drift-bars drift-bars--one" role="img" aria-label="End-to-end training cost of one Atari 100k run in GPU-hours: DIAMOND 79, DRIFT about 25."><div class="drift-bars-ttl">End to end</div><div class="drift-bars-sub">GPU-hours per Atari 100k run</div>
 <div class="drift-bar"><span class="drift-bar-lab">DIAMOND</span><span class="drift-bar-trk"><b style="width:98.8%"></b></span><span class="drift-bar-val">79</span></div>
 <div class="drift-bar drift-bar--ours"><span class="drift-bar-lab">DRIFT</span><span class="drift-bar-trk"><b style="width:31.2%"></b></span><span class="drift-bar-val">~25</span></div>
         </div>

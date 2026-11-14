@@ -288,11 +288,47 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-abl--narrow .drift-abl-row { grid-template-columns: 170px minmax(0, 1fr) 40px; }
 .drift-abl--narrow .drift-abl-ax { padding-left: 170px; padding-right: 40px; }
 /* Text beside its plot on desktop; stacked on phones. */
-.drift-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; margin-block: 8px; }
+/* Text keeps the column's left edge; the plot reaches right into the wide figure area. */
+.drift-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 40px; align-items: center; margin-block: 8px;
+    margin-right: calc((100% - min(var(--wide), 100vw - 2 * var(--gutter))) / 2); }
 .drift-split p { margin-bottom: 0; }
 .drift-split > .fig { margin: 0; }
 .drift-split .drift-abl--narrow { max-width: none; }
 .drift-pair-cap { margin: 10px 0 0; color: var(--muted); font-size: var(--text-secondary); line-height: 1.5; }
+/* Compact plots: text-sized type, tight rows, values next to the marks. Overrides the sizes above. */
+.drift-abl, .drift-hns, .drift-bars { font-size: 13px; }
+.drift-abl-head, .drift-bars-ttl, .drift-hns-head { font-size: 14px; }
+.drift-abl-note, .drift-bars-sub, .drift-abl-ax, .drift-abl-ticks .drift-abl-trk i, .drift-probe-key { font-size: 12px; }
+.drift-abl-row { height: 24px; grid-template-columns: 200px minmax(0, 1fr) 36px; }
+.drift-abl-ax { padding-left: 200px; padding-right: 36px; }
+.drift-abl-ticks { height: 20px; }
+.drift-abl-lab { padding-right: 10px; }
+.drift-abl-val { padding-left: 6px; }
+.drift-pair { gap: 32px; }
+.drift-pair .drift-abl:not(.drift-probe) .drift-abl-row, .drift-abl--narrow .drift-abl-row { grid-template-columns: 148px minmax(0, 1fr) 36px; }
+.drift-pair .drift-abl:not(.drift-probe) .drift-abl-ax, .drift-abl--narrow .drift-abl-ax { padding-left: 148px; padding-right: 36px; }
+.drift-probe .drift-abl-row { grid-template-columns: 70px minmax(0, 1fr) 36px; }
+.drift-probe .drift-abl-ax { padding-left: 70px; }
+.drift-abl--narrow { max-width: 380px; }
+.drift-split .drift-abl--narrow { max-width: 380px; }
+.drift-bar { height: 26px; grid-template-columns: 96px minmax(0, 1fr) 40px; }
+.drift-bar-trk { height: 10px; }
+.drift-bars-sub { margin-bottom: 6px; }
+.drift-hns { max-width: 560px; }
+.drift-hns-row { height: 26px; grid-template-columns: 84px repeat(3, minmax(0, 1fr)); column-gap: 18px; }
+.drift-hns-head { height: 22px; }
+.drift-hns-cell { grid-template-columns: minmax(0, 1fr) 36px; }
+.drift-pair--steps { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+.drift-pair--steps .drift-frames-row { grid-template-columns: 52px repeat(4, minmax(0, 1fr)); gap: 4px; }
+.drift-pair--steps .drift-frames { gap: 4px; font-size: 12px; }
+.drift-compute { gap: 16px; }
+/* Plot legend: marker and label, set over the plot area (above the axes), same in every dot plot. */
+.drift-abl-leg { height: auto; min-height: 20px; margin-bottom: 2px; }
+.drift-abl-leg .drift-leg { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 12px; color: var(--muted); }
+.drift-leg span { white-space: nowrap; }
+.drift-leg span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: 0; background: var(--muted); }
+.drift-leg .drift-leg-nl::before { background: var(--drift-teal); }
+.drift-leg .drift-leg-sf::before { background: var(--drift); }
 /* DRIFT clips: text-free video on a white canvas, labels drawn by the page in the canvas' blank strips. The Atari and Craftium
    grids come in a 4-column and a 2-column (phone) cut; only the one shown is loaded (preload none, played by the page script). */
 .drift-clip { position: relative; margin: 0 auto; container-type: inline-size; }
