@@ -310,7 +310,9 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-probe .drift-abl-row { grid-template-columns: 70px minmax(0, 1fr) 36px; }
 .drift-probe .drift-abl-ax { padding-left: 70px; }
 .drift-abl--narrow { max-width: 380px; }
-.drift-split .drift-abl--narrow { max-width: 380px; }
+.drift-split .drift-abl--narrow { max-width: 330px; margin: 0; }
+.drift-split > .fig { max-width: 330px; }
+.drift-split { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
 .drift-bar { height: 26px; grid-template-columns: 96px minmax(0, 1fr) 40px; }
 .drift-bar-trk { height: 10px; }
 .drift-bars-sub { margin-bottom: 6px; }
@@ -343,7 +345,8 @@ footer.site a { color: var(--muted); text-decoration: none; }
     .drift-pair .drift-abl:not(.drift-probe) .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 38px; }
     .drift-pair .drift-probe-key { font-size: 12px; }
     .drift-split { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-    .drift-split > .fig { padding: 0 12px; }
+    .drift-split > .fig { padding: 0 12px; max-width: none; }
+    .drift-split .drift-abl--narrow { max-width: none; }
     .drift-abl--narrow .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 38px; }
     .drift-abl--narrow .drift-abl-ax { padding-left: 150px; padding-right: 38px; }
     .drift-frames { max-width: calc(100% - 24px); gap: 5px; }
