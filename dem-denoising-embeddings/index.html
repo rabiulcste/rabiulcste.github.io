@@ -472,8 +472,11 @@ bibtex: |
 
 <section id="connections">
     <h2>Connections to SSL, diffusion autoencoders and REPA</h2>
+    <div class="split">
+<div>
     <h3 id="special-case">SSL is the full-noise case</h3>
     <p><a href="https://arxiv.org/abs/2006.07733">Joint-embedding SSL methods</a> turn out to be a special case of DEM. Imagine handing such a predictor a noisy copy of its own target. If the copy is pure noise, it tells the predictor nothing, and we are back to the standard SSL prediction task. Prediction is DEM at full noise. Below full noise, DEM learns the whole range of embeddings that fit the view, where a predictor can only give their average.</p>
+</div>
     <figure class="dem-fig" id="dem-tau">
         <div class="dem-tau-wrap"><svg class="dem-svg dem-svg--phone dem-flow dem-copy" viewBox="0 0 360 176" role="img" aria-labelledby="cp-t">
 <title id="cp-t">An illustration, not model output. The noised view and a noisy copy of the target go into the backbone and embedding denoiser, which predict the target. The slider sets the noise level tau of the copy, a mix of the target and one fixed draw of Gaussian noise. As tau rises, the striped target embedding breaks up into speckled noise, cell by cell. At tau 1 the copy is pure noise and carries no information, so this is prediction from the view alone.</title>
@@ -496,6 +499,7 @@ bibtex: |
         </div>
         <p class="dem-tau-line" id="dem-tau-line" aria-live="polite">Lower noise (DEM). The copy still carries information.</p>
     </figure>
+    </div>
 
     <h3 id="autoencoder">An autoencoding interpretation</h3>
     <p>DEM admits an autoencoding interpretation, as a <a href="https://arxiv.org/abs/2111.15640">diffusion autoencoder</a>. An image is encoded into two latents, its embedding z, which holds the high-level semantics, and a pixel noise η, which holds the low-level details. The teacher gives z, and running the pixel denoiser's ODE from the image back to noise gives η. Decoding both reconstructs the image almost exactly (55 dB PSNR), and a fresh η changes only the low-level details.</p>

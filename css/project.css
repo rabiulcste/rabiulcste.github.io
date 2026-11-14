@@ -156,6 +156,11 @@ footer.site a { color: var(--muted); text-decoration: none; }
 /* One figure for large screens, another drawn for phones; the break is 768 px on every page. */
 @media (min-width: 768px) { .only-phone { display: none !important; } }
 @media (max-width: 767px) { .only-desk { display: none !important; } }
+/* Text beside its figure, both inside the text column; stacked on phones. */
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: center; margin-block: 8px 24px; }
+.split p { margin-bottom: 0; }
+.split > figure { margin: 0; }
+@media (max-width: 767px) { .split { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
 /* Tabs and toggles above a figure */
 .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-block: 0 12px; }
 .tabs[hidden] { display: none; }
