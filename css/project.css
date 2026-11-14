@@ -277,7 +277,11 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-pair .drift-abl .lab-full { display: none; } .drift-pair .drift-abl .lab-short { display: inline; }
 .drift-pair .drift-abl:not(.drift-probe) .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 40px; }
 .drift-pair .drift-abl:not(.drift-probe) .drift-abl-ax { padding-left: 150px; padding-right: 40px; }
-.drift-pair .drift-probe-key { justify-content: flex-start; padding-left: 110px; }
+.drift-pair .drift-probe-key { justify-content: center; flex-wrap: wrap; gap: 4px 16px; }
+.drift-pair--steps { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; }
+.drift-pair--steps .drift-frames .t1, .drift-pair--steps .drift-frames .t3, .drift-pair--steps .drift-frames .t5, .drift-pair--steps .drift-frames .t7 { display: none; }
+.drift-pair--steps .drift-frames-row { grid-template-columns: 58px repeat(4, minmax(0, 1fr)); }
+.drift-pair--steps .drift-frames, .drift-pair--steps .drift-bars--one { max-width: none; }
 .drift-pair-cap { margin: 10px 0 0; color: var(--muted); font-size: var(--text-secondary); line-height: 1.5; }
 /* DRIFT clips: text-free video on a white canvas, labels drawn by the page in the canvas' blank strips. The Atari and Craftium
    grids come in a 4-column and a 2-column (phone) cut; only the one shown is loaded (preload none, played by the page script). */
@@ -291,7 +295,7 @@ footer.site a { color: var(--muted); text-decoration: none; }
     .drift-pair { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 0 12px; }
     .drift-pair .drift-abl { max-width: none; }
     .drift-pair .drift-abl:not(.drift-probe) .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 38px; }
-    .drift-pair .drift-probe-key { padding-left: 0; justify-content: center; gap: 14px; font-size: 12px; }
+    .drift-pair .drift-probe-key { font-size: 12px; }
     .drift-frames { max-width: calc(100% - 24px); gap: 5px; }
     .drift-frames-row { grid-template-columns: 54px repeat(4, minmax(0, 1fr)); gap: 5px; }
     .drift-frames .t1, .drift-frames .t3, .drift-frames .t5, .drift-frames .t7 { display: none; }
