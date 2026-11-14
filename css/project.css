@@ -324,13 +324,18 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-pair--steps .drift-frames-row { grid-template-columns: 52px repeat(4, minmax(0, 1fr)); gap: 4px; }
 .drift-pair--steps .drift-frames { gap: 4px; font-size: 12px; }
 .drift-compute { gap: 16px; }
-/* Plot legend: marker and label, set over the plot area (above the axes), same in every dot plot. */
-.drift-abl-leg { height: auto; min-height: 20px; margin-bottom: 2px; }
-.drift-abl-leg .drift-leg { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 12px; color: var(--muted); }
-.drift-leg span { white-space: nowrap; }
-.drift-leg span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: 0; background: var(--muted); }
-.drift-leg .drift-leg-nl::before { background: var(--drift-teal); }
-.drift-leg .drift-leg-sf::before { background: var(--drift); }
+/* Plot legend: one line, small round markers, muted text, no frame. Shared and centred above a multi-panel figure; top right for a single plot. */
+.drift-legend { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 18px; margin-bottom: 14px; font-size: 12px; color: var(--muted); }
+.drift-legend--right { justify-content: flex-end; margin-bottom: 6px; }
+.drift-legend span { white-space: nowrap; }
+.drift-legend span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: var(--muted); }
+.drift-legend .drift-leg-nl::before { background: var(--drift-teal); }
+.drift-legend .drift-leg-sf::before { background: var(--drift); }
+/* Room to breathe: compact, not crammed. */
+.drift-abl-row { height: 28px; }
+.drift-bar { height: 28px; }
+.drift-hns-row { height: 28px; }
+.drift-pair { gap: 40px; }
 /* DRIFT clips: text-free video on a white canvas, labels drawn by the page in the canvas' blank strips. The Atari and Craftium
    grids come in a 4-column and a 2-column (phone) cut; only the one shown is loaded (preload none, played by the page script). */
 .drift-clip { position: relative; margin: 0 auto; container-type: inline-size; }
