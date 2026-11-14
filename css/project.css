@@ -253,6 +253,23 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-steps p:first-child { padding-right: 40px; }
 .drift-steps p { margin: 0; }
 .drift-steps strong { color: var(--text); }
+/* DRIFT frame grid (one step is enough): real row, then 1, 2 and 4 denoising steps; pixel frames kept sharp. Phones show every other column. */
+.drift-frames { max-width: 760px; margin: 0 auto; display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
+.drift-frames-row { display: grid; grid-template-columns: 64px repeat(8, minmax(0, 1fr)); gap: 6px; align-items: center; }
+.drift-frames-row img { display: block; width: 100%; height: auto; image-rendering: pixelated; border-radius: 3px; }
+.drift-frames-head span { text-align: center; font-variant-numeric: tabular-nums; }
+.drift-frames-lab { color: var(--text); white-space: nowrap; }
+.drift-steps-row--ours .drift-frames-lab { color: var(--drift); font-weight: 600; }
+/* DRIFT probes: two dots per game (grey without, teal with next-latent), joined by a hairline, spread as a band */
+.drift-probe .drift-abl-row { grid-template-columns: 110px minmax(0, 1fr) 44px; }
+.drift-probe .drift-abl-ax { padding-left: 110px; }
+.drift-probe .pair { position: absolute; top: 50%; height: 1px; background: var(--border); }
+.drift-probe .band { --c: var(--muted); }
+.drift-probe .band-w, .drift-probe .dot-w { --c: var(--drift-teal); }
+.drift-probe .drift-abl-val { color: var(--drift-teal-t); font-weight: 600; }
+.drift-probe-key { display: flex; gap: 20px; justify-content: center; margin-bottom: 6px; font-size: 13px; color: var(--muted); }
+.drift-probe-key span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; background: var(--muted); }
+.drift-probe-key .k-w::before { background: var(--drift-teal); }
 /* DRIFT clips: text-free video on a white canvas, labels drawn by the page in the canvas' blank strips. The Atari and Craftium
    grids come in a 4-column and a 2-column (phone) cut; only the one shown is loaded (preload none, played by the page script). */
 .drift-clip { position: relative; margin: 0 auto; container-type: inline-size; }
@@ -262,13 +279,18 @@ footer.site a { color: var(--muted); text-decoration: none; }
 .drift-clip--phone .clip-lab, .drift-clip--phone .clip-name, .drift-clip--one .clip-lab, .drift-clip--one .clip-name { font-size: clamp(11px, 3.8cqw, 14px); }
 @media (max-width: 767px) {
     .drift-hns, .drift-bars--one { max-width: calc(100% - 24px); }
+    .drift-frames { max-width: calc(100% - 24px); gap: 5px; }
+    .drift-frames-row { grid-template-columns: 54px repeat(4, minmax(0, 1fr)); gap: 5px; }
+    .drift-frames .t1, .drift-frames .t3, .drift-frames .t5, .drift-frames .t7 { display: none; }
+    .drift-probe .drift-abl-row { grid-template-columns: 80px minmax(0, 1fr) 38px; }
+    .drift-probe .drift-abl-ax { padding-left: 80px; }
     .drift-steps { grid-template-columns: 1fr; row-gap: 10px; }
     .drift-steps p:first-child { padding-right: 0; }
     .drift-abl { max-width: calc(100% - 24px); font-size: 13px; }
     .drift-abl-row { grid-template-columns: 150px minmax(0, 1fr) 38px; height: 28px; }
     .drift-abl .lab-full { display: none; } .drift-abl .lab-short { display: inline; }
     .drift-abl-lab { padding-right: 10px; }
-    .drift-abl-ax { padding-left: 150px; padding-right: 38px; }
+    .drift-abl-ax { padding-left: 150px; padding-right: 38px; white-space: nowrap; }
     .drift-hns { font-size: 13px; }
     .drift-hns-row { grid-template-columns: 76px repeat(3, minmax(0, 1fr)); column-gap: 10px; height: 30px; }
     .drift-hns-cell { grid-template-columns: minmax(0, 1fr) 34px; }

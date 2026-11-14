@@ -118,7 +118,7 @@ bibtex: |
 </section>
 
 <section id="imagination">
-    <h2>Imagination in one step per frame</h2>
+    <h2>Imagined Atari games</h2>
     <figure class="fig fig--video fig--bleed">
     <div class="fig-img"><div class="drift-clip drift-clip--wide only-desk" style="max-width:936px;aspect-ratio:1634 / 544"><video src="atari_rollouts.mp4" poster="atari_rollouts.webp" muted loop playsinline preload="none" aria-label="Eight Atari games. In each, real frames play on the left and DRIFT's imagined frames on the right under the same actions."></video><span class="clip-lab" style="left:0.00%;top:5.15%">Real</span><span class="clip-lab" style="left:12.00%;top:5.15%">Imagined</span><span class="clip-name" style="left:0.00%;top:11.95%">Boxing</span><span class="clip-lab" style="left:25.40%;top:5.15%">Real</span><span class="clip-lab" style="left:37.39%;top:5.15%">Imagined</span><span class="clip-name" style="left:25.40%;top:11.95%">Pong</span><span class="clip-lab" style="left:50.80%;top:5.15%">Real</span><span class="clip-lab" style="left:62.79%;top:5.15%">Imagined</span><span class="clip-name" style="left:50.80%;top:11.95%">Breakout</span><span class="clip-lab" style="left:76.19%;top:5.15%">Real</span><span class="clip-lab" style="left:88.19%;top:5.15%">Imagined</span><span class="clip-name" style="left:76.19%;top:11.95%">KungFuMaster</span><span class="clip-name" style="left:0.00%;top:61.21%">Kangaroo</span><span class="clip-name" style="left:25.40%;top:61.21%">Hero</span><span class="clip-name" style="left:50.80%;top:61.21%">BankHeist</span><span class="clip-name" style="left:76.19%;top:61.21%">RoadRunner</span></div><div class="drift-clip drift-clip--phone only-phone" style="max-width:460px;aspect-ratio:804 / 1194"><video src="atari_rollouts_phone.mp4" poster="atari_rollouts_phone.webp" muted loop playsinline preload="none" aria-label="Eight Atari games. In each, real frames play on the left and DRIFT's imagined frames on the right under the same actions."></video><span class="clip-lab" style="left:0.00%;top:3.18%">Real</span><span class="clip-lab" style="left:24.38%;top:3.18%">Imagined</span><span class="clip-name" style="left:0.00%;top:7.45%">Boxing</span><span class="clip-lab" style="left:51.62%;top:3.18%">Real</span><span class="clip-lab" style="left:76.00%;top:3.18%">Imagined</span><span class="clip-name" style="left:51.62%;top:7.45%">Pong</span><span class="clip-name" style="left:0.00%;top:32.24%">Breakout</span><span class="clip-name" style="left:51.62%;top:32.24%">KungFuMaster</span><span class="clip-name" style="left:0.00%;top:57.04%">Kangaroo</span><span class="clip-name" style="left:51.62%;top:57.04%">Hero</span><span class="clip-name" style="left:0.00%;top:81.83%">BankHeist</span><span class="clip-name" style="left:51.62%;top:81.83%">RoadRunner</span></div></div>
     <script>(function () {
@@ -334,9 +334,46 @@ bibtex: |
     </figure>
 </section>
 
+<section id="one-step">
+    <h2>One denoising step is enough</h2>
+    <p>DRIFT imagines each frame with a single denoising step. In this Boxing rollout, frames imagined with one, two or four steps look almost the same, and all of them track both boxers. More steps cost more passes through the backbone and do not make imagination more accurate on Boxing or Crafter.</p>
+    <figure class="fig">
+<div class="drift-frames" role="img" aria-label="A Boxing rollout. Real frames on top, then frames imagined with 1, 2 and 4 denoising steps, at every second step from 1 to 15. The three imagined rows look almost the same and all track both boxers.">
+<div class="drift-frames-row drift-frames-head"><span></span><span class="t0">t = 1</span><span class="t1">t = 3</span><span class="t2">t = 5</span><span class="t3">t = 7</span><span class="t4">t = 9</span><span class="t5">t = 11</span><span class="t6">t = 13</span><span class="t7">t = 15</span></div>
+<div class="drift-frames-row"><span class="drift-frames-lab">Real</span><img class="t0" src="steps/real_t01.png" width="64" height="64" alt=""><img class="t1" src="steps/real_t03.png" width="64" height="64" alt=""><img class="t2" src="steps/real_t05.png" width="64" height="64" alt=""><img class="t3" src="steps/real_t07.png" width="64" height="64" alt=""><img class="t4" src="steps/real_t09.png" width="64" height="64" alt=""><img class="t5" src="steps/real_t11.png" width="64" height="64" alt=""><img class="t6" src="steps/real_t13.png" width="64" height="64" alt=""><img class="t7" src="steps/real_t15.png" width="64" height="64" alt=""></div>
+<div class="drift-frames-row drift-steps-row--ours"><span class="drift-frames-lab">1 step</span><img class="t0" src="steps/s1_t01.png" width="64" height="64" alt=""><img class="t1" src="steps/s1_t03.png" width="64" height="64" alt=""><img class="t2" src="steps/s1_t05.png" width="64" height="64" alt=""><img class="t3" src="steps/s1_t07.png" width="64" height="64" alt=""><img class="t4" src="steps/s1_t09.png" width="64" height="64" alt=""><img class="t5" src="steps/s1_t11.png" width="64" height="64" alt=""><img class="t6" src="steps/s1_t13.png" width="64" height="64" alt=""><img class="t7" src="steps/s1_t15.png" width="64" height="64" alt=""></div>
+<div class="drift-frames-row"><span class="drift-frames-lab">2 steps</span><img class="t0" src="steps/s2_t01.png" width="64" height="64" alt=""><img class="t1" src="steps/s2_t03.png" width="64" height="64" alt=""><img class="t2" src="steps/s2_t05.png" width="64" height="64" alt=""><img class="t3" src="steps/s2_t07.png" width="64" height="64" alt=""><img class="t4" src="steps/s2_t09.png" width="64" height="64" alt=""><img class="t5" src="steps/s2_t11.png" width="64" height="64" alt=""><img class="t6" src="steps/s2_t13.png" width="64" height="64" alt=""><img class="t7" src="steps/s2_t15.png" width="64" height="64" alt=""></div>
+<div class="drift-frames-row"><span class="drift-frames-lab">4 steps</span><img class="t0" src="steps/s4_t01.png" width="64" height="64" alt=""><img class="t1" src="steps/s4_t03.png" width="64" height="64" alt=""><img class="t2" src="steps/s4_t05.png" width="64" height="64" alt=""><img class="t3" src="steps/s4_t07.png" width="64" height="64" alt=""><img class="t4" src="steps/s4_t09.png" width="64" height="64" alt=""><img class="t5" src="steps/s4_t11.png" width="64" height="64" alt=""><img class="t6" src="steps/s4_t13.png" width="64" height="64" alt=""><img class="t7" src="steps/s4_t15.png" width="64" height="64" alt=""></div>
+</div>
+        <figcaption>Boxing, 15 frames imagined from 8 real frames under the real actions, every second frame shown. Brief punches are sometimes missed.</figcaption>
+    </figure>
+    <figure class="fig">
+        <div class="drift-bars drift-bars--one" role="img" aria-label="Compute per imagined step in GFLOPs: Horizon Imagination 23.2, DIAMOND 18.7, DRIFT 0.56."><div class="drift-bars-ttl">Compute per imagined step</div><div class="drift-bars-sub">GFLOPs at batch size one, lower is better</div>
+<div class="drift-bar"><span class="drift-bar-lab">Horizon Imag.</span><span class="drift-bar-trk"><b style="width:96.7%"></b></span><span class="drift-bar-val">23.2</span></div>
+<div class="drift-bar"><span class="drift-bar-lab">DIAMOND</span><span class="drift-bar-trk"><b style="width:77.9%"></b></span><span class="drift-bar-val">18.7</span></div>
+<div class="drift-bar drift-bar--ours"><span class="drift-bar-lab">DRIFT</span><span class="drift-bar-trk"><b style="width:2.3%"></b></span><span class="drift-bar-val">0.56</span></div>
+        </div>
+    </figure>
+</section>
+
+<section id="probes">
+    <h2>What the control state knows</h2>
+    <p>Next-latent prediction should make the control state carry how the world moves. To check, we train probes that predict how the controlled object moves next from the control state and the actions. With next-latent prediction, the state explains more of that motion beyond what the actions alone explain, on every game and seed we tested.</p>
+    <figure class="fig">
+<div class="drift-abl drift-probe" role="img" aria-label="Share of the controlled object's motion explained by the control state beyond the actions, one step ahead, mean over 3 seeds. Without and with next-latent prediction: Boxing 0.15 and 0.26, Pong 0.60 and 0.70, Breakout 0.22 and 0.37, Hero 0.07 and 0.21.">
+<div class="drift-probe-key"><span class="k-wo">without next-latent</span><span class="k-w">with next-latent</span></div>
+<div class="drift-abl-row"><span class="drift-abl-lab">Boxing</span><span class="drift-abl-trk"><i class="gl" style="left:0.00%"></i><i class="gl" style="left:23.53%"></i><i class="gl" style="left:47.06%"></i><i class="gl" style="left:70.59%"></i><i class="gl" style="left:94.12%"></i><b class="pair" style="left:17.98%;width:12.13%"></b><b class="band" style="left:15.63%;width:4.70%"></b><b class="band band-w" style="left:28.51%;width:3.19%"></b><b class="dot" style="left:17.98%"></b><b class="dot dot-w" style="left:30.11%"></b></span><span class="drift-abl-val">0.26</span></div>
+<div class="drift-abl-row"><span class="drift-abl-lab">Pong</span><span class="drift-abl-trk"><i class="gl" style="left:0.00%"></i><i class="gl" style="left:23.53%"></i><i class="gl" style="left:47.06%"></i><i class="gl" style="left:70.59%"></i><i class="gl" style="left:94.12%"></i><b class="pair" style="left:70.84%;width:11.46%"></b><b class="band" style="left:65.92%;width:9.84%"></b><b class="band band-w" style="left:81.17%;width:2.27%"></b><b class="dot" style="left:70.84%"></b><b class="dot dot-w" style="left:82.31%"></b></span><span class="drift-abl-val">0.70</span></div>
+<div class="drift-abl-row"><span class="drift-abl-lab">Breakout</span><span class="drift-abl-trk"><i class="gl" style="left:0.00%"></i><i class="gl" style="left:23.53%"></i><i class="gl" style="left:47.06%"></i><i class="gl" style="left:70.59%"></i><i class="gl" style="left:94.12%"></i><b class="pair" style="left:25.55%;width:17.82%"></b><b class="band" style="left:12.75%;width:25.60%"></b><b class="band band-w" style="left:41.61%;width:3.54%"></b><b class="dot" style="left:25.55%"></b><b class="dot dot-w" style="left:43.38%"></b></span><span class="drift-abl-val">0.37</span></div>
+<div class="drift-abl-row"><span class="drift-abl-lab">Hero</span><span class="drift-abl-trk"><i class="gl" style="left:0.00%"></i><i class="gl" style="left:23.53%"></i><i class="gl" style="left:47.06%"></i><i class="gl" style="left:70.59%"></i><i class="gl" style="left:94.12%"></i><b class="pair" style="left:8.41%;width:15.91%"></b><b class="band" style="left:7.08%;width:2.66%"></b><b class="band band-w" style="left:21.75%;width:5.17%"></b><b class="dot" style="left:8.41%"></b><b class="dot dot-w" style="left:24.33%"></b></span><span class="drift-abl-val">0.21</span></div>
+<div class="drift-abl-row drift-abl-ticks"><span></span><span class="drift-abl-trk"><i style="left:0.00%">0</i><i style="left:23.53%">0.2</i><i style="left:47.06%">0.4</i><i style="left:70.59%">0.6</i><i style="left:94.12%">0.8</i></span><span></span></div><div class="drift-abl-ax">R&sup2; gain beyond the actions</div></div>
+        <figcaption>Probes one step ahead, mean and spread over 3 seeds. Teal is with next-latent prediction, grey without.</figcaption>
+    </figure>
+</section>
+
 <section id="results">
-    <h2>Results</h2>
-    <p>On Atari 100k, DRIFT is competitive with DIAMOND, the closest prior diffusion world model. It has a higher IQM and median and a lower mean, while using 33&times; fewer FLOPs per imagined step. The paper has the full results on Atari, Craftium and Crafter, with all baselines and ablations.</p>
+    <h2>Atari 100k</h2>
+    <p>On the standard Atari 100k benchmark, DRIFT is competitive with DIAMOND, the closest prior diffusion world model. It has a higher IQM and median and a lower mean. The paper has the full results on Atari, Craftium and Crafter, with all baselines and ablations.</p>
     <figure class="fig">
         <div class="drift-hns" role="img" aria-label="Atari 100k human-normalized score over 26 games. IQM: DreamerV3 0.47, DIAMOND 0.64, DRIFT 0.67. Median: DreamerV3 0.44, DIAMOND 0.37, DRIFT 0.52. Mean: DreamerV3 1.18, DIAMOND 1.46, DRIFT 1.35.">
 <div class="drift-hns-row drift-hns-head"><span></span><span>IQM</span><span>Median</span><span>Mean</span></div>
@@ -345,12 +382,5 @@ bibtex: |
 <div class="drift-hns-row drift-hns-row--ours"><span class="drift-bar-lab">DRIFT</span><span class="drift-hns-cell"><span class="drift-bar-trk"><b style="width:83.8%"></b></span><span class="drift-bar-val">0.67</span></span><span class="drift-hns-cell"><span class="drift-bar-trk"><b style="width:65.0%"></b></span><span class="drift-bar-val">0.52</span></span><span class="drift-hns-cell"><span class="drift-bar-trk"><b style="width:84.4%"></b></span><span class="drift-bar-val">1.35</span></span></div>
         </div>
         <figcaption>Atari 100k, human-normalized score over 26 games and 5 seeds. DreamerV3 is computed from its released per-seed learning curves. The intervals of DRIFT and DIAMOND overlap. TWISTER, a latent world model without per-seed scores, reports a higher mean and median.</figcaption>
-    </figure>
-    <figure class="fig">
-        <div class="drift-bars drift-bars--one" role="img" aria-label="Compute per imagined step in GFLOPs: Horizon Imagination 23.2, DIAMOND 18.7, DRIFT 0.56."><div class="drift-bars-ttl">Compute per imagined step</div><div class="drift-bars-sub">GFLOPs at batch size one, lower is better</div>
-<div class="drift-bar"><span class="drift-bar-lab">Horizon Imag.</span><span class="drift-bar-trk"><b style="width:96.7%"></b></span><span class="drift-bar-val">23.2</span></div>
-<div class="drift-bar"><span class="drift-bar-lab">DIAMOND</span><span class="drift-bar-trk"><b style="width:77.9%"></b></span><span class="drift-bar-val">18.7</span></div>
-<div class="drift-bar drift-bar--ours"><span class="drift-bar-lab">DRIFT</span><span class="drift-bar-trk"><b style="width:2.3%"></b></span><span class="drift-bar-val">0.56</span></div>
-        </div>
     </figure>
 </section>
