@@ -162,6 +162,7 @@
 .navbar {
     position: relative;
     z-index: 1030;
+    line-height: var(--leading-body);   /* its own, so the bar is the same height on every page */
     padding: var(--space-3) 0;
     background-color: var(--navbar-bg);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -179,25 +180,20 @@
     width: 100%;
 }
 
-/* Site name — same large treatment on home (h1 + link) and inner pages (compact link) */
-.navbar--home .navbar-brand--home {
+/* Site name: an h1 on the homepage, a div elsewhere, styled the same */
+.navbar-brand {
     margin: 0;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-}
-.navbar-brand--home a,
-.navbar-brand--compact {
     font-size: var(--text-display);
     font-weight: 600;
     line-height: var(--leading-display);
     letter-spacing: var(--track-display);
+}
+.navbar-brand a {
     color: var(--text);
     text-decoration: none;
-    transition: color var(--duration) var(--ease-standard), opacity var(--duration) var(--ease-standard);
+    transition: opacity var(--duration) var(--ease-standard);
 }
-.navbar-brand--home a:hover,
-.navbar-brand--compact:hover { color: var(--text); opacity: 0.85; }
+.navbar-brand a:hover { color: var(--text); opacity: 0.85; }
 
 .navbar--home .nav-link,
 .navbar--compact .nav-link {
@@ -258,5 +254,20 @@
     width: 100%;
 }
 .nav-item { margin: 0; }
+/* Phones: a smaller site name and taller tap targets for the links (every page, main site and project pages). */
+@media (max-width: 767px) {
+    .navbar-brand {
+        font-size: var(--text-title-md);
+        letter-spacing: var(--track-headline);
+    }
+    .nav-link { padding: 0.25rem 0; display: inline-block; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .navbar {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        background-color: var(--bg-page);
+    }
+}
 
 .navbar a { text-decoration: none; }

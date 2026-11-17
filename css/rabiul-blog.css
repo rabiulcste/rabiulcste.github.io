@@ -795,13 +795,6 @@ footer .copyright {
 
     footer { padding: var(--space-5) 0 var(--space-6); }
 
-    .navbar--home .navbar-brand--home a,
-    .navbar-brand--compact {
-        font-size: var(--text-title-md);
-        letter-spacing: var(--track-headline);
-    }
-    .nav-link { padding: 0.25rem 0; display: inline-block; }
-
     .profile {
         row-gap: var(--space-3);
     }
@@ -843,12 +836,6 @@ footer .copyright {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
-    }
-    /* The only motion that is not a transition: the 1px hover lift */
-    .navbar {
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-        background-color: var(--bg-page);
     }
 }
 
