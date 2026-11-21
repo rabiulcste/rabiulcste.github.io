@@ -369,7 +369,7 @@ bibtex: |
 </section>
 
 <section id="free" class="wide">
-    <h2>The cleaner view in each family</h2>
+    <h2>A free self-supervised objective from the training step</h2>
     <p>A flow map obeys a composition rule: one long jump lands where two shorter jumps land. So each training example already holds two views of one image on the same trajectory: the noisy input that the student jumps from, and the less noisy point that the first short jump reaches. The standard training step evaluates the network at this cleaner view, or next to it, to build its target. iFeCo reads the teacher's features from that evaluation, so the feature consistency objective comes from the standard training batch, with no extra forward pass.</p>
     <p>Shortcut builds its target from two half steps of its EMA copy, and the second half step starts at the cleaner view. LSD evaluates its EMA copy where the student's jump lands, which is the cleaner view. MeanFlow already computes a Jacobian-vector product (JVP) along the trajectory. That pass gives the features of the noisier view and how fast they change along the path, and a first-order step moves them to the cleaner view. In MeanFlow the teacher is the model itself with a stop-gradient, since the EMA copy does not run this pass.</p>
     <figure class="fe-fig" id="fe-free">
