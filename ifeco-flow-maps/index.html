@@ -255,8 +255,8 @@ bibtex: |
 </section>
 
 <section id="method">
-    <h2>Two views of one trajectory</h2>
-    <p>The student reads the noisier view and the teacher, an EMA copy of the student, reads the cleaner view. One predictor connects the two.</p>
+    <h2>Feature consistency loss</h2>
+    <p>iFeCo adds one loss to the standard training step. A small predictor maps the student's early features of the noisier view to the teacher's deep features of the cleaner view. The teacher is the EMA copy of the student in Shortcut and LSD, and the model itself with a stop-gradient in MeanFlow.</p>
     <figure class="fe-fig fe-btnfig" id="fe-method">
         <div class="tabs fe-btns" role="group" aria-label="Losses" hidden>
             <button type="button" class="btn" data-task="" aria-pressed="true">Both<span class="fe-long"> losses</span></button>
