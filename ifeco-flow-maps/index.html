@@ -228,7 +228,6 @@ bibtex: |
 
 <section id="tldr">
     <p class="tldr"><strong>TL;DR:</strong> Flow-map training already evaluates a teacher on a cleaner view to build the target for a student on a noisier view. iFeCo adds one loss: early features of the noisier view predict the teacher's deep features of the cleaner view. It needs no external encoder and no extra forward pass.</p>
-    <p class="note">Work in progress. The results on this page are preliminary: each model is trained once, and some models have not finished training.</p>
 </section>
 
 <section id="context" class="intro">
@@ -817,14 +816,18 @@ bibtex: |
     </div>
     <p class="caption">Multi-step sampling, FID-50k at 1.2M training steps; &dagger; as above. On Shortcut and LSD the one-step gain carries over to more sampling steps; on MeanFlow the 4-step FIDs tie. REPA has the lowest multi-step FID in all three families.</p>
     <p><strong>Comparison with REPA.</strong> <a href="https://arxiv.org/abs/2410.06940">REPA</a> aligns features with a frozen <a href="https://arxiv.org/abs/2304.07193">DINOv2</a> encoder. Our REPA reference uses the same student block as iFeCo, is not tuned for flow maps, and does not reproduce the published REPA. Which target is better depends on the family and on the number of sampling steps. iFeCo has the lower 1-step FID on Shortcut B/2 (28.03 against 36.11) and on LSD B/2 (10.56 against 11.44). REPA is better on MeanFlow B/2 (4.86 against 5.69&dagger; at 1.2M steps, and 7.36 against 8.03 with the free teacher at 400k) and with 8 sampling steps on Shortcut B/2 (16.14 against 18.04) and LSD B/2 (4.99 against 5.60).</p>
-    <p><strong>Preliminary: the loss on every row.</strong> Each training batch also holds rows with no jump, which train the velocity at a single time. By default iFeCo skips them, since they have no cleaner view. On these rows the student's early features can instead predict a deeper block of the same forward pass, again with no extra forward pass. In MeanFlow and LSD at B/2, this lowers the 1-step FID below that of the default iFeCo at every evaluated checkpoint (table below). At 500k steps the MeanFlow every-row model reaches 7.09, against 8.58 for the baseline and 6.43 for REPA. On Shortcut, where the same change is in the paper, it gives 27.56 against 28.03 at 1.2M steps. Each model is trained once and the gaps are small, so this result does not change the speedups above.</p>
+    <p><strong>Preliminary: the loss on every row.</strong> Each training batch also holds rows with no jump, which train the velocity at a single time. By default iFeCo skips them, since they have no cleaner view. On these rows the student's early features can instead predict a deeper block of the same forward pass, again with no extra forward pass. In all three families at B/2, this lowers the 1-step FID below that of the default iFeCo at every evaluated checkpoint (table below). The gap is largest early in training: on Shortcut it is about 1.4 at 200k to 400k steps and 0.5 at 1.2M (27.56 against 28.03). At 500k steps the MeanFlow every-row model reaches 7.09, against 8.58 for the baseline and 6.43 for REPA. Each model is trained once and the gaps are small, so this result does not change the speedups above.</p>
     <div class="table-wrap">
         <table>
             <thead>
                 <tr><th>Method</th><th>Steps</th><th>Jump rows</th><th class="ours">Every row</th></tr>
             </thead>
             <tbody>
-                <tr><td>MeanFlow</td><td>100k</td><td>26.87</td><td class="ours"><strong>26.32</strong></td></tr>
+                <tr><td>Shortcut</td><td>200k</td><td>48.86</td><td class="ours"><strong>47.44</strong></td></tr>
+                <tr><td></td><td>400k</td><td>37.32</td><td class="ours"><strong>35.95</strong></td></tr>
+                <tr><td></td><td>800k</td><td>29.75</td><td class="ours"><strong>29.31</strong></td></tr>
+                <tr><td></td><td>1.2M</td><td>28.03</td><td class="ours"><strong>27.56</strong></td></tr>
+                <tr class="grp"><td>MeanFlow</td><td>100k</td><td>26.87</td><td class="ours"><strong>26.32</strong></td></tr>
                 <tr><td></td><td>200k</td><td>13.67</td><td class="ours"><strong>12.75</strong></td></tr>
                 <tr><td></td><td>300k</td><td>9.82</td><td class="ours"><strong>9.22</strong></td></tr>
                 <tr><td></td><td>400k</td><td>8.03</td><td class="ours"><strong>7.80</strong></td></tr>
