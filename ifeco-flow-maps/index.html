@@ -3,7 +3,7 @@ layout: project
 title: "A Self-Supervised Free Lunch for Flow Map Training"
 seo_title: "iFeCo: A Self-Supervised Free Lunch for Flow Map Training"
 description: "iFeCo: flow maps learn from their own features. One consistency loss, no external encoder, no extra forward pass. Preliminary ImageNet 256 results."
-abstract: "Flow-map training already evaluates a teacher on a cleaner view to build its target. iFeCo adds one feature consistency loss, in which early features of the noisier view predict the teacher's deep features of the cleaner view, with no external encoder and no extra forward pass. It works as representation alignment (REPA) without a pretrained encoder for one-step and few-step generators such as MeanFlow and shortcut models. In preliminary ImageNet 256 results (1-step FID), it reaches the baseline's final FID 1.3 to 3.0 times sooner in five of six settings, for example 36.95 to 27.72 on Shortcut DiT-B/2 at 1.2M steps."
+abstract: "Flow-map training already evaluates a teacher on a cleaner view to build its target. iFeCo adds one feature consistency loss, in which early features of the noisier view predict the teacher's deep features of the cleaner view, with no external encoder and no extra forward pass. It works as representation alignment (REPA) without a pretrained encoder for one-step and few-step generators such as MeanFlow and shortcut models. In preliminary ImageNet 256 results (1-step FID), it reaches the baseline's final FID 2.4 to 3.1 times sooner on Shortcut and 2.1 times sooner on LSD B/2, for example 36.95 to 28.03 on Shortcut DiT-B/2 at 1.2M steps. On MeanFlow the gain is smaller, and at XL/2 there is none."
 keywords: ["iFeCo", "flow map", "flow maps", "flow map training", "one-step generation", "one-step diffusion", "few-step diffusion", "few-step generation", "fast diffusion sampling", "MeanFlow", "mean flows", "shortcut models", "LSD", "Lagrangian self-distillation", "consistency models", "consistency training", "diffusion distillation", "self-distillation", "knowledge distillation", "representation alignment", "REPA", "representation alignment for diffusion", "self-supervised learning", "diffusion transformer", "SiT", "DINOv2", "ImageNet"]
 authors:
   - name: Rabiul Awal
@@ -31,9 +31,9 @@ bibtex: |
     .fe-short { display: none; }
     @media (max-width: 767px) { .fe-desk { display: none; } }
     /* Amber is iFeCo (student block, teacher's cleaner view, loss), slate the baseline and the flow-map loss, violet REPA. */
-    :root { --dim: 0.1; --acc: #c2410c; --acc-f: #fff1e6; --acc-s: #ffedd5; --sl: #475569; --sl-f: #f1f5f9; --rep: #7c3aed; --grid: #ececef; }
+    :root { --dim: 0.1; --acc: #c2410c; --acc-f: #fff1e6; --acc-s: #ffedd5; --sl: #475569; --sl-f: #f1f5f9; --rep: #7c3aed; --rep-f: #f5f3ff; --grid: #ececef; }
     @media (prefers-color-scheme: dark) {
-        :root { --dim: 0.14; --acc: #fb923c; --acc-f: rgba(251, 146, 60, 0.14); --acc-s: rgba(251, 146, 60, 0.24); --sl: #94a3b8; --sl-f: rgba(148, 163, 184, 0.14); --rep: #a78bfa; --grid: #222225; }
+        :root { --dim: 0.14; --acc: #fb923c; --acc-f: rgba(251, 146, 60, 0.14); --acc-s: rgba(251, 146, 60, 0.24); --sl: #94a3b8; --sl-f: rgba(148, 163, 184, 0.14); --rep: #a78bfa; --rep-f: rgba(167, 139, 250, 0.14); --grid: #222225; }
     }
     .fe-fig { margin-block: 0 48px; }
     .fe-fig > figcaption, main .caption { margin: 0; }
@@ -62,6 +62,8 @@ bibtex: |
     .fs .blk.acc { fill: var(--acc); stroke: var(--acc); } .fs .blk.acc-o { fill: var(--acc-f); stroke: var(--acc); stroke-width: 2; }
     .fs .bx { stroke-width: 1.5; } .fs .bx.sl { fill: var(--sl-f); stroke: var(--sl); } .fs .bx.acc-f { fill: var(--acc-f); stroke: var(--acc); }
     .fs .bt { font-weight: 600; }
+    .fs text.rep, .fs .hd-rep { fill: var(--rep); } .fs .ln.rep { stroke: var(--rep); } .fs .blk.rep { fill: var(--rep); stroke: var(--rep); } .fs .bx.rep-f { fill: var(--rep-f); stroke: var(--rep); }
+    .fe-concept { max-width: 640px; margin-left: auto; margin-right: auto; }
     /* Method figure buttons: parts outside the chosen loss dim; without JS everything stays lit. */
     .method .u { transition: opacity 0.2s; }
     @media (prefers-reduced-motion: reduce) { .method .u { transition: none; } }
@@ -104,7 +106,7 @@ bibtex: |
     @media (min-width: 768px) { .fe-panels[data-on] > svg, .fe-curves[data-on] > svg { display: block; } }
     @media (max-width: 767px) {
         .fe-teaser { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; gap: 16px; }
-        .curve.teaser text { font-size: 17px; } .curve.teaser .tick, .curve.teaser .end { font-size: 15px; } .curve.teaser .spd { font-size: 16px; }
+        .curve.teaser text { font-size: 17px; } .curve.teaser .tick { font-size: 15px; } .curve.teaser .end { font-size: 13px; } .curve.teaser .spd { font-size: 16px; }
         .fe-panels, .fe-curves { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
         .fe-key { max-width: 400px; margin-left: auto; margin-right: auto; padding-left: calc(min(100%, 400px) * 46 / 300); }
         .fe-panels[data-on="0"] > svg:not(:nth-child(1)), .fe-panels[data-on="1"] > svg:not(:nth-child(2)), .fe-panels[data-on="2"] > svg:not(:nth-child(3)),
@@ -119,59 +121,101 @@ bibtex: |
 <section id="teaser" class="wide">
     <figure class="fe-fig">
         <div class="fe-media fe-teaser">
-            <div class="only-desk"><svg class="fs concept" viewBox="0 0 560 250" role="img" aria-labelledby="tc-t">
-<title id="tc-t">A trajectory from noise to an image. The student makes one long jump from the noisier view; two shorter jumps through the cleaner view land at the same point. Below, the student at the noisier view and the teacher at the cleaner view; the consistency loss makes the student's early features predict the teacher's deep features.</title>
-<defs><marker id="ah-txt" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-txt" d="M0,0 L10,5 L0,10 z"/></marker><marker id="ah-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker><marker id="ah-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
-<line class="traj" x1="64" y1="70" x2="496" y2="70"/>
-<image href="view_noise.webp" x="12" y="46.0" width="48" height="48"/><text class="lb" x="36.0" y="110.0" text-anchor="middle">noise</text>
-<image href="view_image.webp" x="500" y="46.0" width="48" height="48"/><text class="lb" x="524.0" y="110.0" text-anchor="middle">image</text>
-<path class="jump" d="M177,65 Q300.0,-34 424,65" marker-end="url(#ah-txt)"/>
-<text class="lb strong" x="300.0" y="14" text-anchor="middle">student jump</text>
-<path class="jump dash" d="M177,64 Q255.0,22 331,63" marker-end="url(#ah-mut)"/>
-<path class="jump dash" d="M349,63 Q385.0,30 424,65" marker-end="url(#ah-mut)"/>
-<text class="lb" x="259.0" y="96" text-anchor="middle">two shorter jumps</text>
-<circle class="land" cx="430" cy="70" r="4"/>
-<circle class="ring" cx="340" cy="70" r="8"/>
-<circle class="dot" cx="170" cy="70" r="6"/>
-<line class="lead" x1="170" y1="79" x2="170" y2="102"/>
-<image href="view_noisier.webp" x="146.0" y="104" width="48" height="48"/>
-<text class="lb" x="170" y="168" text-anchor="middle">noisier view, <tspan class='it'>t</tspan><tspan class='sub'>2</tspan></text>
-<text class="strong" x="170" y="188" text-anchor="middle">student</text>
-<line class="lead" x1="340" y1="79" x2="340" y2="102"/>
-<image href="view_cleaner.webp" x="316.0" y="104" width="48" height="48"/>
-<text class="lb" x="340" y="168" text-anchor="middle">cleaner view, <tspan class='it'>t</tspan><tspan class='sub'>1</tspan></text>
-<text class="strong acc" x="340" y="188" text-anchor="middle">teacher (EMA)</text>
-<line class="arr" x1="180" y1="214" x2="326" y2="214" marker-end="url(#ah-acc)"/>
-<text class="lb acc" x="255.0" y="206" text-anchor="middle">early features predict deep features</text>
-<text class="lb" x="255.0" y="234" text-anchor="middle">consistency loss, no extra pass</text>
+            <div class="only-desk"><svg class="fs contrast" viewBox="0 0 600 266" role="img" aria-labelledby="cx-t">
+<title id="cx-t">Where the alignment target comes from. Top, REPA: the student's early features of a noisy view are aligned with a frozen DINOv2 encoder that reads the clean image, in an extra forward pass. Bottom, iFeCo: the same early features are aligned with the model's own deep features at a cleaner view, which the flow-map training step already computes.</title>
+<defs><marker id="cx-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker><marker id="cx-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker><marker id="cx-rep" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-rep" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text class="strong rep" x="0" y="18">REPA</text>
+<image href="view_noisier.webp" x="0" y="48.0" width="48" height="48"/>
+<text class="lb" x="0" y="110">noisy view</text>
+<line class="ln mut" x1="51" y1="72.0" x2="69" y2="72.0" marker-end="url(#cx-mut)"/>
+<rect class="blk" x="72" y="52" width="14" height="40" rx="3"/>
+<rect class="blk rep" x="92" y="52" width="14" height="40" rx="3"/>
+<rect class="blk" x="112" y="52" width="14" height="40" rx="3"/>
+<rect class="blk" x="132" y="52" width="14" height="40" rx="3"/>
+<rect class="blk" x="152" y="52" width="14" height="40" rx="3"/>
+<rect class="blk" x="172" y="52" width="14" height="40" rx="3"/>
+<text class="lb" x="129.0" y="110" text-anchor="middle">student</text>
+<image href="view_image.webp" x="552" y="48.0" width="48" height="48"/>
+<text class="lb" x="600" y="110" text-anchor="end">clean image</text>
+<line class="ln mut" x1="549" y1="72.0" x2="531" y2="72.0" marker-end="url(#cx-mut)"/>
+<rect class="bx rep-f" x="408" y="52" width="120" height="40" rx="4"/>
+<text class="bt" x="468.0" y="77.0" text-anchor="middle">DINOv2</text>
+<path class="ln rep" d="M99.0,50 V30 H468.0 V49" marker-end="url(#cx-rep)"/>
+<text class="lb rep" x="283.5" y="24" text-anchor="middle">aligns with</text>
+<text class="lb rep" x="300.0" y="130" text-anchor="middle" style="font-size:13px">frozen pretrained encoder, extra forward pass</text>
+<text class="strong acc" x="0" y="146">iFeCo</text>
+<image href="view_noisier.webp" x="0" y="176.0" width="48" height="48"/>
+<text class="lb" x="0" y="238">noisier view</text>
+<line class="ln mut" x1="51" y1="200.0" x2="69" y2="200.0" marker-end="url(#cx-mut)"/>
+<rect class="blk" x="72" y="180" width="14" height="40" rx="3"/>
+<rect class="blk acc" x="92" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="112" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="132" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="152" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="172" y="180" width="14" height="40" rx="3"/>
+<text class="lb" x="129.0" y="238" text-anchor="middle">student</text>
+<image href="view_cleaner.webp" x="552" y="176.0" width="48" height="48"/>
+<text class="lb" x="600" y="238" text-anchor="end">cleaner view</text>
+<line class="ln mut" x1="549" y1="200.0" x2="531" y2="200.0" marker-end="url(#cx-mut)"/>
+<rect class="blk" x="414" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="434" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="454" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="474" y="180" width="14" height="40" rx="3"/>
+<rect class="blk acc-o" x="494" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="514" y="180" width="14" height="40" rx="3"/>
+<text class="lb" x="471.0" y="238" text-anchor="middle">same model</text>
+<path class="ln acc" d="M99.0,178 V158 H501.0 V177" marker-end="url(#cx-acc)"/>
+<text class="lb acc" x="300.0" y="152" text-anchor="middle">aligns with</text>
+<text class="lb acc" x="300.0" y="258" text-anchor="middle" style="font-size:13px">already computed by the training step: no encoder, no extra pass</text>
 </svg></div>
-            <div class="only-phone"><svg class="fs concept concept--phone" viewBox="0 0 400 256" role="img" aria-labelledby="tcp-t">
-<title id="tcp-t">A trajectory from noise to an image. The student makes one long jump from the noisier view; two shorter jumps through the cleaner view land at the same point. Below, the student at the noisier view and the teacher at the cleaner view; the consistency loss makes the student's early features predict the teacher's deep features.</title>
-<defs><marker id="ah-txt" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-txt" d="M0,0 L10,5 L0,10 z"/></marker><marker id="ah-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker><marker id="ah-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
-<line class="traj" x1="48" y1="60" x2="352" y2="60"/>
-<image href="view_noise.webp" x="4" y="40.0" width="40" height="40"/><text class="lb" x="24.0" y="96.0" text-anchor="middle">noise</text>
-<image href="view_image.webp" x="356" y="40.0" width="40" height="40"/><text class="lb" x="376.0" y="96.0" text-anchor="middle">image</text>
-<path class="jump" d="M137,55 Q215.0,-16 294,55" marker-end="url(#ah-txt)"/>
-<text class="lb strong" x="215.0" y="14" text-anchor="middle">student jump</text>
-<path class="jump dash" d="M137,54 Q185.0,26 231,53" marker-end="url(#ah-mut)"/>
-<path class="jump dash" d="M249,53 Q270.0,32 294,55" marker-end="url(#ah-mut)"/>
-<text class="lb" x="189.0" y="86" text-anchor="middle">two shorter jumps</text>
-<circle class="land" cx="300" cy="60" r="4"/>
-<circle class="ring" cx="240" cy="60" r="8"/>
-<circle class="dot" cx="130" cy="60" r="6"/>
-<line class="lead" x1="130" y1="69" x2="130" y2="92"/>
-<image href="view_noisier.webp" x="110.0" y="94" width="40" height="40"/>
-<text class="lb" x="130" y="150" text-anchor="middle">noisier view, <tspan class='it'>t</tspan><tspan class='sub'>2</tspan></text>
-<text class="strong" x="130" y="170" text-anchor="middle">student</text>
-<line class="lead" x1="240" y1="69" x2="240" y2="92"/>
-<image href="view_cleaner.webp" x="220.0" y="94" width="40" height="40"/>
-<text class="lb" x="240" y="150" text-anchor="middle">cleaner view, <tspan class='it'>t</tspan><tspan class='sub'>1</tspan></text>
-<text class="strong acc" x="240" y="170" text-anchor="middle">teacher (EMA)</text>
-<line class="arr" x1="140" y1="196" x2="226" y2="196" marker-end="url(#ah-acc)"/>
-<text class="lb acc" x="185.0" y="188" text-anchor="middle">early features predict deep features</text>
-<text class="lb" x="185.0" y="216" text-anchor="middle">consistency loss, no extra pass</text>
+            <div class="only-phone"><svg class="fs contrast" viewBox="0 0 440 266" role="img" aria-labelledby="cxp-t">
+<title id="cxp-t">Where the alignment target comes from. Top, REPA: the student's early features of a noisy view are aligned with a frozen DINOv2 encoder that reads the clean image, in an extra forward pass. Bottom, iFeCo: the same early features are aligned with the model's own deep features at a cleaner view, which the flow-map training step already computes.</title>
+<defs><marker id="cxp-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker><marker id="cxp-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker><marker id="cxp-rep" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-rep" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text class="strong rep" x="0" y="18">REPA</text>
+<image href="view_noisier.webp" x="0" y="52.0" width="40" height="40"/>
+<text class="lb" x="0" y="110">noisy view</text>
+<line class="ln mut" x1="43" y1="72.0" x2="61" y2="72.0" marker-end="url(#cxp-mut)"/>
+<rect class="blk" x="64" y="52" width="11" height="40" rx="3"/>
+<rect class="blk rep" x="79" y="52" width="11" height="40" rx="3"/>
+<rect class="blk" x="94" y="52" width="11" height="40" rx="3"/>
+<rect class="blk" x="109" y="52" width="11" height="40" rx="3"/>
+<rect class="blk" x="124" y="52" width="11" height="40" rx="3"/>
+<rect class="blk" x="139" y="52" width="11" height="40" rx="3"/>
+<text class="lb" x="107.0" y="110" text-anchor="middle">student</text>
+<image href="view_image.webp" x="400" y="52.0" width="40" height="40"/>
+<text class="lb" x="440" y="110" text-anchor="end">clean image</text>
+<line class="ln mut" x1="397" y1="72.0" x2="359" y2="72.0" marker-end="url(#cxp-mut)"/>
+<rect class="bx rep-f" x="264" y="52" width="92" height="40" rx="4"/>
+<text class="bt" x="310.0" y="77.0" text-anchor="middle">DINOv2</text>
+<path class="ln rep" d="M84.5,50 V30 H310.0 V49" marker-end="url(#cxp-rep)"/>
+<text class="lb rep" x="197.25" y="24" text-anchor="middle">aligns with</text>
+<text class="lb rep" x="220.0" y="130" text-anchor="middle" style="font-size:12px">frozen pretrained encoder, extra forward pass</text>
+<text class="strong acc" x="0" y="146">iFeCo</text>
+<image href="view_noisier.webp" x="0" y="180.0" width="40" height="40"/>
+<text class="lb" x="0" y="238">noisier view</text>
+<line class="ln mut" x1="43" y1="200.0" x2="61" y2="200.0" marker-end="url(#cxp-mut)"/>
+<rect class="blk" x="64" y="180" width="11" height="40" rx="3"/>
+<rect class="blk acc" x="79" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="94" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="109" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="124" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="139" y="180" width="11" height="40" rx="3"/>
+<text class="lb" x="107.0" y="238" text-anchor="middle">student</text>
+<image href="view_cleaner.webp" x="400" y="180.0" width="40" height="40"/>
+<text class="lb" x="440" y="238" text-anchor="end">cleaner view</text>
+<line class="ln mut" x1="397" y1="200.0" x2="359" y2="200.0" marker-end="url(#cxp-mut)"/>
+<rect class="blk" x="270" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="285" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="300" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="315" y="180" width="11" height="40" rx="3"/>
+<rect class="blk acc-o" x="330" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="345" y="180" width="11" height="40" rx="3"/>
+<text class="lb" x="313.0" y="238" text-anchor="middle">same model</text>
+<path class="ln acc" d="M84.5,178 V158 H335.5 V177" marker-end="url(#cxp-acc)"/>
+<text class="lb acc" x="210.0" y="152" text-anchor="middle">aligns with</text>
+<text class="lb acc" x="220.0" y="258" text-anchor="middle" style="font-size:12px">already computed by the training step: no encoder, no extra pass</text>
 </svg></div>
-            <svg class="fs curve teaser" viewBox="0 0 340 236" role="img" aria-label="Shortcut DiT-B/2, 1 step, 1-step FID over training steps. Baseline ends at 37.0 after 1200k steps; iFeCo ends at 28.0 after 1200k steps."><text class="ttl" x="46" y="18" text-anchor="start">Shortcut DiT-B/2, 1 step</text>
+            <svg class="fs curve teaser" viewBox="0 0 340 236" role="img" aria-label="Shortcut DiT-B/2, 1 step, 1-step FID over training steps. Baseline ends at 37.0 after 1200k steps; iFeCo ends at 28.0 after 1200k steps."><defs><marker id="tcv-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs><text class="ttl" x="46" y="18" text-anchor="start">Shortcut DiT-B/2, 1 step</text>
 <line class="grid" x1="46" y1="181.2" x2="276" y2="181.2"/>
 <text class="tick" x="40" y="185.2" text-anchor="end">30</text>
 <line class="grid" x1="46" y1="139.4" x2="276" y2="139.4"/>
@@ -217,23 +261,22 @@ bibtex: |
 <g class="pt-g"><title>iFeCo, 1000k steps: FID 28.27</title><circle class="pt ours" cx="230.0" cy="189.8" r="7"/></g>
 <g class="pt-g"><title>iFeCo, 1100k steps: FID 27.90</title><circle class="pt ours" cx="248.4" cy="191.7" r="7"/></g>
 <g class="pt-g"><title>iFeCo, 1200k steps: FID 28.03</title><circle class="pt ours" cx="266.8" cy="191.1" r="7"/></g>
-<line class="arr" x1="262.8" y1="151.0" x2="129.5" y2="151.0" marker-end="url(#ah-acc)"/>
+<line class="arr" x1="262.8" y1="151.0" x2="129.5" y2="151.0" marker-end="url(#tcv-acc)"/>
 <text class="spd" x="274" y="46" text-anchor="end">2.9&times; fewer steps</text>
 <text class="end base" x="272.8" y="155.0">Baseline</text>
 <text class="end ours" x="272.8" y="195.1">iFeCo</text></svg>
         </div>
-        <figcaption>A flow map jumps along one trajectory from noise to image. One long jump lands where two shorter ones land, so each training image gives a noisier view and a cleaner view. The training target already evaluates a teacher at the cleaner view; iFeCo trains early features of the noisier view to predict that teacher's deep features. Right: 1-step FID over training on ImageNet 256&times;256; the arrow is the training saved to reach the baseline's final FID.</figcaption>
+        <figcaption>REPA takes its alignment target from a frozen pretrained encoder, while iFeCo takes it from the model's own features at a cleaner view, which the flow-map training step already computes. Right: 1-step FID over training on ImageNet 256&times;256; the arrow is the training saved to reach the baseline's final FID.</figcaption>
     </figure>
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> Flow-map training already evaluates a teacher on a cleaner view to build the target for a student on a noisier view. iFeCo adds one loss: early features of the noisier view predict the teacher's deep features of the cleaner view. It needs no external encoder and no extra forward pass.</p>
-    <p class="note">Work in progress. The results on this page are preliminary: each model is trained once, and some models have not finished training.</p>
+    <p class="tldr"><strong>TL;DR:</strong> Flow maps can learn good internal features on their own, without the pretrained encoder that REPA borrows. One added loss, with no extra forward pass, reaches the baseline's final one-step FID on ImageNet 256 2.4 to 3.1 times sooner on Shortcut and 2.1 times sooner on LSD.</p>
 </section>
 
 <section id="context" class="intro">
-    <p>Diffusion training seems difficult partly because of the semantic structure that has to come out of it. We have seen <a href="https://arxiv.org/abs/2510.11690">representation autoencoders</a>, <a href="https://arxiv.org/abs/2312.03701">representation generation</a> and <a href="https://arxiv.org/abs/2410.06940">representation alignment</a>. Much of this work says the same thing: diffusion training needs some form of self-supervised signal to train faster and generate better.</p>
-    <p>Since I was mostly working on few-step models (flow maps), I noticed that they are, in principle, a knowledge distillation algorithm: a student tries to distill from a multi-step teacher. Looked at closely, the student and the teacher see two views of the same data. The teacher gets the cleaner one and the student the noisier one. This gives a consistency target in feature space, without any additional forward pass. That is the free lunch for flow map training.</p>
+    <p>Generative models train faster when their internal features are good. <a href="https://arxiv.org/abs/2410.06940">Representation alignment</a> (REPA) uses this directly: it trains the early features of a diffusion model to match those of DINOv2, a pretrained self-supervised image encoder, and reports training more than 17 times faster. Related work points the same way, from <a href="https://arxiv.org/abs/2510.11690">representation autoencoders</a>, which generate in the feature space of such an encoder, to <a href="https://arxiv.org/abs/2312.03701">representation generation</a>, which first samples encoder features and then the image. All of them borrow features from an external encoder. That encoder needs its own pretraining and an extra forward pass at every training step, and the generator does not learn the features itself.</p>
+    <p>Since I was mostly working on few-step models (flow maps, which generate an image in one or a few jumps along the path from noise to image), I noticed that their training is, in principle, a form of <a href="https://arxiv.org/abs/2505.18825">self-distillation</a>: the model, or its EMA copy (a slowly updated average of its weights), teaches itself. Its own evaluation at a cleaner view of the image builds the target for its jump from a noisier view. Because the model already distills from itself in output space, its features at the cleaner view give a self-distillation target in feature space, as DINOv2's features do for REPA. The training step already computes them, so using them needs no extra forward pass. That is the free lunch for flow map training.</p>
 </section>
 
 <section id="samples" class="wide">
@@ -255,123 +298,67 @@ bibtex: |
     </figure>
 </section>
 
-<section id="method">
-    <h2>Two views of one trajectory</h2>
-    <p>The student reads the noisier view and the teacher, an EMA copy of the student, reads the cleaner view. One predictor connects the two.</p>
-    <figure class="fe-fig fe-btnfig" id="fe-method">
-        <div class="tabs fe-btns" role="group" aria-label="Losses" hidden>
-            <button type="button" class="btn" data-task="" aria-pressed="true">Both<span class="fe-long"> losses</span></button>
-            <button type="button" class="btn" data-task="flow" aria-pressed="false">Flow-map loss</button>
-            <button type="button" class="btn" data-task="cons" aria-pressed="false">Consistency loss</button>
-        </div>
-        <div class="fe-media only-desk"><svg class="fs method" viewBox="0 0 700 330" role="img" aria-labelledby="md-t">
-<title id="md-t">One training step. The student reads the noisier view and the EMA teacher reads the cleaner view. The flow-map loss uses the teacher's output as its target. The consistency loss maps the student's block-2 features through a predictor to the teacher's block-7 features, with no gradient into the teacher.</title>
-<line class="traj" x1="36" y1="40" x2="36" y2="300"/>
-<text class="lb" x="36" y="30" text-anchor="middle">noise</text><text class="lb" x="36" y="318" text-anchor="middle">data</text>
-<circle class="dot" cx="36" cy="92" r="6"/><circle class="ring" cx="36" cy="258" r="8"/>
-<text class="lb it" x="22" y="97" text-anchor="end">t<tspan class="sub">2</tspan></text><text class="lb it" x="22" y="263" text-anchor="end">t<tspan class="sub">1</tspan></text>
-<image href="view_noisier.webp" x="60" y="68.0" width="48" height="48"/>
-<text class="lb" x="84.0" y="131.0" text-anchor="middle">noisier view</text>
-<line class="ln mut" x1="112" y1="92" x2="126" y2="92" marker-end="url(#ah-mut)"/>
-<text class="strong" x="271.0" y="58.0" text-anchor="middle">student</text>
-<rect class="blk" x="130" y="70.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="154" y="70.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="178" y="70.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="202" y="70.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="226" y="70.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="250" y="70.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="274" y="70.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="298" y="70.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="322" y="70.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="346" y="70.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="370" y="70.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="394" y="70.0" width="18" height="44" rx="3"/>
-<image href="view_cleaner.webp" x="60" y="234.0" width="48" height="48"/>
-<text class="lb" x="84.0" y="297.0" text-anchor="middle">cleaner view</text>
-<line class="ln mut" x1="112" y1="258" x2="126" y2="258" marker-end="url(#ah-mut)"/>
-<text class="strong" x="271.0" y="299.0" text-anchor="middle">teacher (EMA)</text>
-<rect class="blk" x="130" y="236.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="154" y="236.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="178" y="236.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="202" y="236.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="226" y="236.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="250" y="236.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="274" y="236.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="298" y="236.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="322" y="236.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="346" y="236.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="370" y="236.0" width="18" height="44" rx="3"/>
-<rect class="blk" x="394" y="236.0" width="18" height="44" rx="3"/>
-<g class="u on-flow"><line class="ln mut" x1="416" y1="92" x2="428" y2="92" marker-end="url(#ah-mut)"/>
-<path class="ln mut dash" d="M416,258 H500 V116" marker-end="url(#ah-mut)"/>
-<text class="lb" x="508" y="189.0">target</text>
-<rect class="bx sl" x="432" y="72" width="140" height="40" rx="4"/>
-<text class="bt" x="502.0" y="97.0" text-anchor="middle">flow-map loss</text></g>
-<g class="u on-cons"><rect class="blk acc" x="154" y="70.0" width="18" height="44" rx="3"/>
-<rect class="blk acc-o" x="274" y="236.0" width="18" height="44" rx="3"/>
-<line class="ln acc" x1="163.0" y1="116.0" x2="163.0" y2="146" marker-end="url(#ah-acc)"/>
-<text class="lb acc" x="171.0" y="136.0">block 2</text>
-<rect class="bx acc-f" x="123" y="150" width="80" height="28" rx="4"/><text class="bt" x="163.0" y="169.0" text-anchor="middle">predictor</text>
-<line class="ln acc" x1="207" y1="164.0" x2="236" y2="164.0" marker-end="url(#ah-acc)"/>
-<rect class="bx acc-f" x="240" y="146" width="156" height="36" rx="4"/><text class="bt" x="318.0" y="169.0" text-anchor="middle">consistency loss</text>
-<line class="ln acc dash" x1="283.0" y1="234.0" x2="283.0" y2="186" marker-end="url(#ah-acc)"/>
-<text class="lb acc" x="291.0" y="213.0">block 7, no gradient</text></g>
-</svg></div>
-        <div class="fe-media only-phone"><svg class="fs method method--phone" viewBox="0 0 400 356" role="img" aria-labelledby="mp-t">
-<title id="mp-t">One training step. The student reads the noisier view and the EMA teacher reads the cleaner view. The flow-map loss uses the teacher's output as its target. The consistency loss maps the student's block-2 features through a predictor to the teacher's block-7 features, with no gradient into the teacher.</title>
-<image href="view_noisier.webp" x="26" y="39.0" width="42" height="42"/>
-<text class="lb" x="47.0" y="96.0" text-anchor="middle">noisier view</text>
-<text class="strong" x="193.5" y="28.0" text-anchor="middle">student</text>
-<rect class="blk" x="88" y="40.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="106" y="40.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="124" y="40.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="142" y="40.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="160" y="40.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="178" y="40.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="196" y="40.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="214" y="40.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="232" y="40.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="250" y="40.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="268" y="40.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="286" y="40.0" width="13" height="40" rx="3"/>
-<image href="view_cleaner.webp" x="26" y="279.0" width="42" height="42"/>
-<text class="lb" x="47.0" y="336.0" text-anchor="middle">cleaner view</text>
-<text class="strong" x="193.5" y="339.0" text-anchor="middle">teacher (EMA)</text>
-<rect class="blk" x="88" y="280.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="106" y="280.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="124" y="280.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="142" y="280.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="160" y="280.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="178" y="280.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="196" y="280.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="214" y="280.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="232" y="280.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="250" y="280.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="268" y="280.0" width="13" height="40" rx="3"/>
-<rect class="blk" x="286" y="280.0" width="13" height="40" rx="3"/>
-<g class="u on-flow">
-<path class="ln mut dash" d="M303,300 H350 V84" marker-end="url(#ah-mut)"/>
-<text class="lb" x="358" y="194.0">target</text>
-<rect class="bx sl" x="310" y="40" width="84" height="40" rx="4"/>
-<text class="bt" x="352.0" y="58.0" text-anchor="middle">flow-map</text><text class="bt" x="352.0" y="74.0" text-anchor="middle">loss</text></g>
-<g class="u on-cons"><rect class="blk acc" x="106" y="40.0" width="13" height="40" rx="3"/>
-<rect class="blk acc-o" x="196" y="280.0" width="13" height="40" rx="3"/>
-<line class="ln acc" x1="112.5" y1="82.0" x2="112.5" y2="146" marker-end="url(#ah-acc)"/>
-<text class="lb acc" x="120.5" y="119.0">block 2</text>
-<rect class="bx acc-f" x="66" y="150" width="78" height="28" rx="4"/><text class="bt" x="105.0" y="169.0" text-anchor="middle">predictor</text>
-<line class="ln acc" x1="148" y1="164.0" x2="168" y2="164.0" marker-end="url(#ah-acc)"/>
-<rect class="bx acc-f" x="172" y="146" width="146" height="36" rx="4"/><text class="bt" x="245.0" y="169.0" text-anchor="middle">consistency loss</text>
-<line class="ln acc dash" x1="202.5" y1="278.0" x2="202.5" y2="186" marker-end="url(#ah-acc)"/>
-<text class="lb acc" x="210.5" y="235.0">block 7, no gradient</text></g>
-</svg></div>
-        <p class="caption fe-task-text" aria-live="polite">One training step. The teacher's forward pass builds the flow-map target and, in the same pass, supplies the deep features that the student's early features learn to predict.</p>
-    </figure>
-    <p class="caption">The predictor is a two-layer MLP; the consistency loss is the cosine distance between its output and the teacher's features, per token, and the predictor is discarded after training. One setting serves all three families: loss weight 0.25, student block at a quarter of the depth (block 2 of 12 at B/2), teacher block at 70% (block 7 of 12).</p>
-</section>
-
 <section id="free" class="wide">
-    <h2>The teacher pass is already there</h2>
-    <p>Each flow-map family passes through the cleaner view when it builds its training target. iFeCo reads the teacher's features from that pass.</p>
+    <h2>Deriving a free self-supervised objective from the training step</h2>
+    <figure class="fe-fig">
+        <div class="fe-media fe-concept">
+            <div class="only-desk"><svg class="fs concept" viewBox="0 0 560 250" role="img" aria-labelledby="tc-t">
+<title id="tc-t">A trajectory from noise to an image. The student makes one long jump from the noisier view; two shorter jumps through the cleaner view land at the same point. Below, the student at the noisier view and the teacher at the cleaner view; the consistency loss makes the student's early features predict the teacher's deep features.</title>
+<defs><marker id="ah-txt" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-txt" d="M0,0 L10,5 L0,10 z"/></marker><marker id="ah-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker><marker id="ah-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<line class="traj" x1="64" y1="70" x2="496" y2="70"/>
+<image href="view_noise.webp" x="12" y="46.0" width="48" height="48"/><text class="lb" x="36.0" y="110.0" text-anchor="middle">noise</text>
+<image href="view_image.webp" x="500" y="46.0" width="48" height="48"/><text class="lb" x="524.0" y="110.0" text-anchor="middle">image</text>
+<path class="jump" d="M177,65 Q300.0,-34 424,65" marker-end="url(#ah-txt)"/>
+<text class="lb strong" x="300.0" y="14" text-anchor="middle">student jump</text>
+<path class="jump dash" d="M177,64 Q255.0,22 331,63" marker-end="url(#ah-mut)"/>
+<path class="jump dash" d="M349,63 Q385.0,30 424,65" marker-end="url(#ah-mut)"/>
+<text class="lb" x="259.0" y="96" text-anchor="middle">two shorter jumps</text>
+<circle class="land" cx="430" cy="70" r="4"/>
+<circle class="ring" cx="340" cy="70" r="8"/>
+<circle class="dot" cx="170" cy="70" r="6"/>
+<line class="lead" x1="170" y1="79" x2="170" y2="102"/>
+<image href="view_noisier.webp" x="146.0" y="104" width="48" height="48"/>
+<text class="lb" x="170" y="168" text-anchor="middle">noisier view, <tspan class='it'>t</tspan><tspan class='sub'>2</tspan></text>
+<text class="strong" x="170" y="188" text-anchor="middle">student</text>
+<line class="lead" x1="340" y1="79" x2="340" y2="102"/>
+<image href="view_cleaner.webp" x="316.0" y="104" width="48" height="48"/>
+<text class="lb" x="340" y="168" text-anchor="middle">cleaner view, <tspan class='it'>t</tspan><tspan class='sub'>1</tspan></text>
+<text class="strong acc" x="340" y="188" text-anchor="middle">teacher</text>
+<line class="arr" x1="180" y1="214" x2="326" y2="214" marker-end="url(#ah-acc)"/>
+<text class="lb acc" x="255.0" y="206" text-anchor="middle">early features predict deep features</text>
+<text class="lb" x="255.0" y="234" text-anchor="middle">consistency loss, no extra pass</text>
+</svg></div>
+            <div class="only-phone"><svg class="fs concept concept--phone" viewBox="0 0 400 256" role="img" aria-labelledby="tcp-t">
+<title id="tcp-t">A trajectory from noise to an image. The student makes one long jump from the noisier view; two shorter jumps through the cleaner view land at the same point. Below, the student at the noisier view and the teacher at the cleaner view; the consistency loss makes the student's early features predict the teacher's deep features.</title>
+<defs><marker id="ahp-txt" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-txt" d="M0,0 L10,5 L0,10 z"/></marker><marker id="ahp-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker><marker id="ahp-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<line class="traj" x1="48" y1="60" x2="352" y2="60"/>
+<image href="view_noise.webp" x="4" y="40.0" width="40" height="40"/><text class="lb" x="24.0" y="96.0" text-anchor="middle">noise</text>
+<image href="view_image.webp" x="356" y="40.0" width="40" height="40"/><text class="lb" x="376.0" y="96.0" text-anchor="middle">image</text>
+<path class="jump" d="M137,55 Q215.0,-16 294,55" marker-end="url(#ahp-txt)"/>
+<text class="lb strong" x="215.0" y="14" text-anchor="middle">student jump</text>
+<path class="jump dash" d="M137,54 Q185.0,26 231,53" marker-end="url(#ahp-mut)"/>
+<path class="jump dash" d="M249,53 Q270.0,32 294,55" marker-end="url(#ahp-mut)"/>
+<text class="lb" x="189.0" y="86" text-anchor="middle">two shorter jumps</text>
+<circle class="land" cx="300" cy="60" r="4"/>
+<circle class="ring" cx="240" cy="60" r="8"/>
+<circle class="dot" cx="130" cy="60" r="6"/>
+<line class="lead" x1="130" y1="69" x2="130" y2="92"/>
+<image href="view_noisier.webp" x="110.0" y="94" width="40" height="40"/>
+<text class="lb" x="130" y="150" text-anchor="middle">noisier view, <tspan class='it'>t</tspan><tspan class='sub'>2</tspan></text>
+<text class="strong" x="130" y="170" text-anchor="middle">student</text>
+<line class="lead" x1="240" y1="69" x2="240" y2="92"/>
+<image href="view_cleaner.webp" x="220.0" y="94" width="40" height="40"/>
+<text class="lb" x="240" y="150" text-anchor="middle">cleaner view, <tspan class='it'>t</tspan><tspan class='sub'>1</tspan></text>
+<text class="strong acc" x="240" y="170" text-anchor="middle">teacher</text>
+<line class="arr" x1="140" y1="196" x2="226" y2="196" marker-end="url(#ahp-acc)"/>
+<text class="lb acc" x="185.0" y="188" text-anchor="middle">early features predict deep features</text>
+<text class="lb" x="185.0" y="216" text-anchor="middle">consistency loss, no extra pass</text>
+</svg></div>
+        </div>
+        <figcaption>A flow map jumps along one trajectory from noise to an image. It is trained so that one long jump lands where two shorter jumps land (<a href="https://arxiv.org/abs/2406.07507">flow map matching</a>). To build that target, the training step already runs the model at the point where the first short jump lands. Each training image therefore comes with two views of the same trajectory: a noisier view, where the student starts, and a cleaner view, where the teacher, the model itself or its EMA copy, reads its features. iFeCo trains the student's early features to predict the teacher's deep features.</figcaption>
+    </figure>
+    <p>iFeCo reads the teacher's features from the evaluation that the training step already runs, so the feature consistency objective comes from the standard training batch, with no extra forward pass. Where that evaluation happens depends on the family.</p>
+    <p>Shortcut builds its target from two half steps of its EMA copy, and the second half step starts at the cleaner view. LSD evaluates its EMA copy where the student's jump lands, which is the cleaner view. MeanFlow already computes a Jacobian-vector product (JVP) along the trajectory. That pass gives the features of the noisier view and how fast they change along the path, and a first-order step moves them to the cleaner view. In MeanFlow the teacher is the model itself with a stop-gradient, since the EMA copy does not run this pass.</p>
     <figure class="fe-fig" id="fe-free">
         <div class="tabs fe-tabs only-phone" role="group" aria-label="Flow-map family" hidden>
             <button type="button" class="btn" data-on="0" aria-pressed="true">Shortcut</button>
@@ -458,13 +445,127 @@ bibtex: |
             <text class="acc small" x="867" y="318" text-anchor="middle">landing point</text>
         </svg>
         </div>
-        <figcaption>Black dot: the noisier view, where the student starts. Amber ring: the cleaner view, where the teacher reads its deep features. Dashed: steps the training target already takes, in <a href="https://arxiv.org/abs/2410.12557">Shortcut Models</a>, <a href="https://arxiv.org/abs/2505.13447">MeanFlow</a> and <a href="https://arxiv.org/abs/2505.18825">LSD</a>. The added cost is the small predictor and its loss: each training step takes 4 to 6% more time.</figcaption>
+        <figcaption>Black dot: the noisier view, where the student starts. Amber ring: the cleaner view, where the teacher reads its deep features. Dashed: steps the training target already takes, in <a href="https://arxiv.org/abs/2410.12557">Shortcut Models</a>, <a href="https://arxiv.org/abs/2505.13447">MeanFlow</a> and <a href="https://arxiv.org/abs/2505.18825">LSD</a>. The added cost is the small predictor and its loss: each training step takes at most about 2% more time.</figcaption>
     </figure>
+</section>
+
+<section id="method">
+    <h2>Feature consistency loss</h2>
+    <p>Given these two views, iFeCo adds one loss to the standard training step. A small predictor maps the student's early features of the noisier view to the teacher's deep features of the cleaner view. The teacher is the EMA copy of the student in Shortcut and LSD, and the model itself with a stop-gradient in MeanFlow.</p>
+    <figure class="fe-fig fe-btnfig" id="fe-method">
+        <div class="tabs fe-btns" role="group" aria-label="Losses" hidden>
+            <button type="button" class="btn" data-task="" aria-pressed="true">Both<span class="fe-long"> losses</span></button>
+            <button type="button" class="btn" data-task="flow" aria-pressed="false">Flow-map loss</button>
+            <button type="button" class="btn" data-task="cons" aria-pressed="false">Consistency loss</button>
+        </div>
+        <div class="fe-media only-desk"><svg class="fs method" viewBox="0 0 700 330" role="img" aria-labelledby="md-t">
+<title id="md-t">One training step. The student reads the noisier view and the EMA teacher reads the cleaner view. The flow-map loss uses the teacher's output as its target. The consistency loss maps the student's block-2 features through a predictor to the teacher's block-7 features, with no gradient into the teacher.</title>
+<line class="traj" x1="36" y1="40" x2="36" y2="300"/>
+<text class="lb" x="36" y="30" text-anchor="middle">noise</text><text class="lb" x="36" y="318" text-anchor="middle">data</text>
+<circle class="dot" cx="36" cy="92" r="6"/><circle class="ring" cx="36" cy="258" r="8"/>
+<text class="lb it" x="22" y="97" text-anchor="end">t<tspan class="sub">2</tspan></text><text class="lb it" x="22" y="263" text-anchor="end">t<tspan class="sub">1</tspan></text>
+<image href="view_noisier.webp" x="60" y="68.0" width="48" height="48"/>
+<text class="lb" x="84.0" y="131.0" text-anchor="middle">noisier view</text>
+<line class="ln mut" x1="112" y1="92" x2="126" y2="92" marker-end="url(#ah-mut)"/>
+<text class="strong" x="271.0" y="58.0" text-anchor="middle">student</text>
+<rect class="blk" x="130" y="70.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="154" y="70.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="178" y="70.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="202" y="70.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="226" y="70.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="250" y="70.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="274" y="70.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="298" y="70.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="322" y="70.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="346" y="70.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="370" y="70.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="394" y="70.0" width="18" height="44" rx="3"/>
+<image href="view_cleaner.webp" x="60" y="234.0" width="48" height="48"/>
+<text class="lb" x="84.0" y="297.0" text-anchor="middle">cleaner view</text>
+<line class="ln mut" x1="112" y1="258" x2="126" y2="258" marker-end="url(#ah-mut)"/>
+<text class="strong" x="271.0" y="299.0" text-anchor="middle">teacher</text>
+<rect class="blk" x="130" y="236.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="154" y="236.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="178" y="236.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="202" y="236.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="226" y="236.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="250" y="236.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="274" y="236.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="298" y="236.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="322" y="236.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="346" y="236.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="370" y="236.0" width="18" height="44" rx="3"/>
+<rect class="blk" x="394" y="236.0" width="18" height="44" rx="3"/>
+<g class="u on-flow"><line class="ln mut" x1="416" y1="92" x2="428" y2="92" marker-end="url(#ah-mut)"/>
+<path class="ln mut dash" d="M416,258 H500 V116" marker-end="url(#ah-mut)"/>
+<text class="lb" x="508" y="189.0">target</text>
+<rect class="bx sl" x="432" y="72" width="140" height="40" rx="4"/>
+<text class="bt" x="502.0" y="97.0" text-anchor="middle">flow-map loss</text></g>
+<g class="u on-cons"><rect class="blk acc" x="154" y="70.0" width="18" height="44" rx="3"/>
+<rect class="blk acc-o" x="274" y="236.0" width="18" height="44" rx="3"/>
+<line class="ln acc" x1="163.0" y1="116.0" x2="163.0" y2="146" marker-end="url(#ah-acc)"/>
+<text class="lb acc" x="171.0" y="136.0">block 2</text>
+<rect class="bx acc-f" x="123" y="150" width="80" height="28" rx="4"/><text class="bt" x="163.0" y="169.0" text-anchor="middle">predictor</text>
+<line class="ln acc" x1="207" y1="164.0" x2="236" y2="164.0" marker-end="url(#ah-acc)"/>
+<rect class="bx acc-f" x="240" y="146" width="156" height="36" rx="4"/><text class="bt" x="318.0" y="169.0" text-anchor="middle">consistency loss</text>
+<line class="ln acc dash" x1="283.0" y1="234.0" x2="283.0" y2="186" marker-end="url(#ah-acc)"/>
+<text class="lb acc" x="291.0" y="213.0">block 7, no gradient</text></g>
+</svg></div>
+        <div class="fe-media only-phone"><svg class="fs method method--phone" viewBox="0 0 400 356" role="img" aria-labelledby="mp-t">
+<title id="mp-t">One training step. The student reads the noisier view and the EMA teacher reads the cleaner view. The flow-map loss uses the teacher's output as its target. The consistency loss maps the student's block-2 features through a predictor to the teacher's block-7 features, with no gradient into the teacher.</title>
+<image href="view_noisier.webp" x="26" y="39.0" width="42" height="42"/>
+<text class="lb" x="47.0" y="96.0" text-anchor="middle">noisier view</text>
+<text class="strong" x="193.5" y="28.0" text-anchor="middle">student</text>
+<rect class="blk" x="88" y="40.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="106" y="40.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="124" y="40.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="142" y="40.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="160" y="40.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="178" y="40.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="196" y="40.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="214" y="40.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="232" y="40.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="250" y="40.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="268" y="40.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="286" y="40.0" width="13" height="40" rx="3"/>
+<image href="view_cleaner.webp" x="26" y="279.0" width="42" height="42"/>
+<text class="lb" x="47.0" y="336.0" text-anchor="middle">cleaner view</text>
+<text class="strong" x="193.5" y="339.0" text-anchor="middle">teacher</text>
+<rect class="blk" x="88" y="280.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="106" y="280.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="124" y="280.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="142" y="280.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="160" y="280.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="178" y="280.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="196" y="280.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="214" y="280.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="232" y="280.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="250" y="280.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="268" y="280.0" width="13" height="40" rx="3"/>
+<rect class="blk" x="286" y="280.0" width="13" height="40" rx="3"/>
+<g class="u on-flow">
+<path class="ln mut dash" d="M303,300 H350 V84" marker-end="url(#ah-mut)"/>
+<text class="lb" x="358" y="194.0">target</text>
+<rect class="bx sl" x="310" y="40" width="84" height="40" rx="4"/>
+<text class="bt" x="352.0" y="58.0" text-anchor="middle">flow-map</text><text class="bt" x="352.0" y="74.0" text-anchor="middle">loss</text></g>
+<g class="u on-cons"><rect class="blk acc" x="106" y="40.0" width="13" height="40" rx="3"/>
+<rect class="blk acc-o" x="196" y="280.0" width="13" height="40" rx="3"/>
+<line class="ln acc" x1="112.5" y1="82.0" x2="112.5" y2="146" marker-end="url(#ah-acc)"/>
+<text class="lb acc" x="120.5" y="119.0">block 2</text>
+<rect class="bx acc-f" x="66" y="150" width="78" height="28" rx="4"/><text class="bt" x="105.0" y="169.0" text-anchor="middle">predictor</text>
+<line class="ln acc" x1="148" y1="164.0" x2="168" y2="164.0" marker-end="url(#ah-acc)"/>
+<rect class="bx acc-f" x="172" y="146" width="146" height="36" rx="4"/><text class="bt" x="245.0" y="169.0" text-anchor="middle">consistency loss</text>
+<line class="ln acc dash" x1="202.5" y1="278.0" x2="202.5" y2="186" marker-end="url(#ah-acc)"/>
+<text class="lb acc" x="210.5" y="235.0">block 7, no gradient</text></g>
+</svg></div>
+        <p class="caption fe-task-text" aria-live="polite">One training step. The teacher's forward pass builds the flow-map target and, in the same pass, supplies the deep features that the student's early features learn to predict.</p>
+    </figure>
+    <p class="caption">The predictor is a two-layer MLP; the consistency loss is the cosine distance between its output and the teacher's features, per token, and the predictor is discarded after training. One setting serves all three families: loss weight 0.25, student block at a quarter of the depth (block 2 of 12 at B/2), teacher block at 70% (block 7 of 12).</p>
 </section>
 
 <section id="results">
     <h2>Results</h2>
-    <p>iFeCo reaches the baseline's final 1-step FID 1.3 to 2.9 times sooner in five of six settings. On Shortcut, the speedup grows with training. On MeanFlow XL/2, iFeCo leads until 300k steps and then falls behind.</p>
+    <p>With the free teacher, iFeCo reaches the baseline's final 1-step FID 2.1 to 3.1 times sooner on Shortcut and on LSD B/2. On Shortcut, the speedup grows with training. On MeanFlow the gain is smaller, and at XL/2 there is none: iFeCo reaches a 1-step FID of 4.42 against 4.40 for the baseline at 400k steps, and 3.95 against 3.80 at 500k.</p>
     <figure class="fe-fig" id="fe-curves">
         <div class="tabs fe-tabs only-phone" role="group" aria-label="Flow-map family" hidden>
             <button type="button" class="btn" data-on="0" aria-pressed="true">MeanFlow</button>
@@ -473,7 +574,7 @@ bibtex: |
         </div>
         <div class="fe-key wide" aria-hidden="true"><span><i></i>Baseline</span><span><i class="k-ours"></i>iFeCo</span><span><i class="k-repa"></i>REPA (frozen DINOv2)</span></div>
         <div class="fe-media fe-curves wide">
-<svg class="fs curve fam-0" viewBox="0 0 300 210" role="img" aria-label="MeanFlow SiT-B/2, 1-step FID over training steps. Baseline ends at 6.12 after 1200k steps; REPA ends at 4.86 after 1200k steps; iFeCo ends at 5.69 after 1200k steps."><text class="ttl" x="46" y="18" text-anchor="start">MeanFlow <tspan class="sz">SiT-B/2</tspan></text>
+<svg class="fs curve fam-0" viewBox="0 0 300 210" role="img" aria-label="MeanFlow SiT-B/2, 1-step FID over training steps. Baseline ends at 6.12 after 1200k steps; REPA ends at 4.86 after 1200k steps; iFeCo ends at 8.03 after 400k steps."><text class="ttl" x="46" y="18" text-anchor="start">MeanFlow <tspan class="sz">SiT-B/2</tspan></text>
 <line class="grid" x1="46" y1="165.7" x2="288" y2="165.7"/>
 <text class="tick" x="40" y="169.7" text-anchor="end">5</text>
 <line class="grid" x1="46" y1="147.8" x2="288" y2="147.8"/>
@@ -519,19 +620,12 @@ bibtex: |
 <g class="pt-g"><title>REPA, 1000k steps: FID 5.04</title><circle class="pt repa" cx="239.6" cy="164.9" r="7"/></g>
 <g class="pt-g"><title>REPA, 1100k steps: FID 4.99</title><circle class="pt repa" cx="259.0" cy="165.9" r="7"/></g>
 <g class="pt-g"><title>REPA, 1200k steps: FID 4.86</title><circle class="pt repa" cx="278.3" cy="168.5" r="7"/></g>
-<polyline class="ln ours" points="77.5,30.0 84.7,60.2 104.1,93.9 123.4,113.8 142.8,126.1 162.2,133.7 181.5,140.2 200.9,141.8 220.2,144.2 239.6,148.2 259.0,149.5 278.3,153.0"/>
-<g class="pt-g"><title>iFeCo, 200k steps: FID 14.69</title><circle class="pt ours" cx="84.7" cy="60.2" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 300k steps: FID 10.41</title><circle class="pt ours" cx="104.1" cy="93.9" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 400k steps: FID 8.50</title><circle class="pt ours" cx="123.4" cy="113.8" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 500k steps: FID 7.49</title><circle class="pt ours" cx="142.8" cy="126.1" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 600k steps: FID 6.93</title><circle class="pt ours" cx="162.2" cy="133.7" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 700k steps: FID 6.49</title><circle class="pt ours" cx="181.5" cy="140.2" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 800k steps: FID 6.38</title><circle class="pt ours" cx="200.9" cy="141.8" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 900k steps: FID 6.23</title><circle class="pt ours" cx="220.2" cy="144.2" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 1000k steps: FID 5.98</title><circle class="pt ours" cx="239.6" cy="148.2" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 1100k steps: FID 5.90</title><circle class="pt ours" cx="259.0" cy="149.5" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 1200k steps: FID 5.69</title><circle class="pt ours" cx="278.3" cy="153.0" r="7"/></g>
-<text class="spd" x="284" y="46" text-anchor="end">1.3&times; sooner</text></svg>
+<polyline class="ln ours" points="65.4,30.0 84.7,67.3 104.1,99.7 123.4,119.3"/>
+<g class="pt-g"><title>iFeCo, 100k steps: FID 26.87</title><circle class="pt ours" cx="65.4" cy="30.0" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 200k steps: FID 13.67</title><circle class="pt ours" cx="84.7" cy="67.3" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 300k steps: FID 9.82</title><circle class="pt ours" cx="104.1" cy="99.7" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 400k steps: FID 8.03</title><circle class="pt ours" cx="123.4" cy="119.3" r="7"/></g>
+</svg>
 <svg class="fs curve fam-1" viewBox="0 0 300 210" role="img" aria-label="Shortcut DiT-B/2, 1-step FID over training steps. Baseline ends at 37.0 after 1200k steps; REPA ends at 36.1 after 1200k steps; iFeCo ends at 28.0 after 1200k steps."><text class="ttl" x="46" y="18" text-anchor="start">Shortcut <tspan class="sz">DiT-B/2</tspan></text>
 <line class="grid" x1="46" y1="158.4" x2="288" y2="158.4"/>
 <text class="tick" x="40" y="162.4" text-anchor="end">30</text>
@@ -592,7 +686,7 @@ bibtex: |
 <g class="pt-g"><title>iFeCo, 1100k steps: FID 27.90</title><circle class="pt ours" cx="258.9" cy="167.4" r="7"/></g>
 <g class="pt-g"><title>iFeCo, 1200k steps: FID 28.03</title><circle class="pt ours" cx="278.3" cy="166.8" r="7"/></g>
 <text class="spd" x="284" y="46" text-anchor="end">2.9&times; sooner</text></svg>
-<svg class="fs curve fam-2" viewBox="0 0 300 210" role="img" aria-label="LSD SiT-B/2, 1-step FID over training steps. Baseline ends at 12.4 after 1200k steps; REPA ends at 12.1 after 900k steps; iFeCo ends at 9.96 after 1200k steps."><text class="ttl" x="46" y="18" text-anchor="start">LSD <tspan class="sz">SiT-B/2</tspan></text>
+<svg class="fs curve fam-2" viewBox="0 0 300 210" role="img" aria-label="LSD SiT-B/2, 1-step FID over training steps. Baseline ends at 12.4 after 1200k steps; REPA ends at 11.4 after 1200k steps; iFeCo ends at 10.6 after 1200k steps."><text class="ttl" x="46" y="18" text-anchor="start">LSD <tspan class="sz">SiT-B/2</tspan></text>
 <line class="grid" x1="46" y1="176.0" x2="288" y2="176.0"/>
 <text class="tick" x="40" y="180.0" text-anchor="end">10</text>
 <line class="grid" x1="46" y1="136.6" x2="288" y2="136.6"/>
@@ -627,7 +721,7 @@ bibtex: |
 <g class="pt-g"><title>Baseline, 1000k steps: FID 12.96</title><circle class="pt base" cx="239.6" cy="150.8" r="7"/></g>
 <g class="pt-g"><title>Baseline, 1100k steps: FID 12.56</title><circle class="pt base" cx="259.0" cy="153.9" r="7"/></g>
 <g class="pt-g"><title>Baseline, 1200k steps: FID 12.42</title><circle class="pt base" cx="278.3" cy="155.0" r="7"/></g>
-<polyline class="ln repa" points="65.4,48.0 84.7,97.6 104.1,121.6 123.4,132.3 142.8,146.1 162.2,147.2 181.5,152.5 200.9,153.0 220.2,157.7"/>
+<polyline class="ln repa" points="65.4,48.0 84.7,97.6 104.1,121.6 123.4,132.3 142.8,146.1 162.2,147.2 181.5,152.5 200.9,152.9 220.2,157.7 239.6,158.7 258.9,157.8 278.3,162.9"/>
 <g class="pt-g"><title>REPA, 100k steps: FID 37.38</title><circle class="pt repa" cx="65.4" cy="48.0" r="7"/></g>
 <g class="pt-g"><title>REPA, 200k steps: FID 22.43</title><circle class="pt repa" cx="84.7" cy="97.6" r="7"/></g>
 <g class="pt-g"><title>REPA, 300k steps: FID 17.52</title><circle class="pt repa" cx="104.1" cy="121.6" r="7"/></g>
@@ -635,30 +729,34 @@ bibtex: |
 <g class="pt-g"><title>REPA, 500k steps: FID 13.61</title><circle class="pt repa" cx="142.8" cy="146.1" r="7"/></g>
 <g class="pt-g"><title>REPA, 600k steps: FID 13.45</title><circle class="pt repa" cx="162.2" cy="147.2" r="7"/></g>
 <g class="pt-g"><title>REPA, 700k steps: FID 12.74</title><circle class="pt repa" cx="181.5" cy="152.5" r="7"/></g>
-<g class="pt-g"><title>REPA, 800k steps: FID 12.68</title><circle class="pt repa" cx="200.9" cy="153.0" r="7"/></g>
+<g class="pt-g"><title>REPA, 800k steps: FID 12.68</title><circle class="pt repa" cx="200.9" cy="152.9" r="7"/></g>
 <g class="pt-g"><title>REPA, 900k steps: FID 12.07</title><circle class="pt repa" cx="220.2" cy="157.7" r="7"/></g>
-<polyline class="ln ours" points="65.4,48.6 84.7,104.1 104.1,129.1 123.4,142.6 142.8,154.7 162.2,161.8 181.5,164.1 200.9,165.3 220.2,166.9 239.6,172.3 259.0,174.0 278.3,176.4"/>
-<g class="pt-g"><title>iFeCo, 100k steps: FID 37.15</title><circle class="pt ours" cx="65.4" cy="48.6" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 200k steps: FID 20.97</title><circle class="pt ours" cx="84.7" cy="104.1" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 300k steps: FID 16.22</title><circle class="pt ours" cx="104.1" cy="129.1" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 400k steps: FID 14.10</title><circle class="pt ours" cx="123.4" cy="142.6" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 500k steps: FID 12.46</title><circle class="pt ours" cx="142.8" cy="154.7" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 600k steps: FID 11.58</title><circle class="pt ours" cx="162.2" cy="161.8" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 700k steps: FID 11.31</title><circle class="pt ours" cx="181.5" cy="164.1" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 800k steps: FID 11.16</title><circle class="pt ours" cx="200.9" cy="165.3" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 900k steps: FID 10.98</title><circle class="pt ours" cx="220.2" cy="166.9" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 1000k steps: FID 10.39</title><circle class="pt ours" cx="239.6" cy="172.3" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 1100k steps: FID 10.21</title><circle class="pt ours" cx="259.0" cy="174.0" r="7"/></g>
-<text class="spd" x="284" y="46" text-anchor="end">2.4&times; sooner</text></svg>
-<svg class="fs curve fam-0" viewBox="0 0 300 210" role="img" aria-label="MeanFlow SiT-XL/2, 1-step FID over training steps. Baseline ends at 3.78 after 700k steps; iFeCo ends at 4.02 after 600k steps."><text class="ttl" x="46" y="18" text-anchor="start"><tspan class="sz">SiT-XL/2</tspan></text>
-<line class="grid" x1="46" y1="163.2" x2="288" y2="163.2"/>
-<text class="tick" x="40" y="167.2" text-anchor="end">4</text>
-<line class="grid" x1="46" y1="124.2" x2="288" y2="124.2"/>
-<text class="tick" x="40" y="128.2" text-anchor="end">6</text>
-<line class="grid" x1="46" y1="96.6" x2="288" y2="96.6"/>
-<text class="tick" x="40" y="100.6" text-anchor="end">8</text>
-<line class="grid" x1="46" y1="57.6" x2="288" y2="57.6"/>
-<text class="tick" x="40" y="61.6" text-anchor="end">12</text>
+<g class="pt-g"><title>REPA, 1000k steps: FID 11.95</title><circle class="pt repa" cx="239.6" cy="158.7" r="7"/></g>
+<g class="pt-g"><title>REPA, 1100k steps: FID 12.06</title><circle class="pt repa" cx="258.9" cy="157.8" r="7"/></g>
+<g class="pt-g"><title>REPA, 1200k steps: FID 11.44</title><circle class="pt repa" cx="278.3" cy="162.9" r="7"/></g>
+<polyline class="ln ours" points="65.4,48.5 84.7,102.4 104.1,127.0 123.4,140.5 142.8,149.0 162.2,158.2 181.5,159.5 200.9,164.9 220.2,166.6 239.6,167.7 258.9,167.8 278.3,170.7"/>
+<g class="pt-g"><title>iFeCo, 100k steps: FID 37.19</title><circle class="pt ours" cx="65.4" cy="48.5" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 200k steps: FID 21.34</title><circle class="pt ours" cx="84.7" cy="102.4" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 300k steps: FID 16.56</title><circle class="pt ours" cx="104.1" cy="127.0" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 400k steps: FID 14.41</title><circle class="pt ours" cx="123.4" cy="140.5" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 500k steps: FID 13.21</title><circle class="pt ours" cx="142.8" cy="149.0" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 600k steps: FID 12.01</title><circle class="pt ours" cx="162.2" cy="158.2" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 700k steps: FID 11.85</title><circle class="pt ours" cx="181.5" cy="159.5" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 800k steps: FID 11.21</title><circle class="pt ours" cx="200.9" cy="164.9" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 900k steps: FID 11.02</title><circle class="pt ours" cx="220.2" cy="166.6" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 1000k steps: FID 10.89</title><circle class="pt ours" cx="239.6" cy="167.7" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 1100k steps: FID 10.88</title><circle class="pt ours" cx="258.9" cy="167.8" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 1200k steps: FID 10.56</title><circle class="pt ours" cx="278.3" cy="170.7" r="7"/></g>
+<text class="spd" x="284" y="46" text-anchor="end">2.1&times; sooner</text></svg>
+<svg class="fs curve fam-0" viewBox="0 0 300 210" role="img" aria-label="MeanFlow SiT-XL/2, 1-step FID over training steps. Baseline ends at 3.50 after 1200k steps; iFeCo ends at 3.95 after 500k steps."><text class="ttl" x="46" y="18" text-anchor="start"><tspan class="sz">SiT-XL/2</tspan></text>
+<line class="grid" x1="46" y1="155.8" x2="288" y2="155.8"/>
+<text class="tick" x="40" y="159.8" text-anchor="end">4</text>
+<line class="grid" x1="46" y1="119.0" x2="288" y2="119.0"/>
+<text class="tick" x="40" y="123.0" text-anchor="end">6</text>
+<line class="grid" x1="46" y1="92.9" x2="288" y2="92.9"/>
+<text class="tick" x="40" y="96.9" text-anchor="end">8</text>
+<line class="grid" x1="46" y1="56.1" x2="288" y2="56.1"/>
+<text class="tick" x="40" y="60.1" text-anchor="end">12</text>
 <line class="grid" x1="46.0" y1="30" x2="46.0" y2="176"/>
 <text class="tick" x="46.0" y="192" text-anchor="middle">0</text>
 <line class="grid" x1="123.4" y1="30" x2="123.4" y2="176"/>
@@ -670,21 +768,25 @@ bibtex: |
 <line class="axis" x1="46" y1="176" x2="288" y2="176"/>
 <line class="axis" x1="46" y1="30" x2="46" y2="176"/>
 <text class="ax" transform="translate(13 103.0) rotate(-90)" text-anchor="middle">1-step FID</text>
-<polyline class="ln base" points="65.4,34.6 84.7,103.4 104.1,137.0 123.4,154.0 142.8,168.1 162.2,168.4 181.5,168.6"/>
-<g class="pt-g"><title>Baseline, 100k steps: FID 15.25</title><circle class="pt base" cx="65.4" cy="34.6" r="7"/></g>
-<g class="pt-g"><title>Baseline, 200k steps: FID 7.45</title><circle class="pt base" cx="84.7" cy="103.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 300k steps: FID 5.25</title><circle class="pt base" cx="104.1" cy="137.0" r="7"/></g>
-<g class="pt-g"><title>Baseline, 400k steps: FID 4.40</title><circle class="pt base" cx="123.4" cy="154.0" r="7"/></g>
-<g class="pt-g"><title>Baseline, 500k steps: FID 3.80</title><circle class="pt base" cx="142.8" cy="168.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 600k steps: FID 3.79</title><circle class="pt base" cx="162.2" cy="168.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 700k steps: FID 3.78</title><circle class="pt base" cx="181.5" cy="168.6" r="7"/></g>
-<polyline class="ln ours" points="65.4,38.0 84.7,107.6 104.1,141.2 123.4,149.3 142.8,155.6 162.2,162.7"/>
-<g class="pt-g"><title>iFeCo, 100k steps: FID 14.72</title><circle class="pt ours" cx="65.4" cy="38.0" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 200k steps: FID 7.13</title><circle class="pt ours" cx="84.7" cy="107.6" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 300k steps: FID 5.03</title><circle class="pt ours" cx="104.1" cy="141.2" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 400k steps: FID 4.62</title><circle class="pt ours" cx="123.4" cy="149.3" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 500k steps: FID 4.33</title><circle class="pt ours" cx="142.8" cy="155.6" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 600k steps: FID 4.02</title><circle class="pt ours" cx="162.2" cy="162.7" r="7"/></g></svg>
+<polyline class="ln base" points="65.4,34.4 84.7,99.4 104.1,131.1 123.4,147.1 142.8,160.4 162.2,160.7 181.5,160.9 200.9,162.1 220.2,172.4 239.6,169.7 258.9,168.7 278.3,167.9"/>
+<g class="pt-g"><title>Baseline, 100k steps: FID 15.25</title><circle class="pt base" cx="65.4" cy="34.4" r="7"/></g>
+<g class="pt-g"><title>Baseline, 200k steps: FID 7.45</title><circle class="pt base" cx="84.7" cy="99.4" r="7"/></g>
+<g class="pt-g"><title>Baseline, 300k steps: FID 5.25</title><circle class="pt base" cx="104.1" cy="131.1" r="7"/></g>
+<g class="pt-g"><title>Baseline, 400k steps: FID 4.40</title><circle class="pt base" cx="123.4" cy="147.1" r="7"/></g>
+<g class="pt-g"><title>Baseline, 500k steps: FID 3.80</title><circle class="pt base" cx="142.8" cy="160.4" r="7"/></g>
+<g class="pt-g"><title>Baseline, 600k steps: FID 3.79</title><circle class="pt base" cx="162.2" cy="160.7" r="7"/></g>
+<g class="pt-g"><title>Baseline, 700k steps: FID 3.78</title><circle class="pt base" cx="181.5" cy="160.9" r="7"/></g>
+<g class="pt-g"><title>Baseline, 800k steps: FID 3.73</title><circle class="pt base" cx="200.9" cy="162.1" r="7"/></g>
+<g class="pt-g"><title>Baseline, 900k steps: FID 3.33</title><circle class="pt base" cx="220.2" cy="172.4" r="7"/></g>
+<g class="pt-g"><title>Baseline, 1000k steps: FID 3.43</title><circle class="pt base" cx="239.6" cy="169.7" r="7"/></g>
+<g class="pt-g"><title>Baseline, 1100k steps: FID 3.47</title><circle class="pt base" cx="258.9" cy="168.7" r="7"/></g>
+<g class="pt-g"><title>Baseline, 1200k steps: FID 3.50</title><circle class="pt base" cx="278.3" cy="167.9" r="7"/></g>
+<polyline class="ln ours" points="65.4,38.8 84.7,102.4 104.1,132.8 123.4,146.7 142.8,156.9"/>
+<g class="pt-g"><title>iFeCo, 100k steps: FID 14.52</title><circle class="pt ours" cx="65.4" cy="38.8" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 200k steps: FID 7.20</title><circle class="pt ours" cx="84.7" cy="102.4" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 300k steps: FID 5.15</title><circle class="pt ours" cx="104.1" cy="132.8" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 400k steps: FID 4.42</title><circle class="pt ours" cx="123.4" cy="146.7" r="7"/></g>
+<g class="pt-g"><title>iFeCo, 500k steps: FID 3.95</title><circle class="pt ours" cx="142.8" cy="156.9" r="7"/></g></svg>
 <svg class="fs curve fam-1" viewBox="0 0 300 210" role="img" aria-label="Shortcut DiT-XL/2, 1-step FID over training steps. Baseline ends at 18.6 after 1200k steps; iFeCo ends at 12.7 after 1200k steps."><text class="ttl" x="46" y="18" text-anchor="start"><tspan class="sz">DiT-XL/2</tspan></text>
 <line class="grid" x1="46" y1="155.8" x2="288" y2="155.8"/>
 <text class="tick" x="40" y="159.8" text-anchor="end">15</text>
@@ -733,55 +835,9 @@ bibtex: |
 <g class="pt-g"><title>iFeCo, 1000k steps: FID 13.17</title><circle class="pt ours" cx="239.6" cy="167.6" r="7"/></g>
 <g class="pt-g"><title>iFeCo, 1100k steps: FID 12.89</title><circle class="pt ours" cx="259.0" cy="169.5" r="7"/></g>
 <g class="pt-g"><title>iFeCo, 1200k steps: FID 12.71</title><circle class="pt ours" cx="278.3" cy="170.8" r="7"/></g>
-<text class="spd" x="284" y="46" text-anchor="end">2.7&times; sooner</text></svg>
-<svg class="fs curve fam-2" viewBox="0 0 300 210" role="img" aria-label="LSD SiT-XL/2, 1-step FID over training steps. Baseline ends at 7.53 after 1200k steps; iFeCo ends at 7.28 after 900k steps."><text class="ttl" x="46" y="18" text-anchor="start"><tspan class="sz">SiT-XL/2</tspan></text>
-<line class="grid" x1="46" y1="168.0" x2="288" y2="168.0"/>
-<text class="tick" x="40" y="172.0" text-anchor="end">7</text>
-<line class="grid" x1="46" y1="153.5" x2="288" y2="153.5"/>
-<text class="tick" x="40" y="157.5" text-anchor="end">8</text>
-<line class="grid" x1="46" y1="129.3" x2="288" y2="129.3"/>
-<text class="tick" x="40" y="133.3" text-anchor="end">10</text>
-<line class="grid" x1="46" y1="85.4" x2="288" y2="85.4"/>
-<text class="tick" x="40" y="89.4" text-anchor="end">15</text>
-<line class="grid" x1="46" y1="54.2" x2="288" y2="54.2"/>
-<text class="tick" x="40" y="58.2" text-anchor="end">20</text>
-<line class="grid" x1="46.0" y1="30" x2="46.0" y2="176"/>
-<text class="tick" x="46.0" y="192" text-anchor="middle">0</text>
-<line class="grid" x1="123.4" y1="30" x2="123.4" y2="176"/>
-<text class="tick" x="123.4" y="192" text-anchor="middle">400k</text>
-<line class="grid" x1="200.9" y1="30" x2="200.9" y2="176"/>
-<text class="tick" x="200.9" y="192" text-anchor="middle">800k</text>
-<line class="grid" x1="278.3" y1="30" x2="278.3" y2="176"/>
-<text class="tick" x="278.3" y="192" text-anchor="middle">1.2M</text>
-<line class="axis" x1="46" y1="176" x2="288" y2="176"/>
-<line class="axis" x1="46" y1="30" x2="46" y2="176"/>
-<text class="ax" transform="translate(13 103.0) rotate(-90)" text-anchor="middle">1-step FID</text>
-<polyline class="ln base" points="65.4,44.5 84.7,99.9 104.1,117.3 123.4,134.4 142.8,141.1 162.2,147.6 181.5,152.4 200.9,152.7 220.2,157.4 239.6,154.3 259.0,160.5 278.3,160.1"/>
-<g class="pt-g"><title>Baseline, 100k steps: FID 21.87</title><circle class="pt base" cx="65.4" cy="44.5" r="7"/></g>
-<g class="pt-g"><title>Baseline, 200k steps: FID 13.12</title><circle class="pt base" cx="84.7" cy="99.9" r="7"/></g>
-<g class="pt-g"><title>Baseline, 300k steps: FID 11.17</title><circle class="pt base" cx="104.1" cy="117.3" r="7"/></g>
-<g class="pt-g"><title>Baseline, 400k steps: FID 9.54</title><circle class="pt base" cx="123.4" cy="134.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 500k steps: FID 8.97</title><circle class="pt base" cx="142.8" cy="141.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 600k steps: FID 8.45</title><circle class="pt base" cx="162.2" cy="147.6" r="7"/></g>
-<g class="pt-g"><title>Baseline, 700k steps: FID 8.08</title><circle class="pt base" cx="181.5" cy="152.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 800k steps: FID 8.06</title><circle class="pt base" cx="200.9" cy="152.7" r="7"/></g>
-<g class="pt-g"><title>Baseline, 900k steps: FID 7.72</title><circle class="pt base" cx="220.2" cy="157.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1000k steps: FID 7.94</title><circle class="pt base" cx="239.6" cy="154.3" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1100k steps: FID 7.50</title><circle class="pt base" cx="259.0" cy="160.5" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1200k steps: FID 7.53</title><circle class="pt base" cx="278.3" cy="160.1" r="7"/></g>
-<polyline class="ln ours" points="65.4,70.3 84.7,119.4 104.1,137.6 123.4,148.1 142.8,151.9 162.2,156.9 181.5,162.4 200.9,167.4 220.2,163.7"/>
-<g class="pt-g"><title>iFeCo, 100k steps: FID 17.23</title><circle class="pt ours" cx="65.4" cy="70.3" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 200k steps: FID 10.96</title><circle class="pt ours" cx="84.7" cy="119.4" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 300k steps: FID 9.26</title><circle class="pt ours" cx="104.1" cy="137.6" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 400k steps: FID 8.41</title><circle class="pt ours" cx="123.4" cy="148.1" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 500k steps: FID 8.12</title><circle class="pt ours" cx="142.8" cy="151.9" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 600k steps: FID 7.75</title><circle class="pt ours" cx="162.2" cy="156.9" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 700k steps: FID 7.37</title><circle class="pt ours" cx="181.5" cy="162.4" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 800k steps: FID 7.04</title><circle class="pt ours" cx="200.9" cy="167.4" r="7"/></g>
-<g class="pt-g"><title>iFeCo, 900k steps: FID 7.28</title><circle class="pt ours" cx="220.2" cy="163.7" r="7"/></g>
-<text class="spd" x="284" y="46" text-anchor="end">1.5&times; sooner</text></svg>
+<text class="spd" x="284" y="46" text-anchor="end">3.1&times; sooner</text></svg>
         </div>
-        <figcaption>1-step FID-50k over training steps on ImageNet 256&times;256 (log scale). The label gives how many times sooner iFeCo reaches the baseline's final FID. XL/2 models are still training. REPA, shown at B/2, is our reference with a frozen DINOv2 encoder.</figcaption>
+        <figcaption>1-step FID-50k over training steps on ImageNet 256&times;256 (log scale). The label gives how many times sooner iFeCo reaches the baseline's final FID. The MeanFlow iFeCo curves stop at 400k (B/2) and 500k (XL/2) steps, so MeanFlow has no label. REPA, shown at B/2, is our reference with a frozen DINOv2 encoder.</figcaption>
     </figure>
     <div class="table-wrap">
         <table>
@@ -790,15 +846,14 @@ bibtex: |
             </thead>
             <tbody>
                 <tr><td><a href="https://arxiv.org/abs/2410.12557">Shortcut</a></td><td class="l"><span class="fe-long">DiT-</span>B/2</td><td class="fe-desk">1.2M</td><td>36.95</td><td class="ours"><strong>28.03</strong></td><td>36.11</td><td>2.9&times;</td></tr>
-                <tr><td></td><td class="l"><span class="fe-long">DiT-</span>XL/2</td><td class="fe-desk">1.0M</td><td>19.34</td><td class="ours"><strong>13.17</strong></td><td>&ndash;</td><td>2.7&times;</td></tr>
-                <tr class="grp"><td><a href="https://arxiv.org/abs/2505.13447">MeanFlow</a></td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td class="fe-desk">1.2M</td><td>6.12</td><td class="ours">5.69</td><td><strong>4.86</strong></td><td>1.3&times;</td></tr>
-                <tr><td></td><td class="l"><span class="fe-long">SiT-</span>XL/2</td><td class="fe-desk">500k</td><td><strong>3.80</strong></td><td class="ours">4.33</td><td>&ndash;</td><td>&ndash;</td></tr>
-                <tr class="grp"><td><a href="https://arxiv.org/abs/2505.18825">LSD</a></td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td class="fe-desk">1.2M</td><td>12.42</td><td class="ours"><strong>9.96</strong></td><td>&ndash;</td><td>2.4&times;</td></tr>
-                <tr><td></td><td class="l"><span class="fe-long">SiT-</span>XL/2</td><td class="fe-desk">900k</td><td>7.72</td><td class="ours"><strong>7.28</strong></td><td>&ndash;</td><td>1.5&times;</td></tr>
-            </tbody>
+                <tr><td></td><td class="l"><span class="fe-long">DiT-</span>XL/2</td><td class="fe-desk">1.2M</td><td>18.55</td><td class="ours"><strong>12.71</strong></td><td>&ndash;</td><td>3.1&times;</td></tr>
+                <tr class="grp"><td><a href="https://arxiv.org/abs/2505.13447">MeanFlow</a></td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td class="fe-desk">400k</td><td>9.79</td><td class="ours">8.03</td><td><strong>7.36</strong></td><td>1.3&times;</td></tr>
+                <tr><td></td><td class="l"><span class="fe-long">SiT-</span>XL/2</td><td class="fe-desk">500k</td><td><strong>3.80</strong></td><td class="ours">3.95</td><td>&ndash;</td><td>&ndash;</td></tr>
+                <tr class="grp"><td><a href="https://arxiv.org/abs/2505.18825">LSD</a></td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td class="fe-desk">1.2M</td><td>12.42</td><td class="ours"><strong>10.56</strong></td><td>11.44</td><td>2.1&times;</td></tr>
+                            </tbody>
         </table>
     </div>
-    <p class="caption">1-step FID-50k (lower is better) with ADM reference statistics. Speedup: how many times sooner iFeCo reaches the baseline's final 1-step FID. MeanFlow XL/2 and LSD XL/2 have not finished their schedules. The MeanFlow and LSD models here use an extra EMA teacher forward pass in place of the free teacher; models with the free teacher are in training.</p>
+    <p class="caption">1-step FID-50k (lower is better) with ADM reference statistics. Speedup: how many times sooner iFeCo reaches the baseline's final 1-step FID, with linear interpolation between evaluations. The MeanFlow iFeCo models stop at 400k (B/2) and 500k (XL/2), so those rows compare at that step; on MeanFlow B/2, iFeCo reaches the baseline's 400k FID at 302k steps. The MeanFlow XL/2 baseline reaches 3.50 at 1.2M.</p>
     <div class="table-wrap">
         <table>
             <thead>
@@ -806,13 +861,35 @@ bibtex: |
             </thead>
             <tbody>
                 <tr><td>Shortcut</td><td class="l"><span class="fe-long">DiT-</span>B/2</td><td>8</td><td>23.89</td><td class="ours">18.04</td><td><strong>16.14</strong></td></tr>
-                <tr><td>MeanFlow</td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td>4</td><td><strong>5.52</strong></td><td class="ours">5.53</td><td>&ndash;</td></tr>
-                <tr><td>LSD</td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td>4</td><td>6.47</td><td class="ours"><strong>5.58</strong></td><td>&ndash;</td></tr>
+                <tr><td>MeanFlow</td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td>4</td><td>6.72</td><td class="ours">6.23</td><td><strong>5.54</strong></td></tr>
+                <tr><td>LSD</td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td>4</td><td>6.47</td><td class="ours">5.62</td><td><strong>4.93</strong></td></tr>
             </tbody>
         </table>
     </div>
-    <p class="caption">Multi-step sampling, FID-50k at 1.2M training steps. On Shortcut and LSD the one-step gain carries over to more sampling steps; on MeanFlow the 4-step FIDs tie.</p>
-    <p><strong>Comparison with REPA.</strong> <a href="https://arxiv.org/abs/2410.06940">REPA</a> aligns features with a frozen <a href="https://arxiv.org/abs/2304.07193">DINOv2</a> encoder. Our REPA reference uses the same student block as iFeCo, is not tuned for flow maps, and does not reproduce the published REPA. Which target is better depends on the family and on the number of sampling steps. iFeCo has the lower 1-step FID on Shortcut B/2 (28.03 against 36.11) and on LSD B/2 (10.98 against 12.07 at 900k steps). REPA is better on MeanFlow B/2 (4.86 against 5.69) and with 8 sampling steps on Shortcut B/2 (16.14 against 18.04) and LSD B/2 (4.97 against 5.78).</p>
+    <p class="caption">Multi-step sampling, FID-50k at 1.2M training steps (MeanFlow at 400k). In all three families the one-step gain carries over to more sampling steps. REPA has the lowest multi-step FID in all three.</p>
+    <p><strong>Comparison with REPA.</strong> <a href="https://arxiv.org/abs/2410.06940">REPA</a> aligns features with a frozen <a href="https://arxiv.org/abs/2304.07193">DINOv2</a> encoder. Our REPA reference uses the same student block as iFeCo, is not tuned for flow maps, and does not reproduce the published REPA. Which target is better depends on the family and on the number of sampling steps. iFeCo has the lower 1-step FID on Shortcut B/2 (28.03 against 36.11) and on LSD B/2 (10.56 against 11.44). REPA is better on MeanFlow B/2 (7.36 against 8.03 at 400k steps) and with 8 sampling steps on Shortcut B/2 (16.14 against 18.04) and LSD B/2 (4.99 against 5.60).</p>
+    <p><strong>Preliminary: the loss on every row.</strong> Each training batch also holds rows with no jump, which train the velocity at a single time. By default iFeCo skips them, since they have no cleaner view. On these rows the student's early features can instead predict a deeper block of the same forward pass, again with no extra forward pass. In all three families at B/2, this lowers the 1-step FID below that of the default iFeCo at every evaluated checkpoint (table below). The gap is largest early in training: on Shortcut it is about 1.4 at 200k to 400k steps and 0.5 at 1.2M (27.56 against 28.03). At 500k steps the MeanFlow every-row model reaches 7.09, against 8.58 for the baseline and 6.43 for REPA. Each model is trained once and the gaps are small, so this result does not change the speedups above.</p>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr><th>Method</th><th>Steps</th><th>Jump rows</th><th class="ours">Every row</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Shortcut</td><td>200k</td><td>48.86</td><td class="ours"><strong>47.44</strong></td></tr>
+                <tr><td></td><td>400k</td><td>37.32</td><td class="ours"><strong>35.95</strong></td></tr>
+                <tr><td></td><td>800k</td><td>29.75</td><td class="ours"><strong>29.31</strong></td></tr>
+                <tr><td></td><td>1.2M</td><td>28.03</td><td class="ours"><strong>27.56</strong></td></tr>
+                <tr class="grp"><td>MeanFlow</td><td>100k</td><td>26.87</td><td class="ours"><strong>26.32</strong></td></tr>
+                <tr><td></td><td>200k</td><td>13.67</td><td class="ours"><strong>12.75</strong></td></tr>
+                <tr><td></td><td>300k</td><td>9.82</td><td class="ours"><strong>9.22</strong></td></tr>
+                <tr><td></td><td>400k</td><td>8.03</td><td class="ours"><strong>7.80</strong></td></tr>
+                <tr class="grp"><td>LSD</td><td>100k</td><td>37.19</td><td class="ours"><strong>36.97</strong></td></tr>
+                <tr><td></td><td>200k</td><td>21.34</td><td class="ours"><strong>20.93</strong></td></tr>
+                <tr><td></td><td>300k</td><td>16.56</td><td class="ours"><strong>15.90</strong></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="caption">1-step FID-50k on ImageNet 256&times;256, B/2, free teacher, one seed. Jump rows: the default iFeCo, with the loss on rows with a jump only. Every row: the loss also on rows with no jump.</p>
 </section>
 
 <script>
