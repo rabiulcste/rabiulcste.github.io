@@ -121,99 +121,99 @@ bibtex: |
 <section id="teaser" class="wide">
     <figure class="fe-fig">
         <div class="fe-media fe-teaser">
-            <div class="only-desk"><svg class="fs contrast" viewBox="0 0 600 246" role="img" aria-labelledby="cx-t">
+            <div class="only-desk"><svg class="fs contrast" viewBox="0 0 600 266" role="img" aria-labelledby="cx-t">
 <title id="cx-t">Where the alignment target comes from. Top, REPA: the student's early features of a noisy view are aligned with a frozen DINOv2 encoder that reads the clean image, in an extra forward pass. Bottom, iFeCo: the same early features are aligned with the model's own deep features at a cleaner view, which the flow-map training step already computes.</title>
 <defs><marker id="cx-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker><marker id="cx-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker><marker id="cx-rep" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-rep" d="M0,0 L10,5 L0,10 z"/></marker></defs>
 <text class="strong rep" x="0" y="18">REPA</text>
-<image href="view_noisier.webp" x="0" y="40.0" width="48" height="48"/>
-<text class="lb" x="0" y="102">noisy view</text>
-<line class="ln mut" x1="51" y1="64.0" x2="69" y2="64.0" marker-end="url(#cx-mut)"/>
-<rect class="blk" x="72" y="44" width="14" height="40" rx="3"/>
-<rect class="blk rep" x="92" y="44" width="14" height="40" rx="3"/>
-<rect class="blk" x="112" y="44" width="14" height="40" rx="3"/>
-<rect class="blk" x="132" y="44" width="14" height="40" rx="3"/>
-<rect class="blk" x="152" y="44" width="14" height="40" rx="3"/>
-<rect class="blk" x="172" y="44" width="14" height="40" rx="3"/>
-<text class="lb" x="129.0" y="102" text-anchor="middle">student</text>
-<image href="view_image.webp" x="552" y="40.0" width="48" height="48"/>
-<text class="lb" x="600" y="102" text-anchor="end">clean image</text>
-<line class="ln mut" x1="549" y1="64.0" x2="531" y2="64.0" marker-end="url(#cx-mut)"/>
-<rect class="bx rep-f" x="408" y="44" width="120" height="40" rx="4"/>
-<text class="bt" x="468.0" y="69.0" text-anchor="middle">DINOv2</text>
-<path class="ln rep" d="M99.0,42 V32 H468.0 V41" marker-end="url(#cx-rep)"/>
-<text class="lb rep" x="283.5" y="26" text-anchor="middle">aligns with</text>
-<text class="lb rep" x="300.0" y="122" text-anchor="middle" style="font-size:13px">frozen pretrained encoder, extra forward pass</text>
-<text class="strong acc" x="0" y="136">iFeCo</text>
-<image href="view_noisier.webp" x="0" y="158.0" width="48" height="48"/>
-<text class="lb" x="0" y="220">noisier view</text>
-<line class="ln mut" x1="51" y1="182.0" x2="69" y2="182.0" marker-end="url(#cx-mut)"/>
-<rect class="blk" x="72" y="162" width="14" height="40" rx="3"/>
-<rect class="blk acc" x="92" y="162" width="14" height="40" rx="3"/>
-<rect class="blk" x="112" y="162" width="14" height="40" rx="3"/>
-<rect class="blk" x="132" y="162" width="14" height="40" rx="3"/>
-<rect class="blk" x="152" y="162" width="14" height="40" rx="3"/>
-<rect class="blk" x="172" y="162" width="14" height="40" rx="3"/>
-<text class="lb" x="129.0" y="220" text-anchor="middle">student</text>
-<image href="view_cleaner.webp" x="552" y="158.0" width="48" height="48"/>
-<text class="lb" x="600" y="220" text-anchor="end">cleaner view</text>
-<line class="ln mut" x1="549" y1="182.0" x2="531" y2="182.0" marker-end="url(#cx-mut)"/>
-<rect class="blk" x="414" y="162" width="14" height="40" rx="3"/>
-<rect class="blk" x="434" y="162" width="14" height="40" rx="3"/>
-<rect class="blk" x="454" y="162" width="14" height="40" rx="3"/>
-<rect class="blk" x="474" y="162" width="14" height="40" rx="3"/>
-<rect class="blk acc-o" x="494" y="162" width="14" height="40" rx="3"/>
-<rect class="blk" x="514" y="162" width="14" height="40" rx="3"/>
-<text class="lb" x="471.0" y="220" text-anchor="middle">same model</text>
-<path class="ln acc" d="M99.0,160 V150 H501.0 V159" marker-end="url(#cx-acc)"/>
-<text class="lb acc" x="300.0" y="144" text-anchor="middle">aligns with</text>
-<text class="lb acc" x="300.0" y="240" text-anchor="middle" style="font-size:13px">already computed by the training step: no encoder, no extra pass</text>
+<image href="view_noisier.webp" x="0" y="48.0" width="48" height="48"/>
+<text class="lb" x="0" y="110">noisy view</text>
+<line class="ln mut" x1="51" y1="72.0" x2="69" y2="72.0" marker-end="url(#cx-mut)"/>
+<rect class="blk" x="72" y="52" width="14" height="40" rx="3"/>
+<rect class="blk rep" x="92" y="52" width="14" height="40" rx="3"/>
+<rect class="blk" x="112" y="52" width="14" height="40" rx="3"/>
+<rect class="blk" x="132" y="52" width="14" height="40" rx="3"/>
+<rect class="blk" x="152" y="52" width="14" height="40" rx="3"/>
+<rect class="blk" x="172" y="52" width="14" height="40" rx="3"/>
+<text class="lb" x="129.0" y="110" text-anchor="middle">student</text>
+<image href="view_image.webp" x="552" y="48.0" width="48" height="48"/>
+<text class="lb" x="600" y="110" text-anchor="end">clean image</text>
+<line class="ln mut" x1="549" y1="72.0" x2="531" y2="72.0" marker-end="url(#cx-mut)"/>
+<rect class="bx rep-f" x="408" y="52" width="120" height="40" rx="4"/>
+<text class="bt" x="468.0" y="77.0" text-anchor="middle">DINOv2</text>
+<path class="ln rep" d="M99.0,50 V30 H468.0 V49" marker-end="url(#cx-rep)"/>
+<text class="lb rep" x="283.5" y="24" text-anchor="middle">aligns with</text>
+<text class="lb rep" x="300.0" y="130" text-anchor="middle" style="font-size:13px">frozen pretrained encoder, extra forward pass</text>
+<text class="strong acc" x="0" y="146">iFeCo</text>
+<image href="view_noisier.webp" x="0" y="176.0" width="48" height="48"/>
+<text class="lb" x="0" y="238">noisier view</text>
+<line class="ln mut" x1="51" y1="200.0" x2="69" y2="200.0" marker-end="url(#cx-mut)"/>
+<rect class="blk" x="72" y="180" width="14" height="40" rx="3"/>
+<rect class="blk acc" x="92" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="112" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="132" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="152" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="172" y="180" width="14" height="40" rx="3"/>
+<text class="lb" x="129.0" y="238" text-anchor="middle">student</text>
+<image href="view_cleaner.webp" x="552" y="176.0" width="48" height="48"/>
+<text class="lb" x="600" y="238" text-anchor="end">cleaner view</text>
+<line class="ln mut" x1="549" y1="200.0" x2="531" y2="200.0" marker-end="url(#cx-mut)"/>
+<rect class="blk" x="414" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="434" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="454" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="474" y="180" width="14" height="40" rx="3"/>
+<rect class="blk acc-o" x="494" y="180" width="14" height="40" rx="3"/>
+<rect class="blk" x="514" y="180" width="14" height="40" rx="3"/>
+<text class="lb" x="471.0" y="238" text-anchor="middle">same model</text>
+<path class="ln acc" d="M99.0,178 V158 H501.0 V177" marker-end="url(#cx-acc)"/>
+<text class="lb acc" x="300.0" y="152" text-anchor="middle">aligns with</text>
+<text class="lb acc" x="300.0" y="258" text-anchor="middle" style="font-size:13px">already computed by the training step: no encoder, no extra pass</text>
 </svg></div>
-            <div class="only-phone"><svg class="fs contrast" viewBox="0 0 440 246" role="img" aria-labelledby="cxp-t">
+            <div class="only-phone"><svg class="fs contrast" viewBox="0 0 440 266" role="img" aria-labelledby="cxp-t">
 <title id="cxp-t">Where the alignment target comes from. Top, REPA: the student's early features of a noisy view are aligned with a frozen DINOv2 encoder that reads the clean image, in an extra forward pass. Bottom, iFeCo: the same early features are aligned with the model's own deep features at a cleaner view, which the flow-map training step already computes.</title>
 <defs><marker id="cxp-mut" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-mut" d="M0,0 L10,5 L0,10 z"/></marker><marker id="cxp-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker><marker id="cxp-rep" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-rep" d="M0,0 L10,5 L0,10 z"/></marker></defs>
 <text class="strong rep" x="0" y="18">REPA</text>
-<image href="view_noisier.webp" x="0" y="44.0" width="40" height="40"/>
-<text class="lb" x="0" y="102">noisy view</text>
-<line class="ln mut" x1="43" y1="64.0" x2="61" y2="64.0" marker-end="url(#cxp-mut)"/>
-<rect class="blk" x="64" y="44" width="11" height="40" rx="3"/>
-<rect class="blk rep" x="79" y="44" width="11" height="40" rx="3"/>
-<rect class="blk" x="94" y="44" width="11" height="40" rx="3"/>
-<rect class="blk" x="109" y="44" width="11" height="40" rx="3"/>
-<rect class="blk" x="124" y="44" width="11" height="40" rx="3"/>
-<rect class="blk" x="139" y="44" width="11" height="40" rx="3"/>
-<text class="lb" x="107.0" y="102" text-anchor="middle">student</text>
-<image href="view_image.webp" x="400" y="44.0" width="40" height="40"/>
-<text class="lb" x="440" y="102" text-anchor="end">clean image</text>
-<line class="ln mut" x1="397" y1="64.0" x2="359" y2="64.0" marker-end="url(#cxp-mut)"/>
-<rect class="bx rep-f" x="264" y="44" width="92" height="40" rx="4"/>
-<text class="bt" x="310.0" y="69.0" text-anchor="middle">DINOv2</text>
-<path class="ln rep" d="M84.5,42 V32 H310.0 V41" marker-end="url(#cxp-rep)"/>
-<text class="lb rep" x="197.25" y="26" text-anchor="middle">aligns with</text>
-<text class="lb rep" x="220.0" y="122" text-anchor="middle" style="font-size:12px">frozen pretrained encoder, extra forward pass</text>
-<text class="strong acc" x="0" y="136">iFeCo</text>
-<image href="view_noisier.webp" x="0" y="162.0" width="40" height="40"/>
-<text class="lb" x="0" y="220">noisier view</text>
-<line class="ln mut" x1="43" y1="182.0" x2="61" y2="182.0" marker-end="url(#cxp-mut)"/>
-<rect class="blk" x="64" y="162" width="11" height="40" rx="3"/>
-<rect class="blk acc" x="79" y="162" width="11" height="40" rx="3"/>
-<rect class="blk" x="94" y="162" width="11" height="40" rx="3"/>
-<rect class="blk" x="109" y="162" width="11" height="40" rx="3"/>
-<rect class="blk" x="124" y="162" width="11" height="40" rx="3"/>
-<rect class="blk" x="139" y="162" width="11" height="40" rx="3"/>
-<text class="lb" x="107.0" y="220" text-anchor="middle">student</text>
-<image href="view_cleaner.webp" x="400" y="162.0" width="40" height="40"/>
-<text class="lb" x="440" y="220" text-anchor="end">cleaner view</text>
-<line class="ln mut" x1="397" y1="182.0" x2="359" y2="182.0" marker-end="url(#cxp-mut)"/>
-<rect class="blk" x="270" y="162" width="11" height="40" rx="3"/>
-<rect class="blk" x="285" y="162" width="11" height="40" rx="3"/>
-<rect class="blk" x="300" y="162" width="11" height="40" rx="3"/>
-<rect class="blk" x="315" y="162" width="11" height="40" rx="3"/>
-<rect class="blk acc-o" x="330" y="162" width="11" height="40" rx="3"/>
-<rect class="blk" x="345" y="162" width="11" height="40" rx="3"/>
-<text class="lb" x="313.0" y="220" text-anchor="middle">same model</text>
-<path class="ln acc" d="M84.5,160 V150 H335.5 V159" marker-end="url(#cxp-acc)"/>
-<text class="lb acc" x="210.0" y="144" text-anchor="middle">aligns with</text>
-<text class="lb acc" x="220.0" y="240" text-anchor="middle" style="font-size:12px">already computed by the training step: no encoder, no extra pass</text>
+<image href="view_noisier.webp" x="0" y="52.0" width="40" height="40"/>
+<text class="lb" x="0" y="110">noisy view</text>
+<line class="ln mut" x1="43" y1="72.0" x2="61" y2="72.0" marker-end="url(#cxp-mut)"/>
+<rect class="blk" x="64" y="52" width="11" height="40" rx="3"/>
+<rect class="blk rep" x="79" y="52" width="11" height="40" rx="3"/>
+<rect class="blk" x="94" y="52" width="11" height="40" rx="3"/>
+<rect class="blk" x="109" y="52" width="11" height="40" rx="3"/>
+<rect class="blk" x="124" y="52" width="11" height="40" rx="3"/>
+<rect class="blk" x="139" y="52" width="11" height="40" rx="3"/>
+<text class="lb" x="107.0" y="110" text-anchor="middle">student</text>
+<image href="view_image.webp" x="400" y="52.0" width="40" height="40"/>
+<text class="lb" x="440" y="110" text-anchor="end">clean image</text>
+<line class="ln mut" x1="397" y1="72.0" x2="359" y2="72.0" marker-end="url(#cxp-mut)"/>
+<rect class="bx rep-f" x="264" y="52" width="92" height="40" rx="4"/>
+<text class="bt" x="310.0" y="77.0" text-anchor="middle">DINOv2</text>
+<path class="ln rep" d="M84.5,50 V30 H310.0 V49" marker-end="url(#cxp-rep)"/>
+<text class="lb rep" x="197.25" y="24" text-anchor="middle">aligns with</text>
+<text class="lb rep" x="220.0" y="130" text-anchor="middle" style="font-size:12px">frozen pretrained encoder, extra forward pass</text>
+<text class="strong acc" x="0" y="146">iFeCo</text>
+<image href="view_noisier.webp" x="0" y="180.0" width="40" height="40"/>
+<text class="lb" x="0" y="238">noisier view</text>
+<line class="ln mut" x1="43" y1="200.0" x2="61" y2="200.0" marker-end="url(#cxp-mut)"/>
+<rect class="blk" x="64" y="180" width="11" height="40" rx="3"/>
+<rect class="blk acc" x="79" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="94" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="109" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="124" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="139" y="180" width="11" height="40" rx="3"/>
+<text class="lb" x="107.0" y="238" text-anchor="middle">student</text>
+<image href="view_cleaner.webp" x="400" y="180.0" width="40" height="40"/>
+<text class="lb" x="440" y="238" text-anchor="end">cleaner view</text>
+<line class="ln mut" x1="397" y1="200.0" x2="359" y2="200.0" marker-end="url(#cxp-mut)"/>
+<rect class="blk" x="270" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="285" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="300" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="315" y="180" width="11" height="40" rx="3"/>
+<rect class="blk acc-o" x="330" y="180" width="11" height="40" rx="3"/>
+<rect class="blk" x="345" y="180" width="11" height="40" rx="3"/>
+<text class="lb" x="313.0" y="238" text-anchor="middle">same model</text>
+<path class="ln acc" d="M84.5,178 V158 H335.5 V177" marker-end="url(#cxp-acc)"/>
+<text class="lb acc" x="210.0" y="152" text-anchor="middle">aligns with</text>
+<text class="lb acc" x="220.0" y="258" text-anchor="middle" style="font-size:12px">already computed by the training step: no encoder, no extra pass</text>
 </svg></div>
             <svg class="fs curve teaser" viewBox="0 0 340 236" role="img" aria-label="Shortcut DiT-B/2, 1 step, 1-step FID over training steps. Baseline ends at 37.0 after 1200k steps; iFeCo ends at 28.0 after 1200k steps."><defs><marker id="tcv-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs><text class="ttl" x="46" y="18" text-anchor="start">Shortcut DiT-B/2, 1 step</text>
 <line class="grid" x1="46" y1="181.2" x2="276" y2="181.2"/>
