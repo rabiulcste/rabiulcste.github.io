@@ -227,7 +227,7 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> Flow-map training already evaluates a teacher on a cleaner view to build the target for a student on a noisier view. iFeCo adds one loss: early features of the noisier view predict the teacher's deep features of the cleaner view. It needs no external encoder and no extra forward pass.</p>
+    <p class="tldr"><strong>TL;DR:</strong> Flow maps can learn good internal features on their own, without the pretrained encoder that REPA borrows. One added loss, with no extra forward pass, reaches the baseline's final one-step FID on ImageNet 256 2.4 to 3.1 times sooner on Shortcut and 2.1 times sooner on LSD.</p>
 </section>
 
 <section id="context" class="intro">
