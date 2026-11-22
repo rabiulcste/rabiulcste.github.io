@@ -59,6 +59,19 @@
     }
     </script>
     {%- endif %}
+    {%- if page.url == "/archive/" %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": {{ page.title | append: " - " | append: site.SEOTitle | jsonify }},
+        "description": {{ meta_desc | jsonify }},
+        "url": {{ page.url | prepend: site.baseurl | prepend: site.url | jsonify }},
+        "inLanguage": ["en", "bn"],
+        "author": {"@type": "Person", "name": {{ site.SEOTitle | jsonify }}, "url": {{ site.url | append: site.baseurl | append: '/' | jsonify }}}
+    }
+    </script>
+    {%- endif %}
     {%- if page.url == "/" %}
     <script type="application/ld+json">
     {
