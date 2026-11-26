@@ -2,8 +2,8 @@
 layout: project
 title: "Self-Supervised Dynamics Forcing for Diffusion World Models"
 seo_title: "Dynamics Forcing: Self-Supervised Dynamics Forcing for Diffusion World Models"
-description: "Dynamics Forcing adds a self-supervised training signal for dynamics to diffusion world models: the model's current state and the actions predict its own state a few steps later. Preliminary results on RT-1 and BridgeData V2."
-abstract: "A world model should capture what actions do to the world. Trained only to reconstruct frames, a diffusion world model gets no direct pressure to represent this, since the effect of an action is a small part of each frame. Dynamics Forcing adds a self-supervised training signal for dynamics: the model's state at the current frame, given the actions that follow, predicts its own representation of a frame up to H steps ahead, computed by an exponential-moving-average teacher. The prediction head is removed after training, so inference is unchanged. Against Shortcut Forcing on the same backbone, Dynamics Forcing has lower FVD and LPIPS on BridgeData V2 from 50k training steps; on RT-1 it is lower at 100k and on par in FVD at 125k. Training continues to 250k steps."
+description: "Dynamics Forcing adds a self-supervised target in latent space to diffusion world models: from its current state and the actions, the model predicts its own state up to H steps ahead. Preliminary results on RT-1 and BridgeData V2."
+abstract: "Diffusion world models learn dynamics only implicitly, from reconstruction. Dynamics Forcing adds a self-supervised target in latent space, in which the model's state at frame t, given the actions that follow, predicts its own state at frame t+k, with k drawn per clip from 1 to H and targets from an exponential-moving-average teacher. Causal attention hides frame t+k from the predictor, and the prediction head is removed after training, so simulation is unchanged. Against Shortcut Forcing on the same backbone, Dynamics Forcing has lower FVD and LPIPS on BridgeData V2 from 50k training steps; on RT-1 it is lower at 100k and on par in FVD at 125k. Training continues to 250k steps."
 keywords: ["Dynamics Forcing", "world model", "diffusion world model", "video world model", "action-conditioned video prediction", "robot learning", "self-supervised learning", "self-predictive representations", "representation learning", "EMA teacher", "Shortcut Forcing", "diffusion forcing", "causal transformer", "BridgeData V2", "RT-1", "Language Table", "DMLab"]
 authors:
   - name: Rabiul Awal
@@ -40,6 +40,11 @@ bibtex: |
     .curve .pt { fill: transparent; } .curve .pt-g:hover .pt { fill: var(--text); r: 4; }
     .curve .end { font-size: 13px; font-weight: 600; } .curve .end.base { fill: var(--sl); } .curve .end.ours { fill: var(--acc); } .curve .lead { stroke: var(--muted); stroke-width: 0.8; }
     .df-media { margin-bottom: 16px; }
+    /* Hero: the lookahead arcs draw one by one on load, then hold; static under reduced motion. */
+    @media (prefers-reduced-motion: no-preference) {
+        .df-arc { stroke-dasharray: var(--len); animation: df-draw 0.6s ease-out both; animation-delay: calc(var(--i) * 0.35s); }
+    }
+    @keyframes df-draw { from { stroke-dashoffset: var(--len); opacity: 0; } 8% { opacity: 1; } to { stroke-dashoffset: 0; opacity: 1; } }
     .df-curves { display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: auto auto; grid-auto-flow: column; gap: 4px 24px; }
     .df-key { padding-left: calc((100% - 24px) / 2 * 46 / 330 + 10px); display: flex; flex-wrap: wrap; gap: 4px 18px; margin-block: 0 8px; color: var(--muted); font-size: var(--text-secondary); }
     .df-key span { display: inline-flex; align-items: center; gap: 6px; }
@@ -53,76 +58,179 @@ bibtex: |
 <section class="drift-page">
     <figure class="fig">
 <!-- hero:begin (written by build_svgs.py) -->
-<div class="drift-media wide only-desk"><svg class="drift-svg drift-diagram" viewBox="0 -40 700 290" role="img" aria-labelledby="dfhd-t"><title id="dfhd-t">A world model reads past frames and renders the next frame. In training, Dynamics Forcing also asks it to predict its own state k steps ahead from the actions in between, with the frames in between hidden; the target state comes from an EMA teacher that reads frame t+k.</title><defs><marker id="dfhd-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfhd-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfhd-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker></defs><g transform="translate(80 0)"><image class="tile" href="tile_ctx0.webp" x="0.0" y="150.0" width="48" height="48" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="150.0" width="48" height="48" rx="4"/>
-<image class="tile" href="tile_ctx1.webp" x="54.0" y="150.0" width="48" height="48" preserveAspectRatio="none"/><rect class="tile-f" x="54.0" y="150.0" width="48" height="48" rx="4"/>
-<image class="tile" href="tile_cur.webp" x="108.0" y="150.0" width="48" height="48" preserveAspectRatio="none"/><rect class="tile-f" x="108.0" y="150.0" width="48" height="48" rx="4"/>
-<image class="tile" href="tile_next.webp" x="196.0" y="150.0" width="48" height="48" preserveAspectRatio="none"/><rect class="tile-f" x="196.0" y="150.0" width="48" height="48" rx="4"/>
-<image class="tile" href="tile_h1.webp" x="250" y="150" width="48" height="48" opacity="0.25" preserveAspectRatio="none"/><rect class="tile-f" x="250" y="150" width="48" height="48" rx="4" stroke-dasharray="3 3"/>
-<image class="tile" href="tile_h2.webp" x="304" y="150" width="48" height="48" opacity="0.25" preserveAspectRatio="none"/><rect class="tile-f" x="304" y="150" width="48" height="48" rx="4" stroke-dasharray="3 3"/>
-<image class="tile" href="tile_fut.webp" x="386.0" y="150.0" width="48" height="48" preserveAspectRatio="none"/><rect class="tile-f" x="386.0" y="150.0" width="48" height="48" rx="4"/>
-<text class="lab" x="78.0" y="216.0" text-anchor="middle">frames up to <tspan class='math'>t</tspan></text>
-<text class="lab" x="220.0" y="216.0" text-anchor="middle"><tspan class='math'>t</tspan>+1</text>
-<text class="lab" x="301.0" y="216.0" text-anchor="middle">hidden</text>
-<text class="lab" x="410.0" y="216.0" text-anchor="middle"><tspan class='math'>t+k</tspan></text>
-<path class="ln-amb" d="M132.0 238 L414.0 238" marker-end="url(#dfhd-amb)"/>
-<circle cx="132.0" cy="238" r="2.5" class="ahd-amb"/>
-<circle cx="220.0" cy="238" r="2.5" class="ahd-amb"/>
-<circle cx="274.0" cy="238" r="2.5" class="ahd-amb"/>
-<circle cx="328.0" cy="238" r="2.5" class="ahd-amb"/>
-<text class="lab-amb" x="424.0" y="243.0" text-anchor="start">actions</text>
-<rect class="hero" x="0.0" y="40.0" width="156.0" height="70.0" rx="6.6"/>
-<text class="hero-t" x="78.0" y="82.0" text-anchor="middle">World model</text>
-<path class="ln" d="M78.0 146 L78.0 113" marker-end="url(#dfhd-ah)"/>
-<path class="ln" d="M158 100 L214.0 146" marker-end="url(#dfhd-ah)"/>
-<text class="lab" x="230.0" y="132.0" text-anchor="start">renders the next frame</text>
-<rect class="mod-teal" x="372.0" y="66.0" width="76.0" height="32.0" rx="5.4"/>
-<text class="lb" x="410.0" y="87.0" text-anchor="middle">later state</text>
-<path class="ln-teal" d="M158 52 C 246 -26, 340.0 -26, 410.0 63" stroke-dasharray="5 4" marker-end="url(#dfhd-teal)"/>
-<text class="lab" x="283.0" y="-22.0" text-anchor="middle">predicts its own state <tspan class='math'>k</tspan> steps ahead, given the actions</text>
-<text class="lab" x="458.0" y="87.0" text-anchor="start">training only</text>
-<text class="lab" x="418.0" y="132.0" text-anchor="start">EMA teacher</text>
-<path class="ln" d="M410.0 146 L410.0 101" marker-end="url(#dfhd-ah)"/></g></svg></div>
-<div class="drift-media drift-media--stack only-phone"><svg class="drift-svg drift-diagram drift-diagram--stack" viewBox="0 -44 396 300" role="img" aria-labelledby="dfhp-t"><title id="dfhp-t">A world model reads past frames and renders the next frame. In training, Dynamics Forcing also asks it to predict its own state k steps ahead from the actions in between, with the frames in between hidden; the target state comes from an EMA teacher that reads frame t+k.</title><defs><marker id="dfhp-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfhp-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfhp-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker></defs><g transform="translate(30 0)"><image class="tile" href="tile_ctx0.webp" x="0.0" y="150.0" width="40" height="40" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="150.0" width="40" height="40" rx="4"/>
-<image class="tile" href="tile_ctx1.webp" x="44.0" y="150.0" width="40" height="40" preserveAspectRatio="none"/><rect class="tile-f" x="44.0" y="150.0" width="40" height="40" rx="4"/>
-<image class="tile" href="tile_cur.webp" x="88.0" y="150.0" width="40" height="40" preserveAspectRatio="none"/><rect class="tile-f" x="88.0" y="150.0" width="40" height="40" rx="4"/>
-<image class="tile" href="tile_next.webp" x="148.0" y="150.0" width="40" height="40" preserveAspectRatio="none"/><rect class="tile-f" x="148.0" y="150.0" width="40" height="40" rx="4"/>
-<image class="tile" href="tile_h1.webp" x="192" y="150" width="40" height="40" opacity="0.25" preserveAspectRatio="none"/><rect class="tile-f" x="192" y="150" width="40" height="40" rx="4" stroke-dasharray="3 3"/>
-<image class="tile" href="tile_h2.webp" x="236" y="150" width="40" height="40" opacity="0.25" preserveAspectRatio="none"/><rect class="tile-f" x="236" y="150" width="40" height="40" rx="4" stroke-dasharray="3 3"/>
-<image class="tile" href="tile_fut.webp" x="296.0" y="150.0" width="40" height="40" preserveAspectRatio="none"/><rect class="tile-f" x="296.0" y="150.0" width="40" height="40" rx="4"/>
-<text class="lab" x="64.0" y="208.0" text-anchor="middle">frames up to <tspan class='math'>t</tspan></text>
-<text class="lab" x="168.0" y="208.0" text-anchor="middle"><tspan class='math'>t</tspan>+1</text>
-<text class="lab" x="234.0" y="208.0" text-anchor="middle">hidden</text>
-<text class="lab" x="316.0" y="208.0" text-anchor="middle"><tspan class='math'>t+k</tspan></text>
-<path class="ln-amb" d="M108.0 230 L320.0 230" marker-end="url(#dfhp-amb)"/>
-<circle cx="108.0" cy="230" r="2.5" class="ahd-amb"/>
-<circle cx="168.0" cy="230" r="2.5" class="ahd-amb"/>
-<circle cx="212.0" cy="230" r="2.5" class="ahd-amb"/>
-<circle cx="256.0" cy="230" r="2.5" class="ahd-amb"/>
-<text class="lab-amb" x="0.0" y="235.0" text-anchor="start">actions</text>
-<rect class="hero" x="0.0" y="40.0" width="130.0" height="64.0" rx="6.6"/>
-<text class="hero-t" x="65.0" y="68.0" text-anchor="middle">World</text>
-<text class="hero-t" x="65.0" y="90.0" text-anchor="middle">model</text>
-<path class="ln" d="M65.0 146 L65.0 107" marker-end="url(#dfhp-ah)"/>
-<path class="ln" d="M132 94 L162.0 146" marker-end="url(#dfhp-ah)"/>
-<text class="lab" x="174.0" y="114.0" text-anchor="start">renders</text>
-<text class="lab" x="174.0" y="132.0" text-anchor="start">next frame</text>
-<rect class="mod-teal" x="278.0" y="66.0" width="76.0" height="32.0" rx="5.4"/>
-<text class="lb" x="316.0" y="87.0" text-anchor="middle">later state</text>
-<path class="ln-teal" d="M132 52 C 220 -26, 246.0 -26, 316.0 63" stroke-dasharray="5 4" marker-end="url(#dfhp-teal)"/>
-<text class="lab" x="223.0" y="-30.0" text-anchor="middle">predicts its own state</text>
-<text class="lab" x="223.0" y="-12.0" text-anchor="middle">k steps ahead (training only)</text>
-<path class="ln" d="M316.0 146 L316.0 101" marker-end="url(#dfhp-ah)"/></g></svg></div>
+<div class="drift-media wide only-desk"><svg class="drift-svg drift-diagram df-hero" viewBox="0 0 837 392" role="img" aria-labelledby="dfhd-t"><title id="dfhd-t">Left, a standard diffusion world model: it reconstructs each frame from a noisy copy, and its states carry dynamics only implicitly. Right, Dynamics Forcing: the same model, plus a latent target in which the current state z_t and the actions predict the model's own states z_t+1 to z_t+H, with targets from its EMA teacher.</title><defs><marker id="dfhd-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfhd-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfhd-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker></defs><g><text class="ttl2" x="0.0" y="14.0" text-anchor="start">Standard diffusion world model</text>
+<rect class="grp" x="0.0" y="26.0" width="396.0" height="180.0" rx="8"/>
+<text class="lab" x="388.0" y="44.0" text-anchor="end">latent space</text>
+<circle class="ema" cx="48" cy="166" r="11"/>
+<circle class="ema" cx="124" cy="166" r="11"/>
+<circle class="ema" cx="200" cy="166" r="11"/>
+<circle class="ema" cx="276" cy="166" r="11"/>
+<circle class="ema" cx="352" cy="166" r="11"/>
+<text class="lab" x="32.0" y="171.0" text-anchor="end"><tspan class='math'>z<tspan class='sub' dy='4'>t</tspan></tspan></text>
+<text class="lab" x="200.0" y="110.0" text-anchor="middle">dynamics only implicit</text>
+<rect class="grp" x="0.0" y="246.0" width="396.0" height="142.0" rx="8"/>
+<text class="lab" x="388.0" y="264.0" text-anchor="end">pixel space · reconstruction</text>
+<image class="tile" href="tile_f0.webp" x="26.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="26.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n0.webp" x="35" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="35" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M48 334 L48 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f1.webp" x="102.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="102.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n1.webp" x="111" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="111" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M124 334 L124 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f2.webp" x="178.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="178.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n2.webp" x="187" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="187" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M200 334 L200 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f3.webp" x="254.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="254.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n3.webp" x="263" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="263" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M276 334 L276 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f4.webp" x="330.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="330.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n4.webp" x="339" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="339" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M352 334 L352 322" marker-end="url(#x-ah)"/>
+<text class="lab" x="48.0" y="380.0" text-anchor="middle"><tspan class='math'>t</tspan></text>
+<text class="lab" x="124.0" y="380.0" text-anchor="middle"><tspan class='math'>t+1</tspan></text>
+<text class="lab" x="200.0" y="380.0" text-anchor="middle"><tspan class='math'>t+2</tspan></text>
+<text class="lab" x="276.0" y="380.0" text-anchor="middle"><tspan class='math'>t+3</tspan></text>
+<text class="lab" x="352.0" y="380.0" text-anchor="middle"><tspan class='math'>t+H</tspan></text>
+<path class="ln" d="M48 272 L48 243" marker-end="url(#x-ah)"/>
+<path class="ln" d="M48 209 L48 180" marker-end="url(#x-ah)"/>
+<rect class="hero" x="0.0" y="210.0" width="120.0" height="32.0" rx="6.6"/>
+<text class="hero-s" x="60.0" y="231.0" text-anchor="middle">world model</text></g><g transform="translate(441 0)"><text class="ttl2" x="0.0" y="14.0" text-anchor="start">Dynamics Forcing (ours)</text>
+<rect class="grp" x="0.0" y="26.0" width="396.0" height="180.0" rx="8"/>
+<text class="lab" x="388.0" y="44.0" text-anchor="end">latent space</text>
+<path class="ln-teal df-arc" style="--i:1;--len:99" d="M52 155 Q 86.0 93 122 153" marker-end="url(#dfhd-teal)"/>
+<path class="ln-teal df-arc" style="--i:2;--len:182" d="M52 155 Q 124.0 59 198 153" marker-end="url(#dfhd-teal)"/>
+<path class="ln-teal df-arc" style="--i:3;--len:267" d="M52 155 Q 162.0 25 274 153" marker-end="url(#dfhd-teal)"/>
+<path class="ln-teal df-arc" style="--i:4;--len:352" d="M52 155 Q 200.0 -9 350 153" marker-end="url(#dfhd-teal)"/>
+<text class="lab" x="10.0" y="44.0" text-anchor="start"><tspan class='math'>k</tspan> = 1, …, <tspan class='math'>H</tspan></text>
+<text class="lab" x="10.0" y="62.0" text-anchor="start">targets: EMA teacher, training only</text>
+<circle class="mod-teal" cx="48" cy="166" r="11"/>
+<circle class="mod-teal" cx="124" cy="166" r="11" stroke-dasharray="3 2.5"/>
+<circle class="mod-teal" cx="200" cy="166" r="11" stroke-dasharray="3 2.5"/>
+<circle class="mod-teal" cx="276" cy="166" r="11" stroke-dasharray="3 2.5"/>
+<circle class="mod-teal" cx="352" cy="166" r="11" stroke-dasharray="3 2.5"/>
+<text class="lab" x="32.0" y="171.0" text-anchor="end"><tspan class='math'>z<tspan class='sub' dy='4'>t</tspan></tspan></text>
+<path class="ln-amb" d="M63 188 L109 188" marker-end="url(#x-amb)"/>
+<path class="ln-amb" d="M139 188 L185 188" marker-end="url(#x-amb)"/>
+<path class="ln-amb" d="M215 188 L261 188" marker-end="url(#x-amb)"/>
+<path class="ln-amb" d="M291 188 L337 188" marker-end="url(#x-amb)"/>
+<text class="lab-amb" x="200.0" y="202.0" text-anchor="middle">actions</text>
+<rect class="grp" x="0.0" y="246.0" width="396.0" height="142.0" rx="8"/>
+<text class="lab" x="388.0" y="264.0" text-anchor="end">pixel space · reconstruction</text>
+<image class="tile" href="tile_f0.webp" x="26.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="26.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n0.webp" x="35" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="35" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M48 334 L48 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f1.webp" x="102.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="102.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n1.webp" x="111" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="111" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M124 334 L124 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f2.webp" x="178.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="178.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n2.webp" x="187" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="187" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M200 334 L200 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f3.webp" x="254.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="254.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n3.webp" x="263" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="263" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M276 334 L276 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f4.webp" x="330.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="330.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n4.webp" x="339" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="339" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M352 334 L352 322" marker-end="url(#x-ah)"/>
+<text class="lab" x="48.0" y="380.0" text-anchor="middle"><tspan class='math'>t</tspan></text>
+<text class="lab" x="124.0" y="380.0" text-anchor="middle"><tspan class='math'>t+1</tspan></text>
+<text class="lab" x="200.0" y="380.0" text-anchor="middle"><tspan class='math'>t+2</tspan></text>
+<text class="lab" x="276.0" y="380.0" text-anchor="middle"><tspan class='math'>t+3</tspan></text>
+<text class="lab" x="352.0" y="380.0" text-anchor="middle"><tspan class='math'>t+H</tspan></text>
+<path class="ln" d="M48 272 L48 243" marker-end="url(#x-ah)"/>
+<path class="ln" d="M48 209 L48 180" marker-end="url(#x-ah)"/>
+<rect class="hero" x="0.0" y="210.0" width="120.0" height="32.0" rx="6.6"/>
+<text class="hero-s" x="60.0" y="231.0" text-anchor="middle">world model</text></g></svg></div>
+<div class="drift-media drift-media--stack only-phone"><svg class="drift-svg drift-diagram df-hero drift-diagram--stack" viewBox="0 0 396 812" role="img" aria-labelledby="dfhp-t"><title id="dfhp-t">Left, a standard diffusion world model: it reconstructs each frame from a noisy copy, and its states carry dynamics only implicitly. Right, Dynamics Forcing: the same model, plus a latent target in which the current state z_t and the actions predict the model's own states z_t+1 to z_t+H, with targets from its EMA teacher.</title><defs><marker id="dfhp-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfhp-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfhp-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker></defs><g><text class="ttl2" x="0.0" y="14.0" text-anchor="start">Standard diffusion world model</text>
+<rect class="grp" x="0.0" y="26.0" width="396.0" height="180.0" rx="8"/>
+<text class="lab" x="388.0" y="44.0" text-anchor="end">latent space</text>
+<circle class="ema" cx="48" cy="166" r="11"/>
+<circle class="ema" cx="124" cy="166" r="11"/>
+<circle class="ema" cx="200" cy="166" r="11"/>
+<circle class="ema" cx="276" cy="166" r="11"/>
+<circle class="ema" cx="352" cy="166" r="11"/>
+<text class="lab" x="32.0" y="171.0" text-anchor="end"><tspan class='math'>z<tspan class='sub' dy='4'>t</tspan></tspan></text>
+<text class="lab" x="200.0" y="110.0" text-anchor="middle">dynamics only implicit</text>
+<rect class="grp" x="0.0" y="246.0" width="396.0" height="142.0" rx="8"/>
+<text class="lab" x="388.0" y="264.0" text-anchor="end">pixel space · reconstruction</text>
+<image class="tile" href="tile_f0.webp" x="26.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="26.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n0.webp" x="35" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="35" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M48 334 L48 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f1.webp" x="102.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="102.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n1.webp" x="111" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="111" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M124 334 L124 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f2.webp" x="178.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="178.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n2.webp" x="187" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="187" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M200 334 L200 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f3.webp" x="254.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="254.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n3.webp" x="263" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="263" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M276 334 L276 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f4.webp" x="330.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="330.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n4.webp" x="339" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="339" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M352 334 L352 322" marker-end="url(#x-ah)"/>
+<text class="lab" x="48.0" y="380.0" text-anchor="middle"><tspan class='math'>t</tspan></text>
+<text class="lab" x="124.0" y="380.0" text-anchor="middle"><tspan class='math'>t+1</tspan></text>
+<text class="lab" x="200.0" y="380.0" text-anchor="middle"><tspan class='math'>t+2</tspan></text>
+<text class="lab" x="276.0" y="380.0" text-anchor="middle"><tspan class='math'>t+3</tspan></text>
+<text class="lab" x="352.0" y="380.0" text-anchor="middle"><tspan class='math'>t+H</tspan></text>
+<path class="ln" d="M48 272 L48 243" marker-end="url(#x-ah)"/>
+<path class="ln" d="M48 209 L48 180" marker-end="url(#x-ah)"/>
+<rect class="hero" x="0.0" y="210.0" width="120.0" height="32.0" rx="6.6"/>
+<text class="hero-s" x="60.0" y="231.0" text-anchor="middle">world model</text></g><g transform="translate(0 418)"><text class="ttl2" x="0.0" y="14.0" text-anchor="start">Dynamics Forcing (ours)</text>
+<rect class="grp" x="0.0" y="26.0" width="396.0" height="180.0" rx="8"/>
+<text class="lab" x="388.0" y="44.0" text-anchor="end">latent space</text>
+<path class="ln-teal df-arc" style="--i:1;--len:99" d="M52 155 Q 86.0 93 122 153" marker-end="url(#dfhp-teal)"/>
+<path class="ln-teal df-arc" style="--i:2;--len:182" d="M52 155 Q 124.0 59 198 153" marker-end="url(#dfhp-teal)"/>
+<path class="ln-teal df-arc" style="--i:3;--len:267" d="M52 155 Q 162.0 25 274 153" marker-end="url(#dfhp-teal)"/>
+<path class="ln-teal df-arc" style="--i:4;--len:352" d="M52 155 Q 200.0 -9 350 153" marker-end="url(#dfhp-teal)"/>
+<text class="lab" x="10.0" y="44.0" text-anchor="start"><tspan class='math'>k</tspan> = 1, …, <tspan class='math'>H</tspan></text>
+<text class="lab" x="10.0" y="62.0" text-anchor="start">targets: EMA teacher, training only</text>
+<circle class="mod-teal" cx="48" cy="166" r="11"/>
+<circle class="mod-teal" cx="124" cy="166" r="11" stroke-dasharray="3 2.5"/>
+<circle class="mod-teal" cx="200" cy="166" r="11" stroke-dasharray="3 2.5"/>
+<circle class="mod-teal" cx="276" cy="166" r="11" stroke-dasharray="3 2.5"/>
+<circle class="mod-teal" cx="352" cy="166" r="11" stroke-dasharray="3 2.5"/>
+<text class="lab" x="32.0" y="171.0" text-anchor="end"><tspan class='math'>z<tspan class='sub' dy='4'>t</tspan></tspan></text>
+<path class="ln-amb" d="M63 188 L109 188" marker-end="url(#x-amb)"/>
+<path class="ln-amb" d="M139 188 L185 188" marker-end="url(#x-amb)"/>
+<path class="ln-amb" d="M215 188 L261 188" marker-end="url(#x-amb)"/>
+<path class="ln-amb" d="M291 188 L337 188" marker-end="url(#x-amb)"/>
+<text class="lab-amb" x="200.0" y="202.0" text-anchor="middle">actions</text>
+<rect class="grp" x="0.0" y="246.0" width="396.0" height="142.0" rx="8"/>
+<text class="lab" x="388.0" y="264.0" text-anchor="end">pixel space · reconstruction</text>
+<image class="tile" href="tile_f0.webp" x="26.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="26.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n0.webp" x="35" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="35" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M48 334 L48 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f1.webp" x="102.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="102.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n1.webp" x="111" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="111" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M124 334 L124 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f2.webp" x="178.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="178.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n2.webp" x="187" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="187" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M200 334 L200 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f3.webp" x="254.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="254.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n3.webp" x="263" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="263" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M276 334 L276 322" marker-end="url(#x-ah)"/>
+<image class="tile" href="tile_f4.webp" x="330.0" y="274.0" width="44" height="44" preserveAspectRatio="none"/><rect class="tile-f" x="330.0" y="274.0" width="44" height="44" rx="4"/>
+<image href="tile_n4.webp" x="339" y="336" width="26" height="26" preserveAspectRatio="none"/><rect class="tile-f" x="339" y="336" width="26" height="26" rx="3"/>
+<path class="ln" d="M352 334 L352 322" marker-end="url(#x-ah)"/>
+<text class="lab" x="48.0" y="380.0" text-anchor="middle"><tspan class='math'>t</tspan></text>
+<text class="lab" x="124.0" y="380.0" text-anchor="middle"><tspan class='math'>t+1</tspan></text>
+<text class="lab" x="200.0" y="380.0" text-anchor="middle"><tspan class='math'>t+2</tspan></text>
+<text class="lab" x="276.0" y="380.0" text-anchor="middle"><tspan class='math'>t+3</tspan></text>
+<text class="lab" x="352.0" y="380.0" text-anchor="middle"><tspan class='math'>t+H</tspan></text>
+<path class="ln" d="M48 272 L48 243" marker-end="url(#x-ah)"/>
+<path class="ln" d="M48 209 L48 180" marker-end="url(#x-ah)"/>
+<rect class="hero" x="0.0" y="210.0" width="120.0" height="32.0" rx="6.6"/>
+<text class="hero-s" x="60.0" y="231.0" text-anchor="middle">world model</text></g></svg></div>
 <!-- hero:end -->
-        <figcaption>A world model reads past frames and renders the next one. In training, Dynamics Forcing also asks it to predict its own state <em>k</em> steps ahead from the actions, over frames it cannot see.</figcaption>
+        <figcaption>Left: a standard diffusion world model reconstructs every frame in pixel space and learns dynamics only implicitly. Right: Dynamics Forcing adds a self-supervised target in latent space, in which the current state and the actions predict the model's own state up to <em>H</em> steps ahead.</figcaption>
     </figure>
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> A world model should capture what actions do to the world. Trained only to reconstruct frames, a diffusion world model gets no direct pressure to represent this, since the effect of an action is a small part of each frame. Dynamics Forcing adds a self-supervised training signal for dynamics, in which the model's current state and the actions predict its own state a few steps later, and leaves inference unchanged.</p>
+    <p class="tldr"><strong>TL;DR:</strong> Diffusion world models learn dynamics only implicitly, from reconstruction. Dynamics Forcing adds a self-supervised objective in latent space that predicts the model's own state up to <em>H</em> steps ahead from its current state and the actions, with targets from its EMA teacher. The prediction head is removed after training, so simulation is unchanged.</p>
 </section>
 <section class="intro">
-    <p>A world model is useful when it knows where actions take the scene. Diffusion world models such as <a href="https://arxiv.org/abs/2405.12399">DIAMOND</a> and <a href="https://danijar.com/project/dreamer4/">Dreamer 4</a> learn by reconstructing each future frame from a noisy copy. The frame holds the effect of the action, and also texture, lighting and background that have nothing to do with it, and the loss weighs all of it alike.</p>
-    <p>I wanted a training signal aimed at the dynamics. In Dynamics Forcing, the model's state at the current frame, given the actions that follow, has to predict its own representation of a frame several steps ahead, a frame it cannot see. Rendering stays with the denoising loss, and the prediction head is removed after training.</p>
+    <p>A useful world model renders plausible future observations and represents how the state changes under an action. Diffusion world models such as <a href="https://arxiv.org/abs/2405.12399">DIAMOND</a> and <a href="https://danijar.com/project/dreamer4/">Dreamer 4</a> are trained by reconstruction alone. Each future frame is denoised from a corrupted copy, given the past frames and actions under causal attention. The frame holds the consequence of the action together with texture, lighting and background unrelated to it, and the loss weighs both alike. Nothing in training asks the model's state to encode where the actions lead.</p>
+    <p>Predictive self-supervised learning supplies a signal for the dynamics, with targets in latent space and no labels or pretrained encoder. Time gives the supervision. The state at frame <em>t</em>, given the actions that follow, is trained to predict the model's own state at frame <em>t+k</em>, with <em>k</em> drawn per clip from 1 to <em>H</em>. Causal attention keeps frame <em>t+k</em> hidden from the predictor, the target comes from an EMA teacher with stopped gradients, and denoising still renders the frames. The prediction head and the teacher are discarded after training.</p>
 </section>
 
 <section id="rollouts">
@@ -140,79 +248,96 @@ bibtex: |
 
 <section id="method">
     <h2>Dynamics Forcing</h2>
-    <p>The current state and the actions that follow predict the later state, taken from an EMA teacher.</p>
+    <p>The current state and the actions that follow predict the model's own state <em>k</em> steps ahead, taken from an EMA teacher.</p>
     <figure class="fig">
 <!-- diagram:begin (written by build_svgs.py) -->
-<div class="drift-media wide only-desk"><svg class="drift-svg drift-diagram" viewBox="0 0 837 262" role="img" aria-labelledby="dfd-t"><title id="dfd-t">Dynamics Forcing training step. Frames up to t go into a causal diffusion transformer. Its last layer feeds the diffusion head and the generative loss of Shortcut Forcing. Its layer-4 feature, with the actions from t to t+k-1, goes through a prediction head that predicts the layer-8 feature of frame t+k computed by an EMA teacher, with k at most H. The prediction head and the teacher are used only in training.</title><defs><marker id="dfd-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfd-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfd-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker></defs><rect class="grp" x="318.0" y="118.0" width="519.0" height="140.0" rx="8"/>
-<text class="lab" x="829.0" y="138.0" text-anchor="end">training only</text>
-<image class="tile" href="tile_cur.webp" x="7.2" y="94.8" width="43.2" height="43.2" preserveAspectRatio="none"/><rect class="tile-f" x="7.2" y="94.8" width="43.2" height="43.2" rx="4"/>
-<image class="tile" href="tile_cur.webp" x="3.6" y="98.4" width="43.2" height="43.2" preserveAspectRatio="none"/><rect class="tile-f" x="3.6" y="98.4" width="43.2" height="43.2" rx="4"/>
-<image class="tile" href="tile_cur.webp" x="0.0" y="102.0" width="43.2" height="43.2" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="102.0" width="43.2" height="43.2" rx="4"/>
-<text class="lab" x="0.0" y="168.0" text-anchor="start">frames up to <tspan class='math'>t</tspan></text>
-<path class="ln" d="M50.4 123.6 L104 123.6" marker-end="url(#dfd-ah)"/>
-<rect class="hero" x="107.0" y="34.0" width="180.0" height="180.0" rx="6.6"/>
-<text class="hero-t" x="197.0" y="112.0" text-anchor="middle">Diffusion</text>
-<text class="hero-t" x="197.0" y="136.0" text-anchor="middle">transformer</text>
-<text class="hero-s" x="279.0" y="66.0" text-anchor="end">layer 12</text>
-<text class="hero-s" x="279.0" y="186.0" text-anchor="end">layer 4</text>
-<text class="lab" x="197.0" y="236.0" text-anchor="middle">causal: frames after <tspan class='math'>t</tspan> stay hidden</text>
-<path class="ln" d="M290 60 L337 60" marker-end="url(#dfd-ah)"/>
-<rect class="mod" x="340.0" y="42.0" width="128.0" height="36.0" rx="6"/>
-<text class="lb" x="404.0" y="65.0" text-anchor="middle">Diffusion head</text>
-<text class="lab" x="480.0" y="56.0" text-anchor="start">generative loss</text>
-<text class="lab" x="480.0" y="72.0" text-anchor="start">(Shortcut Forcing)</text>
-<path class="ln-teal" d="M290 180 L337 180" marker-end="url(#dfd-teal)"/>
-<rect class="mod-teal" x="340.0" y="162.0" width="128.0" height="36.0" rx="6"/>
-<text class="lb" x="404.0" y="185.0" text-anchor="middle">Prediction head</text>
-<path class="ln-amb" d="M404 232 L404 201" marker-end="url(#dfd-amb)"/>
-<text class="lab-amb" x="412.0" y="240.0" text-anchor="start">actions <tspan class='math-amb'>a<tspan class='sub' dy='4'>t</tspan><tspan dy='-4'> … a</tspan><tspan class='sub' dy='4'>t+k−1</tspan></tspan></text>
-<path class="ln-teal" d="M471 180 L597 180" stroke-dasharray="5 4" marker-end="url(#dfd-teal)"/>
-<text class="lab" x="534.0" y="172.0" text-anchor="middle">predicts layer 8</text>
-<rect class="ema" x="600.0" y="140.0" width="130.0" height="80.0" rx="6.6"/>
-<text class="lb" x="665.0" y="176.0" text-anchor="middle">EMA teacher</text>
-<text class="lab" x="665.0" y="196.0" text-anchor="middle">no gradient</text>
-<image class="tile" href="tile_fut.webp" x="768.0" y="162.0" width="43.2" height="43.2" preserveAspectRatio="none"/><rect class="tile-f" x="768.0" y="162.0" width="43.2" height="43.2" rx="4"/>
-<path class="ln" d="M766 183.6 L733 183.6" marker-end="url(#dfd-ah)"/>
-<text class="lab" x="789.6" y="224.0" text-anchor="middle">frame <tspan class='math'>t+k</tspan></text>
-<text class="lab" x="789.6" y="242.0" text-anchor="middle"><tspan class='math'>k</tspan> ≤ <tspan class='math'>H</tspan></text></svg></div>
-<div class="drift-media drift-media--stack only-phone"><svg class="drift-svg drift-diagram drift-diagram--stack" viewBox="0 0 396 440" role="img" aria-labelledby="dfp-t"><title id="dfp-t">Dynamics Forcing training step. Frames up to t go into a causal diffusion transformer. Its last layer feeds the diffusion head and the generative loss of Shortcut Forcing. Its layer-4 feature, with the actions from t to t+k-1, goes through a prediction head that predicts the layer-8 feature of frame t+k computed by an EMA teacher, with k at most H. The prediction head and the teacher are used only in training.</title><defs><marker id="dfp-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfp-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfp-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker></defs><rect class="grp" x="96.0" y="230.0" width="300.0" height="206.0" rx="8"/>
-<text class="lab" x="388.0" y="250.0" text-anchor="end">training only</text>
-<rect class="mod" x="70.0" y="4.0" width="150.0" height="36.0" rx="6"/>
-<text class="lb" x="145.0" y="27.0" text-anchor="middle">Diffusion head</text>
-<text class="lab" x="232.0" y="18.0" text-anchor="start">generative loss</text>
-<text class="lab" x="232.0" y="38.0" text-anchor="start">(Shortcut Forcing)</text>
-<path class="ln" d="M145 72 L145 43" marker-end="url(#dfp-ah)"/>
-<rect class="hero" x="70.0" y="72.0" width="316.0" height="128.0" rx="6.6"/>
-<text class="hero-s" x="82.0" y="96.0" text-anchor="start">layer 12</text>
-<text class="hero-s" x="82.0" y="190.0" text-anchor="start">layer 4</text>
-<text class="hero-t" x="228.0" y="136.0" text-anchor="middle">Diffusion transformer</text>
-<text class="hero-s" x="228.0" y="160.0" text-anchor="middle">causal, frames up to <tspan class='math'>t</tspan></text>
-<image class="tile" href="tile_cur.webp" x="3.6" y="112.4" width="40" height="40" preserveAspectRatio="none"/><rect class="tile-f" x="3.6" y="112.4" width="40" height="40" rx="4"/>
-<image class="tile" href="tile_cur.webp" x="0.0" y="116.0" width="40" height="40" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="116.0" width="40" height="40" rx="4"/>
-<path class="ln" d="M47 136 L67 136" marker-end="url(#dfp-ah)"/>
-<path class="ln-teal" d="M150 202 L150 271" marker-end="url(#dfp-teal)"/>
-<rect class="mod-teal" x="110.0" y="274.0" width="160.0" height="36.0" rx="6"/>
-<text class="lb" x="190.0" y="297.0" text-anchor="middle">Prediction head</text>
-<text class="lab-amb" x="278.0" y="297.0" text-anchor="start">+ actions</text>
-<path class="ln-teal" d="M190 313 L190 347" stroke-dasharray="5 4" marker-end="url(#dfp-teal)"/>
-<text class="lab" x="198.0" y="335.0" text-anchor="start">predicts layer 8</text>
-<rect class="ema" x="110.0" y="350.0" width="160.0" height="62.0" rx="6.6"/>
-<text class="lb" x="190.0" y="377.0" text-anchor="middle">EMA teacher</text>
-<text class="lab" x="190.0" y="397.0" text-anchor="middle">no gradient</text>
-<image class="tile" href="tile_fut.webp" x="314.0" y="352.0" width="40" height="40" preserveAspectRatio="none"/><rect class="tile-f" x="314.0" y="352.0" width="40" height="40" rx="4"/>
-<path class="ln" d="M311 372 L273 372" marker-end="url(#dfp-ah)"/>
-<text class="lab" x="334.0" y="416.0" text-anchor="middle">frame <tspan class='math'>t+k</tspan></text></svg></div>
+<div class="drift-media wide only-desk"><svg class="drift-svg drift-diagram" viewBox="-38 0 837 316" role="img" aria-labelledby="dfd-t"><title id="dfd-t">Dynamics Forcing training step, student and teacher. The student, a causal world model, reads noised frames up to t and renders frames through its diffusion head with the generative loss of Shortcut Forcing. Its layer-4 feature of frame t and the actions a_t to a_t+k-1 go through a prediction head into a cosine loss against the layer-8 feature of frame t+k from the teacher, an EMA copy of the student that reads a cleaner frame t+k with stopped gradients. The offset k is drawn from 1 to H. The prediction head and teacher are used only in training.</title><defs><marker id="dfd-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfd-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfd-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker></defs><rect class="grp" x="350.0" y="40.0" width="390.0" height="258.0" rx="8"/>
+<text class="lab" x="732.0" y="58.0" text-anchor="end">training only</text>
+<path class="ln" d="M250 57 C 340 12, 530 12, 620 57" stroke-dasharray="5 4" marker-end="url(#dfd-ah)"/>
+<text class="lab" x="435.0" y="15.0" text-anchor="middle">EMA</text>
+<rect class="hero" x="170.0" y="60.0" width="160.0" height="90.0" rx="6.6"/>
+<text class="hero-t" x="250.0" y="98.0" text-anchor="middle">Student</text>
+<text class="hero-s" x="250.0" y="120.0" text-anchor="middle">causal world model</text>
+<text class="hero-s" x="322.0" y="142.0" text-anchor="end">layer 4</text>
+<image class="tile" href="tile_stu.webp" x="229.2" y="192.8" width="48" height="48" preserveAspectRatio="none"/><rect class="tile-f" x="229.2" y="192.8" width="48" height="48" rx="4"/>
+<image class="tile" href="tile_stu.webp" x="225.6" y="196.4" width="48" height="48" preserveAspectRatio="none"/><rect class="tile-f" x="225.6" y="196.4" width="48" height="48" rx="4"/>
+<image class="tile" href="tile_stu.webp" x="222.0" y="200.0" width="48" height="48" preserveAspectRatio="none"/><rect class="tile-f" x="222.0" y="200.0" width="48" height="48" rx="4"/>
+<path class="ln" d="M250 196 L250 153" marker-end="url(#dfd-ah)"/>
+<text class="lab" x="250.0" y="268.0" text-anchor="middle">frames up to <tspan class='math'>t</tspan>, noised</text>
+<text class="lab" x="250.0" y="284.0" text-anchor="middle">causal attention hides <tspan class='math'>t+k</tspan></text>
+<rect class="mod" x="20.0" y="60.0" width="112.0" height="32.0" rx="6"/>
+<text class="lb" x="76.0" y="81.0" text-anchor="middle">Diffusion head</text>
+<path class="ln" d="M168 76 L135 76" marker-end="url(#dfd-ah)"/>
+<text class="lab" x="76.0" y="112.0" text-anchor="middle">generative loss</text>
+<text class="lab" x="76.0" y="128.0" text-anchor="middle">(Shortcut Forcing)</text>
+<path class="ln-teal" d="M332 129 L359 129" marker-end="url(#dfd-teal)"/>
+<rect class="mod-teal" x="362.0" y="112.0" width="116.0" height="34.0" rx="6"/>
+<text class="lb" x="420.0" y="134.0" text-anchor="middle">Prediction head</text>
+<path class="ln-amb" d="M420 188 L420 149" marker-end="url(#dfd-amb)"/>
+<text class="lab-amb" x="420.0" y="204.0" text-anchor="middle">actions <tspan class='math-amb'>a<tspan class='sub' dy='4'>t</tspan><tspan dy='-4'> … a</tspan><tspan class='sub' dy='4'>t+k−1</tspan></tspan></text>
+<path class="ln-teal" d="M420 110 L420 93" marker-end="url(#dfd-teal)"/>
+<rect class="mod-teal" x="380.0" y="62.0" width="80.0" height="28.0" rx="14"/>
+<text class="lb" x="420.0" y="81.0" text-anchor="middle">cosine loss</text>
+<rect class="ema" x="540.0" y="60.0" width="160.0" height="90.0" rx="6.6"/>
+<text class="ttl2" x="620.0" y="100.0" text-anchor="middle">Teacher</text>
+<text class="lab" x="620.0" y="120.0" text-anchor="middle">EMA copy, no gradient</text>
+<text class="lab" x="548.0" y="80.0" text-anchor="start">layer 8</text>
+<path class="ln-teal" d="M538 76 L463 76" marker-end="url(#dfd-teal)"/>
+<path class="sg" d="M494 82 L500 70"/>
+<path class="sg" d="M500 82 L506 70"/>
+<text class="lab" x="500.0" y="104.0" text-anchor="middle">stop-grad</text>
+<image class="tile" href="tile_tea.webp" x="596.0" y="200.0" width="48" height="48" preserveAspectRatio="none"/><rect class="tile-f" x="596.0" y="200.0" width="48" height="48" rx="4"/>
+<path class="ln" d="M620 196 L620 153" marker-end="url(#dfd-ah)"/>
+<text class="lab" x="620.0" y="268.0" text-anchor="middle">frame <tspan class='math'>t+k</tspan>, cleaner</text>
+<text class="lab" x="620.0" y="284.0" text-anchor="middle"><tspan class='math'>k</tspan> drawn from 1 to <tspan class='math'>H</tspan></text></svg></div>
+<div class="drift-media drift-media--stack only-phone"><svg class="drift-svg drift-diagram drift-diagram--stack" viewBox="0 0 396 486" role="img" aria-labelledby="dfp-t"><title id="dfp-t">Dynamics Forcing training step, student and teacher. The student, a causal world model, reads noised frames up to t and renders frames through its diffusion head with the generative loss of Shortcut Forcing. Its layer-4 feature of frame t and the actions a_t to a_t+k-1 go through a prediction head into a cosine loss against the layer-8 feature of frame t+k from the teacher, an EMA copy of the student that reads a cleaner frame t+k with stopped gradients. The offset k is drawn from 1 to H. The prediction head and teacher are used only in training.</title><defs><marker id="dfp-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfp-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfp-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker></defs><rect class="grp" x="60.0" y="156.0" width="336.0" height="326.0" rx="8"/>
+<text class="lab" x="388.0" y="476.0" text-anchor="end">training only</text>
+<rect class="mod" x="0.0" y="0.0" width="130.0" height="32.0" rx="6"/>
+<text class="lb" x="65.0" y="21.0" text-anchor="middle">Diffusion head</text>
+<text class="lab" x="140.0" y="14.0" text-anchor="start">generative loss</text>
+<text class="lab" x="140.0" y="30.0" text-anchor="start">(Shortcut Forcing)</text>
+<path class="ln" d="M100 54 L100 35" marker-end="url(#dfp-ah)"/>
+<rect class="hero" x="70.0" y="56.0" width="256.0" height="86.0" rx="6.6"/>
+<text class="hero-t" x="198.0" y="86.0" text-anchor="middle">Student</text>
+<text class="hero-s" x="198.0" y="108.0" text-anchor="middle">causal world model</text>
+<text class="hero-s" x="318.0" y="134.0" text-anchor="end">layer 4</text>
+<image class="tile" href="tile_stu.webp" x="3.6" y="78.4" width="42" height="42" preserveAspectRatio="none"/><rect class="tile-f" x="3.6" y="78.4" width="42" height="42" rx="4"/>
+<image class="tile" href="tile_stu.webp" x="0.0" y="82.0" width="42" height="42" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="82.0" width="42" height="42" rx="4"/>
+<path class="ln" d="M47 103 L67 103" marker-end="url(#dfp-ah)"/>
+<text class="lab" x="24.0" y="150.0" text-anchor="middle">noised</text>
+<path class="ln-teal" d="M198 144 L198 165" marker-end="url(#dfp-teal)"/>
+<rect class="mod-teal" x="136.0" y="168.0" width="124.0" height="32.0" rx="6"/>
+<text class="lb" x="198.0" y="189.0" text-anchor="middle">Prediction head</text>
+<path class="ln-amb" d="M322 184 L263 184" marker-end="url(#dfp-amb)"/>
+<text class="lab-amb" x="326.0" y="178.0" text-anchor="start">actions</text>
+<path class="ln-teal" d="M198 203 L198 219" marker-end="url(#dfp-teal)"/>
+<rect class="mod-teal" x="148.0" y="222.0" width="100.0" height="28.0" rx="14"/>
+<text class="lb" x="198.0" y="241.0" text-anchor="middle">cosine loss</text>
+<rect class="ema" x="70.0" y="290.0" width="256.0" height="72.0" rx="6.6"/>
+<text class="lb" x="198.0" y="320.0" text-anchor="middle">Teacher</text>
+<text class="lab" x="198.0" y="342.0" text-anchor="middle">EMA copy, no gradient</text>
+<text class="lab" x="80.0" y="306.0" text-anchor="start">layer 8</text>
+<path class="ln-teal" d="M198 288 L198 253" marker-end="url(#dfp-teal)"/>
+<path class="sg" d="M192 270 L204 264"/>
+<path class="sg" d="M192 276 L204 270"/>
+<text class="lab" x="210.0" y="275.0" text-anchor="start">stop-grad</text>
+<path class="ln" d="M328 100 C 386 100, 386 326, 330 326" stroke-dasharray="5 4" marker-end="url(#dfp-ah)"/>
+<text class="lab" x="352.0" y="222.0" text-anchor="end">EMA</text>
+<image class="tile" href="tile_tea.webp" x="177.0" y="382.0" width="42" height="42" preserveAspectRatio="none"/><rect class="tile-f" x="177.0" y="382.0" width="42" height="42" rx="4"/>
+<path class="ln" d="M198 378 L198 365" marker-end="url(#dfp-ah)"/>
+<text class="lab" x="198.0" y="444.0" text-anchor="middle">frame <tspan class='math'>t+k</tspan>, cleaner</text>
+<text class="lab" x="198.0" y="462.0" text-anchor="middle"><tspan class='math'>k</tspan> from 1 to <tspan class='math'>H</tspan></text></svg></div>
 <!-- diagram:end -->
-        <figcaption>One training step. Blue is the generative path, shared with Shortcut Forcing. Teal is the Dynamics Forcing loss. The current state (layer 4 of frame <em>t</em>) and the actions <em>a<sub>t</sub></em> to <em>a<sub>t+k&minus;1</sub></em> go through a prediction head, which predicts the later state (layer 8 of frame <em>t+k</em>) from the EMA teacher, with <em>k</em> &le; <em>H</em>. Causal attention hides frame <em>t+k</em> from the student. The prediction head and the teacher are used only in training.</figcaption>
+        <figcaption>One training step. The student, the causal world model, reads noised frames and renders them through its diffusion head with the generative loss of Shortcut Forcing. Its layer-4 feature of frame <em>t</em> (the current state) and the actions go through a prediction head. The head predicts the layer-8 feature of frame <em>t+k</em> (the state <em>k</em> steps ahead), computed by the teacher, an EMA copy that reads a cleaner frame <em>t+k</em> with stopped gradients. The offset <em>k</em> is drawn per clip from 1 to the horizon <em>H</em>, and causal attention hides frame <em>t+k</em> from the student. The prediction head and the teacher are discarded after training.</figcaption>
     </figure>
     <h3>Design choices</h3>
-    <p>The offset <em>k</em> is drawn from 1 to <em>H</em> = 8 for each clip. We expect a next-frame target to be met largely by copying the current state, and a target several frames ahead to require the change the actions cause. Layer 4 predicts layer 8 of 12, so the later layers remain for the generative loss. Feature prediction alone admits trivial solutions. The target comes from a slowly updated copy of the model with stopped gradients, as in self-predictive methods such as BYOL, and denoising remains the main objective.</p>
+    <p>The horizon is <em>H</em> = 8 on every dataset. A next-frame target may be met largely by copying the current state; a target several frames ahead should require the change the actions cause. Layer 4 predicts layer 8 of 12, so the later layers remain for the generative loss. Feature prediction alone admits trivial solutions. As in BYOL, asymmetry and stopped gradients prevent them. Denoising remains the main objective.</p>
 </section>
 
 <section id="baseline">
     <h2>A strong baseline</h2>
-    <p>The baseline is Shortcut Forcing, the training objective of <a href="https://danijar.com/project/dreamer4/">Dreamer 4</a>, on the same 124M-parameter causal Transformer: 12 layers, 2&times;2 latent patches with 2D rotary embeddings, sampled in 4 shortcut steps. Both variants share the backbone, data and recipe, and differ only in the added feature loss.</p>
-    <p>Under the protocol of published world models, our baseline has about 4.6 times lower FVD than the best of them on RT-1, and Dynamics Forcing is on par with our baseline. On BridgeData V2 neither of our runs has reached DriftWorld's FVD yet, while Dynamics Forcing already has lower LPIPS (0.073 against 0.091).</p>
+    <p>The baseline is Shortcut Forcing, the world-model objective of <a href="https://danijar.com/project/dreamer4/">Dreamer 4</a>, on the same 124M-parameter causal Transformer: 12 layers, 2&times;2 latent patches with 2D rotary embeddings, sampled in 4 shortcut steps. Both variants share the backbone, data and recipe, and differ only in the added feature loss.</p>
+    <p>Under the protocol of published world models, Shortcut Forcing reaches 13.5 FVD on RT-1, about 4.6 times lower than the best published model (62.8). Dynamics Forcing reaches 15.3. On BridgeData V2 neither variant has reached DriftWorld's FVD yet. Dynamics Forcing already has lower LPIPS (0.073 against 0.091).</p>
     <figure class="fig">
 <div class="panels">
 <div>
@@ -238,13 +363,13 @@ bibtex: |
 </div>
 </div>
 </div>
-        <figcaption>Published rows from DriftWorld (Lu et al., 2026, Table 3). All rows follow its protocol: 4 context frames, the rest of the episode generated, FVD over the first 16 generated frames. Ours: Shortcut Forcing at 150k (RT-1) and 75k (BridgeData V2) training steps, Dynamics Forcing at 125k and 100k. Published models differ in architecture and scale, and the RT-1 data split could not be verified, so the matched comparison below is the main evidence.</figcaption>
+        <figcaption>Published rows from DriftWorld (Lu et al., 2026, Table 3). All rows follow its protocol: 4 context frames, the rest of the episode generated, FVD over the first 16 generated frames. Shortcut Forcing is shown at 150k (RT-1) and 75k (BridgeData V2) training steps and Dynamics Forcing at 125k and 100k. Published models differ in architecture and scale, and the RT-1 data split could not be verified, so the matched comparison below is the main evidence.</figcaption>
     </figure>
 </section>
 
 <section id="results">
     <h2>Results</h2>
-    <p>Both variants are trained and scored the same way. On BridgeData V2, Dynamics Forcing has lower FVD and LPIPS from 50k training steps. On RT-1 it is behind early; at 100k it is lower in FVD and slightly lower in LPIPS, and at 125k it is on par in FVD and slightly lower in LPIPS.</p>
+    <p>Both variants are trained and scored the same way. In early training, Dynamics Forcing reaches lower FVD and LPIPS in fewer steps on BridgeData V2 (228 against 322 FVD at 75k). On RT-1 it is behind at first and ahead at 100k. At 125k the two are equal in FVD, and Dynamics Forcing has slightly lower LPIPS.</p>
     <figure class="fig">
 <!-- curves:begin (written by build_svgs.py) -->
 <div class="df-key wide" aria-hidden="true"><span><i></i>Shortcut Forcing</span><span><i class="k-ours"></i>Dynamics Forcing</span></div>
@@ -391,7 +516,7 @@ bibtex: |
 <text class="end ours" x="150.4" y="106.1">Dynamics Forcing</text></svg>
 </div>
 <!-- curves:end -->
-        <figcaption>FVD (log scale, top) and LPIPS (bottom) on held-out episodes, lower is better, with 4 sampling steps and the same backbone and recipe for both models. Hover a point for its value. Training continues to 250k steps. Language Table, DMLab and action-control results will be added.</figcaption>
+        <figcaption>FVD (log scale, top) and LPIPS (bottom) on held-out episodes, lower is better, with 4 sampling steps and the same backbone and recipe for both models. Hover a point for its value. Training continues to 250k steps, so these are early observations. Language Table, DMLab and action-control results will be added.</figcaption>
     </figure>
 </section>
 
