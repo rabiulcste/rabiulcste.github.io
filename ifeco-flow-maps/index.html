@@ -72,7 +72,7 @@ bibtex: |
     /* Curves: log FID against training steps. Hover a point for its value. */
     .curve .ttl { font-weight: 600; }
     .curve .grid { stroke: var(--grid); } .curve .axis { stroke: var(--muted); } .curve .ax { font-size: 12px; fill: var(--muted); }
-    .curve .ln { fill: none; stroke-width: 2.2; stroke-linejoin: round; } .curve .ln.base { stroke: var(--sl); } .curve .ln.ours { stroke: var(--acc); } .curve .ln.repa { stroke: var(--rep); } .curve .ln.all { stroke: var(--acc); stroke-dasharray: 5 3.5; } .bars-ms .grid { stroke: var(--grid); } .bars-ms .bar-ours { fill: var(--acc); } .bars-ms .bar-rep { fill: var(--rep); } .bars-ms .bar-ours-t { fill: var(--acc); } .bars-ms .bar-rep-t { fill: var(--rep); } .curve .ln.lsync { stroke: var(--ls); stroke-width: 1.6; }
+    .curve .ln { fill: none; stroke-width: 2.2; stroke-linejoin: round; } .curve .ln.base { stroke: var(--sl); } .curve .ln.ours { stroke: var(--acc); } .curve .ln.repa { stroke: var(--rep); } .curve .ln.all { stroke: var(--acc); stroke-dasharray: 5 3.5; } .bars-ms .grid { stroke: var(--grid); } .bars-sp .grid { stroke: var(--grid); } .bars-sp .axis-b { stroke: var(--muted); } .bars-sp .b-ours { fill: var(--acc); } .bars-sp .b-all { fill: var(--acc); opacity: 0.55; } .bars-sp .b-rep { fill: var(--rep); } .bars-sp .b-lsync { fill: var(--ls); } .bars-sp .t-ours, .bars-sp .t-all { fill: var(--acc); } .bars-sp .t-rep { fill: var(--rep); } .bars-sp .t-lsync { fill: var(--ls); } .bars-sp .tick { font-size: 12px; } .bars-ms .bar-ours { fill: var(--acc); } .bars-ms .bar-rep { fill: var(--rep); } .bars-ms .bar-ours-t { fill: var(--acc); } .bars-ms .bar-rep-t { fill: var(--rep); } .curve .ln.lsync { stroke: var(--ls); stroke-width: 1.6; }
     .curve .pt { fill: transparent; } .curve .pt-g:hover .pt { fill: var(--text); r: 4; }
     .curve .spd { font-size: 14px; font-weight: 600; fill: var(--acc); }
     .curve .end { font-size: 13px; font-weight: 600; } .curve .end.base { fill: var(--sl); } .curve .end.ours { fill: var(--acc); }
@@ -886,23 +886,58 @@ bibtex: |
         </div>
         <figcaption>1-step FID-50k over training steps on ImageNet 256&times;256 (log scale). The label gives how many times sooner iFeCo reaches the baseline's final FID. Dashed: iFeCo with the loss on all rows. The default MeanFlow iFeCo curves stop at 400k (B/2) and 700k (XL/2) steps, so the MeanFlow B/2 label uses the all-rows model. REPA, shown at B/2, is our reference with a frozen DINOv2 encoder; LayerSync, shown on Shortcut B/2, aligns a weaker block with a deeper block of the same forward pass.</figcaption>
     </figure>
+    <figure class="fe-fig">
+<svg class="fs bars-sp" viewBox="0 0 560 238" role="img" aria-label="Training speedup to the baseline final 1-step FID. Shortcut B/2: iFeCo 2.9x, iFeCo, all rows 3.2x, LayerSync 2.7x, REPA 1.2x; Shortcut XL/2: iFeCo 3.1x; LSD B/2: iFeCo 2.1x, iFeCo, all rows 2.3x, REPA 1.4x; MeanFlow B/2: iFeCo, all rows 1.8x, REPA 2.2x.">
+<line class="grid" x1="204.3" y1="4" x2="204.3" y2="210"/>
+<text class="tick" x="204.3" y="228" text-anchor="middle">1&times;</text>
+<line class="grid" x1="290.6" y1="4" x2="290.6" y2="210"/>
+<text class="tick" x="290.6" y="228" text-anchor="middle">2&times;</text>
+<line class="grid" x1="376.8" y1="4" x2="376.8" y2="210"/>
+<text class="tick" x="376.8" y="228" text-anchor="middle">3&times;</text>
+<line class="axis-b" x1="118" y1="4" x2="118" y2="210"/>
+<text class="tick" x="110" y="42.5" text-anchor="end">Shortcut B/2</text>
+<g><title>iFeCo: 2.9&times; sooner</title><rect class="b-ours" x="118" y="8" width="250.2" height="13" rx="2"/></g>
+<text class="tick t-ours" x="373.2" y="18.5">2.9&times; iFeCo</text>
+<g><title>iFeCo, all rows: 3.2&times; sooner</title><rect class="b-all" x="118" y="24" width="276.1" height="13" rx="2"/></g>
+<text class="tick t-all" x="399.1" y="34.5">3.2&times; iFeCo, all rows</text>
+<g><title>LayerSync: 2.7&times; sooner</title><rect class="b-lsync" x="118" y="40" width="233.0" height="13" rx="2"/></g>
+<text class="tick t-lsync" x="356.0" y="50.5">2.7&times; LayerSync</text>
+<g><title>REPA: 1.2&times; sooner</title><rect class="b-rep" x="118" y="56" width="103.6" height="13" rx="2"/></g>
+<text class="tick t-rep" x="226.6" y="66.5">1.2&times; REPA</text>
+<text class="tick" x="110" y="95.5" text-anchor="end">Shortcut XL/2</text>
+<g><title>iFeCo: 3.1&times; sooner</title><rect class="b-ours" x="118" y="85" width="267.5" height="13" rx="2"/></g>
+<text class="tick t-ours" x="390.5" y="95.5">3.1&times; iFeCo</text>
+<text class="tick" x="110" y="140.5" text-anchor="end">LSD B/2</text>
+<g><title>iFeCo: 2.1&times; sooner</title><rect class="b-ours" x="118" y="114" width="181.2" height="13" rx="2"/></g>
+<text class="tick t-ours" x="304.2" y="124.5">2.1&times; iFeCo</text>
+<g><title>iFeCo, all rows: 2.3&times; sooner</title><rect class="b-all" x="118" y="130" width="198.4" height="13" rx="2"/></g>
+<text class="tick t-all" x="321.4" y="140.5">2.3&times; iFeCo, all rows</text>
+<g><title>REPA: 1.4&times; sooner</title><rect class="b-rep" x="118" y="146" width="120.8" height="13" rx="2"/></g>
+<text class="tick t-rep" x="243.8" y="156.5">1.4&times; REPA</text>
+<text class="tick" x="110" y="193.5" text-anchor="end">MeanFlow B/2</text>
+<g><title>iFeCo, all rows: 1.8&times; sooner</title><rect class="b-all" x="118" y="175" width="155.3" height="13" rx="2"/></g>
+<text class="tick t-all" x="278.3" y="185.5">1.8&times; iFeCo, all rows</text>
+<g><title>REPA: 2.2&times; sooner</title><rect class="b-rep" x="118" y="191" width="189.8" height="13" rx="2"/></g>
+<text class="tick t-rep" x="312.8" y="201.5">2.2&times; REPA</text>
+</svg>
+        <figcaption>How many times sooner each method reaches the baseline's final 1-step FID on ImageNet 256 (higher is better). REPA uses a frozen DINOv2 encoder; LayerSync and iFeCo use none. The default MeanFlow model stops at 400k steps, so MeanFlow shows the all-rows model.</figcaption>
+    </figure>
     <div class="table-wrap">
         <table>
             <thead>
-                <tr><th>Method</th><th class="l"><span class="fe-long">Backbone</span><span class="fe-short">Size</span></th><th class="fe-desk">Steps</th><th>Baseline</th><th><a href="https://arxiv.org/abs/2410.06940">REPA</a></th><th class="fe-desk"><a href="https://arxiv.org/abs/2510.12581">LayerSync</a></th><th class="ours">iFeCo</th><th class="ours">All rows</th><th>Speedup</th></tr>
+                <tr><th>Setting</th><th class="fe-desk">Steps</th><th>Baseline</th><th class="ours">iFeCo</th><th><a href="https://arxiv.org/abs/2410.06940">REPA</a></th></tr>
             </thead>
             <tbody>
-                <tr><td><a href="https://arxiv.org/abs/2410.12557">Shortcut</a></td><td class="l"><span class="fe-long">DiT-</span>B/2</td><td class="fe-desk">1.2M</td><td>36.95</td><td>36.11</td><td class="fe-desk">31.92</td><td class="ours">28.03</td><td class="ours"><strong>27.56</strong></td><td>2.9 / 3.2&times;</td></tr>
-                <tr><td></td><td class="l"><span class="fe-long">DiT-</span>XL/2</td><td class="fe-desk">1.2M</td><td>18.55</td><td>&ndash;</td><td class="fe-desk">&ndash;</td><td class="ours"><strong>12.71</strong></td><td class="ours">&ndash;</td><td>3.1&times;</td></tr>
-                <tr class="grp"><td><a href="https://arxiv.org/abs/2505.13447">MeanFlow</a></td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td class="fe-desk">400k</td><td>9.79</td><td><strong>7.36</strong></td><td class="fe-desk">&ndash;</td><td class="ours">8.03</td><td class="ours">7.80</td><td>&ndash;</td></tr>
-                <tr><td></td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td class="fe-desk">1.0M</td><td>6.40</td><td><strong>5.04</strong></td><td class="fe-desk">&ndash;</td><td class="ours">&ndash;</td><td class="ours">5.62</td><td>1.8&times;</td></tr>
-                <tr><td></td><td class="l"><span class="fe-long">SiT-</span>XL/2</td><td class="fe-desk">700k</td><td>3.78</td><td>&ndash;</td><td class="fe-desk">&ndash;</td><td class="ours"><strong>3.60</strong></td><td class="ours">&ndash;</td><td>&ndash;</td></tr>
-                <tr class="grp"><td><a href="https://arxiv.org/abs/2505.18825">LSD</a></td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td class="fe-desk">1.2M</td><td>12.42</td><td>11.44</td><td class="fe-desk">&ndash;</td><td class="ours"><strong>10.56</strong></td><td class="ours">&ndash;</td><td>2.1 / 2.3&times;</td></tr>
-                <tr><td></td><td class="l"><span class="fe-long">SiT-</span>XL/2</td><td class="fe-desk">100k</td><td>21.87</td><td>&ndash;</td><td class="fe-desk">&ndash;</td><td class="ours"><strong>17.47</strong></td><td class="ours">&ndash;</td><td>&ndash;</td></tr>
+                <tr><td><a href="https://arxiv.org/abs/2410.12557">Shortcut</a> B/2</td><td class="fe-desk">1.2M</td><td>36.95</td><td class="ours"><strong>27.56</strong></td><td>36.11</td></tr>
+                <tr><td>Shortcut XL/2</td><td class="fe-desk">1.2M</td><td>18.55</td><td class="ours"><strong>12.71</strong></td><td>&ndash;</td></tr>
+                <tr><td><a href="https://arxiv.org/abs/2505.18825">LSD</a> B/2</td><td class="fe-desk">1.2M</td><td>12.42</td><td class="ours"><strong>10.56</strong></td><td>11.44</td></tr>
+                <tr><td>LSD XL/2</td><td class="fe-desk">100k</td><td>21.87</td><td class="ours"><strong>17.47</strong></td><td>&ndash;</td></tr>
+                <tr><td><a href="https://arxiv.org/abs/2505.13447">MeanFlow</a> B/2</td><td class="fe-desk">1.0M</td><td>6.40</td><td class="ours">5.62</td><td><strong>5.04</strong></td></tr>
+                <tr><td>MeanFlow XL/2</td><td class="fe-desk">700k</td><td>3.78</td><td class="ours"><strong>3.60</strong></td><td>&ndash;</td></tr>
             </tbody>
         </table>
     </div>
-    <p class="caption">1-step FID-50k (lower is better) with ADM reference statistics. All rows: iFeCo with the loss also on the rows without a jump. Speedup: how many times sooner iFeCo (default / all rows) reaches the baseline's final 1-step FID, with linear interpolation between evaluations; MeanFlow B/2 uses the all-rows model against the 1.2M baseline (6.12). The default MeanFlow models stop at 400k (B/2) and 700k (XL/2); LSD XL/2 is at 100k. At XL/2 the 700k row does not show a reliable gain, since iFeCo is behind at 500k and 600k. The MeanFlow XL/2 baseline reaches 3.50 at 1.2M.</p>
+    <p class="caption">1-step FID-50k (lower is better) at the latest step of each setting, ADM reference statistics. iFeCo shows its better setting (all rows on Shortcut B/2 and MeanFlow B/2). LSD XL/2 and MeanFlow XL/2 are still training; MeanFlow XL/2 has no reliable gain, since iFeCo is behind at 500k and 600k.</p>
     <figure class="fe-fig">
 <svg class="fs bars-ms" viewBox="0 0 560 218" role="img" aria-label="Multi-step FID reduction against the baseline. Shortcut B/2, 8 steps: iFeCo 24%, REPA 32%; MeanFlow B/2, 4 steps: iFeCo 7%, REPA 18%; LSD B/2, 4 steps: iFeCo 13%, REPA 24%.">
 <line class="grid" x1="150.0" y1="20" x2="150.0" y2="194"/>
