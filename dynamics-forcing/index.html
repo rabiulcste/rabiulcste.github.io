@@ -2,8 +2,8 @@
 layout: project
 title: "Self-Supervised Dynamics Forcing for Diffusion World Models"
 seo_title: "Dynamics Forcing: Self-Supervised Dynamics Forcing for Diffusion World Models"
-description: "Dynamics Forcing: a diffusion world model predicts its own future features from the current frame and the actions that follow. Training-only, inference unchanged. Preliminary results on BridgeData V2 and RT-1."
-abstract: "Diffusion world models are trained to reconstruct future frames, which leaves implicit how an action changes the underlying state. Dynamics Forcing adds one training-only objective to a causal diffusion world model: an intermediate feature of the current frame, given the actions that follow, predicts a deeper feature of a frame up to H steps ahead, taken from an exponential-moving-average teacher. Causal attention hides the target frame, so the prediction has to come from what the current state carries about the actions and their effect. The prediction head is removed after training and inference is unchanged. In preliminary results on real-robot video, Dynamics Forcing has lower FVD and LPIPS than Shortcut Forcing on BridgeData V2 from 50k training steps, and on RT-1 it is lower at 100k steps and on par at 125k; training continues to 250k steps."
+description: "Dynamics Forcing adds a self-supervised training signal beyond reconstruction to diffusion world models: the model predicts its own future features from its current features and the actions. Preliminary results on BridgeData V2 and RT-1."
+abstract: "Diffusion world models learn only from reconstruction. Dynamics Forcing adds a self-supervised signal aimed at dynamics, the way actions change the state. The features of the current frame and the actions that follow predict the features of a frame up to H steps ahead, taken from an exponential-moving-average teacher. Causal attention hides that frame from the model. The prediction head and the teacher are removed after training, so sampling is unchanged. On BridgeData V2 and RT-1, Dynamics Forcing reaches lower FVD than Shortcut Forcing at matched training steps: from 50k steps on BridgeData V2, and at 100k on RT-1, where it is on par at 125k. Training continues to 250k steps."
 keywords: ["Dynamics Forcing", "world model", "diffusion world model", "video world model", "action-conditioned video prediction", "robot learning", "self-supervised learning", "self-predictive representations", "representation learning", "EMA teacher", "Shortcut Forcing", "diffusion forcing", "causal transformer", "BridgeData V2", "RT-1", "Language Table", "DMLab"]
 authors:
   - name: Rabiul Awal
@@ -27,50 +27,199 @@ bibtex: |
 ---
 <!-- TODO: co-authors (add them to the authors list and the bibtex) -->
 <style>
-    :root { --accent: #b45309; }
-    @media (prefers-color-scheme: dark) { :root { --accent: #f59e0b; } }
-    .df-fig { margin-block: 0 40px; }
+    :root { --accent: var(--drift-amb-t); --drift-blu: #1F4E79; --drift-blu-t: #1F4E79; }
+    @media (prefers-color-scheme: dark) { :root { --drift-blu: #79A8F2; --drift-blu-t: #9CC0F5; } }
+    :root[data-theme="dark"] { --drift: #79A8F2; --drift-2: #4A78C8; --drift-grid: #222225; --drift-amb: #F2A65A; --drift-amb-t: #F2B36B; --drift-teal: #3FB3A4; --drift-teal-t: #8FDCD1; --drift-blu: #79A8F2; --drift-blu-t: #9CC0F5; }
     main h2 { margin-bottom: 12px; }
+    .df-lead { font-size: var(--text-lede); line-height: 1.55; margin: 0 0 16px; }
+    .df-contrib { margin: 0 0 40px; padding-left: 1.2em; }
+    .df-contrib li { margin-bottom: 8px; }
+    .df-design { padding-left: 1.2em; } .df-design li { margin-bottom: 6px; }
+    /* Method diagram: blue = the generative loss (Shortcut Forcing), amber = the Dynamics Forcing feature loss. */
+    .df-diagram .ttl3 { font-size: 15px; font-weight: 600; }
+    .df-diagram .it { font-style: italic; }
+    .df-diagram .mod-blu { fill: var(--drift-blu); fill-opacity: 0.35; stroke: var(--drift-blu); stroke-width: 1.2; }
+    .df-diagram .mod-blu-f { fill: var(--drift-blu); fill-opacity: 0.1; stroke: var(--drift-blu); stroke-width: 1.2; }
+    .df-diagram .mod-amb { fill: var(--drift-amb); fill-opacity: 0.25; stroke: var(--drift-amb); stroke-width: 1.2; }
+    .df-diagram .mod-amb-o { fill: none; stroke: var(--drift-amb); stroke-width: 1.2; stroke-dasharray: 4 3; }
+    .df-diagram .lb-blu, .df-diagram .lab-blu { font-size: 14px; fill: var(--drift-blu-t); } .df-diagram .lab-blu { font-size: 13px; }
+    .df-diagram .ln-blu { fill: none; stroke: var(--drift-blu); stroke-width: 1.2; } .df-diagram .ahd-blu { fill: var(--drift-blu); }
+    .df-diagram .grp-d { fill: none; stroke: var(--border); stroke-width: 1.2; stroke-dasharray: 6 5; }
+    .df-diagram--stack .ttl3 { font-size: 17px; } .drift-diagram--stack.df-diagram .lb-blu { font-size: 16px; } .drift-diagram--stack.df-diagram .lab-blu { font-size: 15px; }
+    /* Rollouts: a dataset switch and an episode switch; CSS shows the chosen panel and episode. */
+    .df-bars { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; }
+    .df-panels > .df-panel, .df-panel > .df-ep { display: none; }
+    .df-panels[data-on="0"] > .df-panel[data-ds="0"], .df-panels[data-on="1"] > .df-panel[data-ds="1"],
+    .df-panels[data-ep="0"] .df-ep[data-ep="0"], .df-panels[data-ep="1"] .df-ep[data-ep="1"] { display: block; }
+    .df-panel .drift-clip .clip-lab { color: #3a3a3e; font-weight: 600; }
+    @media (max-width: 767px) { .df-step { display: none; } }
+    /* FVD curves: log scale against training steps; hover a point for its value. */
+    .df-curves { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 16px; }
+    @media (max-width: 767px) { .df-curves { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; } }
+    .df-curve { display: block; width: 100%; height: auto; }
+    .df-curve text { font-family: var(--font); fill: var(--text); }
+    .df-curve .ttl { font-size: 15px; font-weight: 600; }
+    .df-curve .grid { stroke: var(--drift-grid); } .df-curve .axis { stroke: var(--muted); } .df-curve .axis.dash { stroke-dasharray: 3 4; }
+    .df-curve .ax { font-size: 12px; fill: var(--muted); }
+    .df-curve .ln { fill: none; stroke-width: 2.2; stroke-linejoin: round; } .df-curve .ln.base { stroke: var(--muted); } .df-curve .ln.ours { stroke: var(--drift-amb); }
+    .df-curve .dt.base { fill: var(--muted); } .df-curve .dt.ours { fill: var(--drift-amb); }
+    .df-curve .pt { fill: transparent; } .df-curve .pt-g:hover .dt { r: 5; }
+    .df-curve .end { font-size: 13px; font-weight: 600; } .df-curve .end.base { fill: var(--muted); } .df-curve .end.ours { fill: var(--drift-amb-t); }
     #results .table-wrap { margin-top: 8px; }
-    #rollouts h3 { font-size: var(--text-secondary); font-weight: 600; margin: 24px 0 18px; }
+    #teaser { margin-bottom: 28px; }
+    .df-teaser { margin-bottom: 8px; }
+    .df-teaser .clip-lab, .df-teaser .clip-name { font-size: clamp(12px, 2cqw, 15px); }
+    .df-teaser .clip-name:last-of-type { color: var(--drift-amb-t); }
+    .df-claim { font-size: var(--text-lede); line-height: 1.5; font-weight: 600; margin: 0 0 14px; }
 </style>
 
-<section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> A diffusion world model learns to predict its own future features from the current frame and the actions that follow. The objective is used only during training and leaves inference unchanged. Early results on real-robot video (BridgeData V2, RT-1) are promising; training is still running.</p>
+<section id="teaser">
+    <figure class="fig fig--video fig--bleed">
+<!-- teaser:begin (written by build_site.py) -->
+<div class="drift-clip df-teaser" style="max-width:960px;aspect-ratio:1628 / 584"><video src="teaser.mp4" poster="teaser.webp" muted loop playsinline preload="auto" autoplay aria-label="BridgeData V2 test episode at 75k training steps under the true actions: the real video, then the Shortcut Forcing and Dynamics Forcing rollouts from the same 4 real frames."></video><span class="clip-lab" style="left:0.00%;top:7.19%">Ground truth</span><span class="clip-name" style="left:33.91%;top:7.19%">Shortcut Forcing</span><span class="clip-name" style="left:67.81%;top:7.19%">Dynamics Forcing</span></div>
+<!-- teaser:end -->
+    </figure>
+    <p class="df-claim">Diffusion world models learn only from reconstruction. Dynamics Forcing adds a self-supervised signal that asks the model to predict how the actions change its own future features.</p>
+    <ul class="df-contrib">
+        <li>The features of the current frame and the actions that follow predict the features of a frame up to <em>H</em> steps ahead, taken from an EMA teacher. Causal attention hides that frame from the model.</li>
+        <li>The prediction head and the teacher are removed after training. Sampling is unchanged.</li>
+        <li>On BridgeData V2 and RT-1, Dynamics Forcing reaches lower FVD than Shortcut Forcing at matched training steps: from 50k steps on BridgeData V2, and at 100k on RT-1, where it is on par at 125k. Training continues to 250k steps.</li>
+    </ul>
 </section>
 
-<section id="method" class="wide">
-    <h2>Dynamics Forcing</h2>
-    <figure class="fig df-fig">
-        <div class="fig-img"><img src="method.webp" width="1600" height="762" alt="A causal transformer (student) denoises the current frame through a diffusion head. A prediction head on one of its intermediate layers is trained, with cosine similarity, to match a deeper layer of an EMA teacher that reads a future frame at lower noise."></div>
-        <figcaption>One training step. The student denoises the current frame as usual. A small prediction head on its layer 4, given the current frame's features and the actions that follow, predicts the layer-8 features of a frame up to H steps ahead, computed by an EMA copy of the same network. Causal attention keeps the student from seeing the target frame. The head is discarded after training.</figcaption>
-    </figure>
+<section id="motivation" class="intro">
+    <h2>Why reconstruction is not enough</h2>
+    <p>A diffusion world model learns by reconstructing each future frame from a noisy copy. The loss weighs the effect of the action and the background around it alike, so the dynamics are learned only implicitly. Feature targets such as <a href="https://arxiv.org/abs/2410.06940">REPA</a>, SRA and Self-Flow describe the frame being denoised. A world model has a second source of supervision in time. Its current state can be trained to predict a representation of a later state.</p>
 </section>
 
-<section id="rollouts">
-    <h2>Rollouts under different actions</h2>
-    <figure class="fig fig--video fig--bleed df-fig">
-        <h3>BridgeData V2, 75k training steps</h3>
-        <div class="fig-img"><div class="drift-clip drift-clip--wide only-desk" style="max-width:1084px;aspect-ratio:1084 / 430"><video src="bridge_rollouts.mp4" poster="bridge_rollouts.webp" muted loop playsinline preload="none" aria-label="One BridgeData V2 test episode. Top row Shortcut Forcing, bottom row Dynamics Forcing; columns show the real video and rollouts under true, other-episode, negated, no-op and random actions."></video><span class="clip-lab" style="left:0.00%;top:4.19%">Ground truth</span><span class="clip-lab" style="left:16.79%;top:4.19%">True actions</span><span class="clip-lab" style="left:33.58%;top:4.19%">Other episode</span><span class="clip-lab" style="left:50.37%;top:4.19%">Negated</span><span class="clip-lab" style="left:67.16%;top:4.19%">No-op</span><span class="clip-lab" style="left:83.95%;top:4.19%">Random</span><span class="clip-name" style="left:0.00%;top:10.00%">Shortcut Forcing</span><span class="clip-name" style="left:0.00%;top:57.91%">Dynamics Forcing</span></div><div class="drift-clip drift-clip--phone only-phone" style="max-width:538px;aspect-ratio:538 / 430"><video src="bridge_rollouts_phone.mp4" poster="bridge_rollouts_phone.webp" muted loop playsinline preload="none" aria-label="One BridgeData V2 test episode. Top row Shortcut Forcing, bottom row Dynamics Forcing; columns show the real video and rollouts under true and random actions."></video><span class="clip-lab" style="left:0.00%;top:4.19%">Ground truth</span><span class="clip-lab" style="left:33.83%;top:4.19%">True actions</span><span class="clip-lab" style="left:67.66%;top:4.19%">Random</span><span class="clip-name" style="left:0.00%;top:10.00%">Shortcut Forcing</span><span class="clip-name" style="left:0.00%;top:57.91%">Dynamics Forcing</span></div></div>
-        <h3>RT-1, 100k training steps</h3>
-        <div class="fig-img"><div class="drift-clip drift-clip--wide only-desk" style="max-width:1084px;aspect-ratio:1084 / 430"><video src="rt1_rollouts.mp4" poster="rt1_rollouts.webp" muted loop playsinline preload="none" aria-label="One RT-1 test episode. Top row Shortcut Forcing, bottom row Dynamics Forcing; columns show the real video and rollouts under true, other-episode, negated, no-op and random actions."></video><span class="clip-lab" style="left:0.00%;top:4.19%">Ground truth</span><span class="clip-lab" style="left:16.79%;top:4.19%">True actions</span><span class="clip-lab" style="left:33.58%;top:4.19%">Other episode</span><span class="clip-lab" style="left:50.37%;top:4.19%">Negated</span><span class="clip-lab" style="left:67.16%;top:4.19%">No-op</span><span class="clip-lab" style="left:83.95%;top:4.19%">Random</span><span class="clip-name" style="left:0.00%;top:10.00%">Shortcut Forcing</span><span class="clip-name" style="left:0.00%;top:57.91%">Dynamics Forcing</span></div><div class="drift-clip drift-clip--phone only-phone" style="max-width:538px;aspect-ratio:538 / 430"><video src="rt1_rollouts_phone.mp4" poster="rt1_rollouts_phone.webp" muted loop playsinline preload="none" aria-label="One RT-1 test episode. Top row Shortcut Forcing, bottom row Dynamics Forcing; columns show the real video and rollouts under true and random actions."></video><span class="clip-lab" style="left:0.00%;top:4.19%">Ground truth</span><span class="clip-lab" style="left:33.83%;top:4.19%">True actions</span><span class="clip-lab" style="left:67.66%;top:4.19%">Random</span><span class="clip-name" style="left:0.00%;top:10.00%">Shortcut Forcing</span><span class="clip-name" style="left:0.00%;top:57.91%">Dynamics Forcing</span></div></div>
-        <!-- Language Table: add its rollout block here once the 2x2 runs reach a scored milestone. -->
-        <!-- DMLab: add its rollout block here once the 2x2 runs reach a scored milestone. -->
-    <script>(function () {
-        var fig = document.currentScript.parentElement, reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        function go() { fig.querySelectorAll("video").forEach(function (v) {
-            if (v.offsetParent === null) { if (!v.paused) v.pause(); return; }
-            if (reduce) { v.controls = true; return; }
-            v.preload = "auto"; v.autoplay = true; v.play().catch(function () { v.controls = true; });
-        }); }
-        go(); window.matchMedia("(max-width: 767px)").addEventListener("change", go);
-    })();</script>
-    <figcaption>Both models see the same 4 real frames and generate the next 28. The first column is the real video (dark border); the others are rollouts under the true actions, the actions of another episode, negated actions, no-op actions and random actions (grey border on the context frames, blue on generated ones). Each clip is the first exported test episode, not selected.</figcaption>
+<section id="method">
+    <h2>Method</h2>
+    <figure class="fig">
+<!-- diagram:begin (written by build_svgs.py) -->
+<div class="drift-media wide only-desk"><svg class="drift-svg drift-diagram df-diagram" viewBox="0 0 900 400" role="img" aria-labelledby="dfd-t"><title id="dfd-t">Dynamics Forcing training step. Past frames and frame t go into a causal diffusion transformer. Its layer-12 output feeds the diffusion head and the generative loss of Shortcut Forcing. Its layer-4 feature of frame t, with the actions from t to t+k-1, goes through a prediction head that predicts the layer-8 feature of frame t+k from an EMA teacher, with k at most H. The prediction head and the teacher are used only in training.</title><defs><marker id="dfd-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfd-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfd-blu" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-blu"/></marker></defs><image class="tile" href="tile_ctx0.webp" x="24.0" y="300.0" width="56" height="56" preserveAspectRatio="none"/><rect class="tile-f" x="24.0" y="300.0" width="56" height="56" rx="4"/>
+<image class="tile" href="tile_ctx1.webp" x="88.0" y="300.0" width="56" height="56" preserveAspectRatio="none"/><rect class="tile-f" x="88.0" y="300.0" width="56" height="56" rx="4"/>
+<image class="tile" href="tile_cur.webp" x="152.0" y="300.0" width="56" height="56" preserveAspectRatio="none"/><rect class="tile-f" x="152.0" y="300.0" width="56" height="56" rx="4"/>
+<text class="lab" x="116.0" y="376.0" text-anchor="middle">past frames, then frame <tspan class='it'>t</tspan></text>
+<rect class="mod" x="250.0" y="273.0" width="150.0" height="13.0" rx="3"/>
+<rect class="mod" x="250.0" y="255.0" width="150.0" height="13.0" rx="3"/>
+<rect class="mod" x="250.0" y="237.0" width="150.0" height="13.0" rx="3"/>
+<rect class="mod-amb" x="250.0" y="219.0" width="150.0" height="13.0" rx="3"/>
+<rect class="mod" x="250.0" y="201.0" width="150.0" height="13.0" rx="3"/>
+<rect class="mod" x="250.0" y="183.0" width="150.0" height="13.0" rx="3"/>
+<rect class="mod" x="250.0" y="165.0" width="150.0" height="13.0" rx="3"/>
+<rect class="mod" x="250.0" y="147.0" width="150.0" height="13.0" rx="3"/>
+<rect class="mod" x="250.0" y="129.0" width="150.0" height="13.0" rx="3"/>
+<rect class="mod" x="250.0" y="111.0" width="150.0" height="13.0" rx="3"/>
+<rect class="mod" x="250.0" y="93.0" width="150.0" height="13.0" rx="3"/>
+<rect class="mod-blu" x="250.0" y="75.0" width="150.0" height="13.0" rx="3"/>
+<text class="ttl3" x="325.0" y="49.0" text-anchor="middle">Diffusion transformer</text>
+<text class="lab" x="325.0" y="66.0" text-anchor="middle">causal, 12 layers (student)</text>
+<path class="ln" d="M116 296 C 116 288, 325.0 300, 325.0 289" marker-end="url(#dfd-ah)"/>
+<text class="lab-amb" x="242.0" y="229.0" text-anchor="end">layer 4</text>
+<text class="lab-blu" x="242.0" y="85.0" text-anchor="end">layer 12</text>
+<text class="lab" x="325.0" y="308.0" text-anchor="middle">causal attention hides</text>
+<text class="lab" x="325.0" y="324.0" text-anchor="middle">frames after <tspan class='it'>t</tspan></text>
+<rect class="mod-blu-f" x="40.0" y="40.0" width="150.0" height="34.0" rx="6"/>
+<text class="lb-blu" x="115.0" y="62.0" text-anchor="middle">Diffusion head</text>
+<path class="ln-blu" d="M250 81 L192 57" marker-end="url(#dfd-blu)"/>
+<text class="lab-blu" x="115.0" y="98.0" text-anchor="middle">generative loss</text>
+<text class="lab" x="115.0" y="114.0" text-anchor="middle">(Shortcut Forcing, shared)</text>
+<rect class="mod-amb" x="452.0" y="209.0" width="150.0" height="34.0" rx="6"/>
+<text class="lb-amb" x="527.0" y="231.0" text-anchor="middle">Prediction head</text>
+<path class="ln-amb" d="M400 225 L450 225" marker-end="url(#dfd-amb)"/>
+<text class="lab-amb" x="422.0" y="213.0" text-anchor="middle">current feature</text>
+<rect class="mod-amb-o" x="452.0" y="300.0" width="150.0" height="30.0" rx="6"/>
+<text class="lb-amb" x="527.0" y="320.0" text-anchor="middle">actions <tspan class='it'>a<tspan class='sub' dy='4'>t</tspan><tspan dy='-4'> … a</tspan><tspan class='sub' dy='4'>t+k−1</tspan></tspan></text>
+<path class="ln-amb" d="M527 298 L527 245" marker-end="url(#dfd-amb)"/>
+<rect class="ema" x="700.0" y="273.0" width="136.0" height="13.0" rx="3"/>
+<rect class="ema" x="700.0" y="255.0" width="136.0" height="13.0" rx="3"/>
+<rect class="ema" x="700.0" y="237.0" width="136.0" height="13.0" rx="3"/>
+<rect class="ema" x="700.0" y="219.0" width="136.0" height="13.0" rx="3"/>
+<rect class="ema" x="700.0" y="201.0" width="136.0" height="13.0" rx="3"/>
+<rect class="ema" x="700.0" y="183.0" width="136.0" height="13.0" rx="3"/>
+<rect class="ema" x="700.0" y="165.0" width="136.0" height="13.0" rx="3"/>
+<rect class="mod-amb" x="700.0" y="147.0" width="136.0" height="13.0" rx="3"/>
+<rect class="ema" x="700.0" y="129.0" width="136.0" height="13.0" rx="3"/>
+<rect class="ema" x="700.0" y="111.0" width="136.0" height="13.0" rx="3"/>
+<rect class="ema" x="700.0" y="93.0" width="136.0" height="13.0" rx="3"/>
+<rect class="ema" x="700.0" y="75.0" width="136.0" height="13.0" rx="3"/>
+<text class="ttl3" x="768.0" y="49.0" text-anchor="middle">EMA teacher</text>
+<text class="lab" x="768.0" y="66.0" text-anchor="middle">same network, no gradient</text>
+<text class="lab-amb" x="844.0" y="157.0" text-anchor="start">layer 8</text>
+<path class="ln-amb" d="M604 226 L697 153" stroke-dasharray="5 4" marker-end="url(#dfd-amb)"/>
+<text class="lab-amb" x="634.0" y="172.5" text-anchor="middle">predicts the target feature</text>
+<text class="lab" x="676.0" y="212.5" text-anchor="middle">cosine loss</text>
+<image class="tile" href="tile_fut.webp" x="740.0" y="300.0" width="56" height="56" preserveAspectRatio="none"/><rect class="tile-f" x="740.0" y="300.0" width="56" height="56" rx="4"/>
+<path class="ln" d="M768.0 296 L768.0 289" marker-end="url(#dfd-ah)"/>
+<text class="lab" x="768.0" y="376.0" text-anchor="middle">frame <tspan class='it'>t+k</tspan>, <tspan class='it'>k</tspan> ≤ <tspan class='it'>H</tspan></text>
+<path class="ln" d="M400 279 L697 279" stroke-dasharray="5 4" marker-end="url(#dfd-ah)"/>
+<text class="lab" x="655.0" y="267.0" text-anchor="middle">EMA of weights</text>
+<rect class="grp-d" x="438.0" y="22.0" width="458.0" height="360.0" rx="8"/>
+<text class="lab" x="450.0" y="40.0" text-anchor="start">training only, removed at inference</text></svg></div>
+<div class="drift-media drift-media--stack only-phone"><svg class="drift-svg drift-diagram df-diagram drift-diagram--stack" viewBox="0 86 420 470" role="img" aria-labelledby="dfp-t"><title id="dfp-t">Dynamics Forcing training step. Past frames and frame t go into a causal diffusion transformer. Its layer-12 output feeds the diffusion head and the generative loss of Shortcut Forcing. Its layer-4 feature of frame t, with the actions from t to t+k-1, goes through a prediction head that predicts the layer-8 feature of frame t+k from an EMA teacher, with k at most H. The prediction head and the teacher are used only in training.</title><defs><marker id="dfp-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfp-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfp-blu" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-blu"/></marker></defs><text class="lab-blu" x="20.0" y="104.0" text-anchor="start">generative loss (Shortcut Forcing)</text>
+<rect class="mod-blu-f" x="20.0" y="114.0" width="154.0" height="32.0" rx="6"/>
+<text class="lb-blu" x="97.0" y="135.0" text-anchor="middle">Diffusion head</text>
+<rect class="mod" x="34.0" y="367.0" width="126.0" height="13.0" rx="3"/>
+<rect class="mod" x="34.0" y="349.0" width="126.0" height="13.0" rx="3"/>
+<rect class="mod" x="34.0" y="331.0" width="126.0" height="13.0" rx="3"/>
+<rect class="mod-amb" x="34.0" y="313.0" width="126.0" height="13.0" rx="3"/>
+<rect class="mod" x="34.0" y="295.0" width="126.0" height="13.0" rx="3"/>
+<rect class="mod" x="34.0" y="277.0" width="126.0" height="13.0" rx="3"/>
+<rect class="mod" x="34.0" y="259.0" width="126.0" height="13.0" rx="3"/>
+<rect class="mod" x="34.0" y="241.0" width="126.0" height="13.0" rx="3"/>
+<rect class="mod" x="34.0" y="223.0" width="126.0" height="13.0" rx="3"/>
+<rect class="mod" x="34.0" y="205.0" width="126.0" height="13.0" rx="3"/>
+<rect class="mod" x="34.0" y="187.0" width="126.0" height="13.0" rx="3"/>
+<rect class="mod-blu" x="34.0" y="169.0" width="126.0" height="13.0" rx="3"/>
+<rect class="ema" x="262.0" y="367.0" width="126.0" height="13.0" rx="3"/>
+<rect class="ema" x="262.0" y="349.0" width="126.0" height="13.0" rx="3"/>
+<rect class="ema" x="262.0" y="331.0" width="126.0" height="13.0" rx="3"/>
+<rect class="ema" x="262.0" y="313.0" width="126.0" height="13.0" rx="3"/>
+<rect class="ema" x="262.0" y="295.0" width="126.0" height="13.0" rx="3"/>
+<rect class="ema" x="262.0" y="277.0" width="126.0" height="13.0" rx="3"/>
+<rect class="ema" x="262.0" y="259.0" width="126.0" height="13.0" rx="3"/>
+<rect class="mod-amb" x="262.0" y="241.0" width="126.0" height="13.0" rx="3"/>
+<rect class="ema" x="262.0" y="223.0" width="126.0" height="13.0" rx="3"/>
+<rect class="ema" x="262.0" y="205.0" width="126.0" height="13.0" rx="3"/>
+<rect class="ema" x="262.0" y="187.0" width="126.0" height="13.0" rx="3"/>
+<rect class="ema" x="262.0" y="169.0" width="126.0" height="13.0" rx="3"/>
+<path class="ln-blu" d="M97.0 167 L97.0 149" marker-end="url(#dfp-blu)"/>
+<text class="lab" x="14.0" y="268.0" text-anchor="middle" transform="rotate(-90 14 268)">student (causal)</text>
+<text class="lab" x="408.0" y="268.0" text-anchor="middle" transform="rotate(90 408 268)">EMA teacher, no gradient</text>
+<text class="lab-blu" x="166.0" y="180.0" text-anchor="start">layer 12</text>
+<text class="lab-amb" x="166.0" y="324.0" text-anchor="start">layer 4</text>
+<text class="lab-amb" x="256.0" y="252.0" text-anchor="end">layer 8</text>
+<rect class="mod-amb" x="136.0" y="398.0" width="148.0" height="32.0" rx="6"/>
+<text class="lb-amb" x="210.0" y="419.0" text-anchor="middle">Prediction head</text>
+<path class="ln-amb" d="M154 328 L158 396" marker-end="url(#dfp-amb)"/>
+<path class="ln-amb" d="M262 396 L270 256" stroke-dasharray="5 4" marker-end="url(#dfp-amb)"/>
+<text class="lab-amb" x="210.0" y="450.0" text-anchor="middle">+ actions <tspan class='it'>a<tspan class='sub' dy='4'>t</tspan><tspan dy='-4'> … a</tspan><tspan class='sub' dy='4'>t+k−1</tspan></tspan></text>
+<image class="tile" href="tile_ctx0.webp" x="36.0" y="476.0" width="38" height="38" preserveAspectRatio="none"/><rect class="tile-f" x="36.0" y="476.0" width="38" height="38" rx="4"/>
+<image class="tile" href="tile_ctx1.webp" x="79.0" y="476.0" width="38" height="38" preserveAspectRatio="none"/><rect class="tile-f" x="79.0" y="476.0" width="38" height="38" rx="4"/>
+<image class="tile" href="tile_cur.webp" x="122.0" y="476.0" width="38" height="38" preserveAspectRatio="none"/><rect class="tile-f" x="122.0" y="476.0" width="38" height="38" rx="4"/>
+<path class="ln" d="M97.0 472 L97.0 383" marker-end="url(#dfp-ah)"/>
+<text class="lab" x="98.0" y="536.0" text-anchor="middle">past frames, frame <tspan class='it'>t</tspan></text>
+<image class="tile" href="tile_fut.webp" x="306.0" y="476.0" width="38" height="38" preserveAspectRatio="none"/><rect class="tile-f" x="306.0" y="476.0" width="38" height="38" rx="4"/>
+<path class="ln" d="M325.0 472 L325.0 383" marker-end="url(#dfp-ah)"/>
+<text class="lab" x="325.0" y="536.0" text-anchor="middle">frame <tspan class='it'>t+k</tspan>, <tspan class='it'>k</tspan> ≤ <tspan class='it'>H</tspan></text></svg></div>
+<!-- diagram:end -->
+        <figcaption>One training step. The current feature (layer 4 of frame <em>t</em>) and the actions that follow pass through a small prediction head, which predicts the target feature (layer 8 of frame <em>t+k</em>, <em>k</em> &le; <em>H</em>) of the EMA teacher. Causal attention hides frame <em>t+k</em> from the student. The generative loss (blue) is the loss of Shortcut Forcing. Everything in the dashed box is used only in training.</figcaption>
     </figure>
+    <ul class="df-design">
+        <li><strong>Horizon.</strong> <em>k</em> is drawn from 1 to <em>H</em>, with <em>H</em> = 8. We expect a next-frame target to be met largely by copying the current state, and a target several frames ahead to require the change the actions cause.</li>
+        <li><strong>Shallow to deep.</strong> Layer 4 predicts layer 8 of 12. The later layers remain for the generative loss.</li>
+        <li><strong>EMA teacher.</strong> Feature prediction alone admits trivial solutions. The target comes from a slowly updated copy of the model with stopped gradients, and denoising remains the main objective.</li>
+    </ul>
 </section>
 
 <section id="results">
-    <h2>Preliminary results</h2>
+    <h2>Results</h2>
+    <figure class="fig">
+<!-- curves:begin (written by build_svgs.py) -->
+<div class="df-curves"><svg class="df-curve" viewBox="0 0 450 300" role="img" aria-labelledby="cv0-t"><title id="cv0-t">BridgeData V2: FVD on a log scale against training steps for Shortcut Forcing and Dynamics Forcing.</title><text class="ttl" x="52" y="18">BridgeData V2</text><line class="grid" x1="52" x2="314" y1="260.0" y2="260.0"/><text class="ax" x="44" y="264.0" text-anchor="end">10</text><line class="grid" x1="52" x2="314" y1="201.6" y2="201.6"/><text class="ax" x="44" y="205.6" text-anchor="end">30</text><line class="grid" x1="52" x2="314" y1="137.5" y2="137.5"/><text class="ax" x="44" y="141.5" text-anchor="end">100</text><line class="grid" x1="52" x2="314" y1="79.1" y2="79.1"/><text class="ax" x="44" y="83.1" text-anchor="end">300</text><text class="ax" x="81.1" y="278" text-anchor="middle">50k</text><text class="ax" x="139.3" y="278" text-anchor="middle">100k</text><text class="ax" x="197.6" y="278" text-anchor="middle">150k</text><text class="ax" x="255.8" y="278" text-anchor="middle">200k</text><text class="ax" x="314.0" y="278" text-anchor="middle">250k</text><line class="axis" x1="52" x2="314" y1="260" y2="260"/><text class="ax" x="183" y="296" text-anchor="middle">training steps</text><text class="ax" x="14" y="147" text-anchor="middle" transform="rotate(-90 14 147)">FVD (log)</text><polyline class="ln base" points="52.0,57.5 81.1,49.2 110.2,75.3"/><g class="pt-g"><circle class="pt" cx="52.0" cy="57.5" r="9"/><circle class="dt base" cx="52.0" cy="57.5" r="3"/><title>Shortcut Forcing, 25k steps: FVD 449.9</title></g><g class="pt-g"><circle class="pt" cx="81.1" cy="49.2" r="9"/><circle class="dt base" cx="81.1" cy="49.2" r="3"/><title>Shortcut Forcing, 50k steps: FVD 526.5</title></g><g class="pt-g"><circle class="pt" cx="110.2" cy="75.3" r="9"/><circle class="dt base" cx="110.2" cy="75.3" r="3"/><title>Shortcut Forcing, 75k steps: FVD 322.3</title></g><polyline class="ln ours" points="52.0,55.8 81.1,56.9 110.2,93.6 139.3,154.9"/><g class="pt-g"><circle class="pt" cx="52.0" cy="55.8" r="9"/><circle class="dt ours" cx="52.0" cy="55.8" r="3"/><title>Dynamics Forcing, 25k steps: FVD 464.5</title></g><g class="pt-g"><circle class="pt" cx="81.1" cy="56.9" r="9"/><circle class="dt ours" cx="81.1" cy="56.9" r="3"/><title>Dynamics Forcing, 50k steps: FVD 454.9</title></g><g class="pt-g"><circle class="pt" cx="110.2" cy="93.6" r="9"/><circle class="dt ours" cx="110.2" cy="93.6" r="3"/><title>Dynamics Forcing, 75k steps: FVD 228.2</title></g><g class="pt-g"><circle class="pt" cx="139.3" cy="154.9" r="9"/><circle class="dt ours" cx="139.3" cy="154.9" r="3"/><title>Dynamics Forcing, 100k steps: FVD 72.1</title></g><text class="end base" x="322" y="71.3">Shortcut Forcing</text><text class="end base" x="322" y="87.3">322.3 at 75k</text><text class="end ours" x="322" y="150.9">Dynamics Forcing</text><text class="end ours" x="322" y="166.9">72.1 at 100k</text><line class="axis dash" x1="314.0" x2="314.0" y1="34" y2="260"/><text class="ax" x="310.0" y="44" text-anchor="end">budget</text></svg><svg class="df-curve" viewBox="0 0 450 300" role="img" aria-labelledby="cv1-t"><title id="cv1-t">RT-1: FVD on a log scale against training steps for Shortcut Forcing and Dynamics Forcing.</title><text class="ttl" x="52" y="18">RT-1</text><line class="grid" x1="52" x2="314" y1="260.0" y2="260.0"/><text class="ax" x="44" y="264.0" text-anchor="end">10</text><line class="grid" x1="52" x2="314" y1="201.6" y2="201.6"/><text class="ax" x="44" y="205.6" text-anchor="end">30</text><line class="grid" x1="52" x2="314" y1="137.5" y2="137.5"/><text class="ax" x="44" y="141.5" text-anchor="end">100</text><line class="grid" x1="52" x2="314" y1="79.1" y2="79.1"/><text class="ax" x="44" y="83.1" text-anchor="end">300</text><text class="ax" x="81.1" y="278" text-anchor="middle">50k</text><text class="ax" x="139.3" y="278" text-anchor="middle">100k</text><text class="ax" x="197.6" y="278" text-anchor="middle">150k</text><text class="ax" x="255.8" y="278" text-anchor="middle">200k</text><text class="ax" x="314.0" y="278" text-anchor="middle">250k</text><line class="axis" x1="52" x2="314" y1="260" y2="260"/><text class="ax" x="183" y="296" text-anchor="middle">training steps</text><text class="ax" x="14" y="147" text-anchor="middle" transform="rotate(-90 14 147)">FVD (log)</text><polyline class="ln base" points="52.0,74.1 81.1,66.3 110.2,120.0 139.3,195.1 168.4,238.1"/><g class="pt-g"><circle class="pt" cx="52.0" cy="74.1" r="9"/><circle class="dt base" cx="52.0" cy="74.1" r="3"/><title>Shortcut Forcing, 25k steps: FVD 329.7</title></g><g class="pt-g"><circle class="pt" cx="81.1" cy="66.3" r="9"/><circle class="dt base" cx="81.1" cy="66.3" r="3"/><title>Shortcut Forcing, 50k steps: FVD 381.2</title></g><g class="pt-g"><circle class="pt" cx="110.2" cy="120.0" r="9"/><circle class="dt base" cx="110.2" cy="120.0" r="3"/><title>Shortcut Forcing, 75k steps: FVD 139.0</title></g><g class="pt-g"><circle class="pt" cx="139.3" cy="195.1" r="9"/><circle class="dt base" cx="139.3" cy="195.1" r="3"/><title>Shortcut Forcing, 100k steps: FVD 33.9</title></g><g class="pt-g"><circle class="pt" cx="168.4" cy="238.1" r="9"/><circle class="dt base" cx="168.4" cy="238.1" r="3"/><title>Shortcut Forcing, 125k steps: FVD 15.1</title></g><polyline class="ln ours" points="52.0,69.4 81.1,62.2 110.2,109.0 139.3,209.8 168.4,237.4"/><g class="pt-g"><circle class="pt" cx="52.0" cy="69.4" r="9"/><circle class="dt ours" cx="52.0" cy="69.4" r="3"/><title>Dynamics Forcing, 25k steps: FVD 359.7</title></g><g class="pt-g"><circle class="pt" cx="81.1" cy="62.2" r="9"/><circle class="dt ours" cx="81.1" cy="62.2" r="3"/><title>Dynamics Forcing, 50k steps: FVD 412.2</title></g><g class="pt-g"><circle class="pt" cx="110.2" cy="109.0" r="9"/><circle class="dt ours" cx="110.2" cy="109.0" r="3"/><title>Dynamics Forcing, 75k steps: FVD 170.9</title></g><g class="pt-g"><circle class="pt" cx="139.3" cy="209.8" r="9"/><circle class="dt ours" cx="139.3" cy="209.8" r="3"/><title>Dynamics Forcing, 100k steps: FVD 25.7</title></g><g class="pt-g"><circle class="pt" cx="168.4" cy="237.4" r="9"/><circle class="dt ours" cx="168.4" cy="237.4" r="3"/><title>Dynamics Forcing, 125k steps: FVD 15.3</title></g><text class="end ours" x="322" y="214.7">Dynamics Forcing</text><text class="end ours" x="322" y="230.7">15.3 at 125k</text><text class="end base" x="322" y="252.7">Shortcut Forcing</text><text class="end base" x="322" y="268.7">15.1 at 125k</text><line class="axis dash" x1="314.0" x2="314.0" y1="34" y2="260"/><text class="ax" x="310.0" y="44" text-anchor="end">budget</text></svg></div>
+<!-- curves:end -->
+        <figcaption>FVD over training on held-out episodes (lower is better, log scale). On BridgeData V2, Dynamics Forcing is lower from 50k steps. On RT-1 it is lower at 100k steps and on par at 125k. Hover a point for its value.</figcaption>
+    </figure>
     <div class="table-wrap">
         <table>
             <thead>
@@ -88,10 +237,46 @@ bibtex: |
                 <tr><td>75k</td><td><strong>139.0</strong> / <strong>0.109</strong></td><td class="ours">170.9 / 0.113</td></tr>
                 <tr><td>100k</td><td>33.9 / 0.075</td><td class="ours"><strong>25.7</strong> / 0.074</td></tr>
                 <tr><td>125k</td><td>15.1 / 0.063</td><td class="ours">15.3 / 0.060</td></tr>
-                <!-- Language Table: add a group here (protocol: full-episode, tokenizer-reconstruction target). -->
+                <!-- Language Table: add a group here. -->
                 <!-- DMLab: add a group here. -->
             </tbody>
         </table>
     </div>
-    <p class="caption">FVD / LPIPS on held-out episodes, lower is better, 4 sampling steps, same backbone and training recipe for both models. Bold marks a clear difference (beyond the run-to-run spread of FVD on each dataset, or 0.003 LPIPS). Training continues to 250k steps; Language Table and DMLab will be added.</p>
+    <p class="caption">FVD / LPIPS at each evaluated step, with 4 sampling steps and the same backbone and training recipe for both models. Bold marks a difference larger than the run-to-run spread of FVD on that dataset, or 0.003 in LPIPS. Training continues to 250k steps. Language Table, DMLab and action-control results will be added.</p>
 </section>
+
+<section id="rollouts">
+    <h2>Rollouts under different actions</h2>
+    <p>Both models start from the same 4 real frames and generate the next 28 under five kinds of actions. With the true actions, a rollout should follow the real video. With altered actions, the scene should move differently.</p>
+    <figure class="fig fig--video fig--bleed">
+<!-- rollouts:begin (written by build_site.py; edit the script, not this block) -->
+<div class="df-bars"><div class="tabs df-tabs" role="group" aria-label="Dataset" hidden><button type="button" class="btn" data-on="0" aria-pressed="true">BridgeData V2<span class="df-step"> (75k)</span></button><button type="button" class="btn" data-on="1" aria-pressed="false">RT-1<span class="df-step"> (100k)</span></button></div><div class="tabs df-eps" role="group" aria-label="Episode" hidden><button type="button" class="btn" data-ep="0" aria-pressed="true">Episode 1</button><button type="button" class="btn" data-ep="1" aria-pressed="false">Episode 2</button></div></div>
+<div class="df-panels" data-on="0" data-ep="0"><div class="df-panel" data-ds="0" data-step="75k" data-ctx="4" data-len="32"><div class="df-ep" data-ep="0"><div class="drift-clip drift-clip--wide only-desk" style="max-width:960px;aspect-ratio:3244 / 1240"><video src="bridge_ep0.mp4" poster="bridge_ep0.webp" muted loop playsinline preload="none" aria-label="BridgeData V2 test episode 1 at 75k training steps. Top row Shortcut Forcing, bottom row Dynamics Forcing. Columns: the real video, then rollouts under true, other-episode, negated, no-op and random actions."></video><span class="clip-lab" style="left:0.00%;top:3.39%">Ground truth</span><span class="clip-lab" style="left:16.77%;top:3.39%">True actions</span><span class="clip-lab" style="left:33.54%;top:3.39%">Other episode</span><span class="clip-lab" style="left:50.31%;top:3.39%">Negated</span><span class="clip-lab" style="left:67.08%;top:3.39%">No-op</span><span class="clip-lab" style="left:83.85%;top:3.39%">Random</span><span class="clip-name" style="left:0.00%;top:8.06%">Shortcut Forcing</span><span class="clip-name" style="left:0.00%;top:56.45%">Dynamics Forcing</span></div><div class="drift-clip drift-clip--phone only-phone" style="max-width:520px;aspect-ratio:1612 / 1240"><video src="bridge_ep0_phone.mp4" poster="bridge_ep0_phone.webp" muted loop playsinline preload="none" aria-label="BridgeData V2 test episode 1 at 75k training steps. Top row Shortcut Forcing, bottom row Dynamics Forcing. Columns: the real video, then rollouts under true and random actions."></video><span class="clip-lab" style="left:0.00%;top:3.39%">Ground truth</span><span class="clip-lab" style="left:33.75%;top:3.39%">True actions</span><span class="clip-lab" style="left:67.49%;top:3.39%">Random</span><span class="clip-name" style="left:0.00%;top:8.06%">Shortcut Forcing</span><span class="clip-name" style="left:0.00%;top:56.45%">Dynamics Forcing</span></div></div><div class="df-ep" data-ep="1"><div class="drift-clip drift-clip--wide only-desk" style="max-width:960px;aspect-ratio:3244 / 1240"><video src="bridge_ep1.mp4" poster="bridge_ep1.webp" muted loop playsinline preload="none" aria-label="BridgeData V2 test episode 2 at 75k training steps. Top row Shortcut Forcing, bottom row Dynamics Forcing. Columns: the real video, then rollouts under true, other-episode, negated, no-op and random actions."></video><span class="clip-lab" style="left:0.00%;top:3.39%">Ground truth</span><span class="clip-lab" style="left:16.77%;top:3.39%">True actions</span><span class="clip-lab" style="left:33.54%;top:3.39%">Other episode</span><span class="clip-lab" style="left:50.31%;top:3.39%">Negated</span><span class="clip-lab" style="left:67.08%;top:3.39%">No-op</span><span class="clip-lab" style="left:83.85%;top:3.39%">Random</span><span class="clip-name" style="left:0.00%;top:8.06%">Shortcut Forcing</span><span class="clip-name" style="left:0.00%;top:56.45%">Dynamics Forcing</span></div><div class="drift-clip drift-clip--phone only-phone" style="max-width:520px;aspect-ratio:1612 / 1240"><video src="bridge_ep1_phone.mp4" poster="bridge_ep1_phone.webp" muted loop playsinline preload="none" aria-label="BridgeData V2 test episode 2 at 75k training steps. Top row Shortcut Forcing, bottom row Dynamics Forcing. Columns: the real video, then rollouts under true and random actions."></video><span class="clip-lab" style="left:0.00%;top:3.39%">Ground truth</span><span class="clip-lab" style="left:33.75%;top:3.39%">True actions</span><span class="clip-lab" style="left:67.49%;top:3.39%">Random</span><span class="clip-name" style="left:0.00%;top:8.06%">Shortcut Forcing</span><span class="clip-name" style="left:0.00%;top:56.45%">Dynamics Forcing</span></div></div></div>
+<div class="df-panel" data-ds="1" data-step="100k" data-ctx="4" data-len="32"><div class="df-ep" data-ep="0"><div class="drift-clip drift-clip--wide only-desk" style="max-width:960px;aspect-ratio:3244 / 1240"><video src="rt1_ep0.mp4" poster="rt1_ep0.webp" muted loop playsinline preload="none" aria-label="RT-1 test episode 1 at 100k training steps. Top row Shortcut Forcing, bottom row Dynamics Forcing. Columns: the real video, then rollouts under true, other-episode, negated, no-op and random actions."></video><span class="clip-lab" style="left:0.00%;top:3.39%">Ground truth</span><span class="clip-lab" style="left:16.77%;top:3.39%">True actions</span><span class="clip-lab" style="left:33.54%;top:3.39%">Other episode</span><span class="clip-lab" style="left:50.31%;top:3.39%">Negated</span><span class="clip-lab" style="left:67.08%;top:3.39%">No-op</span><span class="clip-lab" style="left:83.85%;top:3.39%">Random</span><span class="clip-name" style="left:0.00%;top:8.06%">Shortcut Forcing</span><span class="clip-name" style="left:0.00%;top:56.45%">Dynamics Forcing</span></div><div class="drift-clip drift-clip--phone only-phone" style="max-width:520px;aspect-ratio:1612 / 1240"><video src="rt1_ep0_phone.mp4" poster="rt1_ep0_phone.webp" muted loop playsinline preload="none" aria-label="RT-1 test episode 1 at 100k training steps. Top row Shortcut Forcing, bottom row Dynamics Forcing. Columns: the real video, then rollouts under true and random actions."></video><span class="clip-lab" style="left:0.00%;top:3.39%">Ground truth</span><span class="clip-lab" style="left:33.75%;top:3.39%">True actions</span><span class="clip-lab" style="left:67.49%;top:3.39%">Random</span><span class="clip-name" style="left:0.00%;top:8.06%">Shortcut Forcing</span><span class="clip-name" style="left:0.00%;top:56.45%">Dynamics Forcing</span></div></div><div class="df-ep" data-ep="1"><div class="drift-clip drift-clip--wide only-desk" style="max-width:960px;aspect-ratio:3244 / 1240"><video src="rt1_ep1.mp4" poster="rt1_ep1.webp" muted loop playsinline preload="none" aria-label="RT-1 test episode 2 at 100k training steps. Top row Shortcut Forcing, bottom row Dynamics Forcing. Columns: the real video, then rollouts under true, other-episode, negated, no-op and random actions."></video><span class="clip-lab" style="left:0.00%;top:3.39%">Ground truth</span><span class="clip-lab" style="left:16.77%;top:3.39%">True actions</span><span class="clip-lab" style="left:33.54%;top:3.39%">Other episode</span><span class="clip-lab" style="left:50.31%;top:3.39%">Negated</span><span class="clip-lab" style="left:67.08%;top:3.39%">No-op</span><span class="clip-lab" style="left:83.85%;top:3.39%">Random</span><span class="clip-name" style="left:0.00%;top:8.06%">Shortcut Forcing</span><span class="clip-name" style="left:0.00%;top:56.45%">Dynamics Forcing</span></div><div class="drift-clip drift-clip--phone only-phone" style="max-width:520px;aspect-ratio:1612 / 1240"><video src="rt1_ep1_phone.mp4" poster="rt1_ep1_phone.webp" muted loop playsinline preload="none" aria-label="RT-1 test episode 2 at 100k training steps. Top row Shortcut Forcing, bottom row Dynamics Forcing. Columns: the real video, then rollouts under true and random actions."></video><span class="clip-lab" style="left:0.00%;top:3.39%">Ground truth</span><span class="clip-lab" style="left:33.75%;top:3.39%">True actions</span><span class="clip-lab" style="left:67.49%;top:3.39%">Random</span><span class="clip-name" style="left:0.00%;top:8.06%">Shortcut Forcing</span><span class="clip-name" style="left:0.00%;top:56.45%">Dynamics Forcing</span></div></div></div></div>
+<!-- rollouts:end -->
+    <figcaption>Columns: the real video, then the true actions, the actions of another episode, negated actions, no-op actions and random actions. Borders: dark for real video, grey for context frames, blue for generated frames. Phones show the true and random actions. The episodes are the first two exported test episodes.</figcaption>
+    </figure>
+</section>
+
+<script>
+(function () {
+  // Rollouts: the dataset and episode buttons set data-on / data-ep on the panels; CSS shows that clip.
+  var fig = document.getElementById("rollouts"), host = fig.querySelector(".df-panels");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function play() { fig.querySelectorAll("video").forEach(function (v) {
+    if (v.offsetParent === null) { if (!v.paused) v.pause(); return; }
+    if (reduce) { v.controls = true; return; }
+    v.preload = "auto"; v.autoplay = true; v.play().catch(function () { v.controls = true; });
+  }); }
+  [["df-tabs", "on"], ["df-eps", "ep"]].forEach(function (p) {
+    var bar = fig.querySelector("." + p[0]); bar.hidden = false;
+    bar.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      host.dataset[p[1]] = b.dataset[p[1]];
+      bar.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      play();
+    });
+  });
+  play(); window.matchMedia("(max-width: 767px)").addEventListener("change", play);
+})();
+</script>
