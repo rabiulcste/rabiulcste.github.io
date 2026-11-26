@@ -72,7 +72,7 @@ bibtex: |
     /* Curves: log FID against training steps. Hover a point for its value. */
     .curve .ttl { font-weight: 600; }
     .curve .grid { stroke: var(--grid); } .curve .axis { stroke: var(--muted); } .curve .ax { font-size: 12px; fill: var(--muted); }
-    .curve .ln { fill: none; stroke-width: 2.2; stroke-linejoin: round; } .curve .ln.base { stroke: var(--sl); } .curve .ln.ours { stroke: var(--acc); } .curve .ln.repa { stroke: var(--rep); } .curve .ln.all { stroke: var(--acc); stroke-dasharray: 5 3.5; } .curve .ln.lsync { stroke: var(--ls); stroke-width: 1.6; }
+    .curve .ln { fill: none; stroke-width: 2.2; stroke-linejoin: round; } .curve .ln.base { stroke: var(--sl); } .curve .ln.ours { stroke: var(--acc); } .curve .ln.repa { stroke: var(--rep); } .curve .ln.all { stroke: var(--acc); stroke-dasharray: 5 3.5; } .bars-ms .grid { stroke: var(--grid); } .bars-ms .bar-ours { fill: var(--acc); } .bars-ms .bar-rep { fill: var(--rep); } .bars-ms .bar-ours-t { fill: var(--acc); } .bars-ms .bar-rep-t { fill: var(--rep); } .curve .ln.lsync { stroke: var(--ls); stroke-width: 1.6; }
     .curve .pt { fill: transparent; } .curve .pt-g:hover .pt { fill: var(--text); r: 4; }
     .curve .spd { font-size: 14px; font-weight: 600; fill: var(--acc); }
     .curve .end { font-size: 13px; font-weight: 600; } .curve .end.base { fill: var(--sl); } .curve .end.ours { fill: var(--acc); }
@@ -902,46 +902,36 @@ bibtex: |
         </table>
     </div>
     <p class="caption">1-step FID-50k (lower is better) with ADM reference statistics. All rows: iFeCo with the loss also on the rows without a jump. Speedup: how many times sooner iFeCo (default / all rows) reaches the baseline's final 1-step FID, with linear interpolation between evaluations; MeanFlow B/2 uses the all-rows model against the 1.2M baseline (6.12). The default MeanFlow models stop at 400k (B/2) and 700k (XL/2). At XL/2 the 700k row does not show a reliable gain, since iFeCo is behind at 500k and 600k. The MeanFlow XL/2 baseline reaches 3.50 at 1.2M.</p>
-    <div class="table-wrap">
-        <table>
-            <thead>
-                <tr><th>Method</th><th class="l"><span class="fe-long">Backbone</span><span class="fe-short">Size</span></th><th>Sampling<span class="fe-long"> steps</span></th><th>Baseline</th><th class="ours">iFeCo</th><th>REPA</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Shortcut</td><td class="l"><span class="fe-long">DiT-</span>B/2</td><td>8</td><td>23.89</td><td class="ours">18.04</td><td><strong>16.14</strong></td></tr>
-                <tr><td>MeanFlow</td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td>4</td><td>6.72</td><td class="ours">6.23</td><td><strong>5.54</strong></td></tr>
-                <tr><td>LSD</td><td class="l"><span class="fe-long">SiT-</span>B/2</td><td>4</td><td>6.47</td><td class="ours">5.62</td><td><strong>4.93</strong></td></tr>
-            </tbody>
-        </table>
-    </div>
-    <p class="caption">Multi-step sampling, FID-50k at 1.2M training steps (MeanFlow at 400k). In all three families the one-step gain carries over to more sampling steps. REPA has the lowest multi-step FID in all three.</p>
+    <figure class="fe-fig">
+<svg class="fs bars-ms" viewBox="0 0 560 218" role="img" aria-label="Multi-step FID reduction against the baseline. Shortcut B/2, 8 steps: iFeCo 24%, REPA 32%; MeanFlow B/2, 4 steps: iFeCo 7%, REPA 18%; LSD B/2, 4 steps: iFeCo 13%, REPA 24%.">
+<line class="grid" x1="150.0" y1="20" x2="150.0" y2="194"/>
+<text class="tick" x="150.0" y="208" text-anchor="middle">0%</text>
+<line class="grid" x1="255.7" y1="20" x2="255.7" y2="194"/>
+<text class="tick" x="255.7" y="208" text-anchor="middle">10%</text>
+<line class="grid" x1="361.4" y1="20" x2="361.4" y2="194"/>
+<text class="tick" x="361.4" y="208" text-anchor="middle">20%</text>
+<line class="grid" x1="467.1" y1="20" x2="467.1" y2="194"/>
+<text class="tick" x="467.1" y="208" text-anchor="middle">30%</text>
+<text class="tick" x="142" y="51" text-anchor="end">Shortcut B/2, 8 steps</text>
+<g><title>iFeCo: FID 18.04 against 23.89 for the baseline</title><rect class="bar-ours" x="150" y="32" width="258.9" height="16" rx="2"/></g>
+<text class="tick bar-ours-t" x="413.9" y="44">24% iFeCo</text>
+<g><title>REPA: FID 16.14 against 23.89 for the baseline</title><rect class="bar-rep" x="150" y="51" width="342.9" height="16" rx="2"/></g>
+<text class="tick bar-rep-t" x="497.9" y="63">32% REPA</text>
+<text class="tick" x="142" y="107" text-anchor="end">MeanFlow B/2, 4 steps</text>
+<g><title>iFeCo: FID 6.23 against 6.72 for the baseline</title><rect class="bar-ours" x="150" y="88" width="77.1" height="16" rx="2"/></g>
+<text class="tick bar-ours-t" x="232.1" y="100">7%</text>
+<g><title>REPA: FID 5.54 against 6.72 for the baseline</title><rect class="bar-rep" x="150" y="107" width="185.6" height="16" rx="2"/></g>
+<text class="tick bar-rep-t" x="340.6" y="119">18%</text>
+<text class="tick" x="142" y="163" text-anchor="end">LSD B/2, 4 steps</text>
+<g><title>iFeCo: FID 5.62 against 6.47 for the baseline</title><rect class="bar-ours" x="150" y="144" width="138.9" height="16" rx="2"/></g>
+<text class="tick bar-ours-t" x="293.9" y="156">13%</text>
+<g><title>REPA: FID 4.93 against 6.47 for the baseline</title><rect class="bar-rep" x="150" y="163" width="251.6" height="16" rx="2"/></g>
+<text class="tick bar-rep-t" x="406.6" y="175">24%</text>
+</svg>
+        <figcaption>Multi-step sampling: how much each method lowers the baseline's FID-50k (hover for values), at 1.2M training steps (MeanFlow at 400k). The 1-step gain carries over; REPA, with a frozen encoder, gains more here.</figcaption>
+    </figure>
     <p><strong>Against REPA and LayerSync.</strong> iFeCo has the lowest 1-step FID on Shortcut and LSD without a pretrained encoder; REPA (frozen DINOv2) is better on MeanFlow and at several sampling steps. Our REPA reference is not tuned for flow maps.</p>
-    <p><strong>The loss on all rows.</strong> Rows without a jump can take the loss too, with no extra forward pass. It helps most early in training; on LSD the two settings end level.</p>
-    <div class="table-wrap">
-        <table>
-            <thead>
-                <tr><th>Method</th><th>Steps</th><th>Baseline</th><th>iFeCo</th><th class="ours">All rows</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Shortcut</td><td>200k</td><td>60.88</td><td>48.86</td><td class="ours"><strong>47.44</strong></td></tr>
-                <tr><td></td><td>400k</td><td>47.75</td><td>37.32</td><td class="ours"><strong>35.95</strong></td></tr>
-                <tr><td></td><td>800k</td><td>39.83</td><td>29.75</td><td class="ours"><strong>29.31</strong></td></tr>
-                <tr><td></td><td>1.2M</td><td>36.95</td><td>28.03</td><td class="ours"><strong>27.56</strong></td></tr>
-                <tr class="grp"><td>MeanFlow</td><td>200k</td><td>15.91</td><td>13.67</td><td class="ours"><strong>12.75</strong></td></tr>
-                <tr><td></td><td>400k</td><td>9.79</td><td>8.03</td><td class="ours"><strong>7.80</strong></td></tr>
-                <tr><td></td><td>600k</td><td>7.72</td><td>&ndash;</td><td class="ours"><strong>6.53</strong></td></tr>
-                <tr><td></td><td>800k</td><td>6.63</td><td>&ndash;</td><td class="ours"><strong>5.90</strong></td></tr>
-                <tr><td></td><td>1.0M</td><td>6.40</td><td>&ndash;</td><td class="ours"><strong>5.62</strong></td></tr>
-                <tr class="grp"><td>LSD</td><td>200k</td><td>26.91</td><td>21.34</td><td class="ours"><strong>20.93</strong></td></tr>
-                <tr><td></td><td>400k</td><td>18.27</td><td>14.41</td><td class="ours"><strong>13.85</strong></td></tr>
-                <tr><td></td><td>600k</td><td>15.35</td><td>12.01</td><td class="ours"><strong>11.59</strong></td></tr>
-                <tr><td></td><td>800k</td><td>14.09</td><td>11.21</td><td class="ours"><strong>11.07</strong></td></tr>
-                <tr><td></td><td>900k</td><td>13.80</td><td>11.02</td><td class="ours"><strong>10.74</strong></td></tr>
-                <tr><td></td><td>1.0M</td><td>12.96</td><td><strong>10.89</strong></td><td class="ours">10.97</td></tr>
-            </tbody>
-        </table>
-    </div>
-    <p class="caption">1-step FID-50k on ImageNet 256&times;256, B/2, free teacher, one seed. Baseline: no consistency loss (the Shortcut value at 800k is evaluated at 801k). iFeCo: the default, with the loss on rows with a jump only. All rows: the loss also on rows with no jump. The default MeanFlow model is trained to 400k steps only.</p>
+    <p><strong>The loss on all rows.</strong> Rows without a jump can take the loss too, with no extra forward pass (dashed curves above). It helps most early in training; on LSD the two settings end level.</p>
 </section>
 
 <script>
