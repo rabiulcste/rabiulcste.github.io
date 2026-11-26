@@ -3,7 +3,7 @@ layout: project
 title: "A Self-Supervised Free Lunch for Flow Map Training"
 seo_title: "iFeCo: A Self-Supervised Free Lunch for Flow Map Training"
 description: "iFeCo: flow maps learn from their own features. One consistency loss, no external encoder, no extra forward pass. Preliminary ImageNet 256 results."
-abstract: "Flow-map training already evaluates a teacher on a cleaner view to build its target. iFeCo adds one feature consistency loss, in which early features of the noisier view predict the teacher's deep features of the cleaner view, with no external encoder and no extra forward pass. It works as representation alignment (REPA) without a pretrained encoder for one-step and few-step generators such as MeanFlow and shortcut models. In preliminary ImageNet 256 results (1-step FID), it reaches the baseline's final FID 2.9 to 3.2 times sooner on Shortcut and 2.1 to 2.3 times sooner on LSD B/2, for example 36.95 to 28.03 on Shortcut DiT-B/2 at 1.2M steps. On MeanFlow B/2 it is 1.8 times sooner when the loss covers every row, and at XL/2 there is no reliable gain."
+abstract: "Flow-map training already evaluates a teacher on a cleaner view to build its target. iFeCo adds one feature consistency loss, in which early features of the noisier view predict the teacher's deep features of the cleaner view, with no external encoder and no extra forward pass. It works as representation alignment (REPA) without a pretrained encoder for one-step and few-step generators such as MeanFlow and shortcut models. In preliminary ImageNet 256 results (1-step FID), it reaches the vanilla model's final FID 2.9 to 3.2 times sooner on Shortcut and 2.1 to 2.3 times sooner on LSD B/2, for example 36.95 to 28.03 on Shortcut DiT-B/2 at 1.2M steps. On MeanFlow B/2 it is 1.8 times sooner when the loss covers every row, and at XL/2 there is no reliable gain."
 keywords: ["iFeCo", "flow map", "flow maps", "flow map training", "one-step generation", "one-step diffusion", "few-step diffusion", "few-step generation", "fast diffusion sampling", "MeanFlow", "mean flows", "shortcut models", "LSD", "Lagrangian self-distillation", "consistency models", "consistency training", "diffusion distillation", "self-distillation", "knowledge distillation", "representation alignment", "REPA", "representation alignment for diffusion", "self-supervised learning", "diffusion transformer", "SiT", "DINOv2", "ImageNet"]
 authors:
   - name: Rabiul Awal
@@ -215,7 +215,7 @@ bibtex: |
 <text class="lb acc" x="210.0" y="152" text-anchor="middle">aligns with</text>
 <text class="lb acc" x="220.0" y="258" text-anchor="middle" style="font-size:12px">already computed by the training step: no encoder, no extra pass</text>
 </svg></div>
-            <svg class="fs curve teaser" viewBox="0 0 340 236" role="img" aria-label="Shortcut DiT-B/2, 1 step, 1-step FID over training steps. Baseline ends at 37.0 after 1200k steps; iFeCo ends at 28.0 after 1200k steps."><defs><marker id="tcv-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs><text class="ttl" x="46" y="18" text-anchor="start">Shortcut DiT-B/2, 1 step</text>
+            <svg class="fs curve teaser" viewBox="0 0 340 236" role="img" aria-label="Shortcut DiT-B/2, 1 step, 1-step FID over training steps. Vanilla ends at 37.0 after 1200k steps; iFeCo ends at 28.0 after 1200k steps."><defs><marker id="tcv-acc" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path class="hd-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs><text class="ttl" x="46" y="18" text-anchor="start">Shortcut DiT-B/2, 1 step</text>
 <line class="grid" x1="46" y1="181.2" x2="276" y2="181.2"/>
 <text class="tick" x="40" y="185.2" text-anchor="end">30</text>
 <line class="grid" x1="46" y1="139.4" x2="276" y2="139.4"/>
@@ -236,18 +236,18 @@ bibtex: |
 <line class="axis" x1="46" y1="30" x2="46" y2="202"/>
 <text class="ax" transform="translate(13 116.0) rotate(-90)" text-anchor="middle">1-step FID</text>
 <polyline class="ln base" points="64.4,38.2 82.8,78.5 101.2,102.0 119.6,113.7 138.0,121.8 156.4,128.3 174.8,134.3 193.3,140.1 211.6,140.8 230.0,146.9 248.4,150.3 266.8,151.0"/>
-<g class="pt-g"><title>Baseline, 100k steps: FID 80.35</title><circle class="pt base" cx="64.4" cy="38.2" r="7"/></g>
-<g class="pt-g"><title>Baseline, 200k steps: FID 60.88</title><circle class="pt base" cx="82.8" cy="78.5" r="7"/></g>
-<g class="pt-g"><title>Baseline, 300k steps: FID 51.78</title><circle class="pt base" cx="101.2" cy="102.0" r="7"/></g>
-<g class="pt-g"><title>Baseline, 400k steps: FID 47.75</title><circle class="pt base" cx="119.6" cy="113.7" r="7"/></g>
-<g class="pt-g"><title>Baseline, 500k steps: FID 45.16</title><circle class="pt base" cx="138.0" cy="121.8" r="7"/></g>
-<g class="pt-g"><title>Baseline, 600k steps: FID 43.20</title><circle class="pt base" cx="156.4" cy="128.3" r="7"/></g>
-<g class="pt-g"><title>Baseline, 700k steps: FID 41.44</title><circle class="pt base" cx="174.8" cy="134.3" r="7"/></g>
-<g class="pt-g"><title>Baseline, 801k steps: FID 39.83</title><circle class="pt base" cx="193.3" cy="140.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 900k steps: FID 39.62</title><circle class="pt base" cx="211.6" cy="140.8" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1000k steps: FID 37.99</title><circle class="pt base" cx="230.0" cy="146.9" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1100k steps: FID 37.11</title><circle class="pt base" cx="248.4" cy="150.3" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1200k steps: FID 36.95</title><circle class="pt base" cx="266.8" cy="151.0" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 100k steps: FID 80.35</title><circle class="pt base" cx="64.4" cy="38.2" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 200k steps: FID 60.88</title><circle class="pt base" cx="82.8" cy="78.5" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 300k steps: FID 51.78</title><circle class="pt base" cx="101.2" cy="102.0" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 400k steps: FID 47.75</title><circle class="pt base" cx="119.6" cy="113.7" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 500k steps: FID 45.16</title><circle class="pt base" cx="138.0" cy="121.8" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 600k steps: FID 43.20</title><circle class="pt base" cx="156.4" cy="128.3" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 700k steps: FID 41.44</title><circle class="pt base" cx="174.8" cy="134.3" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 801k steps: FID 39.83</title><circle class="pt base" cx="193.3" cy="140.1" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 900k steps: FID 39.62</title><circle class="pt base" cx="211.6" cy="140.8" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1000k steps: FID 37.99</title><circle class="pt base" cx="230.0" cy="146.9" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1100k steps: FID 37.11</title><circle class="pt base" cx="248.4" cy="150.3" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1200k steps: FID 36.95</title><circle class="pt base" cx="266.8" cy="151.0" r="7"/></g>
 <polyline class="ln ours" points="64.4,59.9 82.8,110.3 101.2,137.2 119.6,149.5 138.0,163.3 156.4,169.0 174.8,176.8 193.2,182.4 211.6,186.4 230.0,189.8 248.4,191.7 266.8,191.1"/>
 <g class="pt-g"><title>iFeCo, 100k steps: FID 69.15</title><circle class="pt ours" cx="64.4" cy="59.9" r="7"/></g>
 <g class="pt-g"><title>iFeCo, 200k steps: FID 48.86</title><circle class="pt ours" cx="82.8" cy="110.3" r="7"/></g>
@@ -263,15 +263,15 @@ bibtex: |
 <g class="pt-g"><title>iFeCo, 1200k steps: FID 28.03</title><circle class="pt ours" cx="266.8" cy="191.1" r="7"/></g>
 <line class="arr" x1="262.8" y1="151.0" x2="129.5" y2="151.0" marker-end="url(#tcv-acc)"/>
 <text class="spd" x="274" y="46" text-anchor="end">2.9&times; fewer steps</text>
-<text class="end base" x="272.8" y="155.0">Baseline</text>
+<text class="end base" x="272.8" y="155.0">Vanilla</text>
 <text class="end ours" x="272.8" y="195.1">iFeCo</text></svg>
         </div>
-        <figcaption>REPA takes its alignment target from a frozen pretrained encoder, while iFeCo takes it from the model's own features at a cleaner view, which the flow-map training step already computes. Right: 1-step FID over training on ImageNet 256&times;256; the arrow is the training saved to reach the baseline's final FID.</figcaption>
+        <figcaption>REPA takes its alignment target from a frozen pretrained encoder, while iFeCo takes it from the model's own features at a cleaner view, which the flow-map training step already computes. Right: 1-step FID over training on ImageNet 256&times;256; the arrow is the training saved to reach the vanilla model's final FID.</figcaption>
     </figure>
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> Flow maps can learn good internal features on their own, without the pretrained encoder that REPA borrows. One added loss, with no extra forward pass and less than 2% extra time per training step, reaches the baseline's final one-step FID on ImageNet 256 2.9 to 3.2 times sooner on Shortcut, 2.1 to 2.3 times sooner on LSD, and 1.8 times sooner on MeanFlow when the loss covers every row.</p>
+    <p class="tldr"><strong>TL;DR:</strong> Flow maps can learn good internal features on their own, without the pretrained encoder that REPA borrows. One added loss, with no extra forward pass and less than 2% extra time per training step, reaches the vanilla model's final one-step FID on ImageNet 256 2.9 to 3.2 times sooner on Shortcut, 2.1 to 2.3 times sooner on LSD, and 1.8 times sooner on MeanFlow when the loss covers every row.</p>
 </section>
 
 <section id="context" class="intro">
@@ -287,12 +287,12 @@ bibtex: |
             <button type="button" class="btn" data-on="meanflow" aria-pressed="false">MeanFlow<span class="fe-long"> SiT-B/2</span></button>
         </div>
         <div class="fe-media fe-pair set-shortcut">
-            <figure><figcaption>Baseline</figcaption><img src="samples_shortcut_baseline.webp" width="768" height="768" alt="Shortcut baseline, one-step samples: four classes, four samples each." loading="lazy"></figure>
-            <figure><figcaption class="ours">iFeCo</figcaption><img src="samples_shortcut_feco.webp" width="768" height="768" alt="Shortcut with iFeCo, one-step samples with the same classes and noise as the baseline." loading="lazy"></figure>
+            <figure><figcaption>Vanilla</figcaption><img src="samples_shortcut_baseline.webp" width="768" height="768" alt="Shortcut vanilla model, one-step samples: four classes, four samples each." loading="lazy"></figure>
+            <figure><figcaption class="ours">iFeCo</figcaption><img src="samples_shortcut_feco.webp" width="768" height="768" alt="Shortcut with iFeCo, one-step samples with the same classes and noise as the vanilla model." loading="lazy"></figure>
         </div>
         <div class="fe-media fe-pair set-meanflow">
-            <figure><figcaption>Baseline</figcaption><img src="samples_meanflow_baseline.webp" width="768" height="768" alt="MeanFlow baseline, one-step samples: four classes, four samples each." loading="lazy"></figure>
-            <figure><figcaption class="ours">iFeCo</figcaption><img src="samples_meanflow_feco.webp" width="768" height="768" alt="MeanFlow with iFeCo, one-step samples with the same classes and noise as the baseline." loading="lazy"></figure>
+            <figure><figcaption>Vanilla</figcaption><img src="samples_meanflow_baseline.webp" width="768" height="768" alt="MeanFlow vanilla model, one-step samples: four classes, four samples each." loading="lazy"></figure>
+            <figure><figcaption class="ours">iFeCo</figcaption><img src="samples_meanflow_feco.webp" width="768" height="768" alt="MeanFlow with iFeCo, one-step samples with the same classes and noise as the vanilla model." loading="lazy"></figure>
         </div>
         <figcaption>ImageNet 256&times;256, one sampling step, 1.2M training steps, uncurated. Each row is one class; both grids share classes and noise, so the pictures differ only by the loss.</figcaption>
     </figure>
@@ -565,16 +565,16 @@ bibtex: |
 
 <section id="results">
     <h2>Results</h2>
-    <p>iFeCo reaches the baseline's final 1-step FID 2 to 3 times sooner on Shortcut and LSD, at under 2% extra time per step. Dashed: the same loss on all rows of the batch, which helps most on MeanFlow.</p>
+    <p>iFeCo reaches the vanilla model's final 1-step FID 2 to 3 times sooner on Shortcut and LSD, at under 2% extra time per step. Dashed: the same loss on all rows of the batch, which helps most on MeanFlow.</p>
     <figure class="fe-fig" id="fe-curves">
         <div class="tabs fe-tabs only-phone" role="group" aria-label="Flow-map family" hidden>
             <button type="button" class="btn" data-on="0" aria-pressed="true">MeanFlow</button>
             <button type="button" class="btn" data-on="1" aria-pressed="false">Shortcut</button>
             <button type="button" class="btn" data-on="2" aria-pressed="false">LSD</button>
         </div>
-        <div class="fe-key wide" aria-hidden="true"><span><i></i>Baseline</span><span><i class="k-ours"></i>iFeCo</span><span><i class="k-all"></i>iFeCo, all rows</span><span><i class="k-repa"></i>REPA (frozen DINOv2)</span><span><i class="k-ls"></i>LayerSync</span></div>
+        <div class="fe-key wide" aria-hidden="true"><span><i></i>Vanilla</span><span><i class="k-ours"></i>iFeCo</span><span><i class="k-all"></i>iFeCo, all rows</span><span><i class="k-repa"></i>REPA (frozen DINOv2)</span><span><i class="k-ls"></i>LayerSync</span></div>
         <div class="fe-media fe-curves wide">
-<svg class="fs curve fam-0" viewBox="0 0 300 210" role="img" aria-label="MeanFlow SiT-B/2, 1-step FID over training steps. Baseline ends at 6.12 after 1200k steps; REPA ends at 4.86 after 1200k steps; iFeCo ends at 8.03 after 400k steps."><text class="ttl" x="46" y="18" text-anchor="start">MeanFlow <tspan class="sz">SiT-B/2</tspan></text>
+<svg class="fs curve fam-0" viewBox="0 0 300 210" role="img" aria-label="MeanFlow SiT-B/2, 1-step FID over training steps. Vanilla ends at 6.12 after 1200k steps; REPA ends at 4.86 after 1200k steps; iFeCo ends at 8.03 after 400k steps."><text class="ttl" x="46" y="18" text-anchor="start">MeanFlow <tspan class="sz">SiT-B/2</tspan></text>
 <line class="grid" x1="46" y1="165.7" x2="288" y2="165.7"/>
 <text class="tick" x="40" y="169.7" text-anchor="end">5</text>
 <line class="grid" x1="46" y1="147.8" x2="288" y2="147.8"/>
@@ -597,17 +597,17 @@ bibtex: |
 <line class="axis" x1="46" y1="30" x2="46" y2="176"/>
 <text class="ax" transform="translate(13 103.0) rotate(-90)" text-anchor="middle">1-step FID</text>
 <polyline class="ln base" points="78.8,30.0 84.7,52.4 104.1,82.1 123.4,99.9 142.8,112.8 162.2,123.2 181.5,131.4 200.9,138.1 220.2,138.4 239.6,141.5 259.0,144.0 278.3,145.9"/>
-<g class="pt-g"><title>Baseline, 200k steps: FID 15.91</title><circle class="pt base" cx="84.7" cy="52.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 300k steps: FID 11.75</title><circle class="pt base" cx="104.1" cy="82.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 400k steps: FID 9.79</title><circle class="pt base" cx="123.4" cy="99.9" r="7"/></g>
-<g class="pt-g"><title>Baseline, 500k steps: FID 8.58</title><circle class="pt base" cx="142.8" cy="112.8" r="7"/></g>
-<g class="pt-g"><title>Baseline, 600k steps: FID 7.72</title><circle class="pt base" cx="162.2" cy="123.2" r="7"/></g>
-<g class="pt-g"><title>Baseline, 700k steps: FID 7.10</title><circle class="pt base" cx="181.5" cy="131.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 800k steps: FID 6.63</title><circle class="pt base" cx="200.9" cy="138.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 900k steps: FID 6.61</title><circle class="pt base" cx="220.2" cy="138.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1000k steps: FID 6.40</title><circle class="pt base" cx="239.6" cy="141.5" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1100k steps: FID 6.24</title><circle class="pt base" cx="259.0" cy="144.0" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1200k steps: FID 6.12</title><circle class="pt base" cx="278.3" cy="145.9" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 200k steps: FID 15.91</title><circle class="pt base" cx="84.7" cy="52.4" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 300k steps: FID 11.75</title><circle class="pt base" cx="104.1" cy="82.1" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 400k steps: FID 9.79</title><circle class="pt base" cx="123.4" cy="99.9" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 500k steps: FID 8.58</title><circle class="pt base" cx="142.8" cy="112.8" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 600k steps: FID 7.72</title><circle class="pt base" cx="162.2" cy="123.2" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 700k steps: FID 7.10</title><circle class="pt base" cx="181.5" cy="131.4" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 800k steps: FID 6.63</title><circle class="pt base" cx="200.9" cy="138.1" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 900k steps: FID 6.61</title><circle class="pt base" cx="220.2" cy="138.4" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1000k steps: FID 6.40</title><circle class="pt base" cx="239.6" cy="141.5" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1100k steps: FID 6.24</title><circle class="pt base" cx="259.0" cy="144.0" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1200k steps: FID 6.12</title><circle class="pt base" cx="278.3" cy="145.9" r="7"/></g>
 <polyline class="ln repa" points="73.0,30.0 84.7,80.2 104.1,112.2 123.4,127.8 142.8,141.1 162.2,150.0 181.5,154.1 200.9,158.9 220.2,161.1 239.6,164.9 259.0,165.9 278.3,168.5"/>
 <g class="pt-g"><title>REPA, 200k steps: FID 11.97</title><circle class="pt repa" cx="84.7" cy="80.2" r="7"/></g>
 <g class="pt-g"><title>REPA, 300k steps: FID 8.64</title><circle class="pt repa" cx="104.1" cy="112.2" r="7"/></g>
@@ -636,7 +636,7 @@ bibtex: |
 <g class="pt-g"><title>iFeCo, all rows, 900k steps: FID 5.70</title><circle class="pt ours" cx="220.2" cy="152.8" r="7"/></g>
 <g class="pt-g"><title>iFeCo, all rows, 1000k steps: FID 5.62</title><circle class="pt ours" cx="239.6" cy="154.2" r="7"/></g>
 <text class="spd" x="284" y="46" text-anchor="end">1.8&times; sooner, all rows</text></svg>
-<svg class="fs curve fam-1" viewBox="0 0 300 210" role="img" aria-label="Shortcut DiT-B/2, 1-step FID over training steps. Baseline ends at 37.0 after 1200k steps; REPA ends at 36.1 after 1200k steps; iFeCo ends at 28.0 after 1200k steps."><text class="ttl" x="46" y="18" text-anchor="start">Shortcut <tspan class="sz">DiT-B/2</tspan></text>
+<svg class="fs curve fam-1" viewBox="0 0 300 210" role="img" aria-label="Shortcut DiT-B/2, 1-step FID over training steps. Vanilla ends at 37.0 after 1200k steps; REPA ends at 36.1 after 1200k steps; iFeCo ends at 28.0 after 1200k steps."><text class="ttl" x="46" y="18" text-anchor="start">Shortcut <tspan class="sz">DiT-B/2</tspan></text>
 <line class="grid" x1="46" y1="158.4" x2="288" y2="158.4"/>
 <text class="tick" x="40" y="162.4" text-anchor="end">30</text>
 <line class="grid" x1="46" y1="122.9" x2="288" y2="122.9"/>
@@ -657,18 +657,18 @@ bibtex: |
 <line class="axis" x1="46" y1="30" x2="46" y2="176"/>
 <text class="ax" transform="translate(13 103.0) rotate(-90)" text-anchor="middle">1-step FID</text>
 <polyline class="ln base" points="65.4,36.9 84.7,71.1 104.1,91.1 123.4,101.1 142.8,108.0 162.2,113.4 181.5,118.5 201.0,123.4 220.2,124.1 239.6,129.3 259.0,132.1 278.3,132.7"/>
-<g class="pt-g"><title>Baseline, 100k steps: FID 80.35</title><circle class="pt base" cx="65.4" cy="36.9" r="7"/></g>
-<g class="pt-g"><title>Baseline, 200k steps: FID 60.88</title><circle class="pt base" cx="84.7" cy="71.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 300k steps: FID 51.78</title><circle class="pt base" cx="104.1" cy="91.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 400k steps: FID 47.75</title><circle class="pt base" cx="123.4" cy="101.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 500k steps: FID 45.16</title><circle class="pt base" cx="142.8" cy="108.0" r="7"/></g>
-<g class="pt-g"><title>Baseline, 600k steps: FID 43.20</title><circle class="pt base" cx="162.2" cy="113.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 700k steps: FID 41.44</title><circle class="pt base" cx="181.5" cy="118.5" r="7"/></g>
-<g class="pt-g"><title>Baseline, 801k steps: FID 39.83</title><circle class="pt base" cx="201.0" cy="123.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 900k steps: FID 39.62</title><circle class="pt base" cx="220.2" cy="124.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1000k steps: FID 37.99</title><circle class="pt base" cx="239.6" cy="129.3" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1100k steps: FID 37.11</title><circle class="pt base" cx="259.0" cy="132.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1200k steps: FID 36.95</title><circle class="pt base" cx="278.3" cy="132.7" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 100k steps: FID 80.35</title><circle class="pt base" cx="65.4" cy="36.9" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 200k steps: FID 60.88</title><circle class="pt base" cx="84.7" cy="71.1" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 300k steps: FID 51.78</title><circle class="pt base" cx="104.1" cy="91.1" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 400k steps: FID 47.75</title><circle class="pt base" cx="123.4" cy="101.1" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 500k steps: FID 45.16</title><circle class="pt base" cx="142.8" cy="108.0" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 600k steps: FID 43.20</title><circle class="pt base" cx="162.2" cy="113.4" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 700k steps: FID 41.44</title><circle class="pt base" cx="181.5" cy="118.5" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 801k steps: FID 39.83</title><circle class="pt base" cx="201.0" cy="123.4" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 900k steps: FID 39.62</title><circle class="pt base" cx="220.2" cy="124.1" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1000k steps: FID 37.99</title><circle class="pt base" cx="239.6" cy="129.3" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1100k steps: FID 37.11</title><circle class="pt base" cx="259.0" cy="132.1" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1200k steps: FID 36.95</title><circle class="pt base" cx="278.3" cy="132.7" r="7"/></g>
 <polyline class="ln repa" points="65.4,35.5 84.7,69.5 104.1,88.4 123.4,102.3 142.8,109.9 162.2,116.9 181.5,122.6 200.9,126.8 220.2,129.1 239.6,132.9 259.0,132.9 278.3,135.5"/>
 <g class="pt-g"><title>REPA, 100k steps: FID 81.26</title><circle class="pt repa" cx="65.4" cy="35.5" r="7"/></g>
 <g class="pt-g"><title>REPA, 200k steps: FID 61.68</title><circle class="pt repa" cx="84.7" cy="69.5" r="7"/></g>
@@ -721,7 +721,7 @@ bibtex: |
 <g class="pt-g"><title>LayerSync, 1000k steps: FID 32.68</title><circle class="pt ours" cx="239.6" cy="147.8" r="7"/></g>
 <g class="pt-g"><title>LayerSync, 1100k steps: FID 32.18</title><circle class="pt ours" cx="258.9" cy="149.7" r="7"/></g>
 <g class="pt-g"><title>LayerSync, 1200k steps: FID 31.92</title><circle class="pt ours" cx="278.3" cy="150.7" r="7"/></g></svg>
-<svg class="fs curve fam-2" viewBox="0 0 300 210" role="img" aria-label="LSD SiT-B/2, 1-step FID over training steps. Baseline ends at 12.4 after 1200k steps; REPA ends at 11.4 after 1200k steps; iFeCo ends at 10.6 after 1200k steps."><text class="ttl" x="46" y="18" text-anchor="start">LSD <tspan class="sz">SiT-B/2</tspan></text>
+<svg class="fs curve fam-2" viewBox="0 0 300 210" role="img" aria-label="LSD SiT-B/2, 1-step FID over training steps. Vanilla ends at 12.4 after 1200k steps; REPA ends at 11.4 after 1200k steps; iFeCo ends at 10.6 after 1200k steps."><text class="ttl" x="46" y="18" text-anchor="start">LSD <tspan class="sz">SiT-B/2</tspan></text>
 <line class="grid" x1="46" y1="176.0" x2="288" y2="176.0"/>
 <text class="tick" x="40" y="180.0" text-anchor="end">10</text>
 <line class="grid" x1="46" y1="136.6" x2="288" y2="136.6"/>
@@ -744,18 +744,18 @@ bibtex: |
 <line class="axis" x1="46" y1="30" x2="46" y2="176"/>
 <text class="ax" transform="translate(13 103.0) rotate(-90)" text-anchor="middle">1-step FID</text>
 <polyline class="ln base" points="65.4,38.7 84.7,79.9 104.1,104.5 123.4,117.5 142.8,129.2 162.2,134.4 181.5,138.2 200.9,142.7 220.2,144.7 239.6,150.8 259.0,153.9 278.3,155.0"/>
-<g class="pt-g"><title>Baseline, 100k steps: FID 41.13</title><circle class="pt base" cx="65.4" cy="38.7" r="7"/></g>
-<g class="pt-g"><title>Baseline, 200k steps: FID 26.91</title><circle class="pt base" cx="84.7" cy="79.9" r="7"/></g>
-<g class="pt-g"><title>Baseline, 300k steps: FID 20.88</title><circle class="pt base" cx="104.1" cy="104.5" r="7"/></g>
-<g class="pt-g"><title>Baseline, 400k steps: FID 18.27</title><circle class="pt base" cx="123.4" cy="117.5" r="7"/></g>
-<g class="pt-g"><title>Baseline, 500k steps: FID 16.19</title><circle class="pt base" cx="142.8" cy="129.2" r="7"/></g>
-<g class="pt-g"><title>Baseline, 600k steps: FID 15.35</title><circle class="pt base" cx="162.2" cy="134.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 700k steps: FID 14.76</title><circle class="pt base" cx="181.5" cy="138.2" r="7"/></g>
-<g class="pt-g"><title>Baseline, 800k steps: FID 14.09</title><circle class="pt base" cx="200.9" cy="142.7" r="7"/></g>
-<g class="pt-g"><title>Baseline, 900k steps: FID 13.80</title><circle class="pt base" cx="220.2" cy="144.7" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1000k steps: FID 12.96</title><circle class="pt base" cx="239.6" cy="150.8" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1100k steps: FID 12.56</title><circle class="pt base" cx="259.0" cy="153.9" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1200k steps: FID 12.42</title><circle class="pt base" cx="278.3" cy="155.0" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 100k steps: FID 41.13</title><circle class="pt base" cx="65.4" cy="38.7" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 200k steps: FID 26.91</title><circle class="pt base" cx="84.7" cy="79.9" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 300k steps: FID 20.88</title><circle class="pt base" cx="104.1" cy="104.5" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 400k steps: FID 18.27</title><circle class="pt base" cx="123.4" cy="117.5" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 500k steps: FID 16.19</title><circle class="pt base" cx="142.8" cy="129.2" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 600k steps: FID 15.35</title><circle class="pt base" cx="162.2" cy="134.4" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 700k steps: FID 14.76</title><circle class="pt base" cx="181.5" cy="138.2" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 800k steps: FID 14.09</title><circle class="pt base" cx="200.9" cy="142.7" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 900k steps: FID 13.80</title><circle class="pt base" cx="220.2" cy="144.7" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1000k steps: FID 12.96</title><circle class="pt base" cx="239.6" cy="150.8" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1100k steps: FID 12.56</title><circle class="pt base" cx="259.0" cy="153.9" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1200k steps: FID 12.42</title><circle class="pt base" cx="278.3" cy="155.0" r="7"/></g>
 <polyline class="ln repa" points="65.4,48.0 84.7,97.6 104.1,121.6 123.4,132.3 142.8,146.1 162.2,147.2 181.5,152.5 200.9,152.9 220.2,157.7 239.6,158.7 258.9,157.8 278.3,162.9"/>
 <g class="pt-g"><title>REPA, 100k steps: FID 37.38</title><circle class="pt repa" cx="65.4" cy="48.0" r="7"/></g>
 <g class="pt-g"><title>REPA, 200k steps: FID 22.43</title><circle class="pt repa" cx="84.7" cy="97.6" r="7"/></g>
@@ -793,7 +793,7 @@ bibtex: |
 <g class="pt-g"><title>iFeCo, all rows, 800k steps: FID 11.07</title><circle class="pt ours" cx="200.9" cy="166.1" r="7"/></g>
 <g class="pt-g"><title>iFeCo, all rows, 900k steps: FID 10.74</title><circle class="pt ours" cx="220.2" cy="169.1" r="7"/></g>
 <g class="pt-g"><title>iFeCo, all rows, 1000k steps: FID 10.97</title><circle class="pt ours" cx="239.6" cy="167.0" r="7"/></g></svg>
-<svg class="fs curve fam-0" viewBox="0 0 300 210" role="img" aria-label="MeanFlow SiT-XL/2, 1-step FID over training steps. Baseline ends at 3.50 after 1200k steps; iFeCo ends at 3.60 after 700k steps."><text class="ttl" x="46" y="18" text-anchor="start"><tspan class="sz">SiT-XL/2</tspan></text>
+<svg class="fs curve fam-0" viewBox="0 0 300 210" role="img" aria-label="MeanFlow SiT-XL/2, 1-step FID over training steps. Vanilla ends at 3.50 after 1200k steps; iFeCo ends at 3.60 after 700k steps."><text class="ttl" x="46" y="18" text-anchor="start"><tspan class="sz">SiT-XL/2</tspan></text>
 <line class="grid" x1="46" y1="155.8" x2="288" y2="155.8"/>
 <text class="tick" x="40" y="159.8" text-anchor="end">4</text>
 <line class="grid" x1="46" y1="119.0" x2="288" y2="119.0"/>
@@ -814,18 +814,18 @@ bibtex: |
 <line class="axis" x1="46" y1="30" x2="46" y2="176"/>
 <text class="ax" transform="translate(13 103.0) rotate(-90)" text-anchor="middle">1-step FID</text>
 <polyline class="ln base" points="65.4,34.4 84.7,99.4 104.1,131.1 123.4,147.1 142.8,160.4 162.2,160.7 181.5,160.9 200.9,162.1 220.2,172.4 239.6,169.7 258.9,168.7 278.3,167.9"/>
-<g class="pt-g"><title>Baseline, 100k steps: FID 15.25</title><circle class="pt base" cx="65.4" cy="34.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 200k steps: FID 7.45</title><circle class="pt base" cx="84.7" cy="99.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 300k steps: FID 5.25</title><circle class="pt base" cx="104.1" cy="131.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 400k steps: FID 4.40</title><circle class="pt base" cx="123.4" cy="147.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 500k steps: FID 3.80</title><circle class="pt base" cx="142.8" cy="160.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 600k steps: FID 3.79</title><circle class="pt base" cx="162.2" cy="160.7" r="7"/></g>
-<g class="pt-g"><title>Baseline, 700k steps: FID 3.78</title><circle class="pt base" cx="181.5" cy="160.9" r="7"/></g>
-<g class="pt-g"><title>Baseline, 800k steps: FID 3.73</title><circle class="pt base" cx="200.9" cy="162.1" r="7"/></g>
-<g class="pt-g"><title>Baseline, 900k steps: FID 3.33</title><circle class="pt base" cx="220.2" cy="172.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1000k steps: FID 3.43</title><circle class="pt base" cx="239.6" cy="169.7" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1100k steps: FID 3.47</title><circle class="pt base" cx="258.9" cy="168.7" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1200k steps: FID 3.50</title><circle class="pt base" cx="278.3" cy="167.9" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 100k steps: FID 15.25</title><circle class="pt base" cx="65.4" cy="34.4" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 200k steps: FID 7.45</title><circle class="pt base" cx="84.7" cy="99.4" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 300k steps: FID 5.25</title><circle class="pt base" cx="104.1" cy="131.1" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 400k steps: FID 4.40</title><circle class="pt base" cx="123.4" cy="147.1" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 500k steps: FID 3.80</title><circle class="pt base" cx="142.8" cy="160.4" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 600k steps: FID 3.79</title><circle class="pt base" cx="162.2" cy="160.7" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 700k steps: FID 3.78</title><circle class="pt base" cx="181.5" cy="160.9" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 800k steps: FID 3.73</title><circle class="pt base" cx="200.9" cy="162.1" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 900k steps: FID 3.33</title><circle class="pt base" cx="220.2" cy="172.4" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1000k steps: FID 3.43</title><circle class="pt base" cx="239.6" cy="169.7" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1100k steps: FID 3.47</title><circle class="pt base" cx="258.9" cy="168.7" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1200k steps: FID 3.50</title><circle class="pt base" cx="278.3" cy="167.9" r="7"/></g>
 <polyline class="ln ours" points="65.4,38.8 84.7,102.4 104.1,132.8 123.4,146.7 142.8,156.9 162.2,137.8 181.5,165.4"/>
 <g class="pt-g"><title>iFeCo, 100k steps: FID 14.52</title><circle class="pt ours" cx="65.4" cy="38.8" r="7"/></g>
 <g class="pt-g"><title>iFeCo, 200k steps: FID 7.20</title><circle class="pt ours" cx="84.7" cy="102.4" r="7"/></g>
@@ -834,7 +834,7 @@ bibtex: |
 <g class="pt-g"><title>iFeCo, 500k steps: FID 3.95</title><circle class="pt ours" cx="142.8" cy="156.9" r="7"/></g>
 <g class="pt-g"><title>iFeCo, 600k steps: FID 4.88</title><circle class="pt ours" cx="162.2" cy="137.8" r="7"/></g>
 <g class="pt-g"><title>iFeCo, 700k steps: FID 3.60</title><circle class="pt ours" cx="181.5" cy="165.4" r="7"/></g></svg>
-<svg class="fs curve fam-1" viewBox="0 0 300 210" role="img" aria-label="Shortcut DiT-XL/2, 1-step FID over training steps. Baseline ends at 18.6 after 1200k steps; iFeCo ends at 12.7 after 1200k steps."><text class="ttl" x="46" y="18" text-anchor="start"><tspan class="sz">DiT-XL/2</tspan></text>
+<svg class="fs curve fam-1" viewBox="0 0 300 210" role="img" aria-label="Shortcut DiT-XL/2, 1-step FID over training steps. Vanilla ends at 18.6 after 1200k steps; iFeCo ends at 12.7 after 1200k steps."><text class="ttl" x="46" y="18" text-anchor="start"><tspan class="sz">DiT-XL/2</tspan></text>
 <line class="grid" x1="46" y1="155.8" x2="288" y2="155.8"/>
 <text class="tick" x="40" y="159.8" text-anchor="end">15</text>
 <line class="grid" x1="46" y1="129.7" x2="288" y2="129.7"/>
@@ -857,18 +857,18 @@ bibtex: |
 <line class="axis" x1="46" y1="30" x2="46" y2="176"/>
 <text class="ax" transform="translate(13 103.0) rotate(-90)" text-anchor="middle">1-step FID</text>
 <polyline class="ln base" points="65.4,36.8 84.7,73.7 104.1,94.6 123.4,106.6 142.8,115.6 162.2,121.3 181.5,125.8 200.9,128.4 220.2,130.8 239.6,132.7 259.0,134.3 278.3,136.5"/>
-<g class="pt-g"><title>Baseline, 100k steps: FID 55.64</title><circle class="pt base" cx="65.4" cy="36.8" r="7"/></g>
-<g class="pt-g"><title>Baseline, 200k steps: FID 37.08</title><circle class="pt base" cx="84.7" cy="73.7" r="7"/></g>
-<g class="pt-g"><title>Baseline, 300k steps: FID 29.43</title><circle class="pt base" cx="104.1" cy="94.6" r="7"/></g>
-<g class="pt-g"><title>Baseline, 400k steps: FID 25.78</title><circle class="pt base" cx="123.4" cy="106.6" r="7"/></g>
-<g class="pt-g"><title>Baseline, 500k steps: FID 23.35</title><circle class="pt base" cx="142.8" cy="115.6" r="7"/></g>
-<g class="pt-g"><title>Baseline, 600k steps: FID 21.93</title><circle class="pt base" cx="162.2" cy="121.3" r="7"/></g>
-<g class="pt-g"><title>Baseline, 700k steps: FID 20.87</title><circle class="pt base" cx="181.5" cy="125.8" r="7"/></g>
-<g class="pt-g"><title>Baseline, 800k steps: FID 20.27</title><circle class="pt base" cx="200.9" cy="128.4" r="7"/></g>
-<g class="pt-g"><title>Baseline, 900k steps: FID 19.74</title><circle class="pt base" cx="220.2" cy="130.8" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1000k steps: FID 19.34</title><circle class="pt base" cx="239.6" cy="132.7" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1100k steps: FID 19.00</title><circle class="pt base" cx="259.0" cy="134.3" r="7"/></g>
-<g class="pt-g"><title>Baseline, 1200k steps: FID 18.55</title><circle class="pt base" cx="278.3" cy="136.5" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 100k steps: FID 55.64</title><circle class="pt base" cx="65.4" cy="36.8" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 200k steps: FID 37.08</title><circle class="pt base" cx="84.7" cy="73.7" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 300k steps: FID 29.43</title><circle class="pt base" cx="104.1" cy="94.6" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 400k steps: FID 25.78</title><circle class="pt base" cx="123.4" cy="106.6" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 500k steps: FID 23.35</title><circle class="pt base" cx="142.8" cy="115.6" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 600k steps: FID 21.93</title><circle class="pt base" cx="162.2" cy="121.3" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 700k steps: FID 20.87</title><circle class="pt base" cx="181.5" cy="125.8" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 800k steps: FID 20.27</title><circle class="pt base" cx="200.9" cy="128.4" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 900k steps: FID 19.74</title><circle class="pt base" cx="220.2" cy="130.8" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1000k steps: FID 19.34</title><circle class="pt base" cx="239.6" cy="132.7" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1100k steps: FID 19.00</title><circle class="pt base" cx="259.0" cy="134.3" r="7"/></g>
+<g class="pt-g"><title>Vanilla, 1200k steps: FID 18.55</title><circle class="pt base" cx="278.3" cy="136.5" r="7"/></g>
 <polyline class="ln ours" points="65.4,57.3 84.7,102.2 104.1,123.8 123.4,137.9 142.8,146.8 162.2,152.1 181.5,158.7 200.9,162.7 220.2,164.2 239.6,167.6 259.0,169.5 278.3,170.8"/>
 <g class="pt-g"><title>iFeCo, 100k steps: FID 44.42</title><circle class="pt ours" cx="65.4" cy="57.3" r="7"/></g>
 <g class="pt-g"><title>iFeCo, 200k steps: FID 27.06</title><circle class="pt ours" cx="84.7" cy="102.2" r="7"/></g>
@@ -884,13 +884,13 @@ bibtex: |
 <g class="pt-g"><title>iFeCo, 1200k steps: FID 12.71</title><circle class="pt ours" cx="278.3" cy="170.8" r="7"/></g>
 <text class="spd" x="284" y="46" text-anchor="end">3.1&times; sooner</text></svg>
         </div>
-        <figcaption>1-step FID-50k over training steps on ImageNet 256&times;256 (log scale). The label gives how many times sooner iFeCo reaches the baseline's final FID. Dashed: iFeCo with the loss on all rows. The default MeanFlow iFeCo curves stop at 400k (B/2) and 700k (XL/2) steps, so the MeanFlow B/2 label uses the all-rows model. REPA, shown at B/2, is our reference with a frozen DINOv2 encoder; LayerSync, shown on Shortcut B/2, aligns a weaker block with a deeper block of the same forward pass.</figcaption>
+        <figcaption>1-step FID-50k over training steps on ImageNet 256&times;256 (log scale). The label gives how many times sooner iFeCo reaches the vanilla model's final FID. Dashed: iFeCo with the loss on all rows. The default MeanFlow iFeCo curves stop at 400k (B/2) and 700k (XL/2) steps, so the MeanFlow B/2 label uses the all-rows model. REPA, shown at B/2, is our reference with a frozen DINOv2 encoder; LayerSync, shown on Shortcut B/2, aligns a weaker block with a deeper block of the same forward pass.</figcaption>
     </figure>
     <div class="table-wrap">
         <table class="res">
             <thead>
                 <tr class="sup"><th></th><th></th><th class="span">Frozen encoder</th><th colspan="3" class="span">Encoder-free</th></tr>
-                <tr><th>Model <span class="st">steps</span></th><th>Baseline</th><th><a href="https://arxiv.org/abs/2410.06940">REPA</a></th><th><a href="https://arxiv.org/abs/2510.12581">LayerSync</a></th><th class="oc">iFeCo</th><th class="oc">All rows</th></tr>
+                <tr><th>Model <span class="st">steps</span></th><th>Vanilla</th><th><a href="https://arxiv.org/abs/2410.06940">REPA</a></th><th><a href="https://arxiv.org/abs/2510.12581">LayerSync</a></th><th class="oc">iFeCo</th><th class="oc">All rows</th></tr>
             </thead>
             <tbody>
                 <tr><th colspan="6"><a href="https://arxiv.org/abs/2410.12557">Shortcut</a></th></tr>
@@ -906,9 +906,9 @@ bibtex: |
             </tbody>
         </table>
     </div>
-    <p class="caption">1-step FID-50k on ImageNet 256&times;256 (lower is better), at the latest training step of each model; bold is the best in each row. All rows: iFeCo with the loss also on the rows without a jump. LSD XL/2 and MeanFlow XL/2 are still training; at MeanFlow XL/2 iFeCo crosses the baseline (behind at 500k and 600k), so the gain there is not reliable.</p>
+    <p class="caption">1-step FID-50k on ImageNet 256&times;256 (lower is better), at the latest training step of each model; bold is the best in each row. All rows: iFeCo with the loss also on the rows without a jump. LSD XL/2 and MeanFlow XL/2 are still training; at MeanFlow XL/2 iFeCo crosses the vanilla model (behind at 500k and 600k), so the gain there is not reliable.</p>
     <figure class="fe-fig">
-<svg class="fs bars-ms" viewBox="0 0 560 218" role="img" aria-label="Multi-step FID reduction against the baseline. Shortcut B/2, 8 steps: iFeCo 24%, REPA 32%; MeanFlow B/2, 4 steps: iFeCo 7%, REPA 18%; LSD B/2, 4 steps: iFeCo 13%, REPA 24%.">
+<svg class="fs bars-ms" viewBox="0 0 560 218" role="img" aria-label="Multi-step FID reduction against the vanilla model. Shortcut B/2, 8 steps: iFeCo 24%, REPA 32%; MeanFlow B/2, 4 steps: iFeCo 7%, REPA 18%; LSD B/2, 4 steps: iFeCo 13%, REPA 24%.">
 <line class="grid" x1="150.0" y1="20" x2="150.0" y2="194"/>
 <text class="tick" x="150.0" y="208" text-anchor="middle">0%</text>
 <line class="grid" x1="255.7" y1="20" x2="255.7" y2="194"/>
@@ -918,22 +918,22 @@ bibtex: |
 <line class="grid" x1="467.1" y1="20" x2="467.1" y2="194"/>
 <text class="tick" x="467.1" y="208" text-anchor="middle">30%</text>
 <text class="tick" x="142" y="51" text-anchor="end">Shortcut B/2, 8 steps</text>
-<g><title>iFeCo: FID 18.04 against 23.89 for the baseline</title><rect class="bar-ours" x="150" y="32" width="258.9" height="16" rx="2"/></g>
+<g><title>iFeCo: FID 18.04 against 23.89 for the vanilla model</title><rect class="bar-ours" x="150" y="32" width="258.9" height="16" rx="2"/></g>
 <text class="tick bar-ours-t" x="413.9" y="44">24% iFeCo</text>
-<g><title>REPA: FID 16.14 against 23.89 for the baseline</title><rect class="bar-rep" x="150" y="51" width="342.9" height="16" rx="2"/></g>
+<g><title>REPA: FID 16.14 against 23.89 for the vanilla model</title><rect class="bar-rep" x="150" y="51" width="342.9" height="16" rx="2"/></g>
 <text class="tick bar-rep-t" x="497.9" y="63">32% REPA</text>
 <text class="tick" x="142" y="107" text-anchor="end">MeanFlow B/2, 4 steps</text>
-<g><title>iFeCo: FID 6.23 against 6.72 for the baseline</title><rect class="bar-ours" x="150" y="88" width="77.1" height="16" rx="2"/></g>
+<g><title>iFeCo: FID 6.23 against 6.72 for the vanilla model</title><rect class="bar-ours" x="150" y="88" width="77.1" height="16" rx="2"/></g>
 <text class="tick bar-ours-t" x="232.1" y="100">7%</text>
-<g><title>REPA: FID 5.54 against 6.72 for the baseline</title><rect class="bar-rep" x="150" y="107" width="185.6" height="16" rx="2"/></g>
+<g><title>REPA: FID 5.54 against 6.72 for the vanilla model</title><rect class="bar-rep" x="150" y="107" width="185.6" height="16" rx="2"/></g>
 <text class="tick bar-rep-t" x="340.6" y="119">18%</text>
 <text class="tick" x="142" y="163" text-anchor="end">LSD B/2, 4 steps</text>
-<g><title>iFeCo: FID 5.62 against 6.47 for the baseline</title><rect class="bar-ours" x="150" y="144" width="138.9" height="16" rx="2"/></g>
+<g><title>iFeCo: FID 5.62 against 6.47 for the vanilla model</title><rect class="bar-ours" x="150" y="144" width="138.9" height="16" rx="2"/></g>
 <text class="tick bar-ours-t" x="293.9" y="156">13%</text>
-<g><title>REPA: FID 4.93 against 6.47 for the baseline</title><rect class="bar-rep" x="150" y="163" width="251.6" height="16" rx="2"/></g>
+<g><title>REPA: FID 4.93 against 6.47 for the vanilla model</title><rect class="bar-rep" x="150" y="163" width="251.6" height="16" rx="2"/></g>
 <text class="tick bar-rep-t" x="406.6" y="175">24%</text>
 </svg>
-        <figcaption>Multi-step sampling: how much each method lowers the baseline's FID-50k (hover for values), at 1.2M training steps (MeanFlow at 400k). The 1-step gain carries over; REPA, with a frozen encoder, gains more here.</figcaption>
+        <figcaption>Multi-step sampling: how much each method lowers the vanilla model's FID-50k (hover for values), at 1.2M training steps (MeanFlow at 400k). The 1-step gain carries over; REPA, with a frozen encoder, gains more here.</figcaption>
     </figure>
     <p><strong>Against REPA and LayerSync.</strong> iFeCo has the lowest 1-step FID on Shortcut and LSD without a pretrained encoder; REPA (frozen DINOv2) is better on MeanFlow and at several sampling steps. Our REPA reference is not tuned for flow maps.</p>
     <p><strong>The loss on all rows.</strong> Rows without a jump can take the loss too, with no extra forward pass (dashed curves above). It helps most early in training; on LSD the two settings end level.</p>
