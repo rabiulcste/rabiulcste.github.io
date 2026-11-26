@@ -906,35 +906,7 @@ bibtex: |
             </tbody>
         </table>
     </div>
-    <p class="caption">1-step FID-50k on ImageNet 256&times;256 (lower is better), at the latest training step of each model; bold is the best in each row. All rows: iFeCo with the loss also on the rows without a jump. LSD XL/2 and MeanFlow XL/2 are still training; at MeanFlow XL/2 iFeCo crosses the vanilla model (behind at 500k and 600k), so the gain there is not reliable.</p>
-    <figure class="fe-fig">
-<svg class="fs bars-ms" viewBox="0 0 560 218" role="img" aria-label="Multi-step FID reduction against the vanilla model. Shortcut B/2, 8 steps: iFeCo 24%, REPA 32%; MeanFlow B/2, 4 steps: iFeCo 7%, REPA 18%; LSD B/2, 4 steps: iFeCo 13%, REPA 24%.">
-<line class="grid" x1="150.0" y1="20" x2="150.0" y2="194"/>
-<text class="tick" x="150.0" y="208" text-anchor="middle">0%</text>
-<line class="grid" x1="255.7" y1="20" x2="255.7" y2="194"/>
-<text class="tick" x="255.7" y="208" text-anchor="middle">10%</text>
-<line class="grid" x1="361.4" y1="20" x2="361.4" y2="194"/>
-<text class="tick" x="361.4" y="208" text-anchor="middle">20%</text>
-<line class="grid" x1="467.1" y1="20" x2="467.1" y2="194"/>
-<text class="tick" x="467.1" y="208" text-anchor="middle">30%</text>
-<text class="tick" x="142" y="51" text-anchor="end">Shortcut B/2, 8 steps</text>
-<g><title>iFeCo: FID 18.04 against 23.89 for the vanilla model</title><rect class="bar-ours" x="150" y="32" width="258.9" height="16" rx="2"/></g>
-<text class="tick bar-ours-t" x="413.9" y="44">24% iFeCo</text>
-<g><title>REPA: FID 16.14 against 23.89 for the vanilla model</title><rect class="bar-rep" x="150" y="51" width="342.9" height="16" rx="2"/></g>
-<text class="tick bar-rep-t" x="497.9" y="63">32% REPA</text>
-<text class="tick" x="142" y="107" text-anchor="end">MeanFlow B/2, 4 steps</text>
-<g><title>iFeCo: FID 6.23 against 6.72 for the vanilla model</title><rect class="bar-ours" x="150" y="88" width="77.1" height="16" rx="2"/></g>
-<text class="tick bar-ours-t" x="232.1" y="100">7%</text>
-<g><title>REPA: FID 5.54 against 6.72 for the vanilla model</title><rect class="bar-rep" x="150" y="107" width="185.6" height="16" rx="2"/></g>
-<text class="tick bar-rep-t" x="340.6" y="119">18%</text>
-<text class="tick" x="142" y="163" text-anchor="end">LSD B/2, 4 steps</text>
-<g><title>iFeCo: FID 5.62 against 6.47 for the vanilla model</title><rect class="bar-ours" x="150" y="144" width="138.9" height="16" rx="2"/></g>
-<text class="tick bar-ours-t" x="293.9" y="156">13%</text>
-<g><title>REPA: FID 4.93 against 6.47 for the vanilla model</title><rect class="bar-rep" x="150" y="163" width="251.6" height="16" rx="2"/></g>
-<text class="tick bar-rep-t" x="406.6" y="175">24%</text>
-</svg>
-        <figcaption>Multi-step sampling: how much each method lowers the vanilla model's FID-50k (hover for values), at 1.2M training steps (MeanFlow at 400k). The 1-step gain carries over; REPA, with a frozen encoder, gains more here.</figcaption>
-    </figure>
+    <p class="caption">1-step FID-50k on ImageNet 256&times;256 (lower is better), at the latest training step of each model; bold is the best in each row. All rows: iFeCo with the loss also on the rows without a jump. LSD XL/2 and MeanFlow XL/2 are still training; at MeanFlow XL/2 iFeCo crosses the vanilla model (behind at 500k and 600k), so the gain there is not reliable. With 4 or 8 sampling steps the gain carries over (Shortcut B/2: 23.89 to 18.04 at 8 steps; LSD B/2: 6.47 to 5.62 at 4 steps); there REPA, with its frozen encoder, is lower.</p>
     <p><strong>Against REPA and LayerSync.</strong> iFeCo has the lowest 1-step FID on Shortcut and LSD without a pretrained encoder; REPA (frozen DINOv2) is better on MeanFlow and at several sampling steps. Our REPA reference is not tuned for flow maps.</p>
     <p><strong>The loss on all rows.</strong> Rows without a jump can take the loss too, with no extra forward pass (dashed curves above). It helps most early in training; on LSD the two settings end level.</p>
 </section>
