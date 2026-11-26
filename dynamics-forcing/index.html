@@ -38,7 +38,7 @@ bibtex: |
     .curve .grid { stroke: var(--grid); } .curve .axis { stroke: var(--muted); } .curve .ax { font-size: 12px; fill: var(--muted); }
     .curve .ln { fill: none; stroke-width: 2.2; stroke-linejoin: round; } .curve .ln.base { stroke: var(--sl); } .curve .ln.ours { stroke: var(--acc); }
     .curve .pt { fill: transparent; } .curve .pt-g:hover .pt { fill: var(--text); r: 4; }
-    .curve .end { font-size: 13px; font-weight: 600; } .curve .end.base { fill: var(--sl); } .curve .end.ours { fill: var(--acc); }
+    .curve .end { font-size: 13px; font-weight: 600; } .curve .end.base { fill: var(--sl); } .curve .end.ours { fill: var(--acc); } .curve .lead { stroke: var(--muted); stroke-width: 0.8; }
     .df-media { margin-bottom: 16px; }
     .df-curves { display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: auto auto; grid-auto-flow: column; gap: 4px 24px; }
     .df-key { padding-left: calc((100% - 24px) / 2 * 46 / 330 + 10px); display: flex; flex-wrap: wrap; gap: 4px 18px; margin-block: 0 8px; color: var(--muted); font-size: var(--text-secondary); }
@@ -286,8 +286,10 @@ bibtex: |
 <g class="pt-g"><title>Dynamics Forcing, 75k steps: FVD 170.9</title><circle class="pt ours" cx="119.8" cy="70.1" r="7"/></g>
 <g class="pt-g"><title>Dynamics Forcing, 100k steps: FVD 25.7</title><circle class="pt ours" cx="144.4" cy="140.8" r="7"/></g>
 <g class="pt-g"><title>Dynamics Forcing, 125k steps: FVD 15.3</title><circle class="pt ours" cx="169.0" cy="160.1" r="7"/></g>
-<text class="end ours" x="175.0" y="158.5">Dynamics Forcing</text>
-<text class="end base" x="199.6" y="174.5">Shortcut Forcing</text></svg>
+<line class="lead" x1="196.6" y1="164.8" x2="200.6" y2="164.0"/>
+<text class="end base" x="203.6" y="168.0">Shortcut Forcing</text>
+<line class="lead" x1="172.0" y1="160.1" x2="200.6" y2="148.0"/>
+<text class="end ours" x="203.6" y="152.0">Dynamics Forcing</text></svg>
 <svg class="fs curve" viewBox="0 0 330 150" role="img" aria-label="RT-1, LPIPS over training steps. Shortcut Forcing ends at 0.0587 after 150k steps; Dynamics Forcing ends at 0.0604 after 125k steps."><line class="grid" x1="46" y1="90.5" x2="292" y2="90.5"/>
 <text class="tick" x="40" y="94.5" text-anchor="end">0.1</text>
 <line class="grid" x1="46" y1="48.0" x2="292" y2="48.0"/>
@@ -319,8 +321,10 @@ bibtex: |
 <g class="pt-g"><title>Dynamics Forcing, 75k steps: LPIPS 0.1128</title><circle class="pt ours" cx="119.8" cy="85.1" r="7"/></g>
 <g class="pt-g"><title>Dynamics Forcing, 100k steps: LPIPS 0.0736</title><circle class="pt ours" cx="144.4" cy="101.7" r="7"/></g>
 <g class="pt-g"><title>Dynamics Forcing, 125k steps: LPIPS 0.0604</title><circle class="pt ours" cx="169.0" cy="107.3" r="7"/></g>
-<text class="end ours" x="175.0" y="103.7">Dynamics Forcing</text>
-<text class="end base" x="199.6" y="119.7">Shortcut Forcing</text></svg>
+<line class="lead" x1="196.6" y1="108.1" x2="200.6" y2="104.0"/>
+<text class="end base" x="203.6" y="108.0">Shortcut Forcing</text>
+<line class="lead" x1="172.0" y1="107.3" x2="200.6" y2="88.0"/>
+<text class="end ours" x="203.6" y="92.0">Dynamics Forcing</text></svg>
 <svg class="fs curve" viewBox="0 0 330 210" role="img" aria-label="BridgeData V2, FVD on a log scale over training steps. Shortcut Forcing ends at 322.3 after 75k steps; Dynamics Forcing ends at 72.1 after 100k steps."><text class="ttl" x="46" y="18" text-anchor="start">BridgeData V2</text>
 <line class="grid" x1="46" y1="176.0" x2="292" y2="176.0"/>
 <text class="tick" x="40" y="180.0" text-anchor="end">50</text>
