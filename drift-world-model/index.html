@@ -396,4 +396,18 @@ bibtex: |
 </div>
         <figcaption>Atari 100k, human-normalized score over 26 games and 5 seeds. DreamerV3 is computed from its released per-seed learning curves. The intervals of DRIFT and DIAMOND overlap. TWISTER, a latent world model without per-seed scores, reports a higher mean and median.</figcaption>
     </figure>
+    <h3>Crafter</h3>
+    <p>On Crafter, DRIFT scores above DreamerV2 by 1M steps and more than three times higher than DIAMOND, the diffusion world model baseline.</p>
+    <figure class="fig">
+        <div class="chart chart--bars" role="img" aria-label="Crafter score at 1M environment steps: DreamerV3 14.5, DRIFT 14.0, DreamerV2 13.1, Rainbow 5.3, PPO 5.0, DIAMOND 3.8.">
+<div class="chart-head"><strong>Crafter score at 1M steps</strong><span class="chart-sub">%, higher is better</span></div>
+<div class="chart-row "><span class="chart-lab">DreamerV3</span><span class="chart-trk"><b class="bar" style="width:90.6%"></b></span><span class="chart-val">14.5</span></div>
+<div class="chart-row is-ours c-ours"><span class="chart-lab">DRIFT</span><span class="chart-trk"><b class="bar" style="width:87.6%"></b></span><span class="chart-val">14.0</span></div>
+<div class="chart-row "><span class="chart-lab">DreamerV2</span><span class="chart-trk"><b class="bar" style="width:81.6%"></b></span><span class="chart-val">13.1</span></div>
+<div class="chart-row "><span class="chart-lab">Rainbow</span><span class="chart-trk"><b class="bar" style="width:33.0%"></b></span><span class="chart-val">5.3</span></div>
+<div class="chart-row "><span class="chart-lab">PPO</span><span class="chart-trk"><b class="bar" style="width:31.4%"></b></span><span class="chart-val">5.0</span></div>
+<div class="chart-row "><span class="chart-lab">DIAMOND</span><span class="chart-trk"><b class="bar" style="width:23.7%"></b></span><span class="chart-val">3.8</span></div>
+</div>
+        <figcaption>Crafter score after 1M environment steps. Baselines are published results, except DIAMOND, which we trained with the authors' code.</figcaption>
+    </figure>
 </section>
