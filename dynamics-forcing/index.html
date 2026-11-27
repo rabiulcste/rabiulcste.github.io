@@ -27,111 +27,204 @@ bibtex: |
 ---
 <!-- TODO: co-authors (add them to the authors list and the bibtex) -->
 <style>
-    :root { --accent: var(--drift-teal); --accent-2: var(--drift); --alt: var(--sl); --acc: var(--drift-teal); --sl: #475569; }
-    @media (prefers-color-scheme: dark) { :root { --sl: #94a3b8; } }
-    :root[data-theme="dark"] { --sl: #94a3b8; }
-    /* FVD and LPIPS curves: the .curve rules of the iFeCo page. */
-    .fs { display: block; width: 100%; height: auto; }
-    .fs text { font-family: var(--font); font-size: 15px; fill: var(--text); }
-    .fs .tick { font-size: 13px; fill: var(--muted); }
-    .curve .ttl { font-weight: 600; }
+    :root { --accent: var(--drift-teal); --accent-2: var(--drift); --alt: #475569; }
+    @media (prefers-color-scheme: dark) { :root { --alt: #94a3b8; } }
+    :root[data-theme="dark"] { --alt: #94a3b8; }
+    /* FVD and LPIPS curves (iFeCo's .curve rules; no shared curve component). */
+    .curve .ttl { font-weight: 600; } .curve .tick { font-size: 13px; fill: var(--muted); }
     .curve .grid { stroke: var(--grid); } .curve .axis { stroke: var(--muted); } .curve .ax { font-size: 12px; fill: var(--muted); }
-    .curve .ln { fill: none; stroke-width: 2.2; stroke-linejoin: round; } .curve .ln.base { stroke: var(--sl); } .curve .ln.ours { stroke: var(--acc); }
-    .curve .pt { fill: transparent; } .curve .pt-g:hover .pt { fill: var(--text); r: 4; }
-    .curve .end { font-size: 13px; font-weight: 600; } .curve .end.base { fill: var(--sl); } .curve .end.ours { fill: var(--acc); } .curve .lead { stroke: var(--muted); stroke-width: 0.8; }
-    .df-media { margin-bottom: 16px; }
-    /* Method figure (port of the paper figure): blue is the diffusion branch, orange the prediction branch. */
-    .drift-diagram .mod-blu { fill: var(--drift); fill-opacity: 0.08; stroke: var(--drift); stroke-width: 1.2; }
+    .curve .ln { fill: none; stroke-width: 2.2; stroke-linejoin: round; } .curve .ln.base { stroke: var(--alt); } .curve .ln.ours { stroke: var(--accent); }
+    .curve .pt { fill: transparent; } .curve .pt-g:hover .pt { fill: var(--text); r: 4; } .curve .lead { stroke: var(--muted); stroke-width: 0.8; }
+    .curve .end { font-size: 13px; font-weight: 600; } .curve .end.base { fill: var(--alt); } .curve .end.ours { fill: var(--accent); }
+    /* Method figure: the paper's blue diffusion branch (shared diagrams have no blue text or line). */
     .drift-diagram .lb-blu { font-size: 14px; fill: var(--drift); } .drift-diagram--stack .lb-blu { font-size: 16px; }
     .drift-diagram .ln-blu { fill: none; stroke: var(--drift); stroke-width: 1.2; } .drift-diagram .ahd-blu { fill: var(--drift); }
     /* Hero: the lookahead arcs draw one by one on load, then hold; static under reduced motion. */
-    @media (prefers-reduced-motion: no-preference) {
-        .df-arc { stroke-dasharray: var(--len); animation: df-draw 0.6s ease-out both; animation-delay: calc(var(--i) * 0.35s); }
-    }
+    @media (prefers-reduced-motion: no-preference) { .df-arc { stroke-dasharray: var(--len); animation: df-draw 0.6s ease-out both; animation-delay: calc(var(--i) * 0.35s); } }
     @keyframes df-draw { from { stroke-dashoffset: var(--len); opacity: 0; } 8% { opacity: 1; } to { stroke-dashoffset: 0; opacity: 1; } }
-    .df-curves { display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: auto auto; grid-auto-flow: column; gap: 4px 24px; }
-    .df-key { padding-left: calc((100% - 24px) / 2 * 46 / 330 + 10px); display: flex; flex-wrap: wrap; gap: 4px 18px; margin-block: 0 8px; color: var(--muted); font-size: var(--text-secondary); }
-    .df-key span { display: inline-flex; align-items: center; gap: 6px; }
-    .df-key i { display: inline-block; width: 18px; height: 0; border-top: 2.5px solid var(--sl); } .df-key .k-ours { border-color: var(--acc); }
-    @media (max-width: 767px) {
-        .df-curves { grid-template-columns: 1fr; grid-auto-flow: row; max-width: 400px; margin: 0 auto; }
-        .df-key { max-width: 400px; margin-left: auto; margin-right: auto; padding-left: calc(min(100%, 400px) * 46 / 330); }
-    }
 </style>
 
 <section class="drift-page">
     <figure class="fig">
 <!-- hero:begin (written by build_svgs.py) -->
-<div class="drift-media wide only-desk"><svg class="drift-svg drift-diagram df-hero" viewBox="0 0 837 222" role="img" aria-labelledby="dfhd-t"><title id="dfhd-t">Left, a diffusion world model: past frames go into the world model, which learns by reconstructing the next frame. Right, Dynamics Forcing: the same model also predicts where its own state goes, several steps ahead, given the actions.</title><defs><marker id="dfhd-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfhd-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfhd-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker><marker id="dfhd-blu" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-blu"/></marker></defs><g><text class="ttl2" x="0.0" y="14.0" text-anchor="start">Diffusion world model</text>
-<image class="tile" href="tile_f0.webp" x="0.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="132.0" width="52" height="52" rx="4"/>
-<image class="tile" href="tile_f1.webp" x="60.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="60.0" y="132.0" width="52" height="52" rx="4"/>
-<image class="tile" href="tile_f2.webp" x="120.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="120.0" y="132.0" width="52" height="52" rx="4"/>
-<path class="ln" d="M176 158.0 L198 158.0" marker-end="url(#dfhd-ah)"/>
-<rect class="hero" x="201.0" y="128.0" width="100.0" height="60.0" rx="6.6"/>
-<text class="hero-s" x="251.0" y="152.0" text-anchor="middle">World</text>
-<text class="hero-s" x="251.0" y="172.0" text-anchor="middle">model</text>
-<path class="ln" d="M303 158.0 L338 158.0" marker-end="url(#dfhd-ah)"/>
-<image class="tile" href="tile_f3.webp" x="342.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="342.0" y="132.0" width="52" height="52" rx="4"/>
-<text class="lab" x="198.0" y="214.0" text-anchor="middle">learns by reconstructing frames</text></g><g transform="translate(441 0)"><text class="ttl2" x="0.0" y="14.0" text-anchor="start">Dynamics Forcing</text>
-<image class="tile" href="tile_f0.webp" x="0.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="132.0" width="52" height="52" rx="4"/>
-<image class="tile" href="tile_f1.webp" x="60.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="60.0" y="132.0" width="52" height="52" rx="4"/>
-<image class="tile" href="tile_f2.webp" x="120.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="120.0" y="132.0" width="52" height="52" rx="4"/>
-<path class="ln" d="M176 158.0 L198 158.0" marker-end="url(#dfhd-ah)"/>
-<rect class="hero" x="201.0" y="128.0" width="100.0" height="60.0" rx="6.6"/>
-<text class="hero-s" x="251.0" y="152.0" text-anchor="middle">World</text>
-<text class="hero-s" x="251.0" y="172.0" text-anchor="middle">model</text>
-<path class="ln" d="M303 158.0 L338 158.0" marker-end="url(#dfhd-ah)"/>
-<image class="tile" href="tile_f3.webp" x="342.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="342.0" y="132.0" width="52" height="52" rx="4"/>
-<path class="ln" d="M251 126 L251 96" marker-end="url(#dfhd-ah)"/>
-<path class="ln-teal df-arc" style="--i:1;--len:67" d="M254 81 Q 270.5 29.0 289 80" marker-end="url(#dfhd-teal)"/>
-<circle cx="290" cy="88" r="6" class="mod-teal" stroke-dasharray="2.5 2"/>
-<path class="ln-teal df-arc" style="--i:2;--len:111" d="M254 81 Q 286.5 1.0 321 80" marker-end="url(#dfhd-teal)"/>
-<circle cx="322" cy="88" r="6" class="mod-teal" stroke-dasharray="2.5 2"/>
-<path class="ln-teal df-arc" style="--i:3;--len:155" d="M254 81 Q 302.5 -27.0 353 80" marker-end="url(#dfhd-teal)"/>
-<circle cx="354" cy="88" r="6" class="mod-teal" stroke-dasharray="2.5 2"/>
-<path class="ln-teal df-arc" style="--i:4;--len:199" d="M254 81 Q 318.5 -55.0 385 80" marker-end="url(#dfhd-teal)"/>
-<circle cx="386" cy="88" r="6" class="mod-teal" stroke-dasharray="2.5 2"/>
-<circle cx="251" cy="88" r="8" class="mod-teal"/>
-<path class="ln-amb" d="M262 101 L281 101"/>
-<path class="ln-amb" d="M301 101 L313 101"/>
-<path class="ln-amb" d="M333 101 L345 101"/>
-<path class="ln-amb" d="M365 101 L377 101"/>
-<text class="lab" x="198.0" y="214.0" text-anchor="middle">also predicts where its own state goes, several steps ahead</text></g></svg></div>
-<div class="drift-media drift-media--stack only-phone"><svg class="drift-svg drift-diagram df-hero drift-diagram--stack" viewBox="0 0 396 470" role="img" aria-labelledby="dfhp-t"><title id="dfhp-t">Left, a diffusion world model: past frames go into the world model, which learns by reconstructing the next frame. Right, Dynamics Forcing: the same model also predicts where its own state goes, several steps ahead, given the actions.</title><defs><marker id="dfhp-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfhp-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfhp-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker><marker id="dfhp-blu" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-blu"/></marker></defs><g><text class="ttl2" x="0.0" y="14.0" text-anchor="start">Diffusion world model</text>
-<image class="tile" href="tile_f0.webp" x="0.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="132.0" width="52" height="52" rx="4"/>
-<image class="tile" href="tile_f1.webp" x="60.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="60.0" y="132.0" width="52" height="52" rx="4"/>
-<image class="tile" href="tile_f2.webp" x="120.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="120.0" y="132.0" width="52" height="52" rx="4"/>
-<path class="ln" d="M176 158.0 L198 158.0" marker-end="url(#dfhp-ah)"/>
-<rect class="hero" x="201.0" y="128.0" width="100.0" height="60.0" rx="6.6"/>
-<text class="hero-s" x="251.0" y="152.0" text-anchor="middle">World</text>
-<text class="hero-s" x="251.0" y="172.0" text-anchor="middle">model</text>
-<path class="ln" d="M303 158.0 L338 158.0" marker-end="url(#dfhp-ah)"/>
-<image class="tile" href="tile_f3.webp" x="342.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="342.0" y="132.0" width="52" height="52" rx="4"/>
-<text class="lab" x="198.0" y="214.0" text-anchor="middle">learns by reconstructing frames</text></g><g transform="translate(0 250)"><text class="ttl2" x="0.0" y="14.0" text-anchor="start">Dynamics Forcing</text>
-<image class="tile" href="tile_f0.webp" x="0.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="132.0" width="52" height="52" rx="4"/>
-<image class="tile" href="tile_f1.webp" x="60.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="60.0" y="132.0" width="52" height="52" rx="4"/>
-<image class="tile" href="tile_f2.webp" x="120.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="120.0" y="132.0" width="52" height="52" rx="4"/>
-<path class="ln" d="M176 158.0 L198 158.0" marker-end="url(#dfhp-ah)"/>
-<rect class="hero" x="201.0" y="128.0" width="100.0" height="60.0" rx="6.6"/>
-<text class="hero-s" x="251.0" y="152.0" text-anchor="middle">World</text>
-<text class="hero-s" x="251.0" y="172.0" text-anchor="middle">model</text>
-<path class="ln" d="M303 158.0 L338 158.0" marker-end="url(#dfhp-ah)"/>
-<image class="tile" href="tile_f3.webp" x="342.0" y="132.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="342.0" y="132.0" width="52" height="52" rx="4"/>
-<path class="ln" d="M251 126 L251 96" marker-end="url(#dfhp-ah)"/>
-<path class="ln-teal df-arc" style="--i:1;--len:67" d="M254 81 Q 270.5 29.0 289 80" marker-end="url(#dfhp-teal)"/>
-<circle cx="290" cy="88" r="6" class="mod-teal" stroke-dasharray="2.5 2"/>
-<path class="ln-teal df-arc" style="--i:2;--len:111" d="M254 81 Q 286.5 1.0 321 80" marker-end="url(#dfhp-teal)"/>
-<circle cx="322" cy="88" r="6" class="mod-teal" stroke-dasharray="2.5 2"/>
-<path class="ln-teal df-arc" style="--i:3;--len:155" d="M254 81 Q 302.5 -27.0 353 80" marker-end="url(#dfhp-teal)"/>
-<circle cx="354" cy="88" r="6" class="mod-teal" stroke-dasharray="2.5 2"/>
-<path class="ln-teal df-arc" style="--i:4;--len:199" d="M254 81 Q 318.5 -55.0 385 80" marker-end="url(#dfhp-teal)"/>
-<circle cx="386" cy="88" r="6" class="mod-teal" stroke-dasharray="2.5 2"/>
-<circle cx="251" cy="88" r="8" class="mod-teal"/>
-<path class="ln-amb" d="M262 101 L281 101"/>
-<path class="ln-amb" d="M301 101 L313 101"/>
-<path class="ln-amb" d="M333 101 L345 101"/>
-<path class="ln-amb" d="M365 101 L377 101"/>
-<text class="lab" x="198.0" y="214.0" text-anchor="middle">also predicts where its own state goes, several steps ahead</text></g></svg></div>
+<div class="drift-media only-desk"><svg class="drift-svg drift-diagram drift-diagram--stack df-hero" viewBox="-8 0 853 236" role="img" aria-labelledby="dfhd-t"><title id="dfhd-t">Left, a diffusion world model: past frames go into the world model, which learns by reconstructing the next frame. Right, Dynamics Forcing: the same model also predicts where its own state goes, several steps ahead, given the actions.</title><defs><marker id="dfhd-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfhd-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfhd-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker><marker id="dfhd-blu" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-blu"/></marker></defs><g><image class="tile" href="tile_f0.webp" x="0.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="120.0" width="52" height="52" rx="4"/>
+<image class="tile" href="tile_f1.webp" x="60.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="60.0" y="120.0" width="52" height="52" rx="4"/>
+<image class="tile" href="tile_noisy.webp" x="120.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="120.0" y="120.0" width="52" height="52" rx="4"/>
+<text class="lab" x="146.0" y="187.0" text-anchor="middle">noisy</text>
+<path class="ln" d="M176 146.0 L198 146.0" marker-end="url(#dfhd-ah)"/>
+<rect class="hero" x="201.0" y="116.0" width="100.0" height="60.0" rx="6.6"/>
+<text class="hero-s" x="251.0" y="140.0" text-anchor="middle">World</text>
+<text class="hero-s" x="251.0" y="160.0" text-anchor="middle">model</text>
+<path class="ln" d="M303 146.0 L338 146.0" marker-end="url(#dfhd-ah)"/>
+<image class="tile" href="tile_f2.webp" x="342.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="342.0" y="120.0" width="52" height="52" rx="4"/>
+<text class="lab" x="394.0" y="187.0" text-anchor="end">denoised</text>
+<path class="ln-faint" d="M251 114 L251 98"/>
+<rect x="240.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.36"/>
+<rect x="248.1" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.24"/>
+<rect x="255.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.30"/>
+<rect x="240.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.26"/>
+<rect x="248.1" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.39"/>
+<rect x="255.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.22"/>
+<rect x="240.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.31"/>
+<rect x="248.1" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.28"/>
+<rect x="255.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.35"/>
+<text class="ttl2" x="198.0" y="214.0" text-anchor="middle">Diffusion world model</text>
+<text class="lab" x="198.0" y="232.0" text-anchor="middle">learns by reconstructing frames</text></g><g transform="translate(441 0)"><image class="tile" href="tile_f0.webp" x="0.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="120.0" width="52" height="52" rx="4"/>
+<image class="tile" href="tile_f1.webp" x="60.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="60.0" y="120.0" width="52" height="52" rx="4"/>
+<image class="tile" href="tile_noisy.webp" x="120.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="120.0" y="120.0" width="52" height="52" rx="4"/>
+<text class="lab" x="146.0" y="187.0" text-anchor="middle">noisy</text>
+<path class="ln" d="M176 146.0 L198 146.0" marker-end="url(#dfhd-ah)"/>
+<rect class="hero" x="201.0" y="116.0" width="100.0" height="60.0" rx="6.6"/>
+<text class="hero-s" x="251.0" y="140.0" text-anchor="middle">World</text>
+<text class="hero-s" x="251.0" y="160.0" text-anchor="middle">model</text>
+<path class="ln" d="M303 146.0 L338 146.0" marker-end="url(#dfhd-ah)"/>
+<image class="tile" href="tile_f2.webp" x="342.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="342.0" y="120.0" width="52" height="52" rx="4"/>
+<text class="lab" x="394.0" y="187.0" text-anchor="end">denoised</text>
+<path class="ln" d="M251 114 L251 98" marker-end="url(#dfhd-ah)"/>
+<path class="ln-teal df-arc" style="--i:1;--len:65" d="M255 72 Q 269.0 20.0 287 71" marker-end="url(#dfhd-teal)"/>
+<rect x="276.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="284.1" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="291.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="276.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="284.1" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="291.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="276.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="284.1" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="291.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<path class="ln-teal df-arc" style="--i:2;--len:108" d="M255 72 Q 284.5 -8.0 318 71" marker-end="url(#dfhd-teal)"/>
+<rect x="307.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="315.1" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="322.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="307.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="315.1" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="322.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="307.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="315.1" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="322.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<path class="ln-teal df-arc" style="--i:3;--len:152" d="M255 72 Q 300.0 -36.0 349 71" marker-end="url(#dfhd-teal)"/>
+<rect x="338.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="346.1" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="353.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="338.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="346.1" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="353.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="338.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="346.1" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="353.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<path class="ln-teal df-arc" style="--i:4;--len:195" d="M255 72 Q 315.5 -64.0 380 71" marker-end="url(#dfhd-teal)"/>
+<rect x="369.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="377.1" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="384.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="369.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="377.1" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="384.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="369.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="377.1" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="384.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="240.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.85;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="248.1" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.35;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="255.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.6;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="240.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.45;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="248.1" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.95;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="255.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.3;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="240.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.65;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="248.1" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.5;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="255.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.8;stroke:var(--drift-teal);stroke-width:0.6"/>
+<path class="ln-amb" d="M255 103 L283 103"/>
+<path class="ln-amb" d="M291 103 L314 103"/>
+<path class="ln-amb" d="M322 103 L345 103"/>
+<path class="ln-amb" d="M353 103 L376 103"/>
+<text class="ttl2" x="198.0" y="214.0" text-anchor="middle">Dynamics Forcing</text>
+<text class="lab" x="198.0" y="232.0" text-anchor="middle">also predicts its own state several steps ahead</text></g></svg></div>
+<div class="drift-media drift-media--stack only-phone"><svg class="drift-svg drift-diagram drift-diagram--stack df-hero" viewBox="-8 0 412 478" role="img" aria-labelledby="dfhp-t"><title id="dfhp-t">Left, a diffusion world model: past frames go into the world model, which learns by reconstructing the next frame. Right, Dynamics Forcing: the same model also predicts where its own state goes, several steps ahead, given the actions.</title><defs><marker id="dfhp-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfhp-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfhp-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker><marker id="dfhp-blu" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-blu"/></marker></defs><g><image class="tile" href="tile_f0.webp" x="0.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="120.0" width="52" height="52" rx="4"/>
+<image class="tile" href="tile_f1.webp" x="60.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="60.0" y="120.0" width="52" height="52" rx="4"/>
+<image class="tile" href="tile_noisy.webp" x="120.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="120.0" y="120.0" width="52" height="52" rx="4"/>
+<text class="lab" x="146.0" y="187.0" text-anchor="middle">noisy</text>
+<path class="ln" d="M176 146.0 L198 146.0" marker-end="url(#dfhp-ah)"/>
+<rect class="hero" x="201.0" y="116.0" width="100.0" height="60.0" rx="6.6"/>
+<text class="hero-s" x="251.0" y="140.0" text-anchor="middle">World</text>
+<text class="hero-s" x="251.0" y="160.0" text-anchor="middle">model</text>
+<path class="ln" d="M303 146.0 L338 146.0" marker-end="url(#dfhp-ah)"/>
+<image class="tile" href="tile_f2.webp" x="342.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="342.0" y="120.0" width="52" height="52" rx="4"/>
+<text class="lab" x="394.0" y="187.0" text-anchor="end">denoised</text>
+<path class="ln-faint" d="M251 114 L251 98"/>
+<rect x="240.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.36"/>
+<rect x="248.1" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.24"/>
+<rect x="255.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.30"/>
+<rect x="240.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.26"/>
+<rect x="248.1" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.39"/>
+<rect x="255.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.22"/>
+<rect x="240.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.31"/>
+<rect x="248.1" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.28"/>
+<rect x="255.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--muted);fill-opacity:0.35"/>
+<text class="ttl2" x="198.0" y="214.0" text-anchor="middle">Diffusion world model</text>
+<text class="lab" x="198.0" y="232.0" text-anchor="middle">learns by reconstructing frames</text></g><g transform="translate(0 244)"><image class="tile" href="tile_f0.webp" x="0.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="0.0" y="120.0" width="52" height="52" rx="4"/>
+<image class="tile" href="tile_f1.webp" x="60.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="60.0" y="120.0" width="52" height="52" rx="4"/>
+<image class="tile" href="tile_noisy.webp" x="120.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="120.0" y="120.0" width="52" height="52" rx="4"/>
+<text class="lab" x="146.0" y="187.0" text-anchor="middle">noisy</text>
+<path class="ln" d="M176 146.0 L198 146.0" marker-end="url(#dfhp-ah)"/>
+<rect class="hero" x="201.0" y="116.0" width="100.0" height="60.0" rx="6.6"/>
+<text class="hero-s" x="251.0" y="140.0" text-anchor="middle">World</text>
+<text class="hero-s" x="251.0" y="160.0" text-anchor="middle">model</text>
+<path class="ln" d="M303 146.0 L338 146.0" marker-end="url(#dfhp-ah)"/>
+<image class="tile" href="tile_f2.webp" x="342.0" y="120.0" width="52" height="52" preserveAspectRatio="none"/><rect class="tile-f" x="342.0" y="120.0" width="52" height="52" rx="4"/>
+<text class="lab" x="394.0" y="187.0" text-anchor="end">denoised</text>
+<path class="ln" d="M251 114 L251 98" marker-end="url(#dfhp-ah)"/>
+<path class="ln-teal df-arc" style="--i:1;--len:65" d="M255 72 Q 269.0 20.0 287 71" marker-end="url(#dfhp-teal)"/>
+<rect x="276.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="284.1" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="291.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="276.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="284.1" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="291.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="276.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="284.1" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="291.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<path class="ln-teal df-arc" style="--i:2;--len:108" d="M255 72 Q 284.5 -8.0 318 71" marker-end="url(#dfhp-teal)"/>
+<rect x="307.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="315.1" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="322.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="307.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="315.1" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="322.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="307.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="315.1" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="322.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<path class="ln-teal df-arc" style="--i:3;--len:152" d="M255 72 Q 300.0 -36.0 349 71" marker-end="url(#dfhp-teal)"/>
+<rect x="338.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="346.1" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="353.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="338.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="346.1" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="353.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="338.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="346.1" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="353.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<path class="ln-teal df-arc" style="--i:4;--len:195" d="M255 72 Q 315.5 -64.0 380 71" marker-end="url(#dfhp-teal)"/>
+<rect x="369.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="377.1" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="384.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="369.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="377.1" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="384.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="369.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="377.1" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="384.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.08;stroke:var(--drift-teal);stroke-opacity:0.7;stroke-width:0.7"/>
+<rect x="240.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.85;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="248.1" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.35;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="255.6" y="73.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.6;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="240.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.45;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="248.1" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.95;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="255.6" y="81.0" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.3;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="240.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.65;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="248.1" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.5;stroke:var(--drift-teal);stroke-width:0.6"/>
+<rect x="255.6" y="88.5" width="5.9" height="5.9" rx="1.2" style="fill:var(--drift-teal);fill-opacity:0.8;stroke:var(--drift-teal);stroke-width:0.6"/>
+<path class="ln-amb" d="M255 103 L283 103"/>
+<path class="ln-amb" d="M291 103 L314 103"/>
+<path class="ln-amb" d="M322 103 L345 103"/>
+<path class="ln-amb" d="M353 103 L376 103"/>
+<text class="ttl2" x="198.0" y="214.0" text-anchor="middle">Dynamics Forcing</text>
+<text class="lab" x="198.0" y="232.0" text-anchor="middle">also predicts its own state several steps ahead</text></g></svg></div>
 <!-- hero:end -->
         <figcaption>A diffusion world model learns by reconstructing frames; Dynamics Forcing also trains it to predict where its own state goes over the next several steps.</figcaption>
     </figure>
@@ -201,7 +294,7 @@ bibtex: |
 <text class="lab" x="648.0" y="272.6" text-anchor="end">lower noise</text>
 <path class="ln" d="M313.2 237.0 L592.8000000000001 237.0" stroke-dasharray="5 4" marker-end="url(#dfd-ah)"/>
 <text class="lab" x="537.0" y="230.0" text-anchor="middle">EMA</text>
-<rect class="mod-blu" x="6.0" y="52.8" width="150.0" height="37.2" rx="6"/>
+<rect class="tok-b" x="6.0" y="52.8" width="150.0" height="37.2" rx="6"/>
 <text class="lb-blu" x="81.0" y="76.4" text-anchor="middle">Diffusion head</text>
 <path class="ln-blu" d="M179.99999999999997 71.40000000000002 L158.0 71.40000000000002" marker-end="url(#dfd-blu)"/>
 <path class="ln-blu" d="M81.0 90.00000000000003 L81.0 285.0" marker-end="url(#dfd-blu)"/>
@@ -231,7 +324,7 @@ bibtex: |
 <text class="lb" x="198.0" y="354.0" text-anchor="middle">(EMA teacher)</text>
 <text class="lab" x="135.0" y="163.0" text-anchor="end">layer <tspan class='math'>ℓ<tspan class='sub' dy='4'>s</tspan></tspan></text>
 <text class="lab" x="135.0" y="447.0" text-anchor="end">layer <tspan class='math'>ℓ<tspan class='sub' dy='4'>d</tspan><tspan dy='-4'> &gt; ℓ</tspan><tspan class='sub' dy='4'>s</tspan></tspan></text>
-<rect class="mod-blu" x="4.0" y="31.0" width="118.0" height="30.0" rx="6"/>
+<rect class="tok-b" x="4.0" y="31.0" width="118.0" height="30.0" rx="6"/>
 <text class="lb-blu" x="63.0" y="51.0" text-anchor="middle">Diffusion head</text>
 <path class="ln-blu" d="M143.0 46 L124 46" marker-end="url(#dfp-blu)"/>
 <path class="ln-blu" d="M63 61 L63 214" marker-end="url(#dfp-blu)"/>
@@ -273,7 +366,7 @@ bibtex: |
     <figure class="fig">
 <div class="panels">
 <div>
-<div class="chart chart--bars" style="--lab:118px" role="img" aria-label="FVD on RT-1 under the DriftWorld protocol, log scale: VDM 406.13, IRASim 93.02, LVDM 94.58, DriftWorld 62.84, Shortcut Forcing 13.5, Dynamics Forcing 15.3.">
+<div class="chart chart--bars" style="--lab:118px;--val:50px" role="img" aria-label="FVD on RT-1 under the DriftWorld protocol, log scale: VDM 406.13, IRASim 93.02, LVDM 94.58, DriftWorld 62.84, Shortcut Forcing 13.5, Dynamics Forcing 15.3.">
 <div class="chart-head"><strong>RT-1</strong><span class="chart-sub">FVD, log scale, lower is better</span></div>
 <div class="chart-row"><span class="chart-lab">VDM</span><span class="chart-trk"><b class="bar" style="width:90.9%"></b></span><span class="chart-val">406.13</span></div>
 <div class="chart-row"><span class="chart-lab">IRASim</span><span class="chart-trk"><b class="bar" style="width:54.7%"></b></span><span class="chart-val">93.02</span></div>
@@ -284,7 +377,7 @@ bibtex: |
 </div>
 </div>
 <div>
-<div class="chart chart--bars" style="--lab:118px" role="img" aria-label="FVD on BridgeData V2 under the DriftWorld protocol, log scale: VDM 159.16, IRASim 91.55, LVDM 103.51, DriftWorld 46.05, Shortcut Forcing 322.3, Dynamics Forcing 72.1.">
+<div class="chart chart--bars" style="--lab:118px;--val:50px" role="img" aria-label="FVD on BridgeData V2 under the DriftWorld protocol, log scale: VDM 159.16, IRASim 91.55, LVDM 103.51, DriftWorld 46.05, Shortcut Forcing 322.3, Dynamics Forcing 72.1.">
 <div class="chart-head"><strong>BridgeData V2</strong><span class="chart-sub">FVD, log scale, lower is better</span></div>
 <div class="chart-row"><span class="chart-lab">VDM</span><span class="chart-trk"><b class="bar" style="width:67.9%"></b></span><span class="chart-val">159.16</span></div>
 <div class="chart-row"><span class="chart-lab">IRASim</span><span class="chart-trk"><b class="bar" style="width:54.3%"></b></span><span class="chart-val">91.55</span></div>
@@ -304,9 +397,9 @@ bibtex: |
     <p>Both variants are trained and scored the same way. In early training, Dynamics Forcing reaches lower FVD and LPIPS in fewer steps on BridgeData V2 (228 against 322 FVD at 75k). On RT-1 it is behind at first and ahead at 100k. At 125k the two are equal in FVD, and Dynamics Forcing has slightly lower LPIPS.</p>
     <figure class="fig">
 <!-- curves:begin (written by build_svgs.py) -->
-<div class="df-key wide" aria-hidden="true"><span><i></i>Shortcut Forcing</span><span><i class="k-ours"></i>Dynamics Forcing</span></div>
-<div class="df-media df-curves wide">
-<svg class="fs curve" viewBox="0 0 330 210" role="img" aria-label="RT-1, FVD on a log scale over training steps. Shortcut Forcing ends at 13.5 after 150k steps; Dynamics Forcing ends at 15.3 after 125k steps."><text class="ttl" x="46" y="18" text-anchor="start">RT-1</text>
+<div class="legend" aria-hidden="true"><span class="c-alt">Shortcut Forcing</span><span class="c-ours">Dynamics Forcing</span></div>
+<div class="panels">
+<div class="stack"><svg class="drift-svg curve" viewBox="0 0 330 210" role="img" aria-label="RT-1, FVD on a log scale over training steps. Shortcut Forcing ends at 13.5 after 150k steps; Dynamics Forcing ends at 15.3 after 125k steps."><text class="ttl" x="46" y="18" text-anchor="start">RT-1</text>
 <line class="grid" x1="46" y1="176.0" x2="292" y2="176.0"/>
 <text class="tick" x="40" y="180.0" text-anchor="end">10</text>
 <line class="grid" x1="46" y1="135.0" x2="292" y2="135.0"/>
@@ -346,8 +439,7 @@ bibtex: |
 <line class="lead" x1="196.6" y1="164.8" x2="200.6" y2="164.0"/>
 <text class="end base" x="203.6" y="168.0">Shortcut Forcing</text>
 <line class="lead" x1="172.0" y1="160.1" x2="200.6" y2="148.0"/>
-<text class="end ours" x="203.6" y="152.0">Dynamics Forcing</text></svg>
-<svg class="fs curve" viewBox="0 0 330 150" role="img" aria-label="RT-1, LPIPS over training steps. Shortcut Forcing ends at 0.0587 after 150k steps; Dynamics Forcing ends at 0.0604 after 125k steps."><line class="grid" x1="46" y1="90.5" x2="292" y2="90.5"/>
+<text class="end ours" x="203.6" y="152.0">Dynamics Forcing</text></svg><svg class="drift-svg curve" viewBox="0 0 330 150" role="img" aria-label="RT-1, LPIPS over training steps. Shortcut Forcing ends at 0.0587 after 150k steps; Dynamics Forcing ends at 0.0604 after 125k steps."><line class="grid" x1="46" y1="90.5" x2="292" y2="90.5"/>
 <text class="tick" x="40" y="94.5" text-anchor="end">0.1</text>
 <line class="grid" x1="46" y1="48.0" x2="292" y2="48.0"/>
 <text class="tick" x="40" y="52.0" text-anchor="end">0.2</text>
@@ -381,8 +473,8 @@ bibtex: |
 <line class="lead" x1="196.6" y1="108.1" x2="200.6" y2="104.0"/>
 <text class="end base" x="203.6" y="108.0">Shortcut Forcing</text>
 <line class="lead" x1="172.0" y1="107.3" x2="200.6" y2="88.0"/>
-<text class="end ours" x="203.6" y="92.0">Dynamics Forcing</text></svg>
-<svg class="fs curve" viewBox="0 0 330 210" role="img" aria-label="BridgeData V2, FVD on a log scale over training steps. Shortcut Forcing ends at 322.3 after 75k steps; Dynamics Forcing ends at 72.1 after 100k steps."><text class="ttl" x="46" y="18" text-anchor="start">BridgeData V2</text>
+<text class="end ours" x="203.6" y="92.0">Dynamics Forcing</text></svg></div>
+<div class="stack"><svg class="drift-svg curve" viewBox="0 0 330 210" role="img" aria-label="BridgeData V2, FVD on a log scale over training steps. Shortcut Forcing ends at 322.3 after 75k steps; Dynamics Forcing ends at 72.1 after 100k steps."><text class="ttl" x="46" y="18" text-anchor="start">BridgeData V2</text>
 <line class="grid" x1="46" y1="176.0" x2="292" y2="176.0"/>
 <text class="tick" x="40" y="180.0" text-anchor="end">50</text>
 <line class="grid" x1="46" y1="137.7" x2="292" y2="137.7"/>
@@ -416,8 +508,7 @@ bibtex: |
 <g class="pt-g"><title>Dynamics Forcing, 75k steps: FVD 228.2</title><circle class="pt ours" cx="119.8" cy="92.0" r="7"/></g>
 <g class="pt-g"><title>Dynamics Forcing, 100k steps: FVD 72.1</title><circle class="pt ours" cx="144.4" cy="155.8" r="7"/></g>
 <text class="end base" x="125.8" y="76.9">Shortcut Forcing</text>
-<text class="end ours" x="150.4" y="159.8">Dynamics Forcing</text></svg>
-<svg class="fs curve" viewBox="0 0 330 150" role="img" aria-label="BridgeData V2, LPIPS over training steps. Shortcut Forcing ends at 0.1131 after 75k steps; Dynamics Forcing ends at 0.0728 after 100k steps."><line class="grid" x1="46" y1="90.5" x2="292" y2="90.5"/>
+<text class="end ours" x="150.4" y="159.8">Dynamics Forcing</text></svg><svg class="drift-svg curve" viewBox="0 0 330 150" role="img" aria-label="BridgeData V2, LPIPS over training steps. Shortcut Forcing ends at 0.1131 after 75k steps; Dynamics Forcing ends at 0.0728 after 100k steps."><line class="grid" x1="46" y1="90.5" x2="292" y2="90.5"/>
 <text class="tick" x="40" y="94.5" text-anchor="end">0.1</text>
 <line class="grid" x1="46" y1="48.0" x2="292" y2="48.0"/>
 <text class="tick" x="40" y="52.0" text-anchor="end">0.2</text>
@@ -445,7 +536,7 @@ bibtex: |
 <g class="pt-g"><title>Dynamics Forcing, 75k steps: LPIPS 0.1076</title><circle class="pt ours" cx="119.8" cy="87.3" r="7"/></g>
 <g class="pt-g"><title>Dynamics Forcing, 100k steps: LPIPS 0.0728</title><circle class="pt ours" cx="144.4" cy="102.1" r="7"/></g>
 <text class="end base" x="125.8" y="88.9">Shortcut Forcing</text>
-<text class="end ours" x="150.4" y="106.1">Dynamics Forcing</text></svg>
+<text class="end ours" x="150.4" y="106.1">Dynamics Forcing</text></svg></div>
 </div>
 <!-- curves:end -->
         <figcaption>FVD (log scale, top) and LPIPS (bottom) on held-out episodes, lower is better, with 4 sampling steps and the same backbone and recipe for both models. Hover a point for its value. Training continues to 250k steps, so these are early observations. Language Table, DMLab and action-control results will be added.</figcaption>
