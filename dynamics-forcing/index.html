@@ -231,11 +231,11 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> Diffusion world models learn dynamics only implicitly, from reconstruction. Dynamics Forcing adds a self-supervised objective in latent space that predicts the model's own state up to <em>H</em> steps ahead from its current state and the actions, with targets from its EMA teacher. The prediction head is removed after training, so simulation is unchanged.</p>
+    <p class="tldr"><strong>TL;DR:</strong> Diffusion world models learn dynamics only implicitly, from reconstruction. Dynamics Forcing adds a self-supervised signal: the model learns to predict its own future state, several steps ahead, under the actions. The signal is used only in training, so the model simulates as before.</p>
 </section>
 <section class="intro">
     <p>A useful world model renders plausible future observations and represents how the state changes under an action. Diffusion world models such as <a href="https://arxiv.org/abs/2405.12399">DIAMOND</a> and <a href="https://danijar.com/project/dreamer4/">Dreamer 4</a> are trained by reconstruction alone. Each future frame is denoised from a corrupted copy, given the past frames and actions under causal attention. The frame holds the consequence of the action together with texture, lighting and background unrelated to it, and the loss weighs both alike. Nothing in training asks the model's state to encode where the actions lead.</p>
-    <p>Predictive self-supervised learning supplies a signal for the dynamics, with targets in latent space and no labels or pretrained encoder. Time gives the supervision. The state at frame <em>t</em>, given the actions that follow, is trained to predict the model's own state at frame <em>t+k</em>, with <em>k</em> drawn per clip from 1 to <em>H</em>. Causal attention keeps frame <em>t+k</em> hidden from the predictor, the target comes from an EMA teacher with stopped gradients, and denoising still renders the frames. The prediction head and the teacher are discarded after training.</p>
+    <p>Self-supervised prediction offers a second training signal. A model can learn by predicting its own representation of a later observation, which needs no labels and does not require modelling every pixel. For a world model, this means anticipating how its state evolves under the actions, several steps ahead, while diffusion still renders each frame. Dynamics Forcing adds this signal during training only, and the model simulates exactly as before.</p>
 </section>
 
 <section id="rollouts">
@@ -253,7 +253,13 @@ bibtex: |
 
 <section id="method">
     <h2>Dynamics Forcing</h2>
-    <p>The current state and the actions that follow predict the model's own state <em>k</em> steps ahead, taken from an EMA teacher.</p>
+    <p>Dynamics Forcing adds one training objective to a standard diffusion world model.</p>
+    <h3>Diffusion world model</h3>
+    <p>The world model is a 12-layer causal Transformer over latent frames. Each frame is corrupted independently, and the model denoises each future frame given the past frames and actions. It is trained with Shortcut Forcing, the objective of <a href="https://danijar.com/project/dreamer4/">Dreamer 4</a>, and samples each frame in 4 steps. The same model is the baseline, and Dynamics Forcing leaves it unchanged.</p>
+    <h3>Self-supervised dynamics target</h3>
+    <p>The added objective is a student-teacher loss in latent space. The student is the world model itself. Its layer-4 feature of frame <em>t</em> and the actions <em>a<sub>t</sub></em> to <em>a<sub>t+k&minus;1</sub></em> go through a small prediction head, which predicts the layer-8 feature of frame <em>t+k</em>. The teacher is an EMA copy of the model; it reads frame <em>t+k</em> at a lower noise level and receives no gradients. The loss is the cosine distance between the two features, and causal attention hides frame <em>t+k</em> from the student. Feature prediction alone admits trivial solutions. As in BYOL, the asymmetry and the stopped gradients prevent them, and the denoising loss anchors the features.</p>
+    <h3>Multi-horizon lookahead</h3>
+    <p>The offset <em>k</em> is drawn per clip from 1 to <em>H</em>, with <em>H</em> = 8 on every dataset, so one objective covers short and long lookahead. A next-frame target may be met largely by copying the current state; a target several frames ahead should require the change the actions cause. Layer 4 predicts layer 8 of 12, so the later layers remain for the generative loss. The prediction head and the teacher are discarded after training, so inference cost is unchanged.</p>
     <figure class="fig">
 <!-- diagram:begin (written by build_svgs.py) -->
 <div class="drift-media wide only-desk"><svg class="drift-svg drift-diagram" viewBox="0 0 837 392" role="img" aria-labelledby="dfd-t"><title id="dfd-t">Dynamics Forcing training step, after the paper's figure. Two identical causal Transformers: the student reads frame t with sampled noise, the EMA teacher reads frame t+k at lower noise, with k at most H. The diffusion head reads the student's top block and renders the denoised frame. The prediction head reads a shallow student block l_s and the actions a_t to a_t+k-1, and predicts the teacher's deeper block l_d with a cosine-similarity loss. The teacher is an exponential moving average of the student.</title><defs><marker id="dfd-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd"/></marker><marker id="dfd-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-amb"/></marker><marker id="dfd-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-teal"/></marker><marker id="dfd-blu" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10L2.5 5z" class="ahd-blu"/></marker></defs><rect class="mod" x="180.0" y="225.6" width="132.0" height="22.8" rx="3"/>
@@ -355,8 +361,6 @@ bibtex: |
 <!-- diagram:end -->
         <figcaption>One training step, after the paper's figure. The student reads frame <em>t</em> with sampled noise, and its top block feeds the diffusion head, which renders the denoised frame. A shallow student block (layer <em>&#8467;<sub>s</sub></em> = 4) and the actions feed the prediction head. The head predicts the deeper block (<em>&#8467;<sub>d</sub></em> = 8) of the EMA teacher, which reads frame <em>t+k</em> at lower noise, with a cosine-similarity loss. The offset <em>k</em> is drawn per clip from 1 to <em>H</em>, causal attention hides frame <em>t+k</em> from the student, and the prediction head and the teacher are discarded after training.</figcaption>
     </figure>
-    <h3>Design choices</h3>
-    <p>The horizon is <em>H</em> = 8 on every dataset. A next-frame target may be met largely by copying the current state; a target several frames ahead should require the change the actions cause. Layer 4 predicts layer 8 of 12, so the later layers remain for the generative loss. Feature prediction alone admits trivial solutions. As in BYOL, asymmetry and stopped gradients prevent them. Denoising remains the main objective.</p>
 </section>
 
 <section id="baseline">
