@@ -255,7 +255,7 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> Dynamics Forcing adds a training loss to a diffusion world model. Given the current state and a sequence of actions, the model predicts its own features several frames ahead. The prediction head is used only during training.</p>
+    <p class="tldr"><strong>TL;DR:</strong> Dynamics Forcing trains a diffusion world model to predict its own features several frames ahead, given the actions in between. This gives the model a direct training signal for how actions change the scene in addition to the loss for generating future frames. The prediction head is discarded after training, so rollouts cost the same.</p>
 </section>
 <section class="intro">
     <p>A useful world model renders plausible future observations and represents how the state changes under an action. Diffusion world models such as <a href="https://arxiv.org/abs/2405.12399">DIAMOND</a> and <a href="https://danijar.com/project/dreamer4/">Dreamer 4</a> are trained by reconstruction alone. Each future frame is denoised from a corrupted copy, given the past frames and actions under causal attention. The frame holds the consequence of the action together with texture, lighting and background unrelated to it, and the loss weighs both alike. Nothing in training asks the model's state to encode where the actions lead.</p>
