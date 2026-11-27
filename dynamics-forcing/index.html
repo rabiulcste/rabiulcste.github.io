@@ -231,11 +231,11 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> Diffusion world models learn dynamics only implicitly, from reconstruction. Dynamics Forcing adds a self-supervised objective in latent space that predicts the model's own state up to <em>H</em> steps ahead from its current state and the actions, with targets from its EMA teacher. The prediction head is removed after training, so simulation is unchanged.</p>
+    <p class="tldr"><strong>TL;DR:</strong> Diffusion world models learn dynamics only implicitly, from reconstruction. Dynamics Forcing adds a self-supervised signal: the model learns to predict its own future state, several steps ahead, under the actions. The signal is used only in training, so the model simulates as before.</p>
 </section>
 <section class="intro">
     <p>A useful world model renders plausible future observations and represents how the state changes under an action. Diffusion world models such as <a href="https://arxiv.org/abs/2405.12399">DIAMOND</a> and <a href="https://danijar.com/project/dreamer4/">Dreamer 4</a> are trained by reconstruction alone. Each future frame is denoised from a corrupted copy, given the past frames and actions under causal attention. The frame holds the consequence of the action together with texture, lighting and background unrelated to it, and the loss weighs both alike. Nothing in training asks the model's state to encode where the actions lead.</p>
-    <p>Predictive self-supervised learning supplies a signal for the dynamics, with targets in latent space and no labels or pretrained encoder. Time gives the supervision. The state at frame <em>t</em>, given the actions that follow, is trained to predict the model's own state at frame <em>t+k</em>, with <em>k</em> drawn per clip from 1 to <em>H</em>. Causal attention keeps frame <em>t+k</em> hidden from the predictor, the target comes from an EMA teacher with stopped gradients, and denoising still renders the frames. The prediction head and the teacher are discarded after training.</p>
+    <p>Self-supervised prediction offers a second training signal. A model can learn by predicting its own representation of a later observation, which needs no labels and does not require modelling every pixel. For a world model, this means anticipating how its state evolves under the actions, several steps ahead, while diffusion still renders each frame. Dynamics Forcing adds this signal during training only, and the model simulates exactly as before.</p>
 </section>
 
 <section id="rollouts">
