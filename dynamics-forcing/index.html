@@ -3,7 +3,7 @@ layout: project
 title: "Self-Supervised Dynamics Forcing for Diffusion World Models"
 seo_title: "Dynamics Forcing: Self-Supervised Dynamics Forcing for Diffusion World Models"
 description: "Dynamics Forcing adds a self-supervised target in latent space to diffusion world models: from its current state and the actions, the model predicts its own state up to H steps ahead. Preliminary results on RT-1 and BridgeData V2."
-abstract: "Diffusion world models learn dynamics only implicitly, from reconstruction. Dynamics Forcing adds a self-supervised target in latent space, in which the model's state at frame t, given the actions that follow, predicts its own state at frame t+k, with k drawn per clip from 1 to H and targets from an exponential-moving-average teacher. Causal attention hides frame t+k from the predictor, and the prediction head is removed after training, so simulation is unchanged. Against Shortcut Forcing on the same backbone, Dynamics Forcing has lower FVD and LPIPS on BridgeData V2 from 50k training steps; on RT-1 it is lower at 100k and on par in FVD at 125k. Training continues to 250k steps."
+abstract: "Diffusion world models learn dynamics only implicitly, from reconstruction. Dynamics Forcing adds a self-supervised target in latent space, in which the model's state at frame t, given the actions that follow, predicts its own state at frame t+k, with k drawn per clip from 1 to H and targets from an exponential-moving-average teacher. Causal attention hides frame t+k from the predictor, and the prediction head is removed after training, so simulation is unchanged. Against Shortcut Forcing on the same backbone, Dynamics Forcing has lower FVD on BridgeData V2 from 50k through 100k training steps (72.1 against 97.2 at 100k); on RT-1 it is lower at 100k and on par in FVD at 125k. Training continues to 250k steps."
 keywords: ["Dynamics Forcing", "world model", "diffusion world model", "video world model", "action-conditioned video prediction", "robot learning", "self-supervised learning", "self-predictive representations", "representation learning", "EMA teacher", "Shortcut Forcing", "diffusion forcing", "causal transformer", "BridgeData V2", "RT-1", "Language Table", "DMLab"]
 authors:
   - name: Rabiul Awal
@@ -405,24 +405,24 @@ bibtex: |
 </div>
 </div>
 <div>
-<div class="chart chart--bars" style="--lab:118px;--val:50px" role="img" aria-label="FVD on BridgeData V2 under the DriftWorld protocol, log scale: VDM 159.16, IRASim 91.55, LVDM 103.51, DriftWorld 46.05, Shortcut Forcing 322.3, Dynamics Forcing 72.1.">
+<div class="chart chart--bars" style="--lab:118px;--val:50px" role="img" aria-label="FVD on BridgeData V2 under the DriftWorld protocol, log scale: VDM 159.16, IRASim 91.55, LVDM 103.51, DriftWorld 46.05, Shortcut Forcing 97.2, Dynamics Forcing 72.1.">
 <div class="chart-head"><strong>BridgeData V2</strong><span class="chart-sub">FVD, log scale, lower is better</span></div>
 <div class="chart-row"><span class="chart-lab">VDM</span><span class="chart-trk"><b class="bar" style="width:67.9%"></b></span><span class="chart-val">159.16</span></div>
 <div class="chart-row"><span class="chart-lab">IRASim</span><span class="chart-trk"><b class="bar" style="width:54.3%"></b></span><span class="chart-val">91.55</span></div>
 <div class="chart-row"><span class="chart-lab">LVDM</span><span class="chart-trk"><b class="bar" style="width:57.4%"></b></span><span class="chart-val">103.51</span></div>
 <div class="chart-row"><span class="chart-lab">DriftWorld</span><span class="chart-trk"><b class="bar" style="width:37.5%"></b></span><span class="chart-val">46.05</span></div>
-<div class="chart-row c-alt"><span class="chart-lab">Shortcut Forcing</span><span class="chart-trk"><b class="bar" style="width:85.2%"></b></span><span class="chart-val">322.3</span></div>
+<div class="chart-row c-alt"><span class="chart-lab">Shortcut Forcing</span><span class="chart-trk"><b class="bar" style="width:55.8%"></b></span><span class="chart-val">97.2</span></div>
 <div class="chart-row is-ours c-ours"><span class="chart-lab">Dynamics Forcing</span><span class="chart-trk"><b class="bar" style="width:48.5%"></b></span><span class="chart-val">72.1</span></div>
 </div>
 </div>
 </div>
-        <figcaption>Published rows from DriftWorld (Lu et al., 2026, Table 3). All rows follow its protocol: 4 context frames, the rest of the episode generated, FVD over the first 16 generated frames. Shortcut Forcing is shown at 150k (RT-1) and 75k (BridgeData V2) training steps and Dynamics Forcing at 125k and 100k. Published models differ in architecture and scale, and the RT-1 data split could not be verified, so the matched comparison below is the main evidence.</figcaption>
+        <figcaption>Published rows from DriftWorld (Lu et al., 2026, Table 3). All rows follow its protocol: 4 context frames, the rest of the episode generated, FVD over the first 16 generated frames. On RT-1, Shortcut Forcing is shown at 150k training steps and Dynamics Forcing at 125k; on BridgeData V2 both are at 100k. Published models differ in architecture and scale, and the RT-1 data split could not be verified, so the matched comparison below is the main evidence.</figcaption>
     </figure>
 </section>
 
 <section id="results">
     <h2>Results</h2>
-    <p>Both variants are trained and scored the same way. In early training, Dynamics Forcing reaches lower FVD and LPIPS in fewer steps on BridgeData V2 (228 against 322 FVD at 75k). On RT-1 it is behind at first and ahead at 100k. At 125k the two are equal in FVD, and Dynamics Forcing has slightly lower LPIPS.</p>
+    <p>Both variants are trained and scored the same way. In early training on BridgeData V2, Dynamics Forcing has lower FVD from 50k through 100k steps (72.1 against 97.2 at 100k). Its LPIPS is lower at 50k and 75k and slightly higher at 100k (0.073 against 0.070). On RT-1 it is behind at first and ahead at 100k. At 125k the two are equal in FVD, and Dynamics Forcing has slightly lower LPIPS.</p>
     <figure class="fig">
 <!-- curves:begin (written by build_svgs.py) -->
 <div class="legend" aria-hidden="true"><span class="c-alt">Shortcut Forcing</span><span class="c-ours">Dynamics Forcing</span></div>
@@ -502,7 +502,7 @@ bibtex: |
 <text class="end base" x="203.6" y="108.0">Shortcut Forcing</text>
 <line class="lead" x1="172.0" y1="107.3" x2="200.6" y2="88.0"/>
 <text class="end ours" x="203.6" y="92.0">Dynamics Forcing</text></svg></div>
-<div class="stack"><svg class="drift-svg curve" viewBox="0 0 330 210" role="img" aria-label="BridgeData V2, FVD on a log scale over training steps. Shortcut Forcing ends at 322.3 after 75k steps; Dynamics Forcing ends at 72.1 after 100k steps."><text class="ttl" x="46" y="18" text-anchor="start">BridgeData V2</text>
+<div class="stack"><svg class="drift-svg curve" viewBox="0 0 330 210" role="img" aria-label="BridgeData V2, FVD on a log scale over training steps. Shortcut Forcing ends at 97.2 after 100k steps; Dynamics Forcing ends at 72.1 after 100k steps."><text class="ttl" x="46" y="18" text-anchor="start">BridgeData V2</text>
 <line class="grid" x1="46" y1="176.0" x2="292" y2="176.0"/>
 <text class="tick" x="40" y="180.0" text-anchor="end">50</text>
 <line class="grid" x1="46" y1="137.7" x2="292" y2="137.7"/>
@@ -526,17 +526,18 @@ bibtex: |
 <line class="axis" x1="46" y1="30" x2="46" y2="176"/>
 <text class="ax" transform="translate(13 103.0) rotate(-90)" text-anchor="middle">FVD (log)</text>
 <text class="ax" x="292" y="26" text-anchor="end">250k budget</text>
-<polyline class="ln base" points="70.6,54.5 95.2,45.8 119.8,72.9"/>
+<polyline class="ln base" points="70.6,54.5 95.2,45.8 119.8,72.9 144.4,139.2"/>
 <g class="pt-g"><title>Shortcut Forcing, 25k steps: FVD 449.9</title><circle class="pt base" cx="70.6" cy="54.5" r="7"/></g>
 <g class="pt-g"><title>Shortcut Forcing, 50k steps: FVD 526.5</title><circle class="pt base" cx="95.2" cy="45.8" r="7"/></g>
 <g class="pt-g"><title>Shortcut Forcing, 75k steps: FVD 322.3</title><circle class="pt base" cx="119.8" cy="72.9" r="7"/></g>
+<g class="pt-g"><title>Shortcut Forcing, 100k steps: FVD 97.2</title><circle class="pt base" cx="144.4" cy="139.2" r="7"/></g>
 <polyline class="ln ours" points="70.6,52.7 95.2,53.8 119.8,92.0 144.4,155.8"/>
 <g class="pt-g"><title>Dynamics Forcing, 25k steps: FVD 464.5</title><circle class="pt ours" cx="70.6" cy="52.7" r="7"/></g>
 <g class="pt-g"><title>Dynamics Forcing, 50k steps: FVD 454.9</title><circle class="pt ours" cx="95.2" cy="53.8" r="7"/></g>
 <g class="pt-g"><title>Dynamics Forcing, 75k steps: FVD 228.2</title><circle class="pt ours" cx="119.8" cy="92.0" r="7"/></g>
 <g class="pt-g"><title>Dynamics Forcing, 100k steps: FVD 72.1</title><circle class="pt ours" cx="144.4" cy="155.8" r="7"/></g>
-<text class="end base" x="125.8" y="76.9">Shortcut Forcing</text>
-<text class="end ours" x="150.4" y="159.8">Dynamics Forcing</text></svg><svg class="drift-svg curve" viewBox="0 0 330 150" role="img" aria-label="BridgeData V2, LPIPS over training steps. Shortcut Forcing ends at 0.1131 after 75k steps; Dynamics Forcing ends at 0.0728 after 100k steps."><line class="grid" x1="46" y1="90.5" x2="292" y2="90.5"/>
+<text class="end base" x="150.4" y="143.2">Shortcut Forcing</text>
+<text class="end ours" x="150.4" y="159.8">Dynamics Forcing</text></svg><svg class="drift-svg curve" viewBox="0 0 330 150" role="img" aria-label="BridgeData V2, LPIPS over training steps. Shortcut Forcing ends at 0.07 after 100k steps; Dynamics Forcing ends at 0.0728 after 100k steps."><line class="grid" x1="46" y1="90.5" x2="292" y2="90.5"/>
 <text class="tick" x="40" y="94.5" text-anchor="end">0.1</text>
 <line class="grid" x1="46" y1="48.0" x2="292" y2="48.0"/>
 <text class="tick" x="40" y="52.0" text-anchor="end">0.2</text>
@@ -554,17 +555,20 @@ bibtex: |
 <line class="axis" x1="46" y1="116" x2="292" y2="116"/>
 <line class="axis" x1="46" y1="14" x2="46" y2="116"/>
 <text class="ax" transform="translate(13 65.0) rotate(-90)" text-anchor="middle">LPIPS</text>
-<polyline class="ln base" points="70.6,21.4 95.2,20.5 119.8,84.9"/>
+<polyline class="ln base" points="70.6,21.4 95.2,20.5 119.8,84.9 144.4,103.2"/>
 <g class="pt-g"><title>Shortcut Forcing, 25k steps: LPIPS 0.2625</title><circle class="pt base" cx="70.6" cy="21.4" r="7"/></g>
 <g class="pt-g"><title>Shortcut Forcing, 50k steps: LPIPS 0.2646</title><circle class="pt base" cx="95.2" cy="20.5" r="7"/></g>
 <g class="pt-g"><title>Shortcut Forcing, 75k steps: LPIPS 0.1131</title><circle class="pt base" cx="119.8" cy="84.9" r="7"/></g>
+<g class="pt-g"><title>Shortcut Forcing, 100k steps: LPIPS 0.07</title><circle class="pt base" cx="144.4" cy="103.2" r="7"/></g>
 <polyline class="ln ours" points="70.6,31.9 95.2,47.2 119.8,87.3 144.4,102.1"/>
 <g class="pt-g"><title>Dynamics Forcing, 25k steps: LPIPS 0.2379</title><circle class="pt ours" cx="70.6" cy="31.9" r="7"/></g>
 <g class="pt-g"><title>Dynamics Forcing, 50k steps: LPIPS 0.2018</title><circle class="pt ours" cx="95.2" cy="47.2" r="7"/></g>
 <g class="pt-g"><title>Dynamics Forcing, 75k steps: LPIPS 0.1076</title><circle class="pt ours" cx="119.8" cy="87.3" r="7"/></g>
 <g class="pt-g"><title>Dynamics Forcing, 100k steps: LPIPS 0.0728</title><circle class="pt ours" cx="144.4" cy="102.1" r="7"/></g>
-<text class="end base" x="125.8" y="88.9">Shortcut Forcing</text>
-<text class="end ours" x="150.4" y="106.1">Dynamics Forcing</text></svg></div>
+<line class="lead" x1="147.4" y1="103.2" x2="151.4" y2="104.0"/>
+<text class="end base" x="154.4" y="108.0">Shortcut Forcing</text>
+<line class="lead" x1="147.4" y1="102.1" x2="151.4" y2="88.0"/>
+<text class="end ours" x="154.4" y="92.0">Dynamics Forcing</text></svg></div>
 </div>
 <!-- curves:end -->
         <figcaption>FVD (log scale, top) and LPIPS (bottom) on held-out episodes, lower is better, with 4 sampling steps and the same backbone and recipe for both models. Hover a point for its value. Training continues to 250k steps, so these are early observations. Language Table, DMLab and action-control results will be added.</figcaption>
