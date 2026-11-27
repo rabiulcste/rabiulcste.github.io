@@ -573,6 +573,34 @@ bibtex: |
 <!-- curves:end -->
         <figcaption>FVD (log scale, top) and LPIPS (bottom) on held-out episodes, lower is better, with 4 sampling steps and the same backbone and recipe for both models. Hover a point for its value. Training continues to 250k steps, so these are early observations. Language Table, DMLab and action-control results will be added.</figcaption>
     </figure>
+
+    <h3>Action control</h3>
+    <p>The PSNR drop is the loss in PSNR against the real video when the true actions are replaced; a larger drop means the rollout depends more on the actions. On RT-1, Dynamics Forcing's rollouts depend more on the actions under all four changes. On BridgeData V2, they depend more under negated and other-episode actions. Both checkpoints are still training.</p>
+    <figure class="fig">
+<div class="panels">
+<div>
+<div class="chart chart--bars" style="--lab:96px;--val:56px" role="img" aria-label="Dynamics Forcing minus Shortcut Forcing PSNR drop on RT-1, dB: Negated +0.25 (significant); Other episode +0.27 (significant); No-op +0.30 (significant); Random +0.25 (significant); Noise only -0.05 (not significant).">
+<div class="chart-head"><strong>RT-1</strong><span class="chart-sub">125k steps, 730 clips</span></div>
+<div class="chart-row is-ours c-ours"><span class="chart-lab">Negated</span><span class="chart-trk"><b class="bar" style="width:75.0%"></b></span><span class="chart-val">+0.25*</span></div>
+<div class="chart-row is-ours c-ours"><span class="chart-lab">Other episode</span><span class="chart-trk"><b class="bar" style="width:81.0%"></b></span><span class="chart-val">+0.27*</span></div>
+<div class="chart-row is-ours c-ours"><span class="chart-lab">No-op</span><span class="chart-trk"><b class="bar" style="width:90.0%"></b></span><span class="chart-val">+0.30*</span></div>
+<div class="chart-row is-ours c-ours"><span class="chart-lab">Random</span><span class="chart-trk"><b class="bar" style="width:75.0%"></b></span><span class="chart-val">+0.25*</span></div>
+<div class="chart-row c-base"><span class="chart-lab">Noise only</span><span class="chart-trk"></span><span class="chart-val">-0.05</span></div>
+</div>
+</div>
+<div>
+<div class="chart chart--bars" style="--lab:96px;--val:56px" role="img" aria-label="Dynamics Forcing minus Shortcut Forcing PSNR drop on BridgeData V2, dB: Negated +0.12 (significant); Other episode +0.10 (significant); No-op +0.03 (not significant); Random +0.02 (not significant); Noise only -0.00 (not significant).">
+<div class="chart-head"><strong>BridgeData V2</strong><span class="chart-sub">100k steps, 973 clips</span></div>
+<div class="chart-row is-ours c-ours"><span class="chart-lab">Negated</span><span class="chart-trk"><b class="bar" style="width:36.0%"></b></span><span class="chart-val">+0.12*</span></div>
+<div class="chart-row is-ours c-ours"><span class="chart-lab">Other episode</span><span class="chart-trk"><b class="bar" style="width:30.0%"></b></span><span class="chart-val">+0.10*</span></div>
+<div class="chart-row c-ours"><span class="chart-lab">No-op</span><span class="chart-trk"><b class="bar" style="width:9.0%"></b></span><span class="chart-val">+0.03</span></div>
+<div class="chart-row c-ours"><span class="chart-lab">Random</span><span class="chart-trk"><b class="bar" style="width:6.0%"></b></span><span class="chart-val">+0.02</span></div>
+<div class="chart-row c-base"><span class="chart-lab">Noise only</span><span class="chart-trk"></span><span class="chart-val">-0.00</span></div>
+</div>
+</div>
+</div>
+        <figcaption>Dynamics Forcing minus Shortcut Forcing PSNR drop, in dB, paired by clip. An asterisk and a dark bar mark a difference that is significant after Holm correction (Wilcoxon signed-rank test). Noise only keeps the true actions and draws new noise, as a control.</figcaption>
+    </figure>
 </section>
 
 <script>(function () {
