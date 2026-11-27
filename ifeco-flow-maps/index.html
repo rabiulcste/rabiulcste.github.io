@@ -271,7 +271,7 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> iFeCo trains flow maps to predict features of a cleaner view from a noisier one. It reuses computations already in the training step and adds less than 2% to the time per step. On ImageNet 256, the baseline takes 2.9&ndash;3.2&times; as many steps to reach the same one-step FID on Shortcut, 2.1&ndash;2.3&times; as many on LSD, and 1.8&times; as many on MeanFlow when iFeCo is applied to all training examples.</p>
+    <p class="tldr"><strong>TL;DR:</strong> iFeCo turns the cleaner view already used in flow-map training into a target for representation learning. The model learns to predict those cleaner features from a noisier view. This gives few-step generators a way to learn better features as they train, without a pretrained encoder or an extra forward pass.</p>
 </section>
 
 <section id="context" class="intro">
