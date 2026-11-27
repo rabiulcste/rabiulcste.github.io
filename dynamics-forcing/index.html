@@ -255,11 +255,11 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> Diffusion world models learn dynamics only implicitly, from reconstruction. Dynamics Forcing adds a self-supervised signal: the model learns to predict its own future state, several steps ahead, under the actions. The signal is used only in training, so the model simulates as before.</p>
+    <p class="tldr"><strong>TL;DR:</strong> Dynamics Forcing adds a training loss to a diffusion world model. Given the current state and a sequence of actions, the model predicts its own features several frames ahead. The prediction head is used only during training.</p>
 </section>
 <section class="intro">
     <p>A useful world model renders plausible future observations and represents how the state changes under an action. Diffusion world models such as <a href="https://arxiv.org/abs/2405.12399">DIAMOND</a> and <a href="https://danijar.com/project/dreamer4/">Dreamer 4</a> are trained by reconstruction alone. Each future frame is denoised from a corrupted copy, given the past frames and actions under causal attention. The frame holds the consequence of the action together with texture, lighting and background unrelated to it, and the loss weighs both alike. Nothing in training asks the model's state to encode where the actions lead.</p>
-    <p>Self-supervised prediction offers a second training signal. A model can learn by predicting its own representation of a later observation, which needs no labels and does not require modelling every pixel. For a world model, this means anticipating how its state evolves under the actions, several steps ahead, while diffusion still renders each frame. Dynamics Forcing adds this signal during training only, and the model simulates exactly as before.</p>
+    <p>Dynamics Forcing adds a second target. Given the current features and the intervening actions, the model predicts the features of a later frame. The denoising objective still trains the model to generate each frame.</p>
 </section>
 
 <section id="rollouts">
@@ -388,7 +388,7 @@ bibtex: |
 </section>
 
 <section id="baseline">
-    <h2>A strong baseline</h2>
+    <h2>Shortcut Forcing baseline</h2>
     <p>The baseline is Shortcut Forcing, the world-model objective of <a href="https://danijar.com/project/dreamer4/">Dreamer 4</a>, on the same 124M-parameter causal Transformer: 12 layers, 2&times;2 latent patches with 2D rotary embeddings, sampled in 4 shortcut steps. Both variants share the backbone, data and recipe, and differ only in the added feature loss.</p>
     <p>Under the protocol of published world models, Shortcut Forcing reaches 13.5 FVD on RT-1, about 4.6 times lower than the best published model (62.8). Dynamics Forcing reaches 15.3. On BridgeData V2 neither variant has reached DriftWorld's FVD yet. Dynamics Forcing already has lower LPIPS (0.073 against 0.091).</p>
     <figure class="fig">

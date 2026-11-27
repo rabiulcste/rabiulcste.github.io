@@ -271,7 +271,7 @@ bibtex: |
 </section>
 
 <section id="tldr">
-    <p class="tldr"><strong>TL;DR:</strong> Flow maps can learn good internal features on their own, without the pretrained encoder that REPA borrows. One added loss, with no extra forward pass and less than 2% extra time per training step, reaches the vanilla model's final one-step FID on ImageNet 256 2.9 to 3.2 times sooner on Shortcut, 2.1 to 2.3 times sooner on LSD, and 1.8 times sooner on MeanFlow when the loss covers every row.</p>
+    <p class="tldr"><strong>TL;DR:</strong> iFeCo trains flow maps to predict features of a cleaner view from a noisier one. It reuses computations already in the training step and adds less than 2% to the time per step. On ImageNet 256, the baseline takes 2.9&ndash;3.2&times; as many steps to reach the same one-step FID on Shortcut, 2.1&ndash;2.3&times; as many on LSD, and 1.8&times; as many on MeanFlow when iFeCo is applied to all training examples.</p>
 </section>
 
 <section id="context" class="intro">
@@ -299,7 +299,7 @@ bibtex: |
 </section>
 
 <section id="free" class="wide">
-    <h2>Deriving a free self-supervised objective from the training step</h2>
+    <h2>Feature targets from the existing training step</h2>
     <figure class="fe-fig">
         <div class="fe-media fe-concept">
             <div class="only-desk"><svg class="fs concept" viewBox="0 0 560 250" role="img" aria-labelledby="tc-t">
